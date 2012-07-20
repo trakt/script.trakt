@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.trakt" name="trakt" version="1.0.0" provider-name="trakt.tv">
+	<requires>
+		<import addon="xbmc.python" version="2.0"/>
+		<import addon="script.module.simplejson" version="2.0.10"/>
+		<import addon="script.module.myconnpy" version="0.3.2"/>
+	</requires>
+	<res width="1280" height="720" aspect="16x9" default="true" folder="720p" />
+	<extension point="xbmc.service" name="trakt.service" library="service.py"/>
+	<extension point="xbmc.addon.metadata" name="trakt.metadata">
+		<language></language>
+		<summary lang="en">TV and movie scrobbler for trakt.tv</summary>
+		<description lang="en">Automatically scrobble all TV episodes and movies you are watching to trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features including:
+
+- automatically scrobble what you're watching
+- mobile apps for iPhone, iPad, Android, Windows Phone, Blackberry, and Symbian
+- share what you're watching (in real time) and rating to facebook, twitter, and tumblr
+- use watchlists so you don't forget to what to watch
+- track your media collections and impress your friends
+- create custom lists around any topics you choose
+- easily track your TV show progress across all seasons and episodes
+- discover new shows and movies based on your viewing habits</description>
+		<platform>all</platform>
+	</extension>
+</addon>

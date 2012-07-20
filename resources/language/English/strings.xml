@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+	<!-- Preferences -->
+	<string id="1010">General</string>
+	<string id="1011">Enable debug mode</string>
+	<string id="1012">API Key (optional)</string>
+	<string id="1013">Username</string>
+	<string id="1014">Password</string>
+	<string id="1016">Use secure connection (HTTPS)</string>
+	
+	<string id="1020">Auto Syncing</string>
+	<string id="1021">Auto update Movies Collection at startup</string>
+	<string id="1022">Auto update TV Show Collection at startup</string>
+	<string id="1023">Auto sync seen Movies at startup</string>
+	<string id="1024">Auto sync seen TV Shows at startup</string>
+	<string id="1025">Auto clean Movies Collection at startup</string>
+	<string id="1026">Auto clean TV Show Collection at startup</string>
+	
+	<string id="1030">Rating</string>
+	<string id="1031">Rate Movie after watching</string>
+	<string id="1032">Rate TV Show Episode ater watching</string>
+	<string id="1033">Rate each playlist item</string>
+	<string id="1034">Minimum percent watched to display rate dialog</string>
+	
+	<string id="1040">Scrobbling</string>
+	<string id="1041">Scrobble movies</string>
+	<string id="1042">Scrobble TV episodes</string>
+	<string id="1043">Minimum percent watched to scrobble</string>
+	
+	<!-- Info -->
+	<string id="1105"></string>
+	<string id="1106">Enter your Username and Password in settings</string>
+	<string id="1107">Enter your Password in settings</string>
+	<string id="1108">Can't connect to trakt</string>
+	<string id="1109">Error</string>
+	<string id="1110">Incorrect username or password</string>
+	<string id="1120">Checking Database for Updates</string>
+	<string id="1121">Error uploading movie collection</string>
+	<string id="1122">No new movies in XBMC library to update</string>
+	<string id="1123">Error uploading seen movies</string>
+	<string id="1124">no new seen movies to update for trakt</string>
+	<string id="1125">Movies will be added to Trakt Collection</string> <!-- XX Movies will be added to Trakt Collection -->
+	<string id="1126">Movies updated on Trakt</string> <!-- XX Movies updated -->
+	<string id="1127">Movies will be added as seen on Trakt</string> <!-- XX Movies will be added as seen on Trakt -->
+	<string id="1128">no new seen movies to update for xbmc</string>
+	<string id="1129">Movies updated on XBMC</string>
+	<string id="1130">No movies to unlibrary on trakt</string>
+	<string id="1131">TV Show Episodes will be added to Trakt Collection</string>
+	<string id="1132">Checking XBMC Database for new Movies</string>
+	<string id="1133">Checking XBMC Database for new Episodes</string>
+	<string id="1134">Progress aborted by user</string>
+	<string id="1135">Error uploading TV Show Collection</string>
+	<string id="1136">No new Episodes in XBMC library to update</string>
+	<string id="1137">Episodes sucessfully updated to Trakt</string>
+	<string id="1138">Movies skipped</string>
+	<string id="1139">Checking XBMC Database for deleted Movies</string>
+	<string id="1140">Checking XBMC Database for deleted Episodes</string>
+	<string id="1141">TV Show Episodes will be removed from Trakt Collection</string>
+	<string id="1142">No episodes to remove from trakt</string>
+	<string id="1143">Checking XBMC Database for new seen Episodes</string>
+	<string id="1144">TV Show Episodes will be added as seen on Trakt</string>
+	<string id="1145">Error uploading seen TV Shows</string>
+	<string id="1146">No new seen Episodes in XBMC Database to update</string>
+	<string id="1147">Movies will be added as seen on XBMC</string>
+	<string id="1148">Checking Trakt Database for new seen Episodes</string>
+	<string id="1149">TV Show Episodes will be set as seen on XBMC</string>
+	<string id="1150">updating XBMC Database</string>
+	<string id="1151">No new seen Episodes on Trakt to update</string>
+	<string id="1152">Error: can't open XBMC Movie Database</string>
+	<string id="1153">This will remove all Movies from your Trakt Collection</string>
+	<string id="1154">that are not in the XBMC library.</string>
+	<string id="1155">Do you want to continue?</string>
+	<string id="1156">This will remove all TV Shows from your Trakt Collection</string>
+	<string id="1157">comming soon</string>
+	<string id="1158">there are no movies recommended for you</string>
+	<string id="1159">there are no tv shows recommended for you</string>
+	<string id="1160">there are no movies in your watchlist</string>
+	<string id="1161">there are no tv shows in your watchlist</string>
+	<string id="1162">not found in your XBMC Library</string>
+	<string id="1163">Retreiving information from Trakt servers</string>
+	<string id="1164">Cross-referencing with local information</string>
+	<string id="1166">Rating removed successfully</string>
+	<string id="1167">Rating submitted successfully</string>
+	<string id="1168">Error submitting rating</string>
+	<string id="1300">Checking XBMC Database for new seen Movies</string>
+	<string id="1301">Checking Trakt Database for new seen Movies</string>
+	<string id="1302">Unable to play movie</string>
+	<string id="1303">Rate that movie?</string>
+	<string id="1304">Rate that episode?</string>
+	<string id="1305">Rate whole show</string>
+	<string id="1306">Rate that show?</string>
+	<string id="1307">Unrate</string>
+	<string id="1308">Unrated</string>
+	<string id="1309">Failed to added to watch-list</string>
+	<string id="1310">Successfully added to watch-list</string>
+	<string id="1311">Failed to remove from watch-list</string>
+	<string id="1312">Successfully removed from watch-list</string>
+
+	<!-- auto update / sync -->
+	<string id="1180">start movie collection update</string>
+	<string id="1181">start tvshow collection update</string>
+	<string id="1182">start sync seen movies</string>
+	<string id="1183">start sync seen tv shows</string>
+	<string id="1184">update / sync done</string>
+	
+	<!-- Titles -->
+	<string id="1201">trakt</string>
+	
+	<!-- Menu -->
+	<string id="1210">Watchlist</string>
+	<string id="1211">Friends</string>
+	<string id="1212">Recommendations</string>
+	<string id="1213">Trending Movies / TV Shows</string>
+	<string id="1214">Update / Sync / Clean</string>
+	<string id="1215"></string>
+	<string id="1216"></string>
+
+	<!-- Submenu -->
+	<string id="1217">Update Movie Collection</string>
+	<string id="1218">Sync seen Movies</string>
+	<string id="1219">Update TV Show Collection</string>
+	<string id="1220">Sync seen TV Shows</string>
+	<string id="1221">Clean Movie Collection</string>
+	<string id="1222">Clean TV Show Collection</string>
+
+	<string id="1250">Trending Movies</string>
+	<string id="1251">Trending TV Shows</string>
+
+	<string id="1252">Watchlist Movies</string>
+	<string id="1253">Watchlist TV Shows</string>
+	<string id="1254">Watchlist Episodes</string>
+	
+	<string id="1255">Recommened Movies</string>
+	<string id="1256">Recommened TV Shows</string>
+	<string id="1257">Recommened Episodes</string>
+	
+	<!-- Friends Submenu -->
+	<string id="1280">Currently Watching</string>
+	<string id="1281">Watch-list</string>
+	<string id="1282">Watched</string>
+	<string id="1283">Library</string>
+	<string id="1284">Profile</string>
+</strings>
