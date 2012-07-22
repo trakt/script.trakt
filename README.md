@@ -21,6 +21,7 @@ Remote streaming content will scrobble assuming the metadata is correctly set in
 ###Tested and scrobbling correctly
 
 * XBMC library mode
+* PleXBMC
 * Amazon (bluecop repo)
 * CBS (bluecop repo)
 
