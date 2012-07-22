@@ -70,7 +70,7 @@ class NotificationService(threading.Thread):
 					if data['method'] == 'Player.OnStop':
 						scrobbler.playbackEnded()
 					elif data['method'] == 'Player.OnPlay':
-						if 'data' in data['params'] and 'item' in data['params']['data'] and 'id' in data['params']['data']['item'] and 'type' in data['params']['data']['item']:
+						if 'data' in data['params'] and 'item' in data['params']['data'] and 'type' in data['params']['data']['item']:
 							scrobbler.playbackStarted(data['params']['data'])
 					elif data['method'] == 'Player.OnPause':
 						scrobbler.playbackPaused()

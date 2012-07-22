@@ -1,3 +1,5 @@
 version 1.0.0
   - initial release
   - tv episode and movie scrobbling
+  - works with local files and remote streams with correct metadata
+  - tested with XBMC library mode, Amazon, CBS

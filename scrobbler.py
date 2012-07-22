@@ -39,9 +39,12 @@ class Scrobbler(threading.Thread):
 	
 	def playbackStarted(self, data):
 		self.curVideo = data['item']
+		self.curVideoData = data
 		if self.curVideo <> None:
-			if 'type' in self.curVideo and 'id' in self.curVideo:
-				Debug("[Scrobbler] Watching: "+self.curVideo['type']+" - "+str(self.curVideo['id']))
+			# {"jsonrpc":"2.0","method":"Player.OnPlay","params":{"data":{"item":{"type":"movie"},"player":{"playerid":1,"speed":1},"title":"Shooter","year":2007},"sender":"xbmc"}}
+			# {"jsonrpc":"2.0","method":"Player.OnPlay","params":{"data":{"episode":3,"item":{"type":"episode"},"player":{"playerid":1,"speed":1},"season":4,"showtitle":"24","title":"9:00 A.M. - 10:00 A.M."},"sender":"xbmc"}}
+			if 'type' in self.curVideo: #and 'id' in self.curVideo:
+				Debug("[Scrobbler] Watching: "+self.curVideo['type']) #+" - "+str(self.curVideo['id']))
 				try:
 					if not xbmc.Player().isPlayingVideo():
 						Debug("[Scrobbler] Suddenly stopped watching item")
@@ -86,7 +89,7 @@ class Scrobbler(threading.Thread):
 			self.watchedTime += time.time() - self.startTime
 			self.pinging = False
 			if self.watchedTime <> 0:
-				if 'type' in self.curVideo and 'id' in self.curVideo:
+				if 'type' in self.curVideo: #and 'id' in self.curVideo:
 					self.check()
 				self.watchedTime = 0
 			self.startTime = 0
@@ -96,14 +99,28 @@ class Scrobbler(threading.Thread):
 		scrobbleEpisodeOption = __settings__.getSetting("scrobble_episode")
 		
 		if self.curVideo['type'] == 'movie' and scrobbleMovieOption == 'true':
-			match = getMovieDetailsFromXbmc(self.curVideo['id'], ['imdbnumber','title','year'])
+			match = None
+			if 'id' in self.curVideo:
+				match = getMovieDetailsFromXbmc(self.curVideo['id'], ['imdbnumber','title','year'])
+			elif 'title' in self.curVideoData and 'year' in self.curVideoData:
+				match = {}
+				match['imdbnumber'] = ''
+				match['title'] = self.curVideoData['title']
+				match['year'] = self.curVideoData['year']
 			if match == None:
 				return
 			response = watchingMovieOnTrakt(match['imdbnumber'], match['title'], match['year'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
 			if response != None:
 				Debug("[Scrobbler] Watch response: "+str(response));
 		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true':
-			match = getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode'])
+			match = None
+			if 'id' in self.curVideo:
+				match = getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode'])
+			elif 'showtitle' in self.curVideoData and 'season' in self.curVideoData and 'episode' in self.curVideoData:
+				match = {}
+				match['showtitle'] = self.curVideoData['showtitle']
+				match['season'] = self.curVideoData['season']
+				match['episode'] = self.curVideoData['episode']
 			if match == None:
 				return
 			response = watchingEpisodeOnTrakt(None, match['showtitle'], None, match['season'], match['episode'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
@@ -128,14 +145,28 @@ class Scrobbler(threading.Thread):
 		scrobbleEpisodeOption = __settings__.getSetting("scrobble_episode")
 		
 		if self.curVideo['type'] == 'movie' and scrobbleMovieOption == 'true':
-			match = getMovieDetailsFromXbmc(self.curVideo['id'], ['imdbnumber','title','year'])
+			match = None
+			if 'id' in self.curVideo:
+				match = getMovieDetailsFromXbmc(self.curVideo['id'], ['imdbnumber','title','year'])
+			elif 'title' in self.curVideoData and 'year' in self.curVideoData:
+				match = {}
+				match['imdbnumber'] = ''
+				match['title'] = self.curVideoData['title']
+				match['year'] = self.curVideoData['year']
 			if match == None:
 				return
 			response = scrobbleMovieOnTrakt(match['imdbnumber'], match['title'], match['year'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
 			if response != None:
 				Debug("[Scrobbler] Scrobble response: "+str(response));
 		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true':
-			match = getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode'])
+			match = None
+			if 'id' in self.curVideo:
+				match = getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode'])
+			elif 'showtitle' in self.curVideoData and 'season' in self.curVideoData and 'episode' in self.curVideoData:
+				match = {}
+				match['showtitle'] = self.curVideoData['showtitle']
+				match['season'] = self.curVideoData['season']
+				match['episode'] = self.curVideoData['episode']
 			if match == None:
 				return
 			response = scrobbleEpisodeOnTrakt(None, match['showtitle'], None, match['season'], match['episode'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
@@ -147,8 +178,6 @@ class Scrobbler(threading.Thread):
 		scrobbleMinViewTimeOption = __settings__.getSetting("scrobble_min_view_time")
 		
 		Debug("watched: " + str(self.watchedTime) + " / " + str(self.totalTime));
-		Debug(str((self.watchedTime/self.totalTime)*100));
-		Debug(str(float(scrobbleMinViewTimeOption)));
 		if (self.watchedTime/self.totalTime)*100>=float(scrobbleMinViewTimeOption):
 			self.scrobble()
 		else:
