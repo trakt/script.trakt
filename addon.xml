@@ -19,7 +19,9 @@
 - track your media collections and impress your friends
 - create custom lists around any topics you choose
 - easily track your TV show progress across all seasons and episodes
-- discover new shows and movies based on your viewing habits</description>
+- discover new shows and movies based on your viewing habits
+
+Special thanks to the trakt utilities team! This plugin is essentially their code with a few additions.</description>
 		<platform>all</platform>
 	</extension>
 </addon>

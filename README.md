@@ -34,3 +34,7 @@ Remote streaming content will scrobble assuming the metadata is correctly set in
 5. Enter your **username**, **password**, and change any other settings as needed
 6. Select **OK** to save your settings
 7. Watch something and see it show up on trakt.tv!
+
+###Thanks
+
+Special thanks to the trakt utilities team! This plugin is essentially their code with a few additions.
