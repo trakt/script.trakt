@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+	<!-- Preferences -->
+	<string id="1010">Algemeen</string>
+	<string id="1011">Activeer debug mode</string>
+	<string id="1012">API Key (te vinden op trakt -&gt; Settings -&gt; API)</string>
+	<string id="1013">Gebruikersnaam</string>
+	<string id="1014">Wachtwoord</string>
+    <string id="1016">Use secure connection (HTTPS)</string>
+	
+	<string id="1020">Automatisch synchroniseren</string>
+	<string id="1021">Automatisch bijwerken Film Collectie bij opstarten</string>
+	<string id="1022">Automatisch bijwerken TV Serie Collectie bij opstarten</string>
+	<string id="1023">Automatisch synchroniseren bekeken Films bij het opstarten</string>
+	<string id="1024">Automatisch synchroniseren bekeken TV Series bij het opstarten</string>
+	<string id="1025">Automatisch opschonen Film Collectie bij opstarten</string>
+	<string id="1026">Automatisch opschonen TV Serie Collectie bij opstarten</string>
+	
+	<string id="1030">Waardering</string>
+	<string id="1031">Beoordeel Film na het bekijken</string>
+	<string id="1032">Beoordeel TV Serie na het bekijken</string>
+	<string id="1033">Beoordeel elk afspeellijst item</string>
+	<string id="1034">Minimum percentage gezien om dialoogvenster beoordelen weer te geven</string>
+	
+	<string id="1040">Scrobblen</string>
+	<string id="1041">Scrobble Films</string>
+	<string id="1042">Scrobble TV Series</string>
+	<string id="1043">Minimum percentage gezien om te scrobbelen</string>
+	
+	<!-- Info -->
+	<string id="1105"></string>
+	<string id="1106">Vul uw gebruikersnaam en wachtwoord in bij instellingen</string>
+	<string id="1107">Voer uw wachtwoord in bij instellingen</string>
+	<string id="1108">Kan geen verbinding maken met Trakt</string>
+	<string id="1109">Fout</string>
+	<string id="1110">Onjuiste gebruikersnaam of wachtwoord</string>
+	<string id="1120">Controle Database voor Updates</string>
+	<string id="1121">Fout bij uploaden Film collectie</string>
+	<string id="1122">Geen nieuwe Films in XBMC Database om bij te werken</string>
+	<string id="1123">Fout bij het uploaden van bekeken Films</string>
+	<string id="1124">Geen nieuwe Films bekeken om bij te werken voor Trakt</string>
+	<string id="1125">Films zullen worden toegevoegd aan Trakt Collectie</string> <!-- XX Movies will be added to Trakt Collection -->
+	<string id="1126">Films worden bijgewerkt op Trakt</string> <!-- XX Movies updated -->
+	<string id="1127">Films worden toegevoegd als bekeken op Trakt</string> <!-- XX Movies will be added as seen on Trakt -->
+	<string id="1128">Geen nieuwe bekeken Films om bij te werken voor XBMC</string>
+	<string id="1129">Films bijgewerkt op XBMC</string>
+	<string id="1130">Geen Films om uit database te verwijderen op Trakt</string>
+	<string id="1131">TV Serie Afleveringen zullen worden toegevoegd aan Trakt Collectie</string>
+	<string id="1132">Controle van XBMC Database voor nieuwe Films</string>
+	<string id="1133">Controle van XBMC Database voor nieuwe Afleveringen</string>
+	<string id="1134">Opdracht afgebroken door de gebruiker</string>
+	<string id="1135">Fout bij het uploaden van TV Serie Collectie</string>
+	<string id="1136">Geen nieuwe Afleveringen in XBMC Database om bij te werken</string>
+	<string id="1137">Afleveringen met succes bijgewerkt op Trakt</string>
+	<string id="1138">Films overgeslagen</string>
+	<string id="1139">Controle van XBMC Database voor verwijderde Films</string>
+	<string id="1140">Controle van XBMC Database voor verwijderde Afleveringen</string>
+	<string id="1141">Afleveringen zullen worden verwijderd van Trakt Collectie</string>
+	<string id="1142">Geen Afleveringen om te verwijderen van Trakt</string>
+	<string id="1143">Controle van XBMC Database voor nieuwe bekeken Afleveringen</string>
+	<string id="1144">Afleveringen zullen worden toegevoegd als gezien op Trakt</string>
+	<string id="1145">Fout bij het uploaden van bekeken TV-series</string>
+	<string id="1146">Geen nieuwe bekeken Afleveringen in XBMC database om bij te werken</string>
+	<string id="1147">Films worden toegevoegd als bekeken in XBMC</string>
+	<string id="1148">Controle Trakt Database voor nieuwe bekeken Afleveringen</string>
+	<string id="1149">Afleveringen zullen worden ingesteld als gezien in XBMC</string>
+	<string id="1150">Bijwerken XBMC Database</string>
+	<string id="1151">Geen nieuwe afleveringen bekeken om bij te werken op Trakt</string>
+	<string id="1152">Fout: XBMC Film Database kan niet worden geopend</string>
+	<string id="1153">Dit zal alle Films verwijderen uit uw Trakt Collectie</string>
+	<string id="1154">die niet in de XBMC Database aanwezig zijn.</string>
+	<string id="1155">Wil je doorgaan?</string>
+	<string id="1156">Dit zal alle TV Series verwijderen uit uw Trakt Collectie</string>
+	<string id="1157">binnenkort</string>
+	<string id="1158">Er zijn geen aanbevolen Films voor u</string>
+	<string id="1159">Er zijn geen aanbevolen TV Series aanbevolen voor u</string>
+	<string id="1160">Geen Films aanwezig in je volglijst</string>
+	<string id="1161">Geen TV Series aanwezig in je volglijst</string>
+	<string id="1162">Niet gevonden in uw XBMC Database</string>
+	<string id="1163">Ontvangen van informatie van Trakt servers</string>
+	<string id="1164">Doorverwijzing met lokale informatie</string>
+	<string id="1166">Beoordeling met succes verwijderd</string>
+	<string id="1167">Waardering met succes toegevoegd</string>
+	<string id="1168">Fout bij het toevoegen van waardering</string>
+	<string id="1300">Controle van XBMC Database voor nieuwe bekeken films</string>
+	<string id="1301">Controle Trakt Database voor nieuwe bekeken films</string>
+	<string id="1302">Kan film niet af spelen</string>
+	<string id="1303">Beoordeel deze film?</string>
+	<string id="1304">Beoordeel deze aflevering?</string>
+	<string id="1305">Beoordeel hele serie?</string>
+	<string id="1306">Beoordeel deze serie?</string>
+	<string id="1307">Trek beoordeling in</string>
+	<string id="1308">Niet beoordeeld</string>
+	<string id="1309">Toevoegen aan volglijst mislukt</string>
+	<string id="1310">Succesvol aan volglijst toegevoegd</string>
+	<string id="1311">Fout bij verwijderen van volglijst</string>
+	<string id="1312">Succesvol verwijderd van volglijst</string>
+	
+	<!-- auto update / sync -->
+	<string id="1180">Beginnen bijwerken Film collectie</string>
+	<string id="1181">Beginnen bijwerken TV Series collectie</string>
+	<string id="1182">Start synchronisatie bekeken Films</string>
+	<string id="1183">Start synchronisatie bekeken TV Series</string>
+	<string id="1184">Bijwerken / synchroniseren gedaan</string>
+	
+	<!-- Titles -->
+	<string id="1201">trakt</string>
+	
+	<!-- Menu -->
+	<string id="1210">Volglijst</string>
+	<string id="1211">Vrienden</string>
+	<string id="1212">Aanbevelingen</string>
+	<string id="1213">Trending Films / TV Series</string>
+	<string id="1214">Bijwerken / Synchroniseren / Opschonen</string>
+	<string id="1215"></string>
+	<string id="1216"></string>
+	
+	<!-- Submenu -->
+	<string id="1217">Werk Film Collectie bij</string>
+	<string id="1218">Synchroniseer bekeken Films</string>
+	<string id="1219">Werk TV Serie Collectie bij</string>
+	<string id="1220">Synchroniseer bekeken TV Series</string>
+	<string id="1221">Opschonen Film Collectie</string>
+	<string id="1222">Opschonen TV Serie Collectie</string>
+	
+	<string id="1250">Trending Films</string>
+	<string id="1251">Trending TV Series</string>
+	
+	<string id="1252">Volglijst Films</string>
+	<string id="1253">Volglijst TV Series</string>
+	<string id="1254">Volglijst Afleveringen</string>
+	
+	<string id="1255">Aanbevolen Films</string>
+	<string id="1256">Aanbevolen TV Series</string>
+	<string id="1257">Aanbevolen Afleveringen</string>
+	
+	<!-- Friends Submenu -->
+	<string id="1280">Op dit moment aan het kijken</string>
+	<string id="1281">Volglijst</string>
+	<string id="1282">Bekeken</string>
+	<string id="1283">Bibliotheek</string>
+	<string id="1284">Profiel</string>
+</strings>
