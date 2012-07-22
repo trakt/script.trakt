@@ -25,15 +25,11 @@ class Scrobbler(threading.Thread):
 		# When requested ping trakt to say that the user is still watching the item
 		count = 0
 		while (not (self.abortRequested or xbmc.abortRequested)):
-			time.sleep(5) # 1min wait
-			#Debug("[Scrobbler] Cycling " + str(self.pinging) + " - watchedTime: " + str(self.watchedTime))
+			time.sleep(5)
 			if self.pinging:
 				count += 1
 				self.watchedTime = xbmc.Player().getTime()
 				if count>=100:
-					Debug("[Scrobbler] Pinging watching "+str(self.curVideo))
-					#tmp = time.time()
-					#self.startTime = tmp
 					self.startedWatching()
 					count = 0
 			else:
@@ -150,7 +146,7 @@ class Scrobbler(threading.Thread):
 		__settings__ = xbmcaddon.Addon("script.trakt") #read settings again, encase they have changed
 		scrobbleMinViewTimeOption = __settings__.getSetting("scrobble_min_view_time")
 		
-		Debug("watchedTime: " + str(self.watchedTime) + " - totalTime: " + str(self.totalTime) + " - minTime: " + str(float(scrobbleMinViewTimeOption)));
+		Debug("watched: " + str(self.watchedTime) + " / " + str(self.totalTime));
 		Debug(str((self.watchedTime/self.totalTime)*100));
 		Debug(str(float(scrobbleMinViewTimeOption)));
 		if (self.watchedTime/self.totalTime)*100>=float(scrobbleMinViewTimeOption):
