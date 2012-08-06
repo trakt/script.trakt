@@ -6,14 +6,18 @@ import thread
 import threading
 
 try:
-    import http.client as httplib # Python 3.0 +
+    import http.client as httplib  # Python 3.0 +
 except ImportError:
-    import httplib # Python 2.7 and earlier
+    import httplib  # Python 2.7 and earlier
 
-# Allows non-blocking http requests
-class NBHTTPConnection():
-    def __init__(self, host, port = None, strict = None, timeout = None):
-        self.rawConnection = httplib.HTTPConnection(host, port, strict, timeout)
+# Allows non-blocking http(s) requests
+class NBConnection():
+    def __init__(self, host, port = None, https=False, strict = None, timeout = None):
+        self.https = https
+        if https:
+            self.rawConnection = httplib.HTTPSConnection(host, port, strict, timeout)
+        else:
+            self.rawConnection = httplib.HTTPConnection(host, port, strict, timeout)
         self.response = None
         self.responseLock = threading.Lock()
         self.closing = False
@@ -35,7 +39,7 @@ class NBHTTPConnection():
 
     def go(self):
         self.responseLock.acquire()
-        thread.start_new_thread(NBHTTPConnection._run, (self,))
+        thread.start_new_thread(NBConnection._run, (self,))
 
     def _run(self):
         self.response = self.rawConnection.getresponse()

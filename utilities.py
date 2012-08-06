@@ -7,8 +7,7 @@ import xbmcgui
 import time
 import socket
 
-import nbhttpsconnection
-import nbhttpconnection
+import nbconnection
 
 try:
     import simplejson as json
@@ -71,10 +70,11 @@ def checkSettings(daemon=False):
 def getTraktConnection():
     https = __settings__.getSetting('https')
     try:
-        if (https == 'true'):
-            conn = nbhttpsconnection.NBHTTPSConnection('api.trakt.tv')
+        if https == 'true':
+            conn = nbconnection.NBConnection('api.trakt.tv', https=True)
         else:
-            conn = nbhttpconnection.NBHTTPConnection('api.trakt.tv')
+            conn = nbconnection.NBConnection('api.trakt.tv')
+
     except socket.timeout:
         Debug("getTraktConnection: can't connect to trakt - timeout")
         notification("trakt", __language__(1108).encode( "utf-8", "ignore" ) + " (timeout)") # can't connect to trakt
