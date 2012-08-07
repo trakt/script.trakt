@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
-# 
+#
 
-import os, sys
-import xbmc, xbmcaddon, xbmcgui
+import xbmc
+import xbmcaddon
+import xbmcgui
+import nbhttpconnection
+import nbhttpsconnection
 import time, socket
 
-try: import simplejson as json
-except ImportError: import json
+try:
+	import simplejson as json
+except ImportError:
+	import json
 
-from nbhttpconnection import *
-from nbhttpsconnection import *
-
-import urllib, re
-
-try: import http.client as httplib # Python 3.0 +
-except ImportError: import httplib # Python 2.7 and earlier
-
-try: from hashlib import sha as sha # Python 2.6 +
-except ImportError: import sha # Python 2.5 and earlier
+try:
+	from hashlib import sha as sha # Python 2.6 +
+except ImportError:
+	import sha # Python 2.5 and earlier
 
 # read settings
 __settings__ = xbmcaddon.Addon("script.trakt")
@@ -31,10 +30,12 @@ debug = __settings__.getSetting("debug")
 
 def Debug(msg, force = False):
 	if(debug == 'true' or force):
-		try: print "[trakt] " + msg
-		except UnicodeEncodeError: print "[trakt] " + msg.encode( "utf-8", "ignore" )
-		
-def notification( header, message, time=5000, icon=__settings__.getAddonInfo( "icon" ) ):
+		try:
+			print "[trakt] " + msg
+		except UnicodeEncodeError:
+			print "[trakt] " + msg.encode( "utf-8", "ignore" )
+
+def notification( header, message, time=5000, icon=__settings__.getAddonInfo("icon")):
 	xbmc.executebuiltin( "XBMC.Notification(%s,%s,%i,%s)" % ( header, message, time, icon ) )
 
 def checkSettings(daemon=False):
@@ -63,15 +64,15 @@ def checkSettings(daemon=False):
 		return False
 
 	return True
-	
+
 # get a connection to trakt
 def getTraktConnection():
 	https = __settings__.getSetting('https')
 	try:
 		if (https == 'true'):
-			conn = NBHTTPSConnection('api.trakt.tv')
+			conn = nbhttpsconnection.NBHTTPSConnection('api.trakt.tv')
 		else:
-			conn = NBHTTPConnection('api.trakt.tv')
+			conn = nbhttpconnection.NBHTTPConnection('api.trakt.tv')
 	except socket.timeout:
 		Debug("getTraktConnection: can't connect to trakt - timeout")
 		notification("trakt", __language__(1108).encode( "utf-8", "ignore" ) + " (timeout)") # can't connect to trakt
@@ -103,8 +104,8 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 		return None
 
 	try:
-		req = req.replace("%%API_KEY%%",apikey)
-		req = req.replace("%%USERNAME%%",username)
+		req = req.replace("%%API_KEY%%", apikey)
+		req = req.replace("%%USERNAME%%", username)
 		if method == 'POST':
 			if not anon:
 				args['username'] = username
@@ -122,12 +123,13 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 		Debug("json url: "+req)
 	except socket.error:
 		Debug("traktQuery: can't connect to trakt")
-		if not silent: notification("trakt", __language__(1108).encode( "utf-8", "ignore" )) # can't connect to trakt
+		if not silent:
+			notification("trakt", __language__(1108).encode( "utf-8", "ignore" )) # can't connect to trakt
 		if returnStatus:
 			data = {}
 			data['status'] = 'failure'
 			data['error'] = 'Socket error, unable to connect to trakt'
-			return data;
+			return data
 		return None
 
 	conn.go()
@@ -139,7 +141,7 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 				data = {}
 				data['status'] = 'failure'
 				data['error'] = 'Abort requested, not waiting for response'
-				return data;
+				return data
 			return None
 		if conn.hasResult():
 			break
@@ -159,22 +161,24 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 			data['status'] = 'failure'
 			data['error'] = 'Bad response from trakt'
 			return data
-		if not silent: notification("trakt", __language__(1109).encode( "utf-8", "ignore" ) + ": Bad response from trakt") # Error
+		if not silent:
+			notification("trakt", __language__(1109).encode( "utf-8", "ignore" ) + ": Bad response from trakt") # Error
 		return None
 
 	if 'status' in data:
 		if data['status'] == 'failure':
 			Debug("traktQuery: Error: " + str(data['error']))
 			if returnStatus:
-				return data;
-			if not silent: notification("trakt", __language__(1109).encode( "utf-8", "ignore" ) + ": " + str(data['error'])) # Error
+				return data
+			if not silent:
+				notification("trakt", __language__(1109).encode( "utf-8", "ignore" ) + ": " + str(data['error'])) # Error
 			return None
 
 	return data
 
 # get a single episode from xbmc given the id
 def getEpisodeDetailsFromXbmc(libraryId, fields):
-	rpccmd = json.dumps({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails','params':{'episodeid': libraryId, 'properties': fields}, 'id': 1})
+	rpccmd = json.dumps({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params':{'episodeid': libraryId, 'properties': fields}, 'id': 1})
 
 	result = xbmc.executeJSONRPC(rpccmd)
 	result = json.loads(result)
@@ -195,7 +199,7 @@ def getEpisodeDetailsFromXbmc(libraryId, fields):
 
 # get a single movie from xbmc given the id
 def getMovieDetailsFromXbmc(libraryId, fields):
-	rpccmd = json.dumps({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails','params':{'movieid': libraryId, 'properties': fields}, 'id': 1})
+	rpccmd = json.dumps({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params':{'movieid': libraryId, 'properties': fields}, 'id': 1})
 
 	result = xbmc.executeJSONRPC(rpccmd)
 	result = json.loads(result)
@@ -221,7 +225,7 @@ def getPlaylistLengthFromXBMCPlayer(playerid):
 	if playerid < 0 or playerid > 2:
 		Debug("[Util] getPlaylistLengthFromXBMCPlayer, invalid playerid: "+str(playerid))
 		return 0
-	rpccmd = json.dumps({'jsonrpc': '2.0', 'method': 'Player.GetProperties','params':{'playerid': playerid, 'properties':['playlistid']}, 'id': 1})
+	rpccmd = json.dumps({'jsonrpc': '2.0', 'method': 'Player.GetProperties', 'params':{'playerid': playerid, 'properties':['playlistid']}, 'id': 1})
 	result = xbmc.executeJSONRPC(rpccmd)
 	result = json.loads(result)
 	# check for error
@@ -233,7 +237,7 @@ def getPlaylistLengthFromXBMCPlayer(playerid):
 		pass # no error
 	playlistid = result['result']['playlistid']
 
-	rpccmd = json.dumps({'jsonrpc': '2.0', 'method': 'Playlist.GetProperties','params':{'playlistid': playlistid, 'properties': ['size']}, 'id': 1})
+	rpccmd = json.dumps({'jsonrpc': '2.0', 'method': 'Playlist.GetProperties', 'params':{'playlistid': playlistid, 'properties': ['size']}, 'id': 1})
 	result = xbmc.executeJSONRPC(rpccmd)
 	result = json.loads(result)
 	# check for error
@@ -245,7 +249,7 @@ def getPlaylistLengthFromXBMCPlayer(playerid):
 		pass # no error
 
 	return result['result']['size']
-	
+
 ###############################
 ##### Scrobbling to trakt #####
 ###############################
