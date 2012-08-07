@@ -11,9 +11,12 @@ except ImportError:
 	import httplib # Python 2.7 and earlier
 
 # Allows non-blocking http requests
-class NBHTTPSConnection():
-	def __init__(self, host, port=None, strict=None, timeout=None):
-		self.rawConnection = httplib.HTTPSConnection(host, port, strict, timeout)
+class NBConnection():
+	def __init__(self, host, port=None, https=False, strict=None, timeout=None):
+		if https:
+			self.rawConnection = httplib.HTTPSConnection(host, port, strict, timeout)
+		else:
+			self.rawConnection = httplib.HTTPConnection(host, port, strict, timeout)
 		self.response = None
 		self.responseLock = threading.Lock()
 		self.closing = False
@@ -35,7 +38,7 @@ class NBHTTPSConnection():
 
 	def go(self):
 		self.responseLock.acquire()
-		thread.start_new_thread(NBHTTPSConnection._run, (self,))
+		thread.start_new_thread(NBConnection._run, (self,))
 
 	def _run(self):
 		self.response = self.rawConnection.getresponse()
