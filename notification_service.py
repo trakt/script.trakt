@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-#
+""" Handles notifications from XBMC via its own thread and forwards them on to the scrobbler """
 
 import xbmc
-import xbmcaddon
 import telnetlib
-import time
 import socket
 
 import simplejson as json
@@ -13,13 +11,16 @@ import threading
 from utilities import Debug
 from scrobbler import Scrobbler
 
-__settings__ = xbmcaddon.Addon("script.trakt")
-__language__ = __settings__.getLocalizedString
-
 class NotificationService(threading.Thread):
 	""" Receives XBMC notifications and passes them off as needed """
+
+	TELNET_ADDRESS = 'localhost'
+	TELNET_PORT = 9090
+
 	_abortRequested = False
 	_scrobbler = None
+	_notificationBuffer = ""
+
 
 	def _forward(self, notification):
 		""" Fowards the notification recieved to a function on the scrobbler """
@@ -37,47 +38,43 @@ class NotificationService(threading.Thread):
 			self._abortRequested = True
 
 
+	def _readNotification(self, telnet):
+		""" Read a notification from the telnet connection, blocks until the data is available, or else raises an EOFError if the connection is lost """
+		try:
+			addbuffer = telnet.read_some()
+		except socket.timeout:
+			return self._readNotification(telnet)
+
+		if addbuffer == "":
+			raise EOFError
+
+		self._notificationBuffer += addbuffer
+		try:
+			data, offset = json.JSONDecoder().raw_decode(self._notificationBuffer)
+			self._notificationBuffer = self._notificationBuffer[offset:]
+		except ValueError:
+			return self._readNotification(telnet)
+
+		return data
+
+
 	def run(self):
 		#while xbmc is running
 		self._scrobbler = Scrobbler()
 		self._scrobbler.start()
+		telnet = telnetlib.Telnet(self.TELNET_ADDRESS, self.TELNET_PORT)
 
-		while (not (self._abortRequested or xbmc.abortRequested)):
-			time.sleep(1)
+		while not (self._abortRequested or xbmc.abortRequested):
 			try:
-				telnet = telnetlib.Telnet('localhost', 9090)
-			except IOError as (errno, strerror):
-				#connection failed, try again soon
-				Debug("[Notification Service] Telnet too soon? ("+str(errno)+") "+strerror)
+				data = self._readNotification(telnet)
+			except EOFError:
+				telnet = telnetlib.Telnet(self.TELNET_ADDRESS, self.TELNET_PORT)
+				self._notificationBuffer = ""
 				continue
 
-			Debug("[Notification Service] Waiting~")
-			notificationBuffer = ""
+			Debug("[Notification Service] message: " + str(data))
+			self._forward(data)
 
-			while (not (self._abortRequested or xbmc.abortRequested)):
-				try:
-					addbuffer = telnet.read_some()
-				except socket.timeout:
-					continue
-
-				if addbuffer == "":
-					break # hit EOF restart outer loop
-
-				notificationBuffer += addbuffer
-				try:
-					data, offset = json.JSONDecoder().raw_decode(notificationBuffer)
-					notificationBuffer = notificationBuffer[offset:]
-				except ValueError:  #Not a complete json document in buffer
-					continue
-
-				Debug("[Notification Service] message: " + str(data))
-				self._forward(data)
-
-		try:
-			telnet.close()
-		except:
-			Debug("[NotificationService] Error attempting to close the telnet connection")
-			raise
-
+		telnet.close()
 		self._scrobbler.abortRequested = True
 		Debug("Notification service stopping")
