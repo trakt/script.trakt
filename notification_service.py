@@ -40,22 +40,23 @@ class NotificationService(threading.Thread):
 
 	def _readNotification(self, telnet):
 		""" Read a notification from the telnet connection, blocks until the data is available, or else raises an EOFError if the connection is lost """
-		try:
-			addbuffer = telnet.read_some()
-		except socket.timeout:
-			return self._readNotification(telnet)
+		while True:
+			try:
+				addbuffer = telnet.read_some()
+			except socket.timeout:
+				continue
 
-		if addbuffer == "":
-			raise EOFError
+			if addbuffer == "":
+				raise EOFError
 
-		self._notificationBuffer += addbuffer
-		try:
-			data, offset = json.JSONDecoder().raw_decode(self._notificationBuffer)
-			self._notificationBuffer = self._notificationBuffer[offset:]
-		except ValueError:
-			return self._readNotification(telnet)
+			self._notificationBuffer += addbuffer
+			try:
+				data, offset = json.JSONDecoder().raw_decode(self._notificationBuffer)
+				self._notificationBuffer = self._notificationBuffer[offset:]
+			except ValueError:
+				continue
 
-		return data
+			return data
 
 
 	def run(self):
