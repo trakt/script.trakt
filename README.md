@@ -10,6 +10,7 @@ Automatically scrobble all TV episodes and movies you are watching to trakt.tv! 
 * track your media collections and impress your friends
 * create custom lists around any topics you choose
 * easily track your TV show progress across all seasons and episodes
+* track your progress against industry lists such as the IMDb Top 250
 * discover new shows and movies based on your viewing habits
 
 ###What can be scrobbled?
@@ -24,6 +25,7 @@ Remote streaming content will scrobble assuming the metadata is correctly set in
 * PleXBMC
 * Amazon (bluecop repo)
 * CBS (bluecop repo)
+* South Park
 
 ###Installation
 
