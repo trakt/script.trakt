@@ -181,6 +181,7 @@ def getEpisodeDetailsFromXbmc(libraryId, fields):
 	rpccmd = json.dumps({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params':{'episodeid': libraryId, 'properties': fields}, 'id': 1})
 
 	result = xbmc.executeJSONRPC(rpccmd)
+	Debug('[VideoLibrary.GetEpisodeDetails] ' + result)
 	result = json.loads(result)
 
 	# check for error
@@ -192,6 +193,17 @@ def getEpisodeDetailsFromXbmc(libraryId, fields):
 		pass # no error
 
 	try:
+		# get tvdb id
+		rpccmd_show = json.dumps({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': result['result']['episodedetails']['tvshowid'], 'properties': ['year', 'imdbnumber']}, 'id': 1})
+		
+		result_show = xbmc.executeJSONRPC(rpccmd_show)
+		Debug('[VideoLibrary.GetTVShowDetails] ' + result_show)
+		result_show = json.loads(result_show)
+		
+		# add to episode data
+		result['result']['episodedetails']['tvdb_id'] = result_show['result']['tvshowdetails']['imdbnumber']
+		result['result']['episodedetails']['year'] = result_show['result']['tvshowdetails']['year']
+		
 		return result['result']['episodedetails']
 	except KeyError:
 		Debug("getEpisodeDetailsFromXbmc: KeyError: result['result']['episodedetails']")
@@ -202,6 +214,7 @@ def getMovieDetailsFromXbmc(libraryId, fields):
 	rpccmd = json.dumps({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params':{'movieid': libraryId, 'properties': fields}, 'id': 1})
 
 	result = xbmc.executeJSONRPC(rpccmd)
+	Debug('[VideoLibrary.GetMovieDetails] ' + result)
 	result = json.loads(result)
 
 	# check for error

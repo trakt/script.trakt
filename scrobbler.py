@@ -118,15 +118,17 @@ class Scrobbler(threading.Thread):
 		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true':
 			match = None
 			if 'id' in self.curVideo:
-				match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode'])
+				match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid'])
 			elif 'showtitle' in self.curVideoData and 'season' in self.curVideoData and 'episode' in self.curVideoData:
 				match = {}
+				match['tvdb_id'] = None
+				match['year'] = None
 				match['showtitle'] = self.curVideoData['showtitle']
 				match['season'] = self.curVideoData['season']
 				match['episode'] = self.curVideoData['episode']
 			if match == None:
 				return
-			response = utilities.watchingEpisodeOnTrakt(None, match['showtitle'], None, match['season'], match['episode'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
+			response = utilities.watchingEpisodeOnTrakt(match['tvdb_id'], match['showtitle'], match['year'], match['season'], match['episode'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
 			if response != None:
 				Debug("[Scrobbler] Watch response: "+str(response))
 
@@ -167,12 +169,14 @@ class Scrobbler(threading.Thread):
 				match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode'])
 			elif 'showtitle' in self.curVideoData and 'season' in self.curVideoData and 'episode' in self.curVideoData:
 				match = {}
+				match['tvdb_id'] = None
+				match['year'] = None
 				match['showtitle'] = self.curVideoData['showtitle']
 				match['season'] = self.curVideoData['season']
 				match['episode'] = self.curVideoData['episode']
 			if match == None:
 				return
-			response = utilities.scrobbleEpisodeOnTrakt(None, match['showtitle'], None, match['season'], match['episode'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
+			response = utilities.scrobbleEpisodeOnTrakt(match['tvdb_id'], match['showtitle'], match['year'], match['season'], match['episode'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
 			if response != None:
 				Debug("[Scrobbler] Scrobble response: "+str(response))
 

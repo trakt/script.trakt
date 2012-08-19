@@ -1,5 +1,6 @@
 version 1.0.1
   - code optimization (thanks seadog!)
+  - use tvdb_id for much improved matching and international support
 
 version 1.0.0
   - initial release
