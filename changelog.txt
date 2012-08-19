@@ -1,3 +1,6 @@
+version 1.0.1
+  - code optimization (thanks seadog!)
+
 version 1.0.0
   - initial release
   - tv episode and movie scrobbling
