@@ -1,85 +1,81 @@
 # -*- coding: utf-8 -*-
-# 
+""" Handles notifications from XBMC via its own thread and forwards them on to the scrobbler """
 
-import xbmc, xbmcaddon, xbmcgui
-import telnetlib, time
+import xbmc
+import telnetlib
+import socket
 
-try: import simplejson as json
-except ImportError: import json
+import simplejson as json
 
 import threading
-from utilities import *
+from utilities import Debug
 from scrobbler import Scrobbler
 
-__settings__ = xbmcaddon.Addon("script.trakt")
-__language__ = __settings__.getLocalizedString
-
-# Receives XBMC notifications and passes them off as needed
 class NotificationService(threading.Thread):
-	abortRequested = False
-	def run(self):		  
-		#while xbmc is running
-		scrobbler = Scrobbler()
-		scrobbler.start()
-		
-		while (not (self.abortRequested or xbmc.abortRequested)):
-			time.sleep(1)
+	""" Receives XBMC notifications and passes them off as needed """
+
+	TELNET_ADDRESS = 'localhost'
+	TELNET_PORT = 9090
+
+	_abortRequested = False
+	_scrobbler = None
+	_notificationBuffer = ""
+
+
+	def _forward(self, notification):
+		""" Fowards the notification recieved to a function on the scrobbler """
+		if not ('method' in notification and 'params' in notification and 'sender' in notification['params'] and notification['params']['sender'] == 'xbmc'):
+			return
+
+		if notification['method'] == 'Player.OnStop':
+			self._scrobbler.playbackEnded()
+		elif notification['method'] == 'Player.OnPlay':
+			if 'data' in notification['params'] and 'item' in notification['params']['data'] and 'type' in notification['params']['data']['item']:
+				self._scrobbler.playbackStarted(notification['params']['data'])
+		elif notification['method'] == 'Player.OnPause':
+			self._scrobbler.playbackPaused()
+		elif notification['method'] == 'System.OnQuit':
+			self._abortRequested = True
+
+
+	def _readNotification(self, telnet):
+		""" Read a notification from the telnet connection, blocks until the data is available, or else raises an EOFError if the connection is lost """
+		while True:
 			try:
-				tn = telnetlib.Telnet('localhost', 9090, 10)
-			except IOError as (errno, strerror):
-				#connection failed, try again soon
-				Debug("[Notification Service] Telnet too soon? ("+str(errno)+") "+strerror)
-				time.sleep(1)
+				addbuffer = telnet.read_some()
+			except socket.timeout:
 				continue
-			
-			Debug("[Notification Service] Waiting~");
-			bCount = 0
-			
-			while (not (self.abortRequested or xbmc.abortRequested)):
-				try:
-					if bCount == 0:
-						notification = ""
-						inString = False
-					[index, match, raw] = tn.expect(["(\\\\)|(\\\")|[{\"}]"], 0.2) #note, pre-compiled regex might be faster here
-					notification += raw
-					if index == -1: # Timeout
-						continue
-					if index == 0: # Found escaped quote
-						match = match.group(0)
-						if match == "\"":
-							inString = not inString
-							continue
-						if match == "{":
-							bCount += 1
-						if match == "}":
-							bCount -= 1
-					if bCount > 0:
-						continue
-					if bCount < 0:
-						bCount = 0
-				except EOFError:
-					break #go out to the other loop to restart the connection
-				
-				Debug("[Notification Service] message: " + str(notification))
-				
-				# Parse recieved notification
-				data = json.loads(notification)
-				
-				# Forward notification to functions
-				if 'method' in data and 'params' in data and 'sender' in data['params'] and data['params']['sender'] == 'xbmc':
-					if data['method'] == 'Player.OnStop':
-						scrobbler.playbackEnded()
-					elif data['method'] == 'Player.OnPlay':
-						if 'data' in data['params'] and 'item' in data['params']['data'] and 'type' in data['params']['data']['item']:
-							scrobbler.playbackStarted(data['params']['data'])
-					elif data['method'] == 'Player.OnPause':
-						scrobbler.playbackPaused()
-					elif data['method'] == 'System.OnQuit':
-						self.abortRequested = True
-		try:
-			tn.close()
-		except:
-			Debug("[NotificationService] Error attempting to close the telnet connection")
-			raise
-		scrobbler.abortRequested = True
+
+			if addbuffer == "":
+				raise EOFError
+
+			self._notificationBuffer += addbuffer
+			try:
+				data, offset = json.JSONDecoder().raw_decode(self._notificationBuffer)
+				self._notificationBuffer = self._notificationBuffer[offset:]
+			except ValueError:
+				continue
+
+			return data
+
+
+	def run(self):
+		#while xbmc is running
+		self._scrobbler = Scrobbler()
+		self._scrobbler.start()
+		telnet = telnetlib.Telnet(self.TELNET_ADDRESS, self.TELNET_PORT)
+
+		while not (self._abortRequested or xbmc.abortRequested):
+			try:
+				data = self._readNotification(telnet)
+			except EOFError:
+				telnet = telnetlib.Telnet(self.TELNET_ADDRESS, self.TELNET_PORT)
+				self._notificationBuffer = ""
+				continue
+
+			Debug("[Notification Service] message: " + str(data))
+			self._forward(data)
+
+		telnet.close()
+		self._scrobbler.abortRequested = True
 		Debug("Notification service stopping")
