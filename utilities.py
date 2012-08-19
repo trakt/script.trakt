@@ -6,6 +6,7 @@ import xbmcaddon
 import xbmcgui
 import nbconnection
 import time, socket
+import math
 
 try:
 	import simplejson as json
@@ -255,14 +256,14 @@ def getPlaylistLengthFromXBMCPlayer(playerid):
 
 #tell trakt that the user is watching a movie
 def watchingMovieOnTrakt(imdb_id, title, year, duration, percent):
-	response = traktJsonRequest('POST', '/movie/watching/%%API_KEY%%', {'imdb_id': imdb_id, 'title': title, 'year': year, 'duration': duration, 'progress': percent}, passVersions=True)
+	response = traktJsonRequest('POST', '/movie/watching/%%API_KEY%%', {'imdb_id': imdb_id, 'title': title, 'year': year, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
 	if response == None:
 		Debug("Error in request from 'watchingMovieOnTrakt()'")
 	return response
 
 #tell trakt that the user is watching an episode
 def watchingEpisodeOnTrakt(tvdb_id, title, year, season, episode, duration, percent):
-	response = traktJsonRequest('POST', '/show/watching/%%API_KEY%%', {'tvdb_id': tvdb_id, 'title': title, 'year': year, 'season': season, 'episode': episode, 'duration': duration, 'progress': percent}, passVersions=True)
+	response = traktJsonRequest('POST', '/show/watching/%%API_KEY%%', {'tvdb_id': tvdb_id, 'title': title, 'year': year, 'season': season, 'episode': episode, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
 	if response == None:
 		Debug("Error in request from 'watchingEpisodeOnTrakt()'")
 	return response
@@ -283,14 +284,14 @@ def cancelWatchingEpisodeOnTrakt():
 
 #tell trakt that the user has finished watching an movie
 def scrobbleMovieOnTrakt(imdb_id, title, year, duration, percent):
-	response = traktJsonRequest('POST', '/movie/scrobble/%%API_KEY%%', {'imdb_id': imdb_id, 'title': title, 'year': year, 'duration': duration, 'progress': percent}, passVersions=True)
+	response = traktJsonRequest('POST', '/movie/scrobble/%%API_KEY%%', {'imdb_id': imdb_id, 'title': title, 'year': year, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
 	if response == None:
 		Debug("Error in request from 'scrobbleMovieOnTrakt()'")
 	return response
 
 #tell trakt that the user has finished watching an episode
 def scrobbleEpisodeOnTrakt(tvdb_id, title, year, season, episode, duration, percent):
-	response = traktJsonRequest('POST', '/show/scrobble/%%API_KEY%%', {'tvdb_id': tvdb_id, 'title': title, 'year': year, 'season': season, 'episode': episode, 'duration': duration, 'progress': percent}, passVersions=True)
+	response = traktJsonRequest('POST', '/show/scrobble/%%API_KEY%%', {'tvdb_id': tvdb_id, 'title': title, 'year': year, 'season': season, 'episode': episode, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
 	if response == None:
 		Debug("Error in request from 'scrobbleEpisodeOnTrakt()'")
 	return response
