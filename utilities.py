@@ -88,9 +88,9 @@ def getTraktConnection():
 #	use to customise error notifications
 # anon: anonymous (dont send username/password), default:False
 # connection: default it to make a new connection but if you want to keep the same one alive pass it here
-# silent: default is False, when true it disable any error notifications (but not debug messages)
+# silent: default is True, when true it disable any error notifications (but not debug messages)
 # passVersions: default is False, when true it passes extra version information to trakt to help debug problems
-def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=False, silent=False, passVersions=False):
+def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=False, silent=True, passVersions=False):
 	closeConnection = False
 	if conn == False:
 		conn = getTraktConnection()
