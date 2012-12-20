@@ -118,7 +118,7 @@ class Scrobbler(threading.Thread):
 		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true':
 			match = None
 			if 'id' in self.curVideo:
-				match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid'])
+				match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
 			elif 'showtitle' in self.curVideoData and 'season' in self.curVideoData and 'episode' in self.curVideoData:
 				match = {}
 				match['tvdb_id'] = None
@@ -126,9 +126,10 @@ class Scrobbler(threading.Thread):
 				match['showtitle'] = self.curVideoData['showtitle']
 				match['season'] = self.curVideoData['season']
 				match['episode'] = self.curVideoData['episode']
+				match['uniqueid'] = self.curVideoData['uniqueid']['unknown']
 			if match == None:
 				return
-			response = utilities.watchingEpisodeOnTrakt(match['tvdb_id'], match['showtitle'], match['year'], match['season'], match['episode'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
+			response = utilities.watchingEpisodeOnTrakt(match['tvdb_id'], match['showtitle'], match['year'], match['season'], match['episode'], match['uniqueid']['unknown'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
 			if response != None:
 				Debug("[Scrobbler] Watch response: "+str(response))
 
@@ -166,7 +167,7 @@ class Scrobbler(threading.Thread):
 		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true':
 			match = None
 			if 'id' in self.curVideo:
-				match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid'])
+				match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
 			elif 'showtitle' in self.curVideoData and 'season' in self.curVideoData and 'episode' in self.curVideoData:
 				match = {}
 				match['tvdb_id'] = None
@@ -174,9 +175,10 @@ class Scrobbler(threading.Thread):
 				match['showtitle'] = self.curVideoData['showtitle']
 				match['season'] = self.curVideoData['season']
 				match['episode'] = self.curVideoData['episode']
+				match['uniqueid'] = self.curVideoData['uniqueid']['unknown']
 			if match == None:
 				return
-			response = utilities.scrobbleEpisodeOnTrakt(match['tvdb_id'], match['showtitle'], match['year'], match['season'], match['episode'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
+			response = utilities.scrobbleEpisodeOnTrakt(match['tvdb_id'], match['showtitle'], match['year'], match['season'], match['episode'], match['uniqueid']['unknown'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
 			if response != None:
 				Debug("[Scrobbler] Scrobble response: "+str(response))
 
