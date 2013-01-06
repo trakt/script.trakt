@@ -140,4 +140,33 @@
 	<string id="1282">Watched</string>
 	<string id="1283">Library</string>
 	<string id="1284">Profile</string>
+
+	<!-- Sync Settings -->
+	<string id="1400">Synchronize</string>
+	<string id="1401">API Key</string>
+	<string id="1402">Movies</string>
+	<string id="1403">Add movies to trakt.tv</string>
+	<string id="1404">Update trakt.tv movie playcounts</string>
+	<string id="1405">Update XBMC movie playcounts</string>
+	<string id="1406">Episodes</string>
+	<string id="1407">Add episodes to trakt.tv</string>
+	<string id="1408">Update trakt.tv episode playcounts</string>
+	<string id="1409">Update XBMC episode playcounts</string>
+	<string id="1410">Service</string>
+	<string id="1411">Sync after library updates</string>
+	<string id="1412">Show notifications</string>
+
+	<!-- Sync Notifications -->
+	<string id="1420">Sync started</string>
+	<string id="1421">Sync complete</string>
+	<string id="1422">Getting movies from XBMC</string>
+	<string id="1423">Getting movie collection from trakt.tv</string>
+	<string id="1424">Getting seen movies from trakt.tv</string>
+	<string id="1425">Checking for XBMC movies that are not on trakt.tv</string>
+	<string id="1426">movie(s) will be added to trakt.tv collection</string>
+	<string id="1427">Checking if trakt.tv playcount is up to date</string>
+	<string id="1428">movie(s) playcount will be updated on trakt.tv</string>
+	<string id="1429">Checking if XBMC playcount is up to date</string>
+	<string id="1430">Updating</string>
+	<string id="1431">Movie Sync Complete</string>
 </strings>

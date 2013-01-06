@@ -7,6 +7,9 @@
 	</requires>
 	<res width="1280" height="720" aspect="16x9" default="true" folder="720p" />
 	<extension point="xbmc.service" name="trakt.service" library="service.py"/>
+	<extension point="xbmc.python.script" library="sync_exec.py">
+		<provides>executable</provides>
+	</extension>
 	<extension point="xbmc.addon.metadata" name="trakt.metadata">
 		<language></language>
 		<summary lang="en">TV and movie scrobbler for trakt.tv</summary>
