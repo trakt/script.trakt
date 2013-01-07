@@ -3,6 +3,7 @@
 import xbmcaddon
 import xbmcgui
 from movie_sync import SyncMovies
+from episode_sync import SyncEpisodes
 
 def get_bool(boolean):
 	return xbmcaddon.Addon('script.trakt').getSetting(boolean) == 'true'
@@ -26,3 +27,7 @@ if __name__ == '__main__':
 		if do_sync('movies'):
 			movies = SyncMovies(show_progress=True)
 			movies.Run()
+
+		if do_sync('episodes'):
+			episodes = SyncEpisodes(show_progress=True)
+			episodes.Run()

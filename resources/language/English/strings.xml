@@ -164,9 +164,20 @@
 	<string id="1424">Getting seen movies from trakt.tv</string>
 	<string id="1425">Checking for XBMC movies that are not on trakt.tv</string>
 	<string id="1426">movie(s) will be added to trakt.tv collection</string>
-	<string id="1427">Checking if trakt.tv playcount is up to date</string>
+	<string id="1427">Checking watched movies on trakt.tv</string>
 	<string id="1428">movie(s) playcount will be updated on trakt.tv</string>
 	<string id="1429">Checking if XBMC playcount is up to date</string>
 	<string id="1430">Updating</string>
 	<string id="1431">Movie Sync Complete</string>
+	<string id="1432">Getting TV shows from XBMC</string>
+	<string id="1433">Getting episodes from XBMC</string>
+	<string id="1434">Getting episode collection from trakt.tv</string>
+	<string id="1435">Checking for episodes missing from trakt.tv collection</string>
+	<string id="1436">shows(s) have episodes added to trakt.tv collection</string>
+	<string id="1437">episodes missing</string>
+	<string id="1438">Checking watched episodes on trakt.tv</string>
+	<string id="1439">shows have missing watched status</string>
+	<string id="1440">episodes are being updated</string>
+	<string id="1441">Checking watched episodes on XBMC</string>
+	<string id="1442">Episode Sync Complete</string>
 </strings>
