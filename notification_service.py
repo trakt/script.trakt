@@ -10,6 +10,9 @@ import simplejson as json
 import threading
 from utilities import Debug
 from scrobbler import Scrobbler
+from movie_sync import SyncMovies
+from episode_sync import SyncEpisodes
+from sync_exec import do_sync
 
 class NotificationService(threading.Thread):
 	""" Receives XBMC notifications and passes them off as needed """
@@ -34,6 +37,13 @@ class NotificationService(threading.Thread):
 				self._scrobbler.playbackStarted(notification['params']['data'])
 		elif notification['method'] == 'Player.OnPause':
 			self._scrobbler.playbackPaused()
+		elif notification['method'] == 'VideoLibrary.OnScanFinished':
+			if do_sync('movies'):
+				movies = SyncMovies(show_progress=False)
+				movies.Run()
+			if do_sync('episodes'):
+				episodes = SyncEpisodes(show_progress=False)
+				episodes.Run()
 		elif notification['method'] == 'System.OnQuit':
 			self._abortRequested = True
 
