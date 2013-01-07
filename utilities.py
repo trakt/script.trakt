@@ -38,6 +38,17 @@ def Debug(msg, force = False):
 def notification( header, message, time=5000, icon=__settings__.getAddonInfo("icon")):
 	xbmc.executebuiltin( "XBMC.Notification(%s,%s,%i,%s)" % ( header, message, time, icon ) )
 
+def xbmcJsonRequest(params):
+	data = json.dumps(params)
+	request = xbmc.executeJSONRPC(data)
+	response = json.loads(request)
+
+	try:
+		return response["result"]
+	except KeyError:
+		Debug("[%s] %s" % (params["method"], response["error"]["message"]), True)
+		return None
+
 def checkSettings(daemon=False):
 	if username == "":
 		if daemon:

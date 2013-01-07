@@ -11,4 +11,19 @@
 		<setting id="scrobble_episode" type="bool" label="1042" default="true"/>
 		<setting id="scrobble_min_view_time" type="slider" label="1043" range="0,5,100" default="80"/>
 	</category>
+	<category label="1400"><!-- Synchronize -->
+		<setting label="1410" type="lsep"/><!-- Service -->
+		<setting id="sync_on_update" type="bool" label="1411" default="false"/>
+		<setting id="show_sync_notifications" type="bool" label="1412" default="false"/>
+		<setting type="sep"/>
+		<setting label="1402" type="lsep"/><!-- Movies -->
+		<setting id="add_movies_to_trakt" type="bool" label="1403" default="true"/>
+		<setting id="trakt_movie_playcount" type="bool" label="1404" default="true"/>
+		<setting id="xbmc_movie_playcount" type="bool" label="1405" default="true"/>
+		<setting type="sep"/>
+		<setting label="1406" type="lsep"/><!-- Episodes -->
+		<setting id="add_episodes_to_trakt" type="bool" label="1407" default="true"/>
+		<setting id="trakt_episode_playcount" type="bool" label="1408" default="true"/>
+		<setting id="xbmc_episode_playcount" type="bool" label="1409" default="true"/>
+	</category>
 </settings>
