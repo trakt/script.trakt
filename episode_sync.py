@@ -80,7 +80,7 @@ class SyncEpisodes():
 		for show in shows:
 			show['episodes'] = []
 
-			episodes = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show['tvshowid'], 'properties': ['season', 'episode', 'playcount']}, 'id': 0})
+			episodes = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid']}, 'id': 0})
 			if 'episodes' in episodes:
 				episodes = episodes['episodes']
 
@@ -145,7 +145,7 @@ class SyncEpisodes():
 					missing = compare_show(xbmc_show, trakt_show)
 
 			if missing:
-				show = {'title': xbmc_show['title'], 'episodes': [{'episode': x['episode'], 'season': x['season']} for x in missing]}
+				show = {'title': xbmc_show['title'], 'episodes': [{'episode': x['episode'], 'season': x['season'], 'episode_tvdb_id': x['uniqueid']['unknown']} for x in missing]}
 					
 				if xbmc_show['imdbnumber'].isdigit():
 					show['tvdb_id'] = xbmc_show['imdbnumber']
@@ -217,7 +217,7 @@ class SyncEpisodes():
 
 
 			if missing:
-				show = {'title': xbmc_show['title'], 'episodes': [{'episode': x['episode'], 'season': x['season']} for x in missing]}
+				show = {'title': xbmc_show['title'], 'episodes': [{'episode': x['episode'], 'season': x['season'], 'episode_tvdb_id': x['uniqueid']['unknown']} for x in missing]}
 					
 				if xbmc_show['imdbnumber'].isdigit():
 					show['tvdb_id'] = xbmc_show['imdbnumber']
