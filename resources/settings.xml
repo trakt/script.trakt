@@ -3,7 +3,6 @@
 	<category label="1010"><!-- General -->
 		<setting id="username" type="text" label="1013" default="" />
 		<setting id="password" type="text" option="hidden" label="1014" default="" />
-		<setting id="api_key" type="text" label="1401" default="" />
 		<setting id="debug" type="bool" label="1011" default="true"/>
 		<setting id="https" type="bool" label="1016" default="false"/>
 	</category>

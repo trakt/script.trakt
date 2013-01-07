@@ -19,15 +19,10 @@ def do_sync(media_type):
 	return False
 
 if __name__ == '__main__':
-	if not xbmcaddon.Addon('script.trakt').getSetting('api_key'):
-		xbmcgui.Dialog().ok('trakt', 'Please enter your API key in settings'.encode( "utf-8", "ignore" )) # Please enter your API key in settings
-		xbmcaddon.Addon("script.trakt").openSettings()
+	if do_sync('movies'):
+		movies = SyncMovies(show_progress=True)
+		movies.Run()
 
-	else:
-		if do_sync('movies'):
-			movies = SyncMovies(show_progress=True)
-			movies.Run()
-
-		if do_sync('episodes'):
-			episodes = SyncEpisodes(show_progress=True)
-			episodes.Run()
+	if do_sync('episodes'):
+		episodes = SyncEpisodes(show_progress=True)
+		episodes.Run()

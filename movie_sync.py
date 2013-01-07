@@ -5,12 +5,6 @@ import xbmcgui
 import xbmcaddon
 from utilities import traktJsonRequest, xbmcJsonRequest, Debug, notification
 
-try:
-	import simplejson as json
-except ImportError:
-	import json
-
-
 __setting__   = xbmcaddon.Addon('script.trakt').getSetting
 __getstring__ = xbmcaddon.Addon('script.trakt').getLocalizedString
 
@@ -39,7 +33,6 @@ def xbmc_to_trakt_movie(movie, playcount=False):
 
 class SyncMovies():
 	def __init__(self, show_progress=False):
-		self.apikey = __setting__('api_key')
 		self.xbmc_movies = None
 		self.trakt_movies_seen = None
 		self.trakt_movies_collection = None
@@ -106,7 +99,7 @@ class SyncMovies():
 			if self.show_progress:
 				progress.update(45, line2='%i %s' % (len(add_to_trakt), __getstring__(1426)))
 
-			traktJsonRequest('POST', '/movie/library/%s' % self.apikey, {'movies': [xbmc_to_trakt_movie(x) for x in add_to_trakt]})
+			traktJsonRequest('POST', '/movie/library/%%API_KEY%%', {'movies': [xbmc_to_trakt_movie(x) for x in add_to_trakt]})
 						
 		else:
 			Debug('[Movies Sync] trakt.tv movie collection is up to date')
@@ -146,7 +139,7 @@ class SyncMovies():
 
 			# Send request to update playcounts on trakt.tv
 			params = {'movies': [xbmc_to_trakt_movie(x, playcount=True) for x in update_playcount]}
-			traktJsonRequest('POST', '/movie/seen/%s' % self.apikey, params)
+			traktJsonRequest('POST', '/movie/seen/%%API_KEY%%', params)
 
 		else:
 			Debug('[Movies Sync] trakt.tv movie playcount is up to date')

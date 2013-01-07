@@ -59,7 +59,6 @@ def compare_show_watched_xbmc(xbmc_show, trakt_show):
 
 class SyncEpisodes():
 	def __init__(self, show_progress=False):
-		self.apikey = __setting__('api_key')
 		self.xbmc_shows = []
 		self.trakt_shows = {'collection': [], 'watched': []}
 		self.notify = __setting__('show_sync_notifications') == 'true'
@@ -164,7 +163,7 @@ class SyncEpisodes():
 				if self.show_progress:
 					progress.update(45, line1=__getstring__(1435), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), __getstring__(1437)))
 
-				traktJsonRequest('POST', '/show/episode/library/%s' % self.apikey, show)
+				traktJsonRequest('POST', '/show/episode/library/%%API_KEY%%', show)
 
 		else:
 			Debug('[Episodes Sync] trakt.tv episode collection is up to date')
@@ -236,7 +235,7 @@ class SyncEpisodes():
 				if self.show_progress:
 					progress.update(80, line1=__getstring__(1438), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), __getstring__(1440)))
 
-				traktJsonRequest('POST', '/show/episode/seen/%s' % self.apikey, show)
+				traktJsonRequest('POST', '/show/episode/seen/%%API_KEY%%', show)
 
 		else:
 			Debug('[Episodes Sync] trakt.tv episode playcounts are up to date')

@@ -143,7 +143,7 @@
 
 	<!-- Sync Settings -->
 	<string id="1400">Synchronize</string>
-	<string id="1401">API Key</string>
+	<string id="1401"></string>
 	<string id="1402">Movies</string>
 	<string id="1403">Add movies to trakt.tv</string>
 	<string id="1404">Update trakt.tv movie playcounts</string>

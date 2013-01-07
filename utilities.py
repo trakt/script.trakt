@@ -131,7 +131,7 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 			conn.request('GET', req)
 		else:
 			return None
-		Debug("json url: "+req.replace(__settings__.getSetting("api_key"), "%%USER_API_KEY%%")) #Hide the user API key when logging
+		Debug("json url: "+req)
 	except socket.error:
 		Debug("traktQuery: can't connect to trakt")
 		if not silent:
