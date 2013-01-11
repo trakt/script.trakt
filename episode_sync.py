@@ -146,7 +146,8 @@ class SyncEpisodes():
 
 			if missing:
 				show = {'title': xbmc_show['title'], 'episodes': [{'episode': x['episode'], 'season': x['season'], 'episode_tvdb_id': x['uniqueid']['unknown']} for x in missing]}
-					
+				Debug('[Episodes Sync][AddToTrakt] %s' % show)
+
 				if xbmc_show['imdbnumber'].isdigit():
 					show['tvdb_id'] = xbmc_show['imdbnumber']
 				else:
@@ -176,7 +177,7 @@ class SyncEpisodes():
 		self.trakt_shows['watched'] = traktJsonRequest('POST', '/user/library/shows/watched.json/%%API_KEY%%/%%USERNAME%%/min')
 
 	def UpdatePlaysTrakt(self):
-		Debug('[Episodes Sync] Cecking watched episodes on trakt.tv')
+		Debug('[Episodes Sync] Checking watched episodes on trakt.tv')
 		if self.show_progress:
 			progress.update(70, line1=__getstring__(1438), line2=' ', line3=' ')
 
@@ -194,8 +195,15 @@ class SyncEpisodes():
 
 			trakt_title_index[self.trakt_shows['watched'][i]['title']] = i
 
-		for xbmc_show in self.xbmc_shows:
+		xbmc_shows_watched = []
+		for show in self.xbmc_shows:
+			watched_episodes = [x for x in show['episodes'] if x['playcount']]
+			if watched_episodes:
+				xbmc_shows_watched.append(show)
+
+		for xbmc_show in xbmc_shows_watched:
 			missing = []
+			trakt_show = {}
 
 			#IMDB ID
 			if xbmc_show['imdbnumber'].startswith('tt') and xbmc_show['imdbnumber'] in trakt_imdb_index.keys():
@@ -213,12 +221,12 @@ class SyncEpisodes():
 			if trakt_show:
 				missing = compare_show_watched_trakt(xbmc_show, trakt_show)
 			else:
-				Debug('[Episodes Sync] Failed to find %s on trakt.tv' % xbmc_show['title'])
-
+				missing = [x for x in xbmc_show['episodes'] if x['playcount']]
 
 			if missing:
 				show = {'title': xbmc_show['title'], 'episodes': [{'episode': x['episode'], 'season': x['season'], 'episode_tvdb_id': x['uniqueid']['unknown']} for x in missing]}
-					
+				Debug('[Episodes Sync][UpdatePlaysTrakt] %s' % show)
+
 				if xbmc_show['imdbnumber'].isdigit():
 					show['tvdb_id'] = xbmc_show['imdbnumber']
 				else:
