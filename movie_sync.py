@@ -81,18 +81,20 @@ class SyncMovies():
 			#Compare IMDB IDs
 			if xbmc_movie['imdbnumber'].startswith('tt'):
 				if xbmc_movie['imdbnumber'] not in trakt_imdb_ids:
+					Debug('[Movies Sync][AddToTrakt] %s' % xbmc_movie)
 					add_to_trakt.append(xbmc_movie)
 
 			#Compare TMDB IDs
 			elif xbmc_movie['imdbnumber'].isdigit():
 				if xbmc_movie['imdbnumber'] not in trakt_tmdb_ids:
+					Debug('[Movies Sync][AddToTrakt] %s' % xbmc_movie)
 					add_to_trakt.append(xbmc_movie)
 
 			#Compare titles if unknown ID type
 			else:
 				if xbmc_movie['title'] not in trakt_titles:
+					Debug('[Movies Sync][AddToTrakt] %s' % xbmc_movie)
 					add_to_trakt.append(xbmc_movie)
-
 
 		if add_to_trakt:
 			Debug('[Movies Sync] %i movie(s) will be added to trakt.tv collection' % len(add_to_trakt))
@@ -112,6 +114,7 @@ class SyncMovies():
 
 		update_playcount = []
 		trakt_playcounts = {}
+		xbmc_movies_seen = [x for x in self.xbmc_movies if x['playcount']]
 
 		for trakt_movie in self.trakt_movies_seen:
 			if 'tmdb_id' in trakt_movie:
@@ -122,15 +125,24 @@ class SyncMovies():
 
 			trakt_playcounts[trakt_movie['title']] = trakt_movie['plays']
 
-		for xbmc_movie in self.xbmc_movies:
+		for xbmc_movie in xbmc_movies_seen:
 			if xbmc_movie['imdbnumber'] in trakt_playcounts:
 				if trakt_playcounts[xbmc_movie['imdbnumber']] < xbmc_movie['playcount']:
+					Debug('[Movies Sync][UpdatePlaysTrakt] %s' % xbmc_movie)
 					update_playcount.append(xbmc_movie)
+				else:
+					pass
 
 			elif xbmc_movie['title'] in trakt_playcounts:
 				if trakt_playcounts[xbmc_movie['title']] < xbmc_movie['playcount']:
+					Debug('[Movies Sync][UpdatePlaysTrakt][Update] %s' % xbmc_movie)
 					update_playcount.append(xbmc_movie)
+				else:
+					pass
 
+			else:
+				Debug('[Movies Sync][UpdatePlaysTrakt][Update] %s' % xbmc_movie)
+				update_playcount.append(xbmc_movie)
 
 		if update_playcount:
 			Debug('[Movies Sync] %i movie(s) playcount will be updated on trakt.tv' % len(update_playcount))
