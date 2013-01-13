@@ -4,6 +4,7 @@
 import xbmc
 import telnetlib
 import socket
+import time
 
 import simplejson as json
 
@@ -73,18 +74,28 @@ class NotificationService(threading.Thread):
 		#while xbmc is running
 		self._scrobbler = Scrobbler()
 		self._scrobbler.start()
-		telnet = telnetlib.Telnet(self.TELNET_ADDRESS, self.TELNET_PORT)
-
 		while not (self._abortRequested or xbmc.abortRequested):
 			try:
-				data = self._readNotification(telnet)
-			except EOFError:
+				#try to connect, catch errors and retry every 5 seconds
 				telnet = telnetlib.Telnet(self.TELNET_ADDRESS, self.TELNET_PORT)
-				self._notificationBuffer = ""
+				
+				#if connection succeeds
+				while not (self._abortRequested or xbmc.abortRequested):
+					try:
+						#read notification data
+						data = self._readNotification(telnet)
+						Debug("[Notification Service] message: " + str(data))
+						self._forward(data)
+					except EOFError:
+						#if we end up here, it means the connection was lost or reset,
+						# so we empty out the buffer, and exit this loop, which retries
+						# the connection in the outer loop
+						self._notificationBuffer = ""
+						break
+			except:
+				time.sleep(5)
 				continue
 
-			Debug("[Notification Service] message: " + str(data))
-			self._forward(data)
 
 		telnet.close()
 		self._scrobbler.abortRequested = True
