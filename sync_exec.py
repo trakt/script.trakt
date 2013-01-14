@@ -10,10 +10,10 @@ def get_bool(boolean):
 
 def do_sync(media_type):
 	if media_type == 'movies':
-		if get_bool('add_movies_to_trakt') or get_bool('trakt_movie_playcount') or get_bool('xbmc_movie_playcount'):
+		if get_bool('add_movies_to_trakt') or get_bool('trakt_movie_playcount') or get_bool('xbmc_movie_playcount') or get_bool('clean_trakt_movies'):
 			return True
 	else:
-		if get_bool('add_episodes_to_trakt') or get_bool('trakt_episode_playcount') or get_bool('xbmc_episode_playcount'):
+		if get_bool('add_episodes_to_trakt') or get_bool('trakt_episode_playcount') or get_bool('xbmc_episode_playcount') or get_bool('clean_trakt_episodes'):
 			return True
 
 	return False
