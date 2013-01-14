@@ -5,13 +5,13 @@ import xbmcgui
 import xbmcaddon
 from utilities import traktJsonRequest, xbmcJsonRequest, Debug, notification
 
-
 __setting__   = xbmcaddon.Addon('script.trakt').getSetting
 __getstring__ = xbmcaddon.Addon('script.trakt').getLocalizedString
 
 add_episodes_to_trakt   = __setting__('add_episodes_to_trakt') == 'true'
 trakt_episode_playcount = __setting__('trakt_episode_playcount') == 'true'
 xbmc_episode_playcount  = __setting__('xbmc_episode_playcount') == 'true'
+clean_trakt_episodes  = __setting__('clean_trakt_episodes') == 'true'
 
 progress = xbmcgui.DialogProgress()
 
@@ -172,14 +172,14 @@ class SyncEpisodes():
 	def GetWatchedFromTrakt(self):
 		Debug('[Episodes Sync] Getting watched episodes from trakt.tv')
 		if self.show_progress:
-			progress.update(60, line1=__getstring__(1438), line2=' ', line3=' ')
+			progress.update(50, line1=__getstring__(1438), line2=' ', line3=' ')
 
 		self.trakt_shows['watched'] = traktJsonRequest('POST', '/user/library/shows/watched.json/%%API_KEY%%/%%USERNAME%%/min')
 
 	def UpdatePlaysTrakt(self):
 		Debug('[Episodes Sync] Checking watched episodes on trakt.tv')
 		if self.show_progress:
-			progress.update(70, line1=__getstring__(1438), line2=' ', line3=' ')
+			progress.update(60, line1=__getstring__(1438), line2=' ', line3=' ')
 
 		update_playcount = []
 		trakt_imdb_index = {}
@@ -237,11 +237,11 @@ class SyncEpisodes():
 		if update_playcount:
 			Debug('[Episodes Sync] %i shows(s) shows are missing playcounts on trakt.tv' % len(update_playcount))
 			if self.show_progress:
-				progress.update(75, line1=__getstring__(1438), line2='%i %s' % (len(update_playcount), __getstring__(1439)))
+				progress.update(65, line1=__getstring__(1438), line2='%i %s' % (len(update_playcount), __getstring__(1439)))
 
 			for show in update_playcount:
 				if self.show_progress:
-					progress.update(80, line1=__getstring__(1438), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), __getstring__(1440)))
+					progress.update(70, line1=__getstring__(1438), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), __getstring__(1440)))
 
 				traktJsonRequest('POST', '/show/episode/seen/%%API_KEY%%', show)
 
@@ -251,7 +251,7 @@ class SyncEpisodes():
 	def UpdatePlaysXBMC(self):
 		Debug('[Episodes Sync] Checking watched episodes on XBMC')
 		if self.show_progress:
-			progress.update(90, line1=__getstring__(1441), line2=' ', line3=' ')
+			progress.update(80, line1=__getstring__(1441), line2=' ', line3=' ')
 
 		update_playcount = []
 		trakt_imdb_index = {}
@@ -296,17 +296,90 @@ class SyncEpisodes():
 		if update_playcount:
 			Debug('[Episodes Sync] %i shows(s) shows are missing playcounts on XBMC' % len(update_playcount))
 			if self.show_progress:
-				progress.update(92, line1=__getstring__(1441), line2='%i %s' % (len(update_playcount), __getstring__(1439)))
+				progress.update(85, line1=__getstring__(1441), line2='%i %s' % (len(update_playcount), __getstring__(1439)))
 
 			for show in update_playcount:
 				if self.show_progress:
-					progress.update(95, line1=__getstring__(1441), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), __getstring__(1440)))
+					progress.update(85, line1=__getstring__(1441), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), __getstring__(1440)))
 
 				for episode in show['episodes']:
 					xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.SetEpisodeDetails', 'params': episode, 'id': 0})
 
 		else:
 			Debug('[Episodes Sync] XBMC episode playcounts are up to date')
+
+	def RemoveFromTrakt(self):
+		Debug('[Movies Sync] Cleaning trakt tvshow collection')
+		if self.show_progress:
+			progress.update(90, line1=__getstring__(1445), line2=' ', line3=' ')
+
+		def convert_seasons(show):
+			episodes = []
+			if 'seasons' in show and show['seasons']:
+				for season in show['seasons']:
+					for episode in season['episodes']:
+						episodes.append({'season': season['season'], 'episode': episode})
+			return episodes
+
+		remove_from_trakt = []
+		indices = {'imdb_id': {}, 'tvdb_id': {}, 'title': {}}
+
+		for i in range(len(self.xbmc_shows)):
+			if self.xbmc_shows[i]['imdbnumber'].startswith('tt'):
+				indices['imdb_id'][self.xbmc_shows[i]['imdbnumber']] = i
+
+			if self.xbmc_shows[i]['imdbnumber'].isdigit():
+				indices['tvdb_id'][self.xbmc_shows[i]['imdbnumber']] = i
+
+			indices['title'][self.xbmc_shows[i]['title']] = i
+
+		for trakt_show in self.trakt_shows['collection']:
+			matched = False
+			remove = []
+
+			if 'tvdb_id' in trakt_show:
+				if trakt_show['tvdb_id'] in indices['tvdb_id']:
+					matched = 'tvdb_id'
+
+			if not matched and 'imdb_id' in trakt_show:
+				if trakt_show['imdb_id'] in indices['imdb_id']:
+					matched = 'imdb_id'
+
+			if not matched:
+				if trakt_show['title'] in indices['title']:
+					matched = 'title'
+
+			if matched:
+				xbmc_show = self.xbmc_shows[indices[matched][trakt_show[matched]]]
+				trakt_episodes = convert_seasons(trakt_show)
+				xbmc_episodes = [{'season': x['season'], 'episode': x['episode']} for x in xbmc_show['episodes']]
+
+				for episode in trakt_episodes:
+					if episode not in xbmc_episodes:
+						remove.append(episode)
+
+			else:
+				remove = convert_seasons(trakt_show)
+
+			if remove:
+				show = {'title': trakt_show['title'], 'year': trakt_show['year'], 'episodes': remove}
+				if matched:
+					show[matched] = trakt_show[matched]
+				remove_from_trakt.append(show)
+
+		if remove_from_trakt:
+			Debug('[Episodes Sync] %ishow(s) will have episodes removed from trakt.tv collection' % len(remove_from_trakt))
+			if self.show_progress:
+				progress.update(90, line1=__getstring__(1445), line2='%i %s' % (len(remove_from_trakt), __getstring__(1446)))
+
+			for show in remove_from_trakt:
+				if self.show_progress:
+					progress.update(95, line1=__getstring__(1445), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), __getstring__(1447)))
+
+				traktJsonRequest('POST', '/show/episode/unlibrary/%%API_KEY%%', show)
+
+		else:
+			Debug('[Episodes Sync] trakt.tv episode collection is clean')
 
 	def Run(self):
 		if not self.show_progress: #Service VideoLibrary.OnScanFinished
@@ -329,6 +402,11 @@ class SyncEpisodes():
 				if xbmc_episode_playcount:
 					self.UpdatePlaysXBMC()
 
+				if clean_trakt_episodes:
+					if not add_episodes_to_trakt:
+						self.GetCollectionFromTrakt()
+					self.RemoveFromTrakt()
+
 				if self.notify:
 					notification('%s %s' % (__getstring__(1400), __getstring__(1406)), __getstring__(1421)) #Sync complete
 
@@ -348,6 +426,11 @@ class SyncEpisodes():
 
 			if not progress.iscanceled() and xbmc_episode_playcount:
 				self.UpdatePlaysXBMC()
+
+			if not progress.iscanceled() and clean_trakt_episodes:
+				if not add_episodes_to_trakt:
+					self.GetCollectionFromTrakt()
+				self.RemoveFromTrakt()
 
 			if not progress.iscanceled():
 				progress.update(100, line1=__getstring__(1442), line2=' ', line3=' ')
