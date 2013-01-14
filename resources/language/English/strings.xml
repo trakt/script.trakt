@@ -155,6 +155,8 @@
 	<string id="1410">Service</string>
 	<string id="1411">Sync after library updates</string>
 	<string id="1412">Show notifications</string>
+	<string id="1413">Clean trakt movie library</string>
+	<string id="1414">Clean trakt episode library</string>
 
 	<!-- Sync Notifications -->
 	<string id="1420">Sync started</string>
@@ -180,4 +182,9 @@
 	<string id="1440">episodes are being updated</string>
 	<string id="1441">Checking watched episodes on XBMC</string>
 	<string id="1442">Episode Sync Complete</string>
+	<string id="1443">Cleaning trakt movie collection</string>
+	<string id="1444">movie(s) will be removed from trakt.tv collection</string>
+	<string id="1445">Cleaning trakt tvshow collection</string>
+	<string id="1446">show(s) will have episodes removed from trakt.tv collection</string>
+	<string id="1447">episodes are being removed</string>
 </strings>

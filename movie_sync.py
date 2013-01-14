@@ -11,6 +11,7 @@ __getstring__ = xbmcaddon.Addon('script.trakt').getLocalizedString
 add_movies_to_trakt   = __setting__('add_movies_to_trakt') == 'true'
 trakt_movie_playcount = __setting__('trakt_movie_playcount') == 'true'
 xbmc_movie_playcount  = __setting__('xbmc_movie_playcount') == 'true'
+clean_trakt_movies  = __setting__('clean_trakt_movies') == 'true'
 
 progress = xbmcgui.DialogProgress()
 
@@ -198,6 +199,39 @@ class SyncMovies():
 		else:
 			Debug('[Movies Sync] XBMC movie playcount is up to date')
 
+	def RemoveFromTrakt(self):
+		Debug('[Movies Sync] Cleaning trakt movie collection')
+		if self.show_progress:
+			progress.update(95, line1=__getstring__(1443), line2=' ', line3=' ')
+
+		remove_from_trakt = []
+		xbmc_imdb_ids = [x['imdbnumber'] for x in self.xbmc_movies if x['imdbnumber'].startswith('tt')]
+		xbmc_tmdb_ids = [x['imdbnumber'] for x in self.xbmc_movies if x['imdbnumber'].isdigit()]
+		xbmc_titles = [x['title'] for x in self.xbmc_movies]
+
+
+		for trakt_movie in self.trakt_movies_collection:
+			remove = True
+			if 'imdb_id' in trakt_movie and trakt_movie['imdb_id'] in xbmc_imdb_ids:
+				remove = False
+			if 'tmdb_id' in trakt_movie and trakt_movie['tmdb_id'] in xbmc_tmdb_ids:
+				remove = False
+			if trakt_movie['title'] in xbmc_titles:
+				remove = False
+
+			if remove:
+				Debug('[Movies Sync] %s (%i) will be removed from trakt collection' % (trakt_movie['title'].encode('utf-8'), trakt_movie['year']))
+				remove_from_trakt.append(trakt_movie)
+
+		if remove_from_trakt:
+			Debug('[Movies Sync] %i movie(s) will be removed from trakt.tv collection' % len(remove_from_trakt))
+
+			if self.show_progress:
+				progress.update(95, line2='%i %s' % (len(remove_from_trakt), __getstring__(1444)))
+				traktJsonRequest('POST', '/movie/unlibrary/%%API_KEY%%', {'movies': remove_from_trakt})
+
+		else:
+			Debug('[Movies Sync] trakt.tv movie collection is clean')
 
 	def Run(self):
 		if not self.show_progress: #Service VideoLibrary.OnScanFinished
@@ -220,6 +254,11 @@ class SyncMovies():
 				if xbmc_movie_playcount:
 					self.UpdatePlaysXBMC()
 
+				if clean_trakt_movies:
+					if not add_movies_to_trakt:
+						self.GetFromTraktCollection()
+					self.RemoveFromTrakt()
+
 				if self.notify:
 					notification('%s %s' % (__getstring__(1400), __getstring__(1402)), __getstring__(1421)) #Sync complete
 
@@ -239,6 +278,11 @@ class SyncMovies():
 
 			if not progress.iscanceled() and xbmc_movie_playcount:
 				self.UpdatePlaysXBMC()
+
+			if not progress.iscanceled() and clean_trakt_movies:
+				if not add_movies_to_trakt:
+					self.GetFromTraktCollection()
+				self.RemoveFromTrakt()
 
 			if not progress.iscanceled():
 				progress.update(100, line1=__getstring__(1431), line2=' ', line3=' ')
