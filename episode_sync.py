@@ -269,6 +269,7 @@ class SyncEpisodes():
 
 		for xbmc_show in self.xbmc_shows:
 			missing = []
+			trakt_show = None
 
 			#IMDB ID
 			if xbmc_show['imdbnumber'].startswith('tt') and xbmc_show['imdbnumber'] in trakt_imdb_index.keys():
