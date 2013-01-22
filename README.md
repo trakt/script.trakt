@@ -18,8 +18,6 @@ Automatically scrobble all TV episodes and movies you are watching to trakt.tv! 
 
 ###What can this addon do?
 
-The trakt addon can do lots of cool things:
-
 * Automatically scrobble all TV episodes and movies you are watching 
 * Sync your TV episode and movie collections to trakt
 * Auto clean your trakt collection so that it matches up with XBMC
