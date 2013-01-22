@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.trakt" name="trakt" version="1.0.1" provider-name="trakt.tv">
+<addon id="script.trakt" name="trakt" version="2.0.0" provider-name="trakt.tv">
 	<requires>
-		<import addon="xbmc.python" version="2.0"/>
+		<import addon="xbmc.python" version="2.1.0"/>
 		<import addon="script.module.simplejson" version="2.0.10"/>
-		<import addon="script.module.myconnpy" version="0.3.2"/>
 	</requires>
 	<res width="1280" height="720" aspect="16x9" default="true" folder="720p" />
-	<extension point="xbmc.service" name="trakt.service" library="service.py"/>
+	<extension point="xbmc.service" name="trakt.service" library="service.py" start="startup" />
 	<extension point="xbmc.python.script" library="sync_exec.py">
 		<provides>executable</provides>
 	</extension>
