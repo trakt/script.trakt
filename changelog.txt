@@ -1,5 +1,15 @@
+version 2.0.0
+  - compatible with Frodo RC3
+  - supports absolute and dvd ordering (mizaki)
+  - sync your TV episode and movie collections to trakt (N3MIS15)
+  - auto clean your trakt collection so that it matches up with XBMC (N3MIS15)
+  - keep watched statuses synced between XBMC and trakt (N3MIS15)
+  - retry the telnet connection to prevent timeouts (sschocke)
+  - fixed authentication issue for incorrect username/password
+  - default to HTTPS on
+
 version 1.0.1
-  - code optimization (thanks seadog!)
+  - code optimization (seadog)
   - use tvdb_id for much improved matching and international support
   - hide error notifications during playback
 

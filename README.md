@@ -1,17 +1,29 @@
-trakt.tv TV and movie scrobbler for XBMC Eden
-=============================================
+trakt.tv TV and movie scrobbler for XBMC Frodo
+==============================================
 
-Automatically scrobble all TV episodes and movies you are watching to trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features including:
+###What is trakt?
 
-* automatically scrobble what you're watching
-* [mobile apps](http://trakt.tv/downloads) for iPhone, iPad, Android, Windows Phone, Blackberry, and Symbian
-* share what you're watching (in real time) and rating to facebook, twitter, and tumblr
-* use watchlists so you don't forget to what to watch
-* track your media collections and impress your friends
-* create custom [lists](http://trakt.tv/lists) around any topics you choose
-* easily track your TV show progress across all seasons and episodes
-* track your progress against industry lists such as the [IMDb Top 250](http://trakt.tv/lists/imdb/top-250)
-* discover new shows and movies based on your viewing habits
+Automatically scrobble all TV episodes and movies you are watching to trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at [trakt.tv](http://trakt.tv) and get a ton of features:
+
+* Automatically scrobble what you're watching
+* [Mobile apps](http://trakt.tv/downloads) for iPhone, iPad, Android, and Windows Phone
+* Share what you're watching (in real time) and rating to facebook, twitter, and tumblr
+* Follow your friends and people you're interesed in
+* Use watchlists so you don't forget to what to watch
+* Track your media collections and impress your friends
+* Create custom [lists](http://trakt.tv/lists) around any topics you choose
+* Easily track your TV show progress across all seasons and episodes
+* Track your progress against industry lists such as the [IMDb Top 250](http://trakt.tv/lists/imdb/top-250)
+* Discover new shows and movies based on your viewing habits
+
+###What can this addon do?
+
+The trakt addon can do lots of cool things:
+
+* Automatically scrobble all TV episodes and movies you are watching 
+* Sync your TV episode and movie collections to trakt
+* Auto clean your trakt collection so that it matches up with XBMC
+* Keep watched statuses synced between XBMC and trakt
 
 ###What can be scrobbled?
 
@@ -39,4 +51,4 @@ Remote streaming content will scrobble assuming the metadata is correctly set in
 
 ###Thanks
 
-Special thanks to the [trakt utilities](https://github.com/Manromen/script.traktutilities) team! This plugin is essentially their code with some additions.
+Special thanks to all who contribute to this plugin! Check the commit history and changelog to see these talented developers.
