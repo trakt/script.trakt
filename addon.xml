@@ -5,7 +5,7 @@
 		<import addon="script.module.simplejson" version="2.0.10"/>
 	</requires>
 	<res width="1280" height="720" aspect="16x9" default="true" folder="720p" />
-	<extension point="xbmc.service" name="trakt.service" library="service.py" start="startup" />
+	<extension point="xbmc.service" name="trakt.service" library="service.py" start="login" />
 	<extension point="xbmc.python.script" library="sync_exec.py">
 		<provides>executable</provides>
 	</extension>
