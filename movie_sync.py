@@ -43,18 +43,27 @@ class SyncMovies():
 		if self.show_progress:
 			progress.create('%s %s' % (__getstring__(1400), __getstring__(1402)), line1=' ', line2=' ', line3=' ')
 
+	def Canceled(self):
+		if self.show_progress and progress.iscanceled():
+			Debug('[Movies Sync] Sync was canceled by user')
+			return True
+		elif xbmc.abortRequested:
+			Debug('XBMC abort requested')
+			return True
+		else:
+			return False
+
 	def GetFromXBMC(self):
 		Debug('[Movies Sync] Getting movies from XBMC')
 		if self.show_progress:
 			progress.update(5, line1=__getstring__(1422), line2=' ', line3=' ')
-			xbmc.sleep(1000)
 
 		result = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['title', 'imdbnumber', 'year', 'playcount']}})
 
 		if 'movies' in result:
 			self.xbmc_movies = result['movies']
 		else:
-			Debug('key "movies" not found')
+			Debug('[Movie Sync] Key "movies" not found')
 
 	def GetFromTraktCollection(self):
 		Debug('[Movie Sync] Getting movie collection from trakt.tv')
@@ -99,6 +108,9 @@ class SyncMovies():
 
 		if add_to_trakt:
 			Debug('[Movies Sync] %i movie(s) will be added to trakt.tv collection' % len(add_to_trakt))
+			if self.Canceled():
+				return
+
 			if self.show_progress:
 				progress.update(45, line2='%i %s' % (len(add_to_trakt), __getstring__(1426)))
 
@@ -147,6 +159,9 @@ class SyncMovies():
 
 		if update_playcount:
 			Debug('[Movies Sync] %i movie(s) playcount will be updated on trakt.tv' % len(update_playcount))
+			if self.Canceled():
+				return
+
 			if self.show_progress:
 				progress.update(75, line2='%i %s' % (len(update_playcount), __getstring__(1428)))
 
@@ -195,6 +210,8 @@ class SyncMovies():
 			#split movie list into chunks of 50
 			chunked_movies = chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": update_playcount[i]['movieid'], "playcount": update_playcount[i]['playcount']}, "id": i} for i in range(len(update_playcount))], 50)
 			for chunk in chunked_movies:
+				if self.Canceled():
+					return
 				xbmcJsonRequest(chunk)
 
 		else:
@@ -227,6 +244,9 @@ class SyncMovies():
 		if remove_from_trakt:
 			Debug('[Movies Sync] %i movie(s) will be removed from trakt.tv collection' % len(remove_from_trakt))
 
+			if self.Canceled():
+				return
+
 			if self.show_progress:
 				progress.update(95, line2='%i %s' % (len(remove_from_trakt), __getstring__(1444)))
 				traktJsonRequest('POST', '/movie/unlibrary/%%API_KEY%%', {'movies': remove_from_trakt})
@@ -235,59 +255,36 @@ class SyncMovies():
 			Debug('[Movies Sync] trakt.tv movie collection is clean')
 
 	def Run(self):
-		if not self.show_progress: #Service VideoLibrary.OnScanFinished
-			if __setting__('sync_on_update') == 'true':
-				if self.notify:
-					notification('%s %s' % (__getstring__(1400), __getstring__(1402)), __getstring__(1420)) #Sync started
+		if not self.show_progress and __setting__('sync_on_update') == 'true' and self.notify:
+			notification('%s %s' % (__getstring__(1400), __getstring__(1402)), __getstring__(1420)) #Sync started
 
-				self.GetFromXBMC()
+		self.GetFromXBMC()
 
-				if add_movies_to_trakt:
-					self.GetFromTraktCollection()
-					self.AddToTrakt()
+		if not self.Canceled() and add_movies_to_trakt:
+			self.GetFromTraktCollection()
+			self.AddToTrakt()
 
-				if trakt_movie_playcount or xbmc_movie_playcount:
-					self.GetFromTraktSeen()
+		if trakt_movie_playcount or xbmc_movie_playcount:
+			if not self.Canceled():
+				self.GetFromTraktSeen()
 
-				if trakt_movie_playcount:
-					self.UpdatePlaysTrakt()
+		if not self.Canceled() and trakt_movie_playcount:
+			self.UpdatePlaysTrakt()
 
-				if xbmc_movie_playcount:
-					self.UpdatePlaysXBMC()
+		if not self.Canceled() and xbmc_movie_playcount:
+			self.UpdatePlaysXBMC()
 
-				if clean_trakt_movies:
-					if not add_movies_to_trakt:
-						self.GetFromTraktCollection()
-					self.RemoveFromTrakt()
-
-				if self.notify:
-					notification('%s %s' % (__getstring__(1400), __getstring__(1402)), __getstring__(1421)) #Sync complete
-
-		else: #Manual
-			self.GetFromXBMC()
-
-			if not progress.iscanceled() and add_movies_to_trakt:
+		if not self.Canceled() and clean_trakt_movies:
+			if not add_movies_to_trakt:
 				self.GetFromTraktCollection()
-				self.AddToTrakt()
-
-			if trakt_movie_playcount or xbmc_movie_playcount:
-				if not progress.iscanceled():
-					self.GetFromTraktSeen()
-
-			if not progress.iscanceled() and trakt_movie_playcount:
-				self.UpdatePlaysTrakt()
-
-			if not progress.iscanceled() and xbmc_movie_playcount:
-				self.UpdatePlaysXBMC()
-
-			if not progress.iscanceled() and clean_trakt_movies:
-				if not add_movies_to_trakt:
-					self.GetFromTraktCollection()
+			if not self.Canceled():
 				self.RemoveFromTrakt()
 
-			if not progress.iscanceled():
-				progress.update(100, line1=__getstring__(1431), line2=' ', line3=' ')
-				xbmc.sleep(1000)
-				progress.close()
+		if not self.Canceled() and self.show_progress:
+			progress.update(100, line1=__getstring__(1431), line2=' ', line3=' ')
+			progress.close()
+
+		if not self.show_progress and __setting__('sync_on_update') == 'true' and self.notify:
+			notification('%s %s' % (__getstring__(1400), __getstring__(1402)), __getstring__(1421)) #Sync complete
 
 		Debug('[Movies Sync] Complete')
