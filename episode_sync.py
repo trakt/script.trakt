@@ -67,6 +67,16 @@ class SyncEpisodes():
 		if self.show_progress:
 			progress.create('%s %s' % (__getstring__(1400), __getstring__(1406)), line1=' ', line2=' ', line3=' ')
 
+	def Canceled(self):
+		if self.show_progress and progress.iscanceled():
+			Debug('[Episodes Sync] Sync was canceled by user')
+			return True
+		elif xbmc.abortRequested:
+			Debug('XBMC abort requested')
+			return True
+		else:
+			return False
+
 	def GetFromXBMC(self):
 		Debug('[Episodes Sync] Getting episodes from XBMC')
 		if self.show_progress:
@@ -78,6 +88,8 @@ class SyncEpisodes():
 			progress.update(10, line1=__getstring__(1433), line2=' ', line3=' ')
 
 		for show in shows:
+			if self.Canceled():
+				return
 			show['episodes'] = []
 
 			episodes = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid']}, 'id': 0})
@@ -161,6 +173,8 @@ class SyncEpisodes():
 				progress.update(35, line1=__getstring__(1435), line2='%i %s' % (len(add_to_trakt), __getstring__(1436)))
 
 			for show in add_to_trakt:
+				if self.Canceled():
+					return
 				if self.show_progress:
 					progress.update(45, line1=__getstring__(1435), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), __getstring__(1437)))
 
@@ -240,6 +254,8 @@ class SyncEpisodes():
 				progress.update(65, line1=__getstring__(1438), line2='%i %s' % (len(update_playcount), __getstring__(1439)))
 
 			for show in update_playcount:
+				if self.Canceled():
+					return
 				if self.show_progress:
 					progress.update(70, line1=__getstring__(1438), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), __getstring__(1440)))
 
@@ -306,6 +322,8 @@ class SyncEpisodes():
 				#split episode list into chunks of 50
 				chunked_episodes = chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetEpisodeDetails", "params": show['episodes'][i], "id": i} for i in range(len(show['episodes']))], 50)
 				for chunk in chunked_episodes:
+					if self.Canceled():
+						return
 					xbmcJsonRequest(chunk)
 
 		else:
@@ -376,6 +394,9 @@ class SyncEpisodes():
 				progress.update(90, line1=__getstring__(1445), line2='%i %s' % (len(remove_from_trakt), __getstring__(1446)))
 
 			for show in remove_from_trakt:
+				if self.Canceled():
+					return
+
 				if self.show_progress:
 					progress.update(95, line1=__getstring__(1445), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), __getstring__(1447)))
 
@@ -385,59 +406,38 @@ class SyncEpisodes():
 			Debug('[Episodes Sync] trakt.tv episode collection is clean')
 
 	def Run(self):
-		if not self.show_progress: #Service VideoLibrary.OnScanFinished
-			if __setting__('sync_on_update') == 'true':
-				if self.notify:
-					notification('%s %s' % (__getstring__(1400), __getstring__(1406)), __getstring__(1420)) #Sync started
+		if not self.show_progress and __setting__('sync_on_update') == 'true' and self.notify:
+			notification('%s %s' % (__getstring__(1400), __getstring__(1406)), __getstring__(1420)) #Sync started
 
-				self.GetFromXBMC()
+		self.GetFromXBMC()
 
-				if add_episodes_to_trakt:
-					self.GetCollectionFromTrakt()
-					self.AddToTrakt()
-
-				if trakt_episode_playcount or xbmc_episode_playcount:
-					self.GetWatchedFromTrakt()
-
-				if trakt_episode_playcount:
-					self.UpdatePlaysTrakt()
-
-				if xbmc_episode_playcount:
-					self.UpdatePlaysXBMC()
-
-				if clean_trakt_episodes:
-					if not add_episodes_to_trakt:
-						self.GetCollectionFromTrakt()
-					self.RemoveFromTrakt()
-
-				if self.notify:
-					notification('%s %s' % (__getstring__(1400), __getstring__(1406)), __getstring__(1421)) #Sync complete
-
-		else: #Manual
-			self.GetFromXBMC()
-
-			if not progress.iscanceled() and add_episodes_to_trakt:
-				self.GetCollectionFromTrakt()
+		if not self.Canceled() and add_episodes_to_trakt:
+			self.GetCollectionFromTrakt()
+			if not self.Canceled():
 				self.AddToTrakt()
 
-			if trakt_episode_playcount or xbmc_episode_playcount:
-				if not progress.iscanceled():
-					self.GetWatchedFromTrakt()
+		if trakt_episode_playcount or xbmc_episode_playcount:
+			if not self.Canceled():
+				self.GetWatchedFromTrakt()
 
-			if not progress.iscanceled() and trakt_episode_playcount:
-				self.UpdatePlaysTrakt()
+		if not self.Canceled() and trakt_episode_playcount:
+			self.UpdatePlaysTrakt()
 
-			if not progress.iscanceled() and xbmc_episode_playcount:
+		if xbmc_episode_playcount:
+			if not self.Canceled():
 				self.UpdatePlaysXBMC()
 
-			if not progress.iscanceled() and clean_trakt_episodes:
-				if not add_episodes_to_trakt:
-					self.GetCollectionFromTrakt()
+		if clean_trakt_episodes:
+			if not self.Canceled() and not add_episodes_to_trakt:
+				self.GetCollectionFromTrakt()
+			if not self.Canceled():
 				self.RemoveFromTrakt()
 
-			if not progress.iscanceled():
-				progress.update(100, line1=__getstring__(1442), line2=' ', line3=' ')
-				xbmc.sleep(1000)
-				progress.close()
+		if not self.show_progress and __setting__('sync_on_update') == 'true' and self.notify:
+			notification('%s %s' % (__getstring__(1400), __getstring__(1406)), __getstring__(1421)) #Sync complete
+
+		if not self.Canceled() and self.show_progress:
+			progress.update(100, line1=__getstring__(1442), line2=' ', line3=' ')
+			progress.close()
 
 		Debug('[Episodes Sync] Complete')
