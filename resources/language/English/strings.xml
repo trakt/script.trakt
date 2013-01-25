@@ -169,7 +169,7 @@
 	<string id="1427">Checking watched movies on trakt</string>
 	<string id="1428">movie(s) playcount will be updated on trakt</string>
 	<string id="1429">Checking if XBMC playcount is up to date</string>
-	<string id="1430">Updating</string>
+	<string id="1430">movie(s) playcount will be updated on XBMC</string>
 	<string id="1431">Movie Sync Complete</string>
 	<string id="1432">Getting TV shows from XBMC</string>
 	<string id="1433">Getting episodes from XBMC</string>

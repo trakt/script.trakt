@@ -44,7 +44,9 @@ def xbmcJsonRequest(params):
 	response = json.loads(request)
 
 	try:
-		return response["result"]
+		if "result" in response:
+			return response["result"]
+		return None
 	except KeyError:
 		Debug("[%s] %s" % (params["method"], response["error"]["message"]), True)
 		return None
@@ -75,6 +77,10 @@ def checkSettings(daemon=False):
 		return False
 
 	return True
+
+
+def chunks(l, n):
+	return [l[i:i+n] for i in range(0, len(l), n)]
 
 # get a connection to trakt
 def getTraktConnection():
