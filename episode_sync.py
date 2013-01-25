@@ -3,7 +3,7 @@
 import xbmc
 import xbmcgui
 import xbmcaddon
-from utilities import traktJsonRequest, xbmcJsonRequest, Debug, notification
+from utilities import traktJsonRequest, xbmcJsonRequest, Debug, notification, chunks
 
 __setting__   = xbmcaddon.Addon('script.trakt').getSetting
 __getstring__ = xbmcaddon.Addon('script.trakt').getLocalizedString
@@ -303,8 +303,10 @@ class SyncEpisodes():
 				if self.show_progress:
 					progress.update(85, line1=__getstring__(1441), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), __getstring__(1440)))
 
-				for episode in show['episodes']:
-					xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.SetEpisodeDetails', 'params': episode, 'id': 0})
+				#split episode list into chunks of 50
+				chunked_episodes = chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetEpisodeDetails", "params": show['episodes'][i], "id": i} for i in range(len(show['episodes']))], 50)
+				for chunk in chunked_episodes:
+					xbmcJsonRequest(chunk)
 
 		else:
 			Debug('[Episodes Sync] XBMC episode playcounts are up to date')
