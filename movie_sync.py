@@ -3,7 +3,7 @@
 import xbmc
 import xbmcgui
 import xbmcaddon
-from utilities import traktJsonRequest, xbmcJsonRequest, Debug, notification
+from utilities import traktJsonRequest, xbmcJsonRequest, Debug, notification, chunks
 
 __setting__   = xbmcaddon.Addon('script.trakt').getSetting
 __getstring__ = xbmcaddon.Addon('script.trakt').getLocalizedString
@@ -189,12 +189,13 @@ class SyncMovies():
 
 		if update_playcount:
 			Debug('[Movies Sync] %i movie(s) playcount will be updated on XBMC' % len(update_playcount))
+			if self.show_progress:
+				progress.update(90, line2='%i %s' % (len(update_playcount), __getstring__(1430)))
 
-			for i in range(len(update_playcount)):
-				if self.show_progress:
-					progress.update(90, line2='%s %i / %i' % (__getstring__(1430), i+1, len(update_playcount)), line3=update_playcount[i]['title'].encode('utf-8'))
-
-				xbmcJsonRequest({"jsonrpc": "2.0", "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": update_playcount[i]['movieid'], "playcount": update_playcount[i]['playcount']}, "id": 0})
+			#split movie list into chunks of 50
+			chunked_movies = chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": update_playcount[i]['movieid'], "playcount": update_playcount[i]['playcount']}, "id": i} for i in range(len(update_playcount))], 50)
+			for chunk in chunked_movies:
+				xbmcJsonRequest(chunk)
 
 		else:
 			Debug('[Movies Sync] XBMC movie playcount is up to date')
