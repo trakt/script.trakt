@@ -1,0 +1,9 @@
+<fontset id="Default" unicode="true">
+    <font>
+        <name>font12</name>
+        <filename>Arialuni.TTF</name>
+        <size>12</size>
+        <style>bold</style>
+        <aspect>0.75</aspect>
+    </font>
+</fontset>

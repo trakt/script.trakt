@@ -9,6 +9,7 @@ import time
 
 import utilities
 from utilities import Debug
+import rating
 
 # read settings
 __settings__ = xbmcaddon.Addon("script.trakt")
@@ -94,6 +95,7 @@ class Scrobbler(threading.Thread):
 			if self.watchedTime != 0:
 				if 'type' in self.curVideo: #and 'id' in self.curVideo:
 					self.check()
+					rating.ratingCheck(self.curVideo, self.watchedTime, self.totalTime, self.playlistLength)
 				self.watchedTime = 0
 			self.startTime = 0
 
