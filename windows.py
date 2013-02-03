@@ -163,7 +163,8 @@ class RateEpisodeDialog(RateDialog):
             else:
                 rateShow = RateShowDialog("rate.xml", __settings__.getAddonInfo('path'))
 
-            rateShow.initDialog(self.tvdbid, self.title, self.year, utilities.getShowRatingFromTrakt(self.tvdbid, self.title, self.year), rating_type)
+            curRating = utilities.getShowRatingFromTrakt(self.tvdbid, self.title, self.year, self.ratingType)
+            rateShow.initDialog(self.tvdbid, self.title, self.year, curRating, self.ratingType)
             rateShow.doModal()
             del rateShow
         else:
@@ -189,4 +190,24 @@ class RateShowDialog(RateDialog):
     def onClick(self, controlId):
         method = functools.partial(utilities.rateShowOnTrakt, self.tvdbid, self.title, self.year)
         super(RateShowDialog, self).onClick(controlId, method)
+
+class RateMovieDialog(RateDialog):
+    def __init__(self, xml, fallback_path=__settings__.getAddonInfo('path'), defaultskinname="Default", forcefallback=False):
+        super(RateMovieDialog, self).__init__(xml, fallback_path, defaultskinname, forcefallback)
+        self.imdbid = None
+        self.title = None
+        self.year = None
+
+    def initDialog(self, imdbid, title, year, curRating, rating_type):
+        self.imdbid = imdbid
+        self.title = title
+        self.year = year
+        super(RateMovieDialog, self).initDialog(curRating, rating_type)
+
+    def onInit(self):
+        super(RateMovieDialog, self).onInit(__language__(1303).encode("utf-8", "ignore"))
+
+    def onClick(self, controlId):
+        method = functools.partial(utilities.rateMovieOnTrakt, self.imdbid, self.title, self.year)
+        super(RateMovieDialog, self).onClick(controlId, method)
 
