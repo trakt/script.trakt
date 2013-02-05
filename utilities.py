@@ -29,6 +29,7 @@ username = __settings__.getSetting("username").strip()
 password = __settings__.getSetting("password").strip()
 pwd = sha.new(__settings__.getSetting("password").strip()).hexdigest()
 debug = __settings__.getSetting("debug")
+traktSettings = None
 
 def Debug(msg, force = False):
     if(debug == 'true' or force):
@@ -332,12 +333,15 @@ def scrobbleEpisodeOnTrakt(tvdb_id, title, year, season, episode, uniqueid, dura
         Debug("Error in request from 'scrobbleEpisodeOnTrakt()'")
     return response
 
-def getTraktRatingType():
-    """Get the rating type set on trakt, either simple or advanced"""
+def getTraktSettings():
+    """Get the users settings from trakt.tv"""
+    global traktSettings
+    
     response = traktJsonRequest('POST', '/account/settings/%%API_KEY%%', passVersions=True)
     if response == None:
-        Debug("Error in request from 'getTraktRatingType()'")
-    return response['viewing']['ratings']['mode']
+        Debug("Error in request from 'getTraktSettings()'")
+    
+    traktSettings = response
 
 ###############################
 ##### Ratings on trakt #####

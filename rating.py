@@ -50,13 +50,13 @@ def rateMovie(movieid):
 
     Debug("[Rating] Rating movie '" + title + "' (IMDBID:"+str(imdbid)+")" );
     
-    ratingType = utilities.getTraktRatingType()
+    ratingType = utilities.traktSettings["viewing"]["ratings"]["mode"]
+    curRating = utilities.getMovieRatingFromTrakt(imdbid, title, year, ratingType)
     if ratingType == "advanced":
         gui = windows.RateMovieDialog("rate_advanced.xml", __settings__.getAddonInfo('path'))
     else:
         gui = windows.RateMovieDialog("rate.xml", __settings__.getAddonInfo('path'))
 
-    curRating = utilities.getMovieRatingFromTrakt(imdbid, title, year, ratingType)
     gui.initDialog(imdbid, title, year, curRating, ratingType)
     gui.doModal()
     del gui
@@ -81,7 +81,8 @@ def rateEpisode(episode_id):
 
     Debug("[Rating] Rating tv episode '" + title + "' "+str(season)+"x"+str(episode)+" (TVDBID:"+str(tvdbid)+")");
     
-    ratingType = utilities.getTraktRatingType()
+    ratingType = utilities.traktSettings["viewing"]["ratings"]["mode"]
+    curRating = utilities.getEpisodeRatingFromTrakt(tvdbid, title, year, season, episode, ratingType)
     #~ Debug("[Rating] Current Rating Type is " + str(ratingType) );
     if ratingType == "advanced":
         #~ Debug("[Rating] Advanced rating GUI" );
@@ -90,7 +91,6 @@ def rateEpisode(episode_id):
         #~ Debug("[Rating] Regular rating GUI" );
         gui = windows.RateEpisodeDialog("rate.xml", __settings__.getAddonInfo('path'))
 
-    curRating = utilities.getEpisodeRatingFromTrakt(tvdbid, title, year, season, episode, ratingType)
     #~ Debug("[Rating] Current Rating is " + str(curRating) );
     #~ Debug("[Rating] Rating GUI Init" );
     gui.initDialog(tvdbid, title, year, season, episode, curRating, ratingType)
