@@ -249,7 +249,7 @@ class SyncMovies():
 
 			if self.show_progress:
 				progress.update(95, line2='%i %s' % (len(remove_from_trakt), __getstring__(1444)))
-				traktJsonRequest('POST', '/movie/unlibrary/%%API_KEY%%', {'movies': remove_from_trakt})
+			traktJsonRequest('POST', '/movie/unlibrary/%%API_KEY%%', {'movies': remove_from_trakt})
 
 		else:
 			Debug('[Movies Sync] trakt.tv movie collection is clean')
