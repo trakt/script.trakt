@@ -1,0 +1,213 @@
+<window id="4567" type="dialog">
+    <defaultcontrol always="true">104</defaultcontrol>
+    <allowoverlay>yes</allowoverlay>
+    <visible>true</visible>
+	<coordinates>
+		<system>1</system>
+		<posx>510</posx>
+		<posy>270</posy>
+	</coordinates>
+    <controls>
+        <control type="image" id="98">
+            <description>Scene</description>
+            <posx>-510</posx>
+            <posy>-250</posy>
+            <width>1280</width>
+            <height>720</height>
+            <visible>true</visible>
+            <colordiffuse>66ffffff</colordiffuse>
+            <texture>w1x1.png</texture>
+            <fadetime>20</fadetime>
+            <aspectratio>scale</aspectratio>
+        </control>
+        <control type="image">
+            <description>Header</description>
+            <posx>0</posx>
+            <posy>0</posy>
+            <width>260</width>
+            <height>50</height>
+            <visible>true</visible>
+            <colordiffuse>f6111111</colordiffuse>
+            <texture>w1x1.png</texture>
+            <fadetime>20</fadetime>
+            <aspectratio>scale</aspectratio>
+        </control>
+        <control type="label" id="100">
+            <description>Heading</description>
+            <posx>0</posx>
+            <posy>0</posy>
+            <width>260</width>
+            <height>50</height>
+            <visible>true</visible>
+            <align>center</align>
+            <aligny>center</aligny>
+            <angle>0</angle>
+			<font>font12</font>
+            <scroll>false</scroll>
+            <haspath>false</haspath>
+            <textcolor>ffffffff</textcolor>
+            <shadowcolor>ff222222</shadowcolor>
+            <wrapmultiline>false</wrapmultiline>
+        </control>
+        <control type="image">
+            <description>Area 1</description>
+            <posx>0</posx>
+            <posy>50</posy>
+            <width>260</width>
+            <height>45</height>
+            <visible>true</visible>
+            <colordiffuse>cc222222</colordiffuse>
+            <texture>w1x1.png</texture>
+            <fadetime>20</fadetime>
+            <aspectratio>scale</aspectratio>
+        </control>
+        <control type="image">
+            <description>Area 2</description>
+            <posx>0</posx>
+            <posy>95</posy>
+            <width>260</width>
+            <height>95</height>
+            <visible>true</visible>
+            <colordiffuse>cc111111</colordiffuse>
+            <texture>w1x1.png</texture>
+            <fadetime>20</fadetime>
+            <aspectratio>scale</aspectratio>
+        </control>
+        <control type="group" id="95">
+            <description>Current Rating Group</description>
+            <visible>true</visible>
+            <posx>20</posx>
+            <posy>60</posy>
+            <width>100</width>
+            <height>25</height>
+            <colordiffuse>ffffff</colordiffuse>
+            <textcolor>ff666666</textcolor>
+            <focusedcolor>ffffffff</focusedcolor>
+            <disabledcolor>80ffffff</disabledcolor>
+            <pulseonselect>true</pulseonselect>
+            <control type="button" id="101">
+                <description>Current not rated</description>
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>100</width>
+                <height>25</height>
+                <visible></visible>
+                <texturefocus>current-no-rating.png</texturefocus>
+                <texturenofocus diffuse="44000000">current-no-rating.png</texturenofocus> 
+                <align>center</align>
+                <aligny>center</aligny>
+                <label>Unrated</label>
+                <font>font12</font>
+                <onright>104</onright>
+                <ondown>97</ondown>
+            </control>
+            <control type="button" id="102">
+                <description>Current love</description>
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>100</width>
+                <height>25</height>
+                <visible></visible>
+                <texturefocus>current-love.png</texturefocus>
+                <texturenofocus diffuse="44000000">current-love.png</texturenofocus>
+                <textoffsetx>23</textoffsetx>
+                <label>Unrate</label>
+                <font>font12</font>
+                <onright>104</onright>
+                <ondown>97</ondown>
+            </control>
+            <control type="button" id="103">
+                <description>Current hate</description>
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>100</width>
+                <height>25</height>
+                <visible></visible>
+                <texturefocus>current-hate.png</texturefocus>
+                <texturenofocus diffuse="44000000">current-hate.png</texturenofocus> 
+                <textoffsetx>23</textoffsetx>
+                <label>Unrate</label>
+                <font>font12</font>
+                <onright>104</onright>
+                <ondown>97</ondown>
+            </control>
+        </control>
+        <control type="button" id="104">
+            <description>Skip</description>
+            <posx>140</posx>
+            <posy>60</posy>
+            <width>100</width>
+            <height>25</height>
+            <visible>true</visible>
+            <texturefocus>skip-rating.png</texturefocus>
+            <texturenofocus diffuse="44000000">skip-rating.png</texturenofocus> 
+            <colordiffuse>ffffffff</colordiffuse>
+            <textcolor>ff666666</textcolor>
+            <focusedcolor>ffffffff</focusedcolor>
+            <disabledcolor>80ffffff</disabledcolor>
+            <pulseonselect>true</pulseonselect>
+            <onleft>95</onleft>
+            <ondown>97</ondown>
+        </control>
+        <control type="group" id="97">
+            <description>Love Hate Control Group</description>
+            <posx>20</posx>
+            <posy>105</posy>
+            <width>120</width>
+            <height>75</height>
+            <visible>true</visible>
+            <colordiffuse>ffffffff</colordiffuse>
+            <textcolor>ffffffff</textcolor>
+            <focusedcolor>ffaaaaaa</focusedcolor>
+            <disabledcolor>80ffffff</disabledcolor>
+            <pulseonselect>true</pulseonselect>
+            <defaultcontrol>105</defaultcontrol>
+            <control type="button" id="105">
+                <description>Love</description>
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>100</width>
+                <texturefocus>love.png</texturefocus>
+                <texturenofocus diffuse="44000000">love_f.png</texturenofocus>
+                <onup>104</onup>
+                <ondown>108</ondown>
+                <onright>106</onright>
+            </control>
+            <control type="button" id="106">
+                <description>Hate</description>
+                <posx>0r</posx>
+                <posy>0</posy>
+                <width>100</width>
+                <texturefocus>hate.png</texturefocus>
+                <texturenofocus diffuse="44000000">hate_f.png</texturenofocus>
+                <onup>104</onup>
+                <ondown>108</ondown>
+                <onleft>105</onleft>
+            </control>
+        </control>
+        <control type="image" id="107">
+            <description>extention for rate show button</description>
+            <posx>0</posx>
+            <posy>210</posy>
+            <width>260</width>
+            <height>50</height>
+            <colordiffuse>F6111111</colordiffuse>
+            <texture>w1x1.png</texture>
+        </control>
+        <control type="button" id="108">
+            <description>Rate show</description>
+            <posx>0</posx>
+            <posy>210</posy>
+            <width>260</width>
+            <height>50</height>
+            <angle>0</angle>
+            <align>center</align>
+            <aligny>center</aligny>
+			<font>font13</font>
+            <colordiffuse>FFFFFFFF</colordiffuse>
+            <textcolor>FF666666</textcolor>
+            <focusedcolor>FFAAAAAA</focusedcolor>
+            <onup>97</onup>
+        </control>
+    </controls>
+</window>

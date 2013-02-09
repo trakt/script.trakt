@@ -28,4 +28,10 @@
 		<setting id="xbmc_episode_playcount" type="bool" label="1409" default="true"/>
 		<setting id="clean_trakt_episodes" type="bool" label="1414" default="false"/>
 	</category>
+    <category label="1030"><!-- Rating -->
+        <setting id="rate_movie" type="bool" label="1031" default="false"/>
+        <setting id="rate_episode" type="bool" label="1032" default="false"/>
+        <setting id="rate_each_playlist_item" type="bool" label="1033" default="true"/>
+        <setting id="rate_min_view_time" type="slider" label="1034" range="0,5,100" default="75"/>
+    </category>
 </settings>
