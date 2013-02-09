@@ -37,10 +37,13 @@ def compare_show_watched_trakt(xbmc_show, trakt_show):
 
 	for xbmc_episode in xbmc_show['episodes']:
 		if xbmc_episode['playcount']:
-			for trakt_season in trakt_show['seasons']:
-				if xbmc_episode['season'] == trakt_season['season']:
-					if xbmc_episode['episode'] not in trakt_season['episodes']:
-						missing.append(xbmc_episode)
+			if xbmc_episode['season'] not in [x['season'] for x in trakt_show['seasons']]:
+				missing.append(xbmc_episode)
+			else:
+				for trakt_season in trakt_show['seasons']:
+					if xbmc_episode['season'] == trakt_season['season']:
+						if xbmc_episode['episode'] not in trakt_season['episodes']:
+							missing.append(xbmc_episode)
 
 	return missing
 
