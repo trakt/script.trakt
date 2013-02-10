@@ -1,0 +1,408 @@
+<window>
+    <coordinates>
+        <system>1</system>
+        <posx>390</posx>
+        <posy>185</posy>
+    </coordinates>
+
+    <animation effect="fade" time="250">WindowOpen</animation>
+    <animation effect="fade" time="250">WindowClose</animation>
+
+    <controls>
+        <control type="group"> <!--DIALOG BASE-->
+            <control type="image"> <!--DIALOG BACKGROUND-->
+                <description>Background</description>
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>500</width>
+                <height>350</height>
+                <texture>ConfluenceDialogBack.png</texture>
+            </control>
+            <control type="image">
+                <description>Dialog Header image</description>
+                <posx>40</posx>
+                <posy>16</posy>
+                <width>420</width>
+                <height>40</height>
+                <texture>Confluencedialogheader.png</texture>
+            </control>
+
+            <control type="label" id="10011"> <!--TITLE-->
+                <description>Title</description>
+                <posx>0</posx>
+                <posy>27</posy>
+                <width>500</width>
+                <height>20</height>
+                <label>title</label>
+                <align>center</align>
+                <aligny>center</aligny>
+            </control>
+
+            <control type="button">
+                <description>Close Window button</description>
+                <posx>410</posx>
+                <posy>8</posy>
+                <width>64</width>
+                <height>32</height>
+                <label></label>
+                <onclick>PreviousMenu</onclick>
+                <texturefocus>ConfluenceDialogCloseButton-focus.png</texturefocus>
+                <texturenofocus>ConfluenceDialogCloseButton.png</texturenofocus>
+                <visible>system.getbool(input.enablemouse)</visible>
+            </control>
+        </control>
+
+        <control type="group" id="10111"> <!--SIMPLE RATING-->
+            <control type="image" id="10012"> <!--POSTER-->
+                <description>Poster</description>
+                <posx>50</posx>
+                <posy>90</posy>
+                <width>138</width>
+                <height>203</height>
+                <texture>poster-small.jpg</texture>
+            </control>
+
+            <control type="group"> <!--LOVE GROUP-->
+                <posx>230</posx>
+                <posy>80</posy>
+
+                <control type="image"> <!--LOVE-->
+                    <description>Love Image</description>
+                    <posx>0</posx>
+                    <posy>0</posy>
+                    <width>39</width>
+                    <height>36</height>
+                    <texture>love.png</texture>
+                </control>
+
+                <control type="label" id="10013"> <!--LOVE PERCENTAGE-->
+                    <description>Love Percentage</description>
+                    <posx>40</posx>
+                    <posy>0</posy>
+                    <width>50</width>
+                    <height>36</height>
+                    <label></label>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                </control>
+
+                <control type="label" id="10014"> <!--LOVE VOTES-->
+                    <description>Love Votes</description>
+                    <posx>0</posx>
+                    <posy>40</posy>
+                    <width>89</width>
+                    <height>36</height>
+                    <label></label>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                </control>
+            </control>
+
+            <control type="group"> <!--HATE GROUP-->
+                <posx>350</posx>
+                <posy>80</posy>
+
+                <control type="image"> <!--HATE-->
+                    <description>Hate Image</description>
+                    <posx>0</posx>
+                    <posy>0</posy>
+                    <width>39</width>
+                    <height>36</height>
+                    <texture>hate.png</texture>
+                </control>
+
+                <control type="label" id="10015"> <!--HATE PERCENTAGE-->
+                    <description>Hate Percentage</description>
+                    <posx>40</posx>
+                    <posy>0</posy>
+                    <width>50</width>
+                    <height>36</height>
+                    <label></label>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                </control>
+
+                <control type="label" id="10016"> <!--HATE VOTES-->
+                    <description>Hate Votes</description>
+                    <posx>0</posx>
+                    <posy>40</posy>
+                    <width>89</width>
+                    <height>36</height>
+                    <label></label>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                </control>
+            </control>
+
+            <control type="button" id="10030"> <!--LOVE BUTTON-->
+                <description>Love Button</description>
+                <posx>230</posx>
+                <posy>185</posy>
+                <width>220</width>
+                <height>50</height>
+                <label>Totaly Ninja!</label>
+                <texturefocus>Confluencebutton-focus.png</texturefocus>
+                <texturenofocus>Confluencebutton-nofocus.png</texturenofocus>
+                <aligny>center</aligny>
+                <align>center</align>
+                <onup>10031</onup>
+                <ondown>10031</ondown>
+            </control>
+
+            <control type="button" id="10031"> <!--HATE BUTTON-->
+                <description>Hate Button</description>
+                <posx>230</posx>
+                <posy>250</posy>
+                <width>220</width>
+                <height>50</height>
+                <label>Weak Sauce :(</label>
+                <texturefocus>Confluencebutton-focus.png</texturefocus>
+                <texturenofocus>Confluencebutton-nofocus.png</texturenofocus>
+                <align>center</align>
+                <aligny>center</aligny>
+                <onup>10030</onup>
+                <ondown>10030</ondown>
+            </control>
+        </control>
+
+        <control type="group" id="10112"> <!--ADVANCED RATING-->
+            <control type="image" id="11012"> <!--POSTER-->
+                <description>Poster</description>
+                <posx>50</posx>
+                <posy>70</posy>
+                <width>138</width>
+                <height>203</height>
+                <texture>poster-small.jpg</texture>
+            </control>
+
+            <control type="group"> <!--LOVE GROUP-->
+                <posx>230</posx>
+                <posy>100</posy>
+
+                <control type="image"> <!--LOVE-->
+                    <description>Love Image</description>
+                    <posx>0</posx>
+                    <posy>0</posy>
+                    <width>39</width>
+                    <height>36</height>
+                    <texture>love.png</texture>
+                </control>
+
+                <control type="label" id="11013"> <!--LOVE PERCENTAGE-->
+                    <description>Love Percentage</description>
+                    <posx>40</posx>
+                    <posy>0</posy>
+                    <width>50</width>
+                    <height>36</height>
+                    <label></label>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                </control>
+
+                <control type="label" id="11014"> <!--LOVE VOTES-->
+                    <description>Love Votes</description>
+                    <posx>110</posx>
+                    <posy>0</posy>
+                    <width>120</width>
+                    <height>36</height>
+                    <label></label>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                </control>
+            </control>
+
+            <control type="group"> <!--HATE GROUP-->
+                <posx>230</posx>
+                <posy>175</posy>
+
+                <control type="image"> <!--HATE-->
+                    <description>Hate Image</description>
+                    <posx>0</posx>
+                    <posy>0</posy>
+                    <width>39</width>
+                    <height>36</height>
+                    <texture>hate.png</texture>
+                </control>
+
+                <control type="label" id="11015"> <!--HATE PERCENTAGE-->
+                    <description>Hate Percentage</description>
+                    <posx>40</posx>
+                    <posy>0</posy>
+                    <width>50</width>
+                    <height>36</height>
+                    <label></label>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                </control>
+
+                <control type="label" id="11016"> <!--HATE VOTES-->
+                    <description>Hate Votes</description>
+                    <posx>110</posx>
+                    <posy>0</posy>
+                    <width>120</width>
+                    <height>36</height>
+                    <label></label>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                </control>
+            </control>
+
+            <control type="group">
+                <posx>25</posx>
+                <posy>290</posy>
+
+                <control type="button" id="11030"> <!--1 BUTTON-->
+                    <description>1 Button</description>
+                    <posx>14</posx>
+                    <posy>0</posy>
+                    <width>30</width>
+                    <height>28</height>
+                    <label></label>
+                    <aligny>top</aligny>
+                    <align>center</align>
+                    <onleft>11039</onleft>
+                    <onright>11031</onright>
+                    <texturefocus>1_focus.png</texturefocus>
+                    <texturenofocus>1.png</texturenofocus>
+                </control>
+
+                <control type="button" id="11031"> <!--2 BUTTON-->
+                    <description>2 Button</description>
+                    <posx>57</posx>
+                    <posy>0</posy>
+                    <width>30</width>
+                    <height>28</height>
+                    <label></label>
+                    <aligny>top</aligny>
+                    <align>center</align>
+                    <onleft>11030</onleft>
+                    <onright>11032</onright>
+                    <texturefocus>2_focus.png</texturefocus>
+                    <texturenofocus>2.png</texturenofocus>
+                </control>
+
+                <control type="button" id="11032"> <!--3 BUTTON-->
+                    <description>3 Button</description>
+                    <posx>101</posx>
+                    <posy>0</posy>
+                    <width>30</width>
+                    <height>28</height>
+                    <label></label>
+                    <aligny>top</aligny>
+                    <align>center</align>
+                    <onleft>11031</onleft>
+                    <onright>11033</onright>
+                    <texturefocus>3_focus.png</texturefocus>
+                    <texturenofocus>3.png</texturenofocus>
+                </control>
+
+                <control type="button" id="11033"> <!--4 BUTTON-->
+                    <description>4 Button</description>
+                    <posx>145</posx>
+                    <posy>0</posy>
+                    <width>30</width>
+                    <height>28</height>
+                    <label></label>
+                    <aligny>top</aligny>
+                    <align>center</align>
+                    <onleft>11032</onleft>
+                    <onright>11034</onright>
+                    <texturefocus>4_focus.png</texturefocus>
+                    <texturenofocus>4.png</texturenofocus>
+                </control>
+
+                <control type="button" id="11034"> <!--5 BUTTON-->
+                    <description>5 Button</description>
+                    <posx>188</posx>
+                    <posy>0</posy>
+                    <width>30</width>
+                    <height>28</height>
+                    <label></label>
+                    <aligny>top</aligny>
+                    <align>center</align>
+                    <onleft>11033</onleft>
+                    <onright>11035</onright>
+                    <texturefocus>5_focus.png</texturefocus>
+                    <texturenofocus>5.png</texturenofocus>
+                </control>
+
+                <control type="button" id="11035"> <!--6 BUTTON-->
+                    <description>6 Button</description>
+                    <posx>232</posx>
+                    <posy>0</posy>
+                    <width>30</width>
+                    <height>28</height>
+                    <label></label>
+                    <aligny>top</aligny>
+                    <align>center</align>
+                    <onleft>11034</onleft>
+                    <onright>11036</onright>
+                    <texturefocus>6_focus.png</texturefocus>
+                    <texturenofocus>6.png</texturenofocus>
+                </control>
+
+                <control type="button" id="11036"> <!--7 BUTTON-->
+                    <description>7 Button</description>
+                    <posx>275</posx>
+                    <posy>0</posy>
+                    <width>30</width>
+                    <height>28</height>
+                    <label></label>
+                    <aligny>top</aligny>
+                    <align>center</align>
+                    <onleft>11035</onleft>
+                    <onright>11037</onright>
+                    <texturefocus>7_focus.png</texturefocus>
+                    <texturenofocus>7.png</texturenofocus>
+                </control>
+
+                <control type="button" id="11037"> <!--8 BUTTON-->
+                    <description>8 Button</description>
+                    <posx>319</posx>
+                    <posy>0</posy>
+                    <width>30</width>
+                    <height>28</height>
+                    <label></label>
+                    <aligny>top</aligny>
+                    <align>center</align>
+                    <onleft>11036</onleft>
+                    <onright>11038</onright>
+                    <texturefocus>8_focus.png</texturefocus>
+                    <texturenofocus>8.png</texturenofocus>
+                </control>
+
+                <control type="button" id="11038"> <!--9 BUTTON-->
+                    <description>9 Button</description>
+                    <posx>363</posx>
+                    <posy>0</posy>
+                    <width>30</width>
+                    <height>28</height>
+                    <label></label>
+                    <aligny>top</aligny>
+                    <align>center</align>
+                    <onleft>11037</onleft>
+                    <onright>11039</onright>
+                    <texturefocus>9_focus.png</texturefocus>
+                    <texturenofocus>9.png</texturenofocus>
+                </control>
+
+                <control type="button" id="11039"> <!--10 BUTTON-->
+                    <description>10 Button</description>
+                    <posx>406</posx>
+                    <posy>0</posy>
+                    <width>30</width>
+                    <height>28</height>
+                    <label></label>
+                    <aligny>top</aligny>
+                    <align>left</align>
+                    <onleft>11038</onleft>
+                    <onright>11030</onright>
+                    <texturefocus>10_focus.png</texturefocus>
+                    <texturenofocus>10.png</texturenofocus>
+                </control>
+            </control>
+        </control>
+
+    </controls>
+
+</window>

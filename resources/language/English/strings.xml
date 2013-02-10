@@ -95,6 +95,7 @@
 	<string id="1310">Successfully added to watch-list</string>
 	<string id="1311">Failed to remove from watch-list</string>
 	<string id="1312">Successfully removed from watch-list</string>
+	<string id="1313">votes</string>
 
 	<!-- auto update / sync -->
 	<string id="1180">start movie collection update</string>
