@@ -161,7 +161,7 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 				return data
 			return None
 		if conn.readError:
-			Debug("traktJsonRequest(): Error getting reading response")
+			Debug("traktJsonRequest(): Error reading response")
 			if returnStatus:
 				data = {}
 				data['status'] = 'failure'
@@ -173,8 +173,29 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 			break
 		time.sleep(0.1)
 
+	Debug("traktJsonRequest(): Get response object")
 	response = conn.getResult()
-	raw = response.read()
+	if response = None:
+		Debug("traktJsonRequest(): Response not set")
+		if returnStatus:
+			data = {}
+			data['status'] = 'failure'
+			data['error'] = 'Error getting response, response not set.'
+			return data
+		return None
+		
+	Debug("traktJsonRequest(): Trying to read response")
+	try:
+		raw = response.read()
+	except:
+		Debug("traktJsonRequest(): Exception reading response")
+		if returnStatus:
+			data = {}
+			data['status'] = 'failure'
+			data['error'] = 'Error getting response, exception reading response.'
+			return data
+		return None
+	
 	if closeConnection:
 		conn.close()
 
