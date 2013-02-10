@@ -113,6 +113,7 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 		conn = getTraktConnection()
 		closeConnection = True
 	if conn == None:
+		Debug("traktJsonRequest(): Unable to create connection to trakt.")
 		if returnStatus:
 			data = {}
 			data['status'] = 'failure'
@@ -136,10 +137,11 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 		elif method == 'GET':
 			conn.request('GET', req)
 		else:
+			Debug("traktJsonRequest(): Unknown method " + method)
 			return None
-		Debug("json url: "+req)
+		Debug("traktJsonRequest(): "+method+" JSON url: "+req)
 	except socket.error:
-		Debug("traktQuery: can't connect to trakt")
+		Debug("traktJsonRequest(): Unable to connect to trakt.")
 		if not silent:
 			notification("trakt", __language__(1108).encode( "utf-8", "ignore" )) # can't connect to trakt
 		if returnStatus:
@@ -153,26 +155,57 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 
 	while True:
 		if xbmc.abortRequested:
-			Debug("Broke loop due to abort")
+			Debug("traktJsonRequest(): Broke loop due to abort.")
 			if returnStatus:
 				data = {}
 				data['status'] = 'failure'
 				data['error'] = 'Abort requested, not waiting for response'
 				return data
 			return None
+		if conn.readError:
+			Debug("traktJsonRequest(): Error reading response.")
+			if returnStatus:
+				data = {}
+				data['status'] = 'failure'
+				data['error'] = 'Error getting response, read error on socket.'
+				return data
+			return None
 		if conn.hasResult():
+			Debug("traktJsonRequest(): hasResult()")
 			break
 		time.sleep(0.1)
 
+	Debug("traktJsonRequest(): Get response object.")
 	response = conn.getResult()
-	raw = response.read()
+	if response == None:
+		Debug("traktJsonRequest(): Response not set.")
+		if returnStatus:
+			data = {}
+			data['status'] = 'failure'
+			data['error'] = 'Error getting response, response not set.'
+			return data
+		return None
+		
+	Debug("traktJsonRequest(): Trying to read response.")
+	try:
+		raw = response.read()
+	except:
+		Debug("traktJsonRequest(): Exception reading response.")
+		if returnStatus:
+			data = {}
+			data['status'] = 'failure'
+			data['error'] = 'Error getting response, exception reading response.'
+			return data
+		return None
+	
 	if closeConnection:
 		conn.close()
 
 	try:
 		data = json.loads(raw)
+		Debug("traktJsonRequest(): JSON response: " + str(data))
 	except ValueError:
-		Debug("traktQuery: Bad JSON response: "+raw)
+		Debug("traktJsonRequest(): Bad JSON response: " + raw)
 		if returnStatus:
 			data = {}
 			data['status'] = 'failure'
@@ -184,7 +217,7 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 
 	if 'status' in data:
 		if data['status'] == 'failure':
-			Debug("traktQuery: Error: " + str(data['error']))
+			Debug("traktJsonRequest(): Error: " + str(data['error']))
 			if returnStatus:
 				return data
 			if not silent:
