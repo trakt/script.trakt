@@ -129,18 +129,18 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 		if self.rating_type == 'simple':
 			self.getControl(10012).setImage(self.poster)
 			self.getControl(10013).setLabel(self.loved_percent+'%')
-			self.getControl(10014).setLabel('%s[CR]votes' % self.loved)
+			self.getControl(10014).setLabel('%s[CR]%s' % (self.loved, __language__(1313).encode('utf-8', 'ignore')))
 			self.getControl(10015).setLabel(self.hated_percent+'%')
-			self.getControl(10016).setLabel('%s[CR]votes' % self.hated)
+			self.getControl(10016).setLabel('%s[CR]%s' % (self.hated, __language__(1313).encode('utf-8', 'ignore')))
 
 			self.setFocus(self.getControl(10030)) #Focus Loved Button
 
 		else:
 			self.getControl(11012).setImage(self.poster)
 			self.getControl(11013).setLabel(self.loved_percent+'%')
-			self.getControl(11014).setLabel('%s[CR]votes' % self.loved)
+			self.getControl(11014).setLabel('%s[CR]%s' % (self.loved, __language__(1313).encode('utf-8', 'ignore')))
 			self.getControl(11015).setLabel(self.hated_percent+'%')
-			self.getControl(11016).setLabel('%s[CR]votes' % self.hated)
+			self.getControl(11016).setLabel('%s[CR]%s' % (self.hated, __language__(1313).encode('utf-8', 'ignore')))
 
 			self.setFocus(self.getControl(11037)) #Focus 8 Button
 
