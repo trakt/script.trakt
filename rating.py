@@ -33,7 +33,15 @@ def rateMedia(media_id, media_type):
 
 	if media_type == 'movie':
 		xbmc_media = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovieDetails', 'params': {'movieid': media_id, 'properties': ['title', 'imdbnumber', 'year', 'art']}})['moviedetails']
+		if xbmc_media == None:
+			Debug('[Rating] Failed to retrieve movie data from XBMC')
+			return
+
 		trakt_summary = traktJsonRequest('POST', '/movie/summary.json/%%API_KEY%%/' + xbmc_media['imdbnumber'])
+		if trakt_summary == None:
+			Debug('[Rating] Failed to retrieve movie data from trakt')
+			return
+
 		ratings = trakt_summary['ratings']
 
 		if trakt_summary['rating'] or trakt_summary['rating_advanced']:
@@ -42,10 +50,22 @@ def rateMedia(media_id, media_type):
 
 	else:
 		episode = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': media_id, 'properties': ['uniqueid', 'tvshowid', 'episode', 'season']}})['episodedetails']
+		if episode == None:
+			Debug('[Rating] Failed to retrieve episode data from XBMC')
+			return
+
 		xbmc_media = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetTVShowDetails', 'params': {'tvshowid': episode['tvshowid'], 'properties': ['art', 'imdbnumber']}})['tvshowdetails']
+		if xbmc_media == None:
+			Debug('[Rating] Failed to retrieve tvshow data from XBMC')
+			return
+
 		xbmc_media['episode'] = episode
 
 		trakt_summary = traktJsonRequest('POST', '/show/episode/summary.json/%%API_KEY%%/'+str(xbmc_media['imdbnumber'])+'/'+str(xbmc_media['episode']['season'])+'/'+str(xbmc_media['episode']['episode']))
+		if trakt_summary == None:
+			Debug('[Rating] Failed to retrieve show/episode data from trakt')
+			return
+
 		xbmc_media['year'] = trakt_summary['show']['year']
 		ratings = trakt_summary['episode']['ratings']
 
