@@ -177,7 +177,7 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 
 	Debug("traktJsonRequest(): Get response object.")
 	response = conn.getResult()
-	if response = None:
+	if response == None:
 		Debug("traktJsonRequest(): Response not set.")
 		if returnStatus:
 			data = {}
