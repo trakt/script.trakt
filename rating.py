@@ -95,7 +95,11 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 		self.media = media
 		self.rating_type = rating_type
 
-		self.poster = media['art']['poster']
+		if 'poster' in media['art']:
+			self.poster = media['art']['poster']
+		else:
+			self.poster = None
+
 		self.loved = str(ratings['loved'])
 		self.hated = str(ratings['hated'])
 		self.loved_percent = str(ratings['percentage'])
@@ -127,7 +131,9 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 			self.getControl(10011).setLabel('%s - %s' % (self.media['label'], self.media['episode']['label']))
 
 		if self.rating_type == 'simple':
-			self.getControl(10012).setImage(self.poster)
+			if self.poster:
+				self.getControl(10012).setImage(self.poster)
+
 			self.getControl(10013).setLabel(self.loved_percent+'%')
 			self.getControl(10014).setLabel('%s[CR]%s' % (self.loved, __language__(1313).encode('utf-8', 'ignore')))
 			self.getControl(10015).setLabel(self.hated_percent+'%')
@@ -136,7 +142,9 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 			self.setFocus(self.getControl(10030)) #Focus Loved Button
 
 		else:
-			self.getControl(11012).setImage(self.poster)
+			if self.poster:
+				self.getControl(11012).setImage(self.poster)
+
 			self.getControl(11013).setLabel(self.loved_percent+'%')
 			self.getControl(11014).setLabel('%s[CR]%s' % (self.loved, __language__(1313).encode('utf-8', 'ignore')))
 			self.getControl(11015).setLabel(self.hated_percent+'%')
