@@ -20,6 +20,7 @@ class NBConnection():
 		self.response = None
 		self.responseLock = threading.Lock()
 		self.closing = False
+		self.readError = False
 
 	def request(self, method, url, body=None, headers={}):
 		self.rawConnection.request(method, url, body, headers)
@@ -41,7 +42,15 @@ class NBConnection():
 		thread.start_new_thread(NBConnection._run, (self,))
 
 	def _run(self):
-		self.response = self.rawConnection.getresponse()
+		print "[trakt] [nbconnection] getresponse start"
+		try:
+			self.response = self.rawConnection.getresponse()
+		except:
+			print "[trakt] [nbconnection] Exception"
+			self.readError = True
+			self.close()
+		else:
+			print "[trakt] [nbconnection] response received: " + str(self.response.status) + " " + self.response.reason
 		self.responseLock.release()
 
 	def close(self):
