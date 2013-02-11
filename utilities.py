@@ -206,7 +206,12 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 		except Exception:
 			import traceback
 			Debug("traktJsonRequest(): (%i) Unknown Exception: %s" % (i, traceback.format_exc()))
-			
+	
+	# handle scenario where all retries fail
+	if not data:
+		Debug("traktJsonRequest(): JSON Request failed, data is still empty after retries.")
+		return None
+	
 	if 'status' in data:
 		if data['status'] == 'failure':
 			Debug("traktJsonRequest(): Error: %s" % str(data['error']))
