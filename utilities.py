@@ -102,6 +102,7 @@ def formatTraktURL(req):
 	
 	return result
 
+# helper function for making requests through urllib2
 def get_data(url, args):
 	data = None
 	try:
@@ -110,7 +111,7 @@ def get_data(url, args):
 			req = urllib2.Request(url)
 		else:
 			req = urllib2.Request(url, args)
-		Debug("get_data(): urllib2.urlopen(req)")
+		Debug("get_data(): urllib2.urlopen()")
 		response = urllib2.urlopen(req)
 		Debug("get_data(): response.read()")
 		data = response.read()
