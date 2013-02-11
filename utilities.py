@@ -4,7 +4,6 @@
 import xbmc
 import xbmcaddon
 import xbmcgui
-import nbconnection
 import time, socket
 import math
 import urllib2
@@ -81,23 +80,8 @@ def checkSettings(daemon=False):
 
 	return True
 
-
 def chunks(l, n):
 	return [l[i:i+n] for i in range(0, len(l), n)]
-
-# get a connection to trakt
-def getTraktConnection():
-	https = __settings__.getSetting('https')
-	try:
-		if (https == 'true'):
-			conn = nbconnection.NBConnection('api.trakt.tv', https=True)
-		else:
-			conn = nbconnection.NBConnection('api.trakt.tv')
-	except socket.timeout:
-		Debug("getTraktConnection: can't connect to trakt - timeout")
-		notification("trakt", __language__(1108).encode( "utf-8", "ignore" ) + " (timeout)") # can't connect to trakt
-		return None
-	return conn
 
 # json wrapper to make actual json request call, to rety upto 3 times in the event of failures.
 def traktJSONWrapper(method, req, args={}, returnStatus=False, anon=False, conn=False, silent=True, passVersions=False):
@@ -111,7 +95,7 @@ def traktJSONWrapper(method, req, args={}, returnStatus=False, anon=False, conn=
 	Debug("traktJSONWrapper(): Starting loop")
 	for i in range(0,3):
 		Debug("traktJSONWrapper(): (%i) Sending JSON API %s %s" % (i, method, req.replace("%%API_KEY%%", "")))
-		response = traktJsonRequest2(method, req, args, returnStatus, anon, conn, silent, passVersions)
+		response = traktJsonRequest(method, req, args, returnStatus, anon, conn, silent, passVersions)
 		if xbmc.abortRequested:
 			Debug("traktJSONWrapper(): (%i) xbmc.abortRequested", i)
 			break
@@ -124,138 +108,8 @@ def traktJSONWrapper(method, req, args={}, returnStatus=False, anon=False, conn=
 			else:
 				Debug("traktJSONWrapper(): (%i) JSON Error '%s" % (i, response['error']))
 		time.sleep(0.1)
-		
+
 	return response
-
-# make a JSON api request to trakt
-# method: http method (GET or POST)
-# req: REST request (ie '/user/library/movies/all.json/%%API_KEY%%/%%USERNAME%%')
-# args: arguments to be passed by POST JSON (only applicable to POST requests), default:{}
-# returnStatus: when unset or set to false the function returns None apon error and shows a notification,
-#	when set to true the function returns the status and errors in ['error'] as given to it and doesn't show the notification,
-#	use to customise error notifications
-# anon: anonymous (dont send username/password), default:False
-# connection: default it to make a new connection but if you want to keep the same one alive pass it here
-# silent: default is True, when true it disable any error notifications (but not debug messages)
-# passVersions: default is False, when true it passes extra version information to trakt to help debug problems
-def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=False, silent=True, passVersions=False):
-	closeConnection = False
-	if conn == False:
-		conn = getTraktConnection()
-		closeConnection = True
-	if conn == None:
-		Debug("traktJsonRequest(): Unable to create connection to trakt.")
-		if returnStatus:
-			data = {}
-			data['status'] = 'failure'
-			data['error'] = 'Unable to connect to trakt'
-			return data
-		return None
-
-	try:
-		req = req.replace("%%API_KEY%%", apikey)
-		req = req.replace("%%USERNAME%%", username)
-		if method == 'POST':
-			if not anon:
-				args['username'] = username
-				args['password'] = pwd
-			if passVersions:
-				args['plugin_version'] = __settings__.getAddonInfo("version")
-				args['media_center_version'] = xbmc.getInfoLabel("system.buildversion")
-				args['media_center_date'] = xbmc.getInfoLabel("system.builddate")
-			jdata = json.dumps(args)
-			conn.request('POST', req, jdata)
-		elif method == 'GET':
-			conn.request('GET', req)
-		else:
-			Debug("traktJsonRequest(): Unknown method " + method)
-			return None
-		Debug("traktJsonRequest(): "+method+" JSON url: "+req)
-	except socket.error:
-		Debug("traktJsonRequest(): Unable to connect to trakt.")
-		if not silent:
-			notification("trakt", __language__(1108).encode( "utf-8", "ignore" )) # can't connect to trakt
-		if returnStatus:
-			data = {}
-			data['status'] = 'failure'
-			data['error'] = 'Socket error, unable to connect to trakt'
-			return data
-		return None
-
-	conn.go()
-
-	while True:
-		if xbmc.abortRequested:
-			Debug("traktJsonRequest(): Broke loop due to abort.")
-			if returnStatus:
-				data = {}
-				data['status'] = 'failure'
-				data['error'] = 'Abort requested, not waiting for response'
-				return data
-			return None
-		if conn.readError:
-			Debug("traktJsonRequest(): Error reading response.")
-			if returnStatus:
-				data = {}
-				data['status'] = 'failure'
-				data['error'] = 'Error getting response, read error on socket.'
-				return data
-			return None
-		if conn.hasResult():
-			Debug("traktJsonRequest(): hasResult()")
-			break
-		time.sleep(0.1)
-
-	Debug("traktJsonRequest(): Get response object.")
-	response = conn.getResult()
-	if response == None:
-		Debug("traktJsonRequest(): Response not set.")
-		if returnStatus:
-			data = {}
-			data['status'] = 'failure'
-			data['error'] = 'Error getting response, response not set.'
-			return data
-		return None
-		
-	Debug("traktJsonRequest(): Trying to read response.")
-	try:
-		raw = response.read()
-	except:
-		Debug("traktJsonRequest(): Exception reading response.")
-		if returnStatus:
-			data = {}
-			data['status'] = 'failure'
-			data['error'] = 'Error getting response, exception reading response.'
-			return data
-		return None
-	
-	if closeConnection:
-		conn.close()
-
-	try:
-		data = json.loads(raw)
-		Debug("traktJsonRequest(): JSON response: " + str(data))
-	except ValueError:
-		Debug("traktJsonRequest(): Bad JSON response: " + raw)
-		if returnStatus:
-			data = {}
-			data['status'] = 'failure'
-			data['error'] = 'Bad response from trakt'
-			return data
-		if not silent:
-			notification("trakt", __language__(1109).encode( "utf-8", "ignore" ) + ": Bad response from trakt") # Error
-		return None
-
-	if 'status' in data:
-		if data['status'] == 'failure':
-			Debug("traktJsonRequest(): Error: " + str(data['error']))
-			if returnStatus:
-				return data
-			if not silent:
-				notification("trakt", __language__(1109).encode( "utf-8", "ignore" ) + ": " + str(data['error'])) # Error
-			return None
-
-	return data
 
 # helper method to format api call url
 def formatTraktURL(req):
@@ -275,7 +129,18 @@ def formatTraktURL(req):
 	
 	return result
 	
-def traktJSONRequest2(method, req, args={}, returnStatus=False, anon=False, conn=False, silent=True, passVersions=False):
+# make a JSON api request to trakt
+# method: http method (GET or POST)
+# req: REST request (ie '/user/library/movies/all.json/%%API_KEY%%/%%USERNAME%%')
+# args: arguments to be passed by POST JSON (only applicable to POST requests), default:{}
+# returnStatus: when unset or set to false the function returns None apon error and shows a notification,
+#	when set to true the function returns the status and errors in ['error'] as given to it and doesn't show the notification,
+#	use to customise error notifications
+# anon: anonymous (dont send username/password), default:False
+# connection: default it to make a new connection but if you want to keep the same one alive pass it here
+# silent: default is True, when true it disable any error notifications (but not debug messages)
+# passVersions: default is False, when true it passes extra version information to trakt to help debug problems
+def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=False, silent=True, passVersions=False):
 	raw = None
 	data = None
 	
@@ -297,15 +162,21 @@ def traktJSONRequest2(method, req, args={}, returnStatus=False, anon=False, conn
 		elif method == 'GET':
 			req = urllib2.Request(url)
 		else:
-			Debug("traktJsonRequest2(): Unknown method '%s'" % method)
+			Debug("traktJsonRequest(): Unknown method '%s'" % method)
 			return None
-		Debug("traktJsonRequest2(): %s" % url)
+		Debug("traktJsonRequest(): Request URL '%s'" % url)
 		
+		# get response
 		response = urllib2.urlopen(req)
 		
+		# read data
 		raw = response.read()
+	except socket.timeout:
+		Debug("traktJsonRequest(): can't connect to trakt - timeout")
+		notification("trakt", __language__(1108).encode( "utf-8", "ignore" ) + " (timeout)") # can't connect to trakt
+		return None
 	except socket.error:
-		Debug("traktJsonRequest2(): Unable to connect to trakt.")
+		Debug("traktJsonRequest(): Unable to connect to trakt.")
 		if not silent:
 			notification("trakt", __language__(1108).encode( "utf-8", "ignore" )) # can't connect to trakt
 		if returnStatus:
@@ -315,28 +186,13 @@ def traktJSONRequest2(method, req, args={}, returnStatus=False, anon=False, conn
 			return data
 		return None
 	except HTTPError, e:
-		Debug("traktJsonRequest2(): HTTPError %i" % e.code)
-		if returnStatus:
-			data = {}
-			data['status'] = "failure"
-			data['error'] = "HTTPError: " + str(e.code)
-			return data
+		Debug("traktJsonRequest(): HTTPError %i" % e.code)
 		return None
 	except URLError:
-		Debug("traktJsonRequest2(): URLError")
-		if returnStatus:
-			data = {}
-			data['status'] = "failure"
-			data['error'] = "URLError"
-			return data
+		Debug("traktJsonRequest(): URLError")
 		return None
 	except:
-		Debug("traktJsonRequest2(): Unknown Exception")
-		if returnStatus:
-			data = {}
-			data['status'] = 'failure'
-			data['error'] = 'Socket error, unable to connect to trakt'
-			return data
+		Debug("traktJsonRequest(): Unknown Exception")
 		return None
 		
 	try:
@@ -363,7 +219,6 @@ def traktJSONRequest2(method, req, args={}, returnStatus=False, anon=False, conn
 			return None
 
 	return data
-	
 
 # get a single episode from xbmc given the id
 def getEpisodeDetailsFromXbmc(libraryId, fields):
