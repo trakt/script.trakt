@@ -201,18 +201,11 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 			
 		except ValueError:
 			Debug("traktJsonRequest(): (%i) Bad JSON response: '%s'", (i, raw))
-			if returnStatus:
-				data = {}
-				data['status'] = 'failure'
-				data['error'] = 'Bad response from trakt'
-				return data
 			if not silent:
 				notification("trakt", __language__(1109).encode( "utf-8", "ignore" ) + ": Bad response from trakt") # Error
-			return None
 		except Exception:
 			import traceback
 			Debug("traktJsonRequest(): (%i) Unknown Exception: %s" % (i, traceback.format_exc()))
-			return None
 			
 	if 'status' in data:
 		if data['status'] == 'failure':
