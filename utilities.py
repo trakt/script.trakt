@@ -175,10 +175,10 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 			Debug("traktJsonRequest(): (%i) Request URL '%s'" % (i, url))
 			raw = get_data(url, jdata)
 			if xbmc.abortRequested:
-				Debug("traktJsonRequest(): (%i) xbmc.abortRequested", i)
+				Debug("traktJsonRequest(): (%i) xbmc.abortRequested" % i)
 				break
 			if not raw:
-				Debug("traktJsonRequest(): (%i) JSON Response empty", i)
+				Debug("traktJsonRequest(): (%i) JSON Response empty" % i)
 				continue
 				
 			# get json formatted data	
