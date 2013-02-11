@@ -186,14 +186,19 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 			data = json.loads(raw)
 			Debug("traktJsonRequest(): (%i) JSON response: '%s'" % (i, str(data)))
 			
-			# check status variable in JSON data
+			# check for the status variable in JSON data
 			if 'status' in data:
 				if data['status'] == 'success':
 					break
 				else:
 					Debug("traktJsonRequest(): (%i) JSON Error '%s' -> '%s'" % (i, data['status'], data['error']))
 					continue
-					
+			
+			# check to see if we have data
+			if data:
+				Debug("traktJsonRequest(): Have JSON data, breaking retry.")
+				break
+			
 		except ValueError:
 			Debug("traktJsonRequest(): (%i) Bad JSON response: '%s'", (i, raw))
 			if returnStatus:
