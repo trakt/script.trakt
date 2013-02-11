@@ -187,11 +187,10 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 			
 			# check status variable in JSON data
 			if 'status' in data:
-				Debug("traktJsonRequest(): (%i) JSON Response '%s'" % (i, data['status']))
 				if data['status'] == 'success':
 					break
 				else:
-					Debug("traktJsonRequest(): (%i) JSON Error '%s" % (i, data['error']))
+					Debug("traktJsonRequest(): (%i) JSON Error '%s' -> '%s'" % (i, data['status'], data['error']))
 					continue
 					
 		except ValueError:
@@ -211,12 +210,14 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 			
 	if 'status' in data:
 		if data['status'] == 'failure':
-			Debug("traktJsonRequest(): Error: " + str(data['error']))
+			Debug("traktJsonRequest(): Error: %s" % str(data['error']))
 			if returnStatus:
 				return data
 			if not silent:
 				notification("trakt", __language__(1109).encode( "utf-8", "ignore" ) + ": " + str(data['error'])) # Error
 			return None
+		elif data['status'] == 'success':
+			Debug("traktJsonRequest(): JSON request was successful.")
 
 	return data
 
