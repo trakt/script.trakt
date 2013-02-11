@@ -7,6 +7,9 @@ import xbmcgui
 import nbconnection
 import time, socket
 import math
+import urllib2
+
+from urllib2 import HTTPError, URLError
 
 try:
 	import simplejson as json
@@ -108,7 +111,7 @@ def traktJSONWrapper(method, req, args={}, returnStatus=False, anon=False, conn=
 	Debug("traktJSONWrapper(): Starting loop")
 	for i in range(0,3):
 		Debug("traktJSONWrapper(): (%i) Sending JSON API %s %s" % (i, method, req.replace("%%API_KEY%%", "")))
-		response = traktJsonRequest(method, req, args, returnStatus, anon, conn, silent, passVersions)
+		response = traktJsonRequest2(method, req, args, returnStatus, anon, conn, silent, passVersions)
 		if xbmc.abortRequested:
 			Debug("traktJSONWrapper(): (%i) xbmc.abortRequested", i)
 			break
@@ -253,6 +256,114 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 			return None
 
 	return data
+
+# helper method to format api call url
+def formatTraktURL(req):
+	https = __settings__.getSetting('https')
+	
+	result = "http"
+	
+	if https:
+		result = result + "s"
+
+	result = result + "://api.trakt.tv"
+	
+	req = req.replace("%%API_KEY%%", apikey)
+	req = req.replace("%%USERNAME%%", username)
+	
+	result = result + req
+	
+	return result
+	
+def traktJSONRequest2(method, req, args={}, returnStatus=False, anon=False, conn=False, silent=True, passVersions=False):
+	raw = None
+	data = None
+	
+	# get trakt api url to open
+	url = formatTraktURL(req)
+	
+	try:
+		req = None
+		if method == 'POST':
+			if not anon:
+				args['username'] = username
+				args['password'] = pwd
+			if passVersions:
+				args['plugin_version'] = __settings__.getAddonInfo("version")
+				args['media_center_version'] = xbmc.getInfoLabel("system.buildversion")
+				args['media_center_date'] = xbmc.getInfoLabel("system.builddate")
+			jdata = json.dumps(args)
+			req = urllib2.Request(url, jdata)
+		elif method == 'GET':
+			req = urllib2.Request(url)
+		else:
+			Debug("traktJsonRequest2(): Unknown method '%s'" % method)
+			return None
+		Debug("traktJsonRequest2(): %s" % url)
+		
+		response = urllib2.urlopen(req)
+		
+		raw = response.read()
+	except socket.error:
+		Debug("traktJsonRequest2(): Unable to connect to trakt.")
+		if not silent:
+			notification("trakt", __language__(1108).encode( "utf-8", "ignore" )) # can't connect to trakt
+		if returnStatus:
+			data = {}
+			data['status'] = 'failure'
+			data['error'] = 'Socket error, unable to connect to trakt'
+			return data
+		return None
+	except HTTPError, e:
+		Debug("traktJsonRequest2(): HTTPError %i" % e.code)
+		if returnStatus:
+			data = {}
+			data['status'] = "failure"
+			data['error'] = "HTTPError: " + str(e.code)
+			return data
+		return None
+	except URLError:
+		Debug("traktJsonRequest2(): URLError")
+		if returnStatus:
+			data = {}
+			data['status'] = "failure"
+			data['error'] = "URLError"
+			return data
+		return None
+	except:
+		Debug("traktJsonRequest2(): Unknown Exception")
+		if returnStatus:
+			data = {}
+			data['status'] = 'failure'
+			data['error'] = 'Socket error, unable to connect to trakt'
+			return data
+		return None
+		
+	try:
+		data = json.loads(raw)
+		Debug("traktJsonRequest(): JSON response: " + str(data))
+	except ValueError:
+		Debug("traktJsonRequest(): Bad JSON response: " + raw)
+		if returnStatus:
+			data = {}
+			data['status'] = 'failure'
+			data['error'] = 'Bad response from trakt'
+			return data
+		if not silent:
+			notification("trakt", __language__(1109).encode( "utf-8", "ignore" ) + ": Bad response from trakt") # Error
+		return None
+		
+	if 'status' in data:
+		if data['status'] == 'failure':
+			Debug("traktJsonRequest(): Error: " + str(data['error']))
+			if returnStatus:
+				return data
+			if not silent:
+				notification("trakt", __language__(1109).encode( "utf-8", "ignore" ) + ": " + str(data['error'])) # Error
+			return None
+
+	return data
+	
 
 # get a single episode from xbmc given the id
 def getEpisodeDetailsFromXbmc(libraryId, fields):
