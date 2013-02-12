@@ -128,6 +128,7 @@
                 <aligny>center</aligny>
                 <onleft>11039</onleft>
                 <onright>11031</onright>
+                <animation effect="zoom" end="115,115" center="auto" time="100">focus</animation>
             </control>
 
             <control type="button" id="11031">
@@ -144,6 +145,7 @@
                 <onleft>11030</onleft>
                 <onright>11032</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11032)</visible>
+                <animation effect="zoom" end="115,115" center="auto" time="100">focus</animation>
             </control>
 
             <control type="image">
@@ -170,6 +172,7 @@
                 <onleft>11031</onleft>
                 <onright>11033</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)</visible>
+                <animation effect="zoom" end="115,115" center="auto" time="100">focus</animation>
             </control>
 
             <control type="image">
@@ -196,6 +199,7 @@
                 <onleft>11032</onleft>
                 <onright>11034</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)</visible>
+                <animation effect="zoom" end="115,115" center="auto" time="100">focus</animation>
             </control>
 
             <control type="image">
@@ -222,6 +226,7 @@
                 <onleft>11033</onleft>
                 <onright>11035</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)</visible>
+                <animation effect="zoom" end="115,115" center="auto" time="100">focus</animation>
             </control>
 
             <control type="image">
@@ -248,6 +253,7 @@
                 <onleft>11034</onleft>
                 <onright>11036</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)</visible>
+                <animation effect="zoom" end="115,115" center="auto" time="100">focus</animation>
             </control>
 
             <control type="image">
@@ -274,6 +280,7 @@
                 <onleft>11035</onleft>
                 <onright>11037</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)|!Control.HasFocus(11035)</visible>
+                <animation effect="zoom" end="115,115" center="auto" time="100">focus</animation>
             </control>
 
             <control type="image">
@@ -300,6 +307,7 @@
                 <onleft>11036</onleft>
                 <onright>11038</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)|!Control.HasFocus(11035)|!Control.HasFocus(11036)</visible>
+                <animation effect="zoom" end="115,115" center="auto" time="100">focus</animation>
             </control>
 
             <control type="image">
@@ -326,6 +334,7 @@
                 <onleft>11037</onleft>
                 <onright>11039</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)|!Control.HasFocus(11035)|!Control.HasFocus(11036)|!Control.HasFocus(11037)</visible>
+                <animation effect="zoom" end="115,115" center="auto" time="100">focus</animation>
             </control>
 
             <control type="image">
@@ -352,6 +361,7 @@
                 <onleft>11038</onleft>
                 <onright>11030</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)|!Control.HasFocus(11035)|!Control.HasFocus(11036)|!Control.HasFocus(11037)|!Control.HasFocus(11038)</visible>
+                <animation effect="zoom" end="115,115" center="auto" time="100">focus</animation>
             </control>
 
             <control type="image">
