@@ -1,46 +1,74 @@
 <window>
     <coordinates>
         <system>1</system>
-        <posx>390</posx>
-        <posy>185</posy>
+        <posx>340</posx>
+        <posy>235</posy>
     </coordinates>
 
     <animation effect="fade" time="250">WindowOpen</animation>
     <animation effect="fade" time="250">WindowClose</animation>
 
     <controls>
-        <control type="group"> <!--DIALOG BASE-->
+        <!--DIALOG BASE-->
+        <control type="group">
             <control type="image"> <!--DIALOG BACKGROUND-->
                 <description>Background</description>
                 <posx>0</posx>
                 <posy>0</posy>
-                <width>500</width>
-                <height>350</height>
+                <width>600</width>
+                <height>250</height>
                 <texture>ConfluenceDialogBack.png</texture>
             </control>
+
             <control type="image">
-                <description>Dialog Header image</description>
+                <description>Dialog Header Image</description>
                 <posx>40</posx>
                 <posy>16</posy>
-                <width>420</width>
+                <width>520</width>
                 <height>40</height>
                 <texture>Confluencedialogheader.png</texture>
             </control>
 
-            <control type="label" id="10011"> <!--TITLE-->
+            <control type="label" id="10011"> <!--DIALOG TITLE-->
                 <description>Title</description>
                 <posx>0</posx>
                 <posy>27</posy>
-                <width>500</width>
+                <width>600</width>
                 <height>20</height>
-                <label>title</label>
+                <label>$ADDON[script.trakt 1313]</label>
                 <align>center</align>
                 <aligny>center</aligny>
             </control>
 
+            <control type="label" id="10012"> <!--MEDIA TITLE-->
+                <description>Title</description>
+                <posx>0</posx>
+                <posy>75</posy>
+                <width>600</width>
+                <height>20</height>
+                <label></label>
+                <align>center</align>
+                <aligny>center</aligny>
+                <font>font12</font>
+                <textcolor>FFBBBBBB</textcolor>
+            </control>
+
+            <control type="label" id="10013"> <!--RATING TITLE-->
+                <description>Title</description>
+                <posx>0</posx>
+                <posy>185</posy>
+                <width>600</width>
+                <height>20</height>
+                <label></label>
+                <align>center</align>
+                <aligny>center</aligny>
+                <font>font12</font>
+                <textcolor>FFBBBBBB</textcolor>
+            </control>
+
             <control type="button">
                 <description>Close Window button</description>
-                <posx>410</posx>
+                <posx>510</posx>
                 <posy>8</posy>
                 <width>64</width>
                 <height>32</height>
@@ -52,354 +80,288 @@
             </control>
         </control>
 
-        <control type="group" id="10111"> <!--SIMPLE RATING-->
-            <control type="image" id="10012"> <!--POSTER-->
-                <description>Poster</description>
-                <posx>50</posx>
-                <posy>90</posy>
-                <width>138</width>
-                <height>203</height>
-                <texture>poster-small.jpg</texture>
-            </control>
-
-            <control type="group"> <!--LOVE GROUP-->
-                <posx>230</posx>
-                <posy>80</posy>
-
-                <control type="image"> <!--LOVE-->
-                    <description>Love Image</description>
-                    <posx>0</posx>
-                    <posy>0</posy>
-                    <width>39</width>
-                    <height>36</height>
-                    <texture>love.png</texture>
-                </control>
-
-                <control type="label" id="10013"> <!--LOVE PERCENTAGE-->
-                    <description>Love Percentage</description>
-                    <posx>40</posx>
-                    <posy>0</posy>
-                    <width>50</width>
-                    <height>36</height>
-                    <label></label>
-                    <align>center</align>
-                    <aligny>center</aligny>
-                </control>
-
-                <control type="label" id="10014"> <!--LOVE VOTES-->
-                    <description>Love Votes</description>
-                    <posx>0</posx>
-                    <posy>40</posy>
-                    <width>89</width>
-                    <height>36</height>
-                    <label></label>
-                    <align>center</align>
-                    <aligny>center</aligny>
-                </control>
-            </control>
-
-            <control type="group"> <!--HATE GROUP-->
-                <posx>350</posx>
-                <posy>80</posy>
-
-                <control type="image"> <!--HATE-->
-                    <description>Hate Image</description>
-                    <posx>0</posx>
-                    <posy>0</posy>
-                    <width>39</width>
-                    <height>36</height>
-                    <texture>hate.png</texture>
-                </control>
-
-                <control type="label" id="10015"> <!--HATE PERCENTAGE-->
-                    <description>Hate Percentage</description>
-                    <posx>40</posx>
-                    <posy>0</posy>
-                    <width>50</width>
-                    <height>36</height>
-                    <label></label>
-                    <align>center</align>
-                    <aligny>center</aligny>
-                </control>
-
-                <control type="label" id="10016"> <!--HATE VOTES-->
-                    <description>Hate Votes</description>
-                    <posx>0</posx>
-                    <posy>40</posy>
-                    <width>89</width>
-                    <height>36</height>
-                    <label></label>
-                    <align>center</align>
-                    <aligny>center</aligny>
-                </control>
-            </control>
-
-            <control type="button" id="10030"> <!--LOVE BUTTON-->
+        <!--SIMPLE -->
+        <control type="group" id="10014">
+            <control type="button" id="10030">
                 <description>Love Button</description>
-                <posx>230</posx>
-                <posy>185</posy>
-                <width>220</width>
-                <height>50</height>
-                <label>Totaly Ninja!</label>
-                <texturefocus>Confluencebutton-focus.png</texturefocus>
-                <texturenofocus>Confluencebutton-nofocus.png</texturenofocus>
+                <posx>170</posx>
+                <posy>110</posy>
+                <width>100</width>
+                <height>60</height>
+                <label></label>
+                <texturefocus>love.png</texturefocus>
+                <texturenofocus>love_nofocus.png</texturenofocus>
                 <aligny>center</aligny>
                 <align>center</align>
-                <onup>10031</onup>
-                <ondown>10031</ondown>
+                <onleft>10031</onleft>
+                <onright>10031</onright>
             </control>
 
-            <control type="button" id="10031"> <!--HATE BUTTON-->
+            <control type="button" id="10031">
                 <description>Hate Button</description>
-                <posx>230</posx>
-                <posy>250</posy>
-                <width>220</width>
-                <height>50</height>
-                <label>Weak Sauce :(</label>
-                <texturefocus>Confluencebutton-focus.png</texturefocus>
-                <texturenofocus>Confluencebutton-nofocus.png</texturenofocus>
+                <posx>330</posx>
+                <posy>110</posy>
+                <width>100</width>
+                <height>60</height>
+                <label></label>
+                <texturefocus>hate.png</texturefocus>
+                <texturenofocus>hate_nofocus.png</texturenofocus>
                 <align>center</align>
                 <aligny>center</aligny>
-                <onup>10030</onup>
-                <ondown>10030</ondown>
+                <onleft>10030</onleft>
+                <onright>10030</onright>
             </control>
         </control>
 
-        <control type="group" id="10112"> <!--ADVANCED RATING-->
-            <control type="image" id="11012"> <!--POSTER-->
-                <description>Poster</description>
-                <posx>50</posx>
-                <posy>70</posy>
-                <width>138</width>
-                <height>203</height>
-                <texture>poster-small.jpg</texture>
+        <!--ADVANCED-->
+        <control type="group" id="10015">
+            <control type="button" id="11030">
+                <description>1 Button</description>
+                <posx>80</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <label></label>
+                <texturefocus>1.png</texturefocus>
+                <texturenofocus>1.png</texturenofocus>
+                <align>center</align>
+                <aligny>center</aligny>
+                <onleft>11039</onleft>
+                <onright>11031</onright>
             </control>
 
-            <control type="group"> <!--LOVE GROUP-->
-                <posx>230</posx>
-                <posy>100</posy>
-
-                <control type="image"> <!--LOVE-->
-                    <description>Love Image</description>
-                    <posx>0</posx>
-                    <posy>0</posy>
-                    <width>39</width>
-                    <height>36</height>
-                    <texture>love.png</texture>
-                </control>
-
-                <control type="label" id="11013"> <!--LOVE PERCENTAGE-->
-                    <description>Love Percentage</description>
-                    <posx>40</posx>
-                    <posy>0</posy>
-                    <width>50</width>
-                    <height>36</height>
-                    <label></label>
-                    <align>center</align>
-                    <aligny>center</aligny>
-                </control>
-
-                <control type="label" id="11014"> <!--LOVE VOTES-->
-                    <description>Love Votes</description>
-                    <posx>110</posx>
-                    <posy>0</posy>
-                    <width>120</width>
-                    <height>36</height>
-                    <label></label>
-                    <align>center</align>
-                    <aligny>center</aligny>
-                </control>
+            <control type="button" id="11031">
+                <description>2 Button</description>
+                <posx>125</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <label></label>
+                <texturefocus>2.png</texturefocus>
+                <texturenofocus>2.png</texturenofocus>
+                <align>center</align>
+                <aligny>center</aligny>
+                <onleft>11030</onleft>
+                <onright>11032</onright>
+                <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11032)</visible>
             </control>
 
-            <control type="group"> <!--HATE GROUP-->
-                <posx>230</posx>
-                <posy>175</posy>
-
-                <control type="image"> <!--HATE-->
-                    <description>Hate Image</description>
-                    <posx>0</posx>
-                    <posy>0</posy>
-                    <width>39</width>
-                    <height>36</height>
-                    <texture>hate.png</texture>
-                </control>
-
-                <control type="label" id="11015"> <!--HATE PERCENTAGE-->
-                    <description>Hate Percentage</description>
-                    <posx>40</posx>
-                    <posy>0</posy>
-                    <width>50</width>
-                    <height>36</height>
-                    <label></label>
-                    <align>center</align>
-                    <aligny>center</aligny>
-                </control>
-
-                <control type="label" id="11016"> <!--HATE VOTES-->
-                    <description>Hate Votes</description>
-                    <posx>110</posx>
-                    <posy>0</posy>
-                    <width>120</width>
-                    <height>36</height>
-                    <label></label>
-                    <align>center</align>
-                    <aligny>center</aligny>
-                </control>
+            <control type="image">
+                <description>2 Button Placeholder</description>
+                <posx>125</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <texture>2_b.png</texture>
+                <visible>Control.HasFocus(11030)</visible>
             </control>
 
-            <control type="group">
-                <posx>25</posx>
-                <posy>290</posy>
+            <control type="button" id="11032">
+                <description>3 Button</description>
+                <posx>170</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <label></label>
+                <texturefocus>3.png</texturefocus>
+                <texturenofocus>3.png</texturenofocus>
+                <align>center</align>
+                <aligny>center</aligny>
+                <onleft>11031</onleft>
+                <onright>11033</onright>
+                <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)</visible>
+            </control>
 
-                <control type="button" id="11030"> <!--1 BUTTON-->
-                    <description>1 Button</description>
-                    <posx>14</posx>
-                    <posy>0</posy>
-                    <width>30</width>
-                    <height>28</height>
-                    <label></label>
-                    <aligny>top</aligny>
-                    <align>center</align>
-                    <onleft>11039</onleft>
-                    <onright>11031</onright>
-                    <texturefocus>1_focus.png</texturefocus>
-                    <texturenofocus>1.png</texturenofocus>
-                </control>
+            <control type="image">
+                <description>3 Button Placeholder</description>
+                <posx>170</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <texture>3_b.png</texture>
+                <visible>Control.HasFocus(11030)|Control.HasFocus(11031)</visible>
+            </control>
 
-                <control type="button" id="11031"> <!--2 BUTTON-->
-                    <description>2 Button</description>
-                    <posx>57</posx>
-                    <posy>0</posy>
-                    <width>30</width>
-                    <height>28</height>
-                    <label></label>
-                    <aligny>top</aligny>
-                    <align>center</align>
-                    <onleft>11030</onleft>
-                    <onright>11032</onright>
-                    <texturefocus>2_focus.png</texturefocus>
-                    <texturenofocus>2.png</texturenofocus>
-                </control>
+            <control type="button" id="11033">
+                <description>4 Button</description>
+                <posx>215</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <label></label>
+                <texturefocus>4.png</texturefocus>
+                <texturenofocus>4.png</texturenofocus>
+                <align>center</align>
+                <aligny>center</aligny>
+                <onleft>11032</onleft>
+                <onright>11034</onright>
+                <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)</visible>
+            </control>
 
-                <control type="button" id="11032"> <!--3 BUTTON-->
-                    <description>3 Button</description>
-                    <posx>101</posx>
-                    <posy>0</posy>
-                    <width>30</width>
-                    <height>28</height>
-                    <label></label>
-                    <aligny>top</aligny>
-                    <align>center</align>
-                    <onleft>11031</onleft>
-                    <onright>11033</onright>
-                    <texturefocus>3_focus.png</texturefocus>
-                    <texturenofocus>3.png</texturenofocus>
-                </control>
+            <control type="image">
+                <description>4 Button Placeholder</description>
+                <posx>215</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <texture>4_b.png</texture>
+                <visible>Control.HasFocus(11030)|Control.HasFocus(11031)|Control.HasFocus(11032)</visible>
+            </control>
 
-                <control type="button" id="11033"> <!--4 BUTTON-->
-                    <description>4 Button</description>
-                    <posx>145</posx>
-                    <posy>0</posy>
-                    <width>30</width>
-                    <height>28</height>
-                    <label></label>
-                    <aligny>top</aligny>
-                    <align>center</align>
-                    <onleft>11032</onleft>
-                    <onright>11034</onright>
-                    <texturefocus>4_focus.png</texturefocus>
-                    <texturenofocus>4.png</texturenofocus>
-                </control>
+            <control type="button" id="11034">
+                <description>5 Button</description>
+                <posx>260</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <label></label>
+                <texturefocus>5.png</texturefocus>
+                <texturenofocus>5.png</texturenofocus>
+                <align>center</align>
+                <aligny>center</aligny>
+                <onleft>11033</onleft>
+                <onright>11035</onright>
+                <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)</visible>
+            </control>
 
-                <control type="button" id="11034"> <!--5 BUTTON-->
-                    <description>5 Button</description>
-                    <posx>188</posx>
-                    <posy>0</posy>
-                    <width>30</width>
-                    <height>28</height>
-                    <label></label>
-                    <aligny>top</aligny>
-                    <align>center</align>
-                    <onleft>11033</onleft>
-                    <onright>11035</onright>
-                    <texturefocus>5_focus.png</texturefocus>
-                    <texturenofocus>5.png</texturenofocus>
-                </control>
+            <control type="image">
+                <description>5 Button Placeholder</description>
+                <posx>260</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <texture>5_b.png</texture>
+                <visible>Control.HasFocus(11030)|Control.HasFocus(11031)|Control.HasFocus(11032)|Control.HasFocus(11033)</visible>
+            </control>
 
-                <control type="button" id="11035"> <!--6 BUTTON-->
-                    <description>6 Button</description>
-                    <posx>232</posx>
-                    <posy>0</posy>
-                    <width>30</width>
-                    <height>28</height>
-                    <label></label>
-                    <aligny>top</aligny>
-                    <align>center</align>
-                    <onleft>11034</onleft>
-                    <onright>11036</onright>
-                    <texturefocus>6_focus.png</texturefocus>
-                    <texturenofocus>6.png</texturenofocus>
-                </control>
+            <control type="button" id="11035">
+                <description>6 Button</description>
+                <posx>305</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <label></label>
+                <texturefocus>6.png</texturefocus>
+                <texturenofocus>6.png</texturenofocus>
+                <align>center</align>
+                <aligny>center</aligny>
+                <onleft>11034</onleft>
+                <onright>11036</onright>
+                <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)</visible>
+            </control>
 
-                <control type="button" id="11036"> <!--7 BUTTON-->
-                    <description>7 Button</description>
-                    <posx>275</posx>
-                    <posy>0</posy>
-                    <width>30</width>
-                    <height>28</height>
-                    <label></label>
-                    <aligny>top</aligny>
-                    <align>center</align>
-                    <onleft>11035</onleft>
-                    <onright>11037</onright>
-                    <texturefocus>7_focus.png</texturefocus>
-                    <texturenofocus>7.png</texturenofocus>
-                </control>
+            <control type="image">
+                <description>6 Button Placeholder</description>
+                <posx>305</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <texture>6_b.png</texture>
+                <visible>Control.HasFocus(11030)|Control.HasFocus(11031)|Control.HasFocus(11032)|Control.HasFocus(11033)|Control.HasFocus(11034)</visible>
+            </control>
 
-                <control type="button" id="11037"> <!--8 BUTTON-->
-                    <description>8 Button</description>
-                    <posx>319</posx>
-                    <posy>0</posy>
-                    <width>30</width>
-                    <height>28</height>
-                    <label></label>
-                    <aligny>top</aligny>
-                    <align>center</align>
-                    <onleft>11036</onleft>
-                    <onright>11038</onright>
-                    <texturefocus>8_focus.png</texturefocus>
-                    <texturenofocus>8.png</texturenofocus>
-                </control>
+            <control type="button" id="11036">
+                <description>7 Button</description>
+                <posx>350</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <label></label>
+                <texturefocus>7.png</texturefocus>
+                <texturenofocus>7.png</texturenofocus>
+                <align>center</align>
+                <aligny>center</aligny>
+                <onleft>11035</onleft>
+                <onright>11037</onright>
+                <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)|!Control.HasFocus(11035)</visible>
+            </control>
 
-                <control type="button" id="11038"> <!--9 BUTTON-->
-                    <description>9 Button</description>
-                    <posx>363</posx>
-                    <posy>0</posy>
-                    <width>30</width>
-                    <height>28</height>
-                    <label></label>
-                    <aligny>top</aligny>
-                    <align>center</align>
-                    <onleft>11037</onleft>
-                    <onright>11039</onright>
-                    <texturefocus>9_focus.png</texturefocus>
-                    <texturenofocus>9.png</texturenofocus>
-                </control>
+            <control type="image">
+                <description>7 Button Placeholder</description>
+                <posx>350</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <texture>7_b.png</texture>
+                <visible>Control.HasFocus(11030)|Control.HasFocus(11031)|Control.HasFocus(11032)|Control.HasFocus(11033)|Control.HasFocus(11034)|Control.HasFocus(11035)</visible>
+            </control>
 
-                <control type="button" id="11039"> <!--10 BUTTON-->
-                    <description>10 Button</description>
-                    <posx>406</posx>
-                    <posy>0</posy>
-                    <width>30</width>
-                    <height>28</height>
-                    <label></label>
-                    <aligny>top</aligny>
-                    <align>left</align>
-                    <onleft>11038</onleft>
-                    <onright>11030</onright>
-                    <texturefocus>10_focus.png</texturefocus>
-                    <texturenofocus>10.png</texturenofocus>
-                </control>
+            <control type="button" id="11037">
+                <description>8 Button</description>
+                <posx>395</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <label></label>
+                <texturefocus>8.png</texturefocus>
+                <texturenofocus>8.png</texturenofocus>
+                <align>center</align>
+                <aligny>center</aligny>
+                <onleft>11036</onleft>
+                <onright>11038</onright>
+                <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)|!Control.HasFocus(11035)|!Control.HasFocus(11036)</visible>
+            </control>
+
+            <control type="image">
+                <description>8 Button Placeholder</description>
+                <posx>395</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <texture>8_b.png</texture>
+                <visible>Control.HasFocus(11030)|Control.HasFocus(11031)|Control.HasFocus(11032)|Control.HasFocus(11033)|Control.HasFocus(11034)|Control.HasFocus(11035)|Control.HasFocus(11036)</visible>
+            </control>
+
+            <control type="button" id="11038">
+                <description>9 Button</description>
+                <posx>440</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <label></label>
+                <texturefocus>9.png</texturefocus>
+                <texturenofocus>9.png</texturenofocus>
+                <align>center</align>
+                <aligny>center</aligny>
+                <onleft>11037</onleft>
+                <onright>11039</onright>
+                <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)|!Control.HasFocus(11035)|!Control.HasFocus(11036)|!Control.HasFocus(11037)</visible>
+            </control>
+
+            <control type="image">
+                <description>9 Button Placeholder</description>
+                <posx>440</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <texture>9_b.png</texture>
+                <visible>Control.HasFocus(11030)|Control.HasFocus(11031)|Control.HasFocus(11032)|Control.HasFocus(11033)|Control.HasFocus(11034)|Control.HasFocus(11035)|Control.HasFocus(11036)|Control.HasFocus(11037)</visible>
+            </control>
+
+            <control type="button" id="11039">
+                <description>10 Button</description>
+                <posx>485</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <label></label>
+                <texturefocus>10.png</texturefocus>
+                <texturenofocus>10.png</texturenofocus>
+                <align>center</align>
+                <aligny>center</aligny>
+                <onleft>11038</onleft>
+                <onright>11030</onright>
+                <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)|!Control.HasFocus(11035)|!Control.HasFocus(11036)|!Control.HasFocus(11037)|!Control.HasFocus(11038)</visible>
+            </control>
+
+            <control type="image">
+                <description>10 Button Placeholder</description>
+                <posx>485</posx>
+                <posy>130</posy>
+                <width>35</width>
+                <height>35</height>
+                <texture>10_b.png</texture>
+                <visible>Control.HasFocus(11030)|Control.HasFocus(11031)|Control.HasFocus(11032)|Control.HasFocus(11033)|Control.HasFocus(11034)|Control.HasFocus(11035)|Control.HasFocus(11036)|Control.HasFocus(11037)|Control.HasFocus(11038)</visible>
             </control>
         </control>
 
