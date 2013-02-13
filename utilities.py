@@ -7,6 +7,7 @@ import xbmcgui
 import time, socket
 import math
 import urllib2
+import base64
 
 from urllib2 import HTTPError, URLError
 from httplib import HTTPException
@@ -28,7 +29,7 @@ __language__ = __settings__.getLocalizedString
 apikey = 'b6135e0f7510a44021fac8c03c36c81a17be35d9'
 
 username = __settings__.getSetting("username").strip()
-pwd = sha.new(__settings__.getSetting("password").strip()).hexdigest()
+password = __settings__.getSetting("password").strip()
 debug = __settings__.getSetting("debug")
 
 def Debug(msg, force = False):
@@ -111,6 +112,9 @@ def get_data(url, args):
 			req = urllib2.Request(url)
 		else:
 			req = urllib2.Request(url, args)
+			# add basic http header authentication
+			base64string = base64.encodestring('%s:%s' % (username, password)).replace('\n', '')
+			req.add_header("Authorization", "Basic %s" % base64string)
 		Debug("get_data(): urllib2.urlopen()")
 		response = urllib2.urlopen(req)
 		Debug("get_data(): response.read()")
@@ -159,14 +163,12 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 	url = formatTraktURL(req)
 	
 	if method == 'POST':
-		if not anon:
-			args['username'] = username
-			args['password'] = pwd
 		if passVersions:
 			args['plugin_version'] = __settings__.getAddonInfo("version")
 			args['media_center_version'] = xbmc.getInfoLabel("system.buildversion")
 			args['media_center_date'] = xbmc.getInfoLabel("system.builddate")
 		jdata = json.dumps(args)
+		Debug("traktJsonRequest(): Request Data: '%s'" % str(jdata))
 
 	Debug("traktJsonRequest(): Starting retry loop.")
 	
