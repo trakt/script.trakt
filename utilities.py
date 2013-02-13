@@ -150,6 +150,10 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 	raw = None
 	data = None
 	jdata = {}
+
+	if not (method == 'POST' or method == 'GET'):
+		Debug("traktJsonRequest(): Unknown method '%s'" % method)
+		return None
 	
 	# get trakt api url to open
 	url = formatTraktURL(req)
@@ -163,11 +167,6 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 			args['media_center_version'] = xbmc.getInfoLabel("system.buildversion")
 			args['media_center_date'] = xbmc.getInfoLabel("system.builddate")
 		jdata = json.dumps(args)
-	elif method == 'GET':
-		# do nothing
-	else:
-		Debug("traktJsonRequest(): Unknown method '%s'" % method)
-		return None
 
 	Debug("traktJsonRequest(): Starting retry loop.")
 	
