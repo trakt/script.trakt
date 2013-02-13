@@ -180,6 +180,7 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 				break
 			if not raw:
 				Debug("traktJsonRequest(): (%i) JSON Response empty" % i)
+				time.sleep(0.1)
 				continue
 				
 			# get json formatted data	
@@ -192,6 +193,7 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 					break
 				else:
 					Debug("traktJsonRequest(): (%i) JSON Error '%s' -> '%s'" % (i, data['status'], data['error']))
+					time.sleep(0.1)
 					continue
 			
 			# check to see if we have data
@@ -206,6 +208,8 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 		except Exception:
 			import traceback
 			Debug("traktJsonRequest(): (%i) Unknown Exception: %s" % (i, traceback.format_exc()))
+
+		time.sleep(0.1)
 	
 	# handle scenario where all retries fail
 	if not data:
