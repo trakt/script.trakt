@@ -164,7 +164,7 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 			args['media_center_date'] = xbmc.getInfoLabel("system.builddate")
 		jdata = json.dumps(args)
 	elif method == 'GET':
-		req = urllib2.Request(url)
+		# do nothing
 	else:
 		Debug("traktJsonRequest(): Unknown method '%s'" % method)
 		return None
