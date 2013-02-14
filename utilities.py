@@ -31,6 +31,7 @@ apikey = 'b6135e0f7510a44021fac8c03c36c81a17be35d9'
 username = __settings__.getSetting("username").strip()
 password = __settings__.getSetting("password").strip()
 debug = __settings__.getSetting("debug")
+retries = int(__settings__.getSetting("retries"))
 
 def Debug(msg, force = False):
 	if(debug == 'true' or force):
@@ -170,9 +171,9 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 		jdata = json.dumps(args)
 		Debug("traktJsonRequest(): Request Data: '%s'" % str(jdata))
 
-	Debug("traktJsonRequest(): Starting retry loop.")
+	Debug("traktJsonRequest(): Starting retry loop, maximum %i retries." % retries)
 	
-	for i in range(0,3):	
+	for i in range(0,retries):	
 		try:
 			Debug("traktJsonRequest(): (%i) Request URL '%s'" % (i, url))
 			raw = get_data(url, jdata)
