@@ -3,7 +3,7 @@
 import xbmc
 import xbmcgui
 import xbmcaddon
-from utilities import traktJsonRequest, xbmcJsonRequest, Debug, notification, chunks
+from utilities import traktJSONWrapper, traktJsonRequest, xbmcJsonRequest, Debug, notification, chunks
 
 __setting__   = xbmcaddon.Addon('script.trakt').getSetting
 __getstring__ = xbmcaddon.Addon('script.trakt').getLocalizedString
@@ -37,10 +37,13 @@ def compare_show_watched_trakt(xbmc_show, trakt_show):
 
 	for xbmc_episode in xbmc_show['episodes']:
 		if xbmc_episode['playcount']:
-			for trakt_season in trakt_show['seasons']:
-				if xbmc_episode['season'] == trakt_season['season']:
-					if xbmc_episode['episode'] not in trakt_season['episodes']:
-						missing.append(xbmc_episode)
+			if xbmc_episode['season'] not in [x['season'] for x in trakt_show['seasons']]:
+				missing.append(xbmc_episode)
+			else:
+				for trakt_season in trakt_show['seasons']:
+					if xbmc_episode['season'] == trakt_season['season']:
+						if xbmc_episode['episode'] not in trakt_season['episodes']:
+							missing.append(xbmc_episode)
 
 	return missing
 
@@ -105,7 +108,8 @@ class SyncEpisodes():
 		if self.show_progress:
 			progress.update(15, line1=__getstring__(1434), line2=' ', line3=' ')
 
-		self.trakt_shows['collection'] = traktJsonRequest('POST', '/user/library/shows/collection.json/%%API_KEY%%/%%USERNAME%%/min')
+		#self.trakt_shows['collection'] = traktJsonRequest('POST', '/user/library/shows/collection.json/%%API_KEY%%/%%USERNAME%%/min')
+		self.trakt_shows['collection'] = traktJSONWrapper('POST', '/user/library/shows/collection.json/%%API_KEY%%/%%USERNAME%%/min')
 
 	def AddToTrakt(self):
 		Debug('[Episodes Sync] Checking for episodes missing from trakt.tv collection')
@@ -178,7 +182,8 @@ class SyncEpisodes():
 				if self.show_progress:
 					progress.update(45, line1=__getstring__(1435), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), __getstring__(1437)))
 
-				traktJsonRequest('POST', '/show/episode/library/%%API_KEY%%', show)
+				#traktJsonRequest('POST', '/show/episode/library/%%API_KEY%%', show)
+				traktJSONWrapper('POST', '/show/episode/library/%%API_KEY%%', show)
 
 		else:
 			Debug('[Episodes Sync] trakt.tv episode collection is up to date')
@@ -188,7 +193,8 @@ class SyncEpisodes():
 		if self.show_progress:
 			progress.update(50, line1=__getstring__(1438), line2=' ', line3=' ')
 
-		self.trakt_shows['watched'] = traktJsonRequest('POST', '/user/library/shows/watched.json/%%API_KEY%%/%%USERNAME%%/min')
+		#self.trakt_shows['watched'] = traktJsonRequest('POST', '/user/library/shows/watched.json/%%API_KEY%%/%%USERNAME%%/min')
+		self.trakt_shows['watched'] = traktJSONWrapper('POST', '/user/library/shows/watched.json/%%API_KEY%%/%%USERNAME%%/min')
 
 	def UpdatePlaysTrakt(self):
 		Debug('[Episodes Sync] Checking watched episodes on trakt.tv')
@@ -259,7 +265,8 @@ class SyncEpisodes():
 				if self.show_progress:
 					progress.update(70, line1=__getstring__(1438), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), __getstring__(1440)))
 
-				traktJsonRequest('POST', '/show/episode/seen/%%API_KEY%%', show)
+				#traktJsonRequest('POST', '/show/episode/seen/%%API_KEY%%', show)
+				traktJSONWrapper('POST', '/show/episode/seen/%%API_KEY%%', show)
 
 		else:
 			Debug('[Episodes Sync] trakt.tv episode playcounts are up to date')
@@ -400,7 +407,8 @@ class SyncEpisodes():
 				if self.show_progress:
 					progress.update(95, line1=__getstring__(1445), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), __getstring__(1447)))
 
-				traktJsonRequest('POST', '/show/episode/unlibrary/%%API_KEY%%', show)
+				#traktJsonRequest('POST', '/show/episode/unlibrary/%%API_KEY%%', show)
+				traktJSONWrapper('POST', '/show/episode/unlibrary/%%API_KEY%%', show)
 
 		else:
 			Debug('[Episodes Sync] trakt.tv episode collection is clean')
