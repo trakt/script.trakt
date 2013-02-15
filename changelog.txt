@@ -1,5 +1,8 @@
+version 2.1.0
+  - use urllib2 for connection (nate1280)
+
 version 2.0.0
-  - compatible with Frodo RC3
+  - compatible with Frodo only, Eden support dropped
   - supports absolute and dvd ordering (mizaki)
   - sync your TV episode and movie collections to trakt (N3MIS15)
   - auto clean your trakt collection so that it matches up with XBMC (N3MIS15)
