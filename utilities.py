@@ -4,10 +4,13 @@
 import xbmc
 import xbmcaddon
 import xbmcgui
-import nbconnection
 import time, socket
 import math
+import urllib2
 import base64
+
+from urllib2 import HTTPError, URLError
+from httplib import HTTPException
 
 try:
 	import simplejson as json
@@ -29,6 +32,7 @@ username = __settings__.getSetting("username").strip()
 password = __settings__.getSetting("password").strip()
 pwd = sha.new(__settings__.getSetting("password").strip()).hexdigest()
 debug = __settings__.getSetting("debug")
+retries = int(float(__settings__.getSetting("retries")))
 traktSettings = None
 
 def Debug(msg, force = False):
@@ -81,51 +85,62 @@ def checkSettings(daemon=False):
 
 	return True
 
-
 def chunks(l, n):
 	return [l[i:i+n] for i in range(0, len(l), n)]
 
-# get a connection to trakt
-def getTraktConnection():
+# helper method to format api call url
+def formatTraktURL(req):
 	https = __settings__.getSetting('https')
+	
+	result = "http"
+	
+	if https:
+		result = result + "s"
+
+	result = result + "://api.trakt.tv"
+	
+	req = req.replace("%%API_KEY%%", apikey)
+	req = req.replace("%%USERNAME%%", username)
+	
+	result = result + req
+	
+	return result
+
+# helper function for making requests through urllib2
+def get_data(url, args):
+	data = None
 	try:
-		if (https == 'true'):
-			conn = nbconnection.NBConnection('api.trakt.tv', https=True)
+		Debug("get_data(): urllib2.Request(%s)" % url)
+		if args == None:
+			req = urllib2.Request(url)
 		else:
-			conn = nbconnection.NBConnection('api.trakt.tv')
+			req = urllib2.Request(url, args)
+			# add basic http header authentication
+			base64string = base64.encodestring('%s:%s' % (username, password)).replace('\n', '')
+			req.add_header("Authorization", "Basic %s" % base64string)
+		Debug("get_data(): urllib2.urlopen()")
+		response = urllib2.urlopen(req)
+		Debug("get_data(): response.read()")
+		data = response.read()
 	except socket.timeout:
-		Debug("getTraktConnection: can't connect to trakt - timeout")
+		Debug("get_data(): can't connect to trakt - timeout")
 		notification("trakt", __language__(1108).encode( "utf-8", "ignore" ) + " (timeout)") # can't connect to trakt
 		return None
-	return conn
-
-# json wrapper to make actual json request call, to rety upto 3 times in the event of failures.
-def traktJSONWrapper(method, req, args={}, returnStatus=False, anon=False, conn=False, silent=True, passVersions=False):
-	response = None
-	
-	# check the method, if not POST or GET, return nothing
-	if not (method == 'POST' or method == 'GET'):
-		Debug("traktJSONWrapper(): Unknown method (%S)." % method)
+	except HTTPError, e:
+		Debug("get_data(): HTTPError = %s" % str(e.code))
+		return None
+	except URLError, e:
+		Debug("get_data(): URLError = %s" % str(e.reason))
+		return None
+	except HTTPException, e:
+		Debug("get_data(): HTTPException")
+		return None
+	except Exception:
+		import traceback
+		Debug("get_data(): Generic exception: %s" % traceback.format_exc())
 		return None
 
-	Debug("traktJSONWrapper(): Starting loop")
-	for i in range(0,3):
-		Debug("traktJSONWrapper(): (%i) Sending JSON API %s %s" % (i, method, req.replace("%%API_KEY%%", "")))
-		response = traktJsonRequest(method, req, args, returnStatus, anon, conn, silent, passVersions)
-		if xbmc.abortRequested:
-			Debug("traktJSONWrapper(): (%i) xbmc.abortRequested", i)
-			break
-		if response == None:
-			Debug("traktJSONWrapper(): (%i) JSON Response empty", i)
-		if 'status' in response:
-			Debug("traktJSONWrapper(): (%i) JSON Response '%s'" % (i, response['status']))
-			if response['status'] == 'success':
-				break
-			else:
-				Debug("traktJSONWrapper(): (%i) JSON Error '%s" % (i, response['error']))
-		time.sleep(0.1)
-		
-	return response
+	return data
 
 # make a JSON api request to trakt
 # method: http method (GET or POST)
@@ -139,123 +154,82 @@ def traktJSONWrapper(method, req, args={}, returnStatus=False, anon=False, conn=
 # silent: default is True, when true it disable any error notifications (but not debug messages)
 # passVersions: default is False, when true it passes extra version information to trakt to help debug problems
 def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=False, silent=True, passVersions=False):
-	closeConnection = False
-	if conn == False:
-		conn = getTraktConnection()
-		closeConnection = True
-	if conn == None:
-		Debug("traktJsonRequest(): Unable to create connection to trakt.")
-		if returnStatus:
-			data = {}
-			data['status'] = 'failure'
-			data['error'] = 'Unable to connect to trakt'
-			return data
-		return None
+	raw = None
+	data = None
+	jdata = {}
 
-	try:
-		req = req.replace("%%API_KEY%%", apikey)
-		req = req.replace("%%USERNAME%%", username)
-		if method == 'POST':
-			if not anon:
-				args['username'] = username
-				args['password'] = pwd
-			if passVersions:
-				args['plugin_version'] = __settings__.getAddonInfo("version")
-				args['media_center_version'] = xbmc.getInfoLabel("system.buildversion")
-				args['media_center_date'] = xbmc.getInfoLabel("system.builddate")
-			jdata = json.dumps(args)
-			conn.request('POST', req, jdata)
-		elif method == 'GET':
-			auth = base64.encodestring('%s:%s' % (username, password)).replace('\n', '')
-			headers = {"Authorization":"Basic " + auth}
-			conn.request('GET', req, None, headers)
-		else:
-			Debug("traktJsonRequest(): Unknown method " + method)
-			return None
-		Debug("traktJsonRequest(): "+method+" JSON url: "+req)
-	except socket.error:
-		Debug("traktJsonRequest(): Unable to connect to trakt.")
-		if not silent:
-			notification("trakt", __language__(1108).encode( "utf-8", "ignore" )) # can't connect to trakt
-		if returnStatus:
-			data = {}
-			data['status'] = 'failure'
-			data['error'] = 'Socket error, unable to connect to trakt'
-			return data
-		return None
-
-	conn.go()
-
-	while True:
-		if xbmc.abortRequested:
-			Debug("traktJsonRequest(): Broke loop due to abort.")
-			if returnStatus:
-				data = {}
-				data['status'] = 'failure'
-				data['error'] = 'Abort requested, not waiting for response'
-				return data
-			return None
-		if conn.readError:
-			Debug("traktJsonRequest(): Error reading response.")
-			if returnStatus:
-				data = {}
-				data['status'] = 'failure'
-				data['error'] = 'Error getting response, read error on socket.'
-				return data
-			return None
-		if conn.hasResult():
-			Debug("traktJsonRequest(): hasResult()")
-			break
-		time.sleep(0.1)
-
-	Debug("traktJsonRequest(): Get response object.")
-	response = conn.getResult()
-	if response == None:
-		Debug("traktJsonRequest(): Response not set.")
-		if returnStatus:
-			data = {}
-			data['status'] = 'failure'
-			data['error'] = 'Error getting response, response not set.'
-			return data
-		return None
-		
-	Debug("traktJsonRequest(): Trying to read response.")
-	try:
-		raw = response.read()
-	except:
-		Debug("traktJsonRequest(): Exception reading response.")
-		if returnStatus:
-			data = {}
-			data['status'] = 'failure'
-			data['error'] = 'Error getting response, exception reading response.'
-			return data
+	if not (method == 'POST' or method == 'GET'):
+		Debug("traktJsonRequest(): Unknown method '%s'" % method)
 		return None
 	
-	if closeConnection:
-		conn.close()
+	# get trakt api url to open
+	url = formatTraktURL(req)
+	
+	if method == 'POST':
+		if passVersions:
+			args['plugin_version'] = __settings__.getAddonInfo("version")
+			args['media_center_version'] = xbmc.getInfoLabel("system.buildversion")
+			args['media_center_date'] = xbmc.getInfoLabel("system.builddate")
+		jdata = json.dumps(args)
+		Debug("traktJsonRequest(): Request Data: '%s'" % str(jdata))
 
-	try:
-		data = json.loads(raw)
-		Debug("traktJsonRequest(): JSON response: " + str(data))
-	except ValueError:
-		Debug("traktJsonRequest(): Bad JSON response: " + raw)
-		if returnStatus:
-			data = {}
-			data['status'] = 'failure'
-			data['error'] = 'Bad response from trakt'
-			return data
-		if not silent:
-			notification("trakt", __language__(1109).encode( "utf-8", "ignore" ) + ": Bad response from trakt") # Error
+	Debug("traktJsonRequest(): Starting retry loop, maximum %i retries." % retries)
+	
+	for i in range(0,retries):	
+		try:
+			Debug("traktJsonRequest(): (%i) Request URL '%s'" % (i, url))
+			raw = get_data(url, jdata)
+			if xbmc.abortRequested:
+				Debug("traktJsonRequest(): (%i) xbmc.abortRequested" % i)
+				break
+			if not raw:
+				Debug("traktJsonRequest(): (%i) JSON Response empty" % i)
+				time.sleep(0.1)
+				continue
+				
+			# get json formatted data	
+			data = json.loads(raw)
+			Debug("traktJsonRequest(): (%i) JSON response: '%s'" % (i, str(data)))
+			
+			# check for the status variable in JSON data
+			if 'status' in data:
+				if data['status'] == 'success':
+					break
+				else:
+					Debug("traktJsonRequest(): (%i) JSON Error '%s' -> '%s'" % (i, data['status'], data['error']))
+					time.sleep(0.1)
+					continue
+			
+			# check to see if we have data
+			if data:
+				Debug("traktJsonRequest(): Have JSON data, breaking retry.")
+				break
+			
+		except ValueError:
+			Debug("traktJsonRequest(): (%i) Bad JSON response: '%s'", (i, raw))
+			if not silent:
+				notification("trakt", __language__(1109).encode( "utf-8", "ignore" ) + ": Bad response from trakt") # Error
+		except Exception:
+			import traceback
+			Debug("traktJsonRequest(): (%i) Unknown Exception: %s" % (i, traceback.format_exc()))
+
+		time.sleep(0.1)
+	
+	# handle scenario where all retries fail
+	if not data:
+		Debug("traktJsonRequest(): JSON Request failed, data is still empty after retries.")
 		return None
-
+	
 	if 'status' in data:
 		if data['status'] == 'failure':
-			Debug("traktJsonRequest(): Error: " + str(data['error']))
+			Debug("traktJsonRequest(): Error: %s" % str(data['error']))
 			if returnStatus:
 				return data
 			if not silent:
 				notification("trakt", __language__(1109).encode( "utf-8", "ignore" ) + ": " + str(data['error'])) # Error
 			return None
+		elif data['status'] == 'success':
+			Debug("traktJsonRequest(): JSON request was successful.")
 
 	return data
 
@@ -352,60 +326,54 @@ def getPlaylistLengthFromXBMCPlayer(playerid):
 
 #tell trakt that the user is watching a movie
 def watchingMovieOnTrakt(imdb_id, title, year, duration, percent):
-	Debug("watchingMovieOnTrakt(): Calling traktJSONWrapper()")
-	#response = traktJsonRequest('POST', '/movie/watching/%%API_KEY%%', {'imdb_id': imdb_id, 'title': title, 'year': year, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
-	response = traktJSONWrapper('POST', '/movie/watching/%%API_KEY%%', {'imdb_id': imdb_id, 'title': title, 'year': year, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
-	Debug("watchingMovieOnTrakt(): traktJSONWrapper() returned")
+	Debug("watchingMovieOnTrakt(): Calling traktJsonRequest()")
+	response = traktJsonRequest('POST', '/movie/watching/%%API_KEY%%', {'imdb_id': imdb_id, 'title': title, 'year': year, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
+	Debug("watchingMovieOnTrakt(): traktJsonRequest() returned")
 	if response == None:
 		Debug("watchingMovieOnTrakt(): Error in request")
 	return response
 
 #tell trakt that the user is watching an episode
 def watchingEpisodeOnTrakt(tvdb_id, title, year, season, episode, uniqueid, duration, percent):
-	Debug("watchingEpisodeOnTrakt(): Calling traktJSONWrapper()")
-	#response = traktJsonRequest('POST', '/show/watching/%%API_KEY%%', {'tvdb_id': tvdb_id, 'title': title, 'year': year, 'season': season, 'episode': episode, 'episode_tvdb_id': uniqueid, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
-	response = traktJSONWrapper('POST', '/show/watching/%%API_KEY%%', {'tvdb_id': tvdb_id, 'title': title, 'year': year, 'season': season, 'episode': episode, 'episode_tvdb_id': uniqueid, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
-	Debug("watchingEpisodeOnTrakt(): traktJSONWrapper() returned")
+	Debug("watchingEpisodeOnTrakt(): Calling traktJsonRequest()")
+	response = traktJsonRequest('POST', '/show/watching/%%API_KEY%%', {'tvdb_id': tvdb_id, 'title': title, 'year': year, 'season': season, 'episode': episode, 'episode_tvdb_id': uniqueid, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
+	Debug("watchingEpisodeOnTrakt(): traktJsonRequest() returned")
 	if response == None:
 		Debug("watchingEpisodeOnTrakt(): Error in request")
 	return response
 
 #tell trakt that the user has stopped watching a movie
 def cancelWatchingMovieOnTrakt():
-	Debug("cancelWatchingMovieOnTrakt(): Calling traktJSONWrapper()")
-	#response = traktJsonRequest('POST', '/movie/cancelwatching/%%API_KEY%%')
-	response = traktJSONWrapper('POST', '/movie/cancelwatching/%%API_KEY%%')
-	Debug("cancelWatchingMovieOnTrakt(): traktJSONWrapper() returned")
+	Debug("cancelWatchingMovieOnTrakt(): Calling traktJsonRequest()")
+	response = traktJsonRequest('POST', '/movie/cancelwatching/%%API_KEY%%')
+	Debug("cancelWatchingMovieOnTrakt(): traktJsonRequest() returned")
 	if response == None:
 		Debug("cancelWatchingMovieOnTrakt(): Error in request")
 	return response
 
 #tell trakt that the user has stopped an episode
 def cancelWatchingEpisodeOnTrakt():
-	Debug("cancelWatchingEpisodeOnTrakt(): Calling traktJSONWrapper()")
-	#response = traktJsonRequest('POST', '/show/cancelwatching/%%API_KEY%%')
-	response = traktJSONWrapper('POST', '/show/cancelwatching/%%API_KEY%%')
-	Debug("cancelWatchingEpisodeOnTrakt(): traktJSONWrapper() returned")
+	Debug("cancelWatchingEpisodeOnTrakt(): Calling traktJsonRequest()")
+	response = traktJsonRequest('POST', '/show/cancelwatching/%%API_KEY%%')
+	Debug("cancelWatchingEpisodeOnTrakt(): traktJsonRequest() returned")
 	if response == None:
 		Debug("cancelWatchingEpisodeOnTrakt(): Error in request")
 	return response
 
 #tell trakt that the user has finished watching an movie
 def scrobbleMovieOnTrakt(imdb_id, title, year, duration, percent):
-	Debug("scrobbleMovieOnTrakt(): Calling traktJSONWrapper()")
-	#response = traktJsonRequest('POST', '/movie/scrobble/%%API_KEY%%', {'imdb_id': imdb_id, 'title': title, 'year': year, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
-	response = traktJSONWrapper('POST', '/movie/scrobble/%%API_KEY%%', {'imdb_id': imdb_id, 'title': title, 'year': year, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
-	Debug("scrobbleMovieOnTrakt(): traktJSONWrapper() returned")
+	Debug("scrobbleMovieOnTrakt(): Calling traktJsonRequest()")
+	response = traktJsonRequest('POST', '/movie/scrobble/%%API_KEY%%', {'imdb_id': imdb_id, 'title': title, 'year': year, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
+	Debug("scrobbleMovieOnTrakt(): traktJsonRequest() returned")
 	if response == None:
 		Debug("scrobbleMovieOnTrakt(): Error in request")
 	return response
 
 #tell trakt that the user has finished watching an episode
 def scrobbleEpisodeOnTrakt(tvdb_id, title, year, season, episode, uniqueid, duration, percent):
-	Debug("scrobbleEpisodeOnTrakt(): Calling traktJSONWrapper()")
-	#response = traktJsonRequest('POST', '/show/scrobble/%%API_KEY%%', {'tvdb_id': tvdb_id, 'title': title, 'year': year, 'season': season, 'episode': episode, 'episode_tvdb_id': uniqueid, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
-	response = traktJSONWrapper('POST', '/show/scrobble/%%API_KEY%%', {'tvdb_id': tvdb_id, 'title': title, 'year': year, 'season': season, 'episode': episode, 'episode_tvdb_id': uniqueid, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
-	Debug("scrobbleEpisodeOnTrakt(): traktJSONWrapper() returned")
+	Debug("scrobbleEpisodeOnTrakt(): Calling traktJsonRequest()")
+	response = traktJsonRequest('POST', '/show/scrobble/%%API_KEY%%', {'tvdb_id': tvdb_id, 'title': title, 'year': year, 'season': season, 'episode': episode, 'episode_tvdb_id': uniqueid, 'duration': math.ceil(duration), 'progress': math.ceil(percent)}, passVersions=True)
+	Debug("scrobbleEpisodeOnTrakt(): traktJsonRequest() returned")
 	if response == None:
 		Debug("scrobbleEpisodeOnTrakt(): Error in request")
 	return response
