@@ -85,7 +85,20 @@ class SyncEpisodes():
 		if self.show_progress:
 			progress.update(5, line1=__getstring__(1432), line2=' ', line3=' ')
 
-		shows = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber']}, 'id': 0})['tvshows']
+		shows = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber']}, 'id': 0})
+
+		# sanity check, test for empty result
+		if not shows:
+			Debug("[Episodes Sync] xbmc json request was empty.")
+			return
+
+		# test to see if tvshows key exists in xbmc json request
+		if 'tvshows' in shows:
+			shows = shows['tvshows']
+			Debug("[Episodes Sync] XBMC JSON Result: '%s'" % str(shows))
+		else:
+			Debug("[Episodes Sync] Key 'tvshows' not found")
+			return
 
 		if self.show_progress:
 			progress.update(10, line1=__getstring__(1433), line2=' ', line3=' ')
@@ -414,27 +427,33 @@ class SyncEpisodes():
 
 		self.GetFromXBMC()
 
-		if not self.Canceled() and add_episodes_to_trakt:
-			self.GetCollectionFromTrakt()
-			if not self.Canceled():
-				self.AddToTrakt()
+		# sanity check, test for non-empty xbmc movie list
+		if self.xbmc_shows:
 
-		if trakt_episode_playcount or xbmc_episode_playcount:
-			if not self.Canceled():
-				self.GetWatchedFromTrakt()
-
-		if not self.Canceled() and trakt_episode_playcount:
-			self.UpdatePlaysTrakt()
-
-		if xbmc_episode_playcount:
-			if not self.Canceled():
-				self.UpdatePlaysXBMC()
-
-		if clean_trakt_episodes:
-			if not self.Canceled() and not add_episodes_to_trakt:
+			if not self.Canceled() and add_episodes_to_trakt:
 				self.GetCollectionFromTrakt()
-			if not self.Canceled():
-				self.RemoveFromTrakt()
+				if not self.Canceled():
+					self.AddToTrakt()
+
+			if trakt_episode_playcount or xbmc_episode_playcount:
+				if not self.Canceled():
+					self.GetWatchedFromTrakt()
+
+			if not self.Canceled() and trakt_episode_playcount:
+				self.UpdatePlaysTrakt()
+
+			if xbmc_episode_playcount:
+				if not self.Canceled():
+					self.UpdatePlaysXBMC()
+
+			if clean_trakt_episodes:
+				if not self.Canceled() and not add_episodes_to_trakt:
+					self.GetCollectionFromTrakt()
+				if not self.Canceled():
+					self.RemoveFromTrakt()
+
+		else:
+			Debug("[Episodes Sync] XBMC Show list is empty, aborting Episodes Sync.")
 
 		if not self.show_progress and __setting__('sync_on_update') == 'true' and self.notify:
 			notification('%s %s' % (__getstring__(1400), __getstring__(1406)), __getstring__(1421)) #Sync complete

@@ -60,19 +60,25 @@ class SyncMovies():
 
 		result = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['title', 'imdbnumber', 'year', 'playcount']}})
 
+		# sanity check, test for empty result
+		if not result:
+			Debug("[Movies Sync] xbmc json request was empty.")
+			return
+
 		if 'movies' in result:
 			self.xbmc_movies = result['movies']
+			Debug("[Movies Sync] XBMC JSON Result: '%s'" % str(self.xbmc_movies))
 		else:
-			Debug('[Movie Sync] Key "movies" not found')
+			Debug('[Movies Sync] Key "movies" not found')
 
 	def GetFromTraktCollection(self):
-		Debug('[Movie Sync] Getting movie collection from trakt.tv')
+		Debug('[Movies Sync] Getting movie collection from trakt.tv')
 		if self.show_progress:
 			progress.update(10, line1=__getstring__(1423), line2=' ', line3=' ')
 		self.trakt_movies_collection = traktJsonRequest('POST', '/user/library/movies/collection.json/%%API_KEY%%/%%USERNAME%%/min')
 
 	def GetFromTraktSeen(self):
-		Debug('[Movie Sync] Getting seen movies from trakt.tv')
+		Debug('[Movies Sync] Getting seen movies from trakt.tv')
 		if self.show_progress:
 			progress.update(15, line1=__getstring__(1424), line2=' ', line3=' ')
 		self.trakt_movies_seen = traktJsonRequest('POST', '/user/library/movies/watched.json/%%API_KEY%%/%%USERNAME%%/min')
@@ -260,25 +266,31 @@ class SyncMovies():
 
 		self.GetFromXBMC()
 
-		if not self.Canceled() and add_movies_to_trakt:
-			self.GetFromTraktCollection()
-			self.AddToTrakt()
+		# sanity check, test for non-empty xbmc movie list
+		if self.xbmc_movies:
 
-		if trakt_movie_playcount or xbmc_movie_playcount:
-			if not self.Canceled():
-				self.GetFromTraktSeen()
-
-		if not self.Canceled() and trakt_movie_playcount:
-			self.UpdatePlaysTrakt()
-
-		if not self.Canceled() and xbmc_movie_playcount:
-			self.UpdatePlaysXBMC()
-
-		if not self.Canceled() and clean_trakt_movies:
-			if not add_movies_to_trakt:
+			if not self.Canceled() and add_movies_to_trakt:
 				self.GetFromTraktCollection()
-			if not self.Canceled():
-				self.RemoveFromTrakt()
+				self.AddToTrakt()
+
+			if trakt_movie_playcount or xbmc_movie_playcount:
+				if not self.Canceled():
+					self.GetFromTraktSeen()
+
+			if not self.Canceled() and trakt_movie_playcount:
+				self.UpdatePlaysTrakt()
+
+			if not self.Canceled() and xbmc_movie_playcount:
+				self.UpdatePlaysXBMC()
+
+			if not self.Canceled() and clean_trakt_movies:
+				if not add_movies_to_trakt:
+					self.GetFromTraktCollection()
+				if not self.Canceled():
+					self.RemoveFromTrakt()
+
+		else:
+			Debug("[Movies Sync] XBMC Movie list is empty, aborting Movies Sync.")
 
 		if not self.Canceled() and self.show_progress:
 			progress.update(100, line1=__getstring__(1431), line2=' ', line3=' ')
