@@ -100,8 +100,47 @@ class Scrobbler(threading.Thread):
 	def startedWatching(self):
 		scrobbleMovieOption = __settings__.getSetting("scrobble_movie")
 		scrobbleEpisodeOption = __settings__.getSetting("scrobble_episode")
+		ExcludeLiveTV = __settings__.getSetting("ExcludeLiveTV")
+		ExcludeHTTP = __settings__.getSetting("ExcludeHTTP")		
+		ExcludePathOption = __settings__.getSetting("ExcludePathOption")
+		ExcludePathOption2 = __settings__.getSetting("ExcludePathOption2")
+		ExcludePathOption3 = __settings__.getSetting("ExcludePathOption3")
+		ExcludePath = __settings__.getSetting("ExcludePath")
+		ExcludePath2 = __settings__.getSetting("ExcludePath2")
+		ExcludePath3 = __settings__.getSetting("ExcludePath3")
+		
+		LiveTVExcluded = False
+		HTTPExcluded = False		
+		PathExcluded = False
+		VideoExcluded = False
 
-		if self.curVideo['type'] == 'movie' and scrobbleMovieOption == 'true':
+		currentPath = xbmc.Player().getPlayingFile()
+		if (currentPath.find("pvr://") > -1) and ExcludeLiveTV == 'true':
+			Debug("Video is playing via Live TV, which is currently set as excluded location.", False)
+			LiveTVExcluded = True			
+		if (currentPath.find("http://") > -1) and ExcludeHTTP == 'true':
+			Debug("Video is playing via HTTP source, which is currently set as excluded location.", False)
+			HTTPExcluded = True		
+		if  ExcludePath != "" and ExcludePathOption == 'true':
+			if (currentPath.find(ExcludePath) > -1):
+				Debug('Video is playing from location, which is currently set as excluded path 1.', False)
+				PathExcluded = True
+		if  ExcludePath2 != "" and ExcludePathOption2 == 'true':
+			currentPath = xbmc.Player().getPlayingFile()
+			if (currentPath.find(ExcludePath2) > -1):
+				Debug('Video is playing from location, which is currently set as excluded path 2.', False)
+				PathExcluded = True
+		if  ExcludePath3 != "" and ExcludePathOption3 == 'true':
+			currentPath = xbmc.Player().getPlayingFile()
+			if (currentPath.find(ExcludePath3) > -1):
+				Debug('Video is playing from location, which is currently set as excluded path 3.', False)
+				PathExcluded = True
+
+		if (LiveTVExcluded or HTTPExcluded or PathExcluded):
+			VideoExcluded = True
+			Debug("Video from excluded location was detected. No scrobbling!", False)
+
+		if self.curVideo['type'] == 'movie' and scrobbleMovieOption == 'true' and not VideoExcluded:
 			match = None
 			if 'id' in self.curVideo:
 				match = utilities.getMovieDetailsFromXbmc(self.curVideo['id'], ['imdbnumber', 'title', 'year'])
@@ -115,7 +154,7 @@ class Scrobbler(threading.Thread):
 			response = utilities.watchingMovieOnTrakt(match['imdbnumber'], match['title'], match['year'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
 			if response != None:
 				Debug("[Scrobbler] Watch response: "+str(response))
-		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true':
+		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true' and not VideoExcluded:
 			match = None
 			if 'id' in self.curVideo:
 				match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
@@ -137,11 +176,11 @@ class Scrobbler(threading.Thread):
 		scrobbleMovieOption = __settings__.getSetting("scrobble_movie")
 		scrobbleEpisodeOption = __settings__.getSetting("scrobble_episode")
 
-		if self.curVideo['type'] == 'movie' and scrobbleMovieOption == 'true':
+		if self.curVideo['type'] == 'movie' and scrobbleMovieOption == 'true' and not VideoExcluded:
 			response = utilities.cancelWatchingMovieOnTrakt()
 			if response != None:
 				Debug("[Scrobbler] Cancel watch response: "+str(response))
-		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true':
+		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true' and not VideoExcluded:
 			response = utilities.cancelWatchingEpisodeOnTrakt()
 			if response != None:
 				Debug("[Scrobbler] Cancel watch response: "+str(response))
@@ -150,7 +189,7 @@ class Scrobbler(threading.Thread):
 		scrobbleMovieOption = __settings__.getSetting("scrobble_movie")
 		scrobbleEpisodeOption = __settings__.getSetting("scrobble_episode")
 
-		if self.curVideo['type'] == 'movie' and scrobbleMovieOption == 'true':
+		if self.curVideo['type'] == 'movie' and scrobbleMovieOption == 'true' and not VideoExcluded:
 			match = None
 			if 'id' in self.curVideo:
 				match = utilities.getMovieDetailsFromXbmc(self.curVideo['id'], ['imdbnumber', 'title', 'year'])
@@ -164,7 +203,7 @@ class Scrobbler(threading.Thread):
 			response = utilities.scrobbleMovieOnTrakt(match['imdbnumber'], match['title'], match['year'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
 			if response != None:
 				Debug("[Scrobbler] Scrobble response: "+str(response))
-		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true':
+		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true' and not VideoExcluded:
 			match = None
 			if 'id' in self.curVideo:
 				match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
