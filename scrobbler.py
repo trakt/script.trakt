@@ -62,7 +62,9 @@ class Scrobbler(threading.Thread):
 							self.totalTime = 30
 						else:
 							self.totalTime = 1
-					self.playlistLength = utilities.getPlaylistLengthFromXBMCPlayer(data['player']['playerid'])
+					#self.playlistLength = utilities.getPlaylistLengthFromXBMCPlayer(data['player']['playerid'])
+					# playerid 1 is video.
+					self.playlistLength = utilities.getPlaylistLengthFromXBMCPlayer(1)
 					if (self.playlistLength == 0):
 						Debug("[Scrobbler] Warning: Cant find playlist length?!, assuming that this item is by itself")
 						self.playlistLength = 1
