@@ -28,8 +28,8 @@ class Scrobbler(threading.Thread):
 		# When requested ping trakt to say that the user is still watching the item
 		count = 0
 		while (not (self.abortRequested or xbmc.abortRequested)):
-			time.sleep(5)
-			if self.pinging:
+			xbmc.sleep(5000) # sleep for 5 seconds
+			if self.pinging and xbmc.Player().isPlayingVideo():
 				count += 1
 				self.watchedTime = xbmc.Player().getTime()
 				if count >= 100:
