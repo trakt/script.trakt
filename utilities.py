@@ -88,21 +88,15 @@ def chunks(l, n):
 
 # helper method to format api call url
 def formatTraktURL(req):
-	https = __settings__.getSetting('https')
-	
-	result = "http"
-	
-	if https:
-		result = result + "s"
 
-	result = result + "://api.trakt.tv"
+	# default to always https
+	url = "https://api.trakt.tv" + req
 	
-	req = req.replace("%%API_KEY%%", apikey)
-	req = req.replace("%%USERNAME%%", username)
+	# replace api and username values
+	url = url.replace("%%API_KEY%%", apikey)
+	url = url.replace("%%USERNAME%%", username)
 	
-	result = result + req
-	
-	return result
+	return url
 
 # helper function for making requests through urllib2
 def get_data(url, args):
