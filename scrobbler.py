@@ -32,6 +32,7 @@ class Scrobbler(threading.Thread):
 			if self.pinging and xbmc.Player().isPlayingVideo():
 				count += 1
 				self.watchedTime = xbmc.Player().getTime()
+				self.startTime = time.time()
 				if count >= 100:
 					self.startedWatching()
 					count = 0
