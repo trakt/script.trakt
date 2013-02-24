@@ -80,16 +80,17 @@ class traktMonitor(xbmc.Monitor):
 
 	# called when database gets updated and return video or music to indicate which DB has been changed
 	def onDatabaseUpdated(self, database):
-		Debug("[traktMonitor] onDatabaseUpdated(database: %s)" % database)
-		# equivalent to a VideoLibrary.OnScanFinished
-		data = {"action": "databaseUpdated"}
-		self.action(data)
+		if database == "video":
+			Debug("[traktMonitor] onDatabaseUpdated(database: %s)" % database)
+			data = {"action": "databaseUpdated"}
+			self.action(data)
 
 	# called when database update starts and return video or music to indicate which DB is being updated
 	def onDatabaseScanStarted(self, database):
-		Debug("[traktMonitor] onDatabaseScanStarted(database: %s)" % database)
-		data = {"action": "scanStarted"}
-		self.action(data)
+		if database == "video":
+			Debug("[traktMonitor] onDatabaseScanStarted(database: %s)" % database)
+			data = {"action": "scanStarted"}
+			self.action(data)
 
 class traktPlayer(xbmc.Player):
 
