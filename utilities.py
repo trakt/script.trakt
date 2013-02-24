@@ -17,11 +17,6 @@ try:
 except ImportError:
 	import json
 
-try:
-	from hashlib import sha as sha # Python 2.6 +
-except ImportError:
-	import sha # Python 2.5 and earlier
-
 # read settings
 __settings__ = xbmcaddon.Addon("script.trakt")
 __language__ = __settings__.getLocalizedString
