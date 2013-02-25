@@ -102,6 +102,17 @@
 	<string id="1310">Successfully added to watch-list</string>
 	<string id="1311">Failed to remove from watch-list</string>
 	<string id="1312">Successfully removed from watch-list</string>
+	<string id="1313">What Did You Think?</string>
+	<string id="1314">Totaly Ninja!</string>
+	<string id="1315">Weak Sauce :(</string>
+	<string id="1316">Terrible</string>
+	<string id="1317">Bad</string>
+	<string id="1318">Poor</string>
+	<string id="1319">Meh</string>
+	<string id="1320">Fair</string>
+	<string id="1321">Good</string>
+	<string id="1322">Great</string>
+	<string id="1323">Superb</string>
 
 	<!-- auto update / sync -->
 	<string id="1180">start movie collection update</string>

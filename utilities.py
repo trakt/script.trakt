@@ -25,8 +25,10 @@ apikey = 'b6135e0f7510a44021fac8c03c36c81a17be35d9'
 
 username = __settings__.getSetting("username").strip()
 password = __settings__.getSetting("password").strip()
+pwd = sha.new(__settings__.getSetting("password").strip()).hexdigest()
 debug = __settings__.getSetting("debug")
 retries = int(float(__settings__.getSetting("retries")))
+traktSettings = None
 
 def Debug(msg, force = False):
 	if(debug == 'true' or force):
@@ -239,15 +241,15 @@ def getEpisodeDetailsFromXbmc(libraryId, fields):
 	try:
 		# get tvdb id
 		rpccmd_show = json.dumps({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': result['result']['episodedetails']['tvshowid'], 'properties': ['year', 'imdbnumber']}, 'id': 1})
-		
+
 		result_show = xbmc.executeJSONRPC(rpccmd_show)
 		Debug('[VideoLibrary.GetTVShowDetails] ' + result_show)
 		result_show = json.loads(result_show)
-		
+
 		# add to episode data
 		result['result']['episodedetails']['tvdb_id'] = result_show['result']['tvshowdetails']['imdbnumber']
 		result['result']['episodedetails']['year'] = result_show['result']['tvshowdetails']['year']
-		
+
 		return result['result']['episodedetails']
 	except KeyError:
 		Debug("getEpisodeDetailsFromXbmc: KeyError: result['result']['episodedetails']")
@@ -364,3 +366,13 @@ def scrobbleEpisodeOnTrakt(tvdb_id, title, year, season, episode, uniqueid, dura
 	if response == None:
 		Debug("scrobbleEpisodeOnTrakt(): Error in request")
 	return response
+
+def getTraktSettings():
+	"""Get the users settings from trakt.tv"""
+	global traktSettings
+
+	response = traktJsonRequest('POST', '/account/settings/%%API_KEY%%', passVersions=True)
+	if response == None:
+		Debug("Error in request from 'getTraktSettings()'")
+
+	traktSettings = response
