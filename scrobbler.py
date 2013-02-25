@@ -24,6 +24,7 @@ class Scrobbler(threading.Thread):
 	pinging = False
 	playlistLength = 1
 	abortRequested = False
+	VideoExcluded = False
 
 	def run(self):
 		# When requested ping trakt to say that the user is still watching the item
@@ -127,7 +128,6 @@ class Scrobbler(threading.Thread):
 		LiveTVExcluded = False
 		HTTPExcluded = False		
 		PathExcluded = False
-		VideoExcluded = False
 
 		currentPath = xbmc.Player().getPlayingFile()
 		if (currentPath.find("pvr://") > -1) and ExcludeLiveTV == 'true':
@@ -152,10 +152,10 @@ class Scrobbler(threading.Thread):
 				PathExcluded = True
 
 		if (LiveTVExcluded or HTTPExcluded or PathExcluded):
-			VideoExcluded = True
+			self.VideoExcluded = True
 			Debug("Video from excluded location was detected. No scrobbling!", False)
 
-		if self.curVideo['type'] == 'movie' and scrobbleMovieOption == 'true' and not VideoExcluded:
+		if self.curVideo['type'] == 'movie' and scrobbleMovieOption == 'true' and not self.VideoExcluded:
 			match = None
 			if 'id' in self.curVideo:
 				match = utilities.getMovieDetailsFromXbmc(self.curVideo['id'], ['imdbnumber', 'title', 'year'])
@@ -169,7 +169,7 @@ class Scrobbler(threading.Thread):
 			response = utilities.watchingMovieOnTrakt(match['imdbnumber'], match['title'], match['year'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
 			if response != None:
 				Debug("[Scrobbler] Watch response: "+str(response))
-		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true' and not VideoExcluded:
+		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true' and not self.VideoExcluded:
 			match = None
 			if 'id' in self.curVideo:
 				match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
@@ -191,11 +191,11 @@ class Scrobbler(threading.Thread):
 		scrobbleMovieOption = __settings__.getSetting("scrobble_movie")
 		scrobbleEpisodeOption = __settings__.getSetting("scrobble_episode")
 
-		if self.curVideo['type'] == 'movie' and scrobbleMovieOption == 'true' and not VideoExcluded:
+		if self.curVideo['type'] == 'movie' and scrobbleMovieOption == 'true' and not self.VideoExcluded:
 			response = utilities.cancelWatchingMovieOnTrakt()
 			if response != None:
 				Debug("[Scrobbler] Cancel watch response: "+str(response))
-		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true' and not VideoExcluded:
+		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true' and not self.VideoExcluded:
 			response = utilities.cancelWatchingEpisodeOnTrakt()
 			if response != None:
 				Debug("[Scrobbler] Cancel watch response: "+str(response))
@@ -204,7 +204,7 @@ class Scrobbler(threading.Thread):
 		scrobbleMovieOption = __settings__.getSetting("scrobble_movie")
 		scrobbleEpisodeOption = __settings__.getSetting("scrobble_episode")
 
-		if self.curVideo['type'] == 'movie' and scrobbleMovieOption == 'true' and not VideoExcluded:
+		if self.curVideo['type'] == 'movie' and scrobbleMovieOption == 'true' and not self.VideoExcluded:
 			match = None
 			if 'id' in self.curVideo:
 				match = utilities.getMovieDetailsFromXbmc(self.curVideo['id'], ['imdbnumber', 'title', 'year'])
@@ -218,7 +218,7 @@ class Scrobbler(threading.Thread):
 			response = utilities.scrobbleMovieOnTrakt(match['imdbnumber'], match['title'], match['year'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
 			if response != None:
 				Debug("[Scrobbler] Scrobble response: "+str(response))
-		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true' and not VideoExcluded:
+		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true' and not self.VideoExcluded:
 			match = None
 			if 'id' in self.curVideo:
 				match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
