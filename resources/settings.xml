@@ -11,6 +11,16 @@
 		<setting id="scrobble_movie" type="bool" label="1041" default="true"/>
 		<setting id="scrobble_episode" type="bool" label="1042" default="true"/>
 		<setting id="scrobble_min_view_time" type="slider" label="1043" range="0,5,100" default="80"/>
+		<setting type="sep"/>
+		<setting label="1050" type="lsep"/><!--Exclusions -->
+		<setting id="ExcludeLiveTV" type="bool" label="1051" default="false"/>
+		<setting id="ExcludeHTTP" type="bool" label="1052" default="false"/>		
+		<setting id="ExcludePathOption" type="bool" label="1053" default="false" />
+		<setting id="ExcludePath" type="folder" source="video" label="1054" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
+		<setting id="ExcludePathOption2" type="bool" label="1053" default="false" visible= "eq(-2,true)" enable="eq(-2,true)" />
+		<setting id="ExcludePath2" type="folder" source="video" label="1054" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
+		<setting id="ExcludePathOption3" type="bool" label="1053" default="false" visible= "eq(-2,true)" enable="eq(-2,true)" />
+		<setting id="ExcludePath3" type="folder" source="video" label="1054" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
 	</category>
 	<category label="1400"><!-- Synchronize -->
 		<setting label="1410" type="lsep"/><!-- Service -->
