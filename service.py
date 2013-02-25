@@ -2,7 +2,7 @@
 #
 
 import xbmcaddon
-from utilities import Debug, checkSettings
+from utilities import Debug, checkSettings, getTraktSettings
 from notification_service import NotificationService
 
 __settings__ = xbmcaddon.Addon("script.trakt")
@@ -15,6 +15,7 @@ Debug("Loading '%s' version '%s'" % (__addonid__, __addonversion__))
 # starts update/sync
 def autostart():
 	if checkSettings(True):
+		getTraktSettings()
 		# startup notifcation service
 		NotificationService()
 	
