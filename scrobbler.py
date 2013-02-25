@@ -28,10 +28,11 @@ class Scrobbler(threading.Thread):
 		# When requested ping trakt to say that the user is still watching the item
 		count = 0
 		while (not (self.abortRequested or xbmc.abortRequested)):
-			time.sleep(5)
-			if self.pinging:
+			xbmc.sleep(5000) # sleep for 5 seconds
+			if self.pinging and xbmc.Player().isPlayingVideo():
 				count += 1
 				self.watchedTime = xbmc.Player().getTime()
+				self.startTime = time.time()
 				if count >= 100:
 					self.startedWatching()
 					count = 0
@@ -64,7 +65,9 @@ class Scrobbler(threading.Thread):
 							self.totalTime = 30
 						else:
 							self.totalTime = 1
-					self.playlistLength = utilities.getPlaylistLengthFromXBMCPlayer(data['player']['playerid'])
+					#self.playlistLength = utilities.getPlaylistLengthFromXBMCPlayer(data['player']['playerid'])
+					# playerid 1 is video.
+					self.playlistLength = utilities.getPlaylistLengthFromXBMCPlayer(1)
 					if (self.playlistLength == 0):
 						Debug("[Scrobbler] Warning: Cant find playlist length?!, assuming that this item is by itself")
 						self.playlistLength = 1
@@ -80,6 +83,13 @@ class Scrobbler(threading.Thread):
 				self.curVideo = None
 				self.startTime = 0
 
+	def playbackResumed(self):
+		if self.pausedTime != 0:
+			p = time.time() - self.pausedTime
+			Debug("[Scrobbler] Resumed after: %s" % str(p))
+			self.pausedTime = 0
+			self.startedWatching()
+	
 	def playbackPaused(self):
 		if self.startTime != 0:
 			self.watchedTime += time.time() - self.startTime
