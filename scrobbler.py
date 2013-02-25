@@ -41,6 +41,8 @@ class Scrobbler(threading.Thread):
 		Debug("Scrobbler stopping")
 
 	def playbackStarted(self, data):
+		if self.curVideo != None and self.curVideo != data['item']:
+			self.playbackEnded()
 		self.curVideo = data['item']
 		self.curVideoData = data
 		if self.curVideo != None:
@@ -96,6 +98,7 @@ class Scrobbler(threading.Thread):
 					self.check()
 				self.watchedTime = 0
 			self.startTime = 0
+			self.curVideo = None
 
 	def startedWatching(self):
 		scrobbleMovieOption = __settings__.getSetting("scrobble_movie")
