@@ -5,7 +5,7 @@ import xbmcaddon
 from utilities import Debug, checkSettings, getTraktSettings
 from notification_service import NotificationService
 
-__settings__ = xbmcaddon.Addon("script.trakt")
+__addon__ = xbmcaddon.Addon("script.trakt")
 __addonversion__ = __addon__.getAddonInfo('version')
 __addonid__ = __addon__.getAddonInfo('id')
 __language__ = __addon__.getLocalizedString
