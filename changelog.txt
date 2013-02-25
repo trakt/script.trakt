@@ -1,4 +1,5 @@
 version 2.1.0
+  - rate movies and episode after watching them (sschocke, N3MIS15)
   - use urllib2 for connection (nate1280)
   - rewrite notification service (nate1280)
   - scrobbles playlisted items correctly (koying)
