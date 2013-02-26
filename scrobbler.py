@@ -19,6 +19,7 @@ class Scrobbler(threading.Thread):
 	totalTime = 1
 	watchedTime = 0
 	startTime = 0
+	pausedTime = 0
 	curVideo = None
 	curVideoData = None
 	pinging = False
@@ -97,6 +98,7 @@ class Scrobbler(threading.Thread):
 			self.watchedTime += time.time() - self.startTime
 			Debug("[Scrobbler] Paused after: "+str(self.watchedTime))
 			self.startTime = 0
+			self.pausedTime = time.time()
 
 	def playbackEnded(self):
 		if self.startTime != 0:
