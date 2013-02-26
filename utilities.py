@@ -98,6 +98,44 @@ def checkSettings(daemon=False):
 def chunks(l, n):
 	return [l[i:i+n] for i in range(0, len(l), n)]
 
+# check exclusion settings for filename passed as argument
+def checkScrobblingExclusion(fullpath):
+
+	if not fullpath:
+		return True
+	
+	Debug("checkScrobblingExclusion(): Checking exclusion settings for '%s'" % fullpath)
+	
+	if (fullpath.find("pvr://") > -1) and get_bool_setting("ExcludeLiveTV"):
+		Debug("checkScrobblingExclusion(): Video is playing via Live TV, which is currently set as excluded location.")
+		return True
+				
+	if (fullpath.find("http://") > -1) and get_bool_setting("ExcludeHTTP"):
+		Debug("checkScrobblingExclusion(): Video is playing via HTTP source, which is currently set as excluded location.")
+		return True
+		
+	ExcludePath = get_string_setting("ExcludePath")
+	if ExcludePath != "" and get_bool_setting("ExcludePathOption"):
+		if (fullpath.find(ExcludePath) > -1):
+			Debug('checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 1.')
+			return True
+
+	ExcludePath2 = get_string_setting("ExcludePath2")
+	if ExcludePath2 != "" and get_bool_setting("ExcludePathOption2"):
+		if (fullpath.find(ExcludePath2) > -1):
+			Debug('checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 2.')
+			return True
+
+	ExcludePath3 = get_string_setting("ExcludePath3")
+	if ExcludePath3 != "" and get_bool_setting("ExcludePathOption3"):
+		if (fullpath.find(ExcludePath3) > -1):
+			Debug('checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 3.')
+			return True
+	
+	return False
+
+
+
 # helper method to format api call url
 def formatTraktURL(req):
 

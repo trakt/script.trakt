@@ -11,7 +11,7 @@ if sys.version_info < (2, 7):
 else:
 	import json
 
-from utilities import Debug
+from utilities import Debug, checkScrobblingExclusion
 from scrobbler import Scrobbler
 from movie_sync import SyncMovies
 from episode_sync import SyncEpisodes
@@ -116,8 +116,16 @@ class traktPlayer(xbmc.Player):
 			result = json.loads(result)
 			
 			self.type = result["result"]["item"]["type"]
+			
+			# check for non-library item playback
 			if self.type == "unknown":
 				Debug("[traktPlayer] onPlayBackStarted() - Started playing a non-library file, skipping.")
+				return
+			
+			# check for exclusion
+			_filename = self.getPlayingFile()
+			if checkScrobblingExclusion(_filename):
+				Debug("[traktPlayer] onPlayBackStarted() - '%s' is in exclusion settings, ignoring." % _filename)
 				return
 			
 			self.id = result["result"]["item"]["id"]
