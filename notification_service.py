@@ -94,6 +94,8 @@ class traktMonitor(xbmc.Monitor):
 
 class traktPlayer(xbmc.Player):
 
+	_playing = False
+
 	def __init__(self, *args, **kwargs):
 		xbmc.Player.__init__(self)
 		self.action = kwargs["action"]
@@ -114,54 +116,65 @@ class traktPlayer(xbmc.Player):
 			result = json.loads(result)
 			
 			self.type = result["result"]["item"]["type"]
+			if self.type == "unknown":
+				Debug("[traktPlayer] onPlayBackStarted() - Started playing a non-library file, skipping.")
+				return
+			
 			self.id = result["result"]["item"]["id"]
 			
 			data = {"action": "started", "id": self.id, "type": self.type}
+			
+			self._playing = True
 			
 			# send dispatch
 			self.action(data)
 
 	# called when xbmc stops playing a file
 	def onPlayBackEnded(self):
-		Debug("[traktPlayer] onPlayBackEnded() - %s" % self.isPlayingVideo())
-		data = {"action": "ended"}
-		self.action(data)
+		if self._playing:
+			Debug("[traktPlayer] onPlayBackEnded() - %s" % self.isPlayingVideo())
+			self._playing = False
+			data = {"action": "ended"}
+			self.action(data)
 
 	# called when user stops xbmc playing a file
 	def onPlayBackStopped(self):
-		Debug("[traktPlayer] onPlayBackStopped() - %s" % self.isPlayingVideo())
-		data = {"action": "stopped"}
-		self.action(data)
+		if self._playing:
+			Debug("[traktPlayer] onPlayBackStopped() - %s" % self.isPlayingVideo())
+			self._playing = False
+			data = {"action": "stopped"}
+			self.action(data)
 
 	# called when user pauses a playing file
 	def onPlayBackPaused(self):
-		if self.isPlayingVideo():
+		if self._playing:
 			Debug("[traktPlayer] onPlayBackPaused() - %s" % self.isPlayingVideo())
 			data = {"action": "paused"}
 			self.action(data)
 
 	# called when user resumes a paused file
 	def onPlayBackResumed(self):
-		if self.isPlayingVideo():
+		if self._playing:
 			Debug("[traktPlayer] onPlayBackResumed() - %s" % self.isPlayingVideo())
 			data = {"action": "resumed"}
 			self.action(data)
 
 	# called when user queues the next item
 	def onQueueNextItem(self):
-		Debug("[traktPlayer] onQueueNextItem() - %s" % self.isPlayingVideo())
+		if self._playing:
+			Debug("[traktPlayer] onQueueNextItem() - %s" % self.isPlayingVideo())
 
 	# called when players speed changes. (eg. user FF/RW)
 	def onPlayBackSpeedChanged(self, speed):
-		if self.isPlayingVideo():
+		if self._playing:
 			Debug("[traktPlayer] onPlayBackSpeedChanged(speed: %s) - %s" % (str(speed), self.isPlayingVideo()))
 
 	# called when user seeks to a time
 	def onPlayBackSeek(self, time, offset):
-		if self.isPlayingVideo():
+		if self._playing:
 			Debug("[traktPlayer] onPlayBackSeek(time: %s, offset: %s) - %s" % (str(time), str(offset), self.isPlayingVideo()))
 
 	# called when user performs a chapter seek
 	def onPlayBackSeekChapter(self, chapter):
-		if self.isPlayingVideo():
+		if self._playing:
 			Debug("[traktPlayer] onPlayBackSeekChapter(chapter: %s) - %s" % (str(chapter), self.isPlayingVideo()))
