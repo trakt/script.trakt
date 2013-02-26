@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 
+import sys
 import xbmc
 import xbmcaddon
 import xbmcgui
@@ -12,9 +13,9 @@ import base64
 from urllib2 import HTTPError, URLError
 from httplib import HTTPException
 
-try:
+if sys.version_info < (2, 7):
 	import simplejson as json
-except ImportError:
+else:
 	import json
 
 # read settings
@@ -26,7 +27,6 @@ apikey = 'b6135e0f7510a44021fac8c03c36c81a17be35d9'
 username = __settings__.getSetting("username").strip()
 password = __settings__.getSetting("password").strip()
 debug = __settings__.getSetting("debug")
-retries = int(float(__settings__.getSetting("retries")))
 traktSettings = None
 
 def Debug(msg, force = False):
@@ -38,6 +38,22 @@ def Debug(msg, force = False):
 
 def notification( header, message, time=5000, icon=__settings__.getAddonInfo("icon")):
 	xbmc.executebuiltin( "XBMC.Notification(%s,%s,%i,%s)" % ( header, message, time, icon ) )
+
+# helper function to get bool type from settings
+def get_bool_setting(setting):
+	return __settings__.getSetting(setting) == 'true'
+
+# helper function to get string type from settings
+def get_string_setting(setting):
+	return __settings__.getSetting(setting).strip()
+
+# helper function to get int type from settings
+def get_int_setting(setting):
+	return int(get_float_setting(setting))
+
+# helper function to get float type from settings
+def get_float_setting(setting):
+	return float(__settings__.getSetting(setting))
 
 def xbmcJsonRequest(params):
 	data = json.dumps(params)
@@ -145,6 +161,7 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 	raw = None
 	data = None
 	jdata = {}
+	retries = get_int_setting("retries")
 
 	if not (method == 'POST' or method == 'GET'):
 		Debug("traktJsonRequest(): Unknown method '%s'" % method)
