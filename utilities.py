@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 
+import sys
 import xbmc
 import xbmcaddon
 import xbmcgui
@@ -12,9 +13,9 @@ import base64
 from urllib2 import HTTPError, URLError
 from httplib import HTTPException
 
-try:
+if sys.version_info < (2, 7):
 	import simplejson as json
-except ImportError:
+else:
 	import json
 
 # read settings
@@ -26,7 +27,6 @@ apikey = 'b6135e0f7510a44021fac8c03c36c81a17be35d9'
 username = __settings__.getSetting("username").strip()
 password = __settings__.getSetting("password").strip()
 debug = __settings__.getSetting("debug")
-retries = int(float(__settings__.getSetting("retries")))
 traktSettings = None
 
 def Debug(msg, force = False):
@@ -38,6 +38,22 @@ def Debug(msg, force = False):
 
 def notification( header, message, time=5000, icon=__settings__.getAddonInfo("icon")):
 	xbmc.executebuiltin( "XBMC.Notification(%s,%s,%i,%s)" % ( header, message, time, icon ) )
+
+# helper function to get bool type from settings
+def get_bool_setting(setting):
+	return __settings__.getSetting(setting) == 'true'
+
+# helper function to get string type from settings
+def get_string_setting(setting):
+	return __settings__.getSetting(setting).strip()
+
+# helper function to get int type from settings
+def get_int_setting(setting):
+	return int(get_float_setting(setting))
+
+# helper function to get float type from settings
+def get_float_setting(setting):
+	return float(__settings__.getSetting(setting))
 
 def xbmcJsonRequest(params):
 	data = json.dumps(params)
@@ -81,6 +97,44 @@ def checkSettings(daemon=False):
 
 def chunks(l, n):
 	return [l[i:i+n] for i in range(0, len(l), n)]
+
+# check exclusion settings for filename passed as argument
+def checkScrobblingExclusion(fullpath):
+
+	if not fullpath:
+		return True
+	
+	Debug("checkScrobblingExclusion(): Checking exclusion settings for '%s'" % fullpath)
+	
+	if (fullpath.find("pvr://") > -1) and get_bool_setting("ExcludeLiveTV"):
+		Debug("checkScrobblingExclusion(): Video is playing via Live TV, which is currently set as excluded location.")
+		return True
+				
+	if (fullpath.find("http://") > -1) and get_bool_setting("ExcludeHTTP"):
+		Debug("checkScrobblingExclusion(): Video is playing via HTTP source, which is currently set as excluded location.")
+		return True
+		
+	ExcludePath = get_string_setting("ExcludePath")
+	if ExcludePath != "" and get_bool_setting("ExcludePathOption"):
+		if (fullpath.find(ExcludePath) > -1):
+			Debug('checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 1.')
+			return True
+
+	ExcludePath2 = get_string_setting("ExcludePath2")
+	if ExcludePath2 != "" and get_bool_setting("ExcludePathOption2"):
+		if (fullpath.find(ExcludePath2) > -1):
+			Debug('checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 2.')
+			return True
+
+	ExcludePath3 = get_string_setting("ExcludePath3")
+	if ExcludePath3 != "" and get_bool_setting("ExcludePathOption3"):
+		if (fullpath.find(ExcludePath3) > -1):
+			Debug('checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 3.')
+			return True
+	
+	return False
+
+
 
 # helper method to format api call url
 def formatTraktURL(req):
@@ -145,6 +199,7 @@ def traktJsonRequest(method, req, args={}, returnStatus=False, anon=False, conn=
 	raw = None
 	data = None
 	jdata = {}
+	retries = get_int_setting("retries")
 
 	if not (method == 'POST' or method == 'GET'):
 		Debug("traktJsonRequest(): Unknown method '%s'" % method)

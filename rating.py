@@ -5,15 +5,10 @@ import xbmc
 import xbmcaddon
 import xbmcgui
 import utilities
-from utilities import Debug, xbmcJsonRequest, traktJsonRequest, notification
+from utilities import Debug, xbmcJsonRequest, traktJsonRequest, notification, get_float_setting, get_bool_setting
 
 __settings__ = xbmcaddon.Addon("script.trakt")
 __language__ = __settings__.getLocalizedString
-
-rate_movies = __settings__.getSetting("rate_movie")
-rate_episodes = __settings__.getSetting("rate_episode")
-rate_each_playlist_item = __settings__.getSetting("rate_each_playlist_item")
-rate_min_view_time = __settings__.getSetting("rate_min_view_time")
 
 buttons = {
 	10030:	'love',
@@ -48,12 +43,18 @@ focus_labels = {
 
 def ratingCheck(current_video, watched_time, total_time, playlist_length):
 	"""Check if a video should be rated and if so launches the rating dialog"""
-
-	Debug("[Rating] Rating Check called for " + current_video['type'] + " id=" + str(current_video['id']) );
-	if __settings__.getSetting("rate_"+current_video['type']):
-		if (watched_time/total_time)*100>=float(rate_min_view_time):
-			if (playlist_length <= 1) or (rate_each_playlist_item == 'true'):
+	Debug("[Rating] Rating Check called for '%s' with id=%s" % (current_video['type'], str(current_video['id'])));
+	if get_bool_setting("rate_%s" % current_video['type']):
+		watched = (watched_time / total_time) * 100
+		if watched >= get_float_setting("rate_min_view_time"):
+			if (playlist_length <= 1) or get_bool_setting("rate_each_playlist_item"):
 				rateMedia(current_video['id'], current_video['type'])
+			else:
+				Debug("[Rating] Rate each playlist item is disabled.")
+		else:
+			Debug("[Rating] '%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (current_video['type'], watched, get_float_setting("rate_min_view_time")))
+	else:
+		Debug("[Rating] '%s' is configured to not be rated." % current_video['type'])
 
 
 def rateMedia(media_id, media_type):
@@ -63,12 +64,22 @@ def rateMedia(media_id, media_type):
 		return
 
 	if media_type == 'movie':
-		xbmc_media = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovieDetails', 'params': {'movieid': media_id, 'properties': ['title', 'imdbnumber', 'year']}})['moviedetails']
+		resp = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovieDetails', 'params': {'movieid': media_id, 'properties': ['title', 'imdbnumber', 'year']}})
+		if not resp:
+			Debug("[Rating] Problem getting movie data from XBMC")
+			return
+		
+		if not resp.has_key("moviedetails"):
+			Debug("[Rating] Error with movie results from XBMC, %s" % resp)
+			return
+			
+		xbmc_media = resp["moviedetails"]
 		if xbmc_media == None:
 			Debug('[Rating] Failed to retrieve movie data from XBMC')
 			return
 
-		trakt_summary = traktJsonRequest('POST', '/movie/summary.json/%%API_KEY%%/' + xbmc_media['imdbnumber'])
+		jsonString = "/movie/summary.json/%%API_KEY%%/" + xbmc_media['imdbnumber']
+		trakt_summary = traktJsonRequest('POST', jsonString)
 		if trakt_summary == None:
 			Debug('[Rating] Failed to retrieve movie data from trakt')
 			return
@@ -78,19 +89,38 @@ def rateMedia(media_id, media_type):
 			return
 
 	else:
-		episode = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': media_id, 'properties': ['uniqueid', 'tvshowid', 'episode', 'season']}})['episodedetails']
+		resp = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': media_id, 'properties': ['uniqueid', 'tvshowid', 'episode', 'season']}})
+		if not resp:
+			Debug("[Rating] Problem getting episode data from XBMC")
+			return
+		
+		if not resp.has_key("episodedetails"):
+			Debug("[Rating] Error with episode results from XBMC, %s" % resp)
+			return
+			
+		episode = resp["episodedetails"]
 		if episode == None:
 			Debug('[Rating] Failed to retrieve episode data from XBMC')
 			return
 
-		xbmc_media = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetTVShowDetails', 'params': {'tvshowid': episode['tvshowid'], 'properties': ['imdbnumber']}})['tvshowdetails']
+		resp = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetTVShowDetails', 'params': {'tvshowid': episode['tvshowid'], 'properties': ['imdbnumber']}})
+		if not resp:
+			Debug("[Rating] Problem getting tvshow data from XBMC")
+			return
+		
+		if not resp.has_key("tvshowdetails"):
+			Debug("[Rating] Error with tvshow results from XBMC, %s" % resp)
+			return
+
+		xbmc_media = resp["tvshowdetails"]
 		if xbmc_media == None:
 			Debug('[Rating] Failed to retrieve tvshow data from XBMC')
 			return
 
-		xbmc_media['episode'] = episode
+		xbmc_media["episode"] = episode
 
-		trakt_summary = traktJsonRequest('POST', '/show/episode/summary.json/%%API_KEY%%/'+str(xbmc_media['imdbnumber'])+'/'+str(xbmc_media['episode']['season'])+'/'+str(xbmc_media['episode']['episode']))
+		jsonString = "/show/episode/summary.json/%%API_KEY%%/" + str(xbmc_media['imdbnumber']) + "/" + str(xbmc_media['episode']['season']) + "/" + str(xbmc_media['episode']['episode'])
+		trakt_summary = traktJsonRequest('POST', jsonString)
 		if trakt_summary == None:
 			Debug('[Rating] Failed to retrieve show/episode data from trakt')
 			return

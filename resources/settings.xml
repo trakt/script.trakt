@@ -4,7 +4,6 @@
 		<setting id="username" type="text" label="1013" default="" />
 		<setting id="password" type="text" option="hidden" label="1014" default="" />
 		<setting id="debug" type="bool" label="1011" default="true"/>
-		<setting id="https" type="bool" label="1016" default="true"/>
 		<setting id="retries" type="slider" label="1017" range="1,1,10" default="3" option="int"/>
 	</category>
 	<category label="1040"><!-- Scrobbling -->
