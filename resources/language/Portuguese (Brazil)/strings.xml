@@ -6,6 +6,7 @@
 	<string id="1012">Chave API (encontre em trakt --&gt; Settings --&gt; API)</string>
 	<string id="1013">Usuário</string>
 	<string id="1014">Senha</string>
+	<string id="1017">Número de tentativas</string>
 	
 	<string id="1020">Auto Sincronia</string>
 	<string id="1021">Auto atualizar Coleção de Filmes ao iniciar</string>
@@ -25,6 +26,12 @@
 	<string id="1041">Fazer Scrobble dos Filmes</string>
 	<string id="1042">Fazer Scrobble dos Episódios de Seriados</string>
 	<string id="1043">Percentual mínimo ao assistir para fazer scrobble de um item</string>
+
+	<string id="1050">Exclusões</string>
+	<string id="1051">Excluir TV Ao Vivo</string>
+	<string id="1052">Excluir fontes HTTP</string>	
+	<string id="1053">Excluir caminho</string>
+	<string id="1054">Caminho do diretório (e sub-diretórios)</string>
 	
 	<!-- Info -->
 	<string id="1105"></string>
@@ -89,11 +96,22 @@
 	<string id="1305">Avaliar seriado inteiro</string>
 	<string id="1306">Avaliar esse seriado?</string>
 	<string id="1307">Desavaliar</string>
-	<string id="1308">Não avaliadodo</string>
+	<string id="1308">Não avaliado</string>
 	<string id="1309">Falha ao adicionar a watch-list</string>
 	<string id="1310">Adicionado com sucesso a watch-list</string>
 	<string id="1311">Falha em remover da watch-list</string>
 	<string id="1312">Removido com sucesso da watch-list</string>
+	<string id="1313">O que voce achou?</string>
+	<string id="1314">Totalmente Ninja!</string>
+	<string id="1315">Tempero fraco :(</string>
+	<string id="1316">Horrivel</string>
+	<string id="1317">Ruim</string>
+	<string id="1318">Fraco</string>
+	<string id="1319">Mais ou menos</string>
+	<string id="1320">Razoável</string>
+	<string id="1321">Bom</string>
+	<string id="1322">Ótimo</string>
+	<string id="1323">Soberbo</string>	
 
 	<!-- auto update / sync -->
 	<string id="1180">iniciando atualização da coleção de filmes</string>
