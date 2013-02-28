@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <strings>
-	<!-- Preferences -->
+	<!-- Preferências -->
 	<string id="1010">Geral</string>
 	<string id="1011">Ativar modo debug</string>
 	<string id="1012">Chave API (encontre em trakt --&gt; Settings --&gt; API)</string>
 	<string id="1013">Usuário</string>
 	<string id="1014">Senha</string>
+	<string id="1017">Número de tentativas</string>
 	
 	<string id="1020">Auto Sincronia</string>
 	<string id="1021">Auto atualizar Coleção de Filmes ao iniciar</string>
@@ -18,13 +19,19 @@
 	<string id="1030">Classificação</string>
 	<string id="1031">Classifique o Filme após assistir</string>
 	<string id="1032">Classifique o Episódio de Seriado após assistir</string>
-	<string id="1033">Classifique cada ítem da lista de reprodução</string>
-	<string id="1034">Percentual mínimo ao assistir para mostrar o diálogo de classificação</string>
+	<string id="1033">Classifique cada item da lista de reprodução</string>
+	<string id="1034">Percentual mínimo assistido para classificar</string>
 	
 	<string id="1040">Scrobbling</string>
 	<string id="1041">Fazer Scrobble dos Filmes</string>
 	<string id="1042">Fazer Scrobble dos Episódios de Seriados</string>
-	<string id="1043">Percentual mínimo ao assistir para fazer scrobble de um item</string>
+	<string id="1043">Percentual mínimo assistido para fazer scrobble</string>
+	
+	<string id="1050">Exclusões</string>
+	<string id="1051">Excluir TV Ao Vivo</string>
+	<string id="1052">Excluir fontes HTTP</string>	
+	<string id="1053">Excluir caminho</string>
+	<string id="1054">Caminho do diretório (e subdiretórios)</string>
 	
 	<!-- Info -->
 	<string id="1105"></string>
@@ -41,7 +48,7 @@
 	<string id="1125">Filmes serão adicionados à Coleção Trakt</string> <!-- XX Movies will be added to Trakt Collection -->
 	<string id="1126">Filmes atualizados no Trakt</string> <!-- XX Movies updated -->
 	<string id="1127">Filmes serão adicionados como vistos no Trakt</string> <!-- XX Movies will be added as seen on Trakt -->
-	<string id="1128">nenhum filme visti novo para atualizar para o xbmc</string>
+	<string id="1128">nenhum filme visto novo para atualizar para o XBMC</string>
 	<string id="1129">Filmes atualizados no XBMC</string>
 	<string id="1130">Nenhum filme para retirar da biblioteca no trakt</string>
 	<string id="1131">Episódios de Seriados serão adicionados à Coleção Trakt</string>
@@ -89,20 +96,31 @@
 	<string id="1305">Avaliar seriado inteiro</string>
 	<string id="1306">Avaliar esse seriado?</string>
 	<string id="1307">Desavaliar</string>
-	<string id="1308">Não avaliadodo</string>
+	<string id="1308">Não avaliado</string>
 	<string id="1309">Falha ao adicionar a watch-list</string>
 	<string id="1310">Adicionado com sucesso a watch-list</string>
 	<string id="1311">Falha em remover da watch-list</string>
 	<string id="1312">Removido com sucesso da watch-list</string>
+	<string id="1313">O que voce achou?</string>
+	<string id="1314">Totalmente Ninja!</string>
+	<string id="1315">Tempero fraco :(</string>
+	<string id="1316">Horrivel</string>
+	<string id="1317">Ruim</string>
+	<string id="1318">Fraco</string>
+	<string id="1319">Mais ou menos</string>
+	<string id="1320">Razoável</string>
+	<string id="1321">Bom</string>
+	<string id="1322">Ótimo</string>
+	<string id="1323">Soberbo</string>
 
-	<!-- auto update / sync -->
+	<!-- auto atualização / sincronização -->
 	<string id="1180">iniciando atualização da coleção de filmes</string>
 	<string id="1181">iniciando atualização da coleção de seriados</string>
 	<string id="1182">iniciando sincronização dos filmes vistos</string>
 	<string id="1183">iniciando sincronização dos seriados vistos</string>
 	<string id="1184">atualização / sincronia pronta</string>
 	
-	<!-- Titles -->
+	<!-- Título -->
 	<string id="1201">trakt</string>
 	
 	<!-- Menu -->
@@ -133,10 +151,57 @@
 	<string id="1256">Seriados Recomendados</string>
 	<string id="1257">Episódios Recomendados</string>
 	
-	<!-- Friends Submenu -->
+	<!-- Submenu Amigos -->
 	<string id="1280">Atualmente Assistindo</string>
 	<string id="1281">Watch-list</string>
 	<string id="1282">Assistido</string>
 	<string id="1283">Biblioteca</string>
 	<string id="1284">Perfil</string>
+	
+	<!-- Configurações de Sincronização -->
+	<string id="1400">Sincronizar</string>
+	<string id="1401"></string>
+	<string id="1402">Filmes</string>
+	<string id="1403">Adicionar filmes na coleção do trakt</string>
+	<string id="1404">Atualizar número de vizualizações de filmes do trakt</string>
+	<string id="1405">Atualizar número de vizualizações de filmes do XBMC</string>
+	<string id="1406">Episódios</string>
+	<string id="1407">Adicionar episódios na coleção do trakt</string>
+	<string id="1408">Atualizar número de vizualizações de episódios do trakt</string>
+	<string id="1409">Atualizar número de vizualizações de episódios do XBMC</string>
+	<string id="1410">Serviço</string>
+	<string id="1411">Sincronizar após atualização da biblioteca</string>
+	<string id="1412">Mostrar notificações</string>
+	<string id="1413">Limpar coleção de filmes do trakt</string>
+	<string id="1414">Limpar coleção de episódios do trakt</string>
+
+	<!-- Notificações de Sincronização -->
+	<string id="1420">Sincronização Iniciada</string>
+	<string id="1421">Sincronização Finalizada</string>
+	<string id="1422">Buscando filmes do XBMC</string>
+	<string id="1423">Buscando coleção de filmes do trakt</string>
+	<string id="1424">Buscando filmes vistos do trakt</string>
+	<string id="1425">Verificando filmes do XBMC que não estão no trakt</string>
+	<string id="1426">filme(s) serão adicionados na coleção do trakt</string>
+	<string id="1427">Verificando filmes vistos do trakt</string>
+	<string id="1428">filmes(s) terão número de visualizações atualizadas no trakt</string>
+	<string id="1429">Verificando se número de visualizações do XBMC está atualizada</string>
+	<string id="1430">filmes(s) terão número de visualizações atualizadas no XBMC</string>
+	<string id="1431">Sincronização de filmes finalizada</string>
+	<string id="1432">Buscando Seriados do XBMC</string>
+	<string id="1433">Buscando episódios do XBMC</string>
+	<string id="1434">Buscando coleção de episódios do trakt</string>
+	<string id="1435">Checando episódios faltantes na coleção do trakt</string>
+	<string id="1436">seriados(s) tiveram episódios adicionados a coleção do trakt</string>
+	<string id="1437">episódios faltando</string>
+	<string id="1438">Checando episódios vistos do trakt</string>
+	<string id="1439">seriados não tem marcação como visto </string>
+	<string id="1440">episódios estão sendo atualizados</string>
+	<string id="1441">Checando episódios vistos no XBMC</string>
+	<string id="1442">Sincronização de episódios finalizada</string>
+	<string id="1443">Limpando coleção de filmes do trakt</string>
+	<string id="1444">filmes(s) serão removidos da coleção do trakt</string>
+	<string id="1445">Limpando coleção de Seriados do trakt</string>
+	<string id="1446">seriados(s) serão removidos da coleção do trakt</string>
+	<string id="1447">episódios estão sendo removidos</string>
 </strings>
