@@ -22,6 +22,7 @@ Automatically scrobble all TV episodes and movies you are watching to trakt.tv! 
 * Sync your TV episode and movie collections to trakt
 * Auto clean your trakt collection so that it matches up with XBMC
 * Keep watched statuses synced between XBMC and trakt
+* Rate movies and episodes after watching them
 
 ###What can be scrobbled?
 
