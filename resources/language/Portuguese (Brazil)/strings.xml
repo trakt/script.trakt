@@ -19,12 +19,12 @@
 	<string id="1031">Classifique o Filme após assistir</string>
 	<string id="1032">Classifique o Episódio de Seriado após assistir</string>
 	<string id="1033">Classifique cada ítem da lista de reprodução</string>
-	<string id="1034">Percentual mínimo ao assistir para mostrar o diálogo de classificação</string>
+	<string id="1034">Percentual mínimo assistido para classificar</string>
 	
 	<string id="1040">Scrobbling</string>
 	<string id="1041">Fazer Scrobble dos Filmes</string>
 	<string id="1042">Fazer Scrobble dos Episódios de Seriados</string>
-	<string id="1043">Percentual mínimo ao assistir para fazer scrobble de um item</string>
+	<string id="1043">Percentual mínimo assistido para fazer scrobble</string>
 	
 	<!-- Info -->
 	<string id="1105"></string>
