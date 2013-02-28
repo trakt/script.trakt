@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 #
 
-import sys
 import xbmc
 import xbmcaddon
 import xbmcgui
@@ -13,10 +12,15 @@ import base64
 from urllib2 import HTTPError, URLError
 from httplib import HTTPException
 
-if sys.version_info < (2, 7):
+try:
 	import simplejson as json
-else:
+except ImportError:
 	import json
+
+try:
+	from hashlib import sha1
+except ImportError:
+	from sha import new as sha1
 
 # read settings
 __settings__ = xbmcaddon.Addon("script.trakt")
@@ -25,7 +29,7 @@ __language__ = __settings__.getLocalizedString
 apikey = 'b6135e0f7510a44021fac8c03c36c81a17be35d9'
 
 username = __settings__.getSetting("username").strip()
-password = __settings__.getSetting("password").strip()
+pwd = sha1(__settings__.getSetting("password")).hexdigest()
 debug = __settings__.getSetting("debug")
 traktSettings = None
 
@@ -158,7 +162,7 @@ def get_data(url, args):
 		else:
 			req = urllib2.Request(url, args)
 			# add basic http header authentication
-			base64string = base64.encodestring('%s:%s' % (username, password)).replace('\n', '')
+			base64string = base64.encodestring('%s:%s' % (username, pwd)).replace('\n', '')
 			req.add_header("Authorization", "Basic %s" % base64string)
 		Debug("get_data(): urllib2.urlopen()")
 		response = urllib2.urlopen(req)
