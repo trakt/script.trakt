@@ -11,7 +11,7 @@ if sys.version_info < (2, 7):
 else:
 	import json
 
-from utilities import Debug, checkScrobblingExclusion
+from utilities import Debug, checkScrobblingExclusion, xbmcJsonRequest
 from scrobbler import Scrobbler
 from movie_sync import SyncMovies
 from episode_sync import SyncEpisodes
@@ -30,6 +30,8 @@ class NotificationService:
 		action = data["action"]
 		if action == "started":
 			p = {"item": {"type": data["type"], "id": data["id"]}}
+			if data.has_key("doubleep"):
+				p["item"]["doubleep"] = data["doubleep"]
 			self._scrobbler.playbackStarted(p)
 		elif action == "ended" or action == "stopped":
 			self._scrobbler.playbackEnded()
@@ -106,6 +108,7 @@ class traktPlayer(xbmc.Player):
 		xbmc.sleep(1000)
 		self.type = None
 		self.id = None
+		self.doubleEP = None
 		
 		# only do anything if we're playing a video
 		if self.isPlayingVideo():
@@ -130,7 +133,37 @@ class traktPlayer(xbmc.Player):
 			
 			self.id = result["result"]["item"]["id"]
 			
+			if self.type == "episode":
+				# do a double ep check
+				Debug("[traktPlayer] onPlayBackStarted() - Doing double episode check.")
+				result = xbmcJsonRequest({"jsonrpc": "2.0", "method": "VideoLibrary.GetEpisodeDetails", "params": {"episodeid": self.id, "properties": ["tvshowid", "season","episode"]}, "id": 1})
+				if result:
+					Debug("[traktPlayer] onPlayBackStarted() - %s" % result)
+					tvshowid = int(result["episodedetails"]["tvshowid"])
+					season = int(result["episodedetails"]["season"])
+					episode = int(result["episodedetails"]["episode"])
+					epindex = episode - 1
+					
+					result = xbmcJsonRequest({"jsonrpc": "2.0", "method": "VideoLibrary.GetEpisodes", "params": {"tvshowid": tvshowid, "season": season, "properties": ["episode", "file"], "limits": {"start": epindex, "end": epindex + 2}}, "id": 1})
+					if result:
+						Debug("[traktPlayer] onPlayBackStarted() - %s" % result)
+						# make sure episodes array exists in results
+						if result.has_key("episodes"):
+							# continue if we have 2 items in episodes array
+							if len(result["episodes"]) == 2:
+								ep1 = result["episodes"][0]
+								ep2 = result["episodes"][1]
+								
+								# check if fullpath matches
+								if (ep1["file"] == ep2["file"]) and (ep2["file"] == self.getPlayingFile()):
+									self.doubleEP = ep2["episodeid"]
+									Debug("[traktPlayer] onPlayBackStarted() - This episode is part of a double episode.")
+
 			data = {"action": "started", "id": self.id, "type": self.type}
+			if self.doubleEP:
+				data["doubleep"] = self.doubleEP
+			else:
+				Debug("[traktPlayer] onPlayBackStarted() - This episode is not part of a double episode.")
 			
 			self._playing = True
 			

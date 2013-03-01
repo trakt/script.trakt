@@ -25,6 +25,7 @@ class Scrobbler(threading.Thread):
 	pinging = False
 	playlistLength = 1
 	abortRequested = False
+	markFirstAsWatched = False
 
 	def run(self):
 		# When requested ping trakt to say that the user is still watching the item
@@ -61,6 +62,7 @@ class Scrobbler(threading.Thread):
 					time.sleep(1) # Wait for possible silent seek (caused by resuming)
 					self.watchedTime = xbmc.Player().getTime()
 					self.totalTime = xbmc.Player().getTotalTime()
+					self.markFirstAsWatched = False
 					if self.totalTime == 0:
 						if self.curVideo['type'] == 'movie':
 							self.totalTime = 90
@@ -107,6 +109,7 @@ class Scrobbler(threading.Thread):
 				return
 			self.watchedTime += time.time() - self.startTime
 			self.pinging = False
+			self.markFirstAsWatched = False
 			if self.watchedTime != 0:
 				if 'type' in self.curVideo: #and 'id' in self.curVideo:
 					self.check()
@@ -136,7 +139,20 @@ class Scrobbler(threading.Thread):
 		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true':
 			match = None
 			if 'id' in self.curVideo:
-				match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
+				if self.curVideo.has_key("doubleep") and ((self.watchedTime / self.totalTime) * 100 >= 50):
+					if not self.markFirstAsWatched:
+						# force a scrobble of the first episode
+						Debug("[Scrobbler] Attempting to mark first episode in a double episode as watched.")
+						firstEP = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
+						response = utilities.scrobbleEpisodeOnTrakt(firstEP['tvdb_id'], firstEP['showtitle'], firstEP['year'], firstEP['season'], firstEP['episode'], firstEP['uniqueid']['unknown'], self.totalTime/60, 100)
+						if response != None:
+							Debug("[Scrobbler] Scrobble response: %s" % str(response))
+						self.markFirstAsWatched = True
+					
+					Debug("[Scrobbler] Double episode, into 2nd part now.")
+					match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['doubleep'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
+				else:
+					match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
 			elif 'showtitle' in self.curVideoData and 'season' in self.curVideoData and 'episode' in self.curVideoData:
 				match = {}
 				match['tvdb_id'] = None
@@ -185,7 +201,11 @@ class Scrobbler(threading.Thread):
 		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true':
 			match = None
 			if 'id' in self.curVideo:
-				match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
+				if self.curVideo.has_key("doubleep"):
+					Debug("[Scrobbler] Double episode, scrobbling 2nd part.")
+					match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['doubleep'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
+				else:
+					match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
 			elif 'showtitle' in self.curVideoData and 'season' in self.curVideoData and 'episode' in self.curVideoData:
 				match = {}
 				match['tvdb_id'] = None
