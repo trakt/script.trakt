@@ -143,7 +143,37 @@ def rateMedia(media_id, media_type):
 	)
 
 	gui.doModal()
+	if gui.rating:
+		rateOnTrakt(gui.rating, gui.media_type, gui.media)
 	del gui
+
+
+def rateOnTrakt(rating, media_type, media):
+	Debug('[rating] Sending rating (%s) to trakt' % rating)
+	if media_type == 'movie':
+		params = {'title': media['title'], 'year': media['year'], 'rating': rating}
+
+		if media['imdbnumber'].startswith('tt'):
+			params['imdb_id'] = media['imdbnumber']
+
+		elif media['imdbnumber'].isdigit():
+			params['tmdb_id'] = media['imdbnumber']
+
+		data = traktJsonRequest('POST', '/rate/movie/%%API_KEY%%', params, passVersions=True)
+
+	else:
+		params = {'title': media['label'], 'year': media['year'], 'season': media['episode']['season'], 'episode': media['episode']['episode'], 'rating': rating}
+
+		if media['imdbnumber'].isdigit():
+			params['tvdb_id'] = media['imdbnumber']
+
+		elif media['imdbnumber'].startswith('tt'):
+			params['imdb_id'] = media['imdbnumber']
+
+		data = traktJsonRequest('POST', '/rate/episode/%%API_KEY%%', params, passVersions=True)
+
+	if data != None:
+		notification(__language__(1201).encode('utf-8', 'ignore'), __language__(1167).encode('utf-8', 'ignore')) # Rating submitted successfully
 
 
 class RatingDialog(xbmcgui.WindowXMLDialog):
@@ -151,6 +181,7 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 		self.media_type = media_type
 		self.media = media
 		self.rating_type = rating_type
+		self.rating = None
 
 	def onInit(self):
 		self.getControl(10014).setVisible(self.rating_type == 'simple')
@@ -169,7 +200,7 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 
 	def onClick(self, controlID):
 		if controlID in buttons:
-			self.rateOnTrakt(buttons[controlID])
+			self.rating = buttons[controlID]
 			self.close()
 
 
@@ -178,30 +209,3 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 			self.getControl(10013).setLabel(focus_labels[controlID])
 		else:
 			self.getControl(10013).setLabel('')
-
-
-	def rateOnTrakt(self, rating):
-		if self.media_type == 'movie':
-			params = {'title': self.media['title'], 'year': self.media['year'], 'rating': rating}
-
-			if self.media['imdbnumber'].startswith('tt'):
-				params['imdb_id'] = self.media['imdbnumber']
-
-			elif self.media['imdbnumber'].isdigit():
-				params['tmdb_id']
-
-			data = traktJsonRequest('POST', '/rate/movie/%%API_KEY%%', params, passVersions=True)
-
-		else:
-			params = {'title': self.media['label'], 'year': self.media['year'], 'season': self.media['episode']['season'], 'episode': self.media['episode']['episode'], 'rating': rating}
-
-			if self.media['imdbnumber'].isdigit():
-				params['tvdb_id'] = self.media['imdbnumber']
-
-			elif self.media['imdbnumber'].startswith('tt'):
-				params['imdb_id'] = self.media['imdbnumber']
-
-			data = traktJsonRequest('POST', '/rate/episode/%%API_KEY%%', params, passVersions=True)
-
-		if data != None:
-			notification(__language__(1201).encode('utf-8', 'ignore'), __language__(1167).encode('utf-8', 'ignore')) # Rating submitted successfully
