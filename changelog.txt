@@ -4,6 +4,7 @@ version 2.1.0
   - rewrite notification service (nate1280)
   - scrobbles playlisted items correctly (koying)
   - exclude settings for media to not scrobble (ezechiel1917)
+  - scrobble double episodes correctly (nate1280)
 
 version 2.0.0
   - compatible with Frodo only, Eden support dropped
