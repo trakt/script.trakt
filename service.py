@@ -2,7 +2,9 @@
 #
 
 import xbmcaddon
-from utilities import Debug, checkSettings, getTraktSettings
+import globals
+from utilities import Debug
+from traktapi import traktAPI
 from notification_service import NotificationService
 
 __addon__ = xbmcaddon.Addon("script.trakt")
@@ -14,10 +16,12 @@ Debug("Loading '%s' version '%s'" % (__addonid__, __addonversion__))
 
 # starts update/sync
 def autostart():
-	if checkSettings(True):
-		getTraktSettings()
-		# startup notifcation service
-		NotificationService()
+
+	# init traktapi class
+	globals.traktapi = traktAPI()
+
+	# startup notification
+	NotificationService()
 	
 	Debug("Plugin shutting down.")
 
