@@ -29,7 +29,7 @@ __language__ = __settings__.getLocalizedString
 apikey = 'b6135e0f7510a44021fac8c03c36c81a17be35d9'
 
 username = __settings__.getSetting("username").strip()
-pwd = sha1(__settings__.getSetting("password")).hexdigest()
+pwd = sha1(__settings__.getSetting("password").strip()).hexdigest()
 debug = __settings__.getSetting("debug")
 traktSettings = None
 
