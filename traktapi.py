@@ -261,7 +261,7 @@ class traktAPI(object):
 		_username = get_string_setting("username")
 		_password = sha1(get_string_setting("password")).hexdigest()
 		
-		if not ((self.__username == _username) or (self.__password == _password)):
+		if not ((self.__username == _username) and (self.__password == _password)):
 			self.__username = _username
 			self.__password = _password
 			self.testAccount(force=True)
