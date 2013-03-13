@@ -46,19 +46,22 @@ class traktAPI(object):
 	__apikey = "b6135e0f7510a44021fac8c03c36c81a17be35d9"
 	__baseURL = "https://api.trakt.tv"
 	__timeout = 60
+	__username = ""
+	__password = ""
 	validUser = False
 
 	def __init__(self):
-		username = get_string_setting("username")
+		self.__username = get_string_setting("username")
+		self.__password = sha1(get_string_setting("password")).hexdigest()
 		Debug("[traktAPI] Initializing")
-		Debug("[traktAPI] Testing account '%s'" % username)
+		Debug("[traktAPI] Testing account '%s'" % self.__username)
 		self.settings = None
 		if self.testAccount():
-			Debug("[traktAPI] Account '%s' is valid." % username)
-			Debug("[traktAPI] Getting account settings for '%s'" % username)
+			Debug("[traktAPI] Account '%s' is valid." % self.__username)
+			Debug("[traktAPI] Getting account settings for '%s'" % self.__username)
 			self.getAccountSettings()
 		else:
-			Debug("[traktAPI] Account '%s' is not valid." % username)
+			Debug("[traktAPI] Account '%s' is not valid." % self.__username)
 
 	def __getData(self, url, args):
 		data = None
@@ -155,8 +158,8 @@ class traktAPI(object):
 			Debug("[traktAPI] traktRequest(): Request data: '%s'" % str(json.dumps(args)))
 			
 			# inject username/pass into json data
-			args["username"] = get_string_setting("username")
-			args["password"] = sha1(get_string_setting("password")).hexdigest()
+			args["username"] = self.__username
+			args["password"] = self.__password
 			
 			# check if plugin version needs to be passed
 			if passVersions:
@@ -252,18 +255,29 @@ class traktAPI(object):
 
 		return data
 
+	# helper for onSettingsChanged
+	def updateSettings(self):
+	
+		_username = get_string_setting("username")
+		_password = sha1(get_string_setting("password")).hexdigest()
+		
+		if not ((self.__username == _username) or (self.__password == _password)):
+			self.__username = _username
+			self.__password = _password
+			self.testAccount(force=True)
+
 	# http://api.trakt.tv/account/test/<apikey>
 	# returns: {"status": "success","message": "all good!"}
-	def testAccount(self, daemon=True):
+	def testAccount(self, force=False, daemon=True):
 		
-		if get_string_setting("username") == "":
+		if self.__username == "":
 			notification("trakt", __language__(1106).encode("utf-8", "ignore")) # please enter your Username and Password in settings
 			return False
-		elif get_string_setting("password") == "":
+		elif self.__password == "":
 			notification("trakt", __language__(1107).encode("utf-8", "ignore")) # please enter your Password in settings
 			return False
 
-		if not self.validUser:
+		if not self.validUser or force:
 			url = "%s/account/test/%s" % (self.__baseURL, self.__apikey)
 			Debug("[traktAPI] testAccount(url: %s)" % url)
 			response = self.traktRequest("POST", url)
@@ -338,7 +352,7 @@ class traktAPI(object):
 	# note: if user has nothing in collection, response is then []
 	def getLibrary(self, type):
 		if self.testAccount():
-			url = "%s/user/library/%s/collection.json/%s/%s/min" % (self.__baseURL, type, self.__apikey, get_string_setting("username"))
+			url = "%s/user/library/%s/collection.json/%s/%s/min" % (self.__baseURL, type, self.__apikey, self.__username)
 			Debug("[traktAPI] getLibrary(url: %s)" % url)
 			return self.traktRequest("POST", url)
 
@@ -352,7 +366,7 @@ class traktAPI(object):
 	# note: if nothing watched in collection, returns []
 	def getWatchedLibrary(self, type):
 		if self.testAccount():
-			url = "%s/user/library/%s/watched.json/%s/%s/min" % (self.__baseURL, type, self.__apikey, get_string_setting("username"))
+			url = "%s/user/library/%s/watched.json/%s/%s/min" % (self.__baseURL, type, self.__apikey, self.__username)
 			Debug("[traktAPI] getWatchedLibrary(url: %s)" % url)
 			return self.traktRequest("POST", url)
 

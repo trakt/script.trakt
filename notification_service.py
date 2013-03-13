@@ -12,6 +12,7 @@ else:
 	import json
 
 import globals
+from traktapi import traktAPI
 from utilities import Debug, checkScrobblingExclusion, xbmcJsonRequest
 from scrobbler import Scrobbler
 from movie_sync import SyncMovies
@@ -62,6 +63,9 @@ class NotificationService:
 				episodes.Run()
 		elif action == "scanStarted":
 			pass
+		elif action == "settingsChanged":
+			Debug("[Notification] Settings changed, reloading.")
+			globals.traktapi.updateSettings()
 		else:
 			Debug("[Notification] '%s' unknown dispatch action!" % action)
 
@@ -72,6 +76,9 @@ class NotificationService:
 		self.Player = traktPlayer(action = self._dispatch)
 		self.Monitor = traktMonitor(action = self._dispatch)
 		
+		# init traktapi class
+		globals.traktapi = traktAPI()
+
 		# initalize scrobbler class
 		self._scrobbler = Scrobbler(globals.traktapi)
 
@@ -111,6 +118,11 @@ class traktMonitor(xbmc.Monitor):
 			Debug("[traktMonitor] onDatabaseScanStarted(database: %s)" % database)
 			data = {"action": "scanStarted"}
 			self.action(data)
+
+	def onSettingsChanged(self):
+		data = {"action": "settingsChanged"}
+		self.action(data)
+		
 
 class traktPlayer(xbmc.Player):
 
