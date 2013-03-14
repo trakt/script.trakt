@@ -29,9 +29,8 @@ class NotificationService:
 		xbmc.sleep(500)
 		action = data["action"]
 		if action == "started":
-			p = {"item": {"type": data["type"], "id": data["id"]}}
-			if data.has_key("doubleep"):
-				p["item"]["doubleep"] = data["doubleep"]
+			del data["action"]
+			p = {"item": data}
 			self._scrobbler.playbackStarted(p)
 		elif action == "ended" or action == "stopped":
 			self._scrobbler.playbackEnded()
@@ -113,17 +112,8 @@ class traktPlayer(xbmc.Player):
 		# only do anything if we're playing a video
 		if self.isPlayingVideo():
 			# get item data from json rpc
-			rpccmd = json.dumps({"jsonrpc": "2.0", "method": "Player.GetItem", "params": {"playerid": 1}, "id": 1})
-			result = xbmc.executeJSONRPC(rpccmd)
+			result = xbmcJsonRequest({"jsonrpc": "2.0", "method": "Player.GetItem", "params": {"playerid": 1}, "id": 1})
 			Debug("[traktPlayer] onPlayBackStarted() - %s" % result)
-			result = json.loads(result)
-			
-			self.type = result["result"]["item"]["type"]
-			
-			# check for non-library item playback
-			if self.type == "unknown":
-				Debug("[traktPlayer] onPlayBackStarted() - Started playing a non-library file, skipping.")
-				return
 			
 			# check for exclusion
 			_filename = self.getPlayingFile()
@@ -131,40 +121,77 @@ class traktPlayer(xbmc.Player):
 				Debug("[traktPlayer] onPlayBackStarted() - '%s' is in exclusion settings, ignoring." % _filename)
 				return
 			
-			self.id = result["result"]["item"]["id"]
+			self.type = result["item"]["type"]
+
+			data = {"action": "started"}
 			
-			if self.type == "episode":
-				# do a double ep check
-				Debug("[traktPlayer] onPlayBackStarted() - Doing double episode check.")
-				result = xbmcJsonRequest({"jsonrpc": "2.0", "method": "VideoLibrary.GetEpisodeDetails", "params": {"episodeid": self.id, "properties": ["tvshowid", "season","episode"]}, "id": 1})
-				if result:
-					Debug("[traktPlayer] onPlayBackStarted() - %s" % result)
-					tvshowid = int(result["episodedetails"]["tvshowid"])
-					season = int(result["episodedetails"]["season"])
-					episode = int(result["episodedetails"]["episode"])
-					epindex = episode - 1
-					
-					result = xbmcJsonRequest({"jsonrpc": "2.0", "method": "VideoLibrary.GetEpisodes", "params": {"tvshowid": tvshowid, "season": season, "properties": ["episode", "file"], "limits": {"start": epindex, "end": epindex + 2}}, "id": 1})
+			# check type of item
+			if self.type == "unknown":
+				# do a deeper check to see if we have enough data to perform scrobbles
+				Debug("[traktPlayer] onPlayBackStarted() - Started playing a non-library file, checking available data.")
+				
+				season = xbmc.getInfoLabel("VideoPlayer.Season")
+				episode = xbmc.getInfoLabel("VideoPlayer.Episode")
+				showtitle = xbmc.getInfoLabel("VideoPlayer.TVShowTitle")
+				year = xbmc.getInfoLabel("VideoPlayer.Year")
+				
+				if season and episode and showtitle:
+					# we have season, episode and show title, can scrobble this as an episode
+					self.type = "episode"
+					data["type"] = "episode"
+					data["season"] = int(season)
+					data["episode"] = int(episode)
+					data["showtitle"] = showtitle
+					data["title"] = xbmc.getInfoLabel("VideoPlayer.Title")
+					Debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'episode' - %s - S%02dE%02d - %s." % (data["title"], data["season"], data["episode"]))
+				elif year and not season and not showtitle:
+					# we have a year and no season/showtitle info, enough for a movie
+					self.type = "movie"
+					data["type"] = "movie"
+					data["year"] = int(year)
+					data["title"] = xbmc.getInfoLabel("VideoPlayer.Title")
+					Debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'movie' - %s (%d)." % (data["title"], data["year"]))
+				else:
+					Debug("[traktPlayer] onPlayBackStarted() - Non-library file, not enough data for scrobbling, skipping.")
+					return
+			
+			elif self.type == "episode" or self.type == "movie":
+				# get library id
+				self.id = result["item"]["id"]
+				data["id"] = self.id
+				data["type"] = self.type
+			
+				if self.type == "episode":
+					# do a double ep check
+					Debug("[traktPlayer] onPlayBackStarted() - Doing double episode check.")
+					result = xbmcJsonRequest({"jsonrpc": "2.0", "method": "VideoLibrary.GetEpisodeDetails", "params": {"episodeid": self.id, "properties": ["tvshowid", "season","episode"]}, "id": 1})
 					if result:
 						Debug("[traktPlayer] onPlayBackStarted() - %s" % result)
-						# make sure episodes array exists in results
-						if result.has_key("episodes"):
-							# continue if we have 2 items in episodes array
-							if len(result["episodes"]) == 2:
-								ep1 = result["episodes"][0]
-								ep2 = result["episodes"][1]
-								
-								# check if fullpath matches
-								if (ep1["file"] == ep2["file"]) and (ep2["file"] == self.getPlayingFile()):
-									self.doubleEP = ep2["episodeid"]
-									Debug("[traktPlayer] onPlayBackStarted() - This episode is part of a double episode.")
+						tvshowid = int(result["episodedetails"]["tvshowid"])
+						season = int(result["episodedetails"]["season"])
+						episode = int(result["episodedetails"]["episode"])
+						epindex = episode - 1
+						
+						result = xbmcJsonRequest({"jsonrpc": "2.0", "method": "VideoLibrary.GetEpisodes", "params": {"tvshowid": tvshowid, "season": season, "properties": ["episode", "file"], "limits": {"start": epindex, "end": epindex + 2}}, "id": 1})
+						if result:
+							Debug("[traktPlayer] onPlayBackStarted() - %s" % result)
+							# make sure episodes array exists in results
+							if result.has_key("episodes"):
+								# continue if we have 2 items in episodes array
+								if len(result["episodes"]) == 2:
+									ep1 = result["episodes"][0]
+									ep2 = result["episodes"][1]
+									
+									# check if fullpath matches
+									if (ep1["file"] == ep2["file"]) and (ep2["file"] == self.getPlayingFile()):
+										self.doubleEP = ep2["episodeid"]
+										data["doubleep"] = self.doubleEP
+										Debug("[traktPlayer] onPlayBackStarted() - This episode is part of a double episode.")
 
-			data = {"action": "started", "id": self.id, "type": self.type}
-			if self.doubleEP:
-				data["doubleep"] = self.doubleEP
 			else:
-				Debug("[traktPlayer] onPlayBackStarted() - This episode is not part of a double episode.")
-			
+				Debug("[traktPlayer] onPlayBackStarted() - Video type '%s' unrecognized, skipping." % self.type)
+				return
+
 			self._playing = True
 			
 			# send dispatch
