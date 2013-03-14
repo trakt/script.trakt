@@ -5,7 +5,8 @@ import xbmc
 import xbmcaddon
 import xbmcgui
 import utilities
-from utilities import Debug, xbmcJsonRequest, traktJsonRequest, notification, get_float_setting, get_bool_setting
+import globals
+from utilities import Debug, xbmcJsonRequest, notification, get_float_setting, get_bool_setting
 
 __settings__ = xbmcaddon.Addon("script.trakt")
 __language__ = __settings__.getLocalizedString
@@ -78,8 +79,7 @@ def rateMedia(media_id, media_type):
 			Debug('[Rating] Failed to retrieve movie data from XBMC')
 			return
 
-		jsonString = "/movie/summary.json/%%API_KEY%%/" + xbmc_media['imdbnumber']
-		trakt_summary = traktJsonRequest('POST', jsonString)
+		trakt_summary = globals.traktapi.getMovieSummary(xbmc_media['imdbnumber'])
 		if trakt_summary == None:
 			Debug('[Rating] Failed to retrieve movie data from trakt')
 			return
@@ -119,8 +119,7 @@ def rateMedia(media_id, media_type):
 
 		xbmc_media["episode"] = episode
 
-		jsonString = "/show/episode/summary.json/%%API_KEY%%/" + str(xbmc_media['imdbnumber']) + "/" + str(xbmc_media['episode']['season']) + "/" + str(xbmc_media['episode']['episode'])
-		trakt_summary = traktJsonRequest('POST', jsonString)
+		trakt_summary = globals.traktapi.getShowSummary(xbmc_media['imdbnumber'], xbmc_media['episode']['season'], xbmc_media['episode']['episode'])
 		if trakt_summary == None:
 			Debug('[Rating] Failed to retrieve show/episode data from trakt')
 			return
@@ -131,7 +130,9 @@ def rateMedia(media_id, media_type):
 			Debug('[Rating] Episode has been rated')
 			return
 
-	rating_type = utilities.traktSettings['viewing']['ratings']['mode']
+	if not globals.traktapi.settings:
+		globals.traktapi.getAccountSettings()
+	rating_type = globals.traktapi.settings['viewing']['ratings']['mode']
 	xbmc.executebuiltin('Dialog.Close(all, true)')
 
 	gui = RatingDialog(
@@ -159,7 +160,7 @@ def rateOnTrakt(rating, media_type, media):
 		elif media['imdbnumber'].isdigit():
 			params['tmdb_id'] = media['imdbnumber']
 
-		data = traktJsonRequest('POST', '/rate/movie/%%API_KEY%%', params, passVersions=True)
+		data = globals.traktapi.rateMovie(params)
 
 	else:
 		params = {'title': media['label'], 'year': media['year'], 'season': media['episode']['season'], 'episode': media['episode']['episode'], 'rating': rating}
@@ -170,7 +171,7 @@ def rateOnTrakt(rating, media_type, media):
 		elif media['imdbnumber'].startswith('tt'):
 			params['imdb_id'] = media['imdbnumber']
 
-		data = traktJsonRequest('POST', '/rate/episode/%%API_KEY%%', params, passVersions=True)
+		data = globals.traktapi.rateEpisode(params)
 
 	if data != None:
 		notification(__language__(1201).encode('utf-8', 'ignore'), __language__(1167).encode('utf-8', 'ignore')) # Rating submitted successfully

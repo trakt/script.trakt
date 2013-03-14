@@ -2,6 +2,7 @@
 
 import xbmcaddon
 import xbmcgui
+import globals
 from movie_sync import SyncMovies
 from episode_sync import SyncEpisodes
 
@@ -20,9 +21,9 @@ def do_sync(media_type):
 
 if __name__ == '__main__':
 	if do_sync('movies'):
-		movies = SyncMovies(show_progress=True)
+		movies = SyncMovies(show_progress=True, api=globals.traktapi)
 		movies.Run()
 
 	if do_sync('episodes'):
-		episodes = SyncEpisodes(show_progress=True)
+		episodes = SyncEpisodes(show_progress=True, api=globals.traktapi)
 		episodes.Run()

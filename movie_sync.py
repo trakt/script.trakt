@@ -3,18 +3,17 @@
 import xbmc
 import xbmcgui
 import xbmcaddon
-from utilities import traktJsonRequest, xbmcJsonRequest, Debug, notification, chunks
+from utilities import xbmcJsonRequest, Debug, notification, chunks, get_bool_setting
 
 __setting__   = xbmcaddon.Addon('script.trakt').getSetting
 __getstring__ = xbmcaddon.Addon('script.trakt').getLocalizedString
 
-add_movies_to_trakt   = __setting__('add_movies_to_trakt') == 'true'
-trakt_movie_playcount = __setting__('trakt_movie_playcount') == 'true'
-xbmc_movie_playcount  = __setting__('xbmc_movie_playcount') == 'true'
-clean_trakt_movies  = __setting__('clean_trakt_movies') == 'true'
+add_movies_to_trakt = get_bool_setting('add_movies_to_trakt')
+trakt_movie_playcount = get_bool_setting('trakt_movie_playcount')
+xbmc_movie_playcount = get_bool_setting('xbmc_movie_playcount')
+clean_trakt_movies = get_bool_setting('clean_trakt_movies')
 
 progress = xbmcgui.DialogProgress()
-
 
 def xbmc_to_trakt_movie(movie, playcount=False):
 	""" Helper to convert XBMC movie into a format trakt can use. """
@@ -33,7 +32,12 @@ def xbmc_to_trakt_movie(movie, playcount=False):
 	return trakt_movie
 
 class SyncMovies():
-	def __init__(self, show_progress=False):
+	def __init__(self, show_progress=False, api=None):
+		self.traktapi = api
+		if self.traktapi == None:
+			from traktapi import traktAPI
+			self.traktapi = traktAPI()
+
 		self.xbmc_movies = None
 		self.trakt_movies_seen = None
 		self.trakt_movies_collection = None
@@ -75,13 +79,13 @@ class SyncMovies():
 		Debug('[Movies Sync] Getting movie collection from trakt.tv')
 		if self.show_progress:
 			progress.update(10, line1=__getstring__(1423), line2=' ', line3=' ')
-		self.trakt_movies_collection = traktJsonRequest('POST', '/user/library/movies/collection.json/%%API_KEY%%/%%USERNAME%%/min')
+		self.trakt_movies_collection = self.traktapi.getMovieLibrary()
 
 	def GetFromTraktSeen(self):
 		Debug('[Movies Sync] Getting seen movies from trakt.tv')
 		if self.show_progress:
 			progress.update(15, line1=__getstring__(1424), line2=' ', line3=' ')
-		self.trakt_movies_seen = traktJsonRequest('POST', '/user/library/movies/watched.json/%%API_KEY%%/%%USERNAME%%/min')
+		self.trakt_movies_seen = self.traktapi.getWatchedMovieLibrary()
 
 	def AddToTrakt(self):
 		Debug('[Movies Sync] Checking for XBMC movies that are not on trakt.tv')
@@ -120,7 +124,8 @@ class SyncMovies():
 			if self.show_progress:
 				progress.update(45, line2='%i %s' % (len(add_to_trakt), __getstring__(1426)))
 
-			traktJsonRequest('POST', '/movie/library/%%API_KEY%%', {'movies': [xbmc_to_trakt_movie(x) for x in add_to_trakt]})
+			params = {'movies': [xbmc_to_trakt_movie(x) for x in add_to_trakt]}
+			self.traktapi.addMovie(params)
 						
 		else:
 			Debug('[Movies Sync] trakt.tv movie collection is up to date')
@@ -173,7 +178,7 @@ class SyncMovies():
 
 			# Send request to update playcounts on trakt.tv
 			params = {'movies': [xbmc_to_trakt_movie(x, playcount=True) for x in update_playcount]}
-			traktJsonRequest('POST', '/movie/seen/%%API_KEY%%', params)
+			self.traktapi.updateSeenMovie(params)
 
 		else:
 			Debug('[Movies Sync] trakt.tv movie playcount is up to date')
@@ -255,7 +260,9 @@ class SyncMovies():
 
 			if self.show_progress:
 				progress.update(95, line2='%i %s' % (len(remove_from_trakt), __getstring__(1444)))
-			traktJsonRequest('POST', '/movie/unlibrary/%%API_KEY%%', {'movies': remove_from_trakt})
+			
+			params = {'movies': remove_from_trakt}
+			self.traktapi.removeMovie(params)
 
 		else:
 			Debug('[Movies Sync] trakt.tv movie collection is clean')
