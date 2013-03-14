@@ -181,7 +181,7 @@ class Scrobbler(threading.Thread):
 				match['showtitle'] = self.curVideoData['showtitle']
 				match['season'] = self.curVideoData['season']
 				match['episode'] = self.curVideoData['episode']
-				match['uniqueid'] = self.curVideoData['uniqueid']['unknown']
+				match['uniqueid'] = None
 			if match == None:
 				return
 				
