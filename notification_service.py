@@ -11,6 +11,8 @@ if sys.version_info < (2, 7):
 else:
 	import json
 
+import globals
+from traktapi import traktAPI
 from utilities import Debug, checkScrobblingExclusion, xbmcJsonRequest
 from scrobbler import Scrobbler
 from movie_sync import SyncMovies
@@ -27,6 +29,17 @@ class NotificationService:
 	def _dispatch(self, data):
 		Debug("[Notification] Dispatch: %s" % data)
 		xbmc.sleep(500)
+		
+		# check if scrobbler thread is still alive
+		if not self._scrobbler.isAlive():
+
+			if self.Player._playing and not self._scrobbler.pinging:
+				# make sure pinging is set
+				self._scrobbler.pinging = True
+
+			Debug("[Notification] Scrobler thread died, restarting.")
+			self._scrobbler.start()
+		
 		action = data["action"]
 		if action == "started":
 			del data["action"]
@@ -38,15 +51,20 @@ class NotificationService:
 			self._scrobbler.playbackPaused()
 		elif action == "resumed":
 			self._scrobbler.playbackResumed()
+		elif action == "seek" or action == "seekchapter":
+			self._scrobbler.playbackSeek()
 		elif action == "databaseUpdated":
 			if do_sync('movies'):
-				movies = SyncMovies(show_progress=False)
+				movies = SyncMovies(show_progress=False, api=globals.traktapi)
 				movies.Run()
 			if do_sync('episodes'):
-				episodes = SyncEpisodes(show_progress=False)
+				episodes = SyncEpisodes(show_progress=False, api=globals.traktapi)
 				episodes.Run()
 		elif action == "scanStarted":
-			Debug("[Notification] Dispatch: scanStarted")
+			pass
+		elif action == "settingsChanged":
+			Debug("[Notification] Settings changed, reloading.")
+			globals.traktapi.updateSettings()
 		else:
 			Debug("[Notification] '%s' unknown dispatch action!" % action)
 
@@ -57,10 +75,12 @@ class NotificationService:
 		self.Player = traktPlayer(action = self._dispatch)
 		self.Monitor = traktMonitor(action = self._dispatch)
 		
+		# init traktapi class
+		globals.traktapi = traktAPI()
+
 		# initalize scrobbler class
-		self._scrobbler = Scrobbler()
-		self._scrobbler.start()
-		
+		self._scrobbler = Scrobbler(globals.traktapi)
+
 		# start loop for events
 		while (not xbmc.abortRequested):
 			xbmc.sleep(500)
@@ -68,6 +88,11 @@ class NotificationService:
 		# we aborted
 		if xbmc.abortRequested:
 			Debug("[Notification] abortRequested received, shutting down.")
+			
+			# delete player/monitor
+			del self.Player
+			del self.Monitor
+			
 			# join scrobbler, to wait for termination
 			Debug("[Notification] Joining scrobbler thread to wait for exit.")
 			self._scrobbler.join()
@@ -92,6 +117,11 @@ class traktMonitor(xbmc.Monitor):
 			Debug("[traktMonitor] onDatabaseScanStarted(database: %s)" % database)
 			data = {"action": "scanStarted"}
 			self.action(data)
+
+	def onSettingsChanged(self):
+		data = {"action": "settingsChanged"}
+		self.action(data)
+		
 
 class traktPlayer(xbmc.Player):
 
@@ -241,8 +271,12 @@ class traktPlayer(xbmc.Player):
 	def onPlayBackSeek(self, time, offset):
 		if self._playing:
 			Debug("[traktPlayer] onPlayBackSeek(time: %s, offset: %s) - %s" % (str(time), str(offset), self.isPlayingVideo()))
+			data = {"action": "seek"}
+			self.action(data)
 
 	# called when user performs a chapter seek
 	def onPlayBackSeekChapter(self, chapter):
 		if self._playing:
 			Debug("[traktPlayer] onPlayBackSeekChapter(chapter: %s) - %s" % (str(chapter), self.isPlayingVideo()))
+			data = {"action": "seekchapter"}
+			self.action(data)
