@@ -26,7 +26,7 @@ class Scrobbler(threading.Thread):
 	pinging = False
 	playlistLength = 1
 	abortRequested = False
-	markFirstAsWatched = False
+	markedAsWatched = []
 
 	def __init__(self, api):
 		threading.Thread.__init__(self)
@@ -69,7 +69,6 @@ class Scrobbler(threading.Thread):
 					time.sleep(1) # Wait for possible silent seek (caused by resuming)
 					self.watchedTime = xbmc.Player().getTime()
 					self.totalTime = xbmc.Player().getTotalTime()
-					self.markFirstAsWatched = False
 					if self.totalTime == 0:
 						if self.curVideo['type'] == 'movie':
 							self.totalTime = 90
@@ -83,6 +82,12 @@ class Scrobbler(threading.Thread):
 					if (self.playlistLength == 0):
 						Debug("[Scrobbler] Warning: Cant find playlist length?!, assuming that this item is by itself")
 						self.playlistLength = 1
+					if self.curVideo["type"] == "episode":
+						if self.curVideo.has_key("multi_episode_count"):
+							self.markedAsWatched = []
+							episode_count = self.curVideo["multi_episode_count"]
+							for i in range(episode_count):
+								self.markedAsWatched.append(False)
 				except Exception, e:
 					Debug("[Scrobbler] Suddenly stopped watching item, or error: %s" % e.message)
 					self.curVideo = None
@@ -125,7 +130,7 @@ class Scrobbler(threading.Thread):
 				return
 			self.watchedTime += time.time() - self.startTime
 			self.pinging = False
-			self.markFirstAsWatched = False
+			self.markedAsWatched = []
 			if self.watchedTime != 0:
 				if 'type' in self.curVideo: #and 'id' in self.curVideo:
 					self.check()
@@ -133,6 +138,13 @@ class Scrobbler(threading.Thread):
 				self.watchedTime = 0
 			self.startTime = 0
 			self.curVideo = None
+
+	def _currentEpisode(self, watchedPercent, episodeCount):
+		split = (100 / episodeCount)
+		for i in range(episodeCount - 1, 0, -1):
+			if watchedPercent >= (i * split):
+				return i
+		return 0
 
 	def watching(self):
 		Debug("[Scrobbler] watching()")
@@ -160,18 +172,19 @@ class Scrobbler(threading.Thread):
 		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true':
 			match = None
 			if 'id' in self.curVideo:
-				if self.curVideo.has_key("doubleep") and ((self.watchedTime / self.totalTime) * 100 >= 50):
-					if not self.markFirstAsWatched:
-						# force a scrobble of the first episode
-						Debug("[Scrobbler] Attempting to mark first episode in a double episode as watched.")
-						firstEP = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
-						response = self.traktapi.scrobbleEpisode(firstEP['tvdb_id'], firstEP['showtitle'], firstEP['year'], firstEP['season'], firstEP['episode'], firstEP['uniqueid']['unknown'], self.totalTime/60, 100)
-						if response != None:
-							Debug("[Scrobbler] Scrobble response: %s" % str(response))
-						self.markFirstAsWatched = True
-					
-					Debug("[Scrobbler] Double episode, into 2nd part now.")
-					match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['doubleep'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
+				if self.curVideo.has_key("multi_episode_count"):
+					cur_episode = self._currentEpisode((self.watchedTime / self.totalTime) * 100, self.curVideo['multi_episode_count'])
+					if cur_episode > 0:
+						if not self.markedAsWatched[cur_episode - 1]:
+							Debug("[Scrobbler] Attempting to scrobble episode part %d of %d." % (cur_episode, self.curVideo['multi_episode_count']))
+							episode_data = utilities.getEpisodeDetailsFromXbmc(self.curVideo["multi_episode_data"][cur_episode - 1], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
+							response = self.traktapi.scrobbleEpisode(episode_data['tvdb_id'], episode_data['showtitle'], episode_data['year'], episode_data['season'], episode_data['episode'], episode_data['uniqueid']['unknown'], self.totalTime/60, 100)
+							if response != None:
+								Debug("[Scrobbler] Scrobble response: %s" % str(response))
+							self.markedAsWatched[cur_episode - 1] = True
+
+					Debug("[Scrobbler] Multi-part episode, watching part %d of %d." % (cur_episode + 1, self.curVideo['multi_episode_count']))
+					match = utilities.getEpisodeDetailsFromXbmc(self.curVideo["multi_episode_data"][cur_episode], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
 				else:
 					match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
 			elif 'showtitle' in self.curVideoData and 'season' in self.curVideoData and 'episode' in self.curVideoData:
@@ -231,9 +244,11 @@ class Scrobbler(threading.Thread):
 		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption == 'true':
 			match = None
 			if 'id' in self.curVideo:
-				if self.curVideo.has_key("doubleep"):
-					Debug("[Scrobbler] Double episode, scrobbling 2nd part.")
-					match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['doubleep'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
+				if self.curVideo.has_key("multi_episode_count"):
+					#cur_episode = self._currentEpisode((self.watchedTime / self.totalTime) * 100, self.curVideo['multi_episode_count'])
+					cur_episode = self.curVideo['multi_episode_count'] - 1
+					Debug("[Scrobbler] Multi-part episode, scrobbling part %d of %d." % (cur_episode + 1, self.curVideo['multi_episode_count']))
+					match = utilities.getEpisodeDetailsFromXbmc(self.curVideo["multi_episode_data"][cur_episode], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
 				else:
 					match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
 			elif 'showtitle' in self.curVideoData and 'season' in self.curVideoData and 'episode' in self.curVideoData:
