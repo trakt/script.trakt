@@ -160,7 +160,7 @@ class Scrobbler(threading.Thread):
 				match['showtitle'] = self.curVideoData['showtitle']
 				match['season'] = self.curVideoData['season']
 				match['episode'] = self.curVideoData['episode']
-				match['uniqueid'] = self.curVideoData['uniqueid']['unknown']
+				match['uniqueid'] = None
 			if match == None:
 				return
 			response = utilities.watchingEpisodeOnTrakt(match['tvdb_id'], match['showtitle'], match['year'], match['season'], match['episode'], match['uniqueid']['unknown'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
