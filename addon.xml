@@ -4,7 +4,6 @@
 		<import addon="xbmc.python" version="2.1.0"/>
 		<import addon="script.module.simplejson" version="2.0.10"/>
 	</requires>
-	<res width="1280" height="720" aspect="16x9" default="true" folder="720p" />
 	<extension point="xbmc.service" name="trakt.service" library="service.py" start="login" />
 	<extension point="xbmc.python.script" library="sync_exec.py">
 		<provides>executable</provides>
@@ -31,6 +30,7 @@ What can this addon do?
 - Sync your TV episode and movie collections to trakt
 - Auto clean your trakt collection so that it matches up with XBMC
 - Keep watched statuses synced between XBMC and trakt
+- Rate movies and episode after watching them
 
 Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers.</description>
 		<platform>all</platform>
