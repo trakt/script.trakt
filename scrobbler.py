@@ -22,7 +22,6 @@ class Scrobbler(threading.Thread):
 	startTime = 0
 	pausedTime = 0
 	curVideo = None
-	curVideoData = None
 	pinging = False
 	playlistLength = 1
 	abortRequested = False
@@ -56,7 +55,6 @@ class Scrobbler(threading.Thread):
 		if self.curVideo != None and self.curVideo != data['item']:
 			self.playbackEnded()
 		self.curVideo = data['item']
-		self.curVideoData = data
 		if self.curVideo != None:
 			# {"jsonrpc":"2.0","method":"Player.OnPlay","params":{"data":{"item":{"type":"movie"},"player":{"playerid":1,"speed":1},"title":"Shooter","year":2007},"sender":"xbmc"}}
 			# {"jsonrpc":"2.0","method":"Player.OnPlay","params":{"data":{"episode":3,"item":{"type":"episode"},"player":{"playerid":1,"speed":1},"season":4,"showtitle":"24","title":"9:00 A.M. - 10:00 A.M."},"sender":"xbmc"}}
@@ -155,11 +153,11 @@ class Scrobbler(threading.Thread):
 			match = None
 			if 'id' in self.curVideo:
 				match = utilities.getMovieDetailsFromXbmc(self.curVideo['id'], ['imdbnumber', 'title', 'year'])
-			elif 'title' in self.curVideoData and 'year' in self.curVideoData:
+			elif 'title' in self.curVideo and 'year' in self.curVideo:
 				match = {}
 				match['imdbnumber'] = ''
-				match['title'] = self.curVideoData['title']
-				match['year'] = self.curVideoData['year']
+				match['title'] = self.curVideo['title']
+				match['year'] = self.curVideo['year']
 			if match == None:
 				return
 			
@@ -187,13 +185,13 @@ class Scrobbler(threading.Thread):
 					match = utilities.getEpisodeDetailsFromXbmc(self.curVideo["multi_episode_data"][cur_episode], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
 				else:
 					match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
-			elif 'showtitle' in self.curVideoData and 'season' in self.curVideoData and 'episode' in self.curVideoData:
+			elif 'showtitle' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
 				match = {}
 				match['tvdb_id'] = None
 				match['year'] = None
-				match['showtitle'] = self.curVideoData['showtitle']
-				match['season'] = self.curVideoData['season']
-				match['episode'] = self.curVideoData['episode']
+				match['showtitle'] = self.curVideo['showtitle']
+				match['season'] = self.curVideo['season']
+				match['episode'] = self.curVideo['episode']
 				match['uniqueid'] = None
 			if match == None:
 				return
@@ -227,11 +225,11 @@ class Scrobbler(threading.Thread):
 			match = None
 			if 'id' in self.curVideo:
 				match = utilities.getMovieDetailsFromXbmc(self.curVideo['id'], ['imdbnumber', 'title', 'year'])
-			elif 'title' in self.curVideoData and 'year' in self.curVideoData:
+			elif 'title' in self.curVideo and 'year' in self.curVideo:
 				match = {}
 				match['imdbnumber'] = ''
-				match['title'] = self.curVideoData['title']
-				match['year'] = self.curVideoData['year']
+				match['title'] = self.curVideo['title']
+				match['year'] = self.curVideo['year']
 			if match == None:
 				return
 
@@ -251,14 +249,14 @@ class Scrobbler(threading.Thread):
 					match = utilities.getEpisodeDetailsFromXbmc(self.curVideo["multi_episode_data"][cur_episode], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
 				else:
 					match = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
-			elif 'showtitle' in self.curVideoData and 'season' in self.curVideoData and 'episode' in self.curVideoData:
+			elif 'showtitle' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
 				match = {}
 				match['tvdb_id'] = None
 				match['year'] = None
-				match['showtitle'] = self.curVideoData['showtitle']
-				match['season'] = self.curVideoData['season']
-				match['episode'] = self.curVideoData['episode']
-				match['uniqueid'] = self.curVideoData['uniqueid']['unknown']
+				match['showtitle'] = self.curVideo['showtitle']
+				match['season'] = self.curVideo['season']
+				match['episode'] = self.curVideo['episode']
+				match['uniqueid'] = None
 			if match == None:
 				return
 			
