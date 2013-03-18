@@ -1,3 +1,6 @@
+version 2.2.0
+
+
 version 2.1.0
   - rate movies and episode after watching them (sschocke, N3MIS15)
   - use urllib2 for connection (nate1280)
