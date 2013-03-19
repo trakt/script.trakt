@@ -6,7 +6,7 @@ import xbmcaddon
 import xbmcgui
 import utilities
 import globals
-from utilities import Debug, xbmcJsonRequest, notification, get_float_setting, get_bool_setting
+from utilities import Debug, xbmcJsonRequest, notification, getSettingAsFloat, getSettingAsBool
 
 __settings__ = xbmcaddon.Addon("script.trakt")
 __language__ = __settings__.getLocalizedString
@@ -45,15 +45,15 @@ focus_labels = {
 def ratingCheck(current_video, watched_time, total_time, playlist_length):
 	"""Check if a video should be rated and if so launches the rating dialog"""
 	Debug("[Rating] Rating Check called for '%s' with id=%s" % (current_video['type'], str(current_video['id'])));
-	if get_bool_setting("rate_%s" % current_video['type']):
+	if getSettingAsBool("rate_%s" % current_video['type']):
 		watched = (watched_time / total_time) * 100
-		if watched >= get_float_setting("rate_min_view_time"):
-			if (playlist_length <= 1) or get_bool_setting("rate_each_playlist_item"):
+		if watched >= getSettingAsFloat("rate_min_view_time"):
+			if (playlist_length <= 1) or getSettingAsBool("rate_each_playlist_item"):
 				rateMedia(current_video['id'], current_video['type'])
 			else:
 				Debug("[Rating] Rate each playlist item is disabled.")
 		else:
-			Debug("[Rating] '%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (current_video['type'], watched, get_float_setting("rate_min_view_time")))
+			Debug("[Rating] '%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (current_video['type'], watched, getSettingAsFloat("rate_min_view_time")))
 	else:
 		Debug("[Rating] '%s' is configured to not be rated." % current_video['type'])
 
@@ -61,7 +61,7 @@ def ratingCheck(current_video, watched_time, total_time, playlist_length):
 def rateMedia(media_id, media_type):
 	"""Launches the rating dialog"""
 	if media_id == None:
-		Debug('[Rating] Missing media_id')
+		Debug("[Rating] Missing media_id")
 		return
 
 	if media_type == 'movie':
@@ -70,22 +70,22 @@ def rateMedia(media_id, media_type):
 			Debug("[Rating] Problem getting movie data from XBMC")
 			return
 		
-		if not resp.has_key("moviedetails"):
+		if not 'moviedetails' in resp:
 			Debug("[Rating] Error with movie results from XBMC, %s" % resp)
 			return
 			
 		xbmc_media = resp["moviedetails"]
 		if xbmc_media == None:
-			Debug('[Rating] Failed to retrieve movie data from XBMC')
+			Debug("[Rating] Failed to retrieve movie data from XBMC")
 			return
 
 		trakt_summary = globals.traktapi.getMovieSummary(xbmc_media['imdbnumber'])
 		if trakt_summary == None:
-			Debug('[Rating] Failed to retrieve movie data from trakt')
+			Debug("[Rating] Failed to retrieve movie data from trakt")
 			return
 
 		if trakt_summary['rating'] or trakt_summary['rating_advanced']:
-			Debug('[Rating] Movie has been rated')
+			Debug("[Rating] Movie has already been rated.")
 			return
 
 	else:
@@ -94,13 +94,13 @@ def rateMedia(media_id, media_type):
 			Debug("[Rating] Problem getting episode data from XBMC")
 			return
 		
-		if not resp.has_key("episodedetails"):
+		if not 'episodedetails' in resp:
 			Debug("[Rating] Error with episode results from XBMC, %s" % resp)
 			return
 			
 		episode = resp["episodedetails"]
 		if episode == None:
-			Debug('[Rating] Failed to retrieve episode data from XBMC')
+			Debug("[Rating] Failed to retrieve episode data from XBMC")
 			return
 
 		resp = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetTVShowDetails', 'params': {'tvshowid': episode['tvshowid'], 'properties': ['imdbnumber']}})
@@ -108,26 +108,26 @@ def rateMedia(media_id, media_type):
 			Debug("[Rating] Problem getting tvshow data from XBMC")
 			return
 		
-		if not resp.has_key("tvshowdetails"):
+		if not 'tvshowdetails' in resp:
 			Debug("[Rating] Error with tvshow results from XBMC, %s" % resp)
 			return
 
 		xbmc_media = resp["tvshowdetails"]
 		if xbmc_media == None:
-			Debug('[Rating] Failed to retrieve tvshow data from XBMC')
+			Debug("[Rating] Failed to retrieve tvshow data from XBMC")
 			return
 
 		xbmc_media["episode"] = episode
 
 		trakt_summary = globals.traktapi.getShowSummary(xbmc_media['imdbnumber'], xbmc_media['episode']['season'], xbmc_media['episode']['episode'])
 		if trakt_summary == None:
-			Debug('[Rating] Failed to retrieve show/episode data from trakt')
+			Debug("[Rating] Failed to retrieve show/episode data from trakt")
 			return
 
 		xbmc_media['year'] = trakt_summary['show']['year']
 
 		if trakt_summary['episode']['rating'] or trakt_summary['episode']['rating_advanced']:
-			Debug('[Rating] Episode has been rated')
+			Debug("[Rating] Episode has already been rated.")
 			return
 
 	if not globals.traktapi.settings:
@@ -150,7 +150,7 @@ def rateMedia(media_id, media_type):
 
 
 def rateOnTrakt(rating, media_type, media):
-	Debug('[rating] Sending rating (%s) to trakt' % rating)
+	Debug("[Rating] Sending rating (%s) to trakt.tv" % rating)
 	if media_type == 'movie':
 		params = {'title': media['title'], 'year': media['year'], 'rating': rating}
 

@@ -4,10 +4,10 @@
 		<import addon="xbmc.python" version="2.1.0"/>
 		<import addon="script.module.simplejson" version="2.0.10"/>
 	</requires>
-	<extension point="xbmc.service" name="trakt.service" library="service.py" start="login" />
-	<extension point="xbmc.python.script" library="sync_exec.py">
+	<extension point="xbmc.python.script" library="manual_sync.py">
 		<provides>executable</provides>
 	</extension>
+	<extension point="xbmc.service" name="trakt.service" library="default.py" start="login" />
 	<extension point="xbmc.addon.metadata" name="trakt.metadata">
 		<language></language>
 		<summary lang="en">TV and movie scrobbler for trakt.tv</summary>
