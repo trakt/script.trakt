@@ -8,8 +8,7 @@ import utilities
 import globals
 from utilities import Debug, xbmcJsonRequest, notification, getSettingAsFloat, getSettingAsBool
 
-__settings__ = xbmcaddon.Addon("script.trakt")
-__language__ = __settings__.getLocalizedString
+__addon__ = xbmcaddon.Addon("script.trakt")
 
 buttons = {
 	10030:	'love',
@@ -27,18 +26,18 @@ buttons = {
 }
 
 focus_labels = {
-	10030: __language__(1314).encode('utf-8', 'ignore'),
-	10031: __language__(1315).encode('utf-8', 'ignore'),
-	11030: __language__(1315).encode('utf-8', 'ignore'),
-	11031: __language__(1316).encode('utf-8', 'ignore'),
-	11032: __language__(1317).encode('utf-8', 'ignore'),
-	11033: __language__(1318).encode('utf-8', 'ignore'),
-	11034: __language__(1319).encode('utf-8', 'ignore'),
-	11035: __language__(1320).encode('utf-8', 'ignore'),
-	11036: __language__(1321).encode('utf-8', 'ignore'),
-	11037: __language__(1322).encode('utf-8', 'ignore'),
-	11038: __language__(1323).encode('utf-8', 'ignore'),
-	11039: __language__(1314).encode('utf-8', 'ignore')
+	10030: utilities.getString(1314),
+	10031: utilities.getString(1315),
+	11030: utilities.getString(1315),
+	11031: utilities.getString(1316),
+	11032: utilities.getString(1317),
+	11033: utilities.getString(1318),
+	11034: utilities.getString(1319),
+	11035: utilities.getString(1320),
+	11036: utilities.getString(1321),
+	11037: utilities.getString(1322),
+	11038: utilities.getString(1323),
+	11039: utilities.getString(1314)
 }
 
 
@@ -137,7 +136,7 @@ def rateMedia(media_id, media_type):
 
 	gui = RatingDialog(
 		"RatingDialog.xml",
-		__settings__.getAddonInfo('path'),
+		__addon__.getAddonInfo('path'),
 		media_type=media_type,
 		media=xbmc_media,
 		rating_type=rating_type
@@ -174,7 +173,7 @@ def rateOnTrakt(rating, media_type, media):
 		data = globals.traktapi.rateEpisode(params)
 
 	if data != None:
-		notification(__language__(1201).encode('utf-8', 'ignore'), __language__(1167).encode('utf-8', 'ignore')) # Rating submitted successfully
+		notification(utilities.getString(1201), utilities.getString(1167)) # Rating submitted successfully
 
 
 class RatingDialog(xbmcgui.WindowXMLDialog):
