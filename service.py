@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-""" Handles notifications from XBMC via its own thread and forwards them on to the scrobbler """
 
 import xbmc
 import threading

@@ -313,7 +313,7 @@ class SyncEpisodes():
 			if trakt_show:
 				missing = compare_show_watched_xbmc(xbmc_show, trakt_show)
 			else:
-				Debug("[Episodes Sync] '%s' has not been watched or scrobbled on on trakt.tv yet, skipping." % xbmc_show['title'])
+				Debug("[Episodes Sync] '%s' has not been watched or scrobbled on trakt.tv yet, skipping." % xbmc_show['title'])
 
 
 			if missing:
