@@ -123,7 +123,7 @@ class traktAPI(object):
 			elif hasattr(e, 'reason'): # usually a read timeout, or unable to reach host
 				Debug("[traktAPI] __getData(): Network error: %s" % str(e.reason))
 				if isinstance(e.reason, socket.timeout):
-					notification('trakt', getString(1108).encode("utf-8", "ignore") + " (timeout)") # can't connect to trakt
+					notification('trakt', getString(1108) + " (timeout)") # can't connect to trakt
 				return json.dumps({'status':'failure', 'error':e.reason, 'type':'network'}) 
 			else:
 				return json.dumps({'status':'failure', 'error':e.message}) 
@@ -200,7 +200,7 @@ class traktAPI(object):
 				# malformed json response
 				Debug("[traktAPI] traktRequest(): (%i) Bad JSON response: '%s'", (i, raw))
 				if not silent:
-					notification('trakt', getString(1109).encode('utf-8', 'ignore') + ": Bad response from trakt") # Error
+					notification('trakt', getString(1109) + ": Bad response from trakt") # Error
 				
 			# check for the status variable in JSON data
 			if 'status' in data:
@@ -247,7 +247,7 @@ class traktAPI(object):
 				if returnStatus:
 					return data
 				if not silent:
-					notification('trakt', getString(1109).encode('utf-8', 'ignore') + ": " + str(data['error'])) # Error
+					notification('trakt', getString(1109) + ": " + str(data['error'])) # Error
 				return None
 			elif data['status'] == 'success':
 				Debug("[traktAPI] traktRequest(): JSON request was successful.")
@@ -270,10 +270,10 @@ class traktAPI(object):
 	def testAccount(self, force=False, daemon=True):
 		
 		if self.__username == "":
-			notification('trakt', getString(1106).encode('utf-8', 'ignore')) # please enter your Username and Password in settings
+			notification('trakt', getString(1106)) # please enter your Username and Password in settings
 			return False
 		elif self.__password == "":
-			notification("trakt", getString(1107).encode('utf-8', 'ignore')) # please enter your Password in settings
+			notification("trakt", getString(1107)) # please enter your Password in settings
 			return False
 
 		if not self.validUser or force:
@@ -288,7 +288,7 @@ class traktAPI(object):
 		else:
 			return True
 
-		notification('trakt', getString(1110).encode('utf-8', 'ignore')) # please enter your Password in settings
+		notification('trakt', getString(1110)) # please enter your Password in settings
 		return False
 
 	# url: http://api.trakt.tv/account/settings/<apikey>
