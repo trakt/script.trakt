@@ -77,12 +77,13 @@ class traktService:
 		while (not xbmc.abortRequested):
 			# check if we were tasked to do a manual sync
 			if utilities.getPropertyAsBool('traktManualSync'):
-				utilities.clearProperty('traktManualSync')
 				if not self.syncThread.isAlive():
 					utilities.Debug("Performing a manual sync.")
 					self.doSync(manual=True)
 				else:
 					utilities.Debug("There already is a sync in progress.")
+
+				utilities.clearProperty('traktManualSync')
 
 			if xbmc.Player().isPlayingVideo():
 				self.scrobbler.update()
