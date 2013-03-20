@@ -91,7 +91,7 @@ class traktService:
 			xbmc.sleep(500)
 
 		# we are shutting down
-		utilities.Debug("abortRequested received, shutting down.")
+		utilities.Debug("Shutting down.")
 
 		# check if watcher is set and active, if so, cancel it.
 		if self.watcher:
@@ -139,9 +139,13 @@ class syncThread(threading.Thread):
 		if utilities.syncCheck('movies'):
 			movies = SyncMovies(show_progress = self._isManual, api = globals.traktapi)
 			movies.Run()
+		else:
+			utilities.Debug("Movie sync is disabled, skipping.")
 		if utilities.syncCheck('episodes'):
 			episodes = SyncEpisodes(show_progress = self._isManual, api = globals.traktapi)
 			episodes.Run()
+		else:
+			utilities.Debug("Episode sync is disabled, skipping.")
 
 		utilities.Debug("Finished synchronization with trakt.tv")
 
