@@ -91,7 +91,7 @@ class traktService:
 			xbmc.sleep(500)
 
 		# we are shutting down
-		utilities.Debug("Shutting down.")
+		utilities.Debug("Beginning shut down.")
 
 		# check if watcher is set and active, if so, cancel it.
 		if self.watcher:
