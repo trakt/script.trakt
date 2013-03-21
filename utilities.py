@@ -12,36 +12,56 @@ except ImportError:
 	import json
 
 # read settings
-__settings__ = xbmcaddon.Addon("script.trakt")
-__language__ = __settings__.getLocalizedString
-
-debug = __settings__.getSetting("debug")
+__addon__ = xbmcaddon.Addon('script.trakt')
 
 def Debug(msg, force = False):
-	if(debug == 'true' or force):
+	if(getSettingAsBool('debug') or force):
 		try:
 			print "[trakt] " + msg
 		except UnicodeEncodeError:
-			print "[trakt] " + msg.encode( "utf-8", "ignore" )
+			print "[trakt] " + msg.encode('utf-8', 'ignore')
 
-def notification( header, message, time=5000, icon=__settings__.getAddonInfo("icon")):
-	xbmc.executebuiltin( "XBMC.Notification(%s,%s,%i,%s)" % ( header, message, time, icon ) )
+def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')):
+	xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message, time, icon))
 
-# helper function to get bool type from settings
-def get_bool_setting(setting):
-	return __settings__.getSetting(setting) == 'true'
+def getSetting(setting):
+    return __addon__.getSetting(setting).strip()
 
-# helper function to get string type from settings
-def get_string_setting(setting):
-	return __settings__.getSetting(setting).strip()
+def getSettingAsBool(setting):
+        return getSetting(setting) == "true"
 
-# helper function to get int type from settings
-def get_int_setting(setting):
-	return int(get_float_setting(setting))
+def getSettingAsFloat(setting):
+    try:
+        return float(getSetting(setting))
+    except ValueError:
+        return 0
 
-# helper function to get float type from settings
-def get_float_setting(setting):
-	return float(__settings__.getSetting(setting))
+def getSettingAsInt(setting):
+    try:
+        return int(getSettingAsFloat(setting))
+    except ValueError:		
+        return 0
+
+def getString(string_id):
+    return __addon__.getLocalizedString(string_id).encode('utf-8', 'ignore')
+
+def getProperty(property):
+	return xbmcgui.Window(10000).getProperty(property)
+
+def getPropertyAsBool(property):
+	return getProperty(property) == "True"
+	
+def setProperty(property, value):
+	xbmcgui.Window(10000).setProperty(property, value)
+
+def clearProperty(property):
+	xbmcgui.Window(10000).clearProperty(property)
+
+def isMovie(type):
+	return type == 'movie'
+
+def isEpisode(type):
+	return type == 'episode'
 
 def xbmcJsonRequest(params):
 	data = json.dumps(params)
@@ -49,15 +69,23 @@ def xbmcJsonRequest(params):
 	response = json.loads(request)
 
 	try:
-		if "result" in response:
-			return response["result"]
+		if 'result' in response:
+			return response['result']
 		return None
 	except KeyError:
-		Debug("[%s] %s" % (params["method"], response["error"]["message"]), True)
+		Debug("[%s] %s" % (params['method'], response['error']['message']), True)
 		return None
 
 def chunks(l, n):
 	return [l[i:i+n] for i in range(0, len(l), n)]
+
+def syncCheck(media_type):
+	if media_type == 'movies':
+		return getSettingAsBool('add_movies_to_trakt') or getSettingAsBool('trakt_movie_playcount') or getSettingAsBool('xbmc_movie_playcount') or getSettingAsBool('clean_trakt_movies')
+	else:
+		return getSettingAsBool('add_episodes_to_trakt') or getSettingAsBool('trakt_episode_playcount') or getSettingAsBool('xbmc_episode_playcount') or getSettingAsBool('clean_trakt_episodes')
+
+	return False
 
 # check exclusion settings for filename passed as argument
 def checkScrobblingExclusion(fullpath):
@@ -65,120 +93,70 @@ def checkScrobblingExclusion(fullpath):
 	if not fullpath:
 		return True
 	
-	Debug("checkScrobblingExclusion(): Checking exclusion settings for '%s'" % fullpath)
+	Debug("checkScrobblingExclusion(): Checking exclusion settings for '%s'." % fullpath)
 	
-	if (fullpath.find("pvr://") > -1) and get_bool_setting("ExcludeLiveTV"):
+	if (fullpath.find("pvr://") > -1) and getSettingAsBool('ExcludeLiveTV'):
 		Debug("checkScrobblingExclusion(): Video is playing via Live TV, which is currently set as excluded location.")
 		return True
 				
-	if (fullpath.find("http://") > -1) and get_bool_setting("ExcludeHTTP"):
+	if (fullpath.find("http://") > -1) and getSettingAsBool('ExcludeHTTP'):
 		Debug("checkScrobblingExclusion(): Video is playing via HTTP source, which is currently set as excluded location.")
 		return True
 		
-	ExcludePath = get_string_setting("ExcludePath")
-	if ExcludePath != "" and get_bool_setting("ExcludePathOption"):
+	ExcludePath = getSetting('ExcludePath')
+	if not ExcludePath and getSettingAsBool('ExcludePathOption'):
 		if (fullpath.find(ExcludePath) > -1):
-			Debug('checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 1.')
+			Debug("checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 1.")
 			return True
 
-	ExcludePath2 = get_string_setting("ExcludePath2")
-	if ExcludePath2 != "" and get_bool_setting("ExcludePathOption2"):
+	ExcludePath2 = getSetting('ExcludePath2')
+	if not ExcludePath2 and getSettingAsBool('ExcludePathOption2'):
 		if (fullpath.find(ExcludePath2) > -1):
-			Debug('checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 2.')
+			Debug("checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 2.")
 			return True
 
-	ExcludePath3 = get_string_setting("ExcludePath3")
-	if ExcludePath3 != "" and get_bool_setting("ExcludePathOption3"):
+	ExcludePath3 = getSetting('ExcludePath3')
+	if not ExcludePath3 and getSettingAsBool('ExcludePathOption3'):
 		if (fullpath.find(ExcludePath3) > -1):
-			Debug('checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 3.')
+			Debug("checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 3.")
 			return True
 	
 	return False
 
 # get a single episode from xbmc given the id
 def getEpisodeDetailsFromXbmc(libraryId, fields):
-	rpccmd = json.dumps({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params':{'episodeid': libraryId, 'properties': fields}, 'id': 1})
+	result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params':{'episodeid': libraryId, 'properties': fields}, 'id': 1})
+	Debug("getEpisodeDetailsFromXbmc(): %s" % str(result))
 
-	result = xbmc.executeJSONRPC(rpccmd)
-	Debug('[VideoLibrary.GetEpisodeDetails] ' + result)
-	result = json.loads(result)
-
-	# check for error
-	try:
-		error = result['error']
-		Debug("getEpisodeDetailsFromXbmc: " + str(error))
+	if not result:
+		Debug("getEpisodeDetailsFromXbmc(): Result from XBMC was empty.")
 		return None
-	except KeyError:
-		pass # no error
 
 	try:
 		# get tvdb id
-		rpccmd_show = json.dumps({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': result['result']['episodedetails']['tvshowid'], 'properties': ['year', 'imdbnumber']}, 'id': 1})
-
-		result_show = xbmc.executeJSONRPC(rpccmd_show)
-		Debug('[VideoLibrary.GetTVShowDetails] ' + result_show)
-		result_show = json.loads(result_show)
+		result_show = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': result['episodedetails']['tvshowid'], 'properties': ['year', 'imdbnumber']}, 'id': 1})
+		Debug("getEpisodeDetailsFromXbmc(): %s" % str(result_show))
 
 		# add to episode data
-		result['result']['episodedetails']['tvdb_id'] = result_show['result']['tvshowdetails']['imdbnumber']
-		result['result']['episodedetails']['year'] = result_show['result']['tvshowdetails']['year']
+		result['episodedetails']['tvdb_id'] = result_show['tvshowdetails']['imdbnumber']
+		result['episodedetails']['year'] = result_show['tvshowdetails']['year']
 
-		return result['result']['episodedetails']
+		return result['episodedetails']
 	except KeyError:
-		Debug("getEpisodeDetailsFromXbmc: KeyError: result['result']['episodedetails']")
+		Debug("getEpisodeDetailsFromXbmc(): KeyError: result['episodedetails']")
 		return None
 
 # get a single movie from xbmc given the id
 def getMovieDetailsFromXbmc(libraryId, fields):
-	rpccmd = json.dumps({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params':{'movieid': libraryId, 'properties': fields}, 'id': 1})
+	result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params':{'movieid': libraryId, 'properties': fields}, 'id': 1})
+	Debug("getMovieDetailsFromXbmc(): %s" % str(result))
 
-	result = xbmc.executeJSONRPC(rpccmd)
-	Debug('[VideoLibrary.GetMovieDetails] ' + result)
-	result = json.loads(result)
-
-	# check for error
-	try:
-		error = result['error']
-		Debug("getMovieDetailsFromXbmc: " + str(error))
-		return None
-	except KeyError:
-		pass # no error
-
-	try:
-		return result['result']['moviedetails']
-	except KeyError:
-		Debug("getMovieDetailsFromXbmc: KeyError: result['result']['moviedetails']")
+	if not result:
+		Debug("getMovieDetailsFromXbmc(): Result from XBMC was empty.")
 		return None
 
-# get the length of the current video playlist being played from XBMC
-def getPlaylistLengthFromXBMCPlayer(playerid):
-	if playerid == -1:
-		return 1 #Default player (-1) can't be checked properly
-	if playerid < 0 or playerid > 2:
-		Debug("[Util] getPlaylistLengthFromXBMCPlayer, invalid playerid: "+str(playerid))
-		return 0
-	rpccmd = json.dumps({'jsonrpc': '2.0', 'method': 'Player.GetProperties', 'params':{'playerid': playerid, 'properties':['playlistid']}, 'id': 1})
-	result = xbmc.executeJSONRPC(rpccmd)
-	result = json.loads(result)
-	# check for error
 	try:
-		error = result['error']
-		Debug("[Util] getPlaylistLengthFromXBMCPlayer, Player.GetProperties: " + str(error))
-		return 0
+		return result['moviedetails']
 	except KeyError:
-		pass # no error
-	playlistid = result['result']['playlistid']
-
-	rpccmd = json.dumps({'jsonrpc': '2.0', 'method': 'Playlist.GetProperties', 'params':{'playlistid': playlistid, 'properties': ['size']}, 'id': 1})
-	result = xbmc.executeJSONRPC(rpccmd)
-	result = json.loads(result)
-	# check for error
-	try:
-		error = result['error']
-		Debug("[Util] getPlaylistLengthFromXBMCPlayer, Playlist.GetProperties: " + str(error))
-		return 0
-	except KeyError:
-		pass # no error
-
-	return result['result']['size']
-
+		Debug("getMovieDetailsFromXbmc(): KeyError: result['moviedetails']")
+		return None
