@@ -397,7 +397,7 @@ class traktAPI(object):
 
 	def removeEpisode(self, data):
 		return self.removeFromLibrary('show/episode', data)
-	def removeMovie(self, date):
+	def removeMovie(self, data):
 		return self.removeFromLibrary('movie', data)
 
 	# url: http://api.trakt.tv/<show/episode|movie>/seen/<apikey>
