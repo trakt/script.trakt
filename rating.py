@@ -40,15 +40,14 @@ focus_labels = {
 	11039: utilities.getString(1314)
 }
 
-
-def ratingCheck(current_video, watched_time, total_time, playlist_length):
+def ratingCheck(current_video, summary_info, watched_time, total_time, playlist_length):
 	"""Check if a video should be rated and if so launches the rating dialog"""
 	Debug("[Rating] Rating Check called for '%s' with id=%s" % (current_video['type'], str(current_video['id'])));
 	if getSettingAsBool("rate_%s" % current_video['type']):
 		watched = (watched_time / total_time) * 100
 		if watched >= getSettingAsFloat("rate_min_view_time"):
 			if (playlist_length <= 1) or getSettingAsBool("rate_each_playlist_item"):
-				rateMedia(current_video['id'], current_video['type'])
+				rateMedia(current_video['id'], current_video['type'], summary_info)
 			else:
 				Debug("[Rating] Rate each playlist item is disabled.")
 		else:
@@ -56,78 +55,24 @@ def ratingCheck(current_video, watched_time, total_time, playlist_length):
 	else:
 		Debug("[Rating] '%s' is configured to not be rated." % current_video['type'])
 
-
-def rateMedia(media_id, media_type):
+def rateMedia(media_id, media_type, summary_info):
 	"""Launches the rating dialog"""
 	if media_id == None:
 		Debug("[Rating] Missing media_id")
 		return
 
-	if media_type == 'movie':
-		resp = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovieDetails', 'params': {'movieid': media_id, 'properties': ['title', 'imdbnumber', 'year']}})
-		if not resp:
-			Debug("[Rating] Problem getting movie data from XBMC")
-			return
-		
-		if not 'moviedetails' in resp:
-			Debug("[Rating] Error with movie results from XBMC, %s" % resp)
-			return
-			
-		xbmc_media = resp["moviedetails"]
-		if xbmc_media == None:
-			Debug("[Rating] Failed to retrieve movie data from XBMC")
-			return
-
-		trakt_summary = globals.traktapi.getMovieSummary(xbmc_media['imdbnumber'])
-		if trakt_summary == None:
-			Debug("[Rating] Failed to retrieve movie data from trakt")
-			return
-
-		if trakt_summary['rating'] or trakt_summary['rating_advanced']:
+	if utilities.isMovie(media_type):
+		if summary_info['rating'] or summary_info['rating_advanced']:
 			Debug("[Rating] Movie has already been rated.")
 			return
 
-	else:
-		resp = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': media_id, 'properties': ['uniqueid', 'tvshowid', 'episode', 'season']}})
-		if not resp:
-			Debug("[Rating] Problem getting episode data from XBMC")
-			return
-		
-		if not 'episodedetails' in resp:
-			Debug("[Rating] Error with episode results from XBMC, %s" % resp)
-			return
-			
-		episode = resp["episodedetails"]
-		if episode == None:
-			Debug("[Rating] Failed to retrieve episode data from XBMC")
-			return
-
-		resp = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetTVShowDetails', 'params': {'tvshowid': episode['tvshowid'], 'properties': ['imdbnumber']}})
-		if not resp:
-			Debug("[Rating] Problem getting tvshow data from XBMC")
-			return
-		
-		if not 'tvshowdetails' in resp:
-			Debug("[Rating] Error with tvshow results from XBMC, %s" % resp)
-			return
-
-		xbmc_media = resp["tvshowdetails"]
-		if xbmc_media == None:
-			Debug("[Rating] Failed to retrieve tvshow data from XBMC")
-			return
-
-		xbmc_media["episode"] = episode
-
-		trakt_summary = globals.traktapi.getShowSummary(xbmc_media['imdbnumber'], xbmc_media['episode']['season'], xbmc_media['episode']['episode'])
-		if trakt_summary == None:
-			Debug("[Rating] Failed to retrieve show/episode data from trakt")
-			return
-
-		xbmc_media['year'] = trakt_summary['show']['year']
-
-		if trakt_summary['episode']['rating'] or trakt_summary['episode']['rating_advanced']:
+	elif utilities.isEpisode(media_type):
+		if summary_info['episode']['rating'] or summary_info['episode']['rating_advanced']:
 			Debug("[Rating] Episode has already been rated.")
 			return
+
+	else:
+		return
 
 	if not globals.traktapi.settings:
 		globals.traktapi.getAccountSettings()
@@ -138,7 +83,7 @@ def rateMedia(media_id, media_type):
 		"RatingDialog.xml",
 		__addon__.getAddonInfo('path'),
 		media_type=media_type,
-		media=xbmc_media,
+		media=summary_info,
 		rating_type=rating_type
 	)
 
@@ -147,34 +92,32 @@ def rateMedia(media_id, media_type):
 		rateOnTrakt(gui.rating, gui.media_type, gui.media)
 	del gui
 
-
 def rateOnTrakt(rating, media_type, media):
 	Debug("[Rating] Sending rating (%s) to trakt.tv" % rating)
 	if media_type == 'movie':
-		params = {'title': media['title'], 'year': media['year'], 'rating': rating}
-
-		if media['imdbnumber'].startswith('tt'):
-			params['imdb_id'] = media['imdbnumber']
-
-		elif media['imdbnumber'].isdigit():
-			params['tmdb_id'] = media['imdbnumber']
+		params = {}
+		params['title'] = media['title']
+		params['year'] = media['year']
+		params['rating'] = rating
+		params['tmdb_id'] = media['tmdb_id']
+		params['imdb_id'] = media['imdb_id']
 
 		data = globals.traktapi.rateMovie(params)
 
 	else:
-		params = {'title': media['label'], 'year': media['year'], 'season': media['episode']['season'], 'episode': media['episode']['episode'], 'rating': rating}
-
-		if media['imdbnumber'].isdigit():
-			params['tvdb_id'] = media['imdbnumber']
-
-		elif media['imdbnumber'].startswith('tt'):
-			params['imdb_id'] = media['imdbnumber']
+		params = {}
+		params['title'] = media['show']['title']
+		params['year'] = media['show']['year']
+		params['season'] = media['episode']['season']
+		params['episode'] = media['episode']['number']
+		params['rating'] = rating
+		params['tvdb_id'] = media['show']['tvdb_id']
+		params['imdb_id'] = media['show']['imdb_id']
 
 		data = globals.traktapi.rateEpisode(params)
 
 	if data != None:
 		notification(utilities.getString(1201), utilities.getString(1167)) # Rating submitted successfully
-
 
 class RatingDialog(xbmcgui.WindowXMLDialog):
 	def __init__(self, xmlFile, resourcePath, defaultName='Default', forceFallback=False, media_type=None, media=None, rating_type=None):
@@ -190,19 +133,17 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 		if self.media_type == 'movie':
 			self.getControl(10012).setLabel('%s (%s)' % (self.media['title'], self.media['year']))
 		else:
-			self.getControl(10012).setLabel('%s - %s' % (self.media['label'], self.media['episode']['label']))
+			self.getControl(10012).setLabel('%s - %s' % (self.media['show']['title'], self.media['episode']['title']))
 
 		if self.rating_type == 'simple':
 			self.setFocus(self.getControl(10030)) #Focus Loved Button
 		else:
 			self.setFocus(self.getControl(11037)) #Focus 8 Button
 
-
 	def onClick(self, controlID):
 		if controlID in buttons:
 			self.rating = buttons[controlID]
 			self.close()
-
 
 	def onFocus(self, controlID):
 		if controlID in focus_labels:

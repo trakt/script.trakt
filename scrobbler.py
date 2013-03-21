@@ -23,6 +23,7 @@ class Scrobbler():
 	curVideoInfo = None
 	playlistLength = 1
 	markedAsWatched = []
+	traktSummaryInfo = None
 
 	def __init__(self, api):
 		self.traktapi = api
@@ -100,10 +101,14 @@ class Scrobbler():
 				Debug("[Scrobbler] Warning: Cant find playlist length, assuming that this item is by itself")
 				self.playlistLength = 1
 
+			self.traktSummaryInfo = None
 			self.isMultiPartEpisode = False
 			if utilities.isMovie(self.curVideo['type']):
 				if 'id' in self.curVideo:
 					self.curVideoInfo = utilities.getMovieDetailsFromXbmc(self.curVideo['id'], ['imdbnumber', 'title', 'year'])
+					if utilities.getSettingAsBool('rate_movie'):
+						# pre-get sumamry information, for faster rating dialog.
+						self.traktSummaryInfo = self.traktapi.getMovieSummary(self.curVideoInfo['imdbnumber'])
 				elif 'title' in self.curVideo and 'year' in self.curVideo:
 					self.curVideoInfo = {}
 					self.curVideoInfo['imdbnumber'] = ''
@@ -113,6 +118,9 @@ class Scrobbler():
 			elif utilities.isEpisode(self.curVideo['type']):
 				if 'id' in self.curVideo:
 					self.curVideoInfo = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
+					if utilities.getSettingAsBool('rate_episode'):
+						# pre-get sumamry information, for faster rating dialog.
+						self.traktSummaryInfo = self.traktapi.getShowSummary(self.curVideoInfo['tvdb_id'], self.curVideoInfo['season'], self.curVideoInfo['episode'])
 				elif 'showtitle' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
 					self.curVideoInfo = {}
 					self.curVideoInfo['tvdb_id'] = None
@@ -175,10 +183,11 @@ class Scrobbler():
 		self.markedAsWatched = []
 		if self.watchedTime != 0:
 			if 'type' in self.curVideo:
+				ratingCheck(self.curVideo, self.traktSummaryInfo, self.watchedTime, self.videoDuration, self.playlistLength)
 				self.check()
-				ratingCheck(self.curVideo, self.watchedTime, self.videoDuration, self.playlistLength)
 			self.watchedTime = 0
 			self.isMultiPartEpisode = False
+		self.traktSummaryInfo = None
 		self.curVideo = None
 
 	def watching(self):
