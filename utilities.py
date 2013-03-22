@@ -28,7 +28,7 @@ def getSetting(setting):
     return __addon__.getSetting(setting).strip()
 
 def getSettingAsBool(setting):
-        return getSetting(setting) == "true"
+        return getSetting(setting).lower() == "true"
 
 def getSettingAsFloat(setting):
     try:
@@ -41,6 +41,9 @@ def getSettingAsInt(setting):
         return int(getSettingAsFloat(setting))
     except ValueError:		
         return 0
+
+def setSetting(setting, value):
+	__addon__.setSetting(setting, str(value))
 
 def getString(string_id):
     return __addon__.getLocalizedString(string_id).encode('utf-8', 'ignore')
