@@ -6,52 +6,22 @@ import xbmcaddon
 import xbmcgui
 import utilities
 import globals
-from utilities import Debug, xbmcJsonRequest, notification, getSettingAsFloat, getSettingAsBool
+from utilities import Debug, notification
 
 __addon__ = xbmcaddon.Addon("script.trakt")
-
-buttons = {
-	10030:	'love',
-	10031:	'hate',
-	11030:	'1',
-	11031:	'2',
-	11032:	'3',
-	11033:	'4',
-	11034:	'5',
-	11035:	'6',
-	11036:	'7',
-	11037:	'8',
-	11038:	'9',
-	11039:	'10'
-}
-
-focus_labels = {
-	10030: utilities.getString(1314),
-	10031: utilities.getString(1315),
-	11030: utilities.getString(1315),
-	11031: utilities.getString(1316),
-	11032: utilities.getString(1317),
-	11033: utilities.getString(1318),
-	11034: utilities.getString(1319),
-	11035: utilities.getString(1320),
-	11036: utilities.getString(1321),
-	11037: utilities.getString(1322),
-	11038: utilities.getString(1323),
-	11039: utilities.getString(1314)
-}
 
 def ratingCheck(current_video, summary_info, watched_time, total_time, playlist_length):
 	"""Check if a video should be rated and if so launches the rating dialog"""
 	Debug("[Rating] Rating Check called for '%s' with id=%s" % (current_video['type'], str(current_video['id'])));
-	if getSettingAsBool("rate_%s" % current_video['type']):
+	if utilities.getSettingAsBool("rate_%s" % current_video['type']):
 		watched = (watched_time / total_time) * 100
-		if watched >= getSettingAsFloat("rate_min_view_time"):
-			if (playlist_length <= 1) or getSettingAsBool("rate_each_playlist_item"):
+		if watched >= utilities.getSettingAsFloat("rate_min_view_time"):
+			if (playlist_length <= 1) or utilities.getSettingAsBool("rate_each_playlist_item"):
 				rateMedia(current_video['id'], current_video['type'], summary_info)
 			else:
 				Debug("[Rating] Rate each playlist item is disabled.")
 		else:
-			Debug("[Rating] '%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (current_video['type'], watched, getSettingAsFloat("rate_min_view_time")))
+			Debug("[Rating] '%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (current_video['type'], watched, utilities.getSettingAsFloat("rate_min_view_time")))
 	else:
 		Debug("[Rating] '%s' is configured to not be rated." % current_video['type'])
 
@@ -94,7 +64,7 @@ def rateMedia(media_id, media_type, summary_info):
 
 def rateOnTrakt(rating, media_type, media):
 	Debug("[Rating] Sending rating (%s) to trakt.tv" % rating)
-	if media_type == 'movie':
+	if utilities.isMovie(media_type):
 		params = {}
 		params['title'] = media['title']
 		params['year'] = media['year']
@@ -104,7 +74,7 @@ def rateOnTrakt(rating, media_type, media):
 
 		data = globals.traktapi.rateMovie(params)
 
-	else:
+	elif utilities.isEpisode(media_type):
 		params = {}
 		params['title'] = media['show']['title']
 		params['year'] = media['show']['year']
@@ -116,10 +86,43 @@ def rateOnTrakt(rating, media_type, media):
 
 		data = globals.traktapi.rateEpisode(params)
 
+	else:
+		return
+
 	if data != None:
 		notification(utilities.getString(1201), utilities.getString(1167)) # Rating submitted successfully
 
 class RatingDialog(xbmcgui.WindowXMLDialog):
+	buttons = {
+		10030:	'love',
+		10031:	'hate',
+		11030:	'1',
+		11031:	'2',
+		11032:	'3',
+		11033:	'4',
+		11034:	'5',
+		11035:	'6',
+		11036:	'7',
+		11037:	'8',
+		11038:	'9',
+		11039:	'10'
+	}
+
+	focus_labels = {
+		10030: utilities.getString(1314),
+		10031: utilities.getString(1315),
+		11030: utilities.getString(1315),
+		11031: utilities.getString(1316),
+		11032: utilities.getString(1317),
+		11033: utilities.getString(1318),
+		11034: utilities.getString(1319),
+		11035: utilities.getString(1320),
+		11036: utilities.getString(1321),
+		11037: utilities.getString(1322),
+		11038: utilities.getString(1323),
+		11039: utilities.getString(1314)
+	}
+
 	def __init__(self, xmlFile, resourcePath, forceFallback=False, media_type=None, media=None, rating_type=None):
 		self.media_type = media_type
 		self.media = media
@@ -141,12 +144,12 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 			self.setFocus(self.getControl(11037)) #Focus 8 Button
 
 	def onClick(self, controlID):
-		if controlID in buttons:
-			self.rating = buttons[controlID]
+		if controlID in self.buttons:
+			self.rating = self.buttons[controlID]
 			self.close()
 
 	def onFocus(self, controlID):
-		if controlID in focus_labels:
-			self.getControl(10013).setLabel(focus_labels[controlID])
+		if controlID in self.focus_labels:
+			self.getControl(10013).setLabel(self.focus_labels[controlID])
 		else:
 			self.getControl(10013).setLabel('')
