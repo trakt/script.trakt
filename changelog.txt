@@ -1,5 +1,7 @@
 version 2.2.0
-
+  - Updated translations to English, Spanish and Portuguese(Brazil)
+  - Fixed movie sync (nate1280)
+  - Fixed the execution of Trakt add-on from Home screen shorcut (nate1280)
 
 version 2.1.0
   - rate movies and episode after watching them (sschocke, N3MIS15)
