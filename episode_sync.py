@@ -396,6 +396,8 @@ class SyncEpisodes():
 				show = {'title': trakt_show['title'], 'year': trakt_show['year'], 'episodes': remove}
 				if matched:
 					show[matched] = trakt_show[matched]
+				else:
+					show['tvdb_id'] = trakt_show['tvdb_id']
 				remove_from_trakt.append(show)
 
 		if remove_from_trakt:
