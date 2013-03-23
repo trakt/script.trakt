@@ -57,7 +57,7 @@ class SyncEpisodes():
 	def __init__(self, show_progress=False, api=None):
 		self.traktapi = api
 		self.xbmc_shows = []
-		self.trakt_shows = {'collection': [], 'watched': []}
+		self.trakt_shows = {'collection': None, 'watched': None}
 		self.notify = getSettingAsBool('show_sync_notifications')
 		self.show_progress = show_progress
 
@@ -115,12 +115,21 @@ class SyncEpisodes():
 		if self.show_progress:
 			progress.update(15, line1=getString(1434), line2=' ', line3=' ')
 
-		self.trakt_shows['collection'] = self.traktapi.getShowLibrary()
+		traktCol = self.traktapi.getShowLibrary()
+		if isinstance(traktCol, list):
+			self.trakt_shows['collection'] = traktCol
+			return True
+
+		return False
 
 	def AddToTrakt(self):
 		Debug("[Episodes Sync] Checking for episodes missing from trakt.tv collection.")
 		if self.show_progress:
 			progress.update(30, line1=getString(1435), line2=' ', line3=' ')
+
+		if not isinstance(self.trakt_shows['collection'], list):
+			Debug("[Episodes Sync] Invalid trakt.tv show list, possible error getting data from trakt, aborting trakt.tv collection update.")
+			return
 
 		add_to_trakt = []
 		trakt_imdb_index = {}
@@ -198,12 +207,21 @@ class SyncEpisodes():
 		if self.show_progress:
 			progress.update(50, line1=getString(1438), line2=' ', line3=' ')
 
-		self.trakt_shows['watched'] = self.traktapi.getWatchedEpisodeLibrary()
+		watched = self.traktapi.getWatchedEpisodeLibrary()
+		if isinstance(watched, list):
+			self.trakt_shows['watched'] = watched
+			return True
+
+		return False
 
 	def UpdatePlaysTrakt(self):
 		Debug("[Episodes Sync] Checking watched episodes on trakt.tv")
 		if self.show_progress:
 			progress.update(60, line1=getString(1438), line2=' ', line3=' ')
+
+		if not isinstance(self.trakt_shows['watched'], list):
+			Debug("[Episodes Sync] Invalid trakt.tv watched show list, possible error getting data from trakt, aborting trakt.tv watched update.")
+			return
 
 		update_playcount = []
 		trakt_imdb_index = {}
@@ -279,6 +297,10 @@ class SyncEpisodes():
 		if self.show_progress:
 			progress.update(80, line1=getString(1441), line2=' ', line3=' ')
 
+		if not isinstance(self.trakt_shows['watched'], list):
+			Debug("[Episodes Sync] Invalid trakt.tv watched show list, possible error getting data from trakt, aborting XBMC watched update.")
+			return
+
 		update_playcount = []
 		trakt_imdb_index = {}
 		trakt_tvdb_index = {}
@@ -344,6 +366,10 @@ class SyncEpisodes():
 		if self.show_progress:
 			progress.update(90, line1=getString(1445), line2=' ', line3=' ')
 
+		if not isinstance(self.trakt_shows['collection'], list):
+			Debug("[Episodes Sync] Invalid trakt.tv show list, possible error getting data from trakt, aborting trakt.tv collection cleaning.")
+			return
+
 		def convert_seasons(show):
 			episodes = []
 			if 'seasons' in show and show['seasons']:
@@ -398,6 +424,7 @@ class SyncEpisodes():
 					show[matched] = trakt_show[matched]
 				else:
 					show['tvdb_id'] = trakt_show['tvdb_id']
+					del show['episodes']
 				remove_from_trakt.append(show)
 
 		if remove_from_trakt:
@@ -412,7 +439,10 @@ class SyncEpisodes():
 				if self.show_progress:
 					progress.update(95, line1=getString(1445), line2=show['title'].encode('utf-8', 'ignore'), line3='%i %s' % (len(show['episodes']), getString(1447)))
 
-				self.traktapi.removeEpisode(show)
+				if 'episodes' in show:
+					self.traktapi.removeEpisode(show)
+				else:
+					self.traktapi.removeShow(show)
 
 		else:
 			Debug('[Episodes Sync] trakt.tv episode collection is clean')

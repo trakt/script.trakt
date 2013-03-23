@@ -208,16 +208,16 @@ class traktAPI(object):
 					break
 				else:
 					Debug("[traktAPI] traktRequest(): (%i) JSON Error '%s' -> '%s'" % (i, data['status'], data['error']))
-			
-			# check to see if we have data
-			if data:
+
+			# check to see if we have data, an empty array is still valid data, so check for None only
+			if not data is None:
 				Debug("[traktAPI] traktRequest(): Have JSON data, breaking retry.")
 				break
 
 			xbmc.sleep(500)
 		
 		# handle scenario where all retries fail
-		if not data:
+		if data is None:
 			Debug("[traktAPI] traktRequest(): JSON Request failed, data is still empty after retries.")
 			return None
 		
@@ -385,7 +385,7 @@ class traktAPI(object):
 	def getWatchedMovieLibrary(self):
 		return self.getWatchedLibrary('movies')
 
-	# url: http://api.trakt.tv/<show/episode|movie>/library/<apikey>
+	# url: http://api.trakt.tv/<show|show/episode|movie>/library/<apikey>
 	# returns: {u'status': u'success', u'message': u'27 episodes added to your library'}
 	def addToLibrary(self, type, data):
 		if self.testAccount():
@@ -395,10 +395,12 @@ class traktAPI(object):
 
 	def addEpisode(self, data):
 		return self.addToLibrary('show/episode', data)
+	def addShow(self, data):
+		return self.addToLibrary('show', data)
 	def addMovie(self, data):
 		return self.addToLibrary('movie', data)
 
-	# url: http://api.trakt.tv/<show/episode|movie>/unlibrary/<apikey>
+	# url: http://api.trakt.tv/<show|show/episode|movie>/unlibrary/<apikey>
 	# returns:
 	def removeFromLibrary(self, type, data):
 		if self.testAccount():
@@ -408,10 +410,12 @@ class traktAPI(object):
 
 	def removeEpisode(self, data):
 		return self.removeFromLibrary('show/episode', data)
+	def removeShow(self, data):
+		return self.removeFromLibrary('show', data)
 	def removeMovie(self, data):
 		return self.removeFromLibrary('movie', data)
 
-	# url: http://api.trakt.tv/<show/episode|movie>/seen/<apikey>
+	# url: http://api.trakt.tv/<show|show/episode|movie>/seen/<apikey>
 	# returns: {u'status': u'success', u'message': u'2 episodes marked as seen'}
 	def updateSeenInLibrary(self, type, data):
 		if self.testAccount():
@@ -421,6 +425,8 @@ class traktAPI(object):
 
 	def updateSeenEpisode(self, data):
 		return self.updateSeenInLibrary('show/episode', data)
+	def updateSeenShow(self, data):
+		return self.updateSeenInLibrary('show', data)
 	def updateSeenMovie(self, data):
 		return self.updateSeenInLibrary('movie', data)
 

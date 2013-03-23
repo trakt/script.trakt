@@ -5,6 +5,7 @@ import xbmc
 import xbmcaddon
 import xbmcgui
 import math
+import time
 
 try:
 	import simplejson as json
@@ -78,6 +79,12 @@ def xbmcJsonRequest(params):
 	except KeyError:
 		Debug("[%s] %s" % (params['method'], response['error']['message']), True)
 		return None
+
+def sqlDateToUnixDate(date):
+	if not date:
+		return 0
+	t = time.strptime(date, "%Y-%m-%d %H:%M:%S")
+	return int(time.mktime(t))
 
 def chunks(l, n):
 	return [l[i:i+n] for i in range(0, len(l), n)]
