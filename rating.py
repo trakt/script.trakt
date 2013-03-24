@@ -147,7 +147,7 @@ def rateMedia(media_id, media_type):
 
 
 class RatingDialog(xbmcgui.WindowXMLDialog):
-	def __init__(self, xmlFile, resourcePath, defaultName='Default', forceFallback=False, media_type=None, media=None, rating_type=None):
+	def __init__(self, xmlFile, resourcePath, forceFallback=False, media_type=None, media=None, rating_type=None):
 		self.media_type = media_type
 		self.media = media
 		self.rating_type = rating_type
