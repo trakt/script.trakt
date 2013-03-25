@@ -9,7 +9,7 @@ import math
 import urllib2
 import base64
 
-from utilities import Debug, notification, getSetting, getSettingAsBool, getSettingAsInt, getString
+from utilities import Debug, notification, getSetting, getSettingAsBool, getSettingAsInt, getString, setSetting
 from urllib2 import Request, urlopen, HTTPError, URLError
 from httplib import HTTPException
 
@@ -27,42 +27,41 @@ except ImportError:
 __addon__ = xbmcaddon.Addon('script.trakt')
 __addonversion__ = __addon__.getAddonInfo('version')
 
-class traktAuthProblem(Exception):
-	def __init__(self, value, code):
+class traktError(Exception):
+	def __init__(self, value, code=None):
 		self.value = value
-		self.code = code
+		if code:
+			self.code = code
 	def __str__(self):
 		return repr(self.value)
-class traktServerBusy(Exception):
-	def __init__(self, value, code):
-		self.value = value
-		self.code = code
-	def __str__(self):
-		return repr(self.value)
+
+class traktAuthProblem(traktError): pass
+class traktServerBusy(traktError): pass
+class traktUnknownError(traktError): pass
+class traktNetworkError(traktError):
+	def __init__(self, value, timeout):
+		super(traktNetworkError, self).__init__(value)
+		self.timeout = timeout
 
 class traktAPI(object):
 
 	__apikey = "b6135e0f7510a44021fac8c03c36c81a17be35d9"
 	__baseURL = "https://api.trakt.tv"
-	__timeout = 60
 	__username = ""
 	__password = ""
-	validUser = False
 
 	def __init__(self):
+		Debug("[traktAPI] Initializing.")
+
 		self.__username = getSetting('username')
 		self.__password = sha1(getSetting('password')).hexdigest()
-		Debug("[traktAPI] Initializing.")
-		Debug("[traktAPI] Testing account '%s'." % self.__username)
+
 		self.settings = None
 		if self.testAccount():
-			Debug("[traktAPI] Account '%s' is valid." % self.__username)
 			Debug("[traktAPI] Getting account settings for '%s'." % self.__username)
 			self.getAccountSettings()
-		else:
-			Debug("[traktAPI] Account '%s' is not valid." % self.__username)
 
-	def __getData(self, url, args):
+	def __getData(self, url, args, timeout=60):
 		data = None
 		try:
 			Debug("[traktAPI] __getData(): urllib2.Request(%s)" % url)
@@ -74,7 +73,7 @@ class traktAPI(object):
 
 			Debug("[traktAPI] __getData(): urllib2.urlopen()")
 			t1 = time.time()
-			response = urlopen(req, timeout=self.__timeout)
+			response = urlopen(req, timeout=timeout)
 			t2 = time.time()
 
 			Debug("[traktAPI] __getData(): response.read()")
@@ -86,47 +85,22 @@ class traktAPI(object):
 
 		except IOError, e:
 			if hasattr(e, 'code'): # error 401 or 503, possibly others
-				Debug("[traktAPI] __getData(): Error Code: %s" % str(e.code))
-				
-				error = {}
-
 				# read the error document, strip newlines, this will make an html page 1 line
 				error_data = e.read().replace("\n", "").replace("\r", "")
 
-				# try to parse the data as json
-				try:
-					error = json.loads(error_data)
-				except ValueError:
-					Debug("[traktAPI] __getData(): Error data is not JSON format - %s" % error_data)
-					# manually add status, and the page data returned.
-					error['status'] = 'failure'
-					error['error'] = error_data
-
-				# add error code, and string type to error dictionary
-				error['code'] = e.code
-				error['type'] = 'protocol'
-
 				if e.code == 401: # authentication problem
-					# {"status":"failure","error":"failed authentication"}
-					Debug("[traktAPI] __getData(): Authentication Failure (%s)" % error_data)
-					# reset internal valid user
-					self.validUser = False
-
+					raise traktAuthProblem(error_data)
 				elif e.code == 503: # server busy problem
-					# {"status":"failure","error":"server is over capacity"}
-					Debug("[traktAPI] __getData(): Server Busy (%s)" % error_data)
-
+					raise traktServerBusy(error_data)
 				else:
-					Debug("[traktAPI] __getData(): Other problem (%s)" % error_data)
+					raise traktUnknownError(error_data, e.code)
 
-				return json.dumps(error)
 			elif hasattr(e, 'reason'): # usually a read timeout, or unable to reach host
-				Debug("[traktAPI] __getData(): Network error: %s" % str(e.reason))
-				if isinstance(e.reason, socket.timeout):
-					notification('trakt', getString(1108) + " (timeout)") # can't connect to trakt
-				return json.dumps({'status':'failure', 'error':e.reason, 'type':'network'}) 
+				raise traktNetworkError(str(e.reason), isinstance(e.reason, socket.timeout))
+
 			else:
-				return json.dumps({'status':'failure', 'error':e.message}) 
+				raise traktUnknownError(e.message)
+
 		return data
 	
 	# make a JSON api request to trakt
@@ -157,8 +131,8 @@ class traktAPI(object):
 			Debug("[traktAPI] traktRequest(): Request data: '%s'." % str(json.dumps(args)))
 			
 			# inject username/pass into json data
-			args["username"] = self.__username
-			args["password"] = self.__password
+			args['username'] = self.__username
+			args['password'] = self.__password
 			
 			# check if plugin version needs to be passed
 			if passVersions:
@@ -174,10 +148,36 @@ class traktAPI(object):
 		# start retry loop
 		for i in range(retries):	
 			Debug("[traktAPI] traktRequest(): (%i) Request URL '%s'" % (i, url))
-			
-			# get data from trakt.tv
-			raw = self.__getData(url, jdata)
-			
+
+			# check if we are closing
+			if xbmc.abortRequested:
+				Debug("[traktAPI] traktRequest(): (%i) xbmc.abortRequested" % i)
+				break
+
+			try:
+				# get data from trakt.tv
+				raw = self.__getData(url, jdata)
+			except traktError, e:
+				if isinstance(e, traktServerBusy):
+					Debug("[traktAPI] traktRequest(): (%i) Server Busy (%s)" % (i, e.value))
+				elif isinstance(e, traktAuthProblem):
+					Debug("[traktAPI] traktRequest(): (%i) Authentication Failure (%s)" % (i, e.value))
+					setSetting('account_valid', False)
+					notification('trakt', getString(1110))
+					return
+				elif isinstance(e, traktNetworkError):
+					Debug("[traktAPI] traktRequest(): (%i) Network error: %s" % (i, e.value))
+					if e.timeout:
+						notification('trakt', getString(1108) + " (timeout)") # can't connect to trakt
+					xbmc.sleep(5000)
+				elif isinstance(e, traktUnknownError):
+					Debug("[traktAPI] traktRequest(): (%i) Other problem (%s)" % (i, e.value))
+				else:
+					pass
+
+				xbmc.sleep(1000)
+				continue
+
 			# check if we are closing
 			if xbmc.abortRequested:
 				Debug("[traktAPI] traktRequest(): (%i) xbmc.abortRequested" % i)
@@ -208,36 +208,16 @@ class traktAPI(object):
 					break
 				else:
 					Debug("[traktAPI] traktRequest(): (%i) JSON Error '%s' -> '%s'" % (i, data['status'], data['error']))
-					if 'type' in data:
-						if data['type'] == 'protocol':
-							# protocol error, so a 4xx or 5xx
-							if data['code'] == 401:
-								# auth error, no point retrying
-								self.validUser = False
-								return None
-							else:
-								pass
-						elif data['type'] == 'network':
-							# network communication error, sleep for a
-							# bit longer before continuing
-							xbmc.sleep(5000)
-							continue
-					else:
-						#should never get here
-						pass
-					
-					xbmc.sleep(1000)
-					continue
-			
-			# check to see if we have data
-			if data:
+
+			# check to see if we have data, an empty array is still valid data, so check for None only
+			if not data is None:
 				Debug("[traktAPI] traktRequest(): Have JSON data, breaking retry.")
 				break
 
 			xbmc.sleep(500)
 		
 		# handle scenario where all retries fail
-		if not data:
+		if data is None:
 			Debug("[traktAPI] traktRequest(): JSON Request failed, data is still empty after retries.")
 			return None
 		
@@ -267,28 +247,59 @@ class traktAPI(object):
 
 	# http://api.trakt.tv/account/test/<apikey>
 	# returns: {"status": "success","message": "all good!"}
-	def testAccount(self, force=False, daemon=True):
+	def testAccount(self, force=False):
 		
 		if self.__username == "":
 			notification('trakt', getString(1106)) # please enter your Username and Password in settings
+			setSetting('account_valid', False)
 			return False
 		elif self.__password == "":
 			notification("trakt", getString(1107)) # please enter your Password in settings
+			setSetting('account_valid', False)
 			return False
 
-		if not self.validUser or force:
+		if not getSettingAsBool('account_valid') or force:
+			Debug("[traktAPI] Testing account '%s'." % self.__username)
+
 			url = "%s/account/test/%s" % (self.__baseURL, self.__apikey)
 			Debug("[traktAPI] testAccount(url: %s)" % url)
-			response = self.traktRequest('POST', url)
+			
+			args = json.dumps({'username': self.__username, 'password': self.__password})
+			response = None
+			
+			try:
+				# get data from trakt.tv
+				response = self.__getData(url, args)
+			except traktError, e:
+				if isinstance(e, traktAuthProblem):
+					Debug("[traktAPI] testAccount(): Account '%s' failed authentication. (%s)" % (self.__username, e.value))
+				elif isinstance(e, traktServerBusy):
+					Debug("[traktAPI] testAccount(): Server Busy (%s)" % e.value)
+				elif isinstance(e, traktNetworkError):
+					Debug("[traktAPI] testAccount(): Network error: %s" % e.value)
+				elif isinstance(e, traktUnknownError):
+					Debug("[traktAPI] testAccount(): Other problem (%s)" % e.value)
+				else:
+					pass
+			
 			if response:
-				if 'status' in response:
-					if response['status'] == 'success':
-						self.validUser = True
+				data = None
+				try:
+					data = json.loads(response)
+				except ValueError:
+					pass
+
+				if 'status' in data:
+					if data['status'] == 'success':
+						setSetting('account_valid', True)
+						Debug("[traktAPI] testAccount(): Account '%s' is valid." % self.__username)
 						return True
+
 		else:
 			return True
 
 		notification('trakt', getString(1110)) # please enter your Password in settings
+		setSetting('account_valid', False)
 		return False
 
 	# url: http://api.trakt.tv/account/settings/<apikey>
@@ -374,7 +385,7 @@ class traktAPI(object):
 	def getWatchedMovieLibrary(self):
 		return self.getWatchedLibrary('movies')
 
-	# url: http://api.trakt.tv/<show/episode|movie>/library/<apikey>
+	# url: http://api.trakt.tv/<show|show/episode|movie>/library/<apikey>
 	# returns: {u'status': u'success', u'message': u'27 episodes added to your library'}
 	def addToLibrary(self, type, data):
 		if self.testAccount():
@@ -384,10 +395,12 @@ class traktAPI(object):
 
 	def addEpisode(self, data):
 		return self.addToLibrary('show/episode', data)
+	def addShow(self, data):
+		return self.addToLibrary('show', data)
 	def addMovie(self, data):
 		return self.addToLibrary('movie', data)
 
-	# url: http://api.trakt.tv/<show/episode|movie>/unlibrary/<apikey>
+	# url: http://api.trakt.tv/<show|show/episode|movie>/unlibrary/<apikey>
 	# returns:
 	def removeFromLibrary(self, type, data):
 		if self.testAccount():
@@ -397,10 +410,12 @@ class traktAPI(object):
 
 	def removeEpisode(self, data):
 		return self.removeFromLibrary('show/episode', data)
+	def removeShow(self, data):
+		return self.removeFromLibrary('show', data)
 	def removeMovie(self, data):
 		return self.removeFromLibrary('movie', data)
 
-	# url: http://api.trakt.tv/<show/episode|movie>/seen/<apikey>
+	# url: http://api.trakt.tv/<show|show/episode|movie>/seen/<apikey>
 	# returns: {u'status': u'success', u'message': u'2 episodes marked as seen'}
 	def updateSeenInLibrary(self, type, data):
 		if self.testAccount():
@@ -410,6 +425,8 @@ class traktAPI(object):
 
 	def updateSeenEpisode(self, data):
 		return self.updateSeenInLibrary('show/episode', data)
+	def updateSeenShow(self, data):
+		return self.updateSeenInLibrary('show', data)
 	def updateSeenMovie(self, data):
 		return self.updateSeenInLibrary('movie', data)
 

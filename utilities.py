@@ -5,6 +5,7 @@ import xbmc
 import xbmcaddon
 import xbmcgui
 import math
+import time
 
 try:
 	import simplejson as json
@@ -28,7 +29,7 @@ def getSetting(setting):
     return __addon__.getSetting(setting).strip()
 
 def getSettingAsBool(setting):
-        return getSetting(setting) == "true"
+        return getSetting(setting).lower() == "true"
 
 def getSettingAsFloat(setting):
     try:
@@ -41,6 +42,9 @@ def getSettingAsInt(setting):
         return int(getSettingAsFloat(setting))
     except ValueError:		
         return 0
+
+def setSetting(setting, value):
+	__addon__.setSetting(setting, str(value))
 
 def getString(string_id):
     return __addon__.getLocalizedString(string_id).encode('utf-8', 'ignore')
@@ -75,6 +79,12 @@ def xbmcJsonRequest(params):
 	except KeyError:
 		Debug("[%s] %s" % (params['method'], response['error']['message']), True)
 		return None
+
+def sqlDateToUnixDate(date):
+	if not date:
+		return 0
+	t = time.strptime(date, "%Y-%m-%d %H:%M:%S")
+	return int(time.mktime(t))
 
 def chunks(l, n):
 	return [l[i:i+n] for i in range(0, len(l), n)]

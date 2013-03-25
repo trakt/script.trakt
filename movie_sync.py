@@ -2,7 +2,7 @@
 
 import xbmc
 import xbmcgui
-from utilities import xbmcJsonRequest, Debug, notification, chunks, getSettingAsBool, getString
+from utilities import xbmcJsonRequest, Debug, notification, chunks, getSettingAsBool, getString, sqlDateToUnixDate
 
 add_movies_to_trakt = getSettingAsBool('add_movies_to_trakt')
 trakt_movie_playcount = getSettingAsBool('trakt_movie_playcount')
@@ -15,6 +15,9 @@ def xbmc_to_trakt_movie(movie, playcount=False):
 	""" Helper to convert XBMC movie into a format trakt can use. """
 
 	trakt_movie = {'title': movie['title'], 'year': movie['year']}
+
+	if 'lastplayed' in movie:
+		trakt_movie['last_played'] = sqlDateToUnixDate(movie['lastplayed'])
 
 	if movie['imdbnumber'].startswith('tt'): #IMDB
 		trakt_movie['imdb_id'] = movie['imdbnumber']
@@ -54,7 +57,7 @@ class SyncMovies():
 		if self.show_progress:
 			progress.update(5, line1=getString(1422), line2=' ', line3=' ')
 
-		result = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['title', 'imdbnumber', 'year', 'playcount']}})
+		result = xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['title', 'imdbnumber', 'year', 'playcount', 'lastplayed']}})
 
 		# sanity check, test for empty result
 		if not result:
@@ -71,18 +74,34 @@ class SyncMovies():
 		Debug("[Movies Sync] Getting movie collection from trakt.tv")
 		if self.show_progress:
 			progress.update(10, line1=getString(1423), line2=' ', line3=' ')
-		self.trakt_movies_collection = self.traktapi.getMovieLibrary()
+
+		traktCol = self.traktapi.getMovieLibrary()
+		if isinstance(traktCol, list):
+			self.trakt_movies_collection = traktCol
+			return True
+
+		return False
 
 	def GetFromTraktSeen(self):
 		Debug("[Movies Sync] Getting seen movies from trakt.tv")
 		if self.show_progress:
 			progress.update(15, line1=getString(1424), line2=' ', line3=' ')
-		self.trakt_movies_seen = self.traktapi.getWatchedMovieLibrary()
+
+		traktSeen = self.traktapi.getWatchedMovieLibrary()
+		if isinstance(traktSeen, list):
+			self.trakt_movies_seen = traktSeen
+			return True
+
+		return False
 
 	def AddToTrakt(self):
 		Debug("[Movies Sync] Checking for XBMC movies that are not on trakt.tv")
 		if self.show_progress:
 			progress.update(30, line1=getString(1425), line2=' ', line3=' ')
+
+		if not isinstance(self.trakt_movies_collection, list):
+			Debug("[Movies Sync] Invalid trakt.tv movie list, possible error getting data from trakt, aborting trakt.tv collection update.")
+			return
 
 		add_to_trakt = []
 		trakt_imdb_ids = [x['imdb_id'] for x in self.trakt_movies_collection if 'imdb_id' in x]
@@ -127,6 +146,10 @@ class SyncMovies():
 		Debug("[Movies Sync] Checking if trakt.tv playcount is up to date.")
 		if self.show_progress:
 			progress.update(60, line1=getString(1427), line2=' ', line3=' ')
+
+		if not isinstance(self.trakt_movies_seen, list):
+			Debug("[Movies Sync] Invalid trakt.tv movie seen list, possible error getting data from trakt, aborting trakt.tv watched update.")
+			return
 
 		update_playcount = []
 		trakt_playcounts = {}
@@ -181,6 +204,10 @@ class SyncMovies():
 		if self.show_progress:
 			progress.update(85, line1=getString(1429), line2=' ', line3=' ')
 
+		if not isinstance(self.trakt_movies_seen, list):
+			Debug("[Movies Sync] Invalid trakt.tv movie seen list, possible error getting data from trakt, aborting XBMC watched update.")
+			return
+
 		update_playcount = []
 		trakt_playcounts = {}
 
@@ -224,6 +251,10 @@ class SyncMovies():
 		Debug("[Movies Sync] Cleaning trakt movie collection.")
 		if self.show_progress:
 			progress.update(95, line1=getString(1443), line2=' ', line3=' ')
+
+		if not isinstance(self.trakt_movies_collection, list):
+			Debug("[Movies Sync] Invalid trakt.tv movie list, possible error getting data from trakt, aborting trakt.tv cleaning.")
+			return
 
 		remove_from_trakt = []
 		xbmc_imdb_ids = [x['imdbnumber'] for x in self.xbmc_movies if x['imdbnumber'].startswith('tt')]
