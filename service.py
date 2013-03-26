@@ -223,6 +223,8 @@ class traktPlayer(xbmc.Player):
 					data['episode'] = int(episode)
 					data['showtitle'] = showtitle
 					data['title'] = xbmc.getInfoLabel('VideoPlayer.Title')
+					if year.isdigit():
+						data['year'] = year
 					utilities.Debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'episode' - %s - S%02dE%02d - %s." % (data['showtitle'], data['season'], data['episode'], data['title']))
 				elif year and not season and not showtitle:
 					# we have a year and no season/showtitle info, enough for a movie

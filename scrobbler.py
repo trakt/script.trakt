@@ -125,10 +125,11 @@ class Scrobbler():
 					self.curVideoInfo = {}
 					self.curVideoInfo['tvdb_id'] = None
 					self.curVideoInfo['year'] = None
+					if 'year' in self.curVideo:
+						self.curVideoInfo['year'] = self.curVideo['year']
 					self.curVideoInfo['showtitle'] = self.curVideo['showtitle']
 					self.curVideoInfo['season'] = self.curVideo['season']
 					self.curVideoInfo['episode'] = self.curVideo['episode']
-					self.curVideoInfo['uniqueid'] = None
 
 				if 'multi_episode_count' in self.curVideo:
 					self.isMultiPartEpisode = True
