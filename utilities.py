@@ -89,14 +89,6 @@ def sqlDateToUnixDate(date):
 def chunks(l, n):
 	return [l[i:i+n] for i in range(0, len(l), n)]
 
-def syncCheck(media_type):
-	if media_type == 'movies':
-		return getSettingAsBool('add_movies_to_trakt') or getSettingAsBool('trakt_movie_playcount') or getSettingAsBool('xbmc_movie_playcount') or getSettingAsBool('clean_trakt_movies')
-	else:
-		return getSettingAsBool('add_episodes_to_trakt') or getSettingAsBool('trakt_episode_playcount') or getSettingAsBool('xbmc_episode_playcount') or getSettingAsBool('clean_trakt_episodes')
-
-	return False
-
 # check exclusion settings for filename passed as argument
 def checkScrobblingExclusion(fullpath):
 

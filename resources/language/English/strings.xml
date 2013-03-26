@@ -62,6 +62,7 @@
 	<string id="1412">Show notifications</string>
 	<string id="1413">Clean trakt movie collection</string>
 	<string id="1414">Clean trakt episode collection</string>
+	<string id="1415">Simulate sync (for testing purposes)</string>
 
 	<!-- Sync Notifications -->
 	<string id="1420">Sync started</string>

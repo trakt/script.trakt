@@ -26,6 +26,7 @@
 		<setting label="1410" type="lsep"/><!-- Service -->
 		<setting id="sync_on_update" type="bool" label="1411" default="false"/>
 		<setting id="show_sync_notifications" type="bool" label="1412" default="false"/>
+		<setting id="simulate_sync" type="bool" label="1415" default="false"/>
 		<setting type="sep"/>
 		<setting label="1402" type="lsep"/><!-- Movies -->
 		<setting id="add_movies_to_trakt" type="bool" label="1403" default="true"/>
