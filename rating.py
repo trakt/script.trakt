@@ -109,18 +109,18 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 	}
 
 	focus_labels = {
-		10030: utilities.getString(1314),
-		10031: utilities.getString(1315),
-		11030: utilities.getString(1315),
-		11031: utilities.getString(1316),
-		11032: utilities.getString(1317),
-		11033: utilities.getString(1318),
-		11034: utilities.getString(1319),
-		11035: utilities.getString(1320),
-		11036: utilities.getString(1321),
-		11037: utilities.getString(1322),
-		11038: utilities.getString(1323),
-		11039: utilities.getString(1314)
+		10030: 1314,
+		10031: 1315,
+		11030: 1315,
+		11031: 1316,
+		11032: 1317,
+		11033: 1318,
+		11034: 1319,
+		11035: 1320,
+		11036: 1321,
+		11037: 1322,
+		11038: 1323,
+		11039: 1314
 	}
 
 	def __init__(self, xmlFile, resourcePath, forceFallback=False, media_type=None, media=None, rating_type=None):
@@ -150,6 +150,6 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 
 	def onFocus(self, controlID):
 		if controlID in self.focus_labels:
-			self.getControl(10013).setLabel(self.focus_labels[controlID])
+			self.getControl(10013).setLabel(utilities.getString(self.focus_labels[controlID]))
 		else:
 			self.getControl(10013).setLabel('')
