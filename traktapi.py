@@ -440,11 +440,11 @@ class traktAPI(object):
 			Debug("[traktAPI] getSummary(url: %s)" % url)
 			return self.traktRequest('POST', url)
 
-	def getShowSummary(self, imdb_id, season, episode):
-		data = "%s/%s/%s" % (imdb_id, season, episode)
+	def getShowSummary(self, id, season, episode):
+		data = "%s/%s/%s" % (id, season, episode)
 		return self.getSummary('show/episode', data)
-	def getMovieSummary(self, imdb_id):
-		data = str(imdb_id)
+	def getMovieSummary(self, id):
+		data = str(id)
 		return self.getSummary('movie', data)
 
 	# url: http://api.trakt.tv/rate/<episode|movie>/apikey
