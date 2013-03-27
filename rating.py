@@ -24,9 +24,9 @@ def ratingCheck(media_type, summary_info, watched_time, total_time, playlist_len
 			else:
 				Debug("[Rating] Rate each playlist item is disabled.")
 		else:
-			Debug("[Rating] '%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (current_video['type'], watched, utilities.getSettingAsFloat("rate_min_view_time")))
+			Debug("[Rating] '%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (media_type, watched, utilities.getSettingAsFloat("rate_min_view_time")))
 	else:
-		Debug("[Rating] '%s' is configured to not be rated." % current_video['type'])
+		Debug("[Rating] '%s' is configured to not be rated." % media_type)
 
 def rateMedia(media_type, summary_info):
 	"""Launches the rating dialog"""
