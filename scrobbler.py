@@ -111,7 +111,7 @@ class Scrobbler():
 						self.traktSummaryInfo = self.traktapi.getMovieSummary(self.curVideoInfo['imdbnumber'])
 				elif 'title' in self.curVideo and 'year' in self.curVideo:
 					self.curVideoInfo = {}
-					self.curVideoInfo['imdbnumber'] = ''
+					self.curVideoInfo['imdbnumber'] = None
 					self.curVideoInfo['title'] = self.curVideo['title']
 					self.curVideoInfo['year'] = self.curVideo['year']
 
@@ -210,6 +210,14 @@ class Scrobbler():
 		if utilities.isMovie(self.curVideo['type']) and scrobbleMovieOption:
 			response = self.traktapi.watchingMovie(self.curVideoInfo, duration, watchedPercent)
 			if response != None:
+				if self.curVideoInfo['imdbnumber'] is None:
+					if 'status' in response and response['status'] == "success":
+						if 'movie' in response and 'imdb_id' in response['movie']:
+							self.curVideoInfo['imdbnumber'] = response['movie']['imdb_id']
+							# get summary data now if we are rating this movie
+							if utilities.getSettingAsBool('rate_movie') and self.traktSummaryInfo is None:
+								self.traktSummaryInfo = self.traktapi.getMovieSummary(self.curVideoInfo['imdbnumber'])
+
 				Debug("[Scrobbler] Watch response: %s" % str(response))
 				
 		elif utilities.isEpisode(self.curVideo['type']) and scrobbleEpisodeOption:
