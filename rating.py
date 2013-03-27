@@ -10,14 +10,17 @@ from utilities import Debug, notification
 
 __addon__ = xbmcaddon.Addon("script.trakt")
 
-def ratingCheck(current_video, summary_info, watched_time, total_time, playlist_length):
+def ratingCheck(media_type, summary_info, watched_time, total_time, playlist_length):
 	"""Check if a video should be rated and if so launches the rating dialog"""
-	Debug("[Rating] Rating Check called for '%s' with id=%s" % (current_video['type'], str(current_video['id'])));
-	if utilities.getSettingAsBool("rate_%s" % current_video['type']):
+	Debug("[Rating] Rating Check called for '%s'" % media_type);
+	if summary_info is None:
+		Debug("[Rating] Summary information is empty, aborting.")
+		return
+	if utilities.getSettingAsBool("rate_%s" % media_type):
 		watched = (watched_time / total_time) * 100
 		if watched >= utilities.getSettingAsFloat("rate_min_view_time"):
 			if (playlist_length <= 1) or utilities.getSettingAsBool("rate_each_playlist_item"):
-				rateMedia(current_video['id'], current_video['type'], summary_info)
+				rateMedia(media_type, summary_info)
 			else:
 				Debug("[Rating] Rate each playlist item is disabled.")
 		else:
@@ -25,12 +28,8 @@ def ratingCheck(current_video, summary_info, watched_time, total_time, playlist_
 	else:
 		Debug("[Rating] '%s' is configured to not be rated." % current_video['type'])
 
-def rateMedia(media_id, media_type, summary_info):
+def rateMedia(media_type, summary_info):
 	"""Launches the rating dialog"""
-	if media_id == None:
-		Debug("[Rating] Missing media_id")
-		return
-
 	if utilities.isMovie(media_type):
 		if summary_info['rating'] or summary_info['rating_advanced']:
 			Debug("[Rating] Movie has already been rated.")
