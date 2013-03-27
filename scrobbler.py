@@ -222,6 +222,11 @@ class Scrobbler():
 			
 			response = self.traktapi.watchingEpisode(self.curVideoInfo, duration, watchedPercent)
 			if response != None:
+				if utilities.isEpisode(self.curVideo['type']) and self.curVideoInfo['tvdb_id'] is None:
+					if 'status' in response and response['status'] == "success":
+						if 'show' in response and 'tvdb_id' in response['show']:
+							self.curVideoInfo['tvdb_id'] = response['show']['tvdb_id']
+
 				Debug("[Scrobbler] Watch response: %s" % str(response))
 
 	def stoppedWatching(self):
