@@ -34,5 +34,9 @@ What can this addon do?
 
 Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers.</description>
 		<platform>all</platform>
+		<website>http://trakt.tv</website>
+		<source>https://github.com/rectifyer/script.trakt</source>
+		<forum>http://forum.xbmc.org/showthread.php?tid=138745</forum>
+		<email></email>    
 	</extension>
 </addon>
