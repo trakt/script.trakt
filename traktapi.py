@@ -113,7 +113,7 @@ class traktAPI(object):
 	# silent: default is True, when true it disable any error notifications (but not debug messages)
 	# passVersions: default is False, when true it passes extra version information to trakt to help debug problems
 	# hideResponse: used to not output the json response to the log
-	def traktRequest(self, method, url, args=None, returnStatus=False, silent=True, passVersions=False, hideResponse=False):
+	def traktRequest(self, method, url, args=None, returnStatus=False, returnOnFailure=False, silent=True, passVersions=False, hideResponse=False):
 		raw = None
 		data = None
 		jdata = {}
@@ -206,8 +206,13 @@ class traktAPI(object):
 			if 'status' in data:
 				if data['status'] == 'success':
 					break
+				elif returnOnFailure and data['status'] == 'failure':
+					Debug("[traktAPI] traktRequest(): Return on error set, breaking retry.")
+					break
 				else:
 					Debug("[traktAPI] traktRequest(): (%i) JSON Error '%s' -> '%s'" % (i, data['status'], data['error']))
+					xbmc.sleep(1000)
+					continue
 
 			# check to see if we have data, an empty array is still valid data, so check for None only
 			if not data is None:
@@ -224,7 +229,7 @@ class traktAPI(object):
 		if 'status' in data:
 			if data['status'] == 'failure':
 				Debug("[traktAPI] traktRequest(): Error: %s" % str(data['error']))
-				if returnStatus:
+				if returnStatus or returnOnFailure:
 					return data
 				if not silent:
 					notification('trakt', getString(1109) + ": " + str(data['error'])) # Error
@@ -337,7 +342,7 @@ class traktAPI(object):
 		if self.testAccount():
 			url = "%s/%s/scrobble/%s" % (self.__baseURL, type, self.__apikey)
 			Debug("[traktAPI] scrobble(url: %s, data: %s)" % (url, str(data)))
-			return self.traktRequest('POST', url, data, passVersions=True)
+			return self.traktRequest('POST', url, data, returnOnFailure=True, passVersions=True)
 
 	def scrobbleEpisode(self, info, duration, percent):
 		data = {'tvdb_id': info['tvdb_id'], 'title': info['showtitle'], 'year': info['year'], 'season': info['season'], 'episode': info['episode'], 'duration': math.ceil(duration), 'progress': math.ceil(percent)}

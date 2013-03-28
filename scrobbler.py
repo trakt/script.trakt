@@ -245,11 +245,11 @@ class Scrobbler():
 		scrobbleMovieOption = utilities.getSettingAsBool("scrobble_movie")
 		scrobbleEpisodeOption = utilities.getSettingAsBool("scrobble_episode")
 
-		if self.curVideo['type'] == 'movie' and scrobbleMovieOption:
+		if utilities.isMovie(self.curVideo['type']) and scrobbleMovieOption:
 			response = self.traktapi.cancelWatchingMovie()
 			if response != None:
 				Debug("[Scrobbler] Cancel watch response: %s" % str(response))
-		elif self.curVideo['type'] == 'episode' and scrobbleEpisodeOption:
+		elif utilities.isEpisode(self.curVideo['type']) and scrobbleEpisodeOption:
 			response = self.traktapi.cancelWatchingEpisode()
 			if response != None:
 				Debug("[Scrobbler] Cancel watch response: %s" % str(response))
@@ -267,8 +267,13 @@ class Scrobbler():
 
 		if utilities.isMovie(self.curVideo['type']) and scrobbleMovieOption:
 			response = self.traktapi.scrobbleMovie(self.curVideoInfo, duration, watchedPercent)
-			if response != None:
-				Debug("[Scrobbler] Scrobble response: %s" % str(response))
+			if not response is None and 'status' in response:
+				if response['status'] == "success":
+					Debug("[Scrobbler] Scrobble response: %s" % str(response))
+				elif response['status'] == "failure":
+					if response['error'].startswith("scrobbled") and response['error'].endswith("already"):
+						Debug("[Scrobbler] Movie was just recently scrobbled, attempting to cancel watching instead.")
+						self.stoppedWatching()
 
 		elif utilities.isEpisode(self.curVideo['type']) and scrobbleEpisodeOption:
 			if self.isMultiPartEpisode:
@@ -278,8 +283,13 @@ class Scrobbler():
 				watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
 			
 			response = self.traktapi.scrobbleEpisode(self.curVideoInfo, duration, watchedPercent)
-			if response != None:
-				Debug("[Scrobbler] Scrobble response: %s" % str(response))
+			if not response is None and 'status' in response:
+				if response['status'] == "success":
+					Debug("[Scrobbler] Scrobble response: %s" % str(response))
+				elif response['status'] == "failure":
+					if response['error'].startswith("scrobbled") and response['error'].endswith("already"):
+						Debug("[Scrobbler] Episode was just recently scrobbled, attempting to cancel watching instead.")
+						self.stoppedWatching()
 
 	def check(self):
 		scrobbleMinViewTimeOption = utilities.getSettingAsFloat("scrobble_min_view_time")
