@@ -340,7 +340,9 @@ class traktAPI(object):
 			return self.traktRequest('POST', url, data, passVersions=True)
 
 	def scrobbleEpisode(self, info, duration, percent):
-		data = {'tvdb_id': info['tvdb_id'], 'title': info['showtitle'], 'year': info['year'], 'season': info['season'], 'episode': info['episode'], 'episode_tvdb_id': info['uniqueid']['unknown'], 'duration': math.ceil(duration), 'progress': math.ceil(percent)}
+		data = {'tvdb_id': info['tvdb_id'], 'title': info['showtitle'], 'year': info['year'], 'season': info['season'], 'episode': info['episode'], 'duration': math.ceil(duration), 'progress': math.ceil(percent)}
+		if 'uniqueid' in info:
+			data['episode_tvdb_id'] = info['uniqueid']['unknown']
 		return self.scrobble('show', data)
 	def scrobbleMovie(self, info, duration, percent):
 		data = {'imdb_id': info['imdbnumber'], 'title': info['title'], 'year': info['year'], 'duration': math.ceil(duration), 'progress': math.ceil(percent)}
