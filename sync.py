@@ -409,12 +409,20 @@ class Sync():
 		for movie in movies:
 			movie['plays'] = 0
 			movie['in_collection'] = True
+			if movie['imdb_id'] is None:
+				movie['imdb_id'] = ""
+			if movie['tmdb_id'] is None:
+				movie['tmdb_id'] = ""
 		for movie in watched_movies:
 			m = findInList(movies, 'imdb_id', movie['imdb_id'])
 			if m:
 				m['plays'] = movie['plays']
 			else:
 				movie['in_collection'] = False
+				if movie['imdb_id'] is None:
+					movie['imdb_id'] = ""
+				if movie['tmdb_id'] is None:
+					movie['tmdb_id'] = ""
 				movies.append(movie)
 
 		return movies
@@ -438,12 +446,12 @@ class Sync():
 			movie['last_played'] = utilities.sqlDateToUnixDate(movie['lastplayed'])
 			movie['plays'] = movie.pop('playcount')
 			movie['imdb_id'] = ""
-			movie['tmdb_id'] = ""
+			movie['tmdb_id'] = 0
 			id = movie['imdbnumber']
 			if id.startswith("tt"):
 				movie['imdb_id'] = id
 			if id.isdigit():
-				movie['tmdb_id'] = id
+				movie['tmdb_id'] = int(id)
 			del(movie['imdbnumber'])
 			del(movie['lastplayed'])
 			del(movie['label'])
@@ -471,7 +479,7 @@ class Sync():
 		result = False
 		if movie['imdb_id'].startswith("tt"):
 			result = findInList(movies, 'imdb_id', movie['imdb_id'])
-		if not result and movie['tmdb_id'].isdigit():
+		if not result and movie['tmdb_id'] > 0:
 			result = findInList(movies, 'tmdb_id', movie['tmdb_id'])
 		return result
 
