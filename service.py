@@ -7,8 +7,7 @@ import globals
 import utilities
 from traktapi import traktAPI
 from scrobbler import Scrobbler
-from movie_sync import SyncMovies
-from episode_sync import SyncEpisodes
+from sync import Sync
 
 class traktService:
 
@@ -134,20 +133,8 @@ class syncThread(threading.Thread):
 		self._isManual = isManual
 
 	def run(self):
-		utilities.Debug("Starting synchronization with trakt.tv")
-
-		if utilities.syncCheck('movies'):
-			movies = SyncMovies(show_progress = self._isManual, api = globals.traktapi)
-			movies.Run()
-		else:
-			utilities.Debug("Movie sync is disabled, skipping.")
-		if utilities.syncCheck('episodes'):
-			episodes = SyncEpisodes(show_progress = self._isManual, api = globals.traktapi)
-			episodes.Run()
-		else:
-			utilities.Debug("Episode sync is disabled, skipping.")
-
-		utilities.Debug("Finished synchronization with trakt.tv")
+		sync = Sync(show_progress=self._isManual, api=globals.traktapi)
+		sync.sync()
 
 class traktMonitor(xbmc.Monitor):
 
