@@ -355,7 +355,7 @@ class Sync():
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1406)), utilities.getString(1420)) #Sync started
 
 		xbmcShows = self.xbmcLoadShows()
-		if not isinstance(xbmcShows, list) and len(xbmcShows) == 0:
+		if not isinstance(xbmcShows, list) and not xbmcShows:
 			Debug("[Episodes Sync] XBMC show list is empty, aborting tv show Sync.")
 			return
 
@@ -585,7 +585,7 @@ class Sync():
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1402)), utilities.getString(1420)) #Sync started
 
 		xbmcMovies = self.xbmcLoadMovies()
-		if not isinstance(xbmcMovies, list) and len(xbmcMovies) == 0:
+		if not isinstance(xbmcMovies, list) and not xbmcMovies:
 			Debug("[Movies Sync] XBMC movie list is empty, aborting movie Sync.")
 			return
 
