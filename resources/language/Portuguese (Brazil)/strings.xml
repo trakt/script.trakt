@@ -62,6 +62,7 @@
 	<string id="1412">Mostrar notificações</string>
 	<string id="1413">Limpar coleção de filmes do Trakt</string>
 	<string id="1414">Limpar coleção de episódios do Trakt</string>
+	<string id="1415">Simular sincronização (apenas para testes)</string>	
 
 	<!-- Notificações de Sincronização -->
 	<string id="1420">Sincronização iniciada</string>
