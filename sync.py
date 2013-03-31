@@ -104,6 +104,7 @@ class Sync():
 
 		# reformat show array
 		for show in shows:
+			show['in_collection'] = True
 			show['tvdb_id'] = ""
 			show['imdb_id'] = ""
 			id = show['imdbnumber']
@@ -228,7 +229,7 @@ class Sync():
 			else:
 				if not restrict:
 					if 'in_collection' in show_col1 and show_col1['in_collection']:
-						if self.countEpisodes([show_col1]) > 0:
+						if self.countEpisodes([show_col1], watched=watched) > 0:
 							show = {'title': show_col1['title'], 'tvdb_id': show_col1['tvdb_id'], 'year': show_col1['year'], 'seasons': show_col1[p]}
 							if 'tvshowid' in show_col1:
 								show['tvshowid'] = show_col1['tvshowid']
