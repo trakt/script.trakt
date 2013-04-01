@@ -32,9 +32,10 @@ class traktService:
 			self.watcher.start()
 		elif action == 'ended' or action == 'stopped':
 			self.scrobbler.playbackEnded()
-			if self.watcher.isAlive():
-				self.watcher.cancel()
-				self.watcher = None
+			if self.watcher:
+				if self.watcher.isAlive():
+					self.watcher.cancel()
+					self.watcher = None
 		elif action == 'paused':
 			self.scrobbler.playbackPaused()
 		elif action == 'resumed':
