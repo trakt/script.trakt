@@ -214,7 +214,8 @@ class Sync():
 								season_diff[season] = eps
 					else:
 						if not restrict:
-							season_diff[season] = a
+							if len(a) > 0:
+								season_diff[season] = a
 				if len(season_diff) > 0:
 					show = {'title': show_col1['title'], 'tvdb_id': show_col1['tvdb_id'], 'year': show_col1['year'], 'seasons': season_diff}
 					if 'imdb_id' in show_col1 and show_col1['imdb_id']:
