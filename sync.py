@@ -123,10 +123,16 @@ class Sync():
 			
 		Debug("[Episodes Sync] Getting episode data from XBMC")
 		for show in tvshows:
-			data = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid']}, 'id': 0})
-			episodes = data['episodes']
 			show['seasons'] = {}
 			show['watched'] = {}
+			data = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid']}, 'id': 0})
+			if not data:
+				Debug("[Episodes Sync] There was a problem getting episode data for '%s', aborting sync." % show['title'])
+				return None
+			if not 'episodes' in data:
+				Debug("[Episodes Sync] '%s' has no episodes in XBMC." % show['title'])
+				continue
+			episodes = data['episodes']
 			for e in episodes:
 				_season = e['season']
 				_episode = e['episode']
