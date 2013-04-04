@@ -123,10 +123,16 @@ class Sync():
 			
 		Debug("[Episodes Sync] Getting episode data from XBMC")
 		for show in tvshows:
-			data = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid']}, 'id': 0})
-			episodes = data['episodes']
 			show['seasons'] = {}
 			show['watched'] = {}
+			data = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid']}, 'id': 0})
+			if not data:
+				Debug("[Episodes Sync] There was a problem getting episode data for '%s', aborting sync." % show['title'])
+				return None
+			if not 'episodes' in data:
+				Debug("[Episodes Sync] '%s' has no episodes in XBMC." % show['title'])
+				continue
+			episodes = data['episodes']
 			for e in episodes:
 				_season = e['season']
 				_episode = e['episode']
@@ -214,7 +220,8 @@ class Sync():
 								season_diff[season] = eps
 					else:
 						if not restrict:
-							season_diff[season] = a
+							if len(a) > 0:
+								season_diff[season] = a
 				if len(season_diff) > 0:
 					show = {'title': show_col1['title'], 'tvdb_id': show_col1['tvdb_id'], 'year': show_col1['year'], 'seasons': season_diff}
 					if 'imdb_id' in show_col1 and show_col1['imdb_id']:
