@@ -453,6 +453,7 @@ class Sync():
 		for movie in movies:
 			movie['last_played'] = utilities.sqlDateToUnixDate(movie['lastplayed'])
 			movie['plays'] = movie.pop('playcount')
+			movie['in_collection'] = True
 			movie['imdb_id'] = ""
 			movie['tmdb_id'] = 0
 			id = movie['imdbnumber']
@@ -506,10 +507,11 @@ class Sync():
 						movies.append(movie_col1)
 			else:
 				if not restrict:
-					if watched and (movie_col1['plays'] > 0):
-						movies.append(movie_col1)
-					elif not watched:
-						movies.append(movie_col1)
+					if 'in_collection' in movie_col1 and movie_col1['in_collection']:
+						if watched and (movie_col1['plays'] > 0):
+							movies.append(movie_col1)
+						elif not watched:
+							movies.append(movie_col1)
 		return movies
 
 	def traktAddMovies(self, movies):
