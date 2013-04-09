@@ -106,19 +106,19 @@ def checkScrobblingExclusion(fullpath):
 		return True
 		
 	ExcludePath = getSetting('ExcludePath')
-	if not ExcludePath and getSettingAsBool('ExcludePathOption'):
+	if ExcludePath != "" and getSettingAsBool('ExcludePathOption'):
 		if (fullpath.find(ExcludePath) > -1):
 			Debug("checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 1.")
 			return True
 
 	ExcludePath2 = getSetting('ExcludePath2')
-	if not ExcludePath2 and getSettingAsBool('ExcludePathOption2'):
+	if ExcludePath2 != "" and getSettingAsBool('ExcludePathOption2'):
 		if (fullpath.find(ExcludePath2) > -1):
 			Debug("checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 2.")
 			return True
 
 	ExcludePath3 = getSetting('ExcludePath3')
-	if not ExcludePath3 and getSettingAsBool('ExcludePathOption3'):
+	if ExcludePath3 != "" and getSettingAsBool('ExcludePathOption3'):
 		if (fullpath.find(ExcludePath3) > -1):
 			Debug("checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 3.")
 			return True
