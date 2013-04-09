@@ -2,6 +2,7 @@
 
 import xbmc
 import threading
+import Queue
 
 import globals
 import utilities
@@ -14,15 +15,18 @@ class traktService:
 	scrobbler = None
 	watcher = None
 	syncThread = None
+	dispatchQueue = Queue.Queue()
 	_interval = 10 * 60 # how often to send watching call
 	
 	def __init__(self):
 		threading.Thread.name = 'trakt'
 
+	def _dispatchQueue(self, data):
+		utilities.Debug("Queuing for dispatch: %s" % data)
+		self.dispatchQueue.put(data)
+	
 	def _dispatch(self, data):
 		utilities.Debug("Dispatch: %s" % data)
-		xbmc.sleep(500)
-
 		action = data['action']
 		if action == 'started':
 			del data['action']
@@ -61,8 +65,8 @@ class traktService:
 		utilities.Debug("Service thread starting.")
 		
 		# setup event driven classes
-		self.Player = traktPlayer(action = self._dispatch)
-		self.Monitor = traktMonitor(action = self._dispatch)
+		self.Player = traktPlayer(action = self._dispatchQueue)
+		self.Monitor = traktMonitor(action = self._dispatchQueue)
 
 		# init traktapi class
 		globals.traktapi = traktAPI()
@@ -75,6 +79,11 @@ class traktService:
 
 		# start loop for events
 		while (not xbmc.abortRequested):
+			while not self.dispatchQueue.empty() and (not xbmc.abortRequested):
+				data = self.dispatchQueue.get()
+				utilities.Debug("Queued dispatch: %s" % data)
+				self._dispatch(data)
+
 			# check if we were tasked to do a manual sync
 			if utilities.getPropertyAsBool('traktManualSync'):
 				if not self.syncThread.isAlive():
@@ -165,6 +174,7 @@ class traktMonitor(xbmc.Monitor):
 class traktPlayer(xbmc.Player):
 
 	_playing = False
+	plIndex = None
 
 	def __init__(self, *args, **kwargs):
 		xbmc.Player.__init__(self)
@@ -256,10 +266,22 @@ class traktPlayer(xbmc.Player):
 									data['multi_episode_data'] = multi
 									data['multi_episode_count'] = len(multi)
 									utilities.Debug("[traktPlayer] onPlayBackStarted() - This episode is part of a multi-part episode.")
+								else:
+									utilities.Debug("[traktPlayer] onPlayBackStarted() - This is a single episode.")
 
 			else:
 				utilities.Debug("[traktPlayer] onPlayBackStarted() - Video type '%s' unrecognized, skipping." % self.type)
 				return
+
+			pl = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+			plSize = len(pl)
+			if plSize > 1:
+				pos = pl.getposition()
+				if not self.plIndex is None:
+					utilities.Debug("[traktPlayer] onPlayBackStarted() - User manually skipped to next (or previous) video, forcing playback ended event.")
+					self.onPlayBackEnded()
+				self.plIndex = pos
+				utilities.Debug("[traktPlayer] onPlayBackStarted() - Playlist contains %d item(s), and is currently on item %d" % (plSize, (pos + 1)))
 
 			self._playing = True
 
@@ -271,6 +293,7 @@ class traktPlayer(xbmc.Player):
 		if self._playing:
 			utilities.Debug("[traktPlayer] onPlayBackEnded() - %s" % self.isPlayingVideo())
 			self._playing = False
+			self.plIndex = None
 			data = {'action': 'ended'}
 			self.action(data)
 
@@ -279,6 +302,7 @@ class traktPlayer(xbmc.Player):
 		if self._playing:
 			utilities.Debug("[traktPlayer] onPlayBackStopped() - %s" % self.isPlayingVideo())
 			self._playing = False
+			self.plIndex = None
 			data = {'action': 'stopped'}
 			self.action(data)
 
@@ -310,12 +334,12 @@ class traktPlayer(xbmc.Player):
 	def onPlayBackSeek(self, time, offset):
 		if self._playing:
 			utilities.Debug("[traktPlayer] onPlayBackSeek(time: %s, offset: %s) - %s" % (str(time), str(offset), self.isPlayingVideo()))
-			data = {'action': 'seek'}
+			data = {'action': 'seek', 'time': time, 'offset': offset}
 			self.action(data)
 
 	# called when user performs a chapter seek
 	def onPlayBackSeekChapter(self, chapter):
 		if self._playing:
 			utilities.Debug("[traktPlayer] onPlayBackSeekChapter(chapter: %s) - %s" % (str(chapter), self.isPlayingVideo()))
-			data = {'action': 'seekchapter'}
+			data = {'action': 'seekchapter', 'chapter': chapter}
 			self.action(data)

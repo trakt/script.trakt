@@ -22,6 +22,7 @@ class Scrobbler():
 	curVideo = None
 	curVideoInfo = None
 	playlistLength = 1
+	playlistIndex = 0
 	markedAsWatched = []
 	traktSummaryInfo = None
 
@@ -36,8 +37,16 @@ class Scrobbler():
 		return 0
 
 	def update(self, forceCheck = False):
+		if not xbmc.Player().isPlayingVideo():
+			return
+
 		if self.isPlaying and not self.isPaused:
-			self.watchedTime = xbmc.Player().getTime()
+			t = xbmc.Player().getTime()
+			l = xbmc.PlayList(xbmc.PLAYLIST_VIDEO).getposition()
+			if self.playlistIndex == l:
+				self.watchedTime = t
+			else:
+				Debug("[Scrobbler] Current playlist item changed! Not updating time! (%d -> %d)" % (self.playlistIndex, l))
 
 			if 'id' in self.curVideo and self.isMultiPartEpisode:
 				# do transition check every minute
@@ -66,8 +75,6 @@ class Scrobbler():
 
 	def playbackStarted(self, data):
 		Debug("[Scrobbler] playbackStarted(data: %s)" % data)
-		if self.curVideo != None and self.curVideo != data:
-			self.playbackEnded()
 		if not data:
 			return
 		self.curVideo = data
@@ -97,6 +104,7 @@ class Scrobbler():
 					self.videoDuration = 1
 
 			self.playlistLength = len(xbmc.PlayList(xbmc.PLAYLIST_VIDEO))
+			self.playlistIndex = xbmc.PlayList(xbmc.PLAYLIST_VIDEO).getposition()
 			if (self.playlistLength == 0):
 				Debug("[Scrobbler] Warning: Cant find playlist length, assuming that this item is by itself")
 				self.playlistLength = 1
@@ -190,6 +198,8 @@ class Scrobbler():
 			self.isMultiPartEpisode = False
 		self.traktSummaryInfo = None
 		self.curVideo = None
+		self.playlistLength = 0
+		self.playlistIndex = 0
 
 	def watching(self):
 		if not self.isPlaying:
