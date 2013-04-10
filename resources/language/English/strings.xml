@@ -18,6 +18,7 @@
 	<string id="1041">Scrobble movies</string>
 	<string id="1042">Scrobble TV episodes</string>
 	<string id="1043">Minimum percent watched to scrobble</string>
+	<string id="1044">Simulate scrobbling (for testing purposes)</string>
 	
 	<string id="1050">Exclusions</string>
 	<string id="1051">Exclude Live TV</string>

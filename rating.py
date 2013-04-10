@@ -13,20 +13,20 @@ __addon__ = xbmcaddon.Addon("script.trakt")
 def ratingCheck(media_type, summary_info, watched_time, total_time, playlist_length):
 	"""Check if a video should be rated and if so launches the rating dialog"""
 	Debug("[Rating] Rating Check called for '%s'" % media_type);
+	if not utilities.getSettingAsBool("rate_%s" % media_type):
+		Debug("[Rating] '%s' is configured to not be rated." % media_type)
+		return
 	if summary_info is None:
 		Debug("[Rating] Summary information is empty, aborting.")
 		return
-	if utilities.getSettingAsBool("rate_%s" % media_type):
-		watched = (watched_time / total_time) * 100
-		if watched >= utilities.getSettingAsFloat("rate_min_view_time"):
-			if (playlist_length <= 1) or utilities.getSettingAsBool("rate_each_playlist_item"):
-				rateMedia(media_type, summary_info)
-			else:
-				Debug("[Rating] Rate each playlist item is disabled.")
+	watched = (watched_time / total_time) * 100
+	if watched >= utilities.getSettingAsFloat("rate_min_view_time"):
+		if (playlist_length <= 1) or utilities.getSettingAsBool("rate_each_playlist_item"):
+			rateMedia(media_type, summary_info)
 		else:
-			Debug("[Rating] '%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (media_type, watched, utilities.getSettingAsFloat("rate_min_view_time")))
+			Debug("[Rating] Rate each playlist item is disabled.")
 	else:
-		Debug("[Rating] '%s' is configured to not be rated." % media_type)
+		Debug("[Rating] '%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (media_type, watched, utilities.getSettingAsFloat("rate_min_view_time")))
 
 def rateMedia(media_type, summary_info):
 	"""Launches the rating dialog"""

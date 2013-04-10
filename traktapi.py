@@ -325,7 +325,10 @@ class traktAPI(object):
 		if self.testAccount():
 			url = "%s/%s/watching/%s" % (self.__baseURL, type, self.__apikey)
 			Debug("[traktAPI] watching(url: %s, data: %s)" % (url, str(data)))
-			return self.traktRequest('POST', url, data, passVersions=True)
+			if getSettingAsBool('simulate_scrobbling'):
+				return {'status': 'success'}
+			else:
+				return self.traktRequest('POST', url, data, passVersions=True)
 	
 	def watchingEpisode(self, info, duration, percent):
 		data = {'tvdb_id': info['tvdb_id'], 'title': info['showtitle'], 'year': info['year'], 'season': info['season'], 'episode': info['episode'], 'duration': math.ceil(duration), 'progress': math.ceil(percent)}
@@ -342,7 +345,10 @@ class traktAPI(object):
 		if self.testAccount():
 			url = "%s/%s/scrobble/%s" % (self.__baseURL, type, self.__apikey)
 			Debug("[traktAPI] scrobble(url: %s, data: %s)" % (url, str(data)))
-			return self.traktRequest('POST', url, data, returnOnFailure=True, passVersions=True)
+			if getSettingAsBool('simulate_scrobbling'):
+				return {'status': 'success'}
+			else:
+				return self.traktRequest('POST', url, data, returnOnFailure=True, passVersions=True)
 
 	def scrobbleEpisode(self, info, duration, percent):
 		data = {'tvdb_id': info['tvdb_id'], 'title': info['showtitle'], 'year': info['year'], 'season': info['season'], 'episode': info['episode'], 'duration': math.ceil(duration), 'progress': math.ceil(percent)}
@@ -359,7 +365,10 @@ class traktAPI(object):
 		if self.testAccount():
 			url = "%s/%s/cancelwatching/%s" % (self.__baseURL, type, self.__apikey)
 			Debug("[traktAPI] cancelWatching(url: %s)" % url)
-			return self.traktRequest('POST', url)
+			if getSettingAsBool('simulate_scrobbling'):
+				return {'status': 'success'}
+			else:
+				return self.traktRequest('POST', url)
 		
 	def cancelWatchingEpisode(self):
 		return self.cancelWatching('show')
