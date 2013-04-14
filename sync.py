@@ -12,11 +12,21 @@ def findInListIndex(list, key, value):
 		return x[0]
 	return -1
 
-def findInList(list, key, value):
-	result = [item for item in list if item[key] == value]
-	if len(result) > 0:
-		return result[0]
-	return False
+def findInList(list, case_sensitive=True, *args, **kwargs):
+	for item in list:
+		i = 0
+		for key in kwargs:
+			if not key in item:
+				continue
+			if not case_sensitive and isinstance(item[key], basestring):
+				if item[key].lower() == kwargs[key].lower():
+					i = i + 1
+			else:
+				if item[key] == kwargs[key]:
+					i = i + 1
+		if i == len(kwargs):
+			return item
+	return None
 
 def findAllInList(list, key, value):
 	return [item for item in list if item[key] == value]
@@ -64,19 +74,26 @@ class Sync():
 		for show in shows:
 			y = {}
 			w = {}
-			watched = findInList(watched_shows, 'tvdb_id', show['tvdb_id'])
 			for s in show['seasons']:
 				y[s['season']] = s['episodes']
 				w[s['season']] = []
-			if watched:
-				for s in watched['seasons']:
-					w[s['season']] = s['episodes']
 			show['seasons'] = y
 			show['watched'] = w
 			show['in_collection'] = True
+			if show['imdb_id'] is None:
+				show['imdb_id'] = ""
+			if show['tvdb_id'] is None:
+				show['tvdb_id'] = ""
 		for watched_show in watched_shows:
-			show = findInList(shows, 'tvdb_id', watched_show['tvdb_id'])
-			if not show:
+			if watched_show['imdb_id'] is None:
+				watched_show['imdb_id'] = ""
+			if watched_show['tvdb_id'] is None:
+				watched_show['tvdb_id'] = ""
+			show = self.findShow(watched_show, shows)
+			if show:
+				for s in watched_show['seasons']:
+					show['watched'][s['season']] = s['episodes']
+			else:
 				y = {}
 				w = {}
 				for s in watched_show['seasons']:
@@ -187,9 +204,11 @@ class Sync():
 	def findShow(self, show, shows):
 		result = False
 		if show['tvdb_id'].isdigit():
-			result = findInList(shows, 'tvdb_id', show['tvdb_id'])
+			result = findInList(shows, tvdb_id=show['tvdb_id'])
 		if not result and show['imdb_id'].startswith("tt"):
-			result = findInList(shows, 'imdb_id', show['imdb_id'])
+			result = findInList(shows, imdb_id=show['imdb_id'])
+		if not result and show['title'] and show['year'] > 0:
+			result = findInList(shows, title=show['title'], year=show['year'])
 		return result
 
 	def compareShows(self, shows_col1, shows_col2, watched=False, restrict=False):
@@ -304,7 +323,7 @@ class Sync():
 			Debug("[Episodes Sync] trakt.tv episode playcounts are up to date.")
 			return
 
-		Debug("[Episodes Sync] %i show(s) shows are missing playcounts on trakt.tv" % len(shows))
+		Debug("[Episodes Sync] %i show(s) are missing playcounts on trakt.tv" % len(shows))
 		for show in shows:
 			Debug("[Episodes Sync] Episodes updated: %s" % self.getShowAsString(show, short=True))
 
@@ -422,7 +441,7 @@ class Sync():
 			if movie['tmdb_id'] is None:
 				movie['tmdb_id'] = ""
 		for movie in watched_movies:
-			m = findInList(movies, 'imdb_id', movie['imdb_id'])
+			m = self.findMovie(movie, movies)
 			if m:
 				m['plays'] = movie['plays']
 			else:
@@ -455,12 +474,12 @@ class Sync():
 			movie['plays'] = movie.pop('playcount')
 			movie['in_collection'] = True
 			movie['imdb_id'] = ""
-			movie['tmdb_id'] = 0
+			movie['tmdb_id'] = ""
 			id = movie['imdbnumber']
 			if id.startswith("tt"):
 				movie['imdb_id'] = id
 			if id.isdigit():
-				movie['tmdb_id'] = int(id)
+				movie['tmdb_id'] = id
 			del(movie['imdbnumber'])
 			del(movie['lastplayed'])
 			del(movie['label'])
@@ -487,9 +506,11 @@ class Sync():
 	def findMovie(self, movie, movies):
 		result = False
 		if movie['imdb_id'].startswith("tt"):
-			result = findInList(movies, 'imdb_id', movie['imdb_id'])
-		if not result and movie['tmdb_id'] > 0:
-			result = findInList(movies, 'tmdb_id', movie['tmdb_id'])
+			result = findInList(movies, imdb_id=movie['imdb_id'])
+		if not result and movie['tmdb_id'].isdigit():
+			result = findInList(movies, tmdb_id=movie['tmdb_id'])
+		if not result and movie['title'] and movie['year'] > 0:
+			result = findInList(movies, title=movie['title'], year=movie['year'])
 		return result
 
 	def compareMovies(self, movies_col1, movies_col2, watched=False, restrict=False):
