@@ -18,6 +18,7 @@
 	<string id="1041">Scrobble de Películas</string>
 	<string id="1042">Scrobble de Series</string>
 	<string id="1043">Porcentaje mínimo antes de hacer scrobble</string>
+	<string id="1044">Simular scrobbling (para hacer pruebas)</string>
 	
 	<string id="1050">Exclusiones</string>
 	<string id="1051">Excluir TV en vivo</string>
@@ -62,6 +63,7 @@
 	<string id="1412">Mostrar notificaciones</string>
 	<string id="1413">Limpiar colección de Películas en Trakt</string>
 	<string id="1414">Limpiar colección de Episodios en Trakt</string>
+	<string id="1415">Simular sincronización (para hacer pruebas)</string>
 
 	<!-- Sync Notifications -->
 	<string id="1420">Sincronización iniciada</string>
