@@ -1,5 +1,8 @@
 version 2.2.0
-
+  - lots of code optimizing and bug fixes (nate1280)
+  - sync fixes (nate1280)
+  - better scrobbling of streaming media (nate1280)
+  - updated translations
 
 version 2.1.0
   - rate movies and episode after watching them (sschocke, N3MIS15)
