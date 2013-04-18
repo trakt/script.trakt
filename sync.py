@@ -441,16 +441,17 @@ class Sync():
 			if movie['tmdb_id'] is None:
 				movie['tmdb_id'] = ""
 		for movie in watched_movies:
-			movie['tmdb_id'] = unicode(movie['tmdb_id'])
+			if movie['imdb_id'] is None:
+				movie['imdb_id'] = ""
+			if movie['tmdb_id'] is None:
+				movie['tmdb_id'] = "" 
+			else:
+				movie['tmdb_id'] = unicode(movie['tmdb_id'])
 			m = self.findMovie(movie, movies)
 			if m:
 				m['plays'] = movie['plays']
 			else:
 				movie['in_collection'] = False
-				if movie['imdb_id'] is None:
-					movie['imdb_id'] = ""
-				if movie['tmdb_id'] is None:
-					movie['tmdb_id'] = ""
 				movies.append(movie)
 
 		return movies
