@@ -7,8 +7,14 @@ import Queue
 import globals
 import utilities
 from traktapi import traktAPI
+from rating import rateMedia, rateOnTrakt
 from scrobbler import Scrobbler
 from sync import Sync
+
+try:
+	import simplejson as json
+except ImportError:
+	import json
 
 class traktService:
 
@@ -63,6 +69,11 @@ class traktService:
 			xbmc.sleep(startup_delay * 1000)
 
 		utilities.Debug("Service thread starting.")
+
+		# clear any left over properties
+		utilities.clearProperty('traktManualSync')
+		utilities.clearProperty('traktManualRateData')
+		utilities.clearProperty('traktManualRate')
 		
 		# setup event driven classes
 		self.Player = traktPlayer(action = self._dispatchQueue)
@@ -94,6 +105,12 @@ class traktService:
 
 				utilities.clearProperty('traktManualSync')
 
+			# check if we were tasked to do a manual rating
+			if utilities.getPropertyAsBool('traktManualRate'):
+				self.doManualRating()
+				utilities.clearProperty('traktManualRateData')
+				utilities.clearProperty('traktManualRate')
+			
 			if xbmc.Player().isPlayingVideo():
 				self.scrobbler.update()
 
@@ -128,6 +145,76 @@ class traktService:
 		self.watcher = threading.Timer(self._interval, self.doWatching)
 		self.watcher.name = "trakt-watching"
 		self.watcher.start()
+
+	def doManualRating(self):
+		data = json.loads(utilities.getProperty('traktManualRateData'))
+
+		action = data['action']
+		media_type = data['media_type']
+		summaryInfo = None
+
+		if not utilities.isValidMediaType(media_type):
+			utilities.Debug("doManualRating(): Invalid media type '%s' passed for manual %s." % (media_type, action))
+			return
+
+		if not data['action'] in ['rate', 'unrate']:
+			utilities.Debug("doManualRating(): Unknown action passed.")
+			return
+			
+		if 'dbid' in data:
+			utilities.Debug("Getting data for manual %s of library '%s' with ID of '%s'" % (action, media_type, data['dbid']))
+		elif 'remoteitd' in data:
+			if 'season' in data:
+				utilities.Debug("Getting data for manual %s of non-library '%s' S%02dE%02d, with ID of '%s'." % (action, media_type, data['season'], data['episode'], data['remoteid']))
+			else:
+				utilities.Debug("Getting data for manual %s of non-library '%s' with ID of '%s'" % (action, media_type, data['remoteid']))
+
+		if utilities.isEpisode(media_type):
+			result = {}
+			if 'dbid' in data:
+				result = utilities.getEpisodeDetailsFromXbmc(data['dbid'], ['showtitle', 'season', 'episode', 'tvshowid'])
+				if not result:
+					utilities.Debug("doManualRating(): No data was returned from XBMC, aborting manual %s." % action)
+					return
+			else:
+				result['tvdb_id'] = data['remoteid']
+				result['season'] = data['season']
+				result['episode'] = data['episode']
+
+			summaryInfo = globals.traktapi.getEpisodeSummary(result['tvdb_id'], result['season'], result['episode'])
+		elif utilities.isShow(media_type):
+			result = {}
+			if 'dbid' in data:
+				result = utilities.getShowDetailsFromXBMC(data['dbid'], ['imdbnumber'])
+				if not result:
+					utilities.Debug("doManualRating(): No data was returned from XBMC, aborting manual %s." % action)
+					return
+			else:
+				result['imdbnumber'] = data['remoteid']
+
+			summaryInfo = globals.traktapi.getShowSummary(result['imdbnumber'])
+		elif utilities.isMovie(media_type):
+			result = {}
+			if 'dbid' in data:
+				result = utilities.getMovieDetailsFromXbmc(data['dbid'], ['imdbnumber', 'title', 'year'])
+				if not result:
+					utilities.Debug("doManualRating(): No data was returned from XBMC, aborting manual %s." % action)
+					return
+			else:
+				result['imdbnumber'] = data['remoteid']
+
+			summaryInfo = globals.traktapi.getMovieSummary(result['imdbnumber'])
+		
+		if not summaryInfo is None:
+			if action == 'rate':
+				if not 'rating' in data:
+					rateMedia(media_type, summaryInfo)
+				else:
+					rateMedia(media_type, summaryInfo, rating=data['rating'])
+			elif action == 'unrate':
+				rateMedia(media_type, summaryInfo, unrate=True)
+		else:
+			utilities.Debug("doManualRating(): Summary info was empty, possible problem retrieving data from trakt.tv")
 
 	def doSync(self, manual=False):
 		self.syncThread = syncThread(manual)
