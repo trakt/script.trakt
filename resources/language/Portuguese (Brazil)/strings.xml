@@ -32,7 +32,7 @@
 	<string id="1108">não foi possível conectar ao Trakt</string>
 	<string id="1109">Erro</string>
 	<string id="1110">Usuário ou senha incorretos</string>
-	<string id="1167">Avaliação enviada com sucesso</string>
+	<string id="1167">Avaliação para '%s' foi enviada com sucesso</string>
 	<string id="1313">O que voce achou?</string>
 	<string id="1314">Excepcional!</string>
 	<string id="1315">Péssimo!</string>

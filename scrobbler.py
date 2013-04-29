@@ -128,7 +128,7 @@ class Scrobbler():
 					self.curVideoInfo = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
 					if utilities.getSettingAsBool('rate_episode'):
 						# pre-get sumamry information, for faster rating dialog.
-						self.traktSummaryInfo = self.traktapi.getShowSummary(self.curVideoInfo['tvdb_id'], self.curVideoInfo['season'], self.curVideoInfo['episode'])
+						self.traktSummaryInfo = self.traktapi.getEpisodeSummary(self.curVideoInfo['tvdb_id'], self.curVideoInfo['season'], self.curVideoInfo['episode'])
 				elif 'showtitle' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
 					self.curVideoInfo = {}
 					self.curVideoInfo['tvdb_id'] = None
@@ -246,7 +246,7 @@ class Scrobbler():
 							self.curVideoInfo['tvdb_id'] = response['show']['tvdb_id']
 							# get summary data now if we are rating this episode
 							if utilities.getSettingAsBool('rate_episode') and self.traktSummaryInfo is None:
-								self.traktSummaryInfo = self.traktapi.getShowSummary(self.curVideoInfo['tvdb_id'], self.curVideoInfo['season'], self.curVideoInfo['episode'])
+								self.traktSummaryInfo = self.traktapi.getEpisodeSummary(self.curVideoInfo['tvdb_id'], self.curVideoInfo['season'], self.curVideoInfo['episode'])
 
 				Debug("[Scrobbler] Watch response: %s" % str(response))
 
