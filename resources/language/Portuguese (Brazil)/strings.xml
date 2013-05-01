@@ -2,7 +2,6 @@
 <strings>
 	<!-- Preferências -->
 	<string id="1010">Geral</string>
-	<string id="1011">Ativar modo de depuração</string>
 	<string id="1013">Usuário</string>
 	<string id="1014">Senha</string>
 	<string id="1017">Quantidade de tentativas de conexão</string>	
@@ -18,7 +17,6 @@
 	<string id="1041">Fazer Scrobble dos filmes</string>
 	<string id="1042">Fazer Scrobble dos episódios de seriados</string>
 	<string id="1043">Percentual mínimo assistido para fazer scrobble</string>
-	<string id="1044">Simular scrobble (apenas para testes)</string>
 	
 	<string id="1050">Exclusões</string>
 	<string id="1051">Excluir TV Ao Vivo</string>
@@ -63,7 +61,6 @@
 	<string id="1412">Mostrar notificações</string>
 	<string id="1413">Limpar coleção de filmes do Trakt</string>
 	<string id="1414">Limpar coleção de episódios do Trakt</string>
-	<string id="1415">Simular sincronização (apenas para testes)</string>	
 
 	<!-- Notificações de Sincronização -->
 	<string id="1420">Sincronização iniciada</string>
@@ -94,4 +91,9 @@
 	<string id="1445">Limpando coleção de seriados do Trakt</string>
 	<string id="1446">seriados(s) serão removidos da coleção do Trakt</string>
 	<string id="1447">episódios estão sendo removidos</string>
+
+	<!-- Debug -->
+	<string id="1701">Ativar modo de depuração</string>
+	<string id="1702">Simular scrobble (apenas para testes)</string>
+	<string id="1703">Simular sincronização (apenas para testes)</string>	
 </strings>

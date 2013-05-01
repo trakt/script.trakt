@@ -6,7 +6,6 @@
 <!--$Revision$-->
 <strings>
 	<string id="1010">Główne</string>
-	<string id="1011">Włącz tryb debugowania</string>
 	<string id="1012">Klucz API (dostępny na trakt --&gt; Ustawienia --&gt; API)</string>
 	<string id="1013">Użytkownik</string>
 	<string id="1014">Hasło</string>
@@ -124,4 +123,5 @@
 	<string id="1310">Pomyślnie dodano do listy do obejrzenia</string>
 	<string id="1311">Błąd przy usuwaniu z listy do obejrzenia</string>
 	<string id="1312">Pomyślnie usunięto z listy do obejrzenia</string>
+	<string id="1701">Włącz tryb debugowania</string>
 </strings>
