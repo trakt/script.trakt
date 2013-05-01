@@ -43,9 +43,6 @@ class Sync():
 		if self.simulate:
 			Debug("[Sync] Sync is configured to be simulated.")
 
-		if self.show_progress:
-			progress.create('%s %s' % (utilities.getString(1400), utilities.getString(1402)), line1=' ', line2=' ', line3=' ')
-
 	def isCanceled(self):
 		if self.show_progress and progress.iscanceled():
 			Debug("[Sync] Sync was canceled by user.")
@@ -56,13 +53,22 @@ class Sync():
 		else:
 			return False
 
+	def updateProgress(self, *args, **kwargs):
+		if self.show_progress:
+			kwargs['percent'] = args[0]
+			progress.update(**kwargs)
+	
 	''' begin code for episode sync '''
 	def traktLoadShows(self):
+		self.updateProgress(10, line1=utilities.getString(1485), line2=utilities.getString(1486))
+
 		Debug('[Episodes Sync] Getting episode collection from trakt.tv')
 		shows = self.traktapi.getShowLibrary()
 		if not isinstance(shows, list):
 			Debug("[Episodes Sync] Invalid trakt.tv show list, possible error getting data from trakt, aborting trakt.tv collection update.")
 			return False
+
+		self.updateProgress(12, line2=utilities.getString(1487))
 
 		Debug('[Episodes Sync] Getting watched episodes from trakt.tv')
 		watched_shows = self.traktapi.getWatchedEpisodeLibrary()
@@ -70,6 +76,8 @@ class Sync():
 			Debug("[Episodes Sync] Invalid trakt.tv watched show list, possible error getting data from trakt, aborting trakt.tv watched update.")
 			return False
 
+		i = 0
+		x = float(len(shows))
 		# reformat show array
 		for show in shows:
 			y = {}
@@ -84,6 +92,13 @@ class Sync():
 				show['imdb_id'] = ""
 			if show['tvdb_id'] is None:
 				show['tvdb_id'] = ""
+			
+			i = i + 1
+			y = ((i / x) * 8) + 12
+			self.updateProgress(int(y), line2=utilities.getString(1488))
+
+		i = 0
+		x = float(len(watched_shows))
 		for watched_show in watched_shows:
 			if watched_show['imdb_id'] is None:
 				watched_show['imdb_id'] = ""
@@ -103,6 +118,13 @@ class Sync():
 				watched_show['watched'] = w
 				watched_show['in_collection'] = False
 				shows.append(watched_show)
+
+			i = i + 1
+			y = ((i / x) * 8) + 20
+			self.updateProgress(int(y), line2=utilities.getString(1488))
+
+		self.updateProgress(28, line2=utilities.getString(1489))
+
 		return shows
 
 	def xbmcLoadShowList(self):
@@ -134,10 +156,16 @@ class Sync():
 		return shows
 
 	def xbmcLoadShows(self):
+		self.updateProgress(1, line1=utilities.getString(1480), line2=utilities.getString(1481))
+
 		tvshows = self.xbmcLoadShowList()
 		if tvshows is None:
 			return None
 			
+		self.updateProgress(2, line2=utilities.getString(1482))
+
+		i = 0
+		x = float(len(tvshows))
 		Debug("[Episodes Sync] Getting episode data from XBMC")
 		for show in tvshows:
 			show['seasons'] = {}
@@ -161,6 +189,13 @@ class Sync():
 				if e['playcount'] > 0:
 					if not _episode in show['watched'][_season]:
 						show['watched'][_season].append(_episode)
+
+			i = i + 1
+			y = ((i / x) * 8) + 2
+			self.updateProgress(int(y), line2=utilities.getString(1483))
+
+		self.updateProgress(10, line2=utilities.getString(1484))
+
 		return tvshows
 
 	def countEpisodes(self, shows, watched=False, collection=True, all=False):
@@ -264,6 +299,7 @@ class Sync():
 
 	def traktAddEpisodes(self, shows):
 		if len(shows) == 0:
+			self.updateProgress(46, line1=utilities.getString(1435), line2=utilities.getString(1490))
 			Debug("[Episodes Sync] trakt.tv episode collection is up to date.")
 			return
 
@@ -271,9 +307,10 @@ class Sync():
 		for show in shows:
 			Debug("[Episodes Sync] Episodes added: %s" % self.getShowAsString(show, short=True))
 		
-		if self.show_progress:
-			progress.update(35, line1=utilities.getString(1435), line2='%i %s' % (len(shows), utilities.getString(1436)))
+		self.updateProgress(28, line1=utilities.getString(1435), line2="%i %s" % (len(shows), utilities.getString(1436)), line3=" ")
 
+		i = 0
+		x = float(len(shows))
 		for show in shows:
 			if self.isCanceled():
 				return
@@ -281,8 +318,9 @@ class Sync():
 			epCount = self.countEpisodes([show])
 			title = show['title'].encode('utf-8', 'ignore')
 
-			if self.show_progress:
-				progress.update(45, line1=utilities.getString(1435), line2=title, line3='%i %s' % (epCount, utilities.getString(1437)))
+			i = i + 1
+			y = ((i / x) * 18) + 28
+			self.updateProgress(int(y), line1=utilities.getString(1435), line2=title, line3="%i %s" % (epCount, utilities.getString(1437)))
 
 			s = self.traktFormatShow(show)
 			if self.simulate:
@@ -290,8 +328,11 @@ class Sync():
 			else:
 				self.traktapi.addEpisode(s)
 
+		self.updateProgress(46, line1=utilities.getString(1435), line2=utilities.getString(1491) % self.countEpisodes(shows))
+
 	def traktRemoveEpisodes(self, shows):
 		if len(shows) == 0:
+			self.updateProgress(98, line1=utilities.getString(1445), line2=utilities.getString(1496))
 			Debug('[Episodes Sync] trakt.tv episode collection is clean')
 			return
 
@@ -299,18 +340,16 @@ class Sync():
 		for show in shows:
 			Debug("[Episodes Sync] Episodes removed: %s" % self.getShowAsString(show, short=True))
 
-		if self.show_progress:
-			progress.update(90, line1=utilities.getString(1445), line2='%i %s' % (len(shows), utilities.getString(1446)))
+		self.updateProgress(82, line1=utilities.getString(1445), line2=utilities.getString(1497) % self.countEpisodes(shows), line3=" ")
 
+		i = 0
+		x = float(len(shows))
 		for show in shows:
 			if self.isCanceled():
 				return
 
 			epCount = self.countEpisodes([show])
 			title = show['title'].encode('utf-8', 'ignore')
-
-			if self.show_progress:
-				progress.update(95, line1=utilities.getString(1445), line2=title, line3='%i %s' % (epCount, utilities.getString(1447)))
 
 			s = self.traktFormatShow(show)
 			if self.simulate:
@@ -318,8 +357,15 @@ class Sync():
 			else:
 				self.traktapi.removeEpisode(s)
 
+			i = i + 1
+			y = ((i / x) * 16) + 82
+			self.updateProgress(int(y), line2=title, line3="%i %s" % (epCount, utilities.getString(1447)))
+
+		self.updateProgress(98, line2=utilities.getString(1498) % self.countEpisodes(shows), line3=" ")
+
 	def traktUpdateEpisodes(self, shows):
 		if len(shows) == 0:
+			self.updateProgress(64, line1=utilities.getString(1438), line2=utilities.getString(1492))
 			Debug("[Episodes Sync] trakt.tv episode playcounts are up to date.")
 			return
 
@@ -327,9 +373,10 @@ class Sync():
 		for show in shows:
 			Debug("[Episodes Sync] Episodes updated: %s" % self.getShowAsString(show, short=True))
 
-		if self.show_progress:
-			progress.update(65, line1=utilities.getString(1438), line2='%i %s' % (len(shows), utilities.getString(1439)))
+		self.updateProgress(46, line1=utilities.getString(1438), line2="%i %s" % (len(shows), utilities.getString(1439)), line3=" ")
 
+		i = 0
+		x = float(len(shows))
 		for show in shows:
 			if self.isCanceled():
 				return
@@ -337,8 +384,9 @@ class Sync():
 			epCount = self.countEpisodes([show])
 			title = show['title'].encode('utf-8', 'ignore')
 
-			if self.show_progress:
-				progress.update(70, line1=utilities.getString(1438), line2=title, line3='%i %s' % (epCount, utilities.getString(1440)))
+			i = i + 1
+			y = ((i / x) * 18) + 46
+			self.updateProgress(70, line2=title, line3="%i %s" % (epCount, utilities.getString(1440)))
 
 			s = self.traktFormatShow(show)
 			if self.simulate:
@@ -346,8 +394,11 @@ class Sync():
 			else:
 				self.traktapi.updateSeenEpisode(s)
 
+		self.updateProgress(64, line2="%i %s" % (len(shows), utilities.getString(1439)))
+
 	def xbmcUpdateEpisodes(self, shows):
 		if len(shows) == 0:
+			self.updateProgress(82, line1=utilities.getString(1441), line2=utilities.getString(1493))
 			Debug("[Episodes Sync] XBMC episode playcounts are up to date.")
 			return
 
@@ -355,8 +406,7 @@ class Sync():
 		for s in ["%s" % self.getShowAsString(s, short=True) for s in shows]:
 			Debug("[Episodes Sync] Episodes updated: %s" % s)
 
-		if self.show_progress:
-			progress.update(85, line1=utilities.getString(1441), line2='%i %s' % (len(shows), utilities.getString(1439)))
+		self.updateProgress(64, line1=utilities.getString(1441), line2="%i %s" % (len(shows), utilities.getString(1439)), line3=" ")
 
 		episodes = []
 		for show in shows:
@@ -364,11 +414,10 @@ class Sync():
 				for episode in show['seasons'][season]:
 					episodes.append({'episodeid': show['seasons'][season][episode]['id'], 'playcount': 1})
 
-		if self.show_progress:
-			progress.update(85, line1=utilities.getString(1441), line2='', line3='%i %s' % (len(episodes), utilities.getString(1440)))
-
 		#split episode list into chunks of 50
 		chunked_episodes = utilities.chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetEpisodeDetails", "params": episodes[i], "id": i} for i in range(len(episodes))], 50)
+		i = 0
+		x = float(len(chunked_episodes))
 		for chunk in chunked_episodes:
 			if self.isCanceled():
 				return
@@ -377,9 +426,17 @@ class Sync():
 			else:
 				utilities.xbmcJsonRequest(chunk)
 
+			i = i + 1
+			y = ((i / x) * 18) + 64
+			self.updateProgress(int(y), line2=utilities.getString(1494))
+
+		self.updateProgress(82, line2=utilities.getString(1495) % len(episodes))
+
 	def syncEpisodes(self):
 		if not self.show_progress and utilities.getSettingAsBool('sync_on_update') and self.notify:
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1406)), utilities.getString(1420)) #Sync started
+		if self.show_progress:
+			progress.create("%s %s" % (utilities.getString(1400), utilities.getString(1406)), line1=" ", line2=" ", line3=" ")
 
 		xbmcShows = self.xbmcLoadShows()
 		if not isinstance(xbmcShows, list) and not xbmcShows:
@@ -411,7 +468,7 @@ class Sync():
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1406)), utilities.getString(1421)) #Sync complete
 
 		if not self.isCanceled() and self.show_progress:
-			progress.update(100, line1=utilities.getString(1442), line2=' ', line3=' ')
+			self.updateProgress(100, line1=" ", line2=utilities.getString(1442), line3=" ")
 			progress.close()
 
 		Debug("[Episodes Sync] Shows on trakt.tv (%d), shows in XBMC (%d)." % (len(findAllInList(traktShows, 'in_collection', True)), len(xbmcShows)))
@@ -420,11 +477,15 @@ class Sync():
 
 	''' begin code for movie sync '''
 	def traktLoadMovies(self):
+		self.updateProgress(5, line2=utilities.getString(1462))
+
 		Debug("[Movies Sync] Getting movie collection from trakt.tv")
 		movies = self.traktapi.getMovieLibrary()
 		if not isinstance(movies, list):
 			Debug("[Movies Sync] Invalid trakt.tv movie list, possible error getting data from trakt, aborting trakt.tv collection update.")
 			return False
+
+		self.updateProgress(6, line2=utilities.getString(1463))
 
 		Debug("[Movies Sync] Getting seen movies from trakt.tv")
 		watched_movies = self.traktapi.getWatchedMovieLibrary()
@@ -432,6 +493,10 @@ class Sync():
 			Debug("[Movies Sync] Invalid trakt.tv movie seen list, possible error getting data from trakt, aborting trakt.tv watched update.")
 			return False
 
+		self.updateProgress(8, line2=utilities.getString(1464))
+
+		i = 0
+		x = float(len(movies))
 		# reformat movie arrays
 		for movie in movies:
 			movie['plays'] = 0
@@ -440,6 +505,13 @@ class Sync():
 				movie['imdb_id'] = ""
 			if movie['tmdb_id'] is None:
 				movie['tmdb_id'] = ""
+
+			i = i + 1
+			y = ((i / x) * 6) + 8
+			self.updateProgress(int(y), line2=utilities.getString(1465))
+
+		i = 0
+		x = float(len(watched_movies))
 		for movie in watched_movies:
 			if movie['imdb_id'] is None:
 				movie['imdb_id'] = ""
@@ -454,9 +526,17 @@ class Sync():
 				movie['in_collection'] = False
 				movies.append(movie)
 
+			i = i + 1
+			y = ((i / x) * 6) + 14
+			self.updateProgress(int(y), line2=utilities.getString(1465))
+
+		self.updateProgress(20, line2=utilities.getString(1466))
+
 		return movies
 
 	def xbmcLoadMovies(self):
+		self.updateProgress(1, line2=utilities.getString(1460))
+
 		Debug("[Movies Sync] Getting movie data from XBMC")
 		data = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['title', 'imdbnumber', 'year', 'playcount', 'lastplayed']}})
 		if not data:
@@ -470,6 +550,9 @@ class Sync():
 		movies = data['movies']
 		Debug("[Movies Sync] XBMC JSON Result: '%s'" % str(movies))
 
+		i = 0
+		x = float(len(movies))
+		
 		# reformat movie array
 		for movie in movies:
 			movie['last_played'] = utilities.sqlDateToUnixDate(movie['lastplayed'])
@@ -485,6 +568,13 @@ class Sync():
 			del(movie['imdbnumber'])
 			del(movie['lastplayed'])
 			del(movie['label'])
+
+			i = i + 1
+			y = ((i / x) * 4) + 1
+			self.updateProgress(int(y))
+			
+		self.updateProgress(5, line2=utilities.getString(1461))
+
 		return movies
 
 	def sanitizeMovieData(self, movie):
@@ -539,6 +629,7 @@ class Sync():
 
 	def traktAddMovies(self, movies):
 		if len(movies) == 0:
+			self.updateProgress(40, line2=utilities.getString(1467))
 			Debug("[Movies Sync] trakt.tv movie collection is up to date.")
 			return
 		
@@ -546,8 +637,7 @@ class Sync():
 		Debug("[Movies Sync] %i movie(s) will be added to trakt.tv collection." % len(movies))
 		Debug("[Movies Sync] Movies added: %s" % titles)
 
-		if self.show_progress:
-			progress.update(45, line2='%i %s' % (len(movies), utilities.getString(1426)))
+		self.updateProgress(20, line2="%i %s" % (len(movies), utilities.getString(1426)))
 
 		params = {'movies': [self.sanitizeMovieData(movie) for movie in movies]}
 		if self.simulate:
@@ -555,17 +645,19 @@ class Sync():
 		else:
 			self.traktapi.addMovie(params)
 
+		self.updateProgress(40, line2=utilities.getString(1468) % len(movies))
+
 	def traktRemoveMovies(self, movies):
 		if len(movies) == 0:
-			Debug("[Movies Sync] trakt.tv movie collection is clean.")
+			self.updateProgress(98, line2=utilities.getString(1474))
+			Debug("[Movies Sync] trakt.tv movie collection is clean, no movies to remove.")
 			return
 		
 		titles = ", ".join(["%s (%s)" % (m['title'], m['imdb_id']) for m in movies])
 		Debug("[Movies Sync] %i movie(s) will be removed from trakt.tv collection." % len(movies))
 		Debug("[Movies Sync] Movies removed: %s" % titles)
 
-		if self.show_progress:
-			progress.update(95, line2='%i %s' % (len(movies), utilities.getString(1444)))
+		self.updateProgress(80, line2="%i %s" % (len(movies), utilities.getString(1444)))
 		
 		params = {'movies': [self.sanitizeMovieData(movie) for movie in movies]}
 		if self.simulate:
@@ -573,8 +665,11 @@ class Sync():
 		else:
 			self.traktapi.removeMovie(params)
 
+		self.updateProgress(98, line2=utilities.getString(1475) % len(movies))
+
 	def traktUpdateMovies(self, movies):
 		if len(movies) == 0:
+			self.updateProgress(60, line2=utilities.getString(1469))
 			Debug("[Movies Sync] trakt.tv movie playcount is up to date")
 			return
 		
@@ -582,8 +677,7 @@ class Sync():
 		Debug("[Movies Sync] %i movie(s) playcount will be updated on trakt.tv" % len(movies))
 		Debug("[Movies Sync] Movies updated: %s" % titles)
 
-		if self.show_progress:
-			progress.update(75, line2='%i %s' % (len(movies), utilities.getString(1428)))
+		self.updateProgress(40, line2="%i %s" % (len(movies), utilities.getString(1428)))
 
 		# Send request to update playcounts on trakt.tv
 		params = {'movies': [self.sanitizeMovieData(movie) for movie in movies]}
@@ -592,19 +686,24 @@ class Sync():
 		else:
 			self.traktapi.updateSeenMovie(params)
 
+		self.updateProgress(60, line2=utilities.getString(1470) % len(movies))
+
 	def xbmcUpdateMovies(self, movies):
 		if len(movies) == 0:
+			self.updateProgress(80, line2=utilities.getString(1471))
 			Debug("[Movies Sync] XBMC movie playcount is up to date.")
 			return
 		
 		titles = ", ".join(["%s (%s)" % (m['title'], m['imdb_id']) for m in movies])
 		Debug("[Movies Sync] %i movie(s) playcount will be updated in XBMC" % len(movies))
 		Debug("[Movies Sync] Movies updated: %s" % titles)
-		if self.show_progress:
-			progress.update(90, line2='%i %s' % (len(movies), utilities.getString(1430)))
+
+		self.updateProgress(60, line2="%i %s" % (len(movies), utilities.getString(1430)))
 
 		#split movie list into chunks of 50
 		chunked_movies = utilities.chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": movies[i]['movieid'], "playcount": movies[i]['plays']}, "id": i} for i in range(len(movies))], 50)
+		i = 0
+		x = float(len(chunked_movies))
 		for chunk in chunked_movies:
 			if self.isCanceled():
 				return
@@ -613,9 +712,17 @@ class Sync():
 			else:
 				utilities.xbmcJsonRequest(chunk)
 
+			i = i + 1
+			y = ((i / s) * 20) + 60
+			self.updateProgress(int(y), line2=utilities.getString(1472))
+
+		self.updateProgress(80, line2=utilities.getString(1473) % len(movies))
+
 	def syncMovies(self):
 		if not self.show_progress and utilities.getSettingAsBool('sync_on_update') and self.notify:
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1402)), utilities.getString(1420)) #Sync started
+		if self.show_progress:
+			progress.create("%s %s" % (utilities.getString(1400), utilities.getString(1402)), line1=" ", line2=" ", line3=" ")
 
 		xbmcMovies = self.xbmcLoadMovies()
 		if not isinstance(xbmcMovies, list) and not xbmcMovies:
@@ -644,7 +751,7 @@ class Sync():
 			self.traktRemoveMovies(traktMoviesToRemove)
 
 		if not self.isCanceled() and self.show_progress:
-			progress.update(100, line1=utilities.getString(1431), line2=' ', line3=' ')
+			self.updateProgress(100, line1=utilities.getString(1431), line2=" ", line3=" ")
 			progress.close()
 
 		if not self.show_progress and utilities.getSettingAsBool('sync_on_update') and self.notify:
