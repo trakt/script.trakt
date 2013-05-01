@@ -209,10 +209,12 @@ class traktAPI(object):
 				elif returnOnFailure and data['status'] == 'failure':
 					Debug("[traktAPI] traktRequest(): Return on error set, breaking retry.")
 					break
-				else:
+				elif 'error' in data and data['status'] == 'failure':
 					Debug("[traktAPI] traktRequest(): (%i) JSON Error '%s' -> '%s'" % (i, data['status'], data['error']))
 					xbmc.sleep(1000)
 					continue
+				else:
+					pass
 
 			# check to see if we have data, an empty array is still valid data, so check for None only
 			if not data is None:
@@ -448,22 +450,25 @@ class traktAPI(object):
 	def updateSeenMovie(self, data):
 		return self.updateSeenInLibrary('movie', data)
 
-	# url: http://api.trakt.tv/<show/episode|movie>/summary.format/apikey/title[/season/episode]
-	# returns: returns information for a movie or episode
+	# url: http://api.trakt.tv/<show|show/episode|movie>/summary.format/apikey/title[/season/episode]
+	# returns: returns information for a movie, show or episode
 	def getSummary(self, type, data):
 		if self.testAccount():
 			url = "%s/%s/summary.json/%s/%s" % (self.__baseURL, type, self.__apikey, data)
 			Debug("[traktAPI] getSummary(url: %s)" % url)
 			return self.traktRequest('POST', url)
 
-	def getShowSummary(self, id, season, episode):
+	def getShowSummary(self, id):
+		data = str(id)
+		return self.getSummary('show', data)
+	def getEpisodeSummary(self, id, season, episode):
 		data = "%s/%s/%s" % (id, season, episode)
 		return self.getSummary('show/episode', data)
 	def getMovieSummary(self, id):
 		data = str(id)
 		return self.getSummary('movie', data)
 
-	# url: http://api.trakt.tv/rate/<episode|movie>/apikey
+	# url: http://api.trakt.tv/rate/<show|episode|movie>/apikey
 	# returns: {"status":"success","message":"rated Portlandia 1x01","type":"episode","rating":"love","ratings":{"percentage":100,"votes":2,"loved":2,"hated":0},"facebook":true,"twitter":true,"tumblr":false}
 	def rate(self, type, data):
 		if self.testAccount():
@@ -471,6 +476,8 @@ class traktAPI(object):
 			Debug("[traktAPI] rate(url: %s, data: %s)" % (url, str(data)))
 			return self.traktRequest('POST', url, data, passVersions=True)
 
+	def rateShow(self, data):
+		return self.rate('show', data)
 	def rateEpisode(self, data):
 		return self.rate('episode', data)
 	def rateMovie(self, data):

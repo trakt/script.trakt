@@ -46,5 +46,6 @@
 		<setting id="rate_episode" type="bool" label="1032" default="true"/>
 		<setting id="rate_each_playlist_item" type="bool" label="1033" default="true"/>
 		<setting id="rate_min_view_time" type="slider" label="1034" range="0,5,100" default="75"/>
+		<setting id="rate_rerate" type="bool" label="1035" default="false"/>
 	</category>
 </settings>

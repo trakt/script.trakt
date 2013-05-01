@@ -13,6 +13,7 @@
 	<string id="1032">Rate TV Show Episode after watching</string>
 	<string id="1033">Rate each playlist item</string>
 	<string id="1034">Minimum percent watched to display rate dialog</string>
+	<string id="1035">Allow re-rating of media</string>
 	
 	<string id="1040">Scrobbling</string>
 	<string id="1041">Scrobble movies</string>
@@ -32,7 +33,10 @@
 	<string id="1108">Can't connect to trakt</string>
 	<string id="1109">Error</string>
 	<string id="1110">Incorrect username or password</string>
-	<string id="1167">Rating submitted successfully</string>
+	<string id="1167">Rating for %s was successfully submitted</string>
+	<string id="1168">%s has already been rated</string>
+	<string id="1169">%s successfully unrated</string>
+	<string id="1170">%s already has the same rating</string>
 	<string id="1313">What Did You Think?</string>
 	<string id="1314">Totally Ninja!</string>
 	<string id="1315">Weak Sauce :(</string>
@@ -44,9 +48,17 @@
 	<string id="1321">Good</string>
 	<string id="1322">Great</string>
 	<string id="1323">Superb</string>
+	<string id="1325">Unrate this movie</string>
+	<string id="1326">Unrate this show</string>
+	<string id="1327">Unrate this episode</string>
 
 	<!-- Titles -->
 	<string id="1201">trakt</string>
+	<string id="1202">trakt.tv Rating</string>
+	<string id="1205">Movie</string>
+	<string id="1206">TV Show</string>
+	<string id="1207">Season</string>
+	<string id="1208">Episode</string>
 	
 	<!-- Sync Settings -->
 	<string id="1400">Synchronize</string>

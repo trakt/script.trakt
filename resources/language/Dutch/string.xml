@@ -79,7 +79,7 @@
 	<string id="1163">Ontvangen van informatie van Trakt servers</string>
 	<string id="1164">Doorverwijzing met lokale informatie</string>
 	<string id="1166">Beoordeling met succes verwijderd</string>
-	<string id="1167">Waardering met succes toegevoegd</string>
+	<string id="1167">Waardering voor '%s' werd toegevoegd</string>
 	<string id="1168">Fout bij het toevoegen van waardering</string>
 	<string id="1300">Controle van XBMC Database voor nieuwe bekeken films</string>
 	<string id="1301">Controle Trakt Database voor nieuwe bekeken films</string>

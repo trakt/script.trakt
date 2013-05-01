@@ -77,7 +77,7 @@
 	<string id="1162">nie znaleziony w Twojej bibliotece XBMC</string>
 	<string id="1163">Pobieram informacje z serwerów Trakt</string>
 	<string id="1166">Ocena usunięta pomyślnie</string>
-	<string id="1167">Ocena wysłana pomyślnie</string>
+	<string id="1167">Ocena dla '%s' został wysłany pomyślnie</string>
 	<string id="1168">Błąd wysyłania oceny</string>
 	<string id="1180">rozpocznij aktualizację kolekcji filmów</string>
 	<string id="1181">rozpocznij aktualizację kolekcji seriali tv</string>
