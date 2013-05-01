@@ -2,7 +2,6 @@
 <strings>
 	<!-- Preferences -->
 	<string id="1010">Algemeen</string>
-	<string id="1011">Activeer debug mode</string>
 	<string id="1012">API Key (te vinden op trakt -&gt; Settings -&gt; API)</string>
 	<string id="1013">Gebruikersnaam</string>
 	<string id="1014">Wachtwoord</string>
@@ -139,4 +138,7 @@
 	<string id="1282">Bekeken</string>
 	<string id="1283">Bibliotheek</string>
 	<string id="1284">Profiel</string>
+
+	<!-- Debug -->
+	<string id="1701">Activeer debug mode</string>
 </strings>

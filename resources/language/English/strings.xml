@@ -2,7 +2,6 @@
 <strings>
 	<!-- Preferences -->
 	<string id="1010">General</string>
-	<string id="1011">Enable debug mode</string>
 	<string id="1013">Username</string>
 	<string id="1014">Password</string>
 	<string id="1017">Number of Retries</string>
@@ -19,7 +18,6 @@
 	<string id="1041">Scrobble movies</string>
 	<string id="1042">Scrobble TV episodes</string>
 	<string id="1043">Minimum percent watched to scrobble</string>
-	<string id="1044">Simulate scrobbling (for testing purposes)</string>
 	
 	<string id="1050">Exclusions</string>
 	<string id="1051">Exclude Live TV</string>
@@ -75,7 +73,6 @@
 	<string id="1412">Show notifications</string>
 	<string id="1413">Clean trakt movie collection</string>
 	<string id="1414">Clean trakt episode collection</string>
-	<string id="1415">Simulate sync (for testing purposes)</string>
 
 	<!-- Sync Notifications -->
 	<string id="1420">Sync started</string>
@@ -141,4 +138,10 @@
 	<string id="1496">trakt.tv episode collection is clean, no episodes to remove.</string>
 	<string id="1497">%i episode(s) are being removed from your trakt.tv collection.</string>
 	<string id="1498">%i episode(s) were removed from your trakt.tv collection</string>
+	
+	<!-- Debug -->
+	<string id="1700">Debug</string>
+	<string id="1701">Enable debug mode</string>
+	<string id="1702">Simulate scrobbling (for testing purposes)</string>
+	<string id="1703">Simulate sync (for testing purposes)</string>
 </strings>
