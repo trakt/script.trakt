@@ -11,7 +11,7 @@ import base64
 
 from utilities import Debug, notification, getSetting, getSettingAsBool, getSettingAsInt, getString, setSetting
 from urllib2 import Request, urlopen, HTTPError, URLError
-from httplib import HTTPException
+from httplib import HTTPException, BadStatusLine
 
 try:
 	import simplejson as json
@@ -83,6 +83,8 @@ class traktAPI(object):
 			Debug("[traktAPI] __getData(): Response Time: %0.2f ms" % ((t2 - t1) * 1000))
 			Debug("[traktAPI] __getData(): Response Headers: %s" % str(response.info().dict))
 
+		except BadStatusLine, e:
+			raise traktUnknownError("BadStatusLine: '%s' from URL: '%s'" % (e.line, url)) 
 		except IOError, e:
 			if hasattr(e, 'code'): # error 401 or 503, possibly others
 				# read the error document, strip newlines, this will make an html page 1 line
