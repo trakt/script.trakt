@@ -2,8 +2,8 @@
 
 import xbmc
 import threading
-import Queue
-
+from time import time
+import queue
 import globals
 import utilities
 from traktapi import traktAPI
@@ -21,7 +21,7 @@ class traktService:
 	scrobbler = None
 	watcher = None
 	syncThread = None
-	dispatchQueue = Queue.Queue()
+	dispatchQueue = queue.SqliteQueue()
 	_interval = 10 * 60 # how often to send watching call
 	
 	def __init__(self):
@@ -29,7 +29,7 @@ class traktService:
 
 	def _dispatchQueue(self, data):
 		utilities.Debug("Queuing for dispatch: %s" % data)
-		self.dispatchQueue.put(data)
+		self.dispatchQueue.append(data)
 	
 	def _dispatch(self, data):
 		utilities.Debug("Dispatch: %s" % data)
@@ -59,6 +59,18 @@ class traktService:
 		elif action == 'settingsChanged':
 			utilities.Debug("Settings changed, reloading.")
 			globals.traktapi.updateSettings()
+		elif action == 'markWatched':
+			del data['action']
+			self.doMarkWatched(data)
+		elif action == 'manualRating':
+			ratingData = data['ratingData']
+			self.doManualRating(ratingData)
+		elif action == 'manualSync':
+			if not self.syncThread.isAlive():
+				utilities.Debug("Performing a manual sync.")
+				self.doSync(manual=True)
+			else:
+				utilities.Debug("There already is a sync in progress.")
 		else:
 			utilities.Debug("Unknown dispatch action, '%s'." % action)
 
@@ -70,11 +82,6 @@ class traktService:
 
 		utilities.Debug("Service thread starting.")
 
-		# clear any left over properties
-		utilities.clearProperty('traktManualSync')
-		utilities.clearProperty('traktManualRateData')
-		utilities.clearProperty('traktManualRate')
-		
 		# setup event driven classes
 		self.Player = traktPlayer(action = self._dispatchQueue)
 		self.Monitor = traktMonitor(action = self._dispatchQueue)
@@ -88,29 +95,16 @@ class traktService:
 		# init scrobbler class
 		self.scrobbler = Scrobbler(globals.traktapi)
 
+		# purge queue
+		self.dispatchQueue.purge()
+
 		# start loop for events
 		while (not xbmc.abortRequested):
-			while not self.dispatchQueue.empty() and (not xbmc.abortRequested):
+			while len(self.dispatchQueue) and (not xbmc.abortRequested):
 				data = self.dispatchQueue.get()
 				utilities.Debug("Queued dispatch: %s" % data)
 				self._dispatch(data)
 
-			# check if we were tasked to do a manual sync
-			if utilities.getPropertyAsBool('traktManualSync'):
-				if not self.syncThread.isAlive():
-					utilities.Debug("Performing a manual sync.")
-					self.doSync(manual=True)
-				else:
-					utilities.Debug("There already is a sync in progress.")
-
-				utilities.clearProperty('traktManualSync')
-
-			# check if we were tasked to do a manual rating
-			if utilities.getPropertyAsBool('traktManualRate'):
-				self.doManualRating()
-				utilities.clearProperty('traktManualRateData')
-				utilities.clearProperty('traktManualRate')
-			
 			if xbmc.Player().isPlayingVideo():
 				self.scrobbler.update()
 
@@ -146,8 +140,7 @@ class traktService:
 		self.watcher.name = "trakt-watching"
 		self.watcher.start()
 
-	def doManualRating(self):
-		data = json.loads(utilities.getProperty('traktManualRateData'))
+	def doManualRating(self, data):
 
 		action = data['action']
 		media_type = data['media_type']
@@ -170,40 +163,11 @@ class traktService:
 				utilities.Debug("Getting data for manual %s of non-library '%s' with ID of '%s'" % (action, media_type, data['remoteid']))
 
 		if utilities.isEpisode(media_type):
-			result = {}
-			if 'dbid' in data:
-				result = utilities.getEpisodeDetailsFromXbmc(data['dbid'], ['showtitle', 'season', 'episode', 'tvshowid'])
-				if not result:
-					utilities.Debug("doManualRating(): No data was returned from XBMC, aborting manual %s." % action)
-					return
-			else:
-				result['tvdb_id'] = data['remoteid']
-				result['season'] = data['season']
-				result['episode'] = data['episode']
-
-			summaryInfo = globals.traktapi.getEpisodeSummary(result['tvdb_id'], result['season'], result['episode'])
+			summaryInfo = globals.traktapi.getEpisodeSummary(data['tvdb_id'], data['season'], data['episode'])
 		elif utilities.isShow(media_type):
-			result = {}
-			if 'dbid' in data:
-				result = utilities.getShowDetailsFromXBMC(data['dbid'], ['imdbnumber'])
-				if not result:
-					utilities.Debug("doManualRating(): No data was returned from XBMC, aborting manual %s." % action)
-					return
-			else:
-				result['imdbnumber'] = data['remoteid']
-
-			summaryInfo = globals.traktapi.getShowSummary(result['imdbnumber'])
+			summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
 		elif utilities.isMovie(media_type):
-			result = {}
-			if 'dbid' in data:
-				result = utilities.getMovieDetailsFromXbmc(data['dbid'], ['imdbnumber', 'title', 'year'])
-				if not result:
-					utilities.Debug("doManualRating(): No data was returned from XBMC, aborting manual %s." % action)
-					return
-			else:
-				result['imdbnumber'] = data['remoteid']
-
-			summaryInfo = globals.traktapi.getMovieSummary(result['imdbnumber'])
+			summaryInfo = globals.traktapi.getMovieSummary(data['imdbnumber'])
 		
 		if not summaryInfo is None:
 			if action == 'rate':
@@ -215,6 +179,128 @@ class traktService:
 				rateMedia(media_type, summaryInfo, unrate=True)
 		else:
 			utilities.Debug("doManualRating(): Summary info was empty, possible problem retrieving data from trakt.tv")
+
+	def doMarkWatched(self, data):
+
+		media_type = data['media_type']
+		simulate = utilities.getSettingAsBool('simulate_sync')
+		markedNotification = utilities.getSettingAsBool('show_marked_notification')
+		
+		if utilities.isMovie(media_type):
+			summaryInfo = globals.traktapi.getMovieSummary(data['id'])
+			if summaryInfo:
+				if not summaryInfo['watched']:
+					s = utilities.getFormattedItemName(media_type, summaryInfo)
+					utilities.Debug("doMarkWatched(): '%s' is not watched on trakt, marking it as watched." % s)
+					movie = {}
+					movie['imdb_id'] = data['id']
+					movie['title'] = summaryInfo['title']
+					movie['year'] = summaryInfo['year']
+					movie['plays'] = 1
+					movie['last_played'] = int(time())
+					params = {'movies': [movie]}
+					utilities.Debug("doMarkWatched(): %s" % str(params))
+					
+					if not simulate:
+						result = globals.traktapi.updateSeenMovie(params)
+						if result:
+							if markedNotification:
+								utilities.notification(utilities.getString(1550), s)
+						else:
+							utilities.notification(utilities.getString(1551), s)
+					else:
+						if markedNotification:
+							utilities.notification(utilities.getString(1550), s)
+					
+		elif utilities.isEpisode(media_type):
+			summaryInfo = globals.traktapi.getEpisodeSummary(data['id'], data['season'], data['episode'])
+			if summaryInfo:
+				if not summaryInfo['episode']['watched']:
+					s = utilities.getFormattedItemName(media_type, summaryInfo)
+					utilities.Debug("doMarkWathced(): '%s' is not watched on trakt, marking it as watched." % s)
+					params = {}
+					params['imdb_id'] = summaryInfo['show']['imdb_id']
+					params['tvdb_id'] = summaryInfo['show']['tvdb_id']
+					params['title'] = summaryInfo['show']['title']
+					params['year'] = summaryInfo['show']['year']
+					params['episodes'] = [{'season': data['season'], 'episode': data['episode']}]
+					utilities.Debug("doMarkWatched(): %s" % str(params))
+					
+					if not simulate:
+						result = globals.traktapi.updateSeenEpisode(params)
+						if result:
+							if markedNotification:
+								utilities.notification(utilities.getString(1550), s)
+						else:
+							utilities.notification(utilities.getString(1551), s)
+					else:
+						if markedNotification:
+							utilities.notification(utilities.getString(1550), s)
+
+		elif utilities.isSeason(media_type):
+			showInfo = globals.traktapi.getShowSummary(data['id'])
+			if not showInfo:
+				return
+			summaryInfo = globals.traktapi.getSeasonInfo(data['id'], data['season'])
+			if summaryInfo:
+				showInfo['season'] = data['season']
+				s = utilities.getFormattedItemName(media_type, showInfo)
+				params = {}
+				params['imdb_id'] = showInfo['imdb_id']
+				params['tvdb_id'] = showInfo['tvdb_id']
+				params['title'] = showInfo['title']
+				params['year'] = showInfo['year']
+				params['episodes'] = []
+				for ep in summaryInfo:
+					if ep['episode'] in data['episodes']:
+						if not ep['watched']:
+							params['episodes'].append({'season': ep['season'], 'episode': ep['episode']})
+
+				utilities.Debug("doMarkWatched(): '%s - Season %d' has %d episode(s) that are going to be marked as watched." % (showInfo['title'], data['season'], len(params['episodes'])))
+				
+				if len(params['episodes']) > 0:
+					utilities.Debug("doMarkWatched(): %s" % str(params))
+					if not simulate:
+						result = globals.traktapi.updateSeenEpisode(params)
+						if result:
+							if markedNotification:
+								utilities.notification(utilities.getString(1550), utilities.getString(1552) % (len(params['episodes']), s))
+						else:
+							utilities.notification(utilities.getString(1551), utilities.getString(1552) % (len(params['episodes']), s))
+					else:
+						if markedNotification:
+							utilities.notification(utilities.getString(1550), utilities.getString(1552) % (len(params['episodes']), s))
+
+		elif utilities.isShow(media_type):
+			summaryInfo = globals.traktapi.getShowSummary(data['id'], extended=True)
+			if summaryInfo:
+				s = utilities.getFormattedItemName(media_type, summaryInfo)
+				params = {}
+				params['imdb_id'] = summaryInfo['imdb_id']
+				params['tvdb_id'] = summaryInfo['tvdb_id']
+				params['title'] = summaryInfo['title']
+				params['year'] = summaryInfo['year']
+				params['episodes'] = []
+				for season in summaryInfo['seasons']:
+					for ep in season['episodes']:
+						if str(season['season']) in data['seasons']:
+							if ep['episode'] in data['seasons'][str(season['season'])]:
+								if not ep['watched']:
+									params['episodes'].append({'season': ep['season'], 'episode': ep['episode']})
+				utilities.Debug("doMarkWatched(): '%s' has %d episode(s) that are going to be marked as watched." % (summaryInfo['title'], len(params['episodes'])))
+
+				if len(params['episodes']) > 0:
+					utilities.Debug("doMarkWatched(): %s" % str(params))
+					if not simulate:
+						result = globals.traktapi.updateSeenEpisode(params)
+						if result:
+							if markedNotification:
+								utilities.notification(utilities.getString(1550), utilities.getString(1552) % (len(params['episodes']), s))
+						else:
+							utilities.notification(utilities.getString(1551), utilities.getString(1552) % (len(params['episodes']), s))
+					else:
+						if markedNotification:
+							utilities.notification(utilities.getString(1550), utilities.getString(1552) % (len(params['episodes']), s))
 
 	def doSync(self, manual=False):
 		self.syncThread = syncThread(manual)
