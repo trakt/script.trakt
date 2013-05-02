@@ -3,7 +3,6 @@
 	<category label="1010"><!-- General -->
 		<setting id="username" type="text" label="1013" default="" />
 		<setting id="password" type="text" option="hidden" label="1014" default="" />
-		<setting id="debug" type="bool" label="1011" default="true"/>
 		<setting id="retries" type="slider" label="1017" range="1,1,10" default="5" option="int"/>
 		<setting id="startup_delay" type="slider" label="1018" range="0,30" default="0" option="int"/>
 	</category>
