@@ -37,6 +37,11 @@
 	<string id="1168">%s has already been rated</string>
 	<string id="1169">%s successfully unrated</string>
 	<string id="1170">%s already has the same rating</string>
+	<string id="1171">trakt.tv - Rating submitted successfully</string>
+	<string id="1172">trakt.tv - Already rated</string>
+	<string id="1173">trakt.tv - Unrated successfully</string>
+	<string id="1174">trakt.tv - Already has the same rating</string>
+	<string id="1175">trakt.tv - Problem submitting rating</string>
 	<string id="1313">What Did You Think?</string>
 	<string id="1314">Totally Ninja!</string>
 	<string id="1315">Weak Sauce :(</string>

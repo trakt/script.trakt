@@ -73,17 +73,17 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 					utils.Debug("[Rating] Rating for '%s' is being set to '%d' manually." % (s, rating))
 					rateOnTrakt(rating, media_type, summary_info)
 				else:
-					utils.notification(s, utils.getString(1170) % utils.getFormattedType(media_type))
+					utils.notification(utils.getString(1174), s)
 					utils.Debug("[Rating] '%s' already has a rating of '%d'." % (s, rating))
 			else:
-				utils.notification(s, utils.getString(1168) % utils.getFormattedType(media_type))
+				utils.notification(utils.getString(1172), s)
 				utils.Debug("[Rating] '%s' is already rated." % s)
 		return
 
 	if summary_info['rating'] or summary_info['rating_advanced']:
 		if not rerate:
 			utils.Debug("[Rating] '%s' has already been rated." % s)
-			utils.notification(s, utils.getString(1168) % utils.getFormattedType(media_type))
+			utils.notification(utils.getString(1172), s)
 			return
 		else:
 			utils.Debug("[Rating] '%s' is being re-rated." % s)
@@ -156,12 +156,18 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 	else:
 		return
 
-	if data != None:
+	if data:
 		s = utils.getFormattedItemName(media_type, media)
-		if not unrate:
-			utils.notification(s, utils.getString(1167) % utils.getFormattedType(media_type))
+		if 'status' in data and data['status'] == "success":
+			if not unrate:
+				utils.notification(utils.getString(1171), s)
+			else:
+				utils.notification(utils.getString(1173), s)
+		elif 'status' in data and data['status'] == "failure":
+			utils.notification(utils.getString(1175), s)
 		else:
-			utils.notification(s, utils.getString(1169) % utils.getFormattedType(media_type))
+			# status not in data, different problem, do nothing for now
+			pass
 
 class RatingDialog(xbmcgui.WindowXMLDialog):
 	buttons = {
