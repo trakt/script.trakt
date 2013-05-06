@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <strings>
-	<!-- Preferences -->
+	<!-- General Settings -->
 	<string id="1010">General</string>
 	<string id="1013">Username</string>
 	<string id="1014">Password</string>
 	<string id="1017">Number of Retries</string>
 	<string id="1018">Startup Delay</string>
 	
+	<!-- Rating Settings -->
 	<string id="1030">Rating</string>
 	<string id="1031">Rate Movie after watching</string>
 	<string id="1032">Rate TV Show Episode after watching</string>
@@ -14,32 +15,32 @@
 	<string id="1034">Minimum percent watched to display rate dialog</string>
 	<string id="1035">Allow re-rating of media</string>
 	
+	<!-- Scrobbling Settings -->
 	<string id="1040">Scrobbling</string>
 	<string id="1041">Scrobble movies</string>
 	<string id="1042">Scrobble TV episodes</string>
 	<string id="1043">Minimum percent watched to scrobble</string>
-	
 	<string id="1050">Exclusions</string>
 	<string id="1051">Exclude Live TV</string>
 	<string id="1052">Exclude HTTP sources</string>	
 	<string id="1053">Exclude path</string>
 	<string id="1054">Folder's path (and subfolders)</string>
 	
-	<!-- Info -->
+	<!-- General Notifications -->
 	<string id="1106">Enter your Username and Password in settings</string>
 	<string id="1107">Enter your Password in settings</string>
 	<string id="1108">Can't connect to trakt</string>
 	<string id="1109">Error</string>
 	<string id="1110">Incorrect username or password</string>
-	<string id="1167">Rating for %s was successfully submitted</string>
-	<string id="1168">%s has already been rated</string>
-	<string id="1169">%s successfully unrated</string>
-	<string id="1170">%s already has the same rating</string>
-	<string id="1171">trakt.tv - Rating submitted successfully</string>
-	<string id="1172">trakt.tv - Already rated</string>
-	<string id="1173">trakt.tv - Unrated successfully</string>
-	<string id="1174">trakt.tv - Already has the same rating</string>
-	<string id="1175">trakt.tv - Problem submitting rating</string>
+
+	<!-- Manual Rating Notifications -->
+	<string id="1350">trakt.tv - Rating submitted successfully</string>
+	<string id="1351">trakt.tv - Already rated</string>
+	<string id="1352">trakt.tv - Unrated successfully</string>
+	<string id="1353">trakt.tv - Already has the same rating</string>
+	<string id="1354">trakt.tv - Problem submitting rating</string>
+	
+	<!-- Rating Dialog -->
 	<string id="1313">What Did You Think?</string>
 	<string id="1314">Totally Ninja!</string>
 	<string id="1315">Weak Sauce :(</string>
@@ -56,12 +57,7 @@
 	<string id="1327">Unrate this episode</string>
 
 	<!-- Titles -->
-	<string id="1201">trakt</string>
-	<string id="1202">trakt.tv Rating</string>
-	<string id="1205">Movie</string>
-	<string id="1206">TV Show</string>
-	<string id="1207">Season</string>
-	<string id="1208">Episode</string>
+	<string id="1201">trakt.tv</string>
 	
 	<!-- Sync Settings -->
 	<string id="1400">Synchronize</string>
@@ -82,69 +78,86 @@
 	<!-- Sync Notifications -->
 	<string id="1420">Sync started</string>
 	<string id="1421">Sync complete</string>
-	<string id="1422">Getting movies from XBMC</string>
-	<string id="1423">Getting movie collection from trakt</string>
-	<string id="1424">Getting seen movies from trakt</string>
-	<string id="1425">Checking for XBMC movies that are not on trakt</string>
-	<string id="1426">movie(s) will be added to trakt collection</string>
-	<string id="1427">Checking watched movies on trakt</string>
-	<string id="1428">movie(s) playcount will be updated on trakt</string>
-	<string id="1429">Checking if XBMC playcount is up to date</string>
-	<string id="1430">movie(s) playcount will be updated on XBMC</string>
-	<string id="1431">Movie Sync Complete</string>
-	<string id="1432">Getting TV shows from XBMC</string>
-	<string id="1433">Getting episodes from XBMC</string>
-	<string id="1434">Getting episode collection from trakt</string>
-	<string id="1435">Checking for episodes missing from trakt collection</string>
-	<string id="1436">shows(s) have episodes added to trakt collection</string>
-	<string id="1437">episodes missing</string>
-	<string id="1438">Checking watched episodes on trakt</string>
-	<string id="1439">shows have missing watched status</string>
-	<string id="1440">episodes are being updated</string>
-	<string id="1441">Checking watched episodes on XBMC</string>
-	<string id="1442">Episode Sync Complete</string>
-	<string id="1443">Cleaning trakt movie collection</string>
-	<string id="1444">movie(s) will be removed from trakt collection</string>
-	<string id="1445">Cleaning trakt tvshow collection</string>
-	<string id="1446">show(s) will have episodes removed from trakt collection</string>
-	<string id="1447">episodes are being removed</string>
+	
+	<!-- Sync Movies - load from xbmc -->
 	<string id="1460">Loading movies from XBMC</string>
 	<string id="1461">Movies loaded from XBMC</string>
+	
+	<!-- Sync Movies - load from trakt -->
 	<string id="1462">Retrieving movie collection from trakt.tv</string>
 	<string id="1463">Retrieving seen movies from trakt.tv</string>
 	<string id="1464">Retrieved seen movies from trakt.tv</string>
 	<string id="1465">Parsing movies from trakt.tv</string>
 	<string id="1466">Retrieved movie data from trakt.tv</string>
+
+	<!-- Sync Movies - add to trakt -->
 	<string id="1467">trakt.tv movie collection is up to date, no movies to add.</string>
+	<string id="1426">movie(s) will be added to trakt collection</string>
 	<string id="1468">%i movie(s) were added to your trakt.tv collection.</string>
+
+	<!-- Sync Movies - update trakt -->
 	<string id="1469">trakt.tv movie playcount is up to date.</string>
+	<string id="1428">movie(s) playcount will be updated on trakt</string>
 	<string id="1470">Play counts updated for %i movie(s) on trakt.tv</string>
+	
+	<!-- Sync Movies - update xbmc -->
 	<string id="1471">XBMC movie playcount is up to date.</string>
+	<string id="1430">movie(s) playcount will be updated on XBMC</string>
 	<string id="1472">Updating movie play counts in XBMC.</string>
 	<string id="1473">Play counts updated for %i movie(s) in XBMC.</string>
+
+	<!-- Sync Movies - clean trakt -->
 	<string id="1474">trakt.tv movie collection is up to date.</string>
+	<string id="1444">movie(s) will be removed from trakt collection</string>
 	<string id="1475">%i movie(s) were removed from your trakt.tv collection</string>
+
+	<!-- Sync Movies - complete -->
+	<string id="1431">Movie Sync Complete</string>
+	
+	<!-- Sync Episodes - load from xbmc -->
 	<string id="1480">Loading episode data from XBMC</string>
 	<string id="1481">Loading shows from XBMC</string>
 	<string id="1482">Shows loaded from XBMC</string>
 	<string id="1483">Parsing episode data from XBMC</string>
 	<string id="1484">Loaded TV episode data from XBMC</string>
+
+	<!-- Sync Episodes - load from trakt -->
 	<string id="1485">Loading episode data from trakt.tv</string>
 	<string id="1486">Retrieving episode collection from trakt.tv</string>
 	<string id="1487">Retrieving seen episodes from trakt.tv</string>
 	<string id="1488">Parsing episode data from trakt.tv</string>
 	<string id="1489">Retrieved episode data from trakt.tv</string>
+
+	<!-- Sync Episodes - add to trakt -->
+	<string id="1435">Checking for episodes missing from trakt collection</string>
 	<string id="1490">trakt.tv episode collection is up to date, no episodes to add.</string>
+	<string id="1436">shows(s) have episodes added to trakt collection</string>
+	<string id="1437">episodes missing</string>
 	<string id="1491">%i episode(s) were added to your trakt.tv collection</string>
+
+	<!-- Sync Episodes - update trakt -->
+	<string id="1438">Checking watched episodes on trakt</string>
 	<string id="1492">trakt.tv episode play count is up to date.</string>
+	<string id="1439">shows have missing watched status</string>
+	<string id="1440">episodes are being updated</string>
+	
+	<!-- Sync Episodes - update xbmc -->
+	<string id="1441">Checking watched episodes on XBMC</string>
 	<string id="1493">XBMC episode play count is up to date.</string>
 	<string id="1494">Updating episode play counts in XBMC</string>
 	<string id="1495">Play counts updated for %i episode(s) in XBMC</string>
+
+	<!-- Sync Episodes - clean trakt -->
+	<string id="1445">Cleaning trakt tvshow collection</string>
 	<string id="1496">trakt.tv episode collection is clean, no episodes to remove.</string>
 	<string id="1497">%i episode(s) are being removed from your trakt.tv collection.</string>
+	<string id="1447">episodes are being removed</string>
 	<string id="1498">%i episode(s) were removed from your trakt.tv collection</string>
-	
-	<!-- Debug -->
+
+	<!-- Sync Episodes - complete -->
+	<string id="1442">Episode Sync Complete</string>
+
+	<!-- Debug Settings -->
 	<string id="1700">Debug</string>
 	<string id="1701">Enable debug mode</string>
 	<string id="1702">Simulate scrobbling (for testing purposes)</string>

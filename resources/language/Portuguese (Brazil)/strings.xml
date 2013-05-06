@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <strings>
-	<!-- Preferências -->
+	<!-- General Settings -->
 	<string id="1010">Geral</string>
 	<string id="1013">Usuário</string>
 	<string id="1014">Senha</string>
 	<string id="1017">Quantidade de tentativas de conexão</string>	
 	<string id="1018">Atraso na inicialização</string>	
 
+	<!-- Rating Settings -->
 	<string id="1030">Classificação</string>
 	<string id="1031">Classifique o filme após assisti-lo</string>
 	<string id="1032">Classifique o episódio do seriado após assisti-lo</string>
@@ -14,24 +15,25 @@
 	<string id="1034">Percentual mínimo assistido para classificar</string>
 	<string id="1035">Permitir a re-avaliação do conteúdo</string>	
 	
+	<!-- Scrobbling Settings -->
 	<string id="1040">Scrobbling</string>
 	<string id="1041">Fazer Scrobble dos filmes</string>
 	<string id="1042">Fazer Scrobble dos episódios de seriados</string>
 	<string id="1043">Percentual mínimo assistido para fazer scrobble</string>
-	
 	<string id="1050">Exclusões</string>
 	<string id="1051">Excluir TV Ao Vivo</string>
 	<string id="1052">Excluir fontes HTTP</string>	
 	<string id="1053">Excluir caminho(s)</string>
 	<string id="1054">Caminho do diretório (e subdiretórios)</string>
 	
-	<!-- Info -->
+	<!-- General Notifications -->
 	<string id="1106">por favor, insira seu usuário e senha nas configurações</string>
 	<string id="1107">por favor, insira sua senha nas configurações</string>
 	<string id="1108">não foi possível conectar ao Trakt</string>
 	<string id="1109">Erro</string>
 	<string id="1110">Usuário ou senha incorretos</string>
-	<string id="1167">Avaliação para '%s' foi enviada com sucesso</string>
+	
+	<!-- Rating Dialog -->
 	<string id="1313">O que voce achou?</string>
 	<string id="1314">Excepcional!</string>
 	<string id="1315">Péssimo!</string>
@@ -66,19 +68,11 @@
 	<!-- Notificações de Sincronização -->
 	<string id="1420">Sincronização iniciada</string>
 	<string id="1421">Sincronização finalizada</string>
-	<string id="1422">Buscando os filmes do XBMC</string>
-	<string id="1423">Buscando coleção de filmes do Trakt</string>
-	<string id="1424">Buscando os filmes vistos do Trakt</string>
-	<string id="1425">Verificando os filmes do XBMC que não estão no Trakt</string>
+	
 	<string id="1426">filme(s) serão adicionados na coleção do Trakt</string>
-	<string id="1427">Verificando os filmes vistos do Trakt</string>
 	<string id="1428">filmes(s) terão número de visualizações atualizadas no Trakt</string>
-	<string id="1429">Verificando se número de visualizações do XBMC está atualizada</string>
 	<string id="1430">filmes(s) terão número de visualizações atualizadas no XBMC</string>
 	<string id="1431">Sincronização dos filmes finalizada</string>
-	<string id="1432">Buscando seriados do XBMC</string>
-	<string id="1433">Buscando episódios do XBMC</string>
-	<string id="1434">Buscando coleção de episódios do Trakt</string>
 	<string id="1435">Verificando os episódios faltantes na coleção do Trakt</string>
 	<string id="1436">seriados(s) tiveram episódios adicionados a coleção do Trakt</string>
 	<string id="1437">episódios faltando</string>
@@ -87,10 +81,8 @@
 	<string id="1440">episódios estão sendo atualizados</string>
 	<string id="1441">Verificando os episódios vistos no XBMC</string>
 	<string id="1442">Sincronização dos episódios finalizada</string>
-	<string id="1443">Limpando coleção de filmes do Trakt</string>
 	<string id="1444">filmes(s) serão removidos da coleção do Trakt</string>
 	<string id="1445">Limpando coleção de seriados do Trakt</string>
-	<string id="1446">seriados(s) serão removidos da coleção do Trakt</string>
 	<string id="1447">episódios estão sendo removidos</string>
 
 	<!-- Debug -->

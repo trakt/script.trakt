@@ -134,16 +134,6 @@ def checkScrobblingExclusion(fullpath):
 	
 	return False
 
-def getFormattedType(type):
-	if isMovie(type):
-		return getString(1205)
-	elif isShow(type):
-		return getString(1206)
-	elif isSeason(type):
-		return getString(1207)
-	elif isEpisode(type):
-		return getString(1208)
-
 def getFormattedItemName(type, info, short=False):
 	s = None
 	if isShow(type):
