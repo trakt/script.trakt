@@ -460,8 +460,10 @@ class traktAPI(object):
 			Debug("[traktAPI] getSummary(url: %s)" % url)
 			return self.traktRequest('POST', url)
 
-	def getShowSummary(self, id):
+	def getShowSummary(self, id, extended=False):
 		data = str(id)
+		if extended:
+			data = "%s/extended" % data
 		return self.getSummary('show', data)
 	def getEpisodeSummary(self, id, season, episode):
 		data = "%s/%s/%s" % (id, season, episode)
@@ -470,6 +472,14 @@ class traktAPI(object):
 		data = str(id)
 		return self.getSummary('movie', data)
 
+	# url: http://api.trakt.tv/show/season.format/apikey/title/season
+	# returns: returns detailed episode info for a specific season of a show.
+	def getSeasonInfo(self, id, season):
+		if self.testAccount():
+			url = "%s/show/season.json/%s/%s/%d" % (self.__baseURL, self.__apikey, id, season)
+			Debug("[traktAPI] getSeasonInfo(url: %s)" % url)
+			return self.traktRequest('POST', url)
+	
 	# url: http://api.trakt.tv/rate/<show|episode|movie>/apikey
 	# returns: {"status":"success","message":"rated Portlandia 1x01","type":"episode","rating":"love","ratings":{"percentage":100,"votes":2,"loved":2,"hated":0},"facebook":true,"twitter":true,"tumblr":false}
 	def rate(self, type, data):
