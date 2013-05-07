@@ -13,6 +13,7 @@
 	<string id="1032">Valorar Episodio al acabar de ver</string>
 	<string id="1033">Valorar cada elemento de la lista de reproducción</string>
 	<string id="1034">Porcentaje mínimo antes de hacer la valoración</string>
+	<string id="1035">Permitir volver a valorar contenido</string>
 	
 	<!-- Scrobbling Settings -->
 	<string id="1040">Scrobbling</string>
@@ -28,9 +29,16 @@
 	<!-- General Notifications -->
 	<string id="1106">Introduce tu Usuario y Contraseña en Ajustes</string>
 	<string id="1107">Introduce tu Contraseña en Ajustes</string>
-	<string id="1108">Imposible connectarse a Trakt</string>
+	<string id="1108">Imposible conectarse a trakt.tv</string>
 	<string id="1109">Error</string>
-	<string id="1110">Imposible connectarse a Trakt</string>
+	<string id="1110">Imposible conectarse a trakt.tv</string>
+	
+	<!-- Manual Rating Notifications -->
+	<string id="1350">trakt.tv - Valoración enviada correctamente</string>
+	<string id="1351">trakt.tv - Ya se ha valorado</string>
+	<string id="1352">trakt.tv - Valoración eliminada correctamente</string>
+	<string id="1353">trakt.tv - Ya tiene la misma valoración</string>
+	<string id="1354">trakt.tv - Ha ocurrido un problema al valorar</string>
 	
 	<!-- Rating Dialog -->
 	<string id="1313">¿Qué te pareció?</string>
@@ -44,47 +52,113 @@
 	<string id="1321">Good</string>
 	<string id="1322">Great</string>
 	<string id="1323">Superb</string>
+	<string id="1325">Eliminar valoración de esta película</string>
+	<string id="1326">Eliminar valoración de esta serie</string>
+	<string id="1327">Eliminar valoración de este episodio</string>
 
 	<!-- Titles -->
-	<string id="1201">Trakt</string>
+	<string id="1201">trakt.tv</string>
 	
 	<!-- Sync Settings -->
 	<string id="1400">Sincronizar</string>
 	<string id="1402">Películas</string>
-	<string id="1403">Añadir Películas a la colección de Trakt</string>
-	<string id="1404">Actualizar contador de reproducciones en Trakt</string>
+	<string id="1403">Añadir Películas a la colección de trakt.tv</string>
+	<string id="1404">Actualizar contador de reproducciones en trakt.tv</string>
 	<string id="1405">Actualizar contador de reproducciones en XBMC</string>
 	<string id="1406">Series</string>
-	<string id="1407">Añadir Episodios a la colección de Trakt</string>
-	<string id="1408">Actualizar contador de reproducciones en Trakt</string>
+	<string id="1407">Añadir Episodios a la colección de trakt.tv</string>
+	<string id="1408">Actualizar contador de reproducciones en trakt.tv</string>
 	<string id="1409">Actualizar contador de reproducciones en XBMC</string>
 	<string id="1410">Servicio</string>
 	<string id="1411">Sincronizar después de actualizar la librería</string>
 	<string id="1412">Mostrar notificaciones</string>
-	<string id="1413">Limpiar colección de Películas en Trakt</string>
-	<string id="1414">Limpiar colección de Episodios en Trakt</string>
+	<string id="1413">Limpiar colección de Películas en trakt.tv</string>
+	<string id="1414">Limpiar colección de Episodios en trakt.tv</string>
 
 	<!-- Sync Notifications -->
 	<string id="1420">Sincronización iniciada</string>
 	<string id="1421">Sincronización completada</string>
 	
-	<string id="1426">película(s) se añadirán en Trakt</string>
-	<string id="1428">película(s) se actualizarán en Trakt con el número de reproducciones</string>
-	<string id="1430">Sincronizando</string>
-	<string id="1431">Sincronización de películas completada</string>
-	<string id="1435">Comprobando episodios que no están en Trakt</string>
-	<string id="1436">serie(s) tienen episodios añadidos en la coleccíon de Trakt</string>
-	<string id="1437">episodios faltan</string>
-	<string id="1438">Comprobando episodios vistos en Trakt</string>
-	<string id="1439">serie(s) no constan como vistas</string>
-	<string id="1440">episodio(s) se van a actualizar</string>
-	<string id="1441">Comprobando episodios vistos en XBMC</string>
-	<string id="1442">Sincronización de episodios completada</string>
-	<string id="1444">película(s) serán eliminadas de la colección de Trakt</string>
-	<string id="1445">Limpiando colección de series en Trakt</string>
-	<string id="1447">episodio(s) se están eliminado</string>
+	<!-- Sync Movies - load from xbmc -->
+	<string id="1460">Comprobando películas en XBMC</string>
+	<string id="1461">Comprobación de películas en XBMC completada</string>
+	
+	<!-- Sync Movies - load from trakt -->
+	<string id="1462">Recuperando colección de películas en trakt.tv</string>
+	<string id="1463">Recuperando películas vistas en trakt.tv</string>
+	<string id="1464">Obteniendo películas vistas en trakt.tv</string>
+	<string id="1465">Analizando películas de trakt.tv</string>
+	<string id="1466">Obteniendo datos de películas de trakt.tv</string>
 
-	<!-- Debug -->
+	<!-- Sync Movies - add to trakt -->
+	<string id="1467">La colección de películas de trakt.tv está actualizada.</string>
+	<string id="1426">película(s) se añadirán a la colección de trakt.tv</string>
+	<string id="1468">%i película(s) fueron añadidas a tu colección de trakt.tv</string>
+
+	<!-- Sync Movies - update trakt -->
+	<string id="1469">El contador de reproducciones de películas en trakt.tv está actualizado.</string>
+	<string id="1428">película(s) verán el contador de reproducciones actualizado en trakt.tv</string>
+	<string id="1470">El contador de reproducciones de %i película(s) fue actualizado en trakt.tv</string>
+	
+	<!-- Sync Movies - update xbmc -->
+	<string id="1471">El contador de reproducciones de películas en XBMC está actualizado.</string>
+	<string id="1430">película(s) verán el contador de reproducciones actualizado en XBMC.</string>
+	<string id="1472">Actualizando el contador de reproducciones en XBMC.</string>
+	<string id="1473">El contador de reproducciones de %i película(s) fue actualizado en XBMC.</string>
+
+	<!-- Sync Movies - clean trakt -->
+	<string id="1474">La colección de películas de trakt.tv está actualizada.</string>
+	<string id="1444">película(s) serán eliminadas de tu colección de trakt.tv</string>
+	<string id="1475">%i película(s) fueron eliminadas de tu colección de trakt.tv</string>
+
+	<!-- Sync Movies - complete -->
+	<string id="1431">Sincronización de Películas completada</string>
+	
+	<!-- Sync Episodes - load from xbmc -->
+	<string id="1480">Recuperando información de episodios en XBMC</string>
+	<string id="1481">Recuperando Series de XBMC</string>
+	<string id="1482">Series cargadas desde XBMC</string>
+	<string id="1483">Analizando episodios de XBMC</string>
+	<string id="1484">Información de episodios cargada desde XBMC</string>
+
+	<!-- Sync Episodes - load from trakt -->
+	<string id="1485">Recuperando información de episodios en trakt.tv</string>
+	<string id="1486">Recuperando colección de episodios en trakt.tv</string>
+	<string id="1487">Obteniendo episodios vistos en trakt.tv</string>
+	<string id="1488">Analizando episodios de trakt.tv</string>
+	<string id="1489">Obteniendo datos de episodios de trakt.tv</string>
+
+	<!-- Sync Episodes - add to trakt -->
+	<string id="1435">Comprando episodios que faltan en la colección de trakt.tv</string>
+	<string id="1490">la colección de episodios de trakt.tv está actualizada.</string>
+	<string id="1436">serie(s) tienen episodios añadidos a la colección de trakt.tv</string>
+	<string id="1437">episodios que faltan</string>
+	<string id="1491">%i episodio(s) serán añadidos a tu colección de trakt.tv</string>
+
+	<!-- Sync Episodes - update trakt -->
+	<string id="1438">Comprobando episodios vistos en trakt.tv</string>
+	<string id="1492">El contador de reproducciones de episodios en trakt.tv esta actualizado.</string>
+	<string id="1439">serie(s) tiene episodios que no están marcados como vistos.</string>
+	<string id="1440">episodio(s) serán actualizados.</string>
+	
+	<!-- Sync Episodes - update xbmc -->
+	<string id="1441">Comprobando episodios vistos en XBMC</string>
+	<string id="1493">El contador de reproducciones de episodios en XBMC esta actualizado.</string>
+	<string id="1494">Actualizando contador de reproducciones en XBMC.</string>
+	<string id="1495">El contador de reproducciones de %i episodio(s) fue actualizado en XBMC.</string>
+
+	<!-- Sync Episodes - clean trakt -->
+	<string id="1445">Limpiando colección de series en trakt.tv</string>
+	<string id="1496">La colección de episodios de trakt.tv está actualizada.</string>
+	<string id="1497">%i episodio(s) serán eliminados de la colección de trakt.tv</string>
+	<string id="1447">episodio(s) se están eliminando</string>
+	<string id="1498">%i episodio(s) fueron eliminados de tu colección de trakt.tv</string>
+
+	<!-- Sync Episodes - complete -->
+	<string id="1442">Sincronización de Episodios completada</string>
+	
+	<!-- Debug Settings -->
+	<string id="1700">Depuración</string>
 	<string id="1701">Activar modo depuración</string>
 	<string id="1702">Simular scrobbling (para hacer pruebas)</string>
 	<string id="1703">Simular sincronización (para hacer pruebas)</string>
