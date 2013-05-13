@@ -494,3 +494,51 @@ class traktAPI(object):
 		return self.rate('episode', data)
 	def rateMovie(self, data):
 		return self.rate('movie', data)
+
+	# url: http://api.trakt.tv/user/lists.json/apikey/<username>
+	# returns: Returns all custom lists for a user.
+	def getUserLists(self):
+		if self.testAccount():
+			url = "%s/user/lists.json/%s/%s" % (self.__baseURL, self.__apikey, self.__username)
+			Debug("[traktAPI] getUserLists(url: %s)" % url)
+			return self.traktRequest('POST', url)
+
+	# url: http://api.trakt.tv/user/list.json/apikey/<username>/<slug>
+	# returns: Returns list details and all items it contains.
+	def getUserList(self, data):
+		if self.testAccount():
+			url = "%s/user/list.json/%s/%s/%s" % (self.__baseURL, self.__apikey, self.__username, data)
+			Debug("[traktAPI] getUserList(url: %s, data: %s)" % (url, str(data)))
+			return self.traktRequest('POST', url, data, passVersions=True)
+
+	# url: http://api.trakt.tv/lists/add/apikey
+	# returns: {"status": "success","message": "list added","name": "Top 10 of 2011","slug": "top-10-of-2011","privacy": "public","show_numbers": true,"allow_shouts": true}
+	def userListAdd(self, data):
+		if self.testAccount():
+			url = "%s/lists/add/%s" % (self.__baseURL, self.__apikey)
+			Debug("[traktAPI] userListAdd(url: %s, data: %s)" % (url, str(data)))
+			return self.traktRequest('POST', url, data, passVersions=True)
+	
+	# url: http://api.trakt.tv/lists/delete/apikey
+	# returns: {"status": "success", "message": "list and items deleted"}
+	def userListDelete(self, data):
+		if self.testAccount():
+			url = "%s/lists/delete/%s" % (self.__baseURL, self.__apikey)
+			Debug("[traktAPI] userListDelete(url: %s, data: %s)" % (url, str(data)))
+			return self.traktRequest('POST', url, data, passVersions=True)
+	
+	# url: http://api.trakt.tv/lists/items/add/apikey
+	# returns: {"status": "success","inserted": 4,"already_exist": 0,"skipped": 0,"skipped_items": []}
+	def userListAddItem(self, data):
+		if self.testAccount():
+			url = "%s/lists/items/add/%s" % (self.__baseURL, self.__apikey)
+			Debug("[traktAPI] userListAddItem(url: %s, data: %s)" % (url, str(data)))
+			return self.traktRequest('POST', url, data, passVersions=True)
+	
+	# url: http://api.trakt.tv/lists/items/delete/apikey
+	# returns: {"status": "success","message": "4 items deleted"}
+	def userListItemDelete(self, data):
+		if self.testAccount():
+			url = "%s/lists/items/add/%s" % (self.__baseURL, self.__apikey)
+			Debug("[traktAPI] userListItemDelete(url: %s, data: %s)" % (url, str(data)))
+			return self.traktRequest('POST', url, data, passVersions=True)
