@@ -50,5 +50,6 @@
 		<setting id="debug" type="bool" label="1701" default="true"/>
 		<setting id="simulate_scrobbling" type="bool" label="1702" default="false"/>
 		<setting id="simulate_sync" type="bool" label="1703" default="false"/>
+		<setting id="simulate_tagging" type="bool" label="1704" default="false"/>
 	</category>
 </settings>

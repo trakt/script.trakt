@@ -168,4 +168,5 @@
 	<string id="1701">Enable debug mode</string>
 	<string id="1702">Simulate scrobbling (for testing purposes)</string>
 	<string id="1703">Simulate sync (for testing purposes)</string>
+	<string id="1704">Simulate tagging</string>
 </strings>
