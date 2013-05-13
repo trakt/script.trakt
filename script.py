@@ -4,6 +4,8 @@ import utilities as utils
 import xbmc
 import sys
 import queue
+import tagging
+import time
 
 try:
 	import simplejson as json
@@ -33,7 +35,8 @@ def getArguments():
 		for item in sys.argv:
 			values = item.split("=")
 			if len(values) == 2:
-				data[values[0].lower()] = values[1].lower()
+				data[values[0].lower()] = values[1]
+		data['action'] = data['action'].lower()
 
 	return data
 
@@ -90,11 +93,12 @@ def Main():
 					data['imdbnumber'] = result['imdbnumber']
 
 				elif utils.isShow(media_type):
-					result = utils.getShowDetailsFromXBMC(data['dbid'], ['imdbnumber'])
+					result = utils.getShowDetailsFromXBMC(data['dbid'], ['imdbnumber', 'tag'])
 					if not result:
 						utils.Debug("No data was returned from XBMC, aborting manual %s." % args['action'])
 						return
 					data['imdbnumber'] = result['imdbnumber']
+					data['tag'] = result['tag']
 
 				elif utils.isEpisode(media_type):
 					result = utils.getEpisodeDetailsFromXbmc(data['dbid'], ['showtitle', 'season', 'episode', 'tvshowid'])
@@ -225,6 +229,139 @@ def Main():
 
 		# execute toggle watched action
 		xbmc.executebuiltin("Action(ToggleWatched)")
+
+	elif args['action'] == 'updatetags':
+		data = {'action': 'updatetags'}
+
+	elif args['action'] == 'managelists':
+		data = {'action': 'managelists'}
+
+	elif args['action'] == 'timertest':
+		utils.Debug("Timing JSON requests.")
+		import time
+		t = time.time()
+		data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': 254, 'properties': ['tag']}, 'id': 1})
+		#data = utils.getShowDetailsFromXBMC(254, ['tag', 'imdbnumber'])
+		e = time.time() - t
+		utils.Debug("VideoLibrary.GetTVShowDetails with tags: %0.3f seconds." % e)
+		
+		t = time.time()
+		data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params':{'movieid': 634, 'properties': ['tag']}, 'id': 1})
+		#data = utils.getMovieDetailsFromXbmc(634, ['tag', 'imdbnumber', 'title', 'year'])
+		e = time.time() - t
+		utils.Debug("VideoLibrary.GetMovieDetails with tags: %0.3f seconds." % e)
+
+		t = time.time()
+		data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['tag', 'title', 'imdbnumber', 'year']}, 'id': 0})
+		e = time.time() - t
+		utils.Debug("VideoLibrary.GetTVShows with tags: %0.3f seconds, %d items at %0.5f seconds per item" % (e, len(data['tvshows']), e / len(data['tvshows'])))
+		
+		t = time.time()
+		data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['tag', 'title', 'imdbnumber', 'year']}})
+		e = time.time() - t
+		utils.Debug("VideoLibrary.GetMovies with tags: %0.3f seconds, %d items at %0.5f seconds per item" % (e, len(data['movies']), e / len(data['movies'])))
+		
+		t = time.time()
+		data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
+		e = time.time() - t
+		utils.Debug("VideoLibrary.GetTVShows without tags: %0.3f seconds, %d items at %0.5f seconds per item" % (e, len(data['tvshows']), e / len(data['tvshows'])))
+		
+		t = time.time()
+		data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['title', 'imdbnumber', 'year']}})
+		e = time.time() - t
+		utils.Debug("VideoLibrary.GetMovies without tags: %0.3f seconds, %d items at %0.5f seconds per item" % (e, len(data['movies']), e / len(data['movies'])))
+		
+		t = time.time()
+		data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': 254, 'properties': ['imdbnumber']}, 'id': 1})
+		#data = utils.getShowDetailsFromXBMC(254, ['imdbnumber'])
+		e = time.time() - t
+		utils.Debug("VideoLibrary.GetTVShowDetails without tags: %0.3f seconds." % e)
+		
+		t = time.time()
+		data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params':{'movieid': 634, 'properties': ['imdbnumber', 'title', 'year']}, 'id': 1})
+		#data = utils.getMovieDetailsFromXbmc(634, ['imdbnumber', 'title', 'year'])
+		e = time.time() - t
+		utils.Debug("VideoLibrary.GetMovieDetails without tags: %0.3f seconds." % e)
+		
+		t = time.time()
+		data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
+		data = data['tvshows']
+		for item in data:
+			item_data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': item['tvshowid'], 'properties': ['tag']}, 'id': 1})
+			item['tag'] = item_data['tvshowdetails']['tag']
+		e = time.time() - t
+		utils.Debug("VideoLibrary.GetTVShows with tags from loop: %0.3f seconds, %d items at %0.5f seconds per item" % (e, len(data), e / len(data)))
+		
+		t = time.time()
+		data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
+		data = data['movies']
+		for item in data:
+			item_data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params':{'movieid': item['movieid'], 'properties': ['tag']}, 'id': 1})
+			item['tag'] = item_data['moviedetails']['tag']
+		e = time.time() - t
+		utils.Debug("VideoLibrary.GetMovies with tags from: %0.3f seconds, %d items at %0.5f seconds per item." % (e, len(data), e / len(data)))
+
+	elif args['action'] in ['itemlists', 'addtolist', 'removefromlist']:
+		data = {}
+		data['action'] = args['action']
+		media_type = None
+		dbid = None
+		if 'media_type' in args and 'dbid' in args:
+			media_type = args['media_type']
+			try:
+				dbid = int(args['dbid'])
+			except ValueError:
+				utils.Debug("'%s' triggered for library item, but DBID is invalid." % args['action'])
+				return
+		else:
+			media_type = getMediaType()
+			if not media_type in ['movie', 'show']:
+				utils.Debug("Error, not in video library.")
+				return
+			try:
+				dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
+			except ValueError:
+				utils.Debug("'%s' triggered for library item, but there is a problem with ListItem.DBID." % args['action'])
+				return
+		
+		if not media_type in ['movie', 'show']:
+			utils.Debug("'%s' is not a valid media type for '%s'." % (media_type, args['action']))
+			return
+
+		if args['action'] in ['addtolist', 'removefromlist']:
+			if 'list' in args:
+				data['list'] = args['list']
+			else:
+				utils.Debug("'%s' requires a list parameter." % data['action'])
+
+		data['type'] = media_type
+
+		if utils.isMovie(media_type):
+			result = utils.getMovieDetailsFromXbmc(dbid, ['imdbnumber', 'title', 'year', 'tag'])
+			if not result:
+				utils.Debug("Error getting movie details from XBMC.")
+				return
+			data['tag'] = result['tag']
+			data['movieid'] = result['movieid']
+			data['title'] = result['title']
+			data['year'] = result['year']
+			if result['imdbnumber'].startswith("tt"):
+				data['imdb_id'] = result['imdbnumber']
+			elif result['imdbnumber'].isdigit():
+				data['tmdb_id'] = result['imdbnumber']
+		
+		elif utils.isShow(media_type):
+			result = utils.getShowDetailsFromXBMC(dbid, ['imdbnumber', 'title', 'tag'])
+			if not result:
+				utils.Debug("Error getting show details from XBMC.")
+				return
+			data['tag'] = result['tag']
+			data['tvshowid'] = result['tvshowid']
+			data['title'] = result['title']
+			if result['imdbnumber'].startswith("tt"):
+				data['imdb_id'] = result['imdbnumber']
+			elif result['imdbnumber'].isdigit():
+				data['tvdb_id'] = result['imdbnumber']
 
 	q = queue.SqliteQueue()
 	if 'action' in data:

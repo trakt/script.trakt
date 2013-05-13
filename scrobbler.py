@@ -5,6 +5,7 @@ import xbmc
 import time
 
 import utilities
+import tagging
 from utilities import Debug
 from rating import ratingCheck
 
@@ -117,6 +118,7 @@ class Scrobbler():
 					if utilities.getSettingAsBool('rate_movie'):
 						# pre-get sumamry information, for faster rating dialog.
 						self.traktSummaryInfo = self.traktapi.getMovieSummary(self.curVideoInfo['imdbnumber'])
+						self.traktSummaryInfo['xbmc_id'] = self.curVideo['id']
 				elif 'title' in self.curVideo and 'year' in self.curVideo:
 					self.curVideoInfo = {}
 					self.curVideoInfo['imdbnumber'] = None
@@ -279,6 +281,7 @@ class Scrobbler():
 			response = self.traktapi.scrobbleMovie(self.curVideoInfo, duration, watchedPercent)
 			if not response is None and 'status' in response:
 				if response['status'] == "success":
+					self.watchlistTagCheck()
 					Debug("[Scrobbler] Scrobble response: %s" % str(response))
 				elif response['status'] == "failure":
 					if response['error'].startswith("scrobbled") and response['error'].endswith("already"):
@@ -300,6 +303,30 @@ class Scrobbler():
 					if response['error'].startswith("scrobbled") and response['error'].endswith("already"):
 						Debug("[Scrobbler] Episode was just recently scrobbled, attempting to cancel watching instead.")
 						self.stoppedWatching()
+
+	def watchlistTagCheck(self):
+		if not utilities.isMovie(self.curVideo['type']):
+			return
+
+		if not 'id' in self.curVideo:
+			return
+
+		if not (tagging.isTaggingEnabled() and tagging.isWatchlistsEnabled()):
+			return
+
+		id = self.curVideo['id']
+		result = utils.getMovieDetailsFromXbmc(id, ['tag'])
+		
+		if result:
+			tags = self.result['tag']
+
+			if tagging.hasTraktWatchlistTag(tags):
+				tags.remove(tagging.listToTag("Watchlist"))
+				s = utilities.getFormattedItemName(self.curVideo['type'], self.curVideoInfo)
+				tagging.xbmcSetTags(id, self.curVideo['type'], s, tags)
+
+		else:
+			utils.Debug("No data was returned from XBMC, aborting tag udpate.")
 
 	def check(self):
 		scrobbleMinViewTimeOption = utilities.getSettingAsFloat("scrobble_min_view_time")
