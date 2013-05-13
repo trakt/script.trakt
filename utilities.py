@@ -143,6 +143,11 @@ def getFormattedItemName(type, info, short=False):
 			s = "S%02dE%02d - %s" % (info['episode']['season'], info['episode']['number'], info['episode']['title'])
 		else:
 			s = "%s - S%02dE%02d - %s" % (info['show']['title'], info['episode']['season'], info['episode']['number'], info['episode']['title'])
+	elif isSeason(type):
+		if info['season'] > 0:
+			s = "%s - Season %d" % (info['title'], info['season'])
+		else:
+			s = "%s - Specials" % info['title']
 	elif isMovie(type):
 		s = "%s (%s)" % (info['title'], info['year'])
 	return s

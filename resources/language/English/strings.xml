@@ -74,6 +74,7 @@
 	<string id="1412">Show notifications</string>
 	<string id="1413">Clean trakt movie collection</string>
 	<string id="1414">Clean trakt episode collection</string>
+	<string id="1416">Show marked as watched notification</string>
 
 	<!-- Sync Notifications -->
 	<string id="1420">Sync started</string>
@@ -156,6 +157,11 @@
 
 	<!-- Sync Episodes - complete -->
 	<string id="1442">Episode Sync Complete</string>
+
+	<!-- Sync - manual mark watched -->
+	<string id="1550">trakt.tv - Marked as watched</string>
+	<string id="1551">trakt.tv - Failed making as watched</string>
+	<string id="1552">%d episode(s) of '%s'</string>
 
 	<!-- Debug Settings -->
 	<string id="1700">Debug</string>
