@@ -170,6 +170,7 @@
 	<string id="1603">Create tags from personal ratings</string>
 	<string id="1604">Minimum rating to create tags for</string>
 	<string id="1605">Default privacy setting for new lists</string>
+	<string id="1606">Allow shouts for new lists</string>
 	
 	<!-- Debug Settings -->
 	<string id="1700">Debug</string>

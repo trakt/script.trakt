@@ -352,12 +352,15 @@ class Tagger():
 				Debug("[Tagger] '%s' adding '%s'" % (list, str(params)))
 			else:
 				p = utils.getSettingAsInt('tagging_list_privacy')
-				newList = {'name': list, 'show_numbers': False, 'allow_shouts': False, 'privacy': PRIVACY_LIST[p]}
+				allow_shouts = utils.getSettingAsBool('tagging_list_allowshouts')
+				newList = {'name': list, 'show_numbers': False, 'allow_shouts': allow_shouts, 'privacy': PRIVACY_LIST[p]}
 				result = self.traktapi.userListAdd(newList)
 				if result and 'status' in result and result['status'] == 'success':
 					slug = result['slug']
 					params['slug'] = slug
 					self.traktapi.userListItemAdd(params)
+				else:
+					Debug("[Tagger] There was a problem create the list '%s' on trakt.tv" % list)
 
 	def traktListRemoveItem(self, list, data):
 		if not list:
