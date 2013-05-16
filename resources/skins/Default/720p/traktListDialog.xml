@@ -31,7 +31,7 @@
 				<width>530</width>
 				<height>30</height>
 				<font>font13_title</font>
-				<label>Manage trakt.tv Lists</label>
+				<label>$ADDON[script.trakt 1650]</label>
 				<align>center</align>
 				<aligny>center</aligny>
 				<shadowcolor>black</shadowcolor>
@@ -156,7 +156,7 @@
 				<posy>485</posy>
 				<width>200</width>
 				<height>40</height>
-				<label>Add List</label>
+				<label>$ADDON[script.trakt 1651]</label>
 				<font>font12_title</font>
 				<textcolor>white</textcolor>
 				<focusedcolor>white</focusedcolor>
@@ -174,7 +174,7 @@
 				<posy>485</posy>
 				<width>165</width>
 				<height>40</height>
-				<label>OK</label>
+				<label>$ADDON[script.trakt 1652]</label>
 				<font>font12_title</font>
 				<textcolor>white</textcolor>
 				<focusedcolor>white</focusedcolor>
@@ -192,7 +192,7 @@
 				<posy>485</posy>
 				<width>165</width>
 				<height>40</height>
-				<label>Cancel</label>
+				<label>$ADDON[script.trakt 1653]</label>
 				<font>font12_title</font>
 				<textcolor>white</textcolor>
 				<focusedcolor>white</focusedcolor>

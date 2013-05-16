@@ -172,6 +172,15 @@
 	<string id="1605">Default privacy setting for new lists</string>
 	<string id="1606">Allow shouts for new lists</string>
 	
+	<!-- Tagger String -->
+	<string id="1650">Manage trakt.tv Lists</string>
+	<string id="1651">Add List</string>
+	<string id="1652">OK</string>
+	<string id="1653">Cancel</string>
+	<string id="1654">New List</string>
+	<string id="1655">'%s' is a reserved name, can not add to lists.</string>
+	<string id="1656">'%s' is already in your list.</string>
+	
 	<!-- Debug Settings -->
 	<string id="1700">Debug</string>
 	<string id="1701">Enable debug mode</string>

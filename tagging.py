@@ -4,7 +4,6 @@ import xbmc
 import xbmcaddon
 import xbmcgui
 import utilities as utils
-from utilities import Debug
 import copy
 from traktapi import traktAPI
 
@@ -34,21 +33,21 @@ class Tagger():
 		self._ratingMin = utils.getSettingAsInt('tagging_ratings_min')
 		self.simulate = utils.getSettingAsBool('simulate_tagging')
 		if self.simulate:
-			Debug("[Tagger] Tagging is configured to be simulated.")
+			utils.Debug("[Tagger] Tagging is configured to be simulated.")
 	
 	def xbmcLoadMovies(self):
-		Debug("[Tagger] Getting movie data from XBMC.")
+		utils.Debug("[Tagger] Getting movie data from XBMC.")
 		data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['tag', 'title', 'imdbnumber', 'year']}})
 		if not data:
-			Debug("[Tagger] XBMC JSON request was empty.")
+			utils.Debug("[Tagger] XBMC JSON request was empty.")
 			return
 		
 		if not 'movies' in data:
-			Debug('[Tagger] Key "movies" not found')
+			utils.Debug('[Tagger] Key "movies" not found')
 			return
 
 		movies = data['movies']
-		Debug("[Tagger] XBMC JSON Result: '%s'" % str(movies))
+		utils.Debug("[Tagger] XBMC JSON Result: '%s'" % str(movies))
 
 		for movie in movies:
 			movie['imdb_id'] = ""
@@ -64,18 +63,18 @@ class Tagger():
 		return movies
 
 	def xbmcLoadTVShows(self):
-		Debug("[Tagger] Getting tv show data from XBMC.")
+		utils.Debug("[Tagger] Getting tv show data from XBMC.")
 		data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['tag', 'title', 'imdbnumber', 'year']}, 'id': 0})
 		if not data:
-			Debug("[Tagger] xbmc json request was empty.")
+			utils.Debug("[Tagger] xbmc json request was empty.")
 			return None
 		
 		if not 'tvshows' in data:
-			Debug('[Tagger] Key "tvshows" not found')
+			utils.Debug('[Tagger] Key "tvshows" not found')
 			return None
 
 		shows = data['tvshows']
-		Debug("[Tagger] XBMC JSON Result: '%s'" % str(shows))
+		utils.Debug("[Tagger] XBMC JSON Result: '%s'" % str(shows))
 
 		for show in shows:
 			show['tvdb_id'] = ""
@@ -116,11 +115,11 @@ class Tagger():
 		return lists
 
 	def traktGetLists(self):
-		Debug("[Tagger] Getting lists from trakt.tv")
+		utils.Debug("[Tagger] Getting lists from trakt.tv")
 		data = self.traktapi.getUserLists()
 		
 		if not isinstance(data, list):
-			Debug("[Tagger] Invalid trakt.tv lists, possible error getting data from trakt, aborting trakt.tv collection update.")
+			utils.Debug("[Tagger] Invalid trakt.tv lists, possible error getting data from trakt, aborting trakt.tv collection update.")
 			return False
 
 		lists = {}
@@ -131,19 +130,19 @@ class Tagger():
 
 	def traktGetListData(self): #, lists, movies, shows):
 		if not self.traktSlugs:
-			Debug("[Tagger] No lists at trakt.tv, nothing to retrieve.")
+			utils.Debug("[Tagger] No lists at trakt.tv, nothing to retrieve.")
 			return {}
 		traktLists = {}
-		Debug("[Tagger] Getting list data from trakt.tv")
+		utils.Debug("[Tagger] Getting list data from trakt.tv")
 		for listName in self.traktSlugs:
 			slug = self.traktSlugs[listName]
 			traktLists[listName] = []
 			
-			Debug("[Tagger] Getting list data for list slug '%s'." % slug)
+			utils.Debug("[Tagger] Getting list data for list slug '%s'." % slug)
 			tList = self.traktapi.getUserList(slug)
 			
 			if not isinstance(tList, dict):
-				Debug("[Tagger] Invalid trakt.tv list data, possible error getting data from trakt, aborting tagging sync.")
+				utils.Debug("[Tagger] Invalid trakt.tv list data, possible error getting data from trakt, aborting tagging sync.")
 				return False
 
 			for item in tList['items']:
@@ -199,7 +198,7 @@ class Tagger():
 					data['xbmc_id'] = s['tvshowid']
 				traktData['Watchlist'].append(data)
 		else:
-			Debug("[Tagger] There was a problem getting your watchlists.")
+			utils.Debug("[Tagger] There was a problem getting your watchlists.")
 			return False
 	
 		return traktData
@@ -243,7 +242,7 @@ class Tagger():
 						traktData[tag] = []
 					traktData[tag].append(data)
 		else:
-			Debug("[Tagger] There was a problem getting your rated movies or shows.")
+			utils.Debug("[Tagger] There was a problem getting your rated movies or shows.")
 			return False
 		
 		return traktData
@@ -315,7 +314,7 @@ class Tagger():
 		chunked = utils.chunks([{"jsonrpc": "2.0", "id": "libMovies", "method": "VideoLibrary.SetMovieDetails", "params": {"movieid" : movie, "tag": data['movie'][movie]}} for movie in data['movie']], 50)
 		for chunk in chunked:
 			if self.simulate:
-				Debug("[Tagger] %s" % str(chunk))
+				utils.Debug("[Tagger] %s" % str(chunk))
 			else:
 				utils.xbmcJsonRequest(chunk)
 
@@ -323,25 +322,25 @@ class Tagger():
 		chunked = utils.chunks([{"jsonrpc": "2.0", "id": "libMovies", "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid" : show, "tag": data['show'][show]}} for show in data['show']], 50)
 		for chunk in chunked:
 			if self.simulate:
-				Debug("[Tagger] %s" % str(chunk))
+				utils.Debug("[Tagger] %s" % str(chunk))
 			else:
 				utils.xbmcJsonRequest(chunk)
 
 	
 	def traktListAddItem(self, list, data):
 		if not list:
-			Debug("[Tagger] No list provided.")
+			utils.Debug("[Tagger] No list provided.")
 			return
 
 		if not data:
-			Debug("[Tagger] Nothing to add to trakt lists")
+			utils.Debug("[Tagger] Nothing to add to trakt lists")
 			return
 		
 		params = {}
 		params['items'] = self.sanitizeTraktParams(data)
 
 		if self.simulate:
-			Debug("[Tagger] '%s' adding '%s'" % (list, str(params)))
+			utils.Debug("[Tagger] '%s' adding '%s'" % (list, str(params)))
 		else:
 			if list in self.traktSlugs:
 				slug = self.traktSlugs[list]
@@ -350,14 +349,14 @@ class Tagger():
 				p = utils.getSettingAsInt('tagging_list_privacy')
 				allow_shouts = utils.getSettingAsBool('tagging_list_allowshouts')
 				
-				Debug("[Tagger] Creating new list '%s'" % list)
+				utils.Debug("[Tagger] Creating new list '%s'" % list)
 				result = self.traktapi.userListAdd(list, PRIVACY_LIST[p], allow_shouts=allow_shouts)
 				
 				if result and 'status' in result and result['status'] == 'success':
 					slug = result['slug']
 					params['slug'] = slug
 				else:
-					Debug("[Tagger] There was a problem create the list '%s' on trakt.tv" % list)
+					utils.Debug("[Tagger] There was a problem create the list '%s' on trakt.tv" % list)
 					return
 			
 			self.traktapi.userListItemAdd(params)
@@ -366,22 +365,22 @@ class Tagger():
 						
 	def traktListRemoveItem(self, list, data):
 		if not list:
-			Debug("[Tagger] No list provided.")
+			utils.Debug("[Tagger] No list provided.")
 			return
 
 		if not data:
-			Debug("[Tagger] Nothing to remove from trakt list.")
+			utils.Debug("[Tagger] Nothing to remove from trakt list.")
 			return
 		
 		if not list in self.traktSlugs:
-			Debug("[Tagger] Trying to remove items from non-existant list '%s'." % list)
+			utils.Debug("[Tagger] Trying to remove items from non-existant list '%s'." % list)
 			
 		slug = self.traktSlugs[list]
 		params = {'slug': slug}
 		params['items'] = self.sanitizeTraktParams(data)
 		
 		if self.simulate:
-			Debug("[Tagger] '%s' removing '%s'" % (list, str(params)))
+			utils.Debug("[Tagger] '%s' removing '%s'" % (list, str(params)))
 		else:
 			self.traktapi.userListItemDelete(params)
 
@@ -416,15 +415,15 @@ class Tagger():
 	
 	def isAborted(self):
 		if xbmc.abortRequested:
-			Debug("[Tagger] XBMC abort requested, stopping.")
+			utils.Debug("[Tagger] XBMC abort requested, stopping.")
 			return true
 
 	def updateTagsFromTrakt(self):
 		if not utils.getSettingAsBool('tagging_enable'):
-			Debug("[Tagger] Tagging is not enabled, aborting.")
+			utils.Debug("[Tagger] Tagging is not enabled, aborting.")
 			return
 	
-		Debug("[Tagger] Starting List/Tag synchronization.")
+		utils.Debug("[Tagger] Starting List/Tag synchronization.")
 
 		self.movies = self.xbmcLoadMovies()
 		
@@ -438,22 +437,22 @@ class Tagger():
 
 		# abort if either of the XBMC values are not lists
 		if not isinstance(self.movies, list) or not isinstance(self.shows, list):
-			Debug("[Tagger] Aborting tagging sync, problem getting show or movie data from XBMC.")
+			utils.Debug("[Tagger] Aborting tagging sync, problem getting show or movie data from XBMC.")
 			return
 
 		# get all list slugs from trakt
 		self.traktSlugs = self.traktGetLists()
 		if not isinstance(self.traktSlugs, dict):
-			Debug("[Tagger] Error getting lists from trakt.tv.")
+			utils.Debug("[Tagger] Error getting lists from trakt.tv.")
 			return
-		Debug("[Tagger] Lists at trakt.tv: %s" % str(self.traktSlugs))
+		utils.Debug("[Tagger] Lists at trakt.tv: %s" % str(self.traktSlugs))
 
 		if self.isAborted():
 			return
 
 		# build a list collection from XBMC tags
 		xbmcLists = self.xbmcTagsToListData()
-		Debug("[Tagger] XBMC Tags: %s" % str(xbmcLists))
+		utils.Debug("[Tagger] XBMC Tags: %s" % str(xbmcLists))
 
 		if self.isAborted():
 			return
@@ -475,24 +474,24 @@ class Tagger():
 		if self._ratings:
 			traktLists = self.traktGetRatingData(traktLists)
 	
-		Debug("[Tagger] trakt.tv Lists: %s" % str(traktLists))
+		utils.Debug("[Tagger] trakt.tv Lists: %s" % str(traktLists))
 
 		if self.isAborted():
 			return
 
 		# update xbmc tags from trakt lists
-		Debug("[Tagger] Updating XBMC tags from trakt.tv list(s).")
+		utils.Debug("[Tagger] Updating XBMC tags from trakt.tv list(s).")
 		xbmcData = self.proccessXBMCTags(traktLists, xbmcLists)
-		Debug("[Tagger] %s" % str(xbmcData))
+		utils.Debug("[Tagger] %s" % str(xbmcData))
 		self.xbmcUpdateTags(xbmcData)
 
-		Debug("[Tagger] Tags have been updated.")
+		utils.Debug("[Tagger] Tags have been updated.")
 
 	def manageList(self, data):
 
 		self.traktSlugs = self.traktGetLists()
 		if not isinstance(self.traktSlugs, dict):
-			Debug("[Tagger] Error getting lists from trakt.tv.")
+			utils.Debug("[Tagger] Error getting lists from trakt.tv.")
 			return
 
 		d = traktListDialog(lists=self.traktSlugs, data=data)
@@ -502,7 +501,7 @@ class Tagger():
 			newTags = d.selectedLists
 			
 			if set(oldTags) == set(newTags):
-				Debug("[Tagger] '%s' had no changes made to the lists it belongs to." % data['title'])
+				utils.Debug("[Tagger] '%s' had no changes made to the lists it belongs to." % data['title'])
 
 			else:
 				w = []
@@ -512,13 +511,13 @@ class Tagger():
 					w.append(l)
 					if tag.lower() == "watchlist":
 						if not l in data['tag']:
-							Debug("[Tagger] Adding '%s' to Watchlist." % data['title'])
+							utils.Debug("[Tagger] Adding '%s' to Watchlist." % data['title'])
 							self.updateWatchlist(data)
 					elif tag.lower().startswith("rating:"):
 						pass
 					else:
 						if not l in data['tag']:
-							Debug("[Tagger] Adding '%s' to '%s'." % (data['title'], tag))
+							utils.Debug("[Tagger] Adding '%s' to '%s'." % (data['title'], tag))
 							self.traktListAddItem(tag, [data])
 
 				# use set comparison to find what was removed
@@ -528,12 +527,12 @@ class Tagger():
 				for tag in toRemove:
 					l = tagToList(tag)
 					if l.lower() == "watchlist":
-						Debug("[Tagger] Removing: '%s' from Watchlist." % data['title'])
+						utils.Debug("[Tagger] Removing: '%s' from Watchlist." % data['title'])
 						self.updateWatchlist(data, remove=True)
 					elif l.lower().startswith("rating:"):
-						Debug("[Tagger] Error, rating tag removed somehow. %s" % l)
+						utils.Debug("[Tagger] Error, rating tag removed somehow. %s" % l)
 					else:
-						Debug("[Tagger] Removing: '%s' from '%s'." % (data['title'], str(l)))
+						utils.Debug("[Tagger] Removing: '%s' from '%s'." % (data['title'], str(l)))
 						self.traktListRemoveItem(l, [data])
 
 				# use set comparison to find out if xbmc tags need updating
@@ -545,10 +544,10 @@ class Tagger():
 						result = utils.xbmcJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid" : data['tvshowid'], "tag": w}})
 
 					if result == "OK":
-						Debug("[Tagger] XBMC tags for '%s' were updated with '%s'." % (data['title'], str(w)))
+						utils.Debug("[Tagger] XBMC tags for '%s' were updated with '%s'." % (data['title'], str(w)))
 
 		else:
-			Debug("[Tagger] Dialog was cancelled.")
+			utils.Debug("[Tagger] Dialog was cancelled.")
 
 		del d
 
@@ -600,12 +599,7 @@ class traktListDialog(xbmcgui.WindowXMLDialog):
 
 	def onInit(self):
 		pl = self.getControl(MEDIA_LABEL)
-		s = None
-		if self.data['type'] == 'movie':
-			s = "%s (%d)" % (self.data['title'], self.data['year'])
-		else:
-			s = self.data['title']
-		pl.setLabel(s)
+		pl.setLabel(utils.getFormattedItemName(self.data['type'], self.data))
 		
 		self.list = self.getControl(TRAKT_LISTS)
 		self.populateList()
@@ -625,26 +619,26 @@ class traktListDialog(xbmcgui.WindowXMLDialog):
 
 	def onClick(self, control):
 		if control == BUTTON_ADD_LIST:
-			keyboard = xbmc.Keyboard('', 'New List')
+			keyboard = xbmc.Keyboard("", utils.getString(1654))
 			keyboard.doModal()
 			if keyboard.isConfirmed() and keyboard.getText():
 				list = keyboard.getText().strip()
 				if list:
 					if list.lower() == "watchlist" or list.lower().startswith("rating:"):
-						Debug("[Tagger] Dialog: Tried to add a reserved list name '%s'." % list)
+						utils.Debug("[Tagger] Dialog: Tried to add a reserved list name '%s'." % list)
 						dialog = xbmcgui.Dialog()
-						dialog.ok("Manage trakt.tv Lists", "'%s' is a reserved name, can not add to lists." % list)
+						dialog.ok(utils.getString(1650), utils.getString(1655) % list)
 						return
 					if list not in self.tags:
-						Debug("[Tagger] Dialog: Adding list '%s'." % list)
+						utils.Debug("[Tagger] Dialog: Adding list '%s'." % list)
 						self.tags[list] = True
 						self.populateList(reset=True)
 					else:
-						Debug("[Tagger] Dialog: '%s' already in list, selecting it." % list)
+						utils.Debug("[Tagger] Dialog: '%s' already in list, selecting it." % list)
 						self.tags[list] = True
 						self.populateList(reset=True)
 						dialog = xbmcgui.Dialog()
-						dialog.ok("Manage trakt.tv Lists", "'%s' is already in your list." % list)
+						dialog.ok(utils.getString(1650), utils.getString(1656) % list)
 
 		elif control == BUTTON_OK:
 			data = []
