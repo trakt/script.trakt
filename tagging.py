@@ -184,8 +184,8 @@ class Tagger():
 				data['type'] = 'movie'
 				data['title'] = item['title']
 				data['year'] = item['year']
-				data['imdb_id'] = item['imdb_id']
-				data['tmdb_id'] = item['tmdb_id']
+				data['imdb_id'] = "" if item['imdb_id'] is None else item['imdb_id']
+				data['tmdb_id'] = "" if item['tmdb_id'] is None else item['tmdb_id']
 				m = utils.findMovie(data, self.movies)
 				if m:
 					data['xbmc_id'] = m['movieid']
@@ -195,8 +195,8 @@ class Tagger():
 				data['type'] = 'show'
 				data['title'] = item['title']
 				data['year'] = item['year']
-				data['imdb_id'] = item['imdb_id']
-				data['tvdb_id'] = item['tvdb_id']
+				data['imdb_id'] = "" if item['imdb_id'] is None else item['imdb_id']
+				data['tvdb_id'] = "" if item['tvdb_id'] is None else item['tvdb_id']
 				s = utils.findShow(data, self.shows)
 				if s:
 					data['xbmc_id'] = s['tvshowid']
@@ -315,7 +315,7 @@ class Tagger():
 
 	def xbmcUpdateTags(self, data):
 		# update xbmc tags for movies from trakt lists
-		chunked = utils.chunks([{"jsonrpc": "2.0", "id": "libMovies", "method": "VideoLibrary.SetMovieDetails", "params": {"movieid" : movie, "tag": data['movie'][movie]}} for movie in data['movie']], 50)
+		chunked = utils.chunks([{"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid" : movie, "tag": data['movie'][movie]}} for movie in data['movie']], 50)
 		for chunk in chunked:
 			if self.simulate:
 				utils.Debug("[Tagger] %s" % str(chunk))
@@ -323,7 +323,7 @@ class Tagger():
 				utils.xbmcJsonRequest(chunk)
 
 		# update xbmc tags for shows from trakt lists
-		chunked = utils.chunks([{"jsonrpc": "2.0", "id": "libMovies", "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid" : show, "tag": data['show'][show]}} for show in data['show']], 50)
+		chunked = utils.chunks([{"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid" : show, "tag": data['show'][show]}} for show in data['show']], 50)
 		for chunk in chunked:
 			if self.simulate:
 				utils.Debug("[Tagger] %s" % str(chunk))
@@ -555,7 +555,9 @@ class Tagger():
 						result = utils.xbmcJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid" : data['tvshowid'], "tag": w}})
 
 					if result == "OK":
-						utils.Debug("[Tagger] XBMC tags for '%s' were updated with '%s'." % (data['title'], str(w)))
+						s = utils.getFormattedItemName(data['type'], data)
+						utils.Debug("[Tagger] XBMC tags for '%s' were updated with '%s'." % (s, str(w)))
+						utils.notification(utils.getString(1201), utils.getString(1657) % s)
 
 		else:
 			utils.Debug("[Tagger] Dialog was cancelled.")
@@ -637,8 +639,7 @@ class traktListDialog(xbmcgui.WindowXMLDialog):
 				if list:
 					if list.lower() == "watchlist" or list.lower().startswith("rating:"):
 						utils.Debug("[Tagger] Dialog: Tried to add a reserved list name '%s'." % list)
-						dialog = xbmcgui.Dialog()
-						dialog.ok(utils.getString(1650), utils.getString(1655) % list)
+7						utils.notification(utils.getString(1650), utils.getString(1655) % list)
 						return
 					if list not in self.tags:
 						utils.Debug("[Tagger] Dialog: Adding list '%s', and selecting it." % list)
@@ -648,8 +649,7 @@ class traktListDialog(xbmcgui.WindowXMLDialog):
 						utils.Debug("[Tagger] Dialog: '%s' already in list, selecting it." % list)
 						self.tags[list] = True
 						self.populateList(reset=True)
-						dialog = xbmcgui.Dialog()
-						dialog.ok(utils.getString(1650), utils.getString(1656) % list)
+7						utils.notification(utils.getString(1650), utils.getString(1656) % list)
 
 		elif control == BUTTON_OK:
 			data = []
@@ -668,7 +668,14 @@ class traktListDialog(xbmcgui.WindowXMLDialog):
 	def populateList(self, reset=False):
 		if reset:
 			self.list.reset()
+		if 'Watchlist' in self.tags:
+			item = xbmcgui.ListItem('Watchlist')
+			item.select(self.tags['Watchlist'])
+			self.list.addItem(item)
+			
 		for tag in sorted(self.tags.iterkeys()):
+			if tag.lower() == "watchlist":
+				continue
 			item = xbmcgui.ListItem(tag)
 			item.select(self.tags[tag])
 			self.list.addItem(item)

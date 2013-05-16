@@ -180,6 +180,7 @@
 	<string id="1654">New List</string>
 	<string id="1655">'%s' is a reserved name, can not add to lists.</string>
 	<string id="1656">'%s' is already in your list.</string>
+	<string id="1657">Updated tags for '%s'</string>
 	
 	<!-- Debug Settings -->
 	<string id="1700">Debug</string>
