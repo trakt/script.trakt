@@ -513,9 +513,10 @@ class traktAPI(object):
 
 	# url: http://api.trakt.tv/lists/add/apikey
 	# returns: {"status": "success","message": "list added","name": "Top 10 of 2011","slug": "top-10-of-2011","privacy": "public","show_numbers": true,"allow_shouts": true}
-	def userListAdd(self, data):
+	def userListAdd(self, list, privacy, show_numbers=False, allow_shouts=False):
 		if self.testAccount():
 			url = "%s/lists/add/%s" % (self.__baseURL, self.__apikey)
+			data = {'name': list, 'show_numbers': show_numbers, 'allow_shouts': allow_shouts, 'privacy': privacy}
 			Debug("[traktAPI] userListAdd(url: %s, data: %s)" % (url, str(data)))
 			return self.traktRequest('POST', url, data, passVersions=True)
 	

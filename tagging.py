@@ -332,6 +332,7 @@ class Tagger():
 		if not list:
 			Debug("[Tagger] No list provided.")
 			return
+
 		if not data:
 			Debug("[Tagger] Nothing to add to trakt lists")
 			return
@@ -339,33 +340,35 @@ class Tagger():
 		params = {}
 		params['items'] = self.sanitizeTraktParams(data)
 
-		if list in self.traktSlugs:
-			slug = self.traktSlugs[list]
-			params['slug'] = slug
-				
-			if self.simulate:
-				Debug("[Tagger] '%s' adding '%s'" % (list, str(params)))
-			else:
-				self.traktapi.userListItemAdd(params)
+		if self.simulate:
+			Debug("[Tagger] '%s' adding '%s'" % (list, str(params)))
 		else:
-			if self.simulate:
-				Debug("[Tagger] '%s' adding '%s'" % (list, str(params)))
+			if list in self.traktSlugs:
+				slug = self.traktSlugs[list]
+				params['slug'] = slug
 			else:
 				p = utils.getSettingAsInt('tagging_list_privacy')
 				allow_shouts = utils.getSettingAsBool('tagging_list_allowshouts')
-				newList = {'name': list, 'show_numbers': False, 'allow_shouts': allow_shouts, 'privacy': PRIVACY_LIST[p]}
-				result = self.traktapi.userListAdd(newList)
+				
+				Debug("[Tagger] Creating new list '%s'" % list)
+				result = self.traktapi.userListAdd(list, PRIVACY_LIST[p], allow_shouts=allow_shouts)
+				
 				if result and 'status' in result and result['status'] == 'success':
 					slug = result['slug']
 					params['slug'] = slug
-					self.traktapi.userListItemAdd(params)
 				else:
 					Debug("[Tagger] There was a problem create the list '%s' on trakt.tv" % list)
-
+					return
+			
+			self.traktapi.userListItemAdd(params)
+				
+				
+						
 	def traktListRemoveItem(self, list, data):
 		if not list:
 			Debug("[Tagger] No list provided.")
 			return
+
 		if not data:
 			Debug("[Tagger] Nothing to remove from trakt list.")
 			return
