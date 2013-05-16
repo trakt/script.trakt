@@ -5,6 +5,7 @@ import xbmcaddon
 import xbmcgui
 import utilities as utils
 import copy
+import time
 from traktapi import traktAPI
 
 __addon__ = xbmcaddon.Addon("script.trakt")
@@ -20,6 +21,9 @@ def isTraktList(tag):
 	return True if tag.startswith(TAG_PREFIX) else False
 
 class Tagger():
+
+	traktSlugs = None
+	traktSlugsLast = 0
 
 	def __init__(self, show_progress=False, api=None):
 		if api is None:
@@ -355,6 +359,7 @@ class Tagger():
 				if result and 'status' in result and result['status'] == 'success':
 					slug = result['slug']
 					params['slug'] = slug
+					self.traktSlugs[list] = slug
 				else:
 					utils.Debug("[Tagger] There was a problem create the list '%s' on trakt.tv" % list)
 					return
@@ -489,7 +494,13 @@ class Tagger():
 
 	def manageList(self, data):
 
-		self.traktSlugs = self.traktGetLists()
+		# only get slugs from trakt every ten minutes, instead of every call
+		if self.traktSlugs is None or (time.time() - self.traktSlugsLast) > (60 * 10):
+			self.traktSlugs = self.traktGetLists()
+			self.traktSlugsLast = time.time()
+		else:
+			utils.Debug("[Tagger] Using cached lists.")
+
 		if not isinstance(self.traktSlugs, dict):
 			utils.Debug("[Tagger] Error getting lists from trakt.tv.")
 			return
@@ -606,7 +617,7 @@ class traktListDialog(xbmcgui.WindowXMLDialog):
 		self.setFocus(self.list)
 
 	def onAction(self, action):
-		if not action.getId() == ACTION_SELECT_ITEM:
+		if not action.getId() in ACTION_ITEM_SELECT:
 			if action in ACTION_CLOSE_LIST:
 				self.close()
 		if action in ACTION_ITEM_SELECT:
@@ -630,7 +641,7 @@ class traktListDialog(xbmcgui.WindowXMLDialog):
 						dialog.ok(utils.getString(1650), utils.getString(1655) % list)
 						return
 					if list not in self.tags:
-						utils.Debug("[Tagger] Dialog: Adding list '%s'." % list)
+						utils.Debug("[Tagger] Dialog: Adding list '%s', and selecting it." % list)
 						self.tags[list] = True
 						self.populateList(reset=True)
 					else:
