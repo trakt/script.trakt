@@ -220,8 +220,8 @@ class Tagger():
 				data['type'] = 'movie'
 				data['title'] = item['title']
 				data['year'] = item['year']
-				data['imdb_id'] = item['imdb_id']
-				data['tmdb_id'] = item['tmdb_id']
+				data['imdb_id'] = "" if item['imdb_id'] is None else item['imdb_id']
+				data['tmdb_id'] = "" if item['tmdb_id'] is None else item['tmdb_id']
 				m = utils.findMovie(data, self.movies)
 				if m:
 					data['xbmc_id'] = m['movieid']
@@ -235,8 +235,8 @@ class Tagger():
 				data['type'] = 'show'
 				data['title'] = item['title']
 				data['year'] = item['year']
-				data['imdb_id'] = item['imdb_id']
-				data['tvdb_id'] = unicode(item['tvdb_id'])
+				data['imdb_id'] = "" if item['imdb_id'] is None else item['imdb_id']
+				data['tvdb_id'] = "" if item['tvdb_id'] is None else unicode(item['tvdb_id'])
 				s = utils.findShow(data, self.shows)
 				if s:
 					data['xbmc_id'] = s['tvshowid']
@@ -639,7 +639,7 @@ class traktListDialog(xbmcgui.WindowXMLDialog):
 				if list:
 					if list.lower() == "watchlist" or list.lower().startswith("rating:"):
 						utils.Debug("[Tagger] Dialog: Tried to add a reserved list name '%s'." % list)
-7						utils.notification(utils.getString(1650), utils.getString(1655) % list)
+						utils.notification(utils.getString(1650), utils.getString(1655) % list)
 						return
 					if list not in self.tags:
 						utils.Debug("[Tagger] Dialog: Adding list '%s', and selecting it." % list)
@@ -649,7 +649,7 @@ class traktListDialog(xbmcgui.WindowXMLDialog):
 						utils.Debug("[Tagger] Dialog: '%s' already in list, selecting it." % list)
 						self.tags[list] = True
 						self.populateList(reset=True)
-7						utils.notification(utils.getString(1650), utils.getString(1656) % list)
+						utils.notification(utils.getString(1650), utils.getString(1656) % list)
 
 		elif control == BUTTON_OK:
 			data = []
