@@ -4,6 +4,7 @@ import utilities as utils
 import xbmc
 import sys
 import queue
+import tagging
 
 try:
 	import simplejson as json
@@ -225,6 +226,49 @@ def Main():
 
 		# execute toggle watched action
 		xbmc.executebuiltin("Action(ToggleWatched)")
+
+	elif args['action'] == 'updatetags':
+		data = {'action': 'updateTags'}
+
+	elif args['action'] == 'managelist':
+		media_type = getMediaType()
+		if media_type in ['movie', 'show']:
+			data = {}
+			data['action'] = 'manageList'
+			data['type'] = media_type
+			if utils.isMovie(media_type):
+				dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
+				result = utils.getMovieDetailsFromXbmc(dbid, ['imdbnumber', 'title', 'year', 'tag'])
+				if not result:
+					utils.Debug("Error getting movie details from XBMC.")
+					return
+				data['tag'] = result['tag']
+				data['movieid'] = result['movieid']
+				data['title'] = result['title']
+				data['year'] = result['year']
+				if result['imdbnumber'].startswith("tt"):
+					data['imdb_id'] = result['imdbnumber']
+				elif result['imdbnumber'].isdigit():
+					data['tmdb_id'] = result['imdbnumber']
+			
+			elif utils.isShow(media_type):
+				dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
+				result = utils.getShowDetailsFromXBMC(dbid, ['imdbnumber', 'title', 'tag'])
+				if not result:
+					utils.Debug("Error getting show details from XBMC.")
+					return
+				data['tag'] = result['tag']
+				data['tvshowid'] = result['tvshowid']
+				data['title'] = result['title']
+				if result['imdbnumber'].startswith("tt"):
+					data['imdb_id'] = result['imdbnumber']
+				elif result['imdbnumber'].isdigit():
+					data['tvdb_id'] = result['imdbnumber']
+			
+	elif args['action'] == 'addtolist':
+		pass
+	elif args['action'] == 'removefromlist':
+		pass
 
 	q = queue.SqliteQueue()
 	if 'action' in data:

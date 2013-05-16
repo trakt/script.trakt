@@ -9,6 +9,7 @@ import utilities
 from traktapi import traktAPI
 from rating import rateMedia, rateOnTrakt
 from scrobbler import Scrobbler
+from tagging import Tagger
 from sync import Sync
 
 try:
@@ -19,6 +20,8 @@ except ImportError:
 class traktService:
 
 	scrobbler = None
+	tagger = None
+	updateTagsThread = None
 	watcher = None
 	syncThread = None
 	dispatchQueue = queue.SqliteQueue()
@@ -59,6 +62,7 @@ class traktService:
 		elif action == 'settingsChanged':
 			utilities.Debug("Settings changed, reloading.")
 			globals.traktapi.updateSettings()
+			self.tagger.updateSettings()
 		elif action == 'markWatched':
 			del data['action']
 			self.doMarkWatched(data)
@@ -71,6 +75,15 @@ class traktService:
 				self.doSync(manual=True)
 			else:
 				utilities.Debug("There already is a sync in progress.")
+		elif action == 'updateTags':
+			if self.updateTagsThread and self.updateTagsThread.isAlive():
+				utilities.Debug("Currently updating tags already.")
+			else:
+				self.updateTagsThread = threading.Thread(target=self.tagger.updateTagsFromTrakt, name="trakt-updateTags")
+				self.updateTagsThread.start()
+		elif action == 'manageList':
+			del data['action']
+			self.tagger.manageList(data)
 		else:
 			utilities.Debug("Unknown dispatch action, '%s'." % action)
 
@@ -95,6 +108,9 @@ class traktService:
 		# init scrobbler class
 		self.scrobbler = Scrobbler(globals.traktapi)
 
+		# init tagging class
+		self.tagger = Tagger(globals.traktapi)
+		
 		# purge queue
 		self.dispatchQueue.purge()
 
@@ -121,6 +137,10 @@ class traktService:
 		# delete player/monitor
 		del self.Player
 		del self.Monitor
+
+		# check update tags thread.
+		if self.updateTagsThread and self.updateTagsThread.isAlive():
+			self.updateTagsThread.join()
 
 		# check if sync thread is running, if so, join it.
 		if self.syncThread.isAlive():

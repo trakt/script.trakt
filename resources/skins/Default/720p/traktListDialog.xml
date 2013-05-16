@@ -1,0 +1,209 @@
+<window>
+	<coordinates>
+		<system>1</system>
+		<posx>335</posx>
+		<posy>85</posy>
+	</coordinates>
+	<controls>
+		<control type="group">
+            <animation effect="fade" time="250">WindowOpen</animation>
+            <animation effect="fade" time="250">WindowClose</animation> 
+			<control type="image">
+				<description>background image</description>
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>610</width>
+				<height>550</height>
+				<texture border="40">ConfluenceDialogBack.png</texture>
+			</control>
+			<control type="image">
+				<description>Dialog Header image</description>
+				<posx>40</posx>
+				<posy>16</posy>
+				<width>530</width>
+				<height>40</height>
+				<texture>Confluencedialogheader.png</texture>
+			</control>
+			<control type="label" id="1">
+				<description>header label</description>
+				<posx>40</posx>
+				<posy>20</posy>
+				<width>530</width>
+				<height>30</height>
+				<font>font13_title</font>
+				<label>Manage trakt.tv Lists</label>
+				<align>center</align>
+				<aligny>center</aligny>
+				<shadowcolor>black</shadowcolor>
+			</control>
+            <control type="label" id="25">
+                <description>Title</description>
+                <posx>20</posx>
+                <posy>67</posy>
+                <width>550</width>
+                <height>20</height>
+                <label></label>
+                <align>center</align>
+                <aligny>center</aligny>
+                <font>font12</font>
+                <textcolor>FFBBBBBB</textcolor>
+            </control>
+			<control type="button">
+				<description>Close Window button</description>
+				<posx>520</posx>
+				<posy>15</posy>
+				<width>64</width>
+				<height>32</height>
+				<label>-</label>
+				<font>-</font>
+				<onclick>PreviousMenu</onclick>
+				<texturefocus>ConfluenceDialogCloseButton-focus.png</texturefocus>
+				<texturenofocus>ConfluenceDialogCloseButton.png</texturenofocus>
+				<onleft>10</onleft>
+				<onright>10</onright>
+				<onup>10</onup>
+				<ondown>10</ondown>
+				<visible>system.getbool(input.enablemouse)</visible>
+			</control>
+			<control type="list" id="4">
+				<posx>20</posx>
+				<posy>97</posy>
+				<width>550</width>
+				<height>376</height>
+				<onup>4</onup>
+				<ondown>4</ondown>
+				<onleft>17</onleft>
+				<onright>61</onright>
+				<pagecontrol>61</pagecontrol>
+				<scrolltime>200</scrolltime>
+				<animation effect="slide" start="0,0" end="10,0" time="0" condition="!Control.IsVisible(61)">Conditional</animation>
+				<itemlayout height="46" width="550">
+					<control type="image">
+						<posx>0</posx>
+						<posy>0</posy>
+						<width>550</width>
+						<height>40</height>
+						<texture border="5">button-nofocus.png</texture>
+					</control>
+					<control type="label" id="8">
+						<posx>20</posx>
+						<posy>0</posy>
+						<width>510</width>
+						<height>40</height>
+						<font>font13</font>
+						<textcolor>white</textcolor>
+						<selectedcolor>FFEB9E17</selectedcolor>
+						<align>left</align>
+						<aligny>center</aligny>
+						<info>ListItem.Label</info>
+					</control>
+				</itemlayout>
+				<focusedlayout height="46" width="550">
+					<control type="image">
+						<posx>0</posx>
+						<posy>0</posy>
+						<width>550</width>
+						<height>40</height>
+						<texture border="5">button-nofocus.png</texture>
+						<visible>!Control.HasFocus(4)</visible>
+						<animation effect="fade" time="300">Visible</animation>
+						<animation effect="fade" time="300">Hidden</animation>
+					</control>
+					<control type="image">
+						<posx>0</posx>
+						<posy>0</posy>
+						<width>550</width>
+						<height>40</height>
+						<texture border="5">button-focus2.png</texture>
+						<visible>Control.HasFocus(4)</visible>
+						<animation effect="fade" time="300">Visible</animation>
+						<animation effect="fade" time="300">Hidden</animation>
+					</control>
+					<control type="label" id="8">
+						<posx>20</posx>
+						<posy>0</posy>
+						<width>510</width>
+						<height>40</height>
+						<font>font13</font>
+						<textcolor>white</textcolor>
+						<selectedcolor>FFEB9E17</selectedcolor>
+						<align>left</align>
+						<aligny>center</aligny>
+						<info>ListItem.Label</info>
+					</control>
+				</focusedlayout>
+			</control>
+			<control type="scrollbar" id="61">
+				<posx>570</posx>
+				<posy>65</posy>
+				<width>25</width>
+				<height>380</height>
+				<texturesliderbackground border="0,14,0,14">ScrollBarV.png</texturesliderbackground>
+				<texturesliderbar border="0,14,0,14">ScrollBarV_bar.png</texturesliderbar>
+				<texturesliderbarfocus border="0,14,0,14">ScrollBarV_bar_focus.png</texturesliderbarfocus>
+				<textureslidernib>ScrollBarNib.png</textureslidernib>
+				<textureslidernibfocus>ScrollBarNib.png</textureslidernibfocus>
+				<onleft>4</onleft>
+				<onright>15</onright>
+				<ondown>61</ondown>
+				<onup>61</onup>
+				<showonepage>false</showonepage>
+				<orientation>vertical</orientation>
+			</control>
+			<control type="button" id="15">
+				<description>Manual button</description>
+				<posx>30</posx>
+				<posy>485</posy>
+				<width>200</width>
+				<height>40</height>
+				<label>Add List</label>
+				<font>font12_title</font>
+				<textcolor>white</textcolor>
+				<focusedcolor>white</focusedcolor>
+				<align>center</align>
+				<onleft>61</onleft>
+				<onright>16</onright>
+				<texturenofocus border="5">button-nofocus.png</texturenofocus>
+				<texturefocus border="5">button-focus2.png</texturefocus>
+				<onup>4</onup>
+				<ondown>4</ondown>
+			</control>
+			<control type="button" id="16">
+				<description>Manual button</description>
+				<posx>240</posx>
+				<posy>485</posy>
+				<width>165</width>
+				<height>40</height>
+				<label>OK</label>
+				<font>font12_title</font>
+				<textcolor>white</textcolor>
+				<focusedcolor>white</focusedcolor>
+				<align>center</align>
+				<onleft>15</onleft>
+				<onright>17</onright>
+				<texturenofocus border="5">button-nofocus.png</texturenofocus>
+				<texturefocus border="5">button-focus2.png</texturefocus>
+				<onup>4</onup>
+				<ondown>4</ondown>
+			</control>
+			<control type="button" id="17">
+				<description>Manual button</description>
+				<posx>415</posx>
+				<posy>485</posy>
+				<width>165</width>
+				<height>40</height>
+				<label>Cancel</label>
+				<font>font12_title</font>
+				<textcolor>white</textcolor>
+				<focusedcolor>white</focusedcolor>
+				<align>center</align>
+				<onleft>16</onleft>
+				<onright>4</onright>
+				<texturenofocus border="5">button-nofocus.png</texturenofocus>
+				<texturefocus border="5">button-focus2.png</texturefocus>
+				<onup>4</onup>
+				<ondown>4</ondown>
+			</control>
+		</control>
+	</controls>
+</window>
