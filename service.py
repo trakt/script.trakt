@@ -84,6 +84,16 @@ class traktService:
 		elif action == 'manageList':
 			del data['action']
 			self.tagger.manageList(data)
+		elif action == 'addtolist':
+			del data['action']
+			list = data['list']
+			del data['list']
+			self.tagger.manualAddToList(list, data)
+		elif action == 'removefromlist':
+			del data['action']
+			list = data['list']
+			del data['list']
+			self.tagger.manualRemoveFromList(list, data)
 		else:
 			utilities.Debug("Unknown dispatch action, '%s'." % action)
 

@@ -313,6 +313,21 @@ class Tagger():
 				del(item['tag'])
 		return newData
 
+	def isListOnTrakt(self, list):
+		if self.traktSlugs is None or (time.time() - self.traktSlugsLast) > (60 * 10):
+			self.traktSlugs = self.traktGetLists()
+			self.traktSlugsLast = time.time()
+		else:
+			utils.Debug("[Tagger] Using cached lists.")
+
+		return list in self.traktSlugs
+
+	def getSlug(self, list):
+		if self.isListOnTrakt(list):
+			return self.traktSlugs[list]
+		
+		return None
+
 	def xbmcUpdateTags(self, data):
 		# update xbmc tags for movies from trakt lists
 		chunked = utils.chunks([{"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid" : movie, "tag": data['movie'][movie]}} for movie in data['movie']], 50)
@@ -346,7 +361,7 @@ class Tagger():
 		if self.simulate:
 			utils.Debug("[Tagger] '%s' adding '%s'" % (list, str(params)))
 		else:
-			if list in self.traktSlugs:
+			if self.isListOnTrakt(list):
 				slug = self.traktSlugs[list]
 				params['slug'] = slug
 			else:
@@ -377,7 +392,7 @@ class Tagger():
 			utils.Debug("[Tagger] Nothing to remove from trakt list.")
 			return
 		
-		if not list in self.traktSlugs:
+		if not self.isListOnTrakt(list):
 			utils.Debug("[Tagger] Trying to remove items from non-existant list '%s'." % list)
 			
 		slug = self.traktSlugs[list]
@@ -563,6 +578,65 @@ class Tagger():
 			utils.Debug("[Tagger] Dialog was cancelled.")
 
 		del d
+
+	def manualAddToList(self, list, data):
+		if list.lower().startswith("rating:"):
+			utils.Debug("[Tagger] '%s' is a reserved list name." % list)
+			return
+
+		tag = listToTag(list)
+		if tag in data['tag']:
+			utils.Debug("[Tagger] '%d' is already in the list '%s'." % (data['title'], list))
+			return
+		
+		if tag.lower() == "watchlist":
+			utils.Debug("[Tagger] Adding '%s' to Watchlist." % data['title'])
+			self.updateWatchlist(data)
+		else:
+			utils.Debug("[Tagger] Adding '%s' to '%s'." % (data['title'], list))
+			self.traktListAddItem(list, [data])
+		
+		data['tag'].append(tag)
+		result = None
+		if data['type'] == 'movie':
+			result = utils.xbmcJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid" : data['movieid'], "tag": data['tag']}})
+		elif data['type'] == 'show':
+			result = utils.xbmcJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid" : data['tvshowid'], "tag": data['tag']}})
+		
+		if result == "OK":
+			s = utils.getFormattedItemName(data['type'], data)
+			utils.Debug("[Tagger] XBMC tags for '%s' were updated with '%s'." % (s, str(data['tag'])))
+			utils.notification(utils.getString(1201), utils.getString(1657) % s)
+
+	def manualRemoveFromList(self, list, data):
+		if list.lower().startswith("rating:"):
+			utils.Debug("[Tagger] '%s' is a reserved list name." % list)
+			return
+
+		tag = listToTag(list)
+		if not tag in data['tag']:
+			utils.Debug("[Tagger] '%d' is not in the list '%s'." % (data['title'], list))
+			return
+		
+		if tag.lower() == "watchlist":
+			utils.Debug("[Tagger] Removing: '%s' from Watchlist." % data['title'])
+			self.updateWatchlist(data, remove=True)
+		else:
+			utils.Debug("[Tagger] Removing: '%s' from '%s'." % (data['title'], list))
+			self.traktListRemoveItem(list, [data])
+		
+		data['tag'].remove(tag)
+		result = None
+		if data['type'] == 'movie':
+			result = utils.xbmcJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid" : data['movieid'], "tag": data['tag']}})
+		elif data['type'] == 'show':
+			result = utils.xbmcJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid" : data['tvshowid'], "tag": data['tag']}})
+		
+		if result == "OK":
+			s = utils.getFormattedItemName(data['type'], data)
+			utils.Debug("[Tagger] XBMC tags for '%s' were updated with '%s'." % (s, str(data['tag'])))
+			utils.notification(utils.getString(1201), utils.getString(1657) % s)
+
 
 TRAKT_LISTS				= 4
 BUTTON_ADD_LIST			= 15

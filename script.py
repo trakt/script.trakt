@@ -34,7 +34,8 @@ def getArguments():
 		for item in sys.argv:
 			values = item.split("=")
 			if len(values) == 2:
-				data[values[0].lower()] = values[1].lower()
+				data[values[0].lower()] = values[1]
+		data['action'] = data['action'].lower()
 
 	return data
 
@@ -265,11 +266,64 @@ def Main():
 				elif result['imdbnumber'].isdigit():
 					data['tvdb_id'] = result['imdbnumber']
 			
-	elif args['action'] == 'addtolist':
-		pass
-	elif args['action'] == 'removefromlist':
-		pass
+	elif args['action'] in ['addtolist', 'removefromlist']:
+		if 'list' in args:
+			data = {}
+			data['action'] = args['action']
+			media_type = None
+			dbid = None
+			if 'media_type' in args and 'dbid' in args:
+				media_type = args['media_type']
+				try:
+					dbid = int(args['dbid'])
+				except ValueError:
+					utils.Debug("'%s' triggered for library item, but DBID is invalid." % args['action'])
+					return
+			else:
+				media_type = getMediaType()
+				if not media_type in ['movie', 'show']:
+					utils.Debug("Error, not in video library.")
+					return
+				try:
+					dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
+				except ValueError:
+					utils.Debug("'%s' triggered for library item, but there is a problem with ListItem.DBID." % args['action'])
+					return
+			
+			if not media_type in ['movie', 'show']:
+				utils.Debug("'%s' is not a valid media type for '%s'." % (media_type, args['action']))
+				return
 
+			data['list'] = args['list']
+			data['type'] = media_type
+
+			if utils.isMovie(media_type):
+				result = utils.getMovieDetailsFromXbmc(dbid, ['imdbnumber', 'title', 'year', 'tag'])
+				if not result:
+					utils.Debug("Error getting movie details from XBMC.")
+					return
+				data['tag'] = result['tag']
+				data['movieid'] = result['movieid']
+				data['title'] = result['title']
+				data['year'] = result['year']
+				if result['imdbnumber'].startswith("tt"):
+					data['imdb_id'] = result['imdbnumber']
+				elif result['imdbnumber'].isdigit():
+					data['tmdb_id'] = result['imdbnumber']
+			
+			elif utils.isShow(media_type):
+				result = utils.getShowDetailsFromXBMC(dbid, ['imdbnumber', 'title', 'tag'])
+				if not result:
+					utils.Debug("Error getting show details from XBMC.")
+					return
+				data['tag'] = result['tag']
+				data['tvshowid'] = result['tvshowid']
+				data['title'] = result['title']
+				if result['imdbnumber'].startswith("tt"):
+					data['imdb_id'] = result['imdbnumber']
+				elif result['imdbnumber'].isdigit():
+					data['tvdb_id'] = result['imdbnumber']
+			
 	q = queue.SqliteQueue()
 	if 'action' in data:
 		utils.Debug("Queuing for dispatch: %s" % data)
