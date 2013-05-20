@@ -2,6 +2,7 @@ version 2.3.0
   - moved debug settings to their own menu (nate1280)
   - new togglewatched action for skins/keymaps (nate1280)
   - new rate action for skins/keymaps (nate1280)
+  - new taggling/list actions for skins/keymaps (nate1280)
   - alternate rating notification style (nate1280)
 
 version 2.2.0
