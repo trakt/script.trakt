@@ -1,4 +1,4 @@
-trakt.tv TV and movie scrobbler for XBMC Frodo
+trakt.tv scrobbler and library sync
 ==============================================
 
 ###What is trakt?
@@ -7,7 +7,8 @@ Automatically scrobble all TV episodes and movies you are watching to trakt.tv! 
 
 * Automatically scrobble what you're watching
 * [Mobile apps](http://trakt.tv/downloads) for iPhone, iPad, Android, and Windows Phone
-* Share what you're watching (in real time) and rating to facebook, twitter, and tumblr
+* Share what you're watching (in real time) and rating to facebook and twitter
+* Personalized calendar so you never miss a TV show
 * Follow your friends and people you're interesed in
 * Use watchlists so you don't forget to what to watch
 * Track your media collections and impress your friends
@@ -15,14 +16,16 @@ Automatically scrobble all TV episodes and movies you are watching to trakt.tv! 
 * Easily track your TV show progress across all seasons and episodes
 * Track your progress against industry lists such as the [IMDb Top 250](http://trakt.tv/lists/imdb/top-250)
 * Discover new shows and movies based on your viewing habits
+* Widgets for your forum signature
 
 ###What can this addon do?
 
 * Automatically scrobble all TV episodes and movies you are watching 
-* Sync your TV episode and movie collections to trakt
+* Sync your TV episode and movie collections to trakt (triggered after a library update)
 * Auto clean your trakt collection so that it matches up with XBMC
 * Keep watched statuses synced between XBMC and trakt
 * Rate movies and episodes after watching them
+* Custom skin/keymap actions for toggling watched status, rating, tagging, and listing
 
 ###What can be scrobbled?
 
