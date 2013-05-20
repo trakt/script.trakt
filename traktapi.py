@@ -50,14 +50,14 @@ class traktAPI(object):
 	__username = ""
 	__password = ""
 
-	def __init__(self):
+	def __init__(self, loadSettings=True):
 		Debug("[traktAPI] Initializing.")
 
 		self.__username = getSetting('username')
 		self.__password = sha1(getSetting('password')).hexdigest()
 
 		self.settings = None
-		if self.testAccount():
+		if loadSettings and self.testAccount():
 			Debug("[traktAPI] Getting account settings for '%s'." % self.__username)
 			self.getAccountSettings()
 
@@ -494,3 +494,106 @@ class traktAPI(object):
 		return self.rate('episode', data)
 	def rateMovie(self, data):
 		return self.rate('movie', data)
+
+	# url: http://api.trakt.tv/user/lists.json/apikey/<username>
+	# returns: Returns all custom lists for a user.
+	def getUserLists(self):
+		if self.testAccount():
+			url = "%s/user/lists.json/%s/%s" % (self.__baseURL, self.__apikey, self.__username)
+			Debug("[traktAPI] getUserLists(url: %s)" % url)
+			return self.traktRequest('POST', url)
+
+	# url: http://api.trakt.tv/user/list.json/apikey/<username>/<slug>
+	# returns: Returns list details and all items it contains.
+	def getUserList(self, data):
+		if self.testAccount():
+			url = "%s/user/list.json/%s/%s/%s" % (self.__baseURL, self.__apikey, self.__username, data)
+			Debug("[traktAPI] getUserList(url: %s)" % url)
+			return self.traktRequest('POST', url, passVersions=True)
+
+	# url: http://api.trakt.tv/lists/add/apikey
+	# returns: {"status": "success","message": "list added","name": "Top 10 of 2011","slug": "top-10-of-2011","privacy": "public","show_numbers": true,"allow_shouts": true}
+	def userListAdd(self, list, privacy, show_numbers=False, allow_shouts=False):
+		if self.testAccount():
+			url = "%s/lists/add/%s" % (self.__baseURL, self.__apikey)
+			data = {'name': list, 'show_numbers': show_numbers, 'allow_shouts': allow_shouts, 'privacy': privacy}
+			Debug("[traktAPI] userListAdd(url: %s, data: %s)" % (url, str(data)))
+			return self.traktRequest('POST', url, data, passVersions=True)
+	
+	# url: http://api.trakt.tv/lists/delete/apikey
+	# returns: {"status": "success", "message": "list and items deleted"}
+	def userListDelete(self, data):
+		if self.testAccount():
+			url = "%s/lists/delete/%s" % (self.__baseURL, self.__apikey)
+			Debug("[traktAPI] userListDelete(url: %s, data: %s)" % (url, str(data)))
+			return self.traktRequest('POST', url, data, passVersions=True)
+	
+	# url: http://api.trakt.tv/lists/items/add/apikey
+	# returns: {"status": "success","inserted": 4,"already_exist": 0,"skipped": 0,"skipped_items": []}
+	def userListItemAdd(self, data):
+		if self.testAccount():
+			url = "%s/lists/items/add/%s" % (self.__baseURL, self.__apikey)
+			Debug("[traktAPI] userListAddItem(url: %s, data: %s)" % (url, str(data)))
+			return self.traktRequest('POST', url, data, passVersions=True)
+	
+	# url: http://api.trakt.tv/lists/items/delete/apikey
+	# returns: {"status": "success","message": "4 items deleted"}
+	def userListItemDelete(self, data):
+		if self.testAccount():
+			url = "%s/lists/items/delete/%s" % (self.__baseURL, self.__apikey)
+			Debug("[traktAPI] userListItemDelete(url: %s, data: %s)" % (url, str(data)))
+			return self.traktRequest('POST', url, data, passVersions=True)
+
+	# url: http://api.trakt.tv/user/watchlist/<movies|shows>.json/<apikey>/<username>
+	# returns: [{"title":"GasLand","year":2010,"released":1264320000,"url":"http://trakt.tv/movie/gasland-2010","runtime":107,"tagline":"Can you light your water on fire? ","overview":"It is happening all across America-rural landowners wake up one day to find a lucrative offer from an energy company wanting to lease their property. Reason? The company hopes to tap into a reservoir dubbed the \"Saudi Arabia of natural gas.\" Halliburton developed a way to get the gas out of the ground-a hydraulic drilling process called \"fracking\"-and suddenly America finds itself on the precipice of becoming an energy superpower.","certification":"","imdb_id":"tt1558250","tmdb_id":"40663","inserted":1301130302,"images":{"poster":"http://trakt.us/images/posters_movies/1683.jpg","fanart":"http://trakt.us/images/fanart_movies/1683.jpg"},"genres":["Action","Comedy"]},{"title":"The King's Speech","year":2010,"released":1291968000,"url":"http://trakt.tv/movie/the-kings-speech-2010","runtime":118,"tagline":"God save the king.","overview":"Tells the story of the man who became King George VI, the father of Queen Elizabeth II. After his brother abdicates, George ('Bertie') reluctantly assumes the throne. Plagued by a dreaded stutter and considered unfit to be king, Bertie engages the help of an unorthodox speech therapist named Lionel Logue. Through a set of unexpected techniques, and as a result of an unlikely friendship, Bertie is able to find his voice and boldly lead the country into war.","certification":"R","imdb_id":"tt1504320","tmdb_id":"45269","inserted":1301130174,"images":{"poster":"http://trakt.us/images/posters_movies/8096.jpg","fanart":"http://trakt.us/images/fanart_movies/8096.jpg"},"genres":["Action","Comedy"]}]
+	# note: if nothing in list, returns []
+	def getWatchlist(self, type):
+		if self.testAccount():
+			url = "%s/user/watchlist/%s.json/%s/%s" % (self.__baseURL, type, self.__apikey, self.__username)
+			Debug("[traktAPI] getWatchlist(url: %s)" % url)
+			return self.traktRequest('POST', url)
+
+	def getWatchlistShows(self):
+		return self.getWatchlist('shows')
+	def getWatchlistMovies(self):
+		return self.getWatchlist('movies')
+
+	# url: http://api.trakt.tv/<movie|show>/watchlist/<apikey>
+	# returns: 
+	def watchlistAddItems(self, type, data):
+		if self.testAccount():
+			url = "%s/%s/watchlist/%s" % (self.__baseURL, type, self.__apikey)
+			Debug("[traktAPI] watchlistAddItem(url: %s)" % url)
+			return self.traktRequest('POST', url, data, passVersions=True)
+
+	def watchlistAddShows(self, data):
+		return self.watchlistAddItems('show', data)
+	def watchlistAddMovies(self, data):
+		return self.watchlistAddItems('movie', data)
+
+	# url: http://api.trakt.tv/<movie|show>/unwatchlist/<apikey>
+	# returns: 
+	def watchlistRemoveItems(self, type, data):
+		if self.testAccount():
+			url = "%s/%s/unwatchlist/%s" % (self.__baseURL, type, self.__apikey)
+			Debug("[traktAPI] watchlistRemoveItems(url: %s)" % url)
+			return self.traktRequest('POST', url, data, passVersions=True)
+
+	def watchlistRemoveShows(self, data):
+		return self.watchlistRemoveItems('show', data)
+	def watchlistRemoveMovies(self, data):
+		return self.watchlistRemoveItems('movie', data)
+
+	# url: http://api.trakt.tv/user/ratings/<movies|shows>.json/<apikey>/<username>/<rating>
+	# returns:
+	# note: if no items, returns []
+	def getRatedItems(self, type):
+		if self.testAccount():
+			url = "%s/user/ratings/%s.json/%s/%s/all" % (self.__baseURL, type, self.__apikey, self.__username)
+			Debug("[traktAPI] getRatedItems(url: %s)" % url)
+			return self.traktRequest('POST', url)
+
+	def getRatedMovies(self):
+		return self.getRatedItems('movies')
+	def getRatedShows(self):
+		return self.getRatedItems('shows')

@@ -6,6 +6,7 @@ import xbmcaddon
 import xbmcgui
 import math
 import time
+import copy
 
 try:
 	import simplejson as json
@@ -153,7 +154,7 @@ def getFormattedItemName(type, info, short=False):
 	return s
 
 def getShowDetailsFromXBMC(showID, fields):
-	result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': showID, 'properties': ['year', 'imdbnumber']}, 'id': 1})
+	result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': showID, 'properties': fields}, 'id': 1})
 	Debug("getShowDetailsFromXBMC(): %s" % str(result))
 
 	if not result:
@@ -204,3 +205,49 @@ def getMovieDetailsFromXbmc(libraryId, fields):
 	except KeyError:
 		Debug("getMovieDetailsFromXbmc(): KeyError: result['moviedetails']")
 		return None
+
+def findInList(list, returnIndex=False, returnCopy=False, case_sensitive=True, *args, **kwargs):
+	for index in range(len(list)):
+		item = list[index]
+		i = 0
+		for key in kwargs:
+			if not key in item:
+				continue
+			if not case_sensitive and isinstance(item[key], basestring):
+				if item[key].lower() == kwargs[key].lower():
+					i = i + 1
+			else:
+				if item[key] == kwargs[key]:
+					i = i + 1
+		if i == len(kwargs):
+			if returnIndex:
+				return index
+			else:
+				if returnCopy:
+					return copy.deepcopy(list[index])
+				else:
+					return list[index]
+	return None
+
+def findAllInList(list, key, value):
+	return [item for item in list if item[key] == value]
+
+def findMovie(movie, movies, returnIndex=False):
+	result = None
+	if 'imdb_id' in movie and unicode(movie['imdb_id']).startswith("tt"):
+		result = findInList(movies, returnIndex=returnIndex, imdb_id=movie['imdb_id'])
+	if result is None and 'tmdb_id' in movie and unicode(movie['tmdb_id']).isdigit():
+		result = findInList(movies, returnIndex=returnIndex, tmdb_id=unicode(movie['tmdb_id']))
+	if result is None and movie['title'] and movie['year'] > 0:
+		result = findInList(movies, returnIndex=returnIndex, title=movie['title'], year=movie['year'])
+	return result
+
+def findShow(show, shows, returnIndex=False):
+	result = None
+	if 'tvdb_id' in show and unicode(show['tvdb_id']).isdigit():
+		result = findInList(shows, returnIndex=returnIndex, tvdb_id=unicode(show['tvdb_id']))
+	if result is None and 'imdb_id' in show and unicode(show['imdb_id']).startswith("tt"):
+		result = findInList(shows, returnIndex=returnIndex, imdb_id=show['imdb_id'])
+	if result is None and show['title'] and 'year' in show and show['year'] > 0:
+		result = findInList(shows, returnIndex=returnIndex, title=show['title'], year=show['year'])
+	return result
