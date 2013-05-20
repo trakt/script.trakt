@@ -9,6 +9,7 @@ import utilities
 from traktapi import traktAPI
 from rating import rateMedia, rateOnTrakt
 from scrobbler import Scrobbler
+from tagging import Tagger
 from sync import Sync
 
 try:
@@ -19,6 +20,8 @@ except ImportError:
 class traktService:
 
 	scrobbler = None
+	tagger = None
+	updateTagsThread = None
 	watcher = None
 	syncThread = None
 	dispatchQueue = queue.SqliteQueue()
@@ -59,6 +62,7 @@ class traktService:
 		elif action == 'settingsChanged':
 			utilities.Debug("Settings changed, reloading.")
 			globals.traktapi.updateSettings()
+			self.tagger.updateSettings()
 		elif action == 'markWatched':
 			del data['action']
 			self.doMarkWatched(data)
@@ -71,6 +75,27 @@ class traktService:
 				self.doSync(manual=True)
 			else:
 				utilities.Debug("There already is a sync in progress.")
+		elif action == 'updatetags':
+			if self.updateTagsThread and self.updateTagsThread.isAlive():
+				utilities.Debug("Currently updating tags already.")
+			else:
+				self.updateTagsThread = threading.Thread(target=self.tagger.updateTagsFromTrakt, name="trakt-updatetags")
+				self.updateTagsThread.start()
+		elif action == 'managelists':
+			self.tagger.manageLists()
+		elif action == 'itemlists':
+			del data['action']
+			self.tagger.itemLists(data)
+		elif action == 'addtolist':
+			del data['action']
+			list = data['list']
+			del data['list']
+			self.tagger.manualAddToList(list, data)
+		elif action == 'removefromlist':
+			del data['action']
+			list = data['list']
+			del data['list']
+			self.tagger.manualRemoveFromList(list, data)
 		else:
 			utilities.Debug("Unknown dispatch action, '%s'." % action)
 
@@ -95,6 +120,9 @@ class traktService:
 		# init scrobbler class
 		self.scrobbler = Scrobbler(globals.traktapi)
 
+		# init tagging class
+		self.tagger = Tagger(globals.traktapi)
+		
 		# purge queue
 		self.dispatchQueue.purge()
 
@@ -121,6 +149,10 @@ class traktService:
 		# delete player/monitor
 		del self.Player
 		del self.Monitor
+
+		# check update tags thread.
+		if self.updateTagsThread and self.updateTagsThread.isAlive():
+			self.updateTagsThread.join()
 
 		# check if sync thread is running, if so, join it.
 		if self.syncThread.isAlive():
@@ -170,6 +202,9 @@ class traktService:
 			summaryInfo = globals.traktapi.getMovieSummary(data['imdbnumber'])
 		
 		if not summaryInfo is None:
+			if utilities.isMovie(media_type) or utilities.isShow(media_type):
+				summaryInfo['xbmc_id'] = data['dbid']
+
 			if action == 'rate':
 				if not 'rating' in data:
 					rateMedia(media_type, summaryInfo)
@@ -318,6 +353,10 @@ class syncThread(threading.Thread):
 	def run(self):
 		sync = Sync(show_progress=self._isManual, api=globals.traktapi)
 		sync.sync()
+		
+		if utilities.getSettingAsBool('tagging_enable') and utilities.getSettingAsBool('tagging_tag_after_sync'):
+			q = queue.SqliteQueue()
+			q.append({'action': 'updateTags'})
 
 class traktMonitor(xbmc.Monitor):
 

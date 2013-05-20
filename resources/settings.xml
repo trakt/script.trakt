@@ -46,9 +46,21 @@
 		<setting id="rate_min_view_time" type="slider" label="1034" range="0,5,100" default="75"/>
 		<setting id="rate_rerate" type="bool" label="1035" default="false"/>
 	</category>
+	<category label="1600"><!-- Tagging -->
+		<setting id="tagging_enable" type="bool" label="1601" default="false"/>
+		<setting id="tagging_tag_after_sync" type="bool" label="1602" default="false"/>
+		<setting id="tagging_watchlists" type="bool" label="1603" default="false"/>
+		<setting id="tagging_ratings" type="bool" label="1604" default="false"/>
+		<setting id="tagging_ratings_min" type="slider" label="1605" range="1,10" default="8" option="int"/>
+		<setting id="tagging_list_privacy" type="enum" label="1606" values="Public|Friends|Private" default="0"/>
+		<setting id="tagging_list_allowshouts" type="bool" label="1607" default="false"/>
+		<setting id="tagging_notifications" type="bool" label="1608" default="true"/>
+	</category>
 	<category label="1700"><!-- Debug -->
 		<setting id="debug" type="bool" label="1701" default="true"/>
 		<setting id="simulate_scrobbling" type="bool" label="1702" default="false"/>
 		<setting id="simulate_sync" type="bool" label="1703" default="false"/>
+		<setting id="simulate_tagging" type="bool" label="1704" default="false"/>
+		<setting type="action" label="1705" action="RunScript(script.trakt,action=timertest)"/>
 	</category>
 </settings>
