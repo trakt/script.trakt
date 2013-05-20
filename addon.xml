@@ -15,22 +15,25 @@
 
 - Automatically scrobble what you're watching
 - Mobile apps for iPhone, iPad, Android, and Windows Phone
+- Share what you're watching (in real time) and rating to facebook and twitter
+- Personalized calendar so you never miss a TV show
 - Follow your friends and people you're interesed in
-- Share what you're watching (in real time) and rating to facebook, twitter, and tumblr
 - Use watchlists so you don't forget to what to watch
 - Track your media collections and impress your friends
 - Create custom lists around any topics you choose
 - Easily track your TV show progress across all seasons and episodes
 - Track your progress against industry lists such as the IMDb Top 250
 - Discover new shows and movies based on your viewing habits
+- Widgets for your forum signature
 
 What can this addon do?
 
 - Automatically scrobble all TV episodes and movies you are watching 
-- Sync your TV episode and movie collections to trakt
+- Sync your TV episode and movie collections to trakt (triggered after a library update)
 - Auto clean your trakt collection so that it matches up with XBMC
 - Keep watched statuses synced between XBMC and trakt
 - Rate movies and episode after watching them
+- Custom skin/keymap actions for toggling watched status, rating, tagging, and listing
 
 Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers.</description>
 		<platform>all</platform>
