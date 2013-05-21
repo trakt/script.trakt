@@ -872,14 +872,14 @@ class traktItemListsDialog(xbmcgui.WindowXMLDialog):
 						utils.notification(utils.getString(1650), utils.getString(1655) % new_list)
 						return
 
-					self.tags[new_list] = True
-					self.populateList()
-
 					if new_list not in self.tags:
 						utils.Debug("[Tagger] Dialog: Adding list '%s', and selecting it." % new_list)
 					else:
 						utils.Debug("[Tagger] Dialog: '%s' already in list, selecting it." % new_list)
 						utils.notification(utils.getString(1650), utils.getString(1656) % new_list)
+
+					self.tags[new_list] = True
+					self.populateList()
 
 		elif control == BUTTON_OK:
 			data = []

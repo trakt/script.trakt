@@ -6,31 +6,6 @@ import utilities
 from utilities import Debug, notification
 import copy
 
-def findInListIndex(list, key, value):
-	x = [i for i in range(len(list)) if list[i][key] == value]
-	if len(x) > 0:
-		return x[0]
-	return -1
-
-def findInList(list, case_sensitive=True, *args, **kwargs):
-	for item in list:
-		i = 0
-		for key in kwargs:
-			if not key in item:
-				continue
-			if not case_sensitive and isinstance(item[key], basestring):
-				if item[key].lower() == kwargs[key].lower():
-					i = i + 1
-			else:
-				if item[key] == kwargs[key]:
-					i = i + 1
-		if i == len(kwargs):
-			return item
-	return None
-
-def findAllInList(list, key, value):
-	return [item for item in list if item[key] == value]
-
 progress = xbmcgui.DialogProgress()
 
 class Sync():
@@ -104,7 +79,7 @@ class Sync():
 				watched_show['imdb_id'] = ""
 			if watched_show['tvdb_id'] is None:
 				watched_show['tvdb_id'] = ""
-			show = self.findShow(watched_show, shows)
+			show = utilities.findShow(watched_show, shows)
 			if show:
 				for s in watched_show['seasons']:
 					show['watched'][s['season']] = s['episodes']
@@ -236,21 +211,11 @@ class Sync():
 				data['episodes'].append({'season': season, 'episode': episode})
 		return data
 
-	def findShow(self, show, shows):
-		result = False
-		if show['tvdb_id'].isdigit():
-			result = findInList(shows, tvdb_id=show['tvdb_id'])
-		if not result and show['imdb_id'].startswith("tt"):
-			result = findInList(shows, imdb_id=show['imdb_id'])
-		if not result and show['title'] and show['year'] > 0:
-			result = findInList(shows, title=show['title'], year=show['year'])
-		return result
-
 	def compareShows(self, shows_col1, shows_col2, watched=False, restrict=False):
 		shows = []
 		p = 'watched' if watched else 'seasons'
 		for show_col1 in shows_col1:
-			show_col2 = self.findShow(show_col1, shows_col2)
+			show_col2 = utilities.findShow(show_col1, shows_col2)
 			if show_col2:
 				season_diff = {}
 				show_col2_seasons = show_col2[p]
@@ -471,7 +436,7 @@ class Sync():
 			self.updateProgress(100, line1=" ", line2=utilities.getString(1442), line3=" ")
 			progress.close()
 
-		Debug("[Episodes Sync] Shows on trakt.tv (%d), shows in XBMC (%d)." % (len(findAllInList(traktShows, 'in_collection', True)), len(xbmcShows)))
+		Debug("[Episodes Sync] Shows on trakt.tv (%d), shows in XBMC (%d)." % (len(utilities.findAllInList(traktShows, 'in_collection', True)), len(xbmcShows)))
 		Debug("[Episodes Sync] Episodes on trakt.tv (%d), episodes in XBMC (%d)." % (self.countEpisodes(traktShows), self.countEpisodes(xbmcShows)))
 		Debug("[Episodes Sync] Complete.")
 
@@ -519,7 +484,7 @@ class Sync():
 				movie['tmdb_id'] = "" 
 			else:
 				movie['tmdb_id'] = unicode(movie['tmdb_id'])
-			m = self.findMovie(movie, movies)
+			m = utilities.findMovie(movie, movies)
 			if m:
 				m['plays'] = movie['plays']
 			else:
@@ -590,25 +555,15 @@ class Sync():
 	def countMovies(self, movies, collection=True):
 		if len(movies) > 0:
 			if 'in_collection' in movies[0]:
-				return len(findAllInList(movies, 'in_collection', collection))
+				return len(utilities.findAllInList(movies, 'in_collection', collection))
 			else:
 				return len(movies)
 		return 0
 
-	def findMovie(self, movie, movies):
-		result = False
-		if movie['imdb_id'].startswith("tt"):
-			result = findInList(movies, imdb_id=movie['imdb_id'])
-		if not result and movie['tmdb_id'].isdigit():
-			result = findInList(movies, tmdb_id=movie['tmdb_id'])
-		if not result and movie['title'] and movie['year'] > 0:
-			result = findInList(movies, title=movie['title'], year=movie['year'])
-		return result
-
 	def compareMovies(self, movies_col1, movies_col2, watched=False, restrict=False):
 		movies = []
 		for movie_col1 in movies_col1:
-			movie_col2 = self.findMovie(movie_col1, movies_col2)
+			movie_col2 = utilities.findMovie(movie_col1, movies_col2)
 			if movie_col2:
 				if watched:
 					if (movie_col2['plays'] == 0) and (movie_col1['plays'] > movie_col2['plays']):
