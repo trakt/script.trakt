@@ -135,7 +135,7 @@
 			</control>
 			<control type="scrollbar" id="61">
 				<posx>570</posx>
-				<posy>65</posy>
+				<posy>95</posy>
 				<width>25</width>
 				<height>380</height>
 				<texturesliderbackground border="0,14,0,14">ScrollBarV.png</texturesliderbackground>
