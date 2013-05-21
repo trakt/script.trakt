@@ -16,10 +16,10 @@
 	<string id="1035">Permitir a reavaliação do conteúdo</string>	
 	
 	<!-- Scrobbling Settings -->
-	<string id="1040">Scrobbling</string>
-	<string id="1041">Fazer Scrobble dos filmes</string>
-	<string id="1042">Fazer Scrobble dos episódios de seriados</string>
-	<string id="1043">Percentual mínimo assistido para fazer scrobble</string>
+	<string id="1040">Divulgação</string>
+	<string id="1041">Fazer divulgação dos filmes</string>
+	<string id="1042">Fazer divulgação dos episódios de seriados</string>
+	<string id="1043">Percentual mínimo assistido para fazer divulgação</string>
 	<string id="1050">Exclusões</string>
 	<string id="1051">Excluir TV Ao Vivo</string>
 	<string id="1052">Excluir fontes HTTP</string>	
@@ -74,6 +74,7 @@
 	<string id="1412">Mostrar notificações</string>
 	<string id="1413">Limpar coleção de filmes do Trakt</string>
 	<string id="1414">Limpar coleção de episódios do Trakt</string>
+	<string id="1416">Mostrar notificação ao marcar como visto</string>	
 
 	<!-- Notificações de Sincronização -->
 	<string id="1420">Sincronização iniciada</string>
@@ -157,9 +158,46 @@
 	<!-- Sync Episodes - complete -->
 	<string id="1442">Sincronização de episódios finalizada</string>
 
+	<!-- Sync - manual mark watched -->
+	<string id="1550">trakt.tv - Marcado como visto</string>
+	<string id="1551">trakt.tv - Falha ao marcar como visto</string>
+	<string id="1552">%d episódios(s) de '%s'</string>
+
+	<!-- Tagger Settings -->
+	<string id="1600">Etiquetação (Tagging)</string>
+	<string id="1601">Habilitar etiquetação (Tags)</string>
+	<string id="1602">Atualizar as etiquetas após a atualização da biblioteca</string>	
+	<string id="1603">Criar etiqueta da sua lista de interesse (watchlist)</string>
+	<string id="1604">Criar etiqueta das suas classificações</string>
+	<string id="1605">Classificação mínima para criar etiquetas</string>
+	<string id="1606">Privacidade padrão para as novas listas</string>
+	<string id="1607">Habilitar gritos(shouts) para novas listas</string>
+	<string id="1608">Habilitar notificações</string>	
+	
+	<!-- Tagger String -->
+	<string id="1650">Gerenciar listas do trakt.tv</string>
+	<string id="1651">Adicionar lista</string>
+	<string id="1652">OK</string>
+	<string id="1653">Cancelar</string>
+	<string id="1654">Nova lista</string>
+	<string id="1655">'%s' é um nome reservado, não é possível adicionar a lista.</string>
+	<string id="1656">'%s' já está na sua lista.</string>
+	<string id="1657">Etiquetas atualizadas para '%s'</string>	
+	<string id="1658">Iniciada a sincronização das etiquetas</string>
+	<string id="1659">Finalizada a sincronização das etiquetas</string>
+	<string id="1660">Escolha uma lista para gerenciar</string>
+	<string id="1661">Carregando informações para gerenciar listas</string>
+	<string id="1662">Ocorreu um problema ao carregar dados do XBMC</string>
+	<string id="1663">Ocorreu um problema ao carregar dados do trakt.tv</string>
+	<string id="1664">Ocorreu um problema ao carregar suas listas de interesse</string>
+	<string id="1665">Ocorreu um problema ao carregar suas classificações</string>
+	<string id="1666">As etiquetas/listas foram atualizadas</string>	
+
 	<!-- Debug Settings -->
-	<string id="1700">Debug</string>
+	<string id="1700">Depuração</string>
 	<string id="1701">Ativar modo de depuração</string>
-	<string id="1702">Simular scrobble (apenas para testes)</string>
-	<string id="1703">Simular sincronização (apenas para testes)</string>	
+	<string id="1702">Simular divulgação (apenas para testes)</string>
+	<string id="1703">Simular sincronização (apenas para testes)</string>
+	<string id="1704">Simular etiquetação</string>
+	<string id="1705">Executar testes de duração, veja resultado no log</string>	
 </strings>
