@@ -144,11 +144,210 @@
 				<textureslidernib>ScrollBarNib.png</textureslidernib>
 				<textureslidernibfocus>ScrollBarNib.png</textureslidernibfocus>
 				<onleft>4</onleft>
-				<onright>16</onright>
+				<onright>111</onright>
 				<ondown>61</ondown>
 				<onup>61</onup>
 				<showonepage>false</showonepage>
 				<orientation>vertical</orientation>
+			</control>
+			<control type="group" id="100">
+				<defaultcontrol>111</defaultcontrol>
+				<posx>20</posx>
+				<posy>245</posy>
+				<width>550</width>
+				<height>230</height>
+				<control type="label" id="110">
+					<description>Title</description>
+					<posx>10</posx>
+					<posy>0</posy>
+					<width>270</width>
+					<height>20</height>
+					<label>$ADDON[script.trakt 1667]</label>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>font12</font>
+					<textcolor>FFBBBBBB</textcolor>
+				</control>
+				<control type="list" id="111">
+					<posx>25</posx>
+					<posy>30</posy>
+					<width>240</width>
+					<height>138</height>
+					<onup>4</onup>
+					<ondown>113</ondown>
+					<onleft>61</onleft>
+					<onright>141</onright>
+					<scrolltime>200</scrolltime>
+					<itemlayout height="46" width="240">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>240</width>
+							<height>40</height>
+							<texture border="5">button-nofocus.png</texture>
+						</control>
+						<control type="label">
+							<posx>120</posx>
+							<posy>0</posy>
+							<width>200</width>
+							<height>40</height>
+							<font>font13</font>
+							<textcolor>white</textcolor>
+							<selectedcolor>FFEB9E17</selectedcolor>
+							<align>center</align>
+							<aligny>center</aligny>
+							<info>ListItem.Label</info>
+						</control>
+					</itemlayout>
+					<focusedlayout height="46" width="240">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>240</width>
+							<height>40</height>
+							<texture border="5">button-nofocus.png</texture>
+							<visible>!Control.HasFocus(111)</visible>
+							<animation effect="fade" time="300">Visible</animation>
+							<animation effect="fade" time="300">Hidden</animation>
+						</control>
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>240</width>
+							<height>40</height>
+							<texture border="5">button-focus2.png</texture>
+							<visible>Control.HasFocus(111)</visible>
+							<animation effect="fade" time="300">Visible</animation>
+							<animation effect="fade" time="300">Hidden</animation>
+						</control>
+						<control type="label">
+							<posx>120</posx>
+							<posy>0</posy>
+							<width>200</width>
+							<height>40</height>
+							<font>font13</font>
+							<textcolor>white</textcolor>
+							<selectedcolor>FFEB9E17</selectedcolor>
+							<align>center</align>
+							<aligny>center</aligny>
+							<info>ListItem.Label</info>
+						</control>
+					</focusedlayout>
+				</control>
+				<control type="label" id="140">
+					<description>Title</description>
+					<posx>290</posx>
+					<posy>0</posy>
+					<width>270</width>
+					<height>20</height>
+					<label>$ADDON[script.trakt 1668]</label>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>font12</font>
+					<textcolor>FFBBBBBB</textcolor>
+				</control>
+				<control type="list" id="141">
+					<posx>305</posx>
+					<posy>30</posy>
+					<width>240</width>
+					<height>138</height>
+					<onup>4</onup>
+					<ondown>114</ondown>
+					<onleft>111</onleft>
+					<onright>113</onright>
+					<scrolltime>200</scrolltime>
+					<itemlayout height="46" width="240">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>240</width>
+							<height>40</height>
+							<texture border="5">button-nofocus.png</texture>
+						</control>
+						<control type="label">
+							<posx>120</posx>
+							<posy>0</posy>
+							<width>200</width>
+							<height>40</height>
+							<font>font13</font>
+							<textcolor>white</textcolor>
+							<selectedcolor>FFEB9E17</selectedcolor>
+							<align>center</align>
+							<aligny>center</aligny>
+							<info>ListItem.Label</info>
+						</control>
+					</itemlayout>
+					<focusedlayout height="46" width="240">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>240</width>
+							<height>40</height>
+							<texture border="5">button-nofocus.png</texture>
+							<visible>!Control.HasFocus(141)</visible>
+							<animation effect="fade" time="300">Visible</animation>
+							<animation effect="fade" time="300">Hidden</animation>
+						</control>
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>240</width>
+							<height>40</height>
+							<texture border="5">button-focus2.png</texture>
+							<visible>Control.HasFocus(141)</visible>
+							<animation effect="fade" time="300">Visible</animation>
+							<animation effect="fade" time="300">Hidden</animation>
+						</control>
+						<control type="label">
+							<posx>120</posx>
+							<posy>0</posy>
+							<width>200</width>
+							<height>40</height>
+							<font>font13</font>
+							<textcolor>white</textcolor>
+							<selectedcolor>FFEB9E17</selectedcolor>
+							<align>center</align>
+							<aligny>center</aligny>
+							<info>ListItem.Label</info>
+						</control>
+					</focusedlayout>
+				</control>
+				<control type="button" id="113">
+					<description>Manual button</description>
+					<posx>10</posx>
+					<posy>180</posy>
+					<width>270</width>
+					<height>40</height>
+					<label>$ADDON[script.trakt 1669]</label>
+					<font>font12_title</font>
+					<textcolor>white</textcolor>
+					<focusedcolor>white</focusedcolor>
+					<align>center</align>
+					<onleft>141</onleft>
+					<onright>114</onright>
+					<texturenofocus border="5">button-nofocus.png</texturenofocus>
+					<texturefocus border="5">button-focus2.png</texturefocus>
+					<onup>111</onup>
+					<ondown>16</ondown>
+				</control>
+				<control type="button" id="114">
+					<description>Manual button</description>
+					<posx>290</posx>
+					<posy>180</posy>
+					<width>270</width>
+					<height>40</height>
+					<label>$ADDON[script.trakt 1670]</label>
+					<font>font12_title</font>
+					<textcolor>white</textcolor>
+					<focusedcolor>white</focusedcolor>
+					<align>center</align>
+					<onleft>113</onleft>
+					<onright>16</onright>
+					<texturenofocus border="5">button-nofocus.png</texturenofocus>
+					<texturefocus border="5">button-focus2.png</texturefocus>
+					<onup>141</onup>
+					<ondown>16</ondown>
+				</control>
 			</control>
 			<control type="button" id="15">
 				<description>Manual button</description>
@@ -161,12 +360,12 @@
 				<textcolor>white</textcolor>
 				<focusedcolor>white</focusedcolor>
 				<align>center</align>
-				<onleft>61</onleft>
+				<onleft>114</onleft>
 				<onright>16</onright>
 				<texturenofocus border="5">button-nofocus.png</texturenofocus>
 				<texturefocus border="5">button-focus2.png</texturefocus>
-				<onup>4</onup>
-				<ondown>4</ondown>
+				<onup>100</onup>
+				<ondown>100</ondown>
 			</control>
 			<control type="button" id="16">
 				<description>Manual button</description>
@@ -183,8 +382,8 @@
 				<onright>17</onright>
 				<texturenofocus border="5">button-nofocus.png</texturenofocus>
 				<texturefocus border="5">button-focus2.png</texturefocus>
-				<onup>4</onup>
-				<ondown>4</ondown>
+				<onup>100</onup>
+				<ondown>100</ondown>
 			</control>
 			<control type="button" id="17">
 				<description>Manual button</description>
@@ -201,8 +400,8 @@
 				<onright>4</onright>
 				<texturenofocus border="5">button-nofocus.png</texturenofocus>
 				<texturefocus border="5">button-focus2.png</texturefocus>
-				<onup>4</onup>
-				<ondown>4</ondown>
+				<onup>100</onup>
+				<ondown>100</ondown>
 			</control>
 		</control>
 	</controls>
