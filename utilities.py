@@ -44,8 +44,21 @@ def getSettingAsInt(setting):
     except ValueError:		
         return 0
 
+def getSettingAsList(setting):
+	data = getSetting(setting)
+	try:
+		return json.loads(data)
+	except ValueError:
+		return []
+
 def setSetting(setting, value):
 	__addon__.setSetting(setting, str(value))
+
+def setSettingFromList(setting, value):
+	if value is None:
+		value = []
+	data = json.dumps(value)
+	setSetting(setting, data)
 
 def getString(string_id):
     return __addon__.getLocalizedString(string_id).encode('utf-8', 'ignore')

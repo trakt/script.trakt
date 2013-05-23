@@ -78,8 +78,9 @@ def xbmcSetTags(id, type, title, tags):
 
 class Tagger():
 
-	traktSlugs = None
-	traktSlugsLast = 0
+	traktLists = None
+	traktListData = None
+	traktListsLast = 0
 
 	def __init__(self, api=None):
 		if api is None:
@@ -150,24 +151,31 @@ class Tagger():
 		return data
 
 	def getTraktLists(self, force=False):
-		if force or self.traktSlugs is None or (time() - self.traktSlugsLast) > (60 * 10):
+		if force or self.traktListData is None or self.traktLists is None or (time() - self.traktListsLast) > (60 * 10):
 			utils.Debug("[Tagger] Getting lists from trakt.tv")
 			data = self.traktapi.getUserLists()
 
 			if not isinstance(data, list):
-				utils.Debug("[Tagger] Invalid trakt.tv lists, possible error getting data from trakt, aborting trakt.tv collection update.")
+				utils.Debug("[Tagger] Invalid trakt.tv lists, possible error getting data from trakt.")
 				return False
 
 			lists = {}
+			list_data = {}
+			hidden_lists = utils.getSettingAsList('tagging_hidden_lists')
+
 			for item in data:
 				lists[item['name']] = item['slug']
+				del(item['url'])
+				list_data[item['slug']] = copy.deepcopy(item)
+				list_data[item['slug']]['hide'] = item['slug'] in hidden_lists
 
-			self.traktSlugs = lists
-			self.traktSlugsLast = time()
+			self.traktLists = lists
+			self.traktListData = list_data
+			self.traktListsLast = time()
 		else:
 			utils.Debug("[Tagger] Using cached lists.")
 
-		return self.traktSlugs
+		return self.traktLists
 
 	def getTraktListData(self):
 		data = {}
@@ -303,7 +311,7 @@ class Tagger():
 			utils.Debug("[Tagger] '%s' adding '%s'" % (list, str(params)))
 		else:
 			if self.isListOnTrakt(list):
-				slug = self.traktSlugs[list]
+				slug = self.traktLists[list]
 				params['slug'] = slug
 			else:
 				list_privacy = utils.getSettingAsInt('tagging_list_privacy')
@@ -315,7 +323,7 @@ class Tagger():
 				if result and 'status' in result and result['status'] == 'success':
 					slug = result['slug']
 					params['slug'] = slug
-					self.traktSlugs[list] = slug
+					self.traktLists[list] = slug
 				else:
 					utils.Debug("[Tagger] There was a problem create the list '%s' on trakt.tv" % list)
 					return
@@ -335,7 +343,7 @@ class Tagger():
 		if not self.isListOnTrakt(list):
 			utils.Debug("[Tagger] Trying to remove items from non-existant list '%s'." % list)
 
-		slug = self.traktSlugs[list]
+		slug = self.traktLists[list]
 		params = {'slug': slug}
 		params['items'] = self.sanitizeTraktParams(data)
 
@@ -566,11 +574,12 @@ class Tagger():
 		tTaken = time() - tStart
 		utils.Debug("[Tagger] Time to load data from trakt.tv: %0.3f seconds." % tTaken)
 
-		d = traktManageListsDialog(lists=self.traktSlugs, xbmc_data=self.xbmcData, selected=selected)
+		d = traktManageListsDialog(lists=self.traktListData, xbmc_data=self.xbmcData, selected=selected)
 		d.doModal()
 		_button = d.button
 		_dirty = d.dirty
 		_newSelected = d.selected
+		_listData = d.listData
 		del d
 
 		if _button == BUTTON_OK:
@@ -581,6 +590,73 @@ class Tagger():
 				ratingTags = {'movies': {}, 'shows': {}}
 				tagUpdates = {'movies': [], 'shows': []}
 				traktUpdates = {}
+
+				# apply changes and create new lists first.
+				tStart = time()
+				for list_name in self.traktLists:
+					if list_name in _listData:
+						slug = self.traktLists[list_name]
+						_listData[slug] = _listData.pop(list_name)
+						_listData[slug]['slug'] = slug
+
+				_changed = []
+				_added = []
+				keys_ignore = ['hide', 'slug', 'url']
+				for slug in _listData:
+					if not slug in self.traktListData:
+						_added.append(slug)
+						continue
+					for key in _listData[slug]:
+						if key in keys_ignore:
+							continue
+						if not _listData[slug][key] == self.traktListData[slug][key]:
+							_changed.append(slug)
+							break
+
+				_old_hidden = [slug for slug in self.traktListData if self.traktListData[slug]['hide']]
+				_new_hidden = [slug for slug in _listData if _listData[slug]['hide']]
+				if not set(_new_hidden) == set(_old_hidden):
+					utils.Debug("[Tagger] Updating hidden lists to '%s'." % str(_new_hidden))
+					utils.setSettingFromList('tagging_hidden_lists', _new_hidden)
+
+				if _changed:
+					for slug in _changed:
+						params = {}
+						params['slug'] = slug
+						for key in _listData[slug]:
+							if key in keys_ignore:
+								continue
+							params[key] = _listData[slug][key]
+
+						if self.simulate:
+							utils.Debug("[Tagger] Update list '%s' with params: %s" % (slug, str(params)))
+						else:
+							result = self.traktapi.userListUpdate(params)
+							if result and 'status' in result and result['status'] == 'success':
+								new_slug = result['slug']
+								if not slug == new_slug:
+									new_list_name = _listData[slug]['name']
+									old_list_name = self.traktListData[slug]['name']
+									self.traktLists[new_list_name] = new_slug
+									del(self.traktLists[old_list_name])
+									selected[new_list_name] = selected.pop(old_list_name)
+									_listData[new_slug] = _listData.pop(slug)
+									_listData[new_slug]['slug'] = new_slug
+
+				if _added:
+					for list_name in _added:
+						list_data = _listData[list_name]
+						result = self.traktapi.userListAdd(list_name, list_data['privacy'], list_data['description'], list_data['allow_shouts'], list_data['show_numbers'])
+
+						if result and 'status' in result and result['status'] == 'success':
+							slug = result['slug']
+							self.traktLists[list_name] = slug
+							_listData[slug] = _listData.pop(list_name)
+						else:
+							utils.Debug("[Tagger] There was a problem create the list '%s' on trakt.tv" % list)
+					
+				tTaken = time() - tStart
+				utils.Debug("[Tagger] Time to update trakt.tv list settings: %0.3f seconds." % tTaken)
 
 				# build all tags
 				tStart = time()
@@ -693,8 +769,12 @@ class Tagger():
 
 				tTaken = time() - tStart
 				utils.Debug("[Tagger] Time to update trakt.tv with changes: %0.3f seconds." % tTaken)
+
 				utils.Debug("[Tagger] Finished managing lists.")
 				utils.notification(utils.getString(1201), utils.getString(1666))
+
+				self.traktLists = None
+				self.traktListData = None
 
 	def itemLists(self, data):
 
@@ -704,7 +784,7 @@ class Tagger():
 			utils.Debug("[Tagger] Error getting lists from trakt.tv.")
 			return
 
-		d = traktItemListsDialog(lists=lists, data=data)
+		d = traktItemListsDialog(list_data=self.traktListData, data=data)
 		d.doModal()
 		if not d.selectedLists is None:
 			non_trakt_tags = [tag for tag in data['tag'] if not isTraktList(tag)]
@@ -798,6 +878,11 @@ class Tagger():
 			utils.notification(utils.getString(1201), utils.getString(1657) % s)
 
 TRAKT_LISTS				= 4
+GROUP_LIST_SETTINGS		= 100
+LIST_PRIVACY_SETTING	= 111
+LIST_OTHER_SETTINGS		= 141
+BUTTON_EDIT_DESC		= 113
+BUTTON_RENAME			= 114
 BUTTON_ADD_LIST			= 15
 BUTTON_OK				= 16
 BUTTON_CANCEL			= 17
@@ -814,14 +899,13 @@ class traktItemListsDialog(xbmcgui.WindowXMLDialog):
 
 	selectedLists = None
 
-	def __new__(cls, lists, data):
-		return super(traktItemListsDialog, cls).__new__(cls, "traktListDialog.xml", __addon__.getAddonInfo('path'), lists=lists, data=data) 
+	def __new__(cls, list_data, data):
+		return super(traktItemListsDialog, cls).__new__(cls, "traktListDialog.xml", __addon__.getAddonInfo('path'), list_data=list_data, data=data) 
 
 	def __init__(self, *args, **kwargs):
 		data = kwargs['data']
-		lists = kwargs['lists']
+		list_data = kwargs['list_data']
 		self.data = data
-		self.lists = lists
 		self.hasRating = False
 		self.tags = {}
 		for tag in data['tag']:
@@ -832,10 +916,12 @@ class traktItemListsDialog(xbmcgui.WindowXMLDialog):
 					self.ratingTag = t
 					continue
 				self.tags[t] = True
-
-		for tag in lists:
-			if not tag in self.tags:
-				self.tags[tag] = False
+		utils.Debug(str(list_data))
+		for slug in list_data:
+			list_name = list_data[slug]['name']
+			hidden = list_data[slug]['hide']
+			if not hidden and not list_name in self.tags:
+				self.tags[list_name] = False
 
 		if (not 'Watchlist' in self.tags) and utils.getSettingAsBool('tagging_watchlists'):
 			self.tags['Watchlist'] = False
@@ -843,6 +929,9 @@ class traktItemListsDialog(xbmcgui.WindowXMLDialog):
 		super(traktItemListsDialog, self).__init__()
 
 	def onInit(self):
+		grp = self.getControl(GROUP_LIST_SETTINGS)
+		grp.setEnabled(False)
+		grp.setVisible(False)
 		self.setInfoLabel(utils.getFormattedItemName(self.data['type'], self.data))
 		self.list = self.getControl(TRAKT_LISTS)
 		self.populateList()
@@ -917,12 +1006,17 @@ class traktManageListsDialog(xbmcgui.WindowXMLDialog):
 
 	dirty = False
 	button = None
+	selectedList = None
 
 	def __new__(cls, lists, xbmc_data, selected):
 		return super(traktManageListsDialog, cls).__new__(cls, "traktListDialog.xml", __addon__.getAddonInfo('path'), lists=lists, xbmc_data=xbmc_data, selected=selected)
 
 	def __init__(self, *args, **kwargs):
-		self.lists = kwargs['lists']
+		self.listData = copy.deepcopy(kwargs['lists'])
+		self.lists = {}
+		for l in self.listData:
+			list_data = self.listData[l]
+			self.lists[list_data['name']] = l
 		self.xbmc_data = kwargs['xbmc_data']
 		self.movies = self.xbmc_data['movies']
 		self.movieList = {}
@@ -940,6 +1034,18 @@ class traktManageListsDialog(xbmcgui.WindowXMLDialog):
 		super(traktManageListsDialog, self).__init__()
 
 	def onInit(self):
+		l = self.getControl(LIST_PRIVACY_SETTING)
+		lang = utils.getString
+		privacy_settings = [lang(1671), lang(1672), lang(1673)]
+		for i in range(len(privacy_settings)):
+			l.addItem(self.newListItem(privacy_settings[i], id=PRIVACY_LIST[i]))
+
+		l = self.getControl(LIST_OTHER_SETTINGS)
+		other_settings = [lang(1674), lang(1675), lang(1676)]
+		keys = ["allow_shouts", "show_numbers", "hide"]
+		for i in range(len(other_settings)):
+			l.addItem(self.newListItem(other_settings[i], id=keys[i]))
+
 		self.list = self.getControl(TRAKT_LISTS)
 		self.setInfoLabel(utils.getString(1660))
 		self.level = 1
@@ -954,6 +1060,7 @@ class traktManageListsDialog(xbmcgui.WindowXMLDialog):
 					return
 				else:
 					self.close()
+
 		if action in ACTION_ITEM_SELECT:
 			cID = self.getFocusId() 
 			if cID == TRAKT_LISTS:
@@ -990,6 +1097,40 @@ class traktManageListsDialog(xbmcgui.WindowXMLDialog):
 					s = "removing from" if selected else "adding to"
 					utils.Debug("[Tagger] Dialog: Selected '%s' [%s] %s '%s'." % (item.getLabel(), item.getProperty('id'), s, self.selectedList))
 
+			elif cID == LIST_PRIVACY_SETTING:
+				self.dirty = True
+				l = self.getControl(cID)
+				for i in range(0, l.size()):
+					item = l.getListItem(i)
+					item.select(False)
+				item = l.getSelectedItem()
+				item.select(True)
+				key = item.getProperty('id')
+				list_slug = self.lists[self.selectedList]
+				list_data = self.listData[list_slug]
+				old_privacy = list_data['privacy']
+				list_data['privacy'] = key
+				utils.Debug("[Tagger] Dialog: Changing privacy from '%s' to '%s' for '%s'." % (old_privacy, key, self.selectedList))
+
+			elif cID == LIST_OTHER_SETTINGS:
+				self.dirty = True
+				l = self.getControl(cID)
+				item = l.getSelectedItem()
+				selected = not item.isSelected()
+				item.select(selected)
+				key = item.getProperty('id')
+				list_slug = self.lists[self.selectedList]
+				list_data = self.listData[list_slug]
+				list_data[key] = selected
+				utils.Debug("[Tagger] Dialog: Changing %s for '%s' to '%s'" % (key, self.selectedList, str(selected)))
+
+	def getKeyboardInput(self, title="", default=""):
+		kbd = xbmc.Keyboard(default, title)
+		kbd.doModal()
+		if kbd.isConfirmed() and kbd.getText():
+			return kbd.getText().strip()
+		return None
+
 	def goBackLevel(self):
 		if self.level == 1:
 			pass
@@ -1008,23 +1149,63 @@ class traktManageListsDialog(xbmcgui.WindowXMLDialog):
 	def onClick(self, control):
 		self.button = control
 		if control == BUTTON_ADD_LIST:
-			keyboard = xbmc.Keyboard("", utils.getString(1654))
-			keyboard.doModal()
-			if keyboard.isConfirmed() and keyboard.getText():
-				list = keyboard.getText().strip()
-				if list:
-					if list.lower() == "watchlist" or list.lower().startswith("rating:"):
-						utils.Debug("[Tagger] Dialog: Tried to add a reserved list name '%s'." % list)
-						utils.notification(utils.getString(1650), utils.getString(1655) % list)
-						return
-					if list not in self.lists:
-						utils.Debug("[Tagger] Dialog: Adding list '%s'." % list)
-						self.lists[list] = ""
-						self.selected[list] = {'movies': [], 'shows': []}
-						self.populateLists()
-					else:
-						utils.Debug("[Tagger] Dialog: '%s' already in list." % list)
-						utils.notification(utils.getString(1650), utils.getString(1656) % list)
+			list = self.getKeyboardInput(title=utils.getString(1654))
+			if list:
+				if list.lower() == "watchlist" or list.lower().startswith("rating:"):
+					utils.Debug("[Tagger] Dialog: Tried to add a reserved list name '%s'." % list)
+					utils.notification(utils.getString(1650), utils.getString(1655) % list)
+					return
+				if list not in self.lists:
+					utils.Debug("[Tagger] Dialog: Adding list '%s'." % list)
+					self.lists[list] = list
+					self.selected[list] = {'movies': [], 'shows': []}
+					data = {}
+					data['name'] = list
+					data['slug'] = list
+					list_privacy = utils.getSettingAsInt('tagging_list_privacy')
+					data['privacy'] = PRIVACY_LIST[list_privacy]
+					data['allow_shouts'] = utils.getSettingAsBool('tagging_list_allowshouts')
+					data['show_numbers'] = False
+					data['hide'] = False
+					data['description'] = ""
+					self.listData[list] = data
+					self.populateLists()
+				else:
+					utils.Debug("[Tagger] Dialog: '%s' already in list." % list)
+					utils.notification(utils.getString(1650), utils.getString(1656) % list)
+
+		elif control == BUTTON_EDIT_DESC:
+			list_slug = self.lists[self.selectedList]
+			list_data = self.listData[list_slug]
+			new_description = self.getKeyboardInput(title=utils.getString(1669), default=list_data['description'])
+			if new_description:
+				utils.Debug("[Tagger] Dialog: Setting new description for list '%s', '%s'." % (self.selectedList, new_description))
+				self.dirty = True
+				list_data['description'] = new_description
+
+		elif control == BUTTON_RENAME:
+			list_slug = self.lists[self.selectedList]
+			list_data = self.listData[list_slug]
+			new_name = self.getKeyboardInput(title=utils.getString(1670), default=self.selectedList)
+			if new_name:
+				if new_name.lower() == "watchlist" or new_name.lower().startswith("rating:"):
+					utils.Debug("[Tagger] Dialog: Tried to rename '%s' to a reserved list name '%s'." % (self.selectedList, new_name))
+					utils.notification(utils.getString(1650), utils.getString(1655) % new_name)
+					return
+				
+				if new_name in self.lists:
+					utils.Debug("[Tagger] Dialog: Already contains '%s'." % new_name)
+					utils.notification(utils.getString(1650), utils.getString(1677) % new_name)
+					return
+				
+				old_name = self.selectedList
+				self.selectedList = new_name
+				list_data['name'] = new_name
+				self.setInfoLabel(new_name)
+				self.lists[new_name] = self.lists.pop(old_name)
+				self.selected[new_name] = self.selected.pop(old_name)
+				self.dirty = True
+				utils.Debug("[Tagger] Dialog: Renamed '%s' to '%s'." % (old_name, new_name))
 
 		elif control in [BUTTON_OK, BUTTON_CANCEL]:
 			self.close()
@@ -1033,33 +1214,73 @@ class traktManageListsDialog(xbmcgui.WindowXMLDialog):
 		btn = self.getControl(BUTTON_ADD_LIST)
 		btn.setEnabled(enabled)
 	
+	def setListEditGroupEnabled(self, enabled):
+		new_height = 138 if enabled else 380
+		self.list.setHeight(new_height)
+		grp = self.getControl(GROUP_LIST_SETTINGS)
+		grp.setEnabled(enabled)
+		grp.setVisible(enabled)
+		d = {'public': 0, 'friends': 1, 'private': 2}
+
+		if enabled:
+			list_slug = self.lists[self.selectedList]
+			list_data = self.listData[list_slug]
+			l = self.getControl(LIST_PRIVACY_SETTING)
+			for i in range(0, l.size()):
+				item = l.getListItem(i)
+				item.select(True if d[list_data['privacy']] == i else False)
+
+			l = self.getControl(LIST_OTHER_SETTINGS)
+			item = l.getListItem(0)
+			item.select(list_data['allow_shouts'])
+			item = l.getListItem(1)
+			item.select(list_data['show_numbers'])
+			item = l.getListItem(2)
+			item.select(list_data['hide'])
+	
+	def newListItem(self, label, selected=False, *args, **kwargs):
+		item = xbmcgui.ListItem(label)
+		item.select(selected)
+		for key in kwargs:
+			item.setProperty(key, str(kwargs[key]))
+		return item
+	
 	def setInfoLabel(self, text):
 		pl = self.getControl(LABEL)
 		pl.setLabel(text)
 
 	def populateLists(self):
 		self.list.reset()
+		self.setListEditGroupEnabled(False)
 		if utils.getSettingAsBool('tagging_watchlists'):
-			item = xbmcgui.ListItem('Watchlist')
-			self.list.addItem(item)
+			self.list.addItem(self.newListItem("Watchlist"))
 
-		for list in sorted(self.lists.iterkeys()):
-			if list.lower() == "watchlist":
-				continue
-			item = xbmcgui.ListItem(list)
-			self.list.addItem(item)
+		selected_item = 0
+		sorted_lists = sorted(self.lists.iterkeys())
+		if "Watchlist" in sorted_lists:
+			sorted_lists.remove("Watchlist")
+		for index in range(len(sorted_lists)):
+			if sorted_lists[index] == self.selectedList:
+				selected_item = index + 1
+			self.list.addItem(self.newListItem(sorted_lists[index]))
+		self.list.selectItem(selected_item)
+
+		self.setFocus(self.list)
 
 	def populateTypes(self):
 		self.list.reset()
+		if not self.selectedList.lower() == "watchlist":
+			self.setListEditGroupEnabled(True)
 		items = ["..", "Movies", "TV Shows"]
 		for l in items:
-			item = xbmcgui.ListItem(l)
-			self.list.addItem(l)
+			self.list.addItem(self.newListItem(l))
+
+		self.setFocus(self.list)
 
 	def populateItems(self, type):
 		self.list.reset()
-		item = xbmcgui.ListItem('..')
-		self.list.addItem(item)
+		self.setListEditGroupEnabled(False)
+		self.list.addItem("..")
 
 		items = None
 		if type == "movies":
@@ -1068,8 +1289,7 @@ class traktManageListsDialog(xbmcgui.WindowXMLDialog):
 			items = self.showList
 
 		for title in sorted(items.iterkeys()):
-			item = xbmcgui.ListItem(title)
-			item.setProperty('id', str(items[title]))
-			if items[title] in self.selected[self.selectedList][type]:
-				item.select(True)
-			self.list.addItem(item)
+			selected = True if items[title] in self.selected[self.selectedList][type] else False
+			self.list.addItem(self.newListItem(title, selected=selected, id=str(items[title])))
+
+		self.setFocus(self.list)

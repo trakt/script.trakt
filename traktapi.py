@@ -520,8 +520,10 @@ class traktAPI(object):
 			Debug("[traktAPI] userList(url: %s, data: %s)" % (url, str(data)))
 			return self.traktRequest('POST', url, data, passVersions=True)
 	
-	def userListAdd(self, list_name, privacy, show_numbers=False, allow_shouts=False):
+	def userListAdd(self, list_name, privacy, description=None, allow_shouts=False, show_numbers=False):
 		data = {'name': list_name, 'show_numbers': show_numbers, 'allow_shouts': allow_shouts, 'privacy': privacy}
+		if description:
+			data['description'] = description
 		return self.userList('add', data)
 	def userListDelete(self, slug_name):
 		data = {'slug': slug_name}
@@ -530,6 +532,8 @@ class traktAPI(object):
 		return self.userList('items/add', data)
 	def userListItemDelete(self, data):
 		return self.userList('items/delete', data)
+	def userListUpdate(self, data):
+		return self.userList('update', data)
 
 	# url: http://api.trakt.tv/user/watchlist/<movies|shows>.json/<apikey>/<username>
 	# returns: [{"title":"GasLand","year":2010,"released":1264320000,"url":"http://trakt.tv/movie/gasland-2010","runtime":107,"tagline":"Can you light your water on fire? ","overview":"It is happening all across America-rural landowners wake up one day to find a lucrative offer from an energy company wanting to lease their property. Reason? The company hopes to tap into a reservoir dubbed the \"Saudi Arabia of natural gas.\" Halliburton developed a way to get the gas out of the ground-a hydraulic drilling process called \"fracking\"-and suddenly America finds itself on the precipice of becoming an energy superpower.","certification":"","imdb_id":"tt1558250","tmdb_id":"40663","inserted":1301130302,"images":{"poster":"http://trakt.us/images/posters_movies/1683.jpg","fanart":"http://trakt.us/images/fanart_movies/1683.jpg"},"genres":["Action","Comedy"]},{"title":"The King's Speech","year":2010,"released":1291968000,"url":"http://trakt.tv/movie/the-kings-speech-2010","runtime":118,"tagline":"God save the king.","overview":"Tells the story of the man who became King George VI, the father of Queen Elizabeth II. After his brother abdicates, George ('Bertie') reluctantly assumes the throne. Plagued by a dreaded stutter and considered unfit to be king, Bertie engages the help of an unorthodox speech therapist named Lionel Logue. Through a set of unexpected techniques, and as a result of an unlikely friendship, Bertie is able to find his voice and boldly lead the country into war.","certification":"R","imdb_id":"tt1504320","tmdb_id":"45269","inserted":1301130174,"images":{"poster":"http://trakt.us/images/posters_movies/8096.jpg","fanart":"http://trakt.us/images/fanart_movies/8096.jpg"},"genres":["Action","Comedy"]}]
