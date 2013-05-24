@@ -192,6 +192,17 @@
 	<string id="1664">There was a problem loading your watchlists</string>
 	<string id="1665">There was a problem loading your rating data</string>
 	<string id="1666">Tags/Lists have been updated</string>
+	<string id="1667">Privacy Setting</string>
+	<string id="1668">Other Settings</string>
+	<string id="1669">Edit Description</string>
+	<string id="1670">Rename List</string>
+	<string id="1671">Public</string>
+	<string id="1672">Friends</string>
+	<string id="1673">Private</string>
+	<string id="1674">Allow Shouts</string>
+	<string id="1675">Show Numbers</string>
+	<string id="1676">Hide in Item List</string>
+	<string id="1677">Can't rename to an already existing list %s</string>
 	
 	<!-- Debug Settings -->
 	<string id="1700">Debug</string>
