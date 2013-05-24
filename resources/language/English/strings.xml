@@ -20,6 +20,8 @@
 	<string id="1041">Scrobble movies</string>
 	<string id="1042">Scrobble TV episodes</string>
 	<string id="1043">Minimum percent watched to scrobble</string>
+	<string id="1044">During scrobbling, update ID for library movie if ID is missing</string>
+	<string id="1045">During scrobbling, update ID for library tv show if ID is missing</string>
 	<string id="1050">Exclusions</string>
 	<string id="1051">Exclude Live TV</string>
 	<string id="1052">Exclude HTTP sources</string>	

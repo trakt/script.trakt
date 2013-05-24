@@ -492,6 +492,11 @@ class Tagger():
 				xbmc_update['movies'].extend(trakt_lists[listName]['movies'])
 				xbmc_update['shows'].extend(trakt_lists[listName]['shows'])
 
+		for list_name in xbmc_lists:
+			if not list_name in trakt_lists:
+				xbmc_update['movies'].extend(xbmc_lists[listName]['movies'])
+				xbmc_update['shows'].extend(xbmc_lists[listName]['shows'])
+				
 		tTaken = time() - tStart
 		utils.Debug("[Tagger] Time to compare data: %0.3f seconds." % tTaken)
 
@@ -593,24 +598,18 @@ class Tagger():
 
 				# apply changes and create new lists first.
 				tStart = time()
-				for list_name in self.traktLists:
-					if list_name in _listData:
-						slug = self.traktLists[list_name]
-						_listData[slug] = _listData.pop(list_name)
-						_listData[slug]['slug'] = slug
-
-				_changed = []
-				_added = []
+				_lists_changed = []
+				_lists_added = []
 				keys_ignore = ['hide', 'slug', 'url']
 				for slug in _listData:
 					if not slug in self.traktListData:
-						_added.append(slug)
+						_lists_added.append(slug)
 						continue
 					for key in _listData[slug]:
 						if key in keys_ignore:
 							continue
 						if not _listData[slug][key] == self.traktListData[slug][key]:
-							_changed.append(slug)
+							_lists_changed.append(slug)
 							break
 
 				_old_hidden = [slug for slug in self.traktListData if self.traktListData[slug]['hide']]
@@ -619,8 +618,8 @@ class Tagger():
 					utils.Debug("[Tagger] Updating hidden lists to '%s'." % str(_new_hidden))
 					utils.setSettingFromList('tagging_hidden_lists', _new_hidden)
 
-				if _changed:
-					for slug in _changed:
+				if _lists_changed:
+					for slug in _lists_changed:
 						params = {}
 						params['slug'] = slug
 						for key in _listData[slug]:
@@ -643,8 +642,8 @@ class Tagger():
 									_listData[new_slug] = _listData.pop(slug)
 									_listData[new_slug]['slug'] = new_slug
 
-				if _added:
-					for list_name in _added:
+				if _lists_added:
+					for list_name in _lists_added:
 						list_data = _listData[list_name]
 						result = self.traktapi.userListAdd(list_name, list_data['privacy'], list_data['description'], list_data['allow_shouts'], list_data['show_numbers'])
 
