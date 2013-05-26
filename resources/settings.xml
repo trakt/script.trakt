@@ -10,6 +10,8 @@
 		<setting id="scrobble_movie" type="bool" label="1041" default="true"/>
 		<setting id="scrobble_episode" type="bool" label="1042" default="true"/>
 		<setting id="scrobble_min_view_time" type="slider" label="1043" range="0,5,100" default="80"/>
+		<setting id="update_imdb_id" type="bool" label="1044" default="false"/>
+		<setting id="update_tvdb_id" type="bool" label="1045" default="false"/>
 		<setting type="sep"/>
 		<setting label="1050" type="lsep"/><!--Exclusions -->
 		<setting id="ExcludeLiveTV" type="bool" label="1051" default="false"/>

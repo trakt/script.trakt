@@ -406,7 +406,13 @@ class traktPlayer(xbmc.Player):
 			utilities.Debug("[traktPlayer] onPlayBackStarted() - %s" % result)
 
 			# check for exclusion
-			_filename = self.getPlayingFile()
+			_filename = None
+			try:
+				_filename = self.getPlayingFile()
+			except:
+				utilities.Debug("[traktPlayer] onPlayBackStarted() - Exception trying to get playing filename, player stopped suddently.")
+				return
+
 			if utilities.checkScrobblingExclusion(_filename):
 				utilities.Debug("[traktPlayer] onPlayBackStarted() - '%s' is in exclusion settings, ignoring." % _filename)
 				return
