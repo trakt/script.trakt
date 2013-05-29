@@ -41,7 +41,7 @@ class Scrobbler():
 		if not xbmc.Player().isPlayingVideo():
 			return
 
-		if self.isPlaying and not self.isPaused:
+		if self.isPlaying:
 			t = xbmc.Player().getTime()
 			l = xbmc.PlayList(xbmc.PLAYLIST_VIDEO).getposition()
 			if self.playlistIndex == l:
@@ -117,8 +117,13 @@ class Scrobbler():
 					self.curVideoInfo = utilities.getMovieDetailsFromXbmc(self.curVideo['id'], ['imdbnumber', 'title', 'year'])
 					if utilities.getSettingAsBool('rate_movie'):
 						# pre-get sumamry information, for faster rating dialog.
-						self.traktSummaryInfo = self.traktapi.getMovieSummary(self.curVideoInfo['imdbnumber'])
-						self.traktSummaryInfo['xbmc_id'] = self.curVideo['id']
+						imdb_id = self.curVideoInfo['imdbnumber']
+						if imdb_id.startswith("tt") or imdb_id.isdigit():
+							self.traktSummaryInfo = self.traktapi.getMovieSummary(self.curVideoInfo['imdbnumber'])
+							self.traktSummaryInfo['xbmc_id'] = self.curVideo['id']
+						else:
+							self.curVideoInfo['imdbnumber'] = None
+							Debug("[Scrobbler] Can not get summary information for '%s (%d)' as is has no valid id, will retry during a watching call." % (self.curVideoInfo['title'], self.curVideoInfo['year']))
 				elif 'title' in self.curVideo and 'year' in self.curVideo:
 					self.curVideoInfo = {}
 					self.curVideoInfo['imdbnumber'] = None
@@ -130,7 +135,12 @@ class Scrobbler():
 					self.curVideoInfo = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
 					if utilities.getSettingAsBool('rate_episode'):
 						# pre-get sumamry information, for faster rating dialog.
-						self.traktSummaryInfo = self.traktapi.getEpisodeSummary(self.curVideoInfo['tvdb_id'], self.curVideoInfo['season'], self.curVideoInfo['episode'])
+						tvdb_id = self.curVideoInfo['tvdb_id']
+						if tvdb_id.isdigit() or tvdb_id.startswith("tt"):
+							self.traktSummaryInfo = self.traktapi.getEpisodeSummary(tvdb_id, self.curVideoInfo['season'], self.curVideoInfo['episode'])
+						else:
+							self.curVideoInfo['tvdb_id'] = None
+							Debug("[Scrobbler] Can not get summary information for '%s - S%02dE%02d' as it has no valid id, will retry during a watching call." % (self.curVideoInfo['showtitle'], self.curVideoInfo['season'], self.curVideoInfo['episode']))
 				elif 'showtitle' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
 					self.curVideoInfo = {}
 					self.curVideoInfo['tvdb_id'] = None
@@ -149,6 +159,7 @@ class Scrobbler():
 						self.markedAsWatched.append(False)
 
 			self.isPlaying = True
+			self.isPaused = False
 			self.watching()
 
 	def playbackResumed(self):
@@ -226,6 +237,9 @@ class Scrobbler():
 					if 'status' in response and response['status'] == "success":
 						if 'movie' in response and 'imdb_id' in response['movie']:
 							self.curVideoInfo['imdbnumber'] = response['movie']['imdb_id']
+							if 'id' in self.curVideo and utilities.getSettingAsBool('update_imdb_id'):
+								req = {"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid" : self.curVideoInfo['movieid'], "imdbnumber": self.curVideoInfo['imdbnumber']}}
+								utils.xbmcJsonRequest(req)
 							# get summary data now if we are rating this movie
 							if utilities.getSettingAsBool('rate_movie') and self.traktSummaryInfo is None:
 								self.traktSummaryInfo = self.traktapi.getMovieSummary(self.curVideoInfo['imdbnumber'])
@@ -246,6 +260,9 @@ class Scrobbler():
 					if 'status' in response and response['status'] == "success":
 						if 'show' in response and 'tvdb_id' in response['show']:
 							self.curVideoInfo['tvdb_id'] = response['show']['tvdb_id']
+							if 'id' in self.curVideo and utilities.getSettingAsBool('update_tvdb_id'):
+								req = {"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid" : self.curVideoInfo['tvshowid'], "imdbnumber": self.curVideoInfo['tvdb_id']}}
+								utils.xbmcJsonRequest(req)
 							# get summary data now if we are rating this episode
 							if utilities.getSettingAsBool('rate_episode') and self.traktSummaryInfo is None:
 								self.traktSummaryInfo = self.traktapi.getEpisodeSummary(self.curVideoInfo['tvdb_id'], self.curVideoInfo['season'], self.curVideoInfo['episode'])
@@ -315,10 +332,10 @@ class Scrobbler():
 			return
 
 		id = self.curVideo['id']
-		result = utils.getMovieDetailsFromXbmc(id, ['tag'])
+		result = utilities.getMovieDetailsFromXbmc(id, ['tag'])
 		
 		if result:
-			tags = self.result['tag']
+			tags = result['tag']
 
 			if tagging.hasTraktWatchlistTag(tags):
 				tags.remove(tagging.listToTag("Watchlist"))
