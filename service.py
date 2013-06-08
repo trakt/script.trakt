@@ -96,6 +96,11 @@ class traktService:
 			list = data['list']
 			del data['list']
 			self.tagger.manualRemoveFromList(list, data)
+		elif action == 'loadsettings':
+			force = False
+			if 'force' in data:
+				force = data['force']
+			globals.traktapi.getAccountSettings(force)
 		else:
 			utilities.Debug("Unknown dispatch action, '%s'." % action)
 
@@ -106,6 +111,12 @@ class traktService:
 			xbmc.sleep(startup_delay * 1000)
 
 		utilities.Debug("Service thread starting.")
+
+		# purge queue before doing anything
+		self.dispatchQueue.purge()
+
+		# queue a loadsettings action
+		self.dispatchQueue.append({'action': 'loadsettings'})
 
 		# setup event driven classes
 		self.Player = traktPlayer(action = self._dispatchQueue)
@@ -123,9 +134,6 @@ class traktService:
 		# init tagging class
 		self.tagger = Tagger(globals.traktapi)
 		
-		# purge queue
-		self.dispatchQueue.purge()
-
 		# start loop for events
 		while (not xbmc.abortRequested):
 			while len(self.dispatchQueue) and (not xbmc.abortRequested):

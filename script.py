@@ -48,6 +48,10 @@ def Main():
 	if args['action'] == 'sync':
 		data = {'action': 'manualSync'}
 
+	elif args['action'] == 'loadsettings':
+		data = {'action': 'loadsettings', 'force': True}
+		utils.notification(utils.getString(1201), utils.getString(1111))
+
 	elif args['action'] in ['rate', 'unrate']:
 		data = {}
 		data['action'] = args['action']
