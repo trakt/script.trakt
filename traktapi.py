@@ -50,7 +50,7 @@ class traktAPI(object):
 	__username = ""
 	__password = ""
 
-	def __init__(self, loadSettings=True):
+	def __init__(self, loadSettings=False):
 		Debug("[traktAPI] Initializing.")
 
 		self.__username = getSetting('username')
@@ -58,7 +58,6 @@ class traktAPI(object):
 
 		self.settings = None
 		if loadSettings and self.testAccount():
-			Debug("[traktAPI] Getting account settings for '%s'." % self.__username)
 			self.getAccountSettings()
 
 	def __getData(self, url, args, timeout=60):
@@ -313,15 +312,45 @@ class traktAPI(object):
 
 	# url: http://api.trakt.tv/account/settings/<apikey>
 	# returns: all settings for authenticated user
-	def getAccountSettings(self):
-		if self.testAccount():
-			url = "%s/account/settings/%s" % (self.__baseURL, self.__apikey)
-			Debug("[traktAPI] getAccountSettings(url: %s)" % url)
-			response = self.traktRequest('POST', url, hideResponse=True)
-			if response:
-				if 'status' in response:
+	def getAccountSettings(self, force):
+		_interval = (60 * 60 * 24 * 7) - (60 * 60) # one week less one hour
+
+		_next = getSettingAsInt('trakt_settings_last') + _interval
+		stale = force
+
+		if force:
+			Debug("[traktAPI] Forcing a reload of settings from trakt.tv.")
+
+		if not stale and time.time() >= _next:
+			Debug("[traktAPI] trakt.tv account settings are stale, reloading.")
+			stale = True
+
+		if stale:
+			if self.testAccount():
+				Debug("[traktAPI] Getting account settings for '%s'." % self.__username)
+				url = "%s/account/settings/%s" % (self.__baseURL, self.__apikey)
+				Debug("[traktAPI] getAccountSettings(url: %s)" % url)
+				response = self.traktRequest('POST', url, hideResponse=True)
+				if response and 'status' in response:
 					if response['status'] == 'success':
+						del response['status']
+						setSetting('trakt_settings', json.dumps(response))
+						setSetting('trakt_settings_last', int(time.time()))
 						self.settings = response
+
+		else:
+			Debug("[traktAPI] Loaded cached account settings for '%s'." % self.__username)
+			s = getSetting('trakt_settings')
+			self.settings = json.loads(s)
+
+	# helper to get rating mode, returns the setting from trakt.tv, or 'advanced' if there were problems getting them
+	def getRatingMode(self):
+		if not self.settings:
+			self.getAccountSettings()
+		rating_mode = "advanced"
+		if self.settings and 'viewing' in self.settings:
+			rating_mode = self.settings['viewing']['ratings']['mode']
+		return rating_mode
 
 	# url: http://api.trakt.tv/<show|movie>/watching/<apikey>
 	# returns: {"status":"success","message":"watching The Walking Dead 1x01","show":{"title":"The Walking Dead","year":"2010","imdb_id":"tt123456","tvdb_id":"153021","tvrage_id":"1234"},"season":"1","episode":{"number":"1","title":"Days Gone Bye"},"facebook":false,"twitter":false,"tumblr":false}

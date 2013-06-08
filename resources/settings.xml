@@ -5,6 +5,7 @@
 		<setting id="password" type="text" option="hidden" label="1014" default="" />
 		<setting id="retries" type="slider" label="1017" range="1,1,10" default="5" option="int"/>
 		<setting id="startup_delay" type="slider" label="1018" range="0,30" default="0" option="int"/>
+		<setting type="action" label="1019" action="RunScript(script.trakt,action=loadsettings)"/>
 	</category>
 	<category label="1040"><!-- Scrobbling -->
 		<setting id="scrobble_movie" type="bool" label="1041" default="true"/>
@@ -59,10 +60,12 @@
 		<setting id="tagging_notifications" type="bool" label="1608" default="true"/>
 	</category>
 	<category label="1700"><!-- Debug -->
+		<setting label="1720" type="lsep"/>
 		<setting id="debug" type="bool" label="1701" default="true"/>
+		<setting type="sep"/>
+		<setting label="1721" type="lsep"/>
 		<setting id="simulate_scrobbling" type="bool" label="1702" default="false"/>
 		<setting id="simulate_sync" type="bool" label="1703" default="false"/>
 		<setting id="simulate_tagging" type="bool" label="1704" default="false"/>
-		<setting type="action" label="1705" action="RunScript(script.trakt,action=timertest)"/>
 	</category>
 </settings>
