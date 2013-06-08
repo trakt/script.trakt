@@ -6,6 +6,7 @@
 	<string id="1014">Password</string>
 	<string id="1017">Number of Retries</string>
 	<string id="1018">Startup Delay</string>
+	<string id="1019">Force a reload of settings from trakt.tv, save settings when finished</string>
 	
 	<!-- Rating Settings -->
 	<string id="1030">Rating</string>
@@ -34,6 +35,7 @@
 	<string id="1108">Can't connect to trakt</string>
 	<string id="1109">Error</string>
 	<string id="1110">Incorrect username or password</string>
+	<string id="1111">Loading settings from trakt.tv</string>
 
 	<!-- Manual Rating Notifications -->
 	<string id="1350">trakt.tv - Rating submitted successfully</string>
@@ -209,8 +211,9 @@
 	<!-- Debug Settings -->
 	<string id="1700">Debug</string>
 	<string id="1701">Enable debug mode</string>
-	<string id="1702">Simulate scrobbling (for testing purposes)</string>
-	<string id="1703">Simulate sync (for testing purposes)</string>
+	<string id="1702">Simulate scrobbling</string>
+	<string id="1703">Simulate sync</string>
 	<string id="1704">Simulate tagging</string>
-	<string id="1705">Run timing tests, see log for output</string>
+	<string id="1720">Logging</string>
+	<string id="1721">Simulate settings, if enabled will not make changes in XBMC or trakt.tv</string>
 </strings>
