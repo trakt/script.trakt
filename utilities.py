@@ -24,7 +24,7 @@ def Debug(msg, force = False):
 			print "[trakt] " + msg.encode('utf-8', 'ignore')
 
 def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')):
-	xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message, time, icon))
+	xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message.encode('utf-8', 'ignore'), time, icon))
 
 def getSetting(setting):
     return __addon__.getSetting(setting).strip()
