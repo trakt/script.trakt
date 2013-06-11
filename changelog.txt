@@ -4,6 +4,7 @@ version 2.3.0
   - new rate action for skins/keymaps (nate1280)
   - new tagging/list actions for skins/keymaps (nate1280)
   - alternate rating notification style (nate1280)
+  - exclusion checks now work in syncing and scrobbling (nate1280)
 
 version 2.2.0
   - lots of code optimizing and bug fixes (nate1280)
