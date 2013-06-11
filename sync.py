@@ -18,6 +18,15 @@ class Sync():
 		if self.simulate:
 			Debug("[Sync] Sync is configured to be simulated.")
 
+		_opts = ['ExcludePathOption', 'ExcludePathOption2', 'ExcludePathOption3']
+		_vals = ['ExcludePath', 'ExcludePath2', 'ExcludePath3']
+		self.exclusions = []
+		for i in range(3):
+			if utilities.getSettingAsBool(_opts[i]):
+				_path = utilities.getSetting(_vals[i])
+				if _path != "":
+					self.exclusions.append(_path)
+
 	def isCanceled(self):
 		if self.show_progress and progress.iscanceled():
 			Debug("[Sync] Sync was canceled by user.")
@@ -32,7 +41,13 @@ class Sync():
 		if self.show_progress:
 			kwargs['percent'] = args[0]
 			progress.update(**kwargs)
-	
+
+	def checkExclusion(self, file):
+		for _path in self.exclusions:
+			if file.find(_path) > -1:
+				return True
+		return False
+
 	''' begin code for episode sync '''
 	def traktLoadShows(self):
 		self.updateProgress(10, line1=utilities.getString(1485), line2=utilities.getString(1486))
@@ -145,7 +160,7 @@ class Sync():
 		for show in tvshows:
 			show['seasons'] = {}
 			show['watched'] = {}
-			data = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid']}, 'id': 0})
+			data = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid', 'file']}, 'id': 0})
 			if not data:
 				Debug("[Episodes Sync] There was a problem getting episode data for '%s', aborting sync." % show['title'])
 				return None
@@ -154,6 +169,8 @@ class Sync():
 				continue
 			episodes = data['episodes']
 			for e in episodes:
+				if self.checkExclusion(e['file']):
+					continue
 				_season = e['season']
 				_episode = e['episode']
 				if not _season in show['seasons']:
@@ -503,7 +520,7 @@ class Sync():
 		self.updateProgress(1, line2=utilities.getString(1460))
 
 		Debug("[Movies Sync] Getting movie data from XBMC")
-		data = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['title', 'imdbnumber', 'year', 'playcount', 'lastplayed']}})
+		data = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['title', 'imdbnumber', 'year', 'playcount', 'lastplayed', 'file']}})
 		if not data:
 			Debug("[Movies Sync] XBMC JSON request was empty.")
 			return
@@ -518,8 +535,12 @@ class Sync():
 		i = 0
 		x = float(len(movies))
 		
+		xbmc_movies = []
+
 		# reformat movie array
 		for movie in movies:
+			if self.checkExclusion(movie['file']):
+				continue
 			movie['last_played'] = utilities.sqlDateToUnixDate(movie['lastplayed'])
 			movie['plays'] = movie.pop('playcount')
 			movie['in_collection'] = True
@@ -534,13 +555,15 @@ class Sync():
 			del(movie['lastplayed'])
 			del(movie['label'])
 
+			xbmc_movies.append(movie)
+
 			i = i + 1
 			y = ((i / x) * 4) + 1
 			self.updateProgress(int(y))
 			
 		self.updateProgress(5, line2=utilities.getString(1461))
 
-		return movies
+		return xbmc_movies
 
 	def sanitizeMovieData(self, movie):
 		data = copy.deepcopy(movie)
