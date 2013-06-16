@@ -6,6 +6,7 @@
 	<string id="1014">Contraseña</string>
 	<string id="1017">Número de reintentos</string>
 	<string id="1018">Inicio retrasado</string>
+	<string id="1019">Forzar actualización de la configuración al guardar los cambios</string>
 	
 	<!-- Rating Settings -->
 	<string id="1030">Valorar</string>
@@ -34,13 +35,14 @@
 	<string id="1108">Imposible conectarse a trakt.tv</string>
 	<string id="1109">Error</string>
 	<string id="1110">Imposible conectarse a trakt.tv</string>
-	
+	<string id="1111">Cargando configuración de trakt.tv</string>
+
 	<!-- Manual Rating Notifications -->
-	<string id="1350">trakt.tv - Valoración enviada correctamente</string>
-	<string id="1351">trakt.tv - Ya se ha valorado</string>
-	<string id="1352">trakt.tv - Valoración eliminada correctamente</string>
-	<string id="1353">trakt.tv - Ya tiene la misma valoración</string>
-	<string id="1354">trakt.tv - Ha ocurrido un problema al valorar</string>
+	<string id="1350">Valoración enviada correctamente</string>
+	<string id="1351">Ya se ha valorado</string>
+	<string id="1352">Valoración eliminada correctamente</string>
+	<string id="1353">Ya tiene la misma valoración</string>
+	<string id="1354">Ha ocurrido un problema al valorar</string>
 	
 	<!-- Rating Dialog -->
 	<string id="1313">¿Qué te pareció?</string>
@@ -161,8 +163,8 @@
 	<string id="1442">Sincronización de Episodios completada</string>
 	
 	<!-- Sync - manual mark watched -->
-	<string id="1550">trakt.tv - Marcas como visto</string>
-	<string id="1551">trakt.tv - Fallo al marcar como visto</string>
+	<string id="1550">Marcar como visto en trakt.tv</string>
+	<string id="1551">Fallo al marcar como visto en trakt.tv</string>
 	<string id="1552">%d episodio(s) de '%s'</string>
 
 	<!-- Tagger Settings -->
@@ -209,8 +211,9 @@
 	<!-- Debug Settings -->
 	<string id="1700">Depuración</string>
 	<string id="1701">Activar modo depuración</string>
-	<string id="1702">Simular scrobbling (para hacer pruebas)</string>
-	<string id="1703">Simular sincronización (para hacer pruebas)</string>
-	<string id="1704">Simular etiquetas (para hacer pruebas)</string>
-	<string id="1705">Ejecutar pruebas de tiempo, ver output log</string>
+	<string id="1702">Simular scrobbling</string>
+	<string id="1703">Simular sincronización</string>
+	<string id="1704">Simular etiquetas</string>
+	<string id="1720">Registro</string>
+	<string id="1721">Simular configuracióN. (Si esta activado no se hacen cambios en XBMC o trakt.tv)</string>
 </strings>
