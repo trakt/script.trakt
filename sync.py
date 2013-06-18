@@ -691,7 +691,7 @@ class Sync():
 				utilities.xbmcJsonRequest(chunk)
 
 			i = i + 1
-			y = ((i / s) * 20) + 60
+			y = ((i / x) * 20) + 60
 			self.updateProgress(int(y), line2=utilities.getString(1472))
 
 		self.updateProgress(80, line2=utilities.getString(1473) % len(movies))
