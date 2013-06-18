@@ -215,5 +215,5 @@
 	<string id="1703">Simular sincronización</string>
 	<string id="1704">Simular etiquetas</string>
 	<string id="1720">Registro</string>
-	<string id="1721">Simular configuracióN. (Si esta activado no se hacen cambios en XBMC o trakt.tv)</string>
+	<string id="1721">Simular configuración (La simulación no guarda cambios en XBMC o trakt.tv)</string>
 </strings>
