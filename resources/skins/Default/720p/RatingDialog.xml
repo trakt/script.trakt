@@ -126,6 +126,8 @@
                 <texturenofocus>1.png</texturenofocus>
                 <align>center</align>
                 <aligny>center</aligny>
+                <ondown>11039</ondown>
+                <onup>11031</onup>
                 <onleft>11039</onleft>
                 <onright>11031</onright>
                 <animation effect="zoom" end="115,115" center="auto" time="100">focus</animation>
@@ -142,6 +144,8 @@
                 <texturenofocus>2.png</texturenofocus>
                 <align>center</align>
                 <aligny>center</aligny>
+                <ondown>11030</ondown>
+                <onup>11032</onup>
                 <onleft>11030</onleft>
                 <onright>11032</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11032)</visible>
@@ -169,6 +173,8 @@
                 <texturenofocus>3.png</texturenofocus>
                 <align>center</align>
                 <aligny>center</aligny>
+                <ondown>11031</ondown>
+                <onup>11033</onup>
                 <onleft>11031</onleft>
                 <onright>11033</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)</visible>
@@ -196,6 +202,8 @@
                 <texturenofocus>4.png</texturenofocus>
                 <align>center</align>
                 <aligny>center</aligny>
+                <ondown>11032</ondown>
+                <onup>11034</onup>
                 <onleft>11032</onleft>
                 <onright>11034</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)</visible>
@@ -223,6 +231,8 @@
                 <texturenofocus>5.png</texturenofocus>
                 <align>center</align>
                 <aligny>center</aligny>
+                <ondown>11033</ondown>
+                <onup>11035</onup>
                 <onleft>11033</onleft>
                 <onright>11035</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)</visible>
@@ -250,6 +260,8 @@
                 <texturenofocus>6.png</texturenofocus>
                 <align>center</align>
                 <aligny>center</aligny>
+                <ondown>11034</ondown>
+                <onup>11036</onup>
                 <onleft>11034</onleft>
                 <onright>11036</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)</visible>
@@ -277,6 +289,8 @@
                 <texturenofocus>7.png</texturenofocus>
                 <align>center</align>
                 <aligny>center</aligny>
+                <ondown>11035</ondown>
+                <onup>11037</onup>
                 <onleft>11035</onleft>
                 <onright>11037</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)|!Control.HasFocus(11035)</visible>
@@ -304,6 +318,8 @@
                 <texturenofocus>8.png</texturenofocus>
                 <align>center</align>
                 <aligny>center</aligny>
+                <ondown>11036</ondown>
+                <onup>11038</onup>
                 <onleft>11036</onleft>
                 <onright>11038</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)|!Control.HasFocus(11035)|!Control.HasFocus(11036)</visible>
@@ -331,6 +347,8 @@
                 <texturenofocus>9.png</texturenofocus>
                 <align>center</align>
                 <aligny>center</aligny>
+                <ondown>11037</ondown>
+                <onup>11039</onup>
                 <onleft>11037</onleft>
                 <onright>11039</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)|!Control.HasFocus(11035)|!Control.HasFocus(11036)|!Control.HasFocus(11037)</visible>
@@ -358,6 +376,8 @@
                 <texturenofocus>10.png</texturenofocus>
                 <align>center</align>
                 <aligny>center</aligny>
+                <ondown>11038</ondown>
+                <onup>11030</onup>
                 <onleft>11038</onleft>
                 <onright>11030</onright>
                 <visible allowhiddenfocus="true">!Control.HasFocus(11030)|!Control.HasFocus(11031)|!Control.HasFocus(11032)|!Control.HasFocus(11033)|!Control.HasFocus(11034)|!Control.HasFocus(11035)|!Control.HasFocus(11036)|!Control.HasFocus(11037)|!Control.HasFocus(11038)</visible>
