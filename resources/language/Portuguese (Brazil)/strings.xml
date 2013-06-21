@@ -5,7 +5,8 @@
 	<string id="1013">Usuário</string>
 	<string id="1014">Senha</string>
 	<string id="1017">Quantidade de tentativas de conexão</string>	
-	<string id="1018">Atraso na inicialização</string>	
+	<string id="1018">Atraso na inicialização</string>
+	<string id="1019">Recarregar novamente as configurações do trakt.tv. Salve ao sair</string>	
 
 	<!-- Rating Settings -->
 	<string id="1030">Classificação</string>
@@ -20,6 +21,8 @@
 	<string id="1041">Fazer divulgação dos filmes</string>
 	<string id="1042">Fazer divulgação dos episódios de seriados</string>
 	<string id="1043">Percentual mínimo assistido para fazer divulgação</string>
+	<string id="1044">Durante divulgação, atualizar ID dos filmes caso estiver faltando</string>
+	<string id="1045">Durante divulgação, atualizar ID das séries caso estiver faltando</string>	
 	<string id="1050">Exclusões</string>
 	<string id="1051">Excluir TV Ao Vivo</string>
 	<string id="1052">Excluir fontes HTTP</string>	
@@ -32,6 +35,7 @@
 	<string id="1108">não foi possível conectar ao Trakt</string>
 	<string id="1109">Erro</string>
 	<string id="1110">Usuário ou senha incorretos</string>
+	<string id="1111">Carregando configurações do trakt.tv</string>	
 
 	<!-- Manual Rating Notifications -->
 	<string id="1350">trakt.tv - Classificação enviada</string>
@@ -164,8 +168,8 @@
 	<string id="1552">%d episódios(s) de '%s'</string>
 
 	<!-- Tagger Settings -->
-	<string id="1600">Etiquetação (Tagging)</string>
-	<string id="1601">Habilitar etiquetação (Tags)</string>
+	<string id="1600">Etiquetas (Tagging)</string>
+	<string id="1601">Habilitar etiquetas (Tags)</string>
 	<string id="1602">Atualizar as etiquetas após a atualização da biblioteca</string>	
 	<string id="1603">Criar etiqueta da sua lista de interesse (watchlist)</string>
 	<string id="1604">Criar etiqueta das suas classificações</string>
@@ -192,12 +196,24 @@
 	<string id="1664">Ocorreu um problema ao carregar suas listas de interesse</string>
 	<string id="1665">Ocorreu um problema ao carregar suas classificações</string>
 	<string id="1666">As etiquetas/listas foram atualizadas</string>	
-
+	<string id="1667">Configurações de privacidade</string>
+	<string id="1668">Outras configurações</string>
+	<string id="1669">Editar descrição</string>
+	<string id="1670">Renomear lista</string>
+	<string id="1671">Pública</string>
+	<string id="1672">Amigos</string>
+	<string id="1673">Privada</string>
+	<string id="1674">Permitir gritos(shouts)</string>
+	<string id="1675">Mostrar números</string>
+	<string id="1676">Esconder item na lista</string>
+	<string id="1677">Não é possivel renomear. Já existe o nome %s na lista</string>
+	
 	<!-- Debug Settings -->
 	<string id="1700">Depuração</string>
 	<string id="1701">Ativar modo de depuração</string>
 	<string id="1702">Simular divulgação (apenas para testes)</string>
 	<string id="1703">Simular sincronização (apenas para testes)</string>
-	<string id="1704">Simular etiquetação</string>
-	<string id="1705">Executar testes de duração, veja resultado no log</string>	
+	<string id="1704">Simular etiquetas</string>
+	<string id="1720">Logging</string>
+	<string id="1721">Simular configurações. Se estiver habilitar nada será alterado no XBMC ou trakt.tv</string>	
 </strings>
