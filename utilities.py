@@ -24,7 +24,7 @@ def Debug(msg, force = False):
 			print "[trakt] " + msg.encode('utf-8', 'ignore')
 
 def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')):
-	xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message.encode('utf-8', 'ignore'), time, icon))
+	xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message, time, icon))
 
 def getSetting(setting):
     return __addon__.getSetting(setting).strip()
@@ -164,7 +164,7 @@ def getFormattedItemName(type, info, short=False):
 			s = "%s - Specials" % info['title']
 	elif isMovie(type):
 		s = "%s (%s)" % (info['title'], info['year'])
-	return s
+	return s.encode('utf-8', 'ignore')
 
 def getShowDetailsFromXBMC(showID, fields):
 	result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': showID, 'properties': fields}, 'id': 1})
