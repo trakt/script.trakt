@@ -16,6 +16,9 @@ except ImportError:
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')
 
+# make strptime call prior to doing anything, to try and prevent threading errors
+time.strptime("1970-01-01 12:00:00", "%Y-%m-%d %H:%M:%S")
+
 def Debug(msg, force = False):
 	if(getSettingAsBool('debug') or force):
 		try:

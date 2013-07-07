@@ -38,6 +38,7 @@ class traktError(Exception):
 class traktAuthProblem(traktError): pass
 class traktServerBusy(traktError): pass
 class traktUnknownError(traktError): pass
+class traktNotFoundError(traktError): pass
 class traktNetworkError(traktError):
 	def __init__(self, value, timeout):
 		super(traktNetworkError, self).__init__(value)
@@ -94,7 +95,12 @@ class traktAPI(object):
 				elif e.code == 503: # server busy problem
 					raise traktServerBusy(error_data)
 				else:
-					raise traktUnknownError(error_data, e.code)
+					try:
+						_data = json.loads(error_data)
+						if 'status' in _data:
+							data = error_data
+					except ValueError:
+						raise traktUnknownError(error_data, e.code)
 
 			elif hasattr(e, 'reason'): # usually a read timeout, or unable to reach host
 				raise traktNetworkError(str(e.reason), isinstance(e.reason, socket.timeout))
@@ -161,6 +167,7 @@ class traktAPI(object):
 			except traktError, e:
 				if isinstance(e, traktServerBusy):
 					Debug("[traktAPI] traktRequest(): (%i) Server Busy (%s)" % (i, e.value))
+					xbmc.sleep(5000)
 				elif isinstance(e, traktAuthProblem):
 					Debug("[traktAPI] traktRequest(): (%i) Authentication Failure (%s)" % (i, e.value))
 					setSetting('account_valid', False)
@@ -199,12 +206,12 @@ class traktAPI(object):
 					Debug("[traktAPI] traktRequest(): (%i) JSON response: '%s'" % (i, str(data)))
 			except ValueError:
 				# malformed json response
-				Debug("[traktAPI] traktRequest(): (%i) Bad JSON response: '%s'", (i, raw))
+				Debug("[traktAPI] traktRequest(): (%i) Bad JSON response: '%s'" % (i, raw))
 				if not silent:
 					notification('trakt', getString(1109) + ": Bad response from trakt") # Error
 				
 			# check for the status variable in JSON data
-			if 'status' in data:
+			if data and 'status' in data:
 				if data['status'] == 'success':
 					break
 				elif returnOnFailure and data['status'] == 'failure':
