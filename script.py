@@ -6,6 +6,7 @@ import sys
 import queue
 import tagging
 import time
+from traktContextMenu import traktContextMenu
 
 try:
 	import simplejson as json
@@ -27,9 +28,10 @@ def getMediaType():
 
 def getArguments():
 	data = None
-	
+	default_actions = {0: "sync", 1: "managelists"}
+	default = utils.getSettingAsInt('default_action')
 	if len(sys.argv) == 1:
-		data = {'action': "sync"}
+		data = {'action': default_actions[default]}
 	else:
 		data = {}
 		for item in sys.argv:
@@ -45,8 +47,57 @@ def Main():
 	args = getArguments()
 	data = {}
 
+	if args['action'] == 'contextmenu':
+		buttons = []
+		media_type = getMediaType()
+
+		if utils.getSettingAsBool('tagging_enable'):
+			if utils.isMovie(media_type):
+				buttons.append("itemlists")
+				dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
+				result = utils.getMovieDetailsFromXbmc(dbid, ['tag'])
+				if tagging.hasTraktWatchlistTag(result['tag']):
+					buttons.append("removefromlist")
+				else:
+					buttons.append("addtolist")
+			elif utils.isShow(media_type):
+				buttons.append("itemlists")
+				dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
+				result = utils.getShowDetailsFromXBMC(dbid, ['tag'])
+				if tagging.hasTraktWatchlistTag(result['tag']):
+					buttons.append("removefromlist")
+				else:
+					buttons.append("addtolist")
+
+		if media_type in ['movie', 'show', 'episode']:
+			buttons.append("rate")
+
+		if media_type in ['movie', 'show', 'season', 'episode']:
+			buttons.append("togglewatched")
+
+		if utils.getSettingAsBool('tagging_enable'):
+			buttons.append("managelists")
+			buttons.append("updatetags")
+		buttons.append("sync")
+
+		contextMenu = traktContextMenu(media_type=media_type, buttons=buttons)
+		contextMenu.doModal()
+		_action = contextMenu.action
+		del contextMenu
+
+		if _action is None:
+			return
+
+		utils.Debug("'%s' selected from trakt.tv action menu" % _action)
+		args['action'] = _action
+		if _action in ['addtolist', 'removefromlist']:
+			args['list'] = "watchlist"
+
 	if args['action'] == 'sync':
 		data = {'action': 'manualSync'}
+		data['silent'] = False
+		if 'silent' in args:
+			data['silent'] = (args['silent'].lower() == 'true')
 
 	elif args['action'] == 'loadsettings':
 		data = {'action': 'loadsettings', 'force': True}
