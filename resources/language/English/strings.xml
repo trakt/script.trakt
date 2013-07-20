@@ -7,6 +7,7 @@
 	<string id="1017">Number of Retries</string>
 	<string id="1018">Startup Delay</string>
 	<string id="1019">Force a reload of settings from trakt.tv, save settings when finished</string>
+	<string id="1020">Default script action</string>
 	
 	<!-- Rating Settings -->
 	<string id="1030">Rating</string>
@@ -216,4 +217,17 @@
 	<string id="1704">Simulate tagging</string>
 	<string id="1720">Logging</string>
 	<string id="1721">Simulate settings, if enabled will not make changes in XBMC or trakt.tv</string>
+
+	<!-- Context Menu Entries -->
+	<string id="2000">Manage Movie's Lists</string>
+	<string id="2001">Manage Show's Lists</string>
+	<string id="2010">Remove from Watchlist</string>
+	<string id="2020">Add to Watchlist</string>
+	<string id="2030">Rate this Movie</string>
+	<string id="2031">Rate this Show</string>
+	<string id="2032">Rate this Episode</string>
+	<string id="2040">Toggle Watched</string>
+	<string id="2050">Manage All Lists</string>
+	<string id="2060">Update All Tags</string>
+	<string id="2070">Synchronize Library</string>
 </strings>
