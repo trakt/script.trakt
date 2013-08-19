@@ -175,7 +175,8 @@ class Scrobbler():
 			self.pausedAt = 0
 			self.isPaused = False
 			self.update(True)
-			self.watching()
+			if utilities.getSettingAsBool('watching_call_on_resume'):
+				self.watching()
 
 	def playbackPaused(self):
 		if not self.isPlaying:
@@ -193,7 +194,8 @@ class Scrobbler():
 
 		Debug("[Scrobbler] playbackSeek()")
 		self.update(True)
-		self.watching()
+		if utilities.getSettingAsBool('watching_call_on_seek'):
+			self.watching()
 
 	def playbackEnded(self):
 		if not self.isPlaying:
@@ -241,7 +243,7 @@ class Scrobbler():
 							self.curVideoInfo['imdbnumber'] = response['movie']['imdb_id']
 							if 'id' in self.curVideo and utilities.getSettingAsBool('update_imdb_id'):
 								req = {"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid" : self.curVideoInfo['movieid'], "imdbnumber": self.curVideoInfo['imdbnumber']}}
-								utils.xbmcJsonRequest(req)
+								utilities.xbmcJsonRequest(req)
 							# get summary data now if we are rating this movie
 							if utilities.getSettingAsBool('rate_movie') and self.traktSummaryInfo is None:
 								Debug("[Scrobbler] Movie rating is enabled, pre-fetching summary information.")
@@ -265,7 +267,7 @@ class Scrobbler():
 							self.curVideoInfo['tvdb_id'] = response['show']['tvdb_id']
 							if 'id' in self.curVideo and utilities.getSettingAsBool('update_tvdb_id'):
 								req = {"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid" : self.curVideoInfo['tvshowid'], "imdbnumber": self.curVideoInfo['tvdb_id']}}
-								utils.xbmcJsonRequest(req)
+								utilities.xbmcJsonRequest(req)
 							# get summary data now if we are rating this episode
 							if utilities.getSettingAsBool('rate_episode') and self.traktSummaryInfo is None:
 								Debug("[Scrobbler] Episode rating is enabled, pre-fetching summary information.")
@@ -351,7 +353,7 @@ class Scrobbler():
 				tagging.xbmcSetTags(id, self.curVideo['type'], s, tags)
 
 		else:
-			utils.Debug("No data was returned from XBMC, aborting tag udpate.")
+			utilities.Debug("No data was returned from XBMC, aborting tag udpate.")
 
 	def check(self):
 		scrobbleMinViewTimeOption = utilities.getSettingAsFloat("scrobble_min_view_time")

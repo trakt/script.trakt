@@ -24,6 +24,8 @@
 		<setting id="scrobble_min_view_time" type="slider" label="1043" range="0,5,100" default="80"/>
 		<setting id="update_imdb_id" type="bool" label="1044" default="false"/>
 		<setting id="update_tvdb_id" type="bool" label="1045" default="false"/>
+		<setting id="watching_call_on_seek" type="bool" label="1046" default="true"/>
+		<setting id="watching_call_on_resume" type="bool" label="1047" default="true"/>
 	</category>
 	<category label="1400"><!-- Synchronize -->
 		<setting label="1410" type="lsep"/><!-- Service -->
