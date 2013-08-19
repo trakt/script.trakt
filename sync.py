@@ -426,11 +426,15 @@ class Sync():
 		xbmcShows = self.xbmcLoadShows()
 		if not isinstance(xbmcShows, list) and not xbmcShows:
 			Debug("[Episodes Sync] XBMC show list is empty, aborting tv show Sync.")
+			if self.show_progress and not self.run_silent:
+				progress.close()
 			return
 
 		traktShows = self.traktLoadShows()
 		if not isinstance(traktShows, list):
 			Debug("[Episodes Sync] Error getting trakt.tv show list, aborting tv show sync.")
+			if self.show_progress and not self.run_silent:
+				progress.close()
 			return
 
 		if utilities.getSettingAsBool('add_episodes_to_trakt') and not self.isCanceled():
@@ -709,11 +713,15 @@ class Sync():
 		xbmcMovies = self.xbmcLoadMovies()
 		if not isinstance(xbmcMovies, list) and not xbmcMovies:
 			Debug("[Movies Sync] XBMC movie list is empty, aborting movie Sync.")
+			if self.show_progress and not self.run_silent:
+				progress.close()
 			return
 
 		traktMovies = self.traktLoadMovies()
 		if not isinstance(traktMovies, list):
 			Debug("[Movies Sync] Error getting trakt.tv movie list, aborting movie Sync.")
+			if self.show_progress and not self.run_silent:
+				progress.close()
 			return
 
 		if utilities.getSettingAsBool('add_movies_to_trakt') and not self.isCanceled():
