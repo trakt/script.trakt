@@ -1,3 +1,8 @@
+version 2.3.1
+  - improved API error handling and debugging
+  - new context menu action via RunScript(script.trakt,action=contextmenu)
+  - silent option for manual sync via RunScript(script.trakt,action=sync,silent=True)
+
 version 2.3.0
   - moved debug settings to their own menu (nate1280)
   - new togglewatched action for skins/keymaps (nate1280)
