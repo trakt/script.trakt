@@ -10,10 +10,11 @@ progress = xbmcgui.DialogProgress()
 
 class Sync():
 
-	def __init__(self, show_progress=False, run_silent=False, api=None):
+	def __init__(self, show_progress=False, run_silent=False, library="all", api=None):
 		self.traktapi = api
 		self.show_progress = show_progress
 		self.run_silent = run_silent
+		self.library = library
 		if self.show_progress and self.run_silent:
 			Debug("[Sync] Sync is being run silently.")
 		self.sync_on_update = utilities.getSettingAsBool('sync_on_update')
@@ -764,12 +765,18 @@ class Sync():
 		Debug("[Sync] Starting synchronization with trakt.tv")
 
 		if self.syncCheck('movies'):
-			self.syncMovies()
+			if self.library in ["all", "movies"]:
+				self.syncMovies()
+			else:
+				Debug("[Sync] Movie sync is being skipped for this manual sync.")
 		else:
 			Debug("[Sync] Movie sync is disabled, skipping.")
 
 		if self.syncCheck('episodes'):
-			self.syncEpisodes()
+			if self.library in ["all", "episodes"]:
+				self.syncEpisodes()
+			else:
+				Debug("[Sync] Episode sync is being skipped for this manual sync.")
 		else:
 			Debug("[Sync] Episode sync is disabled, skipping.")
 

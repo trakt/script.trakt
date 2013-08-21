@@ -74,7 +74,7 @@ class traktService:
 		elif action == 'manualSync':
 			if not self.syncThread.isAlive():
 				utilities.Debug("Performing a manual sync.")
-				self.doSync(manual=True, silent=data['silent'])
+				self.doSync(manual=True, silent=data['silent'], library=data['library'])
 			else:
 				utilities.Debug("There already is a sync in progress.")
 		elif action == 'updatetags':
@@ -347,22 +347,23 @@ class traktService:
 						if markedNotification:
 							utilities.notification(utilities.getString(1550), utilities.getString(1552) % (len(params['episodes']), s))
 
-	def doSync(self, manual=False, silent=False):
-		self.syncThread = syncThread(manual, silent)
+	def doSync(self, manual=False, silent=False, library="all"):
+		self.syncThread = syncThread(manual, silent, library)
 		self.syncThread.start()
 
 class syncThread(threading.Thread):
 
 	_isManual = False
 
-	def __init__(self, isManual=False, runSilent=False):
+	def __init__(self, isManual=False, runSilent=False, library="all"):
 		threading.Thread.__init__(self)
 		self.name = "trakt-sync"
 		self._isManual = isManual
 		self._runSilent = runSilent
+		self._library = library
 
 	def run(self):
-		sync = Sync(show_progress=self._isManual, run_silent=self._runSilent, api=globals.traktapi)
+		sync = Sync(show_progress=self._isManual, run_silent=self._runSilent, library=self._library, api=globals.traktapi)
 		sync.sync()
 		
 		if utilities.getSettingAsBool('tagging_enable') and utilities.getSettingAsBool('tagging_tag_after_sync'):
