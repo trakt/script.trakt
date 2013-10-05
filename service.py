@@ -56,7 +56,9 @@ class traktService:
 		elif action == 'seek' or action == 'seekchapter':
 			self.scrobbler.playbackSeek()
 		elif action == 'databaseUpdated':
-			self.doSync()
+			if utilities.getSettingAsBool('sync_on_update'):
+				utilities.Debug("Performing sync after library update.")
+				self.doSync()
 		elif action == 'scanStarted':
 			pass
 		elif action == 'settingsChanged':
@@ -365,7 +367,7 @@ class syncThread(threading.Thread):
 		
 		if utilities.getSettingAsBool('tagging_enable') and utilities.getSettingAsBool('tagging_tag_after_sync'):
 			q = queue.SqliteQueue()
-			q.append({'action': 'updateTags'})
+			q.append({'action': 'updatetags'})
 
 class traktMonitor(xbmc.Monitor):
 
