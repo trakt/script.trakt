@@ -16,6 +16,7 @@ class Sync():
 		self.run_silent = run_silent
 		if self.show_progress and self.run_silent:
 			Debug("[Sync] Sync is being run silently.")
+		self.sync_on_update = utilities.getSettingAsBool('sync_on_update')
 		self.notify = utilities.getSettingAsBool('show_sync_notifications')
 		self.simulate = utilities.getSettingAsBool('simulate_sync')
 		if self.simulate:
@@ -418,7 +419,7 @@ class Sync():
 		self.updateProgress(82, line2=utilities.getString(1495) % len(episodes))
 
 	def syncEpisodes(self):
-		if not self.show_progress and utilities.getSettingAsBool('sync_on_update') and self.notify:
+		if not self.show_progress and self.sync_on_update and self.notify:
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1406)), utilities.getString(1420)) #Sync started
 		if self.show_progress and not self.run_silent:
 			progress.create("%s %s" % (utilities.getString(1400), utilities.getString(1406)), line1=" ", line2=" ", line3=" ")
@@ -453,7 +454,7 @@ class Sync():
 			traktShowsRemove = self.compareShows(traktShows, xbmcShows)
 			self.traktRemoveEpisodes(traktShowsRemove)
 
-		if not self.show_progress and utilities.getSettingAsBool('sync_on_update') and self.notify:
+		if not self.show_progress and self.sync_on_update and self.notify:
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1406)), utilities.getString(1421)) #Sync complete
 
 		if not self.isCanceled() and self.show_progress and not self.run_silent:
@@ -705,7 +706,7 @@ class Sync():
 		self.updateProgress(80, line2=utilities.getString(1473) % len(movies))
 
 	def syncMovies(self):
-		if not self.show_progress and utilities.getSettingAsBool('sync_on_update') and self.notify:
+		if not self.show_progress and self.sync_on_update and self.notify:
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1402)), utilities.getString(1420)) #Sync started
 		if self.show_progress and not self.run_silent:
 			progress.create("%s %s" % (utilities.getString(1400), utilities.getString(1402)), line1=" ", line2=" ", line3=" ")
@@ -744,7 +745,7 @@ class Sync():
 			self.updateProgress(100, line1=utilities.getString(1431), line2=" ", line3=" ")
 			progress.close()
 
-		if not self.show_progress and utilities.getSettingAsBool('sync_on_update') and self.notify:
+		if not self.show_progress and self.sync_on_update and self.notify:
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1402)), utilities.getString(1421)) #Sync complete
 		
 		Debug("[Movies Sync] Movies on trakt.tv (%d), movies in XBMC (%d)." % (len(traktMovies), self.countMovies(xbmcMovies)))
