@@ -1,3 +1,8 @@
+version 2.3.2
+  - fixed update tags not running after sync, if the setting was enabled (nate1280)
+  - fixed usage of sync after library update, was always syncing (nate1280)
+  - small cleanup of sync, replace redundant calls with a variable and one time call (nate1280)
+
 version 2.3.1
   - improved API error handling and debugging
   - new context menu action via RunScript(script.trakt,action=contextmenu)
