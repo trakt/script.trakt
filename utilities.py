@@ -96,7 +96,11 @@ def isValidMediaType(type):
 def xbmcJsonRequest(params):
 	data = json.dumps(params)
 	request = xbmc.executeJSONRPC(data)
-	response = json.loads(request)
+	try:
+		response = json.loads(request)
+	except UnicodeDecodeError, e:
+		Debug("xbmcJsonRequest: UnicodeDecodeError: '%s', Data: '%s'" % (e.message, response))
+		response = json.loads(request.decode('utf-8', 'ignore'))
 
 	try:
 		if 'result' in response:
