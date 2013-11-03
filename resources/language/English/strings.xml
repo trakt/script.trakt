@@ -82,6 +82,7 @@
 	<string id="1413">Clean trakt movie collection</string>
 	<string id="1414">Clean trakt episode collection</string>
 	<string id="1416">Show marked as watched notification</string>
+	<string id="1417">Hide notifications during playback</string>
 
 	<!-- Sync Notifications -->
 	<string id="1420">Sync started</string>

@@ -31,6 +31,7 @@
 		<setting label="1410" type="lsep"/><!-- Service -->
 		<setting id="sync_on_update" type="bool" label="1411" default="false"/>
 		<setting id="show_sync_notifications" type="bool" label="1412" default="false"/>
+		<setting id="hide_notifications_playback" type="bool" label="1417" default="false"/>
 		<setting id="show_marked_notification" type="bool" label="1416" default="true"/>
 		<setting type="sep"/>
 		<setting label="1402" type="lsep"/><!-- Movies -->
