@@ -7,6 +7,7 @@
 	<string id="1017">Quantidade de tentativas de conexão</string>	
 	<string id="1018">Atraso na inicialização</string>
 	<string id="1019">Recarregar novamente as configurações do trakt.tv. Salve ao sair</string>	
+	<string id="1020">Ação padrão do script</string>    
 
 	<!-- Rating Settings -->
 	<string id="1030">Classificação</string>
@@ -23,6 +24,8 @@
 	<string id="1043">Percentual mínimo assistido para fazer divulgação</string>
 	<string id="1044">Durante divulgação, atualizar ID dos filmes caso estiver faltando</string>
 	<string id="1045">Durante divulgação, atualizar ID das séries caso estiver faltando</string>	
+	<string id="1046">Enviar divulgação ao buscar vídeo (seek)</string>
+	<string id="1047">Enviar divulgação ao resumir vídeo</string>    
 	<string id="1050">Exclusões</string>
 	<string id="1051">Excluir TV Ao Vivo</string>
 	<string id="1052">Excluir fontes HTTP</string>	
@@ -78,7 +81,8 @@
 	<string id="1412">Mostrar notificações</string>
 	<string id="1413">Limpar coleção de filmes do Trakt</string>
 	<string id="1414">Limpar coleção de episódios do Trakt</string>
-	<string id="1416">Mostrar notificação ao marcar como visto</string>	
+	<string id="1416">Mostrar notificação ao marcar como visto</string>
+	<string id="1417">Esconder notificações durante execução do vídeo</string>    
 
 	<!-- Notificações de Sincronização -->
 	<string id="1420">Sincronização iniciada</string>
@@ -206,7 +210,7 @@
 	<string id="1674">Permitir gritos(shouts)</string>
 	<string id="1675">Mostrar números</string>
 	<string id="1676">Esconder item na lista</string>
-	<string id="1677">Não é possivel renomear. Já existe o nome %s na lista</string>
+	<string id="1677">Não é possível renomear. Já existe o nome %s na lista</string>
 	
 	<!-- Debug Settings -->
 	<string id="1700">Depuração</string>
@@ -215,5 +219,18 @@
 	<string id="1703">Simular sincronização (apenas para testes)</string>
 	<string id="1704">Simular etiquetas</string>
 	<string id="1720">Logging</string>
-	<string id="1721">Simular configurações. Se estiver habilitar nada será alterado no XBMC ou trakt.tv</string>	
+	<string id="1721">Simular configurações. Se estiver habilitar nada será alterado no XBMC ou trakt.tv</string>
+    
+	<!-- Context Menu Entries -->
+	<string id="2000">Gerenciar lista de filmes</string>
+	<string id="2001">Gerenciar lista de séries</string>
+	<string id="2010">Remover da lista de interesses</string>
+	<string id="2020">Adicionar a lista de interesses</string>
+	<string id="2030">Classificar esse filme</string>
+	<string id="2031">Classificar essa série</string>
+	<string id="2032">Classificar esse episódio</string>
+	<string id="2040">Marcar como visto</string>
+	<string id="2050">Gerenciar todas as listas</string>
+	<string id="2060">Atualizar todas as etiquetas </string>
+	<string id="2070">Sincronizar biblioteca</string>
 </strings>
