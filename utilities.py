@@ -29,6 +29,9 @@ def Debug(msg, force = False):
 def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')):
 	xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message, time, icon))
 
+def showSettings():
+	__addon__.openSettings()
+	
 def getSetting(setting):
     return __addon__.getSetting(setting).strip()
 
@@ -96,10 +99,10 @@ def isValidMediaType(type):
 def xbmcJsonRequest(params):
 	data = json.dumps(params)
 	request = xbmc.executeJSONRPC(data)
+	response = None
 	try:
 		response = json.loads(request)
-	except UnicodeDecodeError, e:
-		Debug("xbmcJsonRequest: UnicodeDecodeError: '%s', Data: '%s'" % (e.message, response))
+	except UnicodeDecodeError:
 		response = json.loads(request.decode('utf-8', 'ignore'))
 
 	try:

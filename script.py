@@ -103,6 +103,9 @@ def Main():
 		data = {'action': 'loadsettings', 'force': True}
 		utils.notification(utils.getString(1201), utils.getString(1111))
 
+	elif args['action'] == 'settings':
+		data = {'action': 'settings'}
+
 	elif args['action'] in ['rate', 'unrate']:
 		data = {}
 		data['action'] = args['action']

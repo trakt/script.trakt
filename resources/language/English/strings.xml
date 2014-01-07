@@ -26,6 +26,8 @@
 	<string id="1045">During scrobbling, update ID for library tv show if ID is missing</string>
 	<string id="1046">Send watching call on seek</string>
 	<string id="1047">Send watching call on resume</string>
+	<string id="1048">Show notification on scrobble</string>
+	<string id="1049">trakt.tv - Scrobbled</string>
 	<string id="1050">Exclusions</string>
 	<string id="1051">Exclude Live TV</string>
 	<string id="1052">Exclude HTTP sources</string>	
