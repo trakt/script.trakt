@@ -98,6 +98,9 @@ def Main():
 		data['silent'] = False
 		if 'silent' in args:
 			data['silent'] = (args['silent'].lower() == 'true')
+		data['library'] = "all"
+		if 'library' in args and args['library'] in ['episodes', 'movies']:
+			data['library'] = args['library']
 
 	elif args['action'] == 'loadsettings':
 		data = {'action': 'loadsettings', 'force': True}
