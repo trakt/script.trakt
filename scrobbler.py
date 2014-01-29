@@ -305,6 +305,7 @@ class Scrobbler():
 			if not response is None and 'status' in response:
 				if response['status'] == "success":
 					self.watchlistTagCheck()
+					self.scrobbleNotification(response)
 					Debug("[Scrobbler] Scrobble response: %s" % str(response))
 				elif response['status'] == "failure":
 					if response['error'].startswith("scrobbled") and response['error'].endswith("already"):
@@ -323,6 +324,8 @@ class Scrobbler():
 			response = self.traktapi.scrobbleEpisode(self.curVideoInfo, duration, watchedPercent)
 			if not response is None and 'status' in response:
 				if response['status'] == "success":
+					response['episode']['season'] = response['season']
+					self.scrobbleNotification(response)
 					Debug("[Scrobbler] Scrobble response: %s" % str(response))
 				elif response['status'] == "failure":
 					if response['error'].startswith("scrobbled") and response['error'].endswith("already"):
@@ -330,6 +333,14 @@ class Scrobbler():
 						self.stoppedWatching()
 					elif response['error'] == "show not found":
 						Debug("[Scrobbler] Show '%s' was not found on trakt.tv, possible malformed XBMC metadata." % self.curVideoInfo['showtitle'])
+
+	def scrobbleNotification(self, info):
+		if not self.curVideoInfo:
+			return
+		
+		if utilities.getSettingAsBool("scrobble_notification"):
+			s = utilities.getFormattedItemName(self.curVideo['type'], info)
+			utilities.notification(utilities.getString(1049), s)
 
 	def watchlistTagCheck(self):
 		if not utilities.isMovie(self.curVideo['type']):

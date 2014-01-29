@@ -366,6 +366,7 @@ class traktAPI(object):
 			url = "%s/%s/watching/%s" % (self.__baseURL, type, self.__apikey)
 			Debug("[traktAPI] watching(url: %s, data: %s)" % (url, str(data)))
 			if getSettingAsBool('simulate_scrobbling'):
+				Debug("[traktAPI] Simulating response.")
 				return {'status': 'success'}
 			else:
 				return self.traktRequest('POST', url, data, passVersions=True)
@@ -386,6 +387,7 @@ class traktAPI(object):
 			url = "%s/%s/scrobble/%s" % (self.__baseURL, type, self.__apikey)
 			Debug("[traktAPI] scrobble(url: %s, data: %s)" % (url, str(data)))
 			if getSettingAsBool('simulate_scrobbling'):
+				Debug("[traktAPI] Simulating response.")
 				return {'status': 'success'}
 			else:
 				return self.traktRequest('POST', url, data, returnOnFailure=True, passVersions=True)
@@ -406,6 +408,7 @@ class traktAPI(object):
 			url = "%s/%s/cancelwatching/%s" % (self.__baseURL, type, self.__apikey)
 			Debug("[traktAPI] cancelWatching(url: %s)" % url)
 			if getSettingAsBool('simulate_scrobbling'):
+				Debug("[traktAPI] Simulating response.")
 				return {'status': 'success'}
 			else:
 				return self.traktRequest('POST', url)
