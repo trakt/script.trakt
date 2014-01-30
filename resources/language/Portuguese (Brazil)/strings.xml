@@ -25,7 +25,9 @@
 	<string id="1044">Durante divulgação, atualizar ID dos filmes caso estiver faltando</string>
 	<string id="1045">Durante divulgação, atualizar ID das séries caso estiver faltando</string>	
 	<string id="1046">Enviar divulgação ao buscar vídeo (seek)</string>
-	<string id="1047">Enviar divulgação ao resumir vídeo</string>    
+	<string id="1047">Enviar divulgação ao resumir vídeo</string>
+	<string id="1048">Mostrar notificação da divulgação</string>
+	<string id="1049">trakt.tv - Divulgado</string>    
 	<string id="1050">Exclusões</string>
 	<string id="1051">Excluir TV Ao Vivo</string>
 	<string id="1052">Excluir fontes HTTP</string>	
