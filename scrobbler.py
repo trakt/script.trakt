@@ -305,6 +305,8 @@ class Scrobbler():
 			if not response is None and 'status' in response:
 				if response['status'] == "success":
 					self.watchlistTagCheck()
+					response['title'] = response['movie']['title']
+					response['year'] = response['movie']['year']
 					self.scrobbleNotification(response)
 					Debug("[Scrobbler] Scrobble response: %s" % str(response))
 				elif response['status'] == "failure":
