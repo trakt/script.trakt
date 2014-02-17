@@ -319,7 +319,7 @@ class traktAPI(object):
 
 	# url: http://api.trakt.tv/account/settings/<apikey>
 	# returns: all settings for authenticated user
-	def getAccountSettings(self, force):
+	def getAccountSettings(self, force=False):
 		_interval = (60 * 60 * 24 * 7) - (60 * 60) # one week less one hour
 
 		_next = getSettingAsInt('trakt_settings_last') + _interval
