@@ -551,7 +551,8 @@ class Sync():
 		for movie in movies:
 			if self.checkExclusion(movie['file']):
 				continue
-			movie['last_played'] = utilities.sqlDateToUnixDate(movie['lastplayed'])
+			if movie['lastplayed']:
+				movie['last_played'] = utilities.sqlDateToUnixDate(movie['lastplayed'])
 			movie['plays'] = movie.pop('playcount')
 			movie['in_collection'] = True
 			movie['imdb_id'] = ""

@@ -117,7 +117,11 @@ def sqlDateToUnixDate(date):
 	if not date:
 		return 0
 	t = time.strptime(date, "%Y-%m-%d %H:%M:%S")
-	return int(time.mktime(t))
+	try:
+		utime = int(time.mktime(t))
+	except OverflowError:
+		utime = None
+	return utime
 
 def chunks(l, n):
 	return [l[i:i+n] for i in range(0, len(l), n)]
