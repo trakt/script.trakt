@@ -59,8 +59,8 @@ class Sync():
 		self.updateProgress(10, line1=utilities.getString(1485), line2=utilities.getString(1486))
 
 		Debug('[Episodes Sync] Getting episode collection from trakt.tv')
-		shows = self.traktapi.getShowLibrary()
-		if not isinstance(shows, list):
+		library_shows = self.traktapi.getShowLibrary()
+		if not isinstance(library_shows, list):
 			Debug("[Episodes Sync] Invalid trakt.tv show list, possible error getting data from trakt, aborting trakt.tv collection update.")
 			return False
 
@@ -72,10 +72,15 @@ class Sync():
 			Debug("[Episodes Sync] Invalid trakt.tv watched show list, possible error getting data from trakt, aborting trakt.tv watched update.")
 			return False
 
+		shows = []
 		i = 0
-		x = float(len(shows))
+		x = float(len(library_shows))
 		# reformat show array
-		for show in shows:
+		for show in library_shows:
+			if show['title'] is None and show['imdb_id'] is None and show['tvdb_id'] is None:
+				# has no identifing values, skip it
+				continue
+
 			y = {}
 			w = {}
 			for s in show['seasons']:
@@ -88,7 +93,9 @@ class Sync():
 				show['imdb_id'] = ""
 			if show['tvdb_id'] is None:
 				show['tvdb_id'] = ""
-			
+
+			shows.append(show)
+
 			i = i + 1
 			y = ((i / x) * 8) + 12
 			self.updateProgress(int(y), line2=utilities.getString(1488))
@@ -96,6 +103,10 @@ class Sync():
 		i = 0
 		x = float(len(watched_shows))
 		for watched_show in watched_shows:
+			if watched_show['title'] is None and watched_show['imdb_id'] is None and watched_show['tvdb_id'] is None:
+				# has no identifing values, skip it
+				continue
+
 			if watched_show['imdb_id'] is None:
 				watched_show['imdb_id'] = ""
 			if watched_show['tvdb_id'] is None:
