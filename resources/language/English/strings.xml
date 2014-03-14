@@ -16,6 +16,8 @@
 	<string id="1033">Rate each playlist item</string>
 	<string id="1034">Minimum percent watched to display rate dialog</string>
 	<string id="1035">Allow re-rating of media</string>
+	<string id="1036">Default rating (Simple)</string>
+	<string id="1037">Default rating (Advanced)</string>
 	
 	<!-- Scrobbling Settings -->
 	<string id="1040">Scrobbling</string>
