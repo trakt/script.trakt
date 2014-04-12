@@ -7,6 +7,7 @@ import xbmcgui
 import math
 import time
 import copy
+import re
 
 try:
 	import simplejson as json
@@ -18,6 +19,21 @@ __addon__ = xbmcaddon.Addon('script.trakt')
 
 # make strptime call prior to doing anything, to try and prevent threading errors
 time.strptime("1970-01-01 12:00:00", "%Y-%m-%d %H:%M:%S")
+
+REGEX_EXPRESSIONS = [ '[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
+                      '[\._ \-]([0-9]+)x([0-9]+)([^\\/]*)',                     # foo.1x09
+                      '[\._ \-]([0-9]+)([0-9][0-9])([\._ \-][^\\/]*)',          # foo.109
+                      '([0-9]+)([0-9][0-9])([\._ \-][^\\/]*)',
+                      '[\\\\/\\._ -]([0-9]+)([0-9][0-9])[^\\/]*',
+                      'Season ([0-9]+) - Episode ([0-9]+)[^\\/]*',              # Season 01 - Episode 02
+                      'Season ([0-9]+) Episode ([0-9]+)[^\\/]*',                # Season 01 Episode 02
+                      '[\\\\/\\._ -][0]*([0-9]+)x[0]*([0-9]+)[^\\/]*',
+                      '[[Ss]([0-9]+)\]_\[[Ee]([0-9]+)([^\\/]*)',                #foo_[s01]_[e01]
+                      '[\._ \-][Ss]([0-9]+)[\.\-]?[Ee]([0-9]+)([^\\/]*)',       #foo, s01e01, foo.s01.e01, foo.s01-e01
+                      's([0-9]+)ep([0-9]+)[^\\/]*',                             #foo - s01ep03, foo - s1ep03
+                      '[Ss]([0-9]+)[][ ._-]*[Ee]([0-9]+)([^\\\\/]*)$',
+                      '[\\\\/\\._ \\[\\(-]([0-9]+)x([0-9]+)([^\\\\/]*)$'
+                     ]
 
 def Debug(msg, force = False):
 	if(getSettingAsBool('debug') or force):
@@ -31,7 +47,7 @@ def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')
 
 def showSettings():
 	__addon__.openSettings()
-	
+
 def getSetting(setting):
     return __addon__.getSetting(setting).strip()
 
@@ -278,3 +294,36 @@ def findShow(show, shows, returnIndex=False):
 	if result is None and show['title'] and 'year' in show and show['year'] > 0:
 		result = findInList(shows, returnIndex=returnIndex, title=show['title'], year=show['year'])
 	return result
+
+def regex_tvshow(compare, file, sub = ""):
+	sub_info = ""
+	tvshow = 0
+
+  	for regex in REGEX_EXPRESSIONS:
+  		response_file = re.findall(regex, file)
+  		if len(response_file) > 0 :
+  			Debug("regex_tvshow(): Regex File Se: %s, Ep: %s," % (str(response_file[0][0]),str(response_file[0][1]),) )
+  			tvshow = 1
+  			if not compare :
+  				title = re.split(regex, file)[0]
+  				for char in ['[', ']', '_', '(', ')','.','-']:
+  					title = title.replace(char, ' ')
+  				if title.endswith(" "): title = title[:-1]
+  				return title,response_file[0][0], response_file[0][1]
+  			else:
+  				break
+
+  	if (tvshow == 1):
+  		for regex in regex_expressions:
+  			response_sub = re.findall(regex, sub)
+  			if len(response_sub) > 0 :
+  				try :
+  					sub_info = "Regex Subtitle Ep: %s," % (str(response_sub[0][1]),)
+  					if (int(response_sub[0][1]) == int(response_file[0][1])):
+  						return True
+  				except: pass
+  		return False
+  	if compare :
+  		return True
+  	else:
+  		return "","",""
