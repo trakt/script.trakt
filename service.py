@@ -424,7 +424,7 @@ class traktPlayer(xbmc.Player):
 			try:
 				_filename = self.getPlayingFile()
 			except:
-				utilities.Debug("[traktPlayer] onPlayBackStarted() - Exception trying to get playing filename, player stopped suddently.")
+				utilities.Debug("[traktPlayer] onPlayBackStarted() - Exception trying to get playing filename, player suddenly stopped.")
 				return
 
 			if utilities.checkScrobblingExclusion(_filename):
@@ -444,6 +444,8 @@ class traktPlayer(xbmc.Player):
 				episode = xbmc.getInfoLabel('VideoPlayer.Episode')
 				showtitle = xbmc.getInfoLabel('VideoPlayer.TVShowTitle')
 				year = xbmc.getInfoLabel('VideoPlayer.Year')
+				
+				utilities.Debug("[traktPlayer] info - showtitle:"+ showtitle +", Year:"+ year +", Season:"+ season +", Episode:"+ episode)
 
 				if season and episode and showtitle:
 					# we have season, episode and show title, can scrobble this as an episode
@@ -463,6 +465,14 @@ class traktPlayer(xbmc.Player):
 					data['year'] = int(year)
 					data['title'] = xbmc.getInfoLabel('VideoPlayer.Title')
 					utilities.Debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'movie' - %s (%d)." % (data['title'], data['year']))
+				elif showtitle:
+					title, season, episode = utilities.regex_tvshow(False, showtitle)
+					data['type'] = 'episode'
+					data['season'] = int(season)
+					data['episode'] = int(episode)
+					data['showtitle'] = title
+					data['title'] = title
+					utilities.Debug("[traktPlayer] onPlayBackStarted() - Title:"+title+", showtitle:"+showtitle+", season:"+season+", episode:"+episode)
 				else:
 					utilities.Debug("[traktPlayer] onPlayBackStarted() - Non-library file, not enough data for scrobbling, skipping.")
 					return
