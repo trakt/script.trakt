@@ -245,6 +245,8 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 		self.rating_type = rating_type
 		self.rating = None
 		self.rerate = rerate
+		self.default_simple = utils.getSettingAsInt('rating_default_simple')
+		self.default_advanced = utils.getSettingAsInt('rating_default_advanced')
 
 	def onInit(self):
 		self.getControl(10014).setVisible(self.rating_type == 'simple')
@@ -255,12 +257,12 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 
 		rateID = None
 		if self.rating_type == 'simple':
-			rateID = 10030
+			rateID = 10030 + self.default_simple
 			if self.rerate:
 				if self.media['rating'] == "hate":
 					rateID = 10031
 		else:
-			rateID = 11037
+			rateID = 11029 + self.default_advanced
 			if self.rerate and int(self.media['rating_advanced']) > 0:
 				rateID = 11029 + int(self.media['rating_advanced'])
 		self.setFocus(self.getControl(rateID))
