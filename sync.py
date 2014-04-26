@@ -640,11 +640,21 @@ class Sync():
 
 		self.updateProgress(20, line2="%i %s" % (len(movies), utilities.getString(1426)))
 
-		params = {'movies': [self.sanitizeMovieData(movie) for movie in movies]}
-		if self.simulate:
-			Debug("[Movies Sync] %s" % str(params))
-		else:
-			self.traktapi.addMovie(params)
+		chunked_movies = utilities.chunks([self.sanitizeMovieData(movie) for movie in movies], 50)
+		i = 0
+		x = float(len(chunked_movies))
+		for chunk in chunked_movies:
+			if self.isCanceled():
+				return
+			params = {'movies': chunk}
+			if self.simulate:
+				Debug("[Movies Sync] %s" % str(params))
+			else:
+				self.traktapi.addMovie(params)
+
+			i = i + 1
+			y = ((i / x) * 20) + 20
+			self.updateProgress(int(y), line2=utilities.getString(1477))
 
 		self.updateProgress(40, line2=utilities.getString(1468) % len(movies))
 
@@ -660,11 +670,21 @@ class Sync():
 
 		self.updateProgress(80, line2="%i %s" % (len(movies), utilities.getString(1444)))
 		
-		params = {'movies': [self.sanitizeMovieData(movie) for movie in movies]}
-		if self.simulate:
-			Debug("[Movies Sync] %s" % str(params))
-		else:
-			self.traktapi.removeMovie(params)
+		chunked_movies = utilities.chunks([self.sanitizeMovieData(movie) for movie in movies], 50)
+		i = 0
+		x = float(len(chunked_movies))
+		for chunk in chunked_movies:
+			if self.isCanceled():
+				return
+			params = {'movies': chunk}
+			if self.simulate:
+				Debug("[Movies Sync] %s" % str(params))
+			else:
+				self.traktapi.removeMovie(params)
+
+			i = i + 1
+			y = ((i / x) * 20) + 80
+			self.updateProgress(int(y), line2=utilities.getString(1476))
 
 		self.updateProgress(98, line2=utilities.getString(1475) % len(movies))
 
@@ -681,11 +701,21 @@ class Sync():
 		self.updateProgress(40, line2="%i %s" % (len(movies), utilities.getString(1428)))
 
 		# Send request to update playcounts on trakt.tv
-		params = {'movies': [self.sanitizeMovieData(movie) for movie in movies]}
-		if self.simulate:
-			Debug("[Movies Sync] %s" % str(params))
-		else:
-			self.traktapi.updateSeenMovie(params)
+		chunked_movies = utilities.chunks([self.sanitizeMovieData(movie) for movie in movies], 50)
+		i = 0
+		x = float(len(chunked_movies))
+		for chunk in chunked_movies:
+			if self.isCanceled():
+				return
+			params = {'movies': chunk}
+			if self.simulate:
+				Debug("[Movies Sync] %s" % str(params))
+			else:
+				self.traktapi.updateSeenMovie(params)
+
+			i = i + 1
+			y = ((i / x) * 20) + 40
+			self.updateProgress(int(y), line2=utilities.getString(1478))
 
 		self.updateProgress(60, line2=utilities.getString(1470) % len(movies))
 

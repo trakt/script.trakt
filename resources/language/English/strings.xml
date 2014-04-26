@@ -106,11 +106,13 @@
 	<!-- Sync Movies - add to trakt -->
 	<string id="1467">trakt.tv movie collection is up to date, no movies to add.</string>
 	<string id="1426">movie(s) will be added to trakt collection</string>
+	<string id="1477">Adding movies to trakt.tv collection</string>
 	<string id="1468">%i movie(s) were added to your trakt.tv collection.</string>
 
 	<!-- Sync Movies - update trakt -->
 	<string id="1469">trakt.tv movie playcount is up to date.</string>
 	<string id="1428">movie(s) playcount will be updated on trakt</string>
+	<string id="1478">Updating movie play counts on trakt.tv</string>
 	<string id="1470">Play counts updated for %i movie(s) on trakt.tv</string>
 	
 	<!-- Sync Movies - update xbmc -->
@@ -122,6 +124,7 @@
 	<!-- Sync Movies - clean trakt -->
 	<string id="1474">trakt.tv movie collection is up to date.</string>
 	<string id="1444">movie(s) will be removed from trakt collection</string>
+	<string id="1476">Removing movies from trakt.tv collection</string>
 	<string id="1475">%i movie(s) were removed from your trakt.tv collection</string>
 
 	<!-- Sync Movies - complete -->
