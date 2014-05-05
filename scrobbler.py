@@ -134,6 +134,12 @@ class Scrobbler():
 			elif utilities.isEpisode(self.curVideo['type']):
 				if 'id' in self.curVideo:
 					self.curVideoInfo = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
+					if not self.curVideoInfo: # getEpisodeDetailsFromXbmc was empty
+						Debug("[Scrobbler] Episode details from XBMC was empty, ID (%d) seems invalid, aborting further scrobbling of this episode." % self.curVideo['id'])
+						self.curVideo = None
+						self.isPlaying = False
+						self.watchedTime = 0
+						return
 					if utilities.getSettingAsBool('rate_episode'):
 						# pre-get sumamry information, for faster rating dialog.
 						Debug("[Scrobbler] Episode rating is enabled, pre-fetching summary information.")
