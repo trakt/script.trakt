@@ -178,7 +178,7 @@
 	<!-- Tagger Settings -->
 	<string id="1600">Tagowanie</string>
 	<string id="1601">Włącz tagowanie</string>
-	<string id="1602"Aktualizuj tagi po synchronizacji biblioteki</string>
+	<string id="1602">Aktualizuj tagi po synchronizacji biblioteki</string>
 	<string id="1603">Stwórz tagi z listy oglądanych</string>
 	<string id="1604">Stwórz tagi z osobistych ocen</string>
 	<string id="1605">Minimalna ocena, aby stworzyć tag</string>
