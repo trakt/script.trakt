@@ -8,6 +8,8 @@
 	<string id="1018">Startup Delay</string>
 	<string id="1019">Force a reload of settings from trakt.tv, save settings when finished</string>
 	<string id="1020">Default script action</string>
+	<string id="1021">Manual Sync</string>
+	<string id="1022">Manage Lists</string>
 	
 	<!-- Rating Settings -->
 	<string id="1030">Rating</string>
@@ -18,6 +20,8 @@
 	<string id="1035">Allow re-rating of media</string>
 	<string id="1036">Default rating (Simple)</string>
 	<string id="1037">Default rating (Advanced)</string>
+	<string id="1038">Love</string>
+	<string id="1039">Hate</string>
 	
 	<!-- Scrobbling Settings -->
 	<string id="1040">Scrobbling</string>
