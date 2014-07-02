@@ -203,7 +203,12 @@ class traktAPI(object):
 				if hideResponse:
 					Debug("[traktAPI] traktRequest(): (%i) JSON response recieved, response not logged" % i)
 				else:
-					Debug("[traktAPI] traktRequest(): (%i) JSON response: '%s'" % (i, str(data)))
+					text = str(data)
+					if len(text) > 1000:
+						text = text[:1000]
+						Debug("[traktAPI] traktRequest(): (%i) JSON response (snippet): '%s'" % (i, text))
+					else:
+						Debug("[traktAPI] traktRequest(): (%i) JSON response: '%s'" % (i, text))
 			except ValueError:
 				# malformed json response
 				Debug("[traktAPI] traktRequest(): (%i) Bad JSON response: '%s'" % (i, raw))
