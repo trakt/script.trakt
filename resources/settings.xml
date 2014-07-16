@@ -5,7 +5,7 @@
 		<setting id="password" type="text" option="hidden" label="1014" default="" />
 		<setting id="retries" type="slider" label="1017" range="1,1,10" default="5" option="int"/>
 		<setting id="startup_delay" type="slider" label="1018" range="0,30" default="0" option="int"/>
-		<setting id="default_action" type="enum" label="1020" values="Manual Sync|Manage Lists" default="0" />
+		<setting id="default_action" type="enum" label="1020" lvalues="1021|1022" default="0" />
 		<setting type="action" label="1019" action="RunScript(script.trakt,action=loadsettings)"/>
 	</category>
 	<category label="1050"><!-- Exclusions -->
@@ -54,7 +54,7 @@
 		<setting id="rate_min_view_time" type="slider" label="1034" range="0,5,100" default="75"/>
 		<setting id="rate_rerate" type="bool" label="1035" default="false"/>
 		<setting type="sep"/>
-		<setting id="rating_default_simple" type="enum" label="1036" values="Love|Hate" default="0"/>
+		<setting id="rating_default_simple" type="enum" label="1036" lvalues="1038|1039" default="0"/>
 		<setting id="rating_default_advanced" type="slider" label="1037" range="1,10" default="8" option="int"/>
 	</category>
 	<category label="1600"><!-- Tagging -->
@@ -63,7 +63,7 @@
 		<setting id="tagging_watchlists" type="bool" label="1603" default="false"/>
 		<setting id="tagging_ratings" type="bool" label="1604" default="false"/>
 		<setting id="tagging_ratings_min" type="slider" label="1605" range="1,10" default="8" option="int"/>
-		<setting id="tagging_list_privacy" type="enum" label="1606" values="Public|Friends|Private" default="0"/>
+		<setting id="tagging_list_privacy" type="enum" label="1606" lvalues="1671|1672|1673" default="0"/>
 		<setting id="tagging_list_allowshouts" type="bool" label="1607" default="false"/>
 		<setting id="tagging_notifications" type="bool" label="1608" default="true"/>
 	</category>
