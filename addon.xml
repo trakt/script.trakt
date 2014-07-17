@@ -28,7 +28,7 @@
 
 What can this addon do?
 
-- Automatically scrobble all TV episodes and movies you are watching 
+- Automatically scrobble all TV episodes and movies you are watching
 - Sync your TV episode and movie collections to trakt (triggered after a library update)
 - Auto clean your trakt collection so that it matches up with XBMC
 - Keep watched statuses synced between XBMC and trakt
@@ -66,6 +66,6 @@ Special thanks to all who contributed to this plugin! Check the commit history a
 		<website>http://trakt.tv</website>
 		<source>https://github.com/trakt/script.trakt</source>
 		<forum>http://forum.xbmc.org/showthread.php?tid=138745</forum>
-		<email></email>    
+		<email></email>
 	</extension>
 </addon>
