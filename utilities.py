@@ -35,10 +35,6 @@ REGEX_EXPRESSIONS = [ '[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
                       '[\\\\/\\._ \\[\\(-]([0-9]+)x([0-9]+)([^\\\\/]*)$'
                      ]
 
-def Debug(msg, error=False):
-	level = xbmc.LOGERROR if error else xbmc.LOGDEBUG
-	xbmc.log("[trakt] %s" % msg, level=level)
-
 def Debug(msg, force = False):
 	if(getSettingAsBool('debug') or force):
 		try:
