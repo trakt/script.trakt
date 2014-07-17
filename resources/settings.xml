@@ -10,7 +10,7 @@
 	</category>
 	<category label="1050"><!-- Exclusions -->
 		<setting id="ExcludeLiveTV" type="bool" label="1051" default="false"/>
-		<setting id="ExcludeHTTP" type="bool" label="1052" default="false"/>		
+		<setting id="ExcludeHTTP" type="bool" label="1052" default="false"/>
 		<setting id="ExcludePathOption" type="bool" label="1053" default="false" />
 		<setting id="ExcludePath" type="folder" source="video" label="1054" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
 		<setting id="ExcludePathOption2" type="bool" label="1053" default="false" visible= "eq(-2,true)" enable="eq(-2,true)" />
@@ -68,6 +68,8 @@
 		<setting id="tagging_notifications" type="bool" label="1608" default="true"/>
 	</category>
 	<category label="1700"><!-- Debug -->
+		<setting label="1720" type="lsep"/>
+		<setting id="debug" type="bool" label="1701" default="true"/>
 		<setting type="sep"/>
 		<setting label="1721" type="lsep"/>
 		<setting id="simulate_scrobbling" type="bool" label="1702" default="false"/>

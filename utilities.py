@@ -39,6 +39,13 @@ def Debug(msg, error=False):
 	level = xbmc.LOGERROR if error else xbmc.LOGDEBUG
 	xbmc.log("[trakt] %s" % msg, level=level)
 
+def Debug(msg, force = False):
+	if(getSettingAsBool('debug') or force):
+		try:
+			print "[trakt] " + msg
+		except UnicodeEncodeError:
+			print "[trakt] " + msg.encode('utf-8', 'ignore')
+
 def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')):
 	xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message, time, icon))
 
@@ -60,7 +67,7 @@ def getSettingAsFloat(setting):
 def getSettingAsInt(setting):
     try:
         return int(getSettingAsFloat(setting))
-    except ValueError:		
+    except ValueError:
         return 0
 
 def getSettingAsList(setting):
@@ -87,7 +94,7 @@ def getProperty(property):
 
 def getPropertyAsBool(property):
 	return getProperty(property) == "True"
-	
+
 def setProperty(property, value):
 	xbmcgui.Window(10000).setProperty(property, value)
 
@@ -144,17 +151,17 @@ def checkScrobblingExclusion(fullpath):
 
 	if not fullpath:
 		return True
-	
+
 	Debug("checkScrobblingExclusion(): Checking exclusion settings for '%s'." % fullpath)
-	
+
 	if (fullpath.find("pvr://") > -1) and getSettingAsBool('ExcludeLiveTV'):
 		Debug("checkScrobblingExclusion(): Video is playing via Live TV, which is currently set as excluded location.")
 		return True
-				
+
 	if (fullpath.find("http://") > -1) and getSettingAsBool('ExcludeHTTP'):
 		Debug("checkScrobblingExclusion(): Video is playing via HTTP source, which is currently set as excluded location.")
 		return True
-		
+
 	ExcludePath = getSetting('ExcludePath')
 	if ExcludePath != "" and getSettingAsBool('ExcludePathOption'):
 		if (fullpath.find(ExcludePath) > -1):
@@ -172,7 +179,7 @@ def checkScrobblingExclusion(fullpath):
 		if (fullpath.find(ExcludePath3) > -1):
 			Debug("checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 3.")
 			return True
-	
+
 	return False
 
 def getFormattedItemName(type, info, short=False):
@@ -217,14 +224,14 @@ def getEpisodeDetailsFromXbmc(libraryId, fields):
 		return None
 
 	show_data = getShowDetailsFromXBMC(result['episodedetails']['tvshowid'], ['year', 'imdbnumber'])
-	
+
 	if not show_data:
 		Debug("getEpisodeDetailsFromXbmc(): Result from getShowDetailsFromXBMC() was empty.")
 		return None
-		
+
 	result['episodedetails']['tvdb_id'] = show_data['imdbnumber']
 	result['episodedetails']['year'] = show_data['year']
-	
+
 	try:
 		return result['episodedetails']
 	except KeyError:
