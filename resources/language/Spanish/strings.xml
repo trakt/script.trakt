@@ -7,6 +7,9 @@
 	<string id="1017">Número de reintentos</string>
 	<string id="1018">Inicio retrasado</string>
 	<string id="1019">Forzar actualización de la configuración al guardar los cambios</string>
+	<string id="1020">Acciones por Defecto</string>
+	<string id="1021">Sincronización Manual</string>
+	<string id="1022">Administrar Listas</string>
 	
 	<!-- Rating Settings -->
 	<string id="1030">Valorar</string>
@@ -15,6 +18,10 @@
 	<string id="1033">Valorar cada elemento de la lista de reproducción</string>
 	<string id="1034">Porcentaje mínimo antes de hacer la valoración</string>
 	<string id="1035">Permitir volver a valorar contenido</string>
+	<string id="1036">Valoración por Defecto (Simple)</string>
+	<string id="1037">Valoración por Defecto (Avanzada)</string>
+	<string id="1038">Love</string>
+	<string id="1039">Hate</string>
 	
 	<!-- Scrobbling Settings -->
 	<string id="1040">Scrobbling</string>
@@ -23,6 +30,10 @@
 	<string id="1043">Porcentaje mínimo antes de hacer scrobble</string>
 	<string id="1044">Durante el scrobbling, actualizar el ID de la Película si no existe</string>
 	<string id="1045">Durante el scrobbling, actualizar el ID de la Serie si no existe</string>
+	<string id="1046">Al Rebobinar enviar aviso de Visualización</string>
+	<string id="1047">Al Resumir enviar aviso de Visualización</string>
+	<string id="1048">Mostrar notificación al hacer Scrobble</string>
+	<string id="1049">trakt.tv - Scrobbled</string>
 	<string id="1050">Exclusiones</string>
 	<string id="1051">Excluir TV en vivo</string>
 	<string id="1052">Excluir fuentes HTTP</string>	
@@ -79,7 +90,8 @@
 	<string id="1413">Limpiar Colección de Películas en trakt.tv</string>
 	<string id="1414">Limpiar Colección de Episodios en trakt.tv</string>
 	<string id="1416">Mostrar marcados como notificación de visto</string>
-	
+	<string id="1417">Ocultar las notificaciones durante la repruducción</string>
+
 	<!-- Sync Notifications -->
 	<string id="1420">Sincronización iniciada</string>
 	<string id="1421">Sincronización completada</string>
@@ -98,11 +110,13 @@
 	<!-- Sync Movies - add to trakt -->
 	<string id="1467">La Colección de Películas de trakt.tv está actualizada.</string>
 	<string id="1426">película(s) se añadirán a la Colección de trakt.tv</string>
+	<string id="1477">Añadir Películas a la colección de trakt.tv</string>
 	<string id="1468">%i película(s) fueron añadidas a tu Colección de trakt.tv</string>
 
 	<!-- Sync Movies - update trakt -->
 	<string id="1469">El contador de reproducciones de Películas en trakt.tv está actualizado.</string>
 	<string id="1428">película(s) verán el contador de reproducciones actualizado en trakt.tv</string>
+	<string id="1478">Actualizar el contador de reproducciones en trakt.tv</string>
 	<string id="1470">El contador de reproducciones de %i película(s) fue actualizado en trakt.tv</string>
 	
 	<!-- Sync Movies - update xbmc -->
@@ -114,6 +128,7 @@
 	<!-- Sync Movies - clean trakt -->
 	<string id="1474">La Colección de Películas de trakt.tv está actualizada.</string>
 	<string id="1444">película(s) serán eliminadas de tu Colección en trakt.tv</string>
+	<string id="1476">Elimando Películas de la Colección de trakt.tv</string>
 	<string id="1475">%i película(s) fueron eliminadas de tu Colección en trakt.tv</string>
 
 	<!-- Sync Movies - complete -->
@@ -142,7 +157,7 @@
 
 	<!-- Sync Episodes - update trakt -->
 	<string id="1438">Comprobando Episodios vistos en trakt.tv</string>
-	<string id="1492">El contador de reproducciones de Episodios en trakt.tv esta actualizado.</string>
+	<string id="1492">El contador de reproducciones de Episodios en trakt.tv está actualizado.</string>
 	<string id="1439">serie(s) tiene Episodios que no están marcados como vistos.</string>
 	<string id="1440">episodio(s) serán actualizados.</string>
 	
@@ -161,7 +176,7 @@
 
 	<!-- Sync Episodes - complete -->
 	<string id="1442">Sincronización de Episodios completada.</string>
-	
+
 	<!-- Sync - manual mark watched -->
 	<string id="1550">Marcado como visto en trakt.tv</string>
 	<string id="1551">Fallo al marcar como visto en trakt.tv</string>
@@ -216,4 +231,17 @@
 	<string id="1704">Simular Etiquetas</string>
 	<string id="1720">Registrar Eventos</string>
 	<string id="1721">Simular configuración (La simulación no guarda cambios en XBMC o trakt.tv)</string>
+
+	<!-- Context Menu Entries -->
+	<string id="2000">Administrar Listas de Películas</string>
+	<string id="2001">Administrar Listas de Series</string>
+	<string id="2010">Eliminar de la Watchlist</string>
+	<string id="2020">Añadir a la Watchlist</string>
+	<string id="2030">Valorar esta Película</string>
+	<string id="2031">Valorar esta Serie</string>
+	<string id="2032">Valorar este Episodio</string>
+	<string id="2040">Conmutar estado de Visto</string>
+	<string id="2050">Administrar Todas las Listas</string>
+	<string id="2060">Actualizar Todas las Etiquetas</string>
+	<string id="2070">Sincronizar Libraría</string>
 </strings>
