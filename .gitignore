@@ -2,3 +2,5 @@
 *.pyo
 .DS*
 .pylint_rc
+/.project
+/.pydevproject

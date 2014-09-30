@@ -200,7 +200,7 @@ class traktService:
 			
 		if 'dbid' in data:
 			utilities.Debug("Getting data for manual %s of library '%s' with ID of '%s'" % (action, media_type, data['dbid']))
-		elif 'remoteitd' in data:
+		elif 'remoteid' in data:
 			if 'season' in data:
 				utilities.Debug("Getting data for manual %s of non-library '%s' S%02dE%02d, with ID of '%s'." % (action, media_type, data['season'], data['episode'], data['remoteid']))
 			else:
@@ -214,7 +214,7 @@ class traktService:
 			summaryInfo = globals.traktapi.getMovieSummary(data['imdbnumber'])
 		
 		if not summaryInfo is None:
-			if utilities.isMovie(media_type) or utilities.isShow(media_type):
+			if 'dbid' in data and (utilities.isMovie(media_type) or utilities.isShow(media_type)):
 				summaryInfo['xbmc_id'] = data['dbid']
 
 			if action == 'rate':
