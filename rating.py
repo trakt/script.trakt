@@ -161,7 +161,7 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 		s = utils.getFormattedItemName(media_type, media)
 		if 'status' in data and data['status'] == "success":
 
-			if tagging.isTaggingEnabled() and tagging.isRatingsEnabled():
+			if 'xbmc_id' in media and tagging.isTaggingEnabled() and tagging.isRatingsEnabled():
 				if utils.isMovie(media_type) or utils.isShow(media_type):
 
 					id = media['xbmc_id']
