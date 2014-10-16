@@ -413,7 +413,7 @@ class Sync():
                 for episode in show['seasons'][season]:
                     episodes.append({'episodeid': show['seasons'][season][episode]['id'], 'playcount': 1})
 
-        #split episode list into chunks of 50
+        # split episode list into chunks of 50
         chunked_episodes = utilities.chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetEpisodeDetails", "params": episodes[i], "id": i} for i in range(len(episodes))], 50)
         i = 0
         x = float(len(chunked_episodes))
@@ -433,7 +433,7 @@ class Sync():
 
     def syncEpisodes(self):
         if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
-            notification('%s %s' % (utilities.getString(1400), utilities.getString(1406)), utilities.getString(1420)) #Sync started
+            notification('%s %s' % (utilities.getString(1400), utilities.getString(1406)), utilities.getString(1420))  # Sync started
         if self.show_progress and not self.run_silent:
             progress.create("%s %s" % (utilities.getString(1400), utilities.getString(1406)), line1=" ", line2=" ", line3=" ")
 
@@ -468,7 +468,7 @@ class Sync():
             self.traktRemoveEpisodes(traktShowsRemove)
 
         if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
-            notification('%s %s' % (utilities.getString(1400), utilities.getString(1406)), utilities.getString(1421)) #Sync complete
+            notification('%s %s' % (utilities.getString(1400), utilities.getString(1406)), utilities.getString(1421))  # Sync complete
 
         if not self.isCanceled() and self.show_progress and not self.run_silent:
             self.updateProgress(100, line1=" ", line2=utilities.getString(1442), line3=" ")
@@ -731,7 +731,7 @@ class Sync():
 
         self.updateProgress(60, line2="%i %s" % (len(movies), utilities.getString(1430)))
 
-        #split movie list into chunks of 50
+        # split movie list into chunks of 50
         chunked_movies = utilities.chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": movies[i]['movieid'], "playcount": movies[i]['plays']}, "id": i} for i in range(len(movies))], 50)
         i = 0
         x = float(len(chunked_movies))
@@ -751,7 +751,7 @@ class Sync():
 
     def syncMovies(self):
         if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
-            notification('%s %s' % (utilities.getString(1400), utilities.getString(1402)), utilities.getString(1420)) #Sync started
+            notification('%s %s' % (utilities.getString(1400), utilities.getString(1402)), utilities.getString(1420))  # Sync started
         if self.show_progress and not self.run_silent:
             progress.create("%s %s" % (utilities.getString(1400), utilities.getString(1402)), line1=" ", line2=" ", line3=" ")
 
@@ -790,7 +790,7 @@ class Sync():
             progress.close()
 
         if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
-            notification('%s %s' % (utilities.getString(1400), utilities.getString(1402)), utilities.getString(1421)) #Sync complete
+            notification('%s %s' % (utilities.getString(1400), utilities.getString(1402)), utilities.getString(1421))  # Sync complete
 
         Debug("[Movies Sync] Movies on trakt.tv (%d), movies in XBMC (%d)." % (len(traktMovies), self.countMovies(xbmcMovies)))
         Debug("[Movies Sync] Complete.")

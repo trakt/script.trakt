@@ -95,13 +95,13 @@ class SqliteQueue(object):
                     id, obj_buffer = cursor.next()
                     keep_pooling = False
                 except StopIteration:
-                    conn.commit() # unlock the database
+                    conn.commit()  # unlock the database
                     if not sleep_wait:
                         keep_pooling = False
                         continue
                     tries += 1
                     sleep(wait)
-                    wait = min(max_wait, tries/10 + wait)
+                    wait = min(max_wait, tries / 10 + wait)
             if id:
                 conn.execute(self._del, (id,))
                 return loads(str(obj_buffer))

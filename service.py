@@ -25,7 +25,7 @@ class traktService:
     watcher = None
     syncThread = None
     dispatchQueue = queue.SqliteQueue()
-    _interval = 10 * 60 # how often to send watching call
+    _interval = 10 * 60  # how often to send watching call
 
     def __init__(self):
         threading.Thread.name = 'trakt'
@@ -123,8 +123,8 @@ class traktService:
         self.dispatchQueue.append({'action': 'loadsettings'})
 
         # setup event driven classes
-        self.Player = traktPlayer(action = self._dispatchQueue)
-        self.Monitor = traktMonitor(action = self._dispatchQueue)
+        self.Player = traktPlayer(action=self._dispatchQueue)
+        self.Monitor = traktMonitor(action=self._dispatchQueue)
 
         # init traktapi class
         globals.traktapi = traktAPI()
@@ -445,7 +445,7 @@ class traktPlayer(xbmc.Player):
                 showtitle = xbmc.getInfoLabel('VideoPlayer.TVShowTitle')
                 year = xbmc.getInfoLabel('VideoPlayer.Year')
 
-                utilities.Debug("[traktPlayer] info - showtitle:"+ showtitle +", Year:"+ year +", Season:"+ season +", Episode:"+ episode)
+                utilities.Debug("[traktPlayer] info - showtitle:" + showtitle + ", Year:" + year + ", Season:" + season + ", Episode:" + episode)
 
                 if season and episode and showtitle:
                     # we have season, episode and show title, can scrobble this as an episode
@@ -472,7 +472,7 @@ class traktPlayer(xbmc.Player):
                     data['episode'] = int(episode)
                     data['showtitle'] = title
                     data['title'] = title
-                    utilities.Debug("[traktPlayer] onPlayBackStarted() - Title:"+title+", showtitle:"+showtitle+", season:"+season+", episode:"+episode)
+                    utilities.Debug("[traktPlayer] onPlayBackStarted() - Title:" + title + ", showtitle:" + showtitle + ", season:" + season + ", episode:" + episode)
                 else:
                     utilities.Debug("[traktPlayer] onPlayBackStarted() - Non-library file, not enough data for scrobbling, skipping.")
                     return

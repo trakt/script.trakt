@@ -210,18 +210,18 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 
 class RatingDialog(xbmcgui.WindowXMLDialog):
     buttons = {
-        10030:	'love',
-        10031:	'hate',
-        11030:	1,
-        11031:	2,
-        11032:	3,
-        11033:	4,
-        11034:	5,
-        11035:	6,
-        11036:	7,
-        11037:	8,
-        11038:	9,
-        11039:	10
+        10030: 'love',
+        10031: 'hate',
+        11030: 1,
+        11031: 2,
+        11032: 3,
+        11033: 4,
+        11034: 5,
+        11035: 6,
+        11036: 7,
+        11037: 8,
+        11038: 9,
+        11039: 10
     }
 
     focus_labels = {

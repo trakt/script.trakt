@@ -61,9 +61,9 @@ def xbmcSetTags(id, type, title, tags):
 
     req = None
     if utils.isMovie(type):
-        req = {"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid" : id, "tag": tags}}
+        req = {"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": id, "tag": tags}}
     elif utils.isShow(type):
-        req = {"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid" : id, "tag": tags}}
+        req = {"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid": id, "tag": tags}}
 
     if utils.getSettingAsBool('simulate_tagging'):
         utils.Debug("[Tagger] %s" % str(req))
@@ -212,7 +212,7 @@ class Tagger():
 
         utils.Debug("[Tagger] Getting watchlist data from trakt.tv")
         w = {}
-        w['movies']	= self.traktapi.getWatchlistMovies()
+        w['movies'] = self.traktapi.getWatchlistMovies()
         w['shows'] = self.traktapi.getWatchlistShows()
 
         if isinstance(w['movies'], list) and isinstance(w['shows'], list):
@@ -287,8 +287,8 @@ class Tagger():
         return None
 
     def xbmcUpdateTags(self, data):
-        chunked = utils.chunks([{"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid" : movie, "tag": data['movies'][movie]}} for movie in data['movies']], 50)
-        chunked.extend(utils.chunks([{"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid" : show, "tag": data['shows'][show]}} for show in data['shows']], 50))
+        chunked = utils.chunks([{"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": movie, "tag": data['movies'][movie]}} for movie in data['movies']], 50)
+        chunked.extend(utils.chunks([{"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid": show, "tag": data['shows'][show]}} for show in data['shows']], 50))
         for chunk in chunked:
             if self.simulate:
                 utils.Debug("[Tagger] %s" % str(chunk))
@@ -876,23 +876,23 @@ class Tagger():
         if xbmcSetTags(data[id_field], data['type'], s, data['tag']):
             utils.notification(utils.getString(1201), utils.getString(1657) % s)
 
-TRAKT_LISTS				= 4
-GROUP_LIST_SETTINGS		= 100
-LIST_PRIVACY_SETTING	= 111
-LIST_OTHER_SETTINGS		= 141
-BUTTON_EDIT_DESC		= 113
-BUTTON_RENAME			= 114
-BUTTON_ADD_LIST			= 15
-BUTTON_OK				= 16
-BUTTON_CANCEL			= 17
-LABEL					= 25
-ACTION_PREVIOUS_MENU2	= 92
-ACTION_PARENT_DIR		= 9
-ACTION_PREVIOUS_MENU	= 10 
-ACTION_SELECT_ITEM		= 7
-ACTION_MOUSE_LEFT_CLICK	= 100
-ACTION_CLOSE_LIST		= [ACTION_PREVIOUS_MENU2, ACTION_PARENT_DIR, ACTION_PREVIOUS_MENU]
-ACTION_ITEM_SELECT		= [ACTION_SELECT_ITEM, ACTION_MOUSE_LEFT_CLICK]
+TRAKT_LISTS = 4
+GROUP_LIST_SETTINGS = 100
+LIST_PRIVACY_SETTING = 111
+LIST_OTHER_SETTINGS = 141
+BUTTON_EDIT_DESC = 113
+BUTTON_RENAME = 114
+BUTTON_ADD_LIST = 15
+BUTTON_OK = 16
+BUTTON_CANCEL = 17
+LABEL = 25
+ACTION_PREVIOUS_MENU2 = 92
+ACTION_PARENT_DIR = 9
+ACTION_PREVIOUS_MENU = 10 
+ACTION_SELECT_ITEM = 7
+ACTION_MOUSE_LEFT_CLICK = 100
+ACTION_CLOSE_LIST = [ACTION_PREVIOUS_MENU2, ACTION_PARENT_DIR, ACTION_PREVIOUS_MENU]
+ACTION_ITEM_SELECT = [ACTION_SELECT_ITEM, ACTION_MOUSE_LEFT_CLICK]
 
 class traktItemListsDialog(xbmcgui.WindowXMLDialog):
 

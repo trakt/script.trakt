@@ -86,13 +86,13 @@ class traktAPI(object):
         except BadStatusLine, e:
             raise traktUnknownError("BadStatusLine: '%s' from URL: '%s'" % (e.line, url))
         except IOError, e:
-            if hasattr(e, 'code'): # error 401 or 503, possibly others
+            if hasattr(e, 'code'):  # error 401 or 503, possibly others
                 # read the error document, strip newlines, this will make an html page 1 line
                 error_data = e.read().replace("\n", "").replace("\r", "")
 
-                if e.code == 401: # authentication problem
+                if e.code == 401:  # authentication problem
                     raise traktAuthProblem(error_data)
-                elif e.code == 503: # server busy problem
+                elif e.code == 503:  # server busy problem
                     raise traktServerBusy(error_data)
                 else:
                     try:
@@ -102,7 +102,7 @@ class traktAPI(object):
                     except ValueError:
                         raise traktUnknownError(error_data, e.code)
 
-            elif hasattr(e, 'reason'): # usually a read timeout, or unable to reach host
+            elif hasattr(e, 'reason'):  # usually a read timeout, or unable to reach host
                 raise traktNetworkError(str(e.reason), isinstance(e.reason, socket.timeout))
 
             else:
@@ -176,7 +176,7 @@ class traktAPI(object):
                 elif isinstance(e, traktNetworkError):
                     Debug("[traktAPI] traktRequest(): (%i) Network error: %s" % (i, e.value))
                     if e.timeout:
-                        notification('trakt', getString(1108) + " (timeout)") # can't connect to trakt
+                        notification('trakt', getString(1108) + " (timeout)")  # can't connect to trakt
                     xbmc.sleep(5000)
                 elif isinstance(e, traktUnknownError):
                     Debug("[traktAPI] traktRequest(): (%i) Other problem (%s)" % (i, e.value))
@@ -208,7 +208,7 @@ class traktAPI(object):
                 # malformed json response
                 Debug("[traktAPI] traktRequest(): (%i) Bad JSON response: '%s'" % (i, raw))
                 if not silent:
-                    notification('trakt', getString(1109) + ": Bad response from trakt") # Error
+                    notification('trakt', getString(1109) + ": Bad response from trakt")  # Error
 
             # check for the status variable in JSON data
             if data and 'status' in data:
@@ -242,7 +242,7 @@ class traktAPI(object):
                 if returnStatus or returnOnFailure:
                     return data
                 if not silent:
-                    notification('trakt', getString(1109) + ": " + str(data['error'])) # Error
+                    notification('trakt', getString(1109) + ": " + str(data['error']))  # Error
                 return None
             elif data['status'] == 'success':
                 Debug("[traktAPI] traktRequest(): JSON request was successful.")
@@ -265,11 +265,11 @@ class traktAPI(object):
     def testAccount(self, force=False):
 
         if self.__username == "":
-            notification('trakt', getString(1106)) # please enter your Username and Password in settings
+            notification('trakt', getString(1106))  # please enter your Username and Password in settings
             setSetting('account_valid', False)
             return False
         elif self.__password == "":
-            notification("trakt", getString(1107)) # please enter your Password in settings
+            notification("trakt", getString(1107))  # please enter your Password in settings
             setSetting('account_valid', False)
             return False
 
@@ -313,14 +313,14 @@ class traktAPI(object):
         else:
             return True
 
-        notification('trakt', getString(1110)) # please enter your Password in settings
+        notification('trakt', getString(1110))  # please enter your Password in settings
         setSetting('account_valid', False)
         return False
 
     # url: http://api.trakt.tv/account/settings/<apikey>
     # returns: all settings for authenticated user
     def getAccountSettings(self, force=False):
-        _interval = (60 * 60 * 24 * 7) - (60 * 60) # one week less one hour
+        _interval = (60 * 60 * 24 * 7) - (60 * 60)  # one week less one hour
 
         _next = getSettingAsInt('trakt_settings_last') + _interval
         stale = force

@@ -20,7 +20,7 @@ __addon__ = xbmcaddon.Addon('script.trakt')
 # make strptime call prior to doing anything, to try and prevent threading errors
 time.strptime("1970-01-01 12:00:00", "%Y-%m-%d %H:%M:%S")
 
-REGEX_EXPRESSIONS = [ '[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
+REGEX_EXPRESSIONS = ['[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
                       '[\._ \-]([0-9]+)x([0-9]+)([^\\/]*)',                     # foo.1x09
                       '[\._ \-]([0-9]+)([0-9][0-9])([\._ \-][^\\/]*)',          # foo.109
                       '([0-9]+)([0-9][0-9])([\._ \-][^\\/]*)',
@@ -28,14 +28,14 @@ REGEX_EXPRESSIONS = [ '[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
                       'Season ([0-9]+) - Episode ([0-9]+)[^\\/]*',              # Season 01 - Episode 02
                       'Season ([0-9]+) Episode ([0-9]+)[^\\/]*',                # Season 01 Episode 02
                       '[\\\\/\\._ -][0]*([0-9]+)x[0]*([0-9]+)[^\\/]*',
-                      '[[Ss]([0-9]+)\]_\[[Ee]([0-9]+)([^\\/]*)',                #foo_[s01]_[e01]
-                      '[\._ \-][Ss]([0-9]+)[\.\-]?[Ee]([0-9]+)([^\\/]*)',       #foo, s01e01, foo.s01.e01, foo.s01-e01
-                      's([0-9]+)ep([0-9]+)[^\\/]*',                             #foo - s01ep03, foo - s1ep03
+                      '[[Ss]([0-9]+)\]_\[[Ee]([0-9]+)([^\\/]*)',  # foo_[s01]_[e01]
+                      '[\._ \-][Ss]([0-9]+)[\.\-]?[Ee]([0-9]+)([^\\/]*)',  # foo, s01e01, foo.s01.e01, foo.s01-e01
+                      's([0-9]+)ep([0-9]+)[^\\/]*',  # foo - s01ep03, foo - s1ep03
                       '[Ss]([0-9]+)[][ ._-]*[Ee]([0-9]+)([^\\\\/]*)$',
                       '[\\\\/\\._ \\[\\(-]([0-9]+)x([0-9]+)([^\\\\/]*)$'
                       ]
 
-def Debug(msg, force = False):
+def Debug(msg, force=False):
     if(getSettingAsBool('debug') or force):
         try:
             print "[trakt] " + msg
@@ -140,7 +140,7 @@ def sqlDateToUnixDate(date):
     return utime
 
 def chunks(l, n):
-    return [l[i:i+n] for i in range(0, len(l), n)]
+    return [l[i:i + n] for i in range(0, len(l), n)]
 
 # check exclusion settings for filename passed as argument
 def checkScrobblingExclusion(fullpath):
@@ -197,7 +197,7 @@ def getFormattedItemName(type, info, short=False):
     return s.encode('utf-8', 'ignore')
 
 def getShowDetailsFromXBMC(showID, fields):
-    result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': showID, 'properties': fields}, 'id': 1})
+    result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params': {'tvshowid': showID, 'properties': fields}, 'id': 1})
     Debug("getShowDetailsFromXBMC(): %s" % str(result))
 
     if not result:
@@ -212,7 +212,7 @@ def getShowDetailsFromXBMC(showID, fields):
 
 # get a single episode from xbmc given the id
 def getEpisodeDetailsFromXbmc(libraryId, fields):
-    result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params':{'episodeid': libraryId, 'properties': fields}, 'id': 1})
+    result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': libraryId, 'properties': fields}, 'id': 1})
     Debug("getEpisodeDetailsFromXbmc(): %s" % str(result))
 
     if not result:
@@ -236,7 +236,7 @@ def getEpisodeDetailsFromXbmc(libraryId, fields):
 
 # get a single movie from xbmc given the id
 def getMovieDetailsFromXbmc(libraryId, fields):
-    result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params':{'movieid': libraryId, 'properties': fields}, 'id': 1})
+    result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params': {'movieid': libraryId, 'properties': fields}, 'id': 1})
     Debug("getMovieDetailsFromXbmc(): %s" % str(result))
 
     if not result:
@@ -295,35 +295,35 @@ def findShow(show, shows, returnIndex=False):
         result = findInList(shows, returnIndex=returnIndex, title=show['title'], year=show['year'])
     return result
 
-def regex_tvshow(compare, file, sub = ""):
+def regex_tvshow(compare, file, sub=""):
     sub_info = ""
     tvshow = 0
 
     for regex in REGEX_EXPRESSIONS:
         response_file = re.findall(regex, file)
-        if len(response_file) > 0 :
-            Debug("regex_tvshow(): Regex File Se: %s, Ep: %s," % (str(response_file[0][0]),str(response_file[0][1]),) )
+        if len(response_file) > 0:
+            Debug("regex_tvshow(): Regex File Se: %s, Ep: %s," % (str(response_file[0][0]), str(response_file[0][1]),))
             tvshow = 1
-            if not compare :
+            if not compare:
                 title = re.split(regex, file)[0]
-                for char in ['[', ']', '_', '(', ')','.','-']:
+                for char in ['[', ']', '_', '(', ')', '.', '-']:
                     title = title.replace(char, ' ')
                 if title.endswith(" "): title = title[:-1]
-                return title,response_file[0][0], response_file[0][1]
+                return title, response_file[0][0], response_file[0][1]
             else:
                 break
 
     if (tvshow == 1):
         for regex in regex_expressions:
             response_sub = re.findall(regex, sub)
-            if len(response_sub) > 0 :
-                try :
+            if len(response_sub) > 0:
+                try:
                     sub_info = "Regex Subtitle Ep: %s," % (str(response_sub[0][1]),)
                     if (int(response_sub[0][1]) == int(response_file[0][1])):
                         return True
                 except: pass
         return False
-    if compare :
+    if compare:
         return True
     else:
-        return "","",""
+        return "", "", ""

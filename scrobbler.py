@@ -37,7 +37,7 @@ class Scrobbler():
                 return i
         return 0
 
-    def update(self, forceCheck = False):
+    def update(self, forceCheck=False):
         if not xbmc.Player().isPlayingVideo():
             return
 
@@ -87,7 +87,7 @@ class Scrobbler():
             if not xbmc.Player().isPlayingVideo():
                 Debug("[Scrobbler] Suddenly stopped watching item")
                 return
-            xbmc.sleep(1000) # Wait for possible silent seek (caused by resuming)
+            xbmc.sleep(1000)  # Wait for possible silent seek (caused by resuming)
             try:
                 self.watchedTime = xbmc.Player().getTime()
                 self.videoDuration = xbmc.Player().getTotalTime()
@@ -134,7 +134,7 @@ class Scrobbler():
             elif utilities.isEpisode(self.curVideo['type']):
                 if 'id' in self.curVideo:
                     self.curVideoInfo = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
-                    if not self.curVideoInfo: # getEpisodeDetailsFromXbmc was empty
+                    if not self.curVideoInfo:  # getEpisodeDetailsFromXbmc was empty
                         Debug("[Scrobbler] Episode details from XBMC was empty, ID (%d) seems invalid, aborting further scrobbling of this episode." % self.curVideo['id'])
                         self.curVideo = None
                         self.isPlaying = False
@@ -248,7 +248,7 @@ class Scrobbler():
                         if 'movie' in response and 'imdb_id' in response['movie']:
                             self.curVideoInfo['imdbnumber'] = response['movie']['imdb_id']
                             if 'id' in self.curVideo and utilities.getSettingAsBool('update_imdb_id'):
-                                req = {"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid" : self.curVideoInfo['movieid'], "imdbnumber": self.curVideoInfo['imdbnumber']}}
+                                req = {"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": self.curVideoInfo['movieid'], "imdbnumber": self.curVideoInfo['imdbnumber']}}
                                 utilities.xbmcJsonRequest(req)
                             # get summary data now if we are rating this movie
                             if utilities.getSettingAsBool('rate_movie') and self.traktSummaryInfo is None:
@@ -272,7 +272,7 @@ class Scrobbler():
                         if 'show' in response and 'tvdb_id' in response['show']:
                             self.curVideoInfo['tvdb_id'] = response['show']['tvdb_id']
                             if 'id' in self.curVideo and utilities.getSettingAsBool('update_tvdb_id'):
-                                req = {"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid" : self.curVideoInfo['tvshowid'], "imdbnumber": self.curVideoInfo['tvdb_id']}}
+                                req = {"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid": self.curVideoInfo['tvshowid'], "imdbnumber": self.curVideoInfo['tvdb_id']}}
                                 utilities.xbmcJsonRequest(req)
                             # get summary data now if we are rating this episode
                             if utilities.getSettingAsBool('rate_episode') and self.traktSummaryInfo is None:

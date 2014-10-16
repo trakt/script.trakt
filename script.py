@@ -301,13 +301,13 @@ def Main():
         utils.Debug("Timing JSON requests.")
         import time
         t = time.time()
-        data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': 254, 'properties': ['tag']}, 'id': 1})
+        data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params': {'tvshowid': 254, 'properties': ['tag']}, 'id': 1})
         #data = utils.getShowDetailsFromXBMC(254, ['tag', 'imdbnumber'])
         e = time.time() - t
         utils.Debug("VideoLibrary.GetTVShowDetails with tags: %0.3f seconds." % e)
 
         t = time.time()
-        data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params':{'movieid': 634, 'properties': ['tag']}, 'id': 1})
+        data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params': {'movieid': 634, 'properties': ['tag']}, 'id': 1})
         #data = utils.getMovieDetailsFromXbmc(634, ['tag', 'imdbnumber', 'title', 'year'])
         e = time.time() - t
         utils.Debug("VideoLibrary.GetMovieDetails with tags: %0.3f seconds." % e)
@@ -333,13 +333,13 @@ def Main():
         utils.Debug("VideoLibrary.GetMovies without tags: %0.3f seconds, %d items at %0.5f seconds per item" % (e, len(data['movies']), e / len(data['movies'])))
 
         t = time.time()
-        data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': 254, 'properties': ['imdbnumber']}, 'id': 1})
+        data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params': {'tvshowid': 254, 'properties': ['imdbnumber']}, 'id': 1})
         #data = utils.getShowDetailsFromXBMC(254, ['imdbnumber'])
         e = time.time() - t
         utils.Debug("VideoLibrary.GetTVShowDetails without tags: %0.3f seconds." % e)
 
         t = time.time()
-        data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params':{'movieid': 634, 'properties': ['imdbnumber', 'title', 'year']}, 'id': 1})
+        data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params': {'movieid': 634, 'properties': ['imdbnumber', 'title', 'year']}, 'id': 1})
         #data = utils.getMovieDetailsFromXbmc(634, ['imdbnumber', 'title', 'year'])
         e = time.time() - t
         utils.Debug("VideoLibrary.GetMovieDetails without tags: %0.3f seconds." % e)
@@ -348,7 +348,7 @@ def Main():
         data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
         data = data['tvshows']
         for item in data:
-            item_data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': item['tvshowid'], 'properties': ['tag']}, 'id': 1})
+            item_data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params': {'tvshowid': item['tvshowid'], 'properties': ['tag']}, 'id': 1})
             item['tag'] = item_data['tvshowdetails']['tag']
         e = time.time() - t
         utils.Debug("VideoLibrary.GetTVShows with tags from loop: %0.3f seconds, %d items at %0.5f seconds per item" % (e, len(data), e / len(data)))
@@ -357,7 +357,7 @@ def Main():
         data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
         data = data['movies']
         for item in data:
-            item_data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params':{'movieid': item['movieid'], 'properties': ['tag']}, 'id': 1})
+            item_data = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params': {'movieid': item['movieid'], 'properties': ['tag']}, 'id': 1})
             item['tag'] = item_data['moviedetails']['tag']
         e = time.time() - t
         utils.Debug("VideoLibrary.GetMovies with tags from: %0.3f seconds, %d items at %0.5f seconds per item." % (e, len(data), e / len(data)))
