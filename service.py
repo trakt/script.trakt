@@ -105,7 +105,7 @@ class traktService:
                 force = data['force']
             globals.traktapi.getAccountSettings(force)
         elif action == 'settings':
-            utilisites.showSettings()
+            utilities.showSettings()
         else:
             utilities.Debug("Unknown dispatch action, '%s'." % action)
 

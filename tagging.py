@@ -424,7 +424,7 @@ class Tagger():
     def isAborted(self):
         if xbmc.abortRequested:
             utils.Debug("[Tagger] XBMC abort requested, stopping.")
-            return true
+            return True
 
     def updateTagsFromTrakt(self):
         if not self._enabled:
