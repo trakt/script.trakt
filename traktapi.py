@@ -4,7 +4,8 @@
 import xbmc
 import xbmcaddon
 import xbmcgui
-import time, socket
+import time
+import socket
 import math
 import urllib2
 import base64
