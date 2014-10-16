@@ -85,7 +85,7 @@ class traktAPI(object):
         try:
             Debug("[traktAPI] __getData(): urllib2.Request(%s)" % url)
 
-            if args == None:
+            if args is None:
                 req = Request(url)
             else:
                 req = Request(url, args)

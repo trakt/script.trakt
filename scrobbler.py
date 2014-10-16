@@ -65,7 +65,7 @@ class Scrobbler():
                         duration = adjustedDuration / 60
                         watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
                         response = self.traktapi.scrobbleEpisode(self.curVideoInfo, duration, watchedPercent)
-                        if response != None:
+                        if response is not None:
                             Debug("[Scrobbler] Scrobble response: %s" % str(response))
 
                         # update current information
@@ -209,7 +209,7 @@ class Scrobbler():
             return
 
         Debug("[Scrobbler] playbackEnded()")
-        if self.curVideo == None:
+        if self.curVideo is None:
             Debug("[Scrobbler] Warning: Playback ended but video forgotten.")
             return
         self.isPlaying = False
@@ -243,7 +243,7 @@ class Scrobbler():
 
         if utilities.isMovie(self.curVideo['type']) and scrobbleMovieOption:
             response = self.traktapi.watchingMovie(self.curVideoInfo, duration, watchedPercent)
-            if response != None:
+            if response is not None:
                 if self.curVideoInfo['imdbnumber'] is None:
                     if 'status' in response and response['status'] == "success":
                         if 'movie' in response and 'imdb_id' in response['movie']:
@@ -267,7 +267,7 @@ class Scrobbler():
                 watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
 
             response = self.traktapi.watchingEpisode(self.curVideoInfo, duration, watchedPercent)
-            if response != None:
+            if response is not None:
                 if self.curVideoInfo['tvdb_id'] is None:
                     if 'status' in response and response['status'] == "success":
                         if 'show' in response and 'tvdb_id' in response['show']:
@@ -289,11 +289,11 @@ class Scrobbler():
 
         if utilities.isMovie(self.curVideo['type']) and scrobbleMovieOption:
             response = self.traktapi.cancelWatchingMovie()
-            if response != None:
+            if response is not None:
                 Debug("[Scrobbler] Cancel watch response: %s" % str(response))
         elif utilities.isEpisode(self.curVideo['type']) and scrobbleEpisodeOption:
             response = self.traktapi.cancelWatchingEpisode()
-            if response != None:
+            if response is not None:
                 Debug("[Scrobbler] Cancel watch response: %s" % str(response))
 
     def scrobble(self):
