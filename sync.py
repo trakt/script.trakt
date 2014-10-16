@@ -54,7 +54,7 @@ class Sync():
                 return True
         return False
 
-    ''' begin code for episode sync '''
+    # begin code for episode sync
     def traktLoadShows(self):
         self.updateProgress(10, line1=utilities.getString(1485), line2=utilities.getString(1486))
 
@@ -478,7 +478,7 @@ class Sync():
         Debug("[Episodes Sync] Episodes on trakt.tv (%d), episodes in XBMC (%d)." % (self.countEpisodes(traktShows), self.countEpisodes(xbmcShows)))
         Debug("[Episodes Sync] Complete.")
 
-    ''' begin code for movie sync '''
+    # begin code for movie sync
     def traktLoadMovies(self):
         self.updateProgress(5, line2=utilities.getString(1462))
 
