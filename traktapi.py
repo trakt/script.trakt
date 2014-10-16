@@ -3,16 +3,13 @@
 
 import xbmc
 import xbmcaddon
-import xbmcgui
 import time
 import socket
 import math
-import urllib2
-import base64
 
 from utilities import Debug, notification, getSetting, getSettingAsBool, getSettingAsInt, getString, setSetting
-from urllib2 import Request, urlopen, HTTPError, URLError
-from httplib import HTTPException, BadStatusLine
+from urllib2 import Request, urlopen
+from httplib import BadStatusLine
 
 try:
     import simplejson as json

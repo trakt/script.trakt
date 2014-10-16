@@ -5,7 +5,6 @@ import xbmc
 import sys
 import queue
 import tagging
-import time
 from traktContextMenu import traktContextMenu
 
 try:

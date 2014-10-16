@@ -4,7 +4,6 @@
 import xbmc
 import xbmcaddon
 import xbmcgui
-import math
 import time
 import copy
 import re

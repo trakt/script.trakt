@@ -7,7 +7,7 @@ import queue
 import globals
 import utilities
 from traktapi import traktAPI
-from rating import rateMedia, rateOnTrakt
+from rating import rateMedia
 from scrobbler import Scrobbler
 from tagging import Tagger
 from sync import Sync
