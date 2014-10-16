@@ -37,7 +37,7 @@ REGEX_EXPRESSIONS = ['[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
 
 
 def Debug(msg, force=False):
-    if(getSettingAsBool('debug') or force):
+    if getSettingAsBool('debug') or force:
         try:
             print "[trakt] " + msg
         except UnicodeEncodeError:
@@ -175,29 +175,29 @@ def checkScrobblingExclusion(fullpath):
 
     Debug("checkScrobblingExclusion(): Checking exclusion settings for '%s'." % fullpath)
 
-    if (fullpath.find("pvr://") > -1) and getSettingAsBool('ExcludeLiveTV'):
+    if fullpath.find("pvr://") > -1 and getSettingAsBool('ExcludeLiveTV'):
         Debug("checkScrobblingExclusion(): Video is playing via Live TV, which is currently set as excluded location.")
         return True
 
-    if (fullpath.find("http://") > -1) and getSettingAsBool('ExcludeHTTP'):
+    if fullpath.find("http://") > -1 and getSettingAsBool('ExcludeHTTP'):
         Debug("checkScrobblingExclusion(): Video is playing via HTTP source, which is currently set as excluded location.")
         return True
 
     ExcludePath = getSetting('ExcludePath')
     if ExcludePath != "" and getSettingAsBool('ExcludePathOption'):
-        if (fullpath.find(ExcludePath) > -1):
+        if fullpath.find(ExcludePath) > -1:
             Debug("checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 1.")
             return True
 
     ExcludePath2 = getSetting('ExcludePath2')
     if ExcludePath2 != "" and getSettingAsBool('ExcludePathOption2'):
-        if (fullpath.find(ExcludePath2) > -1):
+        if fullpath.find(ExcludePath2) > -1:
             Debug("checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 2.")
             return True
 
     ExcludePath3 = getSetting('ExcludePath3')
     if ExcludePath3 != "" and getSettingAsBool('ExcludePathOption3'):
-        if (fullpath.find(ExcludePath3) > -1):
+        if fullpath.find(ExcludePath3) > -1:
             Debug("checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 3.")
             return True
 
@@ -350,13 +350,13 @@ def regex_tvshow(compare, file, sub=""):
             else:
                 break
 
-    if (tvshow == 1):
+    if tvshow == 1:
         for regex in REGEX_EXPRESSIONS:
             response_sub = re.findall(regex, sub)
             if len(response_sub) > 0:
                 try:
                     sub_info = "Regex Subtitle Ep: %s," % (str(response_sub[0][1]),)
-                    if (int(response_sub[0][1]) == int(response_file[0][1])):
+                    if int(response_sub[0][1]) == int(response_file[0][1]):
                         return True
                 except:
                     pass

@@ -107,7 +107,7 @@ class Scrobbler():
 
             self.playlistLength = len(xbmc.PlayList(xbmc.PLAYLIST_VIDEO))
             self.playlistIndex = xbmc.PlayList(xbmc.PLAYLIST_VIDEO).getposition()
-            if (self.playlistLength == 0):
+            if self.playlistLength == 0:
                 Debug("[Scrobbler] Warning: Cant find playlist length, assuming that this item is by itself")
                 self.playlistLength = 1
 

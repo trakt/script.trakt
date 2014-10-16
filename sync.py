@@ -613,7 +613,7 @@ class Sync():
             movie_col2 = utilities.findMovie(movie_col1, movies_col2)
             if movie_col2:
                 if watched:
-                    if (movie_col2['plays'] == 0) and (movie_col1['plays'] > movie_col2['plays']):
+                    if movie_col2['plays'] == 0 and movie_col1['plays'] > movie_col2['plays']:
                         if 'movieid' not in movie_col1:
                             movie_col1['movieid'] = movie_col2['movieid']
                         movies.append(movie_col1)

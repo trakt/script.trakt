@@ -140,7 +140,7 @@ class traktService:
         self.tagger = Tagger(globals.traktapi)
 
         # start loop for events
-        while (not xbmc.abortRequested):
+        while not xbmc.abortRequested:
             while len(self.dispatchQueue) and (not xbmc.abortRequested):
                 data = self.dispatchQueue.get()
                 utilities.Debug("Queued dispatch: %s" % data)

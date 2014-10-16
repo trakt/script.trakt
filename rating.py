@@ -22,7 +22,7 @@ def ratingCheck(media_type, summary_info, watched_time, total_time, playlist_len
         return
     watched = (watched_time / total_time) * 100
     if watched >= utils.getSettingAsFloat("rate_min_view_time"):
-        if (playlist_length <= 1) or utils.getSettingAsBool("rate_each_playlist_item"):
+        if playlist_length <= 1 or utils.getSettingAsBool("rate_each_playlist_item"):
             rateMedia(media_type, summary_info)
         else:
             utils.Debug("[Rating] Rate each playlist item is disabled.")
