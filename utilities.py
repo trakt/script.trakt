@@ -308,7 +308,8 @@ def regex_tvshow(compare, file, sub=""):
                 title = re.split(regex, file)[0]
                 for char in ['[', ']', '_', '(', ')', '.', '-']:
                     title = title.replace(char, ' ')
-                if title.endswith(" "): title = title[:-1]
+                if title.endswith(" "):
+                    title = title[:-1]
                 return title, response_file[0][0], response_file[0][1]
             else:
                 break
@@ -321,7 +322,8 @@ def regex_tvshow(compare, file, sub=""):
                     sub_info = "Regex Subtitle Ep: %s," % (str(response_sub[0][1]),)
                     if (int(response_sub[0][1]) == int(response_file[0][1])):
                         return True
-                except: pass
+                except:
+                    pass
         return False
     if compare:
         return True

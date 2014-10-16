@@ -36,10 +36,14 @@ class traktError(Exception):
     def __str__(self):
         return repr(self.value)
 
-class traktAuthProblem(traktError): pass
-class traktServerBusy(traktError): pass
-class traktUnknownError(traktError): pass
-class traktNotFoundError(traktError): pass
+class traktAuthProblem(traktError):
+    pass
+class traktServerBusy(traktError):
+    pass
+class traktUnknownError(traktError):
+    pass
+class traktNotFoundError(traktError):
+    pass
 class traktNetworkError(traktError):
     def __init__(self, value, timeout):
         super(traktNetworkError, self).__init__(value)
