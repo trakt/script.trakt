@@ -12,7 +12,7 @@ ACTION_LIST = 111
 DIALOG_IMAGE = 2
 ACTION_PREVIOUS_MENU2 = 92
 ACTION_PARENT_DIR = 9
-ACTION_PREVIOUS_MENU = 10 
+ACTION_PREVIOUS_MENU = 10
 ACTION_SELECT_ITEM = 7
 ACTION_MOUSE_LEFT_CLICK = 100
 ACTION_CLOSE_LIST = [ACTION_PREVIOUS_MENU2, ACTION_PARENT_DIR, ACTION_PREVIOUS_MENU]
@@ -23,7 +23,7 @@ class traktContextMenu(xbmcgui.WindowXMLDialog):
     action = None
 
     def __new__(cls, media_type=None, buttons=None):
-        return super(traktContextMenu, cls).__new__(cls, "traktContextMenu.xml", __addon__.getAddonInfo('path'), media_type=media_type, buttons=None) 
+        return super(traktContextMenu, cls).__new__(cls, "traktContextMenu.xml", __addon__.getAddonInfo('path'), media_type=media_type, buttons=None)
 
     def __init__(self, *args, **kwargs):
         self.buttons = kwargs['buttons']
@@ -73,7 +73,7 @@ class traktContextMenu(xbmcgui.WindowXMLDialog):
                 self.close()
 
         if action in ACTION_ITEM_SELECT:
-            cID = self.getFocusId() 
+            cID = self.getFocusId()
             if cID == ACTION_LIST:
                 l = self.getControl(cID)
                 item = l.getSelectedItem()

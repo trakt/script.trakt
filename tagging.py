@@ -888,7 +888,7 @@ BUTTON_CANCEL = 17
 LABEL = 25
 ACTION_PREVIOUS_MENU2 = 92
 ACTION_PARENT_DIR = 9
-ACTION_PREVIOUS_MENU = 10 
+ACTION_PREVIOUS_MENU = 10
 ACTION_SELECT_ITEM = 7
 ACTION_MOUSE_LEFT_CLICK = 100
 ACTION_CLOSE_LIST = [ACTION_PREVIOUS_MENU2, ACTION_PARENT_DIR, ACTION_PREVIOUS_MENU]
@@ -899,7 +899,7 @@ class traktItemListsDialog(xbmcgui.WindowXMLDialog):
     selectedLists = None
 
     def __new__(cls, list_data, data):
-        return super(traktItemListsDialog, cls).__new__(cls, "traktListDialog.xml", __addon__.getAddonInfo('path'), list_data=list_data, data=data) 
+        return super(traktItemListsDialog, cls).__new__(cls, "traktListDialog.xml", __addon__.getAddonInfo('path'), list_data=list_data, data=data)
 
     def __init__(self, *args, **kwargs):
         data = kwargs['data']
@@ -941,7 +941,7 @@ class traktItemListsDialog(xbmcgui.WindowXMLDialog):
             if action in ACTION_CLOSE_LIST:
                 self.close()
         if action in ACTION_ITEM_SELECT:
-            cID = self.getFocusId() 
+            cID = self.getFocusId()
             if cID == TRAKT_LISTS:
                 item = self.list.getSelectedItem()
                 selected = not item.isSelected()
@@ -1061,7 +1061,7 @@ class traktManageListsDialog(xbmcgui.WindowXMLDialog):
                     self.close()
 
         if action in ACTION_ITEM_SELECT:
-            cID = self.getFocusId() 
+            cID = self.getFocusId()
             if cID == TRAKT_LISTS:
                 item = self.list.getSelectedItem()
 

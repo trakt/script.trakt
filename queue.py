@@ -25,7 +25,7 @@ __addon__ = xbmcaddon.Addon('script.trakt')
 class SqliteQueue(object):
 
     _create = (
-        'CREATE TABLE IF NOT EXISTS queue ' 
+        'CREATE TABLE IF NOT EXISTS queue '
         '('
         '  id INTEGER PRIMARY KEY AUTOINCREMENT,'
         '  item BLOB'
@@ -79,7 +79,7 @@ class SqliteQueue(object):
     def append(self, obj):
         obj_buffer = dumps(obj)
         with self._get_conn() as conn:
-            conn.execute(self._append, (obj_buffer,)) 
+            conn.execute(self._append, (obj_buffer,))
 
     def get(self, sleep_wait=True):
         keep_pooling = True

@@ -519,7 +519,7 @@ class Sync():
             if movie['imdb_id'] is None:
                 movie['imdb_id'] = ""
             if movie['tmdb_id'] is None:
-                movie['tmdb_id'] = "" 
+                movie['tmdb_id'] = ""
             else:
                 movie['tmdb_id'] = unicode(movie['tmdb_id'])
             m = utilities.findMovie(movie, movies)
