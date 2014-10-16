@@ -12,7 +12,7 @@ __addon__ = xbmcaddon.Addon("script.trakt")
 
 def ratingCheck(media_type, summary_info, watched_time, total_time, playlist_length):
     """Check if a video should be rated and if so launches the rating dialog"""
-    utils.Debug("[Rating] Rating Check called for '%s'" % media_type);
+    utils.Debug("[Rating] Rating Check called for '%s'" % media_type)
     if not utils.getSettingAsBool("rate_%s" % media_type):
         utils.Debug("[Rating] '%s' is configured to not be rated." % media_type)
         return
