@@ -17,6 +17,7 @@ try:
 except ImportError:
     import json
 
+
 class traktService:
 
     scrobbler = None
@@ -353,6 +354,7 @@ class traktService:
         self.syncThread = syncThread(manual, silent, library)
         self.syncThread.start()
 
+
 class syncThread(threading.Thread):
 
     _isManual = False
@@ -371,6 +373,7 @@ class syncThread(threading.Thread):
         if utilities.getSettingAsBool('tagging_enable') and utilities.getSettingAsBool('tagging_tag_after_sync'):
             q = queue.SqliteQueue()
             q.append({'action': 'updatetags'})
+
 
 class traktMonitor(xbmc.Monitor):
 
@@ -396,6 +399,7 @@ class traktMonitor(xbmc.Monitor):
     def onSettingsChanged(self):
         data = {'action': 'settingsChanged'}
         self.action(data)
+
 
 class traktPlayer(xbmc.Player):
 

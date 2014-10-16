@@ -35,6 +35,7 @@ REGEX_EXPRESSIONS = ['[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
                       '[\\\\/\\._ \\[\\(-]([0-9]+)x([0-9]+)([^\\\\/]*)$'
                       ]
 
+
 def Debug(msg, force=False):
     if(getSettingAsBool('debug') or force):
         try:
@@ -42,17 +43,22 @@ def Debug(msg, force=False):
         except UnicodeEncodeError:
             print "[trakt] " + msg.encode('utf-8', 'ignore')
 
+
 def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')):
     xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message, time, icon))
+
 
 def showSettings():
     __addon__.openSettings()
 
+
 def getSetting(setting):
     return __addon__.getSetting(setting).strip()
 
+
 def getSettingAsBool(setting):
     return getSetting(setting).lower() == "true"
+
 
 def getSettingAsFloat(setting):
     try:
@@ -60,11 +66,13 @@ def getSettingAsFloat(setting):
     except ValueError:
         return 0
 
+
 def getSettingAsInt(setting):
     try:
         return int(getSettingAsFloat(setting))
     except ValueError:
         return 0
+
 
 def getSettingAsList(setting):
     data = getSetting(setting)
@@ -73,8 +81,10 @@ def getSettingAsList(setting):
     except ValueError:
         return []
 
+
 def setSetting(setting, value):
     __addon__.setSetting(setting, str(value))
+
 
 def setSettingFromList(setting, value):
     if value is None:
@@ -82,35 +92,46 @@ def setSettingFromList(setting, value):
     data = json.dumps(value)
     setSetting(setting, data)
 
+
 def getString(string_id):
     return __addon__.getLocalizedString(string_id).encode('utf-8', 'ignore')
+
 
 def getProperty(property):
     return xbmcgui.Window(10000).getProperty(property)
 
+
 def getPropertyAsBool(property):
     return getProperty(property) == "True"
+
 
 def setProperty(property, value):
     xbmcgui.Window(10000).setProperty(property, value)
 
+
 def clearProperty(property):
     xbmcgui.Window(10000).clearProperty(property)
+
 
 def isMovie(type):
     return type == 'movie'
 
+
 def isEpisode(type):
     return type == 'episode'
+
 
 def isShow(type):
     return type == 'show'
 
+
 def isSeason(type):
     return type == 'season'
 
+
 def isValidMediaType(type):
     return type in ['movie', 'show', 'episode']
+
 
 def xbmcJsonRequest(params):
     data = json.dumps(params)
@@ -129,6 +150,7 @@ def xbmcJsonRequest(params):
         Debug("[%s] %s" % (params['method'], response['error']['message']), True)
         return None
 
+
 def sqlDateToUnixDate(date):
     if not date:
         return 0
@@ -139,10 +161,13 @@ def sqlDateToUnixDate(date):
         utime = None
     return utime
 
+
 def chunks(l, n):
     return [l[i:i + n] for i in range(0, len(l), n)]
 
 # check exclusion settings for filename passed as argument
+
+
 def checkScrobblingExclusion(fullpath):
 
     if not fullpath:
@@ -178,6 +203,7 @@ def checkScrobblingExclusion(fullpath):
 
     return False
 
+
 def getFormattedItemName(type, info, short=False):
     s = None
     if isShow(type):
@@ -196,6 +222,7 @@ def getFormattedItemName(type, info, short=False):
         s = "%s (%s)" % (info['title'], info['year'])
     return s.encode('utf-8', 'ignore')
 
+
 def getShowDetailsFromXBMC(showID, fields):
     result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params': {'tvshowid': showID, 'properties': fields}, 'id': 1})
     Debug("getShowDetailsFromXBMC(): %s" % str(result))
@@ -211,6 +238,8 @@ def getShowDetailsFromXBMC(showID, fields):
         return None
 
 # get a single episode from xbmc given the id
+
+
 def getEpisodeDetailsFromXbmc(libraryId, fields):
     result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': libraryId, 'properties': fields}, 'id': 1})
     Debug("getEpisodeDetailsFromXbmc(): %s" % str(result))
@@ -235,6 +264,8 @@ def getEpisodeDetailsFromXbmc(libraryId, fields):
         return None
 
 # get a single movie from xbmc given the id
+
+
 def getMovieDetailsFromXbmc(libraryId, fields):
     result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params': {'movieid': libraryId, 'properties': fields}, 'id': 1})
     Debug("getMovieDetailsFromXbmc(): %s" % str(result))
@@ -248,6 +279,7 @@ def getMovieDetailsFromXbmc(libraryId, fields):
     except KeyError:
         Debug("getMovieDetailsFromXbmc(): KeyError: result['moviedetails']")
         return None
+
 
 def findInList(list, returnIndex=False, returnCopy=False, case_sensitive=True, *args, **kwargs):
     for index in range(len(list)):
@@ -272,8 +304,10 @@ def findInList(list, returnIndex=False, returnCopy=False, case_sensitive=True, *
                     return list[index]
     return None
 
+
 def findAllInList(list, key, value):
     return [item for item in list if item[key] == value]
+
 
 def findMovie(movie, movies, returnIndex=False):
     result = None
@@ -285,6 +319,7 @@ def findMovie(movie, movies, returnIndex=False):
         result = findInList(movies, returnIndex=returnIndex, title=movie['title'], year=movie['year'])
     return result
 
+
 def findShow(show, shows, returnIndex=False):
     result = None
     if 'tvdb_id' in show and unicode(show['tvdb_id']).isdigit():
@@ -294,6 +329,7 @@ def findShow(show, shows, returnIndex=False):
     if result is None and show['title'] and 'year' in show and show['year'] > 0:
         result = findInList(shows, returnIndex=returnIndex, title=show['title'], year=show['year'])
     return result
+
 
 def regex_tvshow(compare, file, sub=""):
     sub_info = ""

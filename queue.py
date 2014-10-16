@@ -22,6 +22,8 @@ import xbmcaddon
 __addon__ = xbmcaddon.Addon('script.trakt')
 
 # code from http://flask.pocoo.org/snippets/88/ with some modifications
+
+
 class SqliteQueue(object):
 
     _create = (

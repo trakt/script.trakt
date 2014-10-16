@@ -13,23 +13,38 @@ __addon__ = xbmcaddon.Addon("script.trakt")
 TAG_PREFIX = "trakt.tv - "
 PRIVACY_LIST = ['public', 'friends', 'private']
 
+
 def isTaggingEnabled():
     return utils.getSettingAsBool('tagging_enable')
+
+
 def isWatchlistsEnabled():
     return utils.getSettingAsBool('tagging_watchlists')
+
+
 def isRatingsEnabled():
     return utils.getSettingAsBool('tagging_ratings')
+
+
 def getMinRating():
     return utils.getSettingAsInt('tagging_ratings_min')
 
+
 def tagToList(tag):
     return tag.replace(TAG_PREFIX, "", 1)
+
+
 def listToTag(list):
     return "%s%s" % (TAG_PREFIX, list)
+
+
 def ratingToTag(rating):
     return "%sRating: %s" % (TAG_PREFIX, rating)
+
+
 def isTraktList(tag):
     return True if tag.startswith(TAG_PREFIX) else False
+
 
 def hasTraktWatchlistTag(tags):
     watchlist_tag = False
@@ -40,6 +55,8 @@ def hasTraktWatchlistTag(tags):
                 watchlist_tag = True
                 break
     return watchlist_tag
+
+
 def getTraktRatingTag(tags):
     for tag in tags:
         if isTraktList(tag):
@@ -47,13 +64,18 @@ def getTraktRatingTag(tags):
             if _tag.lower().startswith("rating:"):
                 return tag
     return None
+
+
 def hasTraktRatingTag(tags):
     return not getTraktRatingTag(tags) is None
+
+
 def isTraktRatingTag(tag):
     if isTraktList(tag):
         _tag = tagToList(tag)
         return _tag.lower().startswith("rating:")
     return False
+
 
 def xbmcSetTags(id, type, title, tags):
     if not (utils.isMovie(type) or utils.isShow(type)):
@@ -75,6 +97,7 @@ def xbmcSetTags(id, type, title, tags):
             return True
 
     return False
+
 
 class Tagger():
 
@@ -894,6 +917,7 @@ ACTION_MOUSE_LEFT_CLICK = 100
 ACTION_CLOSE_LIST = [ACTION_PREVIOUS_MENU2, ACTION_PARENT_DIR, ACTION_PREVIOUS_MENU]
 ACTION_ITEM_SELECT = [ACTION_SELECT_ITEM, ACTION_MOUSE_LEFT_CLICK]
 
+
 class traktItemListsDialog(xbmcgui.WindowXMLDialog):
 
     selectedLists = None
@@ -1000,6 +1024,7 @@ class traktItemListsDialog(xbmcgui.WindowXMLDialog):
             item = xbmcgui.ListItem(tag)
             item.select(self.tags[tag])
             self.list.addItem(item)
+
 
 class traktManageListsDialog(xbmcgui.WindowXMLDialog):
 

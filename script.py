@@ -13,6 +13,7 @@ try:
 except ImportError:
     import json
 
+
 def getMediaType():
 
     if xbmc.getCondVisibility('Container.Content(tvshows)'):
@@ -25,6 +26,7 @@ def getMediaType():
         return "movie"
     else:
         return None
+
 
 def getArguments():
     data = None
@@ -41,6 +43,7 @@ def getArguments():
         data['action'] = data['action'].lower()
 
     return data
+
 
 def Main():
 

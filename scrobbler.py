@@ -9,6 +9,7 @@ import tagging
 from utilities import Debug
 from rating import ratingCheck
 
+
 class Scrobbler():
 
     traktapi = None

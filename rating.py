@@ -10,6 +10,7 @@ import globals
 
 __addon__ = xbmcaddon.Addon("script.trakt")
 
+
 def ratingCheck(media_type, summary_info, watched_time, total_time, playlist_length):
     """Check if a video should be rated and if so launches the rating dialog"""
     utils.Debug("[Rating] Rating Check called for '%s'" % media_type)
@@ -27,6 +28,7 @@ def ratingCheck(media_type, summary_info, watched_time, total_time, playlist_len
             utils.Debug("[Rating] Rate each playlist item is disabled.")
     else:
         utils.Debug("[Rating] '%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (media_type, watched, utils.getSettingAsFloat("rate_min_view_time")))
+
 
 def rateMedia(media_type, summary_info, unrate=False, rating=None):
     """Launches the rating dialog"""
@@ -122,6 +124,7 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 
     del gui
 
+
 def rateOnTrakt(rating, media_type, media, unrate=False):
     utils.Debug("[Rating] Sending rating (%s) to trakt.tv" % rating)
 
@@ -207,6 +210,7 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
         else:
             # status not in data, different problem, do nothing for now
             pass
+
 
 class RatingDialog(xbmcgui.WindowXMLDialog):
     buttons = {

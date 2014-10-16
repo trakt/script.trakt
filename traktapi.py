@@ -28,26 +28,40 @@ except ImportError:
 __addon__ = xbmcaddon.Addon('script.trakt')
 __addonversion__ = __addon__.getAddonInfo('version')
 
+
 class traktError(Exception):
+
     def __init__(self, value, code=None):
         self.value = value
         if code:
             self.code = code
+
     def __str__(self):
         return repr(self.value)
 
+
 class traktAuthProblem(traktError):
     pass
+
+
 class traktServerBusy(traktError):
     pass
+
+
 class traktUnknownError(traktError):
     pass
+
+
 class traktNotFoundError(traktError):
     pass
+
+
 class traktNetworkError(traktError):
+
     def __init__(self, value, timeout):
         super(traktNetworkError, self).__init__(value)
         self.timeout = timeout
+
 
 class traktAPI(object):
 
@@ -381,6 +395,7 @@ class traktAPI(object):
         if 'uniqueid' in info:
             data['episode_tvdb_id'] = info['uniqueid']['unknown']
         return self.watching('show', data)
+
     def watchingMovie(self, info, duration, percent):
         data = {'imdb_id': info['imdbnumber'], 'title': info['title'], 'year': info['year'], 'duration': math.ceil(duration), 'progress': math.ceil(percent)}
         return self.watching('movie', data)
@@ -402,6 +417,7 @@ class traktAPI(object):
         if 'uniqueid' in info:
             data['episode_tvdb_id'] = info['uniqueid']['unknown']
         return self.scrobble('show', data)
+
     def scrobbleMovie(self, info, duration, percent):
         data = {'imdb_id': info['imdbnumber'], 'title': info['title'], 'year': info['year'], 'duration': math.ceil(duration), 'progress': math.ceil(percent)}
         return self.scrobble('movie', data)
@@ -420,6 +436,7 @@ class traktAPI(object):
 
     def cancelWatchingEpisode(self):
         return self.cancelWatching('show')
+
     def cancelWatchingMovie(self):
         return self.cancelWatching('movie')
 
@@ -434,6 +451,7 @@ class traktAPI(object):
 
     def getShowLibrary(self):
         return self.getLibrary('shows')
+
     def getMovieLibrary(self):
         return self.getLibrary('movies')
 
@@ -448,6 +466,7 @@ class traktAPI(object):
 
     def getWatchedEpisodeLibrary(self,):
         return self.getWatchedLibrary('shows')
+
     def getWatchedMovieLibrary(self):
         return self.getWatchedLibrary('movies')
 
@@ -461,8 +480,10 @@ class traktAPI(object):
 
     def addEpisode(self, data):
         return self.addToLibrary('show/episode', data)
+
     def addShow(self, data):
         return self.addToLibrary('show', data)
+
     def addMovie(self, data):
         return self.addToLibrary('movie', data)
 
@@ -476,8 +497,10 @@ class traktAPI(object):
 
     def removeEpisode(self, data):
         return self.removeFromLibrary('show/episode', data)
+
     def removeShow(self, data):
         return self.removeFromLibrary('show', data)
+
     def removeMovie(self, data):
         return self.removeFromLibrary('movie', data)
 
@@ -491,8 +514,10 @@ class traktAPI(object):
 
     def updateSeenEpisode(self, data):
         return self.updateSeenInLibrary('show/episode', data)
+
     def updateSeenShow(self, data):
         return self.updateSeenInLibrary('show', data)
+
     def updateSeenMovie(self, data):
         return self.updateSeenInLibrary('movie', data)
 
@@ -509,9 +534,11 @@ class traktAPI(object):
         if extended:
             data = "%s/extended" % data
         return self.getSummary('show', data)
+
     def getEpisodeSummary(self, id, season, episode):
         data = "%s/%s/%s" % (id, season, episode)
         return self.getSummary('show/episode', data)
+
     def getMovieSummary(self, id):
         data = str(id)
         return self.getSummary('movie', data)
@@ -534,8 +561,10 @@ class traktAPI(object):
 
     def rateShow(self, data):
         return self.rate('show', data)
+
     def rateEpisode(self, data):
         return self.rate('episode', data)
+
     def rateMovie(self, data):
         return self.rate('movie', data)
 
@@ -569,13 +598,17 @@ class traktAPI(object):
         if description:
             data['description'] = description
         return self.userList('add', data)
+
     def userListDelete(self, slug_name):
         data = {'slug': slug_name}
         return self.userList('delete', data)
+
     def userListItemAdd(self, data):
         return self.userList('items/add', data)
+
     def userListItemDelete(self, data):
         return self.userList('items/delete', data)
+
     def userListUpdate(self, data):
         return self.userList('update', data)
 
@@ -590,6 +623,7 @@ class traktAPI(object):
 
     def getWatchlistShows(self):
         return self.getWatchlist('shows')
+
     def getWatchlistMovies(self):
         return self.getWatchlist('movies')
 
@@ -603,6 +637,7 @@ class traktAPI(object):
 
     def watchlistAddShows(self, data):
         return self.watchlistAddItems('show', data)
+
     def watchlistAddMovies(self, data):
         return self.watchlistAddItems('movie', data)
 
@@ -616,6 +651,7 @@ class traktAPI(object):
 
     def watchlistRemoveShows(self, data):
         return self.watchlistRemoveItems('show', data)
+
     def watchlistRemoveMovies(self, data):
         return self.watchlistRemoveItems('movie', data)
 
@@ -630,5 +666,6 @@ class traktAPI(object):
 
     def getRatedMovies(self):
         return self.getRatedItems('movies')
+
     def getRatedShows(self):
         return self.getRatedItems('shows')

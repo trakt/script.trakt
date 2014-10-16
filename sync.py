@@ -8,6 +8,7 @@ import copy
 
 progress = xbmcgui.DialogProgress()
 
+
 class Sync():
 
     def __init__(self, show_progress=False, run_silent=False, library="all", api=None):
