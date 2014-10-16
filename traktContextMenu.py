@@ -78,6 +78,5 @@ class traktContextMenu(xbmcgui.WindowXMLDialog):
             if cID == ACTION_LIST:
                 l = self.getControl(cID)
                 item = l.getSelectedItem()
-                selected = not item.isSelected()
                 self.action = item.getProperty('id')
                 self.close()
