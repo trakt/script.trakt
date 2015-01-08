@@ -22,7 +22,6 @@ class traktService:
 	scrobbler = None
 	tagger = None
 	updateTagsThread = None
-	watcher = None
 	syncThread = None
 	dispatchQueue = queue.SqliteQueue()
 	_interval = 10 * 60 # how often to send watching call
@@ -40,15 +39,8 @@ class traktService:
 		if action == 'started':
 			del data['action']
 			self.scrobbler.playbackStarted(data)
-			self.watcher = threading.Timer(self._interval, self.doWatching)
-			self.watcher.name = "trakt-watching"
-			self.watcher.start()
 		elif action == 'ended' or action == 'stopped':
 			self.scrobbler.playbackEnded()
-			if self.watcher:
-				if self.watcher.isAlive():
-					self.watcher.cancel()
-					self.watcher = None
 		elif action == 'paused':
 			self.scrobbler.playbackPaused()
 		elif action == 'resumed':
@@ -153,11 +145,6 @@ class traktService:
 		# we are shutting down
 		utilities.Debug("Beginning shut down.")
 
-		# check if watcher is set and active, if so, cancel it.
-		if self.watcher:
-			if self.watcher.isAlive():
-				self.watcher.cancel()
-
 		# delete player/monitor
 		del self.Player
 		del self.Monitor
@@ -169,20 +156,6 @@ class traktService:
 		# check if sync thread is running, if so, join it.
 		if self.syncThread.isAlive():
 			self.syncThread.join()
-
-	def doWatching(self):
-		# check if we're still playing a video
-		if not xbmc.Player().isPlayingVideo():
-			self.watcher = None
-			return
-
-		# call watching method
-		self.scrobbler.watching()
-
-		# start a new timer thread
-		self.watcher = threading.Timer(self._interval, self.doWatching)
-		self.watcher.name = "trakt-watching"
-		self.watcher.start()
 
 	def doManualRating(self, data):
 

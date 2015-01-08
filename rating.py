@@ -131,35 +131,51 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 	if utils.isMovie(media_type):
 		params['title'] = media['title']
 		params['year'] = media['year']
-		params['tmdb_id'] = media['tmdb_id']
-		params['imdb_id'] = media['imdb_id']
+		params['ids'] = {}
+		params['ids']['tmdb'] = media['tmdb_id']
+		params['ids']['imdb'] = media['imdb_id']
+		root = {}
+		listing = []
+		listing = [params]
+		root['movies'] = listing
 
-		data = globals.traktapi.rateMovie(params)
+		data = globals.traktapi.rateMovie(root)
 
 	elif utils.isShow(media_type):
 		params['title'] = media['title']
 		params['year'] = media['year']
-		params['tvdb_id'] = media['tvdb_id']
-		params['imdb_id'] = media['imdb_id']
+		params['ids'] = {}
+		params['ids']['tmdb'] = media['tmdb_id']
+		params['ids']['imdb'] = media['imdb_id']
+		params['ids']['tvdb'] = media['tvdb_id']
 
-		data = globals.traktapi.rateShow(params)
+		root = {}
+		listing = []
+		listing = [params]
+		root['shows'] = listing
+
+		data = globals.traktapi.rateShow(root)
 	
 	elif utils.isEpisode(media_type):
 		params['title'] = media['show']['title']
 		params['year'] = media['show']['year']
-		params['season'] = media['episode']['season']
-		params['episode'] = media['episode']['number']
-		params['tvdb_id'] = media['show']['tvdb_id']
-		params['imdb_id'] = media['show']['imdb_id']
+		params['ids'] = {}
+		params['ids']['tvdb'] = media['episode']['tvdb_id']
+		params['ids']['imdb'] = media['episode']['imdb_id']
 
-		data = globals.traktapi.rateEpisode(params)
+		root = {}
+		listing = []
+		listing = [params]
+		root['episodes'] = listing
+
+		data = globals.traktapi.rateEpisode(root)
 
 	else:
 		return
 
 	if data:
 		s = utils.getFormattedItemName(media_type, media)
-		if 'status' in data and data['status'] == "success":
+		if 'not_found' in data and not data['not_found']:
 
 			if tagging.isTaggingEnabled() and tagging.isRatingsEnabled():
 				if utils.isMovie(media_type) or utils.isShow(media_type):
