@@ -18,10 +18,7 @@
 	<string id="1033">Valorar cada elemento de la lista de reproducción</string>
 	<string id="1034">Porcentaje mínimo antes de hacer la valoración</string>
 	<string id="1035">Permitir volver a valorar contenido</string>
-	<string id="1036">Valoración por Defecto (Simple)</string>
-	<string id="1037">Valoración por Defecto (Avanzada)</string>
-	<string id="1038">Love</string>
-	<string id="1039">Hate</string>
+	<string id="1037">Valoración por Defecto</string>
 	
 	<!-- Scrobbling Settings -->
 	<string id="1040">Scrobbling</string>

@@ -18,10 +18,7 @@
 	<string id="1033">Classificar cada item da lista de reprodução</string>
 	<string id="1034">Percentagem mínima assistida para classificar</string>
 	<string id="1035">Permitir a reavaliação do conteúdo</string>
-	<string id="1036">Classificação por Defeito (Simples)</string>
-	<string id="1037">Classificação por Defeito (Avançado)</string>
-	<string id="1038">Adorei</string>
-	<string id="1039">Detestei</string>
+	<string id="1037">Classificação por Defeito</string>
 	
 	<!-- Scrobbling Settings -->
 	<string id="1040">Partilha</string>

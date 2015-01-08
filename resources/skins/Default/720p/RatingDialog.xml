@@ -80,39 +80,6 @@
             </control>
         </control>
 
-        <!--SIMPLE -->
-        <control type="group" id="10014">
-            <control type="button" id="10030">
-                <description>Love Button</description>
-                <posx>170</posx>
-                <posy>110</posy>
-                <width>100</width>
-                <height>60</height>
-                <label></label>
-                <texturefocus>love.png</texturefocus>
-                <texturenofocus>love_nofocus.png</texturenofocus>
-                <aligny>center</aligny>
-                <align>center</align>
-                <onleft>10031</onleft>
-                <onright>10031</onright>
-            </control>
-
-            <control type="button" id="10031">
-                <description>Hate Button</description>
-                <posx>330</posx>
-                <posy>110</posy>
-                <width>100</width>
-                <height>60</height>
-                <label></label>
-                <texturefocus>hate.png</texturefocus>
-                <texturenofocus>hate_nofocus.png</texturenofocus>
-                <align>center</align>
-                <aligny>center</aligny>
-                <onleft>10030</onleft>
-                <onright>10030</onright>
-            </control>
-        </control>
-
         <!--ADVANCED-->
         <control type="group" id="10015">
             <control type="button" id="11030">
