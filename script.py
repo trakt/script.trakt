@@ -162,18 +162,18 @@ def Main():
 					data['tag'] = result['tag']
 
 				elif utils.isEpisode(media_type):
-					result = utils.getEpisodeDetailsFromXbmc(data['dbid'], ['showtitle', 'season', 'episode', 'tvshowid'])
+					result = utils.getEpisodeDetailsFromXbmc(data['dbid'], ['showtitle', 'season', 'episode', 'imdbnumber'])
 					if not result:
 						utils.Debug("No data was returned from XBMC, aborting manual %s." % args['action'])
 						return
-					data['tvdb_id'] = result['tvdb_id']
+					data['imdbnumber'] = result['imdbnumber']
 					data['season'] = result['season']
 					data['episode'] = result['episode']
 
 			else:
 				if 'season' in data:
 					utils.Debug("Manual %s of non-library '%s' S%02dE%02d, with an ID of '%s'." % (args['action'], media_type, data['season'], data['episode'], data['remoteid']))
-					data['tvdb_id'] = data['remoteid']
+					data['imdbnumber'] = data['remoteid']
 				else:
 					utils.Debug("Manual %s of non-library '%s' with an ID of '%s'." % (args['action'], media_type, data['remoteid']))
 					data['imdbnumber'] = data['remoteid']

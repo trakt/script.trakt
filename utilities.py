@@ -327,3 +327,15 @@ def regex_tvshow(compare, file, sub = ""):
   		return True
   	else:
   		return "","",""
+
+def findMovieMatchInList(id, list):
+	return next((item for item in list if item['movie']['ids']['imdb'] == id), {})
+
+def findShowMatchInList(id, list):
+	return next((item for item in list if item['show']['ids']['tvdb'] == id), {})  		
+
+def findEpisodeMatchInList(id, season, episode, list, mode):
+	if mode == 'watched':
+		return next((item for item in list if item['show']['ids']['tvdb'] == id and item['seasons']['number'] == season and item['seasons']['episodes']['number'] == episode ), {}) 
+	else:
+		return next((item for item in list if item['episode']['ids']['tvdb'] == id), {}) 

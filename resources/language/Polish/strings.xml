@@ -16,8 +16,7 @@
 	<string id="1033">Oceń każdą pozycję playlisty</string>
 	<string id="1034">Minimalny procent obejrzenia, aby pokazać dialog oceny</string>
 	<string id="1035">Zezwalaj na ponowne ocenianie</string>
-	<string id="1036">Domyślna ocena (Proste)</string>
-	<string id="1037">Domyślna ocena (Zaawansowane)</string>	
+	<string id="1037">Domyślna ocena</string>	
 	
 	<!-- Scrobbling Settings -->
 	<string id="1040">Scroblowanie</string>

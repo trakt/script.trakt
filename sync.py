@@ -77,7 +77,7 @@ class Sync():
 		x = float(len(library_shows))
 		# reformat show array
 		for show in library_shows:
-			if show['title'] is None and show['imdb_id'] is None and show['tvdb_id'] is None:
+			if show['title'] is None and show['imdb'] is None and show['tvdb'] is None:
 				# has no identifing values, skip it
 				continue
 
@@ -89,10 +89,10 @@ class Sync():
 			show['seasons'] = y
 			show['watched'] = w
 			show['in_collection'] = True
-			if show['imdb_id'] is None:
-				show['imdb_id'] = ""
-			if show['tvdb_id'] is None:
-				show['tvdb_id'] = ""
+			if show['imdb'] is None:
+				show['imdb'] = ""
+			if show['tvdb'] is None:
+				show['tvdb'] = ""
 
 			shows.append(show)
 
@@ -237,9 +237,9 @@ class Sync():
 		return "%s [tvdb: %s] - %s" % (show['title'], show['tvdb_id'], ", ".join(p))
 
 	def traktFormatShow(self, show):
-		data = {'title': show['title'], 'tvdb_id': show['tvdb_id'], 'year': show['year'], 'episodes': []}
+		data = {'title': show['title'], 'ids': {'tvdb': show['tvdb_id']}, 'year': show['year'], 'episodes': []}
 		if 'imdb_id' in show:
-			data['imdb_id'] = show['imdb_id']
+			data['ids']['imdb'] = show['imdb_id']
 		for season in show['seasons']:
 			for episode in show['seasons'][season]:
 				data['episodes'].append({'season': season, 'episode': episode})

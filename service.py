@@ -90,11 +90,6 @@ class traktService:
 			list = data['list']
 			del data['list']
 			self.tagger.manualRemoveFromList(list, data)
-		elif action == 'loadsettings':
-			force = False
-			if 'force' in data:
-				force = data['force']
-			globals.traktapi.getAccountSettings(force)
 		elif action == 'settings':
 			utilisites.showSettings()
 		else:
@@ -180,7 +175,7 @@ class traktService:
 				utilities.Debug("Getting data for manual %s of non-library '%s' with ID of '%s'" % (action, media_type, data['remoteid']))
 
 		if utilities.isEpisode(media_type):
-			summaryInfo = globals.traktapi.getEpisodeSummary(data['tvdb_id'], data['season'], data['episode'])
+			summaryInfo = globals.traktapi.getEpisodeSummary(data['imdbnumber'], data['season'], data['episode'])
 		elif utilities.isShow(media_type):
 			summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
 		elif utilities.isMovie(media_type):
@@ -239,10 +234,10 @@ class traktService:
 					s = utilities.getFormattedItemName(media_type, summaryInfo)
 					utilities.Debug("doMarkWathced(): '%s' is not watched on trakt, marking it as watched." % s)
 					params = {}
-					params['imdb_id'] = summaryInfo['show']['imdb_id']
-					params['tvdb_id'] = summaryInfo['show']['tvdb_id']
-					params['title'] = summaryInfo['show']['title']
-					params['year'] = summaryInfo['show']['year']
+					params['imdb_id'] = summaryInfo['ids']['imdb_id']
+					params['tvdb_id'] = summaryInfo['ids']['tvdb_id']
+					params['title'] = summaryInfo['title']
+					params['year'] = summaryInfo['year']
 					params['episodes'] = [{'season': data['season'], 'episode': data['episode']}]
 					utilities.Debug("doMarkWatched(): %s" % str(params))
 					
@@ -266,8 +261,8 @@ class traktService:
 				showInfo['season'] = data['season']
 				s = utilities.getFormattedItemName(media_type, showInfo)
 				params = {}
-				params['imdb_id'] = showInfo['imdb_id']
-				params['tvdb_id'] = showInfo['tvdb_id']
+				params['imdb_id'] = summaryInfo['ids']['imdb']
+				params['tvdb_id'] = summaryInfo['ids']['tvdb']
 				params['title'] = showInfo['title']
 				params['year'] = showInfo['year']
 				params['episodes'] = []
@@ -296,8 +291,8 @@ class traktService:
 			if summaryInfo:
 				s = utilities.getFormattedItemName(media_type, summaryInfo)
 				params = {}
-				params['imdb_id'] = summaryInfo['imdb_id']
-				params['tvdb_id'] = summaryInfo['tvdb_id']
+				params['imdb_id'] = summaryInfo['ids']['imdb']
+				params['tvdb_id'] = summaryInfo['ids']['tvdb']
 				params['title'] = summaryInfo['title']
 				params['year'] = summaryInfo['year']
 				params['episodes'] = []

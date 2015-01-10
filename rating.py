@@ -41,19 +41,13 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 
 	s = utils.getFormattedItemName(media_type, summary_info)
 
-	if not globals.traktapi.settings:
-		globals.traktapi.getAccountSettings()
-	rating_type = globals.traktapi.settings['viewing']['ratings']['mode']
+	utils.Debug("[Rating] Summary Info %s" % (summary_info))
 
 	if unrate:
 		rating = None
 
-		if rating_type == "simple":
-			if not summary_info['rating'] == "false":
-				rating = "unrate"
-		else:
-			if summary_info['rating_advanced'] > 0:
-				rating = 0
+		if summary_info['rating_advanced'] > 0:
+			rating = 0
 
 		if not rating is None:
 			utils.Debug("[Rating] '%s' is being unrated." % s)
@@ -81,7 +75,7 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 				utils.Debug("[Rating] '%s' is already rated." % s)
 		return
 
-	if summary_info['rating'] or summary_info['rating_advanced']:
+	if summary_info['user']['ratings']:
 		if not rerate:
 			utils.Debug("[Rating] '%s' has already been rated." % s)
 			utils.notification(utils.getString(1351), s)
@@ -96,7 +90,7 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 		__addon__.getAddonInfo('path'),
 		media_type=media_type,
 		media=summary_info,
-		rating_type=rating_type,
+		rating_type='advanced',
 		rerate=rerate
 	)
 
@@ -106,12 +100,8 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 		if rerate:
 			rating = gui.rating
 			
-			if rating_type == "simple":
-				if not summary_info['rating'] == "false" and rating == summary_info['rating']:
-					rating = "unrate"
-			else:
-				if summary_info['rating_advanced'] > 0 and rating == summary_info['rating_advanced']:
-					rating = 0
+			if summary_info['user']['ratings'] > 0 and rating == summary_info['rating_advanced']:
+				rating = 0
 
 		if rating == 0 or rating == "unrate":
 			rateOnTrakt(rating, gui.media_type, gui.media, unrate=True)
@@ -226,8 +216,6 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 
 class RatingDialog(xbmcgui.WindowXMLDialog):
 	buttons = {
-		10030:	'love',
-		10031:	'hate',
 		11030:	1,
 		11031:	2,
 		11032:	3,
@@ -241,8 +229,6 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 	}
 
 	focus_labels = {
-		10030: 1314,
-		10031: 1315,
 		11030: 1315,
 		11031: 1316,
 		11032: 1317,
@@ -261,26 +247,20 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 		self.rating_type = rating_type
 		self.rating = None
 		self.rerate = rerate
-		self.default_simple = utils.getSettingAsInt('rating_default_simple')
 		self.default_advanced = utils.getSettingAsInt('rating_default_advanced')
 
 	def onInit(self):
-		self.getControl(10014).setVisible(self.rating_type == 'simple')
 		self.getControl(10015).setVisible(self.rating_type == 'advanced')
 
 		s = utils.getFormattedItemName(self.media_type, self.media, short=True)
 		self.getControl(10012).setLabel(s)
 
 		rateID = None
-		if self.rating_type == 'simple':
-			rateID = 10030 + self.default_simple
-			if self.rerate:
-				if self.media['rating'] == "hate":
-					rateID = 10031
-		else:
-			rateID = 11029 + self.default_advanced
-			if self.rerate and int(self.media['rating_advanced']) > 0:
-				rateID = 11029 + int(self.media['rating_advanced'])
+		
+		rateID = 11029 + self.default_advanced
+		# TODO do we need this? - Manual Rating
+		#if self.rerate and int(self.media['rating_advanced']) > 0:
+		#	rateID = 11029 + int(self.media['rating_advanced'])
 		self.setFocus(self.getControl(rateID))
 
 	def onClick(self, controlID):
@@ -291,16 +271,17 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 	def onFocus(self, controlID):
 		if controlID in self.focus_labels:
 			s = utils.getString(self.focus_labels[controlID])
-			if self.rerate:
-				if self.media['rating'] == self.buttons[controlID] or self.media['rating_advanced'] == self.buttons[controlID]:
-					if utils.isMovie(self.media_type):
-						s = utils.getString(1325)
-					elif utils.isShow(self.media_type):
-						s = utils.getString(1326)
-					elif utils.isEpisode(self.media_type):
-						s = utils.getString(1327)
-					else:
-						pass
+			# TODO do we need this? - Manual Rating
+			#if self.rerate:
+			#	if self.media['rating'] == self.buttons[controlID] or self.media['rating_advanced'] == self.buttons[controlID]:
+			#		if utils.isMovie(self.media_type):
+			#			s = utils.getString(1325)
+			#		elif utils.isShow(self.media_type):
+			#			s = utils.getString(1326)
+			#		elif utils.isEpisode(self.media_type):
+			#			s = utils.getString(1327)
+			#		else:
+			#			pass
 			
 			self.getControl(10013).setLabel(s)
 		else:
