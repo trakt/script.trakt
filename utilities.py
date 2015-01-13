@@ -251,6 +251,7 @@ def getMovieDetailsFromXbmc(libraryId, fields):
 
 def findInList(list, returnIndex=False, returnCopy=False, case_sensitive=True, *args, **kwargs):
 	for index in range(len(list)):
+		Debug("findInList index %s" % index)
 		item = list[index]
 		i = 0
 		for key in kwargs:
@@ -275,24 +276,16 @@ def findInList(list, returnIndex=False, returnCopy=False, case_sensitive=True, *
 def findAllInList(list, key, value):
 	return [item for item in list if item[key] == value]
 
-def findMovie(movie, movies, returnIndex=False):
+def findMediaObject(xbmcMovie, traktMovies, returnIndex=False):
 	result = None
-	if 'imdb_id' in movie and unicode(movie['imdb_id']).startswith("tt"):
-		result = findInList(movies, returnIndex=returnIndex, imdb_id=movie['imdb_id'])
-	if result is None and 'tmdb_id' in movie and unicode(movie['tmdb_id']).isdigit():
-		result = findInList(movies, returnIndex=returnIndex, tmdb_id=unicode(movie['tmdb_id']))
-	if result is None and movie['title'] and movie['year'] > 0:
-		result = findInList(movies, returnIndex=returnIndex, title=movie['title'], year=movie['year'])
-	return result
-
-def findShow(show, shows, returnIndex=False):
-	result = None
-	if 'tvdb_id' in show and unicode(show['tvdb_id']).isdigit():
-		result = findInList(shows, returnIndex=returnIndex, tvdb_id=unicode(show['tvdb_id']))
-	if result is None and 'imdb_id' in show and unicode(show['imdb_id']).startswith("tt"):
-		result = findInList(shows, returnIndex=returnIndex, imdb_id=show['imdb_id'])
-	if result is None and show['title'] and 'year' in show and show['year'] > 0:
-		result = findInList(shows, returnIndex=returnIndex, title=show['title'], year=show['year'])
+	if 'imdb' in xbmcMovie and unicode(xbmcMovie['imdb']).startswith("tt"):
+		result = findInList(traktMovies, returnIndex=returnIndex, imdb_id=xbmcMovie['imdb'])
+	elif 'tmdb' in xbmcMovie and unicode(xbmcMovie['tmdb']).isdigit():
+		result = findInList(traktMovies, returnIndex=returnIndex, tmdb_id=unicode(xbmcMovie['tmdb']))
+	elif 'tvdb' in xbmcMovie and unicode(xbmcMovie['tvdb']).isdigit():
+		result = findInList(traktMovies, returnIndex=returnIndex, tvdb_id=unicode(xbmcMovie['tvdb']))		
+	elif 'title' in xbmcMovie and 'year' in xbmcMovie and xbmcMovie['title'] and xbmcMovie['year'] > 0:
+		result = findInList(traktMovies, returnIndex=returnIndex, title=xbmcMovie['title'], year=xbmcMovie['year'])	
 	return result
 
 def regex_tvshow(compare, file, sub = ""):
@@ -339,3 +332,5 @@ def findEpisodeMatchInList(id, season, episode, list, mode):
 		return next((item for item in list if item['show']['ids']['tvdb'] == id and item['seasons']['number'] == season and item['seasons']['episodes']['number'] == episode ), {}) 
 	else:
 		return next((item for item in list if item['episode']['ids']['tvdb'] == id), {}) 
+
+		

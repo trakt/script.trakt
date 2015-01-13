@@ -199,7 +199,7 @@ class Tagger():
 
 			for item in listdata['items']:
 				type = 'movies' if item['type'] == 'movie' else 'shows'
-				f = utils.findMovie if type == 'movies' else utils.findShow
+				f = utils.findMediaObject
 
 				i = f(item[item['type']], self.xbmcData[type], returnIndex=True)
 				if not i is None:
@@ -219,7 +219,7 @@ class Tagger():
 			data['Watchlist'] = {'movies': [], 'shows': []}
 
 			for type in w:
-				f = utils.findMovie if type == 'movies' else utils.findShow
+				f = utils.findMediaObject
 				for item in w[type]:
 					i = f(item, self.xbmcData[type], returnIndex=True)
 					if not i is None:
@@ -246,7 +246,7 @@ class Tagger():
 				data[listName] = {'movies': [], 'shows': []}
 
 			for type in r:
-				f = utils.findMovie if type == 'movies' else utils.findShow
+				f = utils.findMediaObject
 				for item in r[type]:
 					if item['rating_advanced'] >= self._ratingMin:
 						i = f(item, self.xbmcData[type], returnIndex=True)

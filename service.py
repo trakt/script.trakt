@@ -175,7 +175,7 @@ class traktService:
 				utilities.Debug("Getting data for manual %s of non-library '%s' with ID of '%s'" % (action, media_type, data['remoteid']))
 
 		if utilities.isEpisode(media_type):
-			summaryInfo = globals.traktapi.getEpisodeSummary(data['imdbnumber'], data['season'], data['episode'])
+			summaryInfo = globals.traktapi.getEpisodeSummary(data['trakt'], data['season'], data['episode'])
 		elif utilities.isShow(media_type):
 			summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
 		elif utilities.isMovie(media_type):

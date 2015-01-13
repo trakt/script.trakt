@@ -1,4 +1,0 @@
-recursive-include examples *.py
-recursive-include trakt *.py
-include *
-global-exclude *.iml *.pyc

@@ -197,6 +197,7 @@ class Scrobbler():
 			return
 
 		Debug("[Scrobbler] playbackSeek()")
+		self.update(True)
 		self.scrobble('start')
 
 	def playbackEnded(self):
