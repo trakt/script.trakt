@@ -5,7 +5,6 @@ import xbmc
 import time
 
 import utilities
-import tagging
 from utilities import Debug
 from rating import ratingCheck
 
@@ -237,7 +236,6 @@ class Scrobbler():
 			response = self.traktapi.scrobbleMovie(self.curVideoInfo, watchedPercent, status)
 			if not response is None and 'status' in response:
 				if response['status'] == "success":
-					self.watchlistTagCheck()
 					response['title'] = response['movie']['title']
 					response['year'] = response['movie']['year']
 					self.scrobbleNotification(response)
@@ -268,28 +266,4 @@ class Scrobbler():
 		if utilities.getSettingAsBool("scrobble_notification"):
 			s = utilities.getFormattedItemName(self.curVideo['type'], info)
 			utilities.notification(utilities.getString(1049), s)
-
-	def watchlistTagCheck(self):
-		if not utilities.isMovie(self.curVideo['type']):
-			return
-
-		if not 'id' in self.curVideo:
-			return
-
-		if not (tagging.isTaggingEnabled() and tagging.isWatchlistsEnabled()):
-			return
-
-		id = self.curVideo['id']
-		result = utilities.getMovieDetailsFromXbmc(id, ['tag'])
-		
-		if result:
-			tags = result['tag']
-
-			if tagging.hasTraktWatchlistTag(tags):
-				tags.remove(tagging.listToTag("Watchlist"))
-				s = utilities.getFormattedItemName(self.curVideo['type'], self.curVideoInfo)
-				tagging.xbmcSetTags(id, self.curVideo['type'], s, tags)
-
-		else:
-			utilities.Debug("No data was returned from XBMC, aborting tag udpate.")
 

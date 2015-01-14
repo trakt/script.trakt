@@ -5,7 +5,6 @@ import xbmc
 import xbmcaddon
 import xbmcgui
 import utilities as utils
-import tagging
 import globals
 
 __addon__ = xbmcaddon.Addon("script.trakt")
@@ -75,7 +74,7 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 				utils.Debug("[Rating] '%s' is already rated." % s)
 		return
 
-	if summary_info['user']['ratings']:
+	if summary_info['rating']:
 		if not rerate:
 			utils.Debug("[Rating] '%s' has already been rated." % s)
 			utils.notification(utils.getString(1351), s)
@@ -100,7 +99,7 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 		if rerate:
 			rating = gui.rating
 			
-			if summary_info['user']['ratings'] > 0 and rating == summary_info['rating_advanced']:
+			if summary_info['rating'] > 0 and rating == summary_info['rating_advanced']:
 				rating = 0
 
 		if rating == 0 or rating == "unrate":
@@ -147,11 +146,16 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 		data = globals.traktapi.rateShow(root)
 	
 	elif utils.isEpisode(media_type):
-		params['title'] = media['show']['title']
-		params['year'] = media['show']['year']
+		utils.Debug("%s" % media)
+		#params['title'] = media['show']['title']
+		#params['year'] = media['show']['year']
+		params['season'] = media['episode']['season']
+		params['number'] = media['episode']['number']
 		params['ids'] = {}
-		params['ids']['tvdb'] = media['episode']['tvdb_id']
-		params['ids']['imdb'] = media['episode']['imdb_id']
+		if media['episode']['tvdb_id']:
+			params['ids']['tvdb'] = media['episode']['tvdb_id']
+		if media['episode']['imdb_id']:
+			params['ids']['imdb'] = media['episode']['imdb_id']
 
 		root = {}
 		listing = []
@@ -166,43 +170,6 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 	if data:
 		s = utils.getFormattedItemName(media_type, media)
 		if 'not_found' in data and not data['not_found']:
-
-			if tagging.isTaggingEnabled() and tagging.isRatingsEnabled():
-				if utils.isMovie(media_type) or utils.isShow(media_type):
-
-					id = media['xbmc_id']
-					f = utils.getMovieDetailsFromXbmc if utils.isMovie(media_type) else utils.getShowDetailsFromXBMC
-					result = f(id, ['tag'])
-					
-					if result:
-						tags = result['tag']
-
-						new_rating = rating
-						if new_rating == "love":
-							new_rating = 10
-						elif new_rating == "hate":
-							new_rating = 1
-
-						new_rating_tag = tagging.ratingToTag(new_rating)
-						if unrate:
-							new_rating_tag = ""
-
-						update = False
-						if tagging.hasTraktRatingTag(tags):
-							old_rating_tag = tagging.getTraktRatingTag(tags)
-							if not old_rating_tag == new_rating_tag:
-								tags.remove(old_rating_tag)
-								update = True
-
-						if not unrate and new_rating >= tagging.getMinRating():
-							tags.append(new_rating_tag)
-							update = True
-
-						if update:
-							tagging.xbmcSetTags(id, media_type, s, tags)
-
-					else:
-						utils.Debug("No data was returned from XBMC, aborting tag udpate.")
 
 			if not unrate:
 				utils.notification(utils.getString(1350), s)

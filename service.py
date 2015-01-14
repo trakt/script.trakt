@@ -9,7 +9,6 @@ import utilities
 from traktapi import traktAPI
 from rating import rateMedia, rateOnTrakt
 from scrobbler import Scrobbler
-from tagging import Tagger
 from sync import Sync
 
 try:
@@ -20,7 +19,6 @@ except ImportError:
 class traktService:
 
 	scrobbler = None
-	tagger = None
 	updateTagsThread = None
 	syncThread = None
 	dispatchQueue = queue.SqliteQueue()
@@ -56,7 +54,6 @@ class traktService:
 		elif action == 'settingsChanged':
 			utilities.Debug("Settings changed, reloading.")
 			globals.traktapi.updateSettings()
-			self.tagger.updateSettings()
 		elif action == 'markWatched':
 			del data['action']
 			self.doMarkWatched(data)
@@ -69,29 +66,8 @@ class traktService:
 				self.doSync(manual=True, silent=data['silent'], library=data['library'])
 			else:
 				utilities.Debug("There already is a sync in progress.")
-		elif action == 'updatetags':
-			if self.updateTagsThread and self.updateTagsThread.isAlive():
-				utilities.Debug("Currently updating tags already.")
-			else:
-				self.updateTagsThread = threading.Thread(target=self.tagger.updateTagsFromTrakt, name="trakt-updatetags")
-				self.updateTagsThread.start()
-		elif action == 'managelists':
-			self.tagger.manageLists()
-		elif action == 'itemlists':
-			del data['action']
-			self.tagger.itemLists(data)
-		elif action == 'addtolist':
-			del data['action']
-			list = data['list']
-			del data['list']
-			self.tagger.manualAddToList(list, data)
-		elif action == 'removefromlist':
-			del data['action']
-			list = data['list']
-			del data['list']
-			self.tagger.manualRemoveFromList(list, data)
 		elif action == 'settings':
-			utilisites.showSettings()
+			utilities.showSettings()
 		else:
 			utilities.Debug("Unknown dispatch action, '%s'." % action)
 
@@ -122,11 +98,8 @@ class traktService:
 		# init scrobbler class
 		self.scrobbler = Scrobbler(globals.traktapi)
 
-		# init tagging class
-		self.tagger = Tagger(globals.traktapi)
-		
 		# start loop for events
-		while (not xbmc.abortRequested):
+		while not xbmc.abortRequested:
 			while len(self.dispatchQueue) and (not xbmc.abortRequested):
 				data = self.dispatchQueue.get()
 				utilities.Debug("Queued dispatch: %s" % data)

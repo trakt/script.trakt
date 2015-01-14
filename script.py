@@ -131,7 +131,7 @@ def Main():
 					data['season'] = int(args['season'])
 					data['episode'] = int(args['episode'])
 				except ValueError:
-					utilities.Debug("Error parsing season or episode for manual %s" % args['action'])
+					utils.Debug("Error parsing season or episode for manual %s" % args['action'])
 					return
 		else:
 			media_type = getMediaType()
