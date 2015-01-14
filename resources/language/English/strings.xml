@@ -180,7 +180,7 @@
 	<string id="1552">%d episode(s) of '%s'</string>
 
 	<!-- Tagger Settings -->
-	<string id="1600">Tagging</string>
+	<!--<string id="1600">Tagging</string>
 	<string id="1601">Enable Tagging</string>
 	<string id="1602">Update tags after a library sync</string>
 	<string id="1603">Create tags from watch lists</string>
@@ -191,7 +191,7 @@
 	<string id="1608">Enable notifications</string>
 	
 	<!-- Tagger String -->
-	<string id="1650">Manage trakt.tv Lists</string>
+	<!--<string id="1650">Manage trakt.tv Lists</string>
 	<string id="1651">Add List</string>
 	<string id="1652">OK</string>
 	<string id="1653">Cancel</string>

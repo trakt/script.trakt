@@ -309,9 +309,6 @@ class syncThread(threading.Thread):
 		sync = Sync(show_progress=self._isManual, run_silent=self._runSilent, library=self._library, api=globals.traktapi)
 		sync.sync()
 		
-		if utilities.getSettingAsBool('tagging_enable') and utilities.getSettingAsBool('tagging_tag_after_sync'):
-			q = queue.SqliteQueue()
-			q.append({'action': 'updatetags'})
 
 class traktMonitor(xbmc.Monitor):
 

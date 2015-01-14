@@ -4,7 +4,6 @@ import utilities as utils
 import xbmc
 import sys
 import queue
-import tagging
 import time
 from traktContextMenu import traktContextMenu
 
@@ -51,33 +50,12 @@ def Main():
 		buttons = []
 		media_type = getMediaType()
 
-		if utils.getSettingAsBool('tagging_enable'):
-			if utils.isMovie(media_type):
-				buttons.append("itemlists")
-				dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
-				result = utils.getMovieDetailsFromXbmc(dbid, ['tag'])
-				if tagging.hasTraktWatchlistTag(result['tag']):
-					buttons.append("removefromlist")
-				else:
-					buttons.append("addtolist")
-			elif utils.isShow(media_type):
-				buttons.append("itemlists")
-				dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
-				result = utils.getShowDetailsFromXBMC(dbid, ['tag'])
-				if tagging.hasTraktWatchlistTag(result['tag']):
-					buttons.append("removefromlist")
-				else:
-					buttons.append("addtolist")
-
 		if media_type in ['movie', 'show', 'episode']:
 			buttons.append("rate")
 
 		if media_type in ['movie', 'show', 'season', 'episode']:
 			buttons.append("togglewatched")
 
-		if utils.getSettingAsBool('tagging_enable'):
-			buttons.append("managelists")
-			buttons.append("updatetags")
 		buttons.append("sync")
 
 		contextMenu = traktContextMenu(media_type=media_type, buttons=buttons)
