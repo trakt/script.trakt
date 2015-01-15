@@ -44,5 +44,5 @@ Remote streaming content will scrobble assuming the metadata is correctly set in
 
 ###Thanks
 
-Special thanks to all who contribute to this plugin! Check the commit history and changelog to see these talented developers.
-Special thanks to fuzeman for trakt.py (https://github.com/fuzeman/trakt.py)
+* Special thanks to all who contribute to this plugin! Check the commit history and changelog to see these talented developers.
+* Special thanks to fuzeman for [trakt.py] (https://github.com/fuzeman/trakt.py)
