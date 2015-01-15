@@ -132,7 +132,7 @@ class Scrobbler():
 				if 'id' in self.curVideo:
 					self.curVideoInfo = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
 					if not self.curVideoInfo: # getEpisodeDetailsFromXbmc was empty
-						Debug("[Scrobbler] Episode details from XBMC was empty, ID (%d) seems invalid, aborting further scrobbling of this episode." % self.curVideo['id'])
+						Debug("[Scrobbler] Episode details from Kodi was empty, ID (%d) seems invalid, aborting further scrobbling of this episode." % self.curVideo['id'])
 						self.curVideo = None
 						self.isPlaying = False
 						self.watchedTime = 0
@@ -241,7 +241,7 @@ class Scrobbler():
 					self.scrobbleNotification(response)
 					Debug("[Scrobbler] Scrobble response: %s" % str(response))
 				elif response['status'] == "failure":
-						Debug("[Scrobbler] Movie '%s' was not found on trakt.tv, possible malformed XBMC metadata." % self.curVideoInfo['title'])
+						Debug("[Scrobbler] Movie '%s' was not found on trakt.tv, possible malformed Kodi metadata." % self.curVideoInfo['title'])
 
 		elif utilities.isEpisode(self.curVideo['type']) and scrobbleEpisodeOption:
 			if self.isMultiPartEpisode:
@@ -257,7 +257,7 @@ class Scrobbler():
 					self.scrobbleNotification(response)
 					Debug("[Scrobbler] Scrobble response: %s" % str(response))
 				elif response['status'] == "failure":
-						Debug("[Scrobbler] Show '%s' was not found on trakt.tv, possible malformed XBMC metadata." % self.curVideoInfo['showtitle'])
+						Debug("[Scrobbler] Show '%s' was not found on trakt.tv, possible malformed Kodi metadata." % self.curVideoInfo['showtitle'])
 
 	def scrobbleNotification(self, info):
 		if not self.curVideoInfo:

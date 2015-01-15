@@ -7,7 +7,7 @@ import math
 import urllib2
 
 from trakt import Trakt
-from utilities import Debug, notification, getSetting, getSettingAsBool, getSettingAsInt, getString, setSetting
+from utilities import Debug, notification, getSetting, getSettingAsBool, getSettingAsInt, getString, setSetting, findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList
 from urllib2 import Request, urlopen, HTTPError, URLError
 from httplib import HTTPException, BadStatusLine
 
@@ -42,8 +42,11 @@ class traktAPI(object):
 
 	__baseURL = "https://api.trakt.tv"
 	__apikey = "d4161a7a106424551add171e5470112e4afdaf2438e6ef2fe0548edc75924868"
+	__token = ""
+	__username = ""
+	__password = ""
 
-	def __init__(self, loadSettings=False):
+	def __init__(self):
 		Debug("[traktAPI] Initializing.")
 
 		# Get user login data
@@ -53,7 +56,7 @@ class traktAPI(object):
 
 		# Configure
 		Trakt.configuration.defaults.client(
-		    id='d4161a7a106424551add171e5470112e4afdaf2438e6ef2fe0548edc75924868'
+		    id=self.__apikey
 		)
 
 		if not self.__token:
@@ -75,58 +78,66 @@ class traktAPI(object):
 
 	def getToken(self):
 		# Attempt authentication (retrieve new token)
-		self.__token = Trakt['auth'].login(self.__username, self.__password)
+		x = Trakt['auth'].login(getSetting('username'), getSetting('password'))
+		Debug("[traktAPI] getToken(): token: %s" % self.__token)
 
 
+	def scrobbleEpisode(self, info, percent, status):
+		show = { 'show': {'title': info['showtitle'], 'year': info['year']} }
+		episode = { 'episode': { 'season': info['season'], 'number': info['episode'], 'ids': {}} }
 
-	# def scrobbleEpisode(self, info, percent, status):
-	# 	show = { 'show': {'title': info['showtitle'], 'year': info['year']} }
-	# 	episode = { 'episode': { 'season': info['season'], 'number': info['episode'], 'ids': {}} }
-	# 	if 'uniqueid' in info:
-	# 		data['ids']['tvdb'] = info['uniqueid']['unknown']
-	# 		Debug("[traktAPI] scrobble(data: %s)" % (url, str(data)))
-    #
-    #
-	# 		return
-	# 		with Trakt.configuration.auth(self.__username, self.__token):
-	# 			if status == 'start':
-	# 				Trakt['scrobble'].start(
-	# 					show=show,
-	# 					episode=episode,
-	# 					progress=math.ceil(percent))
-	# 			elif status == 'pause':
-	# 				Trakt['scrobble'].pause(
-	# 					show=show,
-	# 					episode=episode,
-	# 					progress=math.ceil(percent))
-	# 			elif status == 'stop':
-	# 				Trakt['scrobble'].stop(
-	# 					show=show,
-	# 					episode=episode,
-	# 					progress=math.ceil(percent))
-	# 			else:
-	# 				Debug("[traktAPI] scrobble() Bad scrobble status")
-    #
-	# def scrobbleMovie(self, info, percent, status):
-	# 	movie = { 'movie': { 'ids': {'imdb': info['imdbnumber']}, 'title': info['title'], 'year': info['year']} }
-	# 	Debug("[traktAPI] scrobble(data: %s)" % (str(movie)))
-    #
-	# 	return
-	# 	with Trakt.configuration.auth(self.__username, self.__token):
-	# 		if status == 'start':
-	# 			Trakt['scrobble'].start(
-	# 				movie=movie,
-	# 				progress=math.ceil(percent))
-	# 		elif status == 'pause':
-	# 			Trakt['scrobble'].pause(
-	# 				movie=movie,
-	# 				progress=math.ceil(percent))
-	# 		elif status == 'stop':
-	# 			Trakt['scrobble'].stop(
-	# 				movie=movie,
-	# 				progress=math.ceil(percent))
-	# 		else:
-	# 			Debug("[traktAPI] scrobble() Bad scrobble status")
+		if 'uniqueid' in info:
+			episode['ids']['tvdb'] = info['uniqueid']['unknown']
+
+		result = {}
+
+		with Trakt.configuration.auth(self.__username, self.__token):
+			if status == 'start':
+				result =Trakt['scrobble'].start(
+					show=show,
+					episode=episode,
+					progress=math.ceil(percent))
+			elif status == 'pause':
+				result = Trakt['scrobble'].pause(
+					show=show,
+					episode=episode,
+					progress=math.ceil(percent))
+			elif status == 'stop':
+				result = Trakt['scrobble'].stop(
+					show=show,
+					episode=episode,
+					progress=math.ceil(percent))
+			else:
+					Debug("[traktAPI] scrobble() Bad scrobble status")
+		return result
+
+
+	def scrobbleMovie(self, info, percent, status):
+
+		movie = { 'movie': { 'ids': {'imdb': info['imdbnumber']}, 'title': info['title'], 'year': info['year']} }
+		Debug("[traktAPI] scrobble(data: %s)" % (str(movie)))
+
+		result = None
+		with Trakt.configuration.auth(self.__username, self.__token):
+			if status == 'start':
+				Debug("[traktAPI] scrobble() Start")
+				result = Trakt['scrobble'].start(
+					movie=movie,
+					progress=math.ceil(percent))
+			elif status == 'pause':
+				Debug("[traktAPI] scrobble() Pause")
+				result = Trakt['scrobble'].pause(
+					movie=movie,
+					progress=math.ceil(percent))
+			elif status == 'stop':
+				Debug("[traktAPI] scrobble() Stop")
+				result = Trakt['scrobble'].stop(
+					movie=movie,
+					progress=math.ceil(percent))
+			else:
+				Debug("[traktAPI] scrobble() Bad scrobble status")
+		Debug("[traktAPI] scrobble() %s" % result)				
+		return result
 
 	def getShowsLibrary(self, shows):
 		with Trakt.configuration.auth(self.__username, self.__token):
@@ -179,25 +190,23 @@ class traktAPI(object):
     #TODO move this to the new api wrapper
 
 
-	def __getData(self, url, args, timeout=60):
+	def __getData(self, url, args, method, timeout=60):
 		data = None
 		try:
 			Debug("[traktAPI] __getData(): urllib2.Request(%s)" % url)
 
-			headers = { 'trakt-user-login': self.__username,
+			headers = {'trakt-user-login': self.__username,
 						'trakt-user-token': self.__token,
 						'Content-type': 'application/json',
 						'trakt-api-key': self.__apikey,
 						'trakt-api-version': '2'
 						}
-
 			if args == None:
-				Debug("[traktAPI] __getData(): Without args")
 				req = Request(url, headers)
 			else:
-				Debug("[traktAPI] __getData(): With args")
 				req = Request(url, args, headers)
 
+			req.get_method = lambda: method
 			Debug("[traktAPI] __getData(): urllib2.urlopen()")
 			t1 = time.time()
 			response = urlopen(req, timeout=timeout)
@@ -210,9 +219,9 @@ class traktAPI(object):
 			Debug("[traktAPI] __getData(): Response Time: %0.2f ms" % ((t2 - t1) * 1000))
 			Debug("[traktAPI] __getData(): Response Headers: %s" % str(response.info().dict))
 
-		except BadStatusLine, e:
+		except BadStatusLine as e:
 			raise traktUnknownError("BadStatusLine: '%s' from URL: '%s'" % (e.line, url))
-		except IOError, e:
+		except IOError as e:
 			if hasattr(e, 'code'): # error 401 or 503, possibly others
 				# read the error document, strip newlines, this will make an html page 1 line
 				error_data = e.read().replace("\n", "").replace("\r", "")
@@ -238,9 +247,8 @@ class traktAPI(object):
 		return data
 
 	# make a JSON api request to trakt
-	# method: http method (GET or POST)
-	# req: REST request (ie '/users/library/movies/all.json/%%API_KEY%%/%%USERNAME%%')
-	# args: arguments to be passed by POST JSON (only applicable to POST requests), default:{}
+	# method: http method (GET or POST or PUT or DELETE)
+	# args: arguments to be passed by JSON, default:{}
 	# returnStatus: when unset or set to false the function returns None upon error and shows a notification,
 	#	when set to true the function returns the status and errors in ['error'] as given to it and doesn't show the notification,
 	#	use to customise error notifications
@@ -255,16 +263,15 @@ class traktAPI(object):
 		if args is None:
 			args = {}
 
-		if not (method == 'POST' or method == 'GET'):
+		if not (method == 'POST' or method == 'GET' or method == 'PUT' or method == 'DELETE'):
 			Debug("[traktAPI] traktRequest(): Unknown method '%s'." % method)
 			return None
 
-		if method == 'POST':
-			# debug log before username and sha1hash are injected
-			Debug("[traktAPI] traktRequest(): Request data: '%s'." % str(json.dumps(args)))
+		# debug log before username and sha1hash are injected
+		Debug("[traktAPI] traktRequest(): Request data: '%s'." % str(json.dumps(args)))
 
-			# convert to json data
-			jdata = json.dumps(args)
+		# convert to json data
+		jdata = json.dumps(args)
 
 		Debug("[traktAPI] traktRequest(): Starting retry loop, maximum %i retries." % retries)
 
@@ -279,8 +286,8 @@ class traktAPI(object):
 
 			try:
 				# get data from trakt.tv
-				raw = self.__getData(url, jdata)
-			except traktError, e:
+				raw = self.__getData(url, jdata, method)
+			except traktError as e:
 				if isinstance(e, traktServerBusy):
 					Debug("[traktAPI] traktRequest(): (%i) Server Busy (%s)" % (i, e.value))
 					xbmc.sleep(5000)
@@ -362,50 +369,50 @@ class traktAPI(object):
 				return None
 			elif data['status'] == 'success':
 				Debug("[traktAPI] traktRequest(): JSON request was successful.")
-
 		return data
 
-    # url: http://api.trakt.tv/<show|movie>/scrobble/<apikey>
-	# returns: {"status": "success","message": "scrobbled The Walking Dead 1x01"}
-	def scrobble(self, data, status):
-			url = "%s/scrobble/%s" % (self.__baseURL, status)
-			Debug("[traktAPI] scrobble(url: %s, data: %s)" % (url, str(data)))
-			if getSettingAsBool('simulate_scrobbling'):
-				Debug("[traktAPI] Simulating response.")
-				return {'status': 'success'}
-			else:
-				return self.traktRequest('POST', url, data, returnOnFailure=True)
+	def getShowSummary(self, id):
+		url = "%s/shows/%s" % (self.__baseURL, id)
+		Debug("[traktAPI] getShowSummary(url: %s)" % (url))
+		result = self.traktRequest('GET', url)
+		result['user'] = {}
+		result['user']['ratings'] = self.getShowRatingForUser(id)
+		return result
 
-	def scrobbleEpisode(self, info, percent, status):
-		data = { 'show': {'title': info['showtitle'], 'year': info['year']}, 'episode': { 'season': info['season'], 'number': info['episode']}, 'progress': math.ceil(percent)}
-		if 'uniqueid' in info:
-			data['episode_tvdb_id'] = info['uniqueid']['unknown']
-		return self.scrobble(data, status)
-	def scrobbleMovie(self, info, percent, status):
-		data = { 'movie': { 'ids': {'imdb': info['imdbnumber']}, 'title': info['title'], 'year': info['year']}, 'progress': math.ceil(percent)}
-		return self.scrobble(data, status)
-
-    # url: http://api.trakt.tv/<show|show/episode|movie>/summary.format/apikey/title[/season/episode]
-	# returns: returns information for a movie, show or episode
-	def getSummary(self, type, data):
-			url = "%s/%s/summary.json/%s/%s" % (self.__baseURL, type, self.__apikey, data)
-			Debug("[traktAPI] getSummary(url: %s)" % url)
-			return self.traktRequest('POST', url)
-
-	def getShowSummary(self, id, extended=False):
-		data = str(id)
-		if extended:
-			data = "%s/extended" % data
-		return self.getSummary('show', data)
 	def getEpisodeSummary(self, id, season, episode):
-		data = "%s/%s/%s" % (id, season, episode)
-		return self.getSummary('show/episode', data)
+		url = "%s/shows/%s/seasons/%s/episodes/%s" % (self.__baseURL, id, season, episode)
+		Debug("[traktAPI] getEpisodeSummary(url: %s)" % (url))
+		result = self.traktRequest('GET', url)
+		result['user'] = {}
+		result['user']['ratings'] = self.getEpisodeRatingForUser(id, season, episode)
+		return result
+
 	def getMovieSummary(self, id):
-		data = str(id)
-		return self.getSummary('movie', data)
+		url = "%s/movies/%s" % (self.__baseURL, id)
+		Debug("[traktAPI] getMovieSummary(url: %s)" % (url))
+		result = self.traktRequest('GET', url)
+		result['user'] = {}
+		result['user']['ratings'] = self.getMovieRatingForUser(id)
+		return result
+
+	def getShowRatingForUser(self, id):
+		ratings = self.getRatedItems('shows')
+		return findShowMatchInList(id, ratings)
+	def getEpisodeRatingForUser(self, id, season, episode):
+		ratings = self.getRatedItems('episodes')
+		return findEpisodeMatchInList(id, season, episode, ratings, 'rating')
+	def getMovieRatingForUser(self, id):
+		ratings = self.getRatedItems('movies')
+		return findMovieMatchInList(id, ratings)
+
+	# url: https://api.trakt.tv/sync/ratings/<type>
+	# note: if no items, returns []
+	def getRatedItems(self, type):
+			url = "%s/sync/ratings/%s" % (self.__baseURL, type)
+			Debug("[traktAPI] getRatedItems(url: %s)" % url)
+			return self.traktRequest('GET', url)					
 
     # url: http://api.trakt.tv/sync/ratings
-	# returns: {"status":"success","message":"rated Portlandia 1x01","type":"episode","rating":"love","ratings":{"percentage":100,"votes":2,"loved":2,"hated":0},"facebook":true,"twitter":true,"tumblr":false}
 	def rate(self, type, data):
 
 			url = "%s/sync/ratings" % (self.__baseURL)

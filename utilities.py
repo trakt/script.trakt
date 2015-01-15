@@ -201,7 +201,7 @@ def getShowDetailsFromXBMC(showID, fields):
 	Debug("getShowDetailsFromXBMC(): %s" % str(result))
 
 	if not result:
-		Debug("getEpisodeDetailsFromXbmc(): Result from XBMC was empty.")
+		Debug("getEpisodeDetailsFromXbmc(): Result from Kodi was empty.")
 		return None
 
 	try:
@@ -216,7 +216,7 @@ def getEpisodeDetailsFromXbmc(libraryId, fields):
 	Debug("getEpisodeDetailsFromXbmc(): %s" % str(result))
 
 	if not result:
-		Debug("getEpisodeDetailsFromXbmc(): Result from XBMC was empty.")
+		Debug("getEpisodeDetailsFromXbmc(): Result from Kodi was empty.")
 		return None
 
 	show_data = getShowDetailsFromXBMC(result['episodedetails']['tvshowid'], ['year', 'imdbnumber'])
@@ -240,7 +240,7 @@ def getMovieDetailsFromXbmc(libraryId, fields):
 	Debug("getMovieDetailsFromXbmc(): %s" % str(result))
 
 	if not result:
-		Debug("getMovieDetailsFromXbmc(): Result from XBMC was empty.")
+		Debug("getMovieDetailsFromXbmc(): Result from Kodi was empty.")
 		return None
 
 	try:
@@ -332,5 +332,4 @@ def findEpisodeMatchInList(id, season, episode, list, mode):
 		return next((item for item in list if item['show']['ids']['tvdb'] == id and item['seasons']['number'] == season and item['seasons']['episodes']['number'] == episode ), {}) 
 	else:
 		return next((item for item in list if item['episode']['ids']['tvdb'] == id), {}) 
-
 		

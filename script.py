@@ -127,14 +127,14 @@ def Main():
 				if utils.isMovie(media_type):
 					result = utils.getMovieDetailsFromXbmc(data['dbid'], ['imdbnumber', 'title', 'year'])
 					if not result:
-						utils.Debug("No data was returned from XBMC, aborting manual %s." % args['action'])
+						utils.Debug("No data was returned from Kodi, aborting manual %s." % args['action'])
 						return
 					data['imdbnumber'] = result['imdbnumber']
 
 				elif utils.isShow(media_type):
 					result = utils.getShowDetailsFromXBMC(data['dbid'], ['imdbnumber', 'tag'])
 					if not result:
-						utils.Debug("No data was returned from XBMC, aborting manual %s." % args['action'])
+						utils.Debug("No data was returned from Kodi, aborting manual %s." % args['action'])
 						return
 					data['imdbnumber'] = result['imdbnumber']
 					data['tag'] = result['tag']
@@ -142,7 +142,7 @@ def Main():
 				elif utils.isEpisode(media_type):
 					result = utils.getEpisodeDetailsFromXbmc(data['dbid'], ['showtitle', 'season', 'episode', 'imdbnumber'])
 					if not result:
-						utils.Debug("No data was returned from XBMC, aborting manual %s." % args['action'])
+						utils.Debug("No data was returned from Kodi, aborting manual %s." % args['action'])
 						return
 					data['imdbnumber'] = result['imdbnumber']
 					data['season'] = result['season']
@@ -177,9 +177,9 @@ def Main():
 					if result['playcount'] == 0:
 						data['id'] = result['imdbnumber']
 					else:
-						utils.Debug("Movie alread marked as watched in XBMC.")
+						utils.Debug("Movie alread marked as watched in Kodi.")
 				else:
-					utils.Debug("Error getting movie details from XBMC.")
+					utils.Debug("Error getting movie details from Kodi.")
 					return
 
 			elif utils.isEpisode(media_type):
@@ -191,9 +191,9 @@ def Main():
 						data['season'] = result['season']
 						data['episode'] = result['episode']
 					else:
-						utils.Debug("Episode already marked as watched in XBMC.")
+						utils.Debug("Episode already marked as watched in Kodi.")
 				else:
-					utils.Debug("Error getting episode details from XBMC.")
+					utils.Debug("Error getting episode details from Kodi.")
 					return
 
 			elif utils.isSeason(media_type):
@@ -207,7 +207,7 @@ def Main():
 							data['id'] = show['imdbnumber']
 							break
 				else:
-					utils.Debug("Error getting TV shows from XBMC.")
+					utils.Debug("Error getting TV shows from Kodi.")
 					return
 
 				season = xbmc.getInfoLabel('ListItem.Season')
@@ -237,7 +237,7 @@ def Main():
 				dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
 				result = utils.getShowDetailsFromXBMC(dbid, ['year', 'imdbnumber'])
 				if not result:
-					utils.Debug("Error getting show details from XBMC.")
+					utils.Debug("Error getting show details from Kodi.")
 					return
 				showTitle = result['label']
 				data['id'] = result['imdbnumber']
@@ -259,7 +259,7 @@ def Main():
 
 					data['seasons'] = dict((k, v) for k, v in s.iteritems() if v)
 				else:
-					utils.Debug("Error getting episode details for '%s' from XBMC." % showTitle)
+					utils.Debug("Error getting episode details for '%s' from Kodi." % showTitle)
 					return
 
 			if len(data) > 1:
@@ -378,7 +378,7 @@ def Main():
 		if utils.isMovie(media_type):
 			result = utils.getMovieDetailsFromXbmc(dbid, ['imdbnumber', 'title', 'year', 'tag'])
 			if not result:
-				utils.Debug("Error getting movie details from XBMC.")
+				utils.Debug("Error getting movie details from Kodi.")
 				return
 			data['tag'] = result['tag']
 			data['movieid'] = result['movieid']
@@ -392,7 +392,7 @@ def Main():
 		elif utils.isShow(media_type):
 			result = utils.getShowDetailsFromXBMC(dbid, ['imdbnumber', 'title', 'tag'])
 			if not result:
-				utils.Debug("Error getting show details from XBMC.")
+				utils.Debug("Error getting show details from Kodi.")
 				return
 			data['tag'] = result['tag']
 			data['tvshowid'] = result['tvshowid']

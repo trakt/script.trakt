@@ -22,20 +22,20 @@ Automatically scrobble all TV episodes and movies you are watching to trakt.tv! 
 
 * Automatically scrobble all TV episodes and movies you are watching 
 * Sync your TV episode and movie collections to trakt (triggered after a library update)
-* Auto clean your trakt collection so that it matches up with XBMC
-* Keep watched statuses synced between XBMC and trakt
+* Auto clean your trakt collection so that it matches up with Kodi
+* Keep watched statuses synced between Kodi and trakt
 * Rate movies and episodes after watching them
 * Custom skin/keymap actions for toggling watched status, rating, tagging, and listing
 
 ###What can be scrobbled?
 
-This plugin will scrobble local media and most remote streaming content. Local content should be played in XBMC library mode and you should use [TVDb](http://thetvdb.com/) (for tv shows) and [TMDb](http://themoviedb.org) (for movies) as your scrapers. TV shows are identified using their TVDb ID. Movies are identified using the IMDb ID. This helps trakt match up the correct show or movie regardless of the title and improves accuracy a lot.
+This plugin will scrobble local media and most remote streaming content. Local content should be played in Kodi library mode and you should use [TVDb](http://thetvdb.com/) (for tv shows) and [TMDb](http://themoviedb.org) (for movies) as your scrapers. TV shows are identified using their TVDb ID. Movies are identified using the IMDb ID. This helps trakt match up the correct show or movie regardless of the title and improves accuracy a lot.
 
-Remote streaming content will scrobble assuming the metadata is correctly set in XBMC. The various streaming plugins need to correctly identify TV episodes and movies with as much metadata as they can for trakt to know what you're watching.
+Remote streaming content will scrobble assuming the metadata is correctly set in Kodi. The various streaming plugins need to correctly identify TV episodes and movies with as much metadata as they can for trakt to know what you're watching.
 
 ###Tested and scrobbling correctly
 
-* XBMC library mode
+* Kodi library mode
 * PleXBMC
 * Amazon (bluecop repo)
 * CBS (bluecop repo)
@@ -43,7 +43,7 @@ Remote streaming content will scrobble assuming the metadata is correctly set in
 
 ###Installation
 
-1. Clone this repository (or [download it here](https://github.com/rectifyer/script.trakt/zipball/master)) into a folder called **script.trakt** inside your XBMC **addons** folder
+1. Clone this repository (or [download it here](https://github.com/rectifyer/script.trakt/zipball/master)) into a folder called **script.trakt** inside your Kodi **addons** folder
 2. Start up XMBC (or restart if its already running)
 3. Navigate to *Settings* > *Add-ons* > *Enabled add-ons* > *Services* > **trakt**
 4. Select *trakt* and go to **Configure**

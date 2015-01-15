@@ -73,11 +73,11 @@
 	<string id="1402">Filmes</string>
 	<string id="1403">Adicionar filmes na coleção do Trakt</string>
 	<string id="1404">Atualizar número de visualizações dos filmes do Trakt</string>
-	<string id="1405">Atualizar número de visualizações dos filmes do XBMC</string>
+	<string id="1405">Atualizar número de visualizações dos filmes do Kodi</string>
 	<string id="1406">Episódios</string>
 	<string id="1407">Adicionar episódios na coleção do Trakt</string>
 	<string id="1408">Atualizar número de visualizações dos episódios do Trakt</string>
-	<string id="1409">Atualizar número de visualizações dos episódios do XBMC</string>
+	<string id="1409">Atualizar número de visualizações dos episódios do Kodi</string>
 	<string id="1410">Serviço</string>
 	<string id="1411">Sincronizar após atualização da biblioteca</string>
 	<string id="1412">Mostrar notificações</string>
@@ -90,9 +90,9 @@
 	<string id="1420">Sincronização iniciada</string>
 	<string id="1421">Sincronização finalizada</string>
 
-	<!-- Sync Movies - load from xbmc -->
-	<string id="1460">Carregando filmes do XBMC</string>
-	<string id="1461">Filmes do XBMC carregados</string>
+	<!-- Sync Movies - load from kodi -->
+	<string id="1460">Carregando filmes do Kodi</string>
+	<string id="1461">Filmes do Kodi carregados</string>
 	
 	<!-- Sync Movies - load from trakt -->
 	<string id="1462">Buscando coleção de filmes trakt.tv</string>
@@ -111,11 +111,11 @@
 	<string id="1428">filme(s) terão o número de visualizações atualizados no trakt.tv</string>
 	<string id="1470">%i filme(s) tiveram o número de visualizações atualizados no trakt.tv</string>
 	
-	<!-- Sync Movies - update xbmc -->
-	<string id="1471">Está atualizado o número de visualizações de filmes no XBMC</string>
-	<string id="1430">filme(s) terão o número de visualizações atualizados no XBMC</string>
-	<string id="1472">Atualizando o número de visualizações de filmes no XBMC.</string>
-	<string id="1473">%i filme(s) tiveram o número de visualizações atualizados no XBMC.</string>
+	<!-- Sync Movies - update kodi -->
+	<string id="1471">Está atualizado o número de visualizações de filmes no Kodi</string>
+	<string id="1430">filme(s) terão o número de visualizações atualizados no Kodi</string>
+	<string id="1472">Atualizando o número de visualizações de filmes no Kodi.</string>
+	<string id="1473">%i filme(s) tiveram o número de visualizações atualizados no Kodi.</string>
 
 	<!-- Sync Movies - clean trakt -->
 	<string id="1474">Coleção de filmes do trakt.tv está atualizada.</string>
@@ -125,12 +125,12 @@
 	<!-- Sync Movies - complete -->
 	<string id="1431">Sincronização de filmes finalizada</string>
 	
-	<!-- Sync Episodes - load from xbmc -->
-	<string id="1480">Carregando dados dos episódios do XBMC</string>
-	<string id="1481">Carregando as séries do XBMC</string>
-	<string id="1482">Carregadas as séries do XBMC</string>
-	<string id="1483">Analisando os dados dos episódios do XBMC</string>
-	<string id="1484">Carregados os dados dos episódios do XBMC</string>
+	<!-- Sync Episodes - load from kodi -->
+	<string id="1480">Carregando dados dos episódios do Kodi</string>
+	<string id="1481">Carregando as séries do Kodi</string>
+	<string id="1482">Carregadas as séries do Kodi</string>
+	<string id="1483">Analisando os dados dos episódios do Kodi</string>
+	<string id="1484">Carregados os dados dos episódios do Kodi</string>
 
 	<!-- Sync Episodes - load from trakt -->
 	<string id="1485">Carregando dados dos episódios do trakt.tv</string>
@@ -152,11 +152,11 @@
 	<string id="1439">séries estão faltando a marcação como vistos</string>
 	<string id="1440">episódios foram atualizados</string>
 	
-	<!-- Sync Episodes - update xbmc -->
-	<string id="1441">Analisando os episódios vistos no XBMC</string>
-	<string id="1493">Está atualizado o número de visualizações dos episódios no XBMC</string>
-	<string id="1494">Atualizando o número de visualizações de episódios no XBMC</string>
-	<string id="1495">%i episódios(s) tiveram o número de visualizações atualizados no XBMC.</string>
+	<!-- Sync Episodes - update kodi -->
+	<string id="1441">Analisando os episódios vistos no Kodi</string>
+	<string id="1493">Está atualizado o número de visualizações dos episódios no Kodi</string>
+	<string id="1494">Atualizando o número de visualizações de episódios no Kodi</string>
+	<string id="1495">%i episódios(s) tiveram o número de visualizações atualizados no Kodi.</string>
 
 	<!-- Sync Episodes - clean trakt -->
 	<string id="1445">Limpando a coleção de séries do trakt</string>
@@ -197,7 +197,7 @@
 	<string id="1659">Finalizada a sincronização das etiquetas</string>
 	<string id="1660">Escolha uma lista para gerenciar</string>
 	<string id="1661">Carregando informações para gerenciar listas</string>
-	<string id="1662">Ocorreu um problema ao carregar dados do XBMC</string>
+	<string id="1662">Ocorreu um problema ao carregar dados do Kodi</string>
 	<string id="1663">Ocorreu um problema ao carregar dados do trakt.tv</string>
 	<string id="1664">Ocorreu um problema ao carregar suas listas de interesse</string>
 	<string id="1665">Ocorreu um problema ao carregar suas classificações</string>
@@ -221,7 +221,7 @@
 	<string id="1703">Simular sincronização (apenas para testes)</string>
 	<string id="1704">Simular etiquetas</string>
 	<string id="1720">Logging</string>
-	<string id="1721">Simular configurações. Se estiver habilitar nada será alterado no XBMC ou trakt.tv</string>
+	<string id="1721">Simular configurações. Se estiver habilitar nada será alterado no Kodi ou trakt.tv</string>
     
 	<!-- Context Menu Entries -->
 	<string id="2000">Gerenciar lista de filmes</string>

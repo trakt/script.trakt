@@ -39,7 +39,7 @@ class Sync():
 			Debug("[Sync] Sync was canceled by user.")
 			return True
 		elif xbmc.abortRequested:
-			Debug('XBMC abort requested')
+			Debug('Kodi abort requested')
 			return True
 		else:
 			return False
@@ -81,7 +81,7 @@ class Sync():
 		return shows
 
 	def xbmcLoadShowList(self):
-		Debug("[Episodes Sync] Getting show data from XBMC")
+		Debug("[Episodes Sync] Getting show data from Kodi")
 		data = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
 		if not data:
 			Debug("[Episodes Sync] xbmc json request was empty.")
@@ -92,7 +92,7 @@ class Sync():
 			return None
 
 		shows = data['tvshows']
-		Debug("[Episodes Sync] XBMC JSON Result: '%s'" % str(shows))
+		Debug("[Episodes Sync] Kodi JSON Result: '%s'" % str(shows))
 
 		# reformat show array
 		for show in shows:
@@ -121,7 +121,7 @@ class Sync():
 		result['shows'] = []
 		i = 0
 		x = float(len(tvshows))
-		Debug("[Episodes Sync] Getting episode data from XBMC")
+		Debug("[Episodes Sync] Getting episode data from Kodi")
 		for show_col1 in tvshows:
 			Debug("show_col1 %s" % show_col1)
 
@@ -132,7 +132,7 @@ class Sync():
 				Debug("[Episodes Sync] There was a problem getting episode data for '%s', aborting sync." % show['title'])
 				return None
 			if not 'episodes' in data:
-				Debug("[Episodes Sync] '%s' has no episodes in XBMC." % show['title'])
+				Debug("[Episodes Sync] '%s' has no episodes in Kodi." % show['title'])
 				continue				
 
 			episodes = []
@@ -333,10 +333,10 @@ class Sync():
 	# def xbmcUpdateEpisodes(self, shows):
 	# 	if len(shows) == 0:
 	# 		self.updateProgress(82, line1=utilities.getString(1441), line2=utilities.getString(1493))
-	# 		Debug("[Episodes Sync] XBMC episode playcounts are up to date.")
+	# 		Debug("[Episodes Sync] Kodi episode playcounts are up to date.")
 	# 		return
 
-	# 	Debug("[Episodes Sync] %i show(s) shows are missing playcounts on XBMC" % len(shows))
+	# 	Debug("[Episodes Sync] %i show(s) shows are missing playcounts on Kodi" % len(shows))
 	# 	for s in ["%s" % self.getShowAsString(s, short=True) for s in shows]:
 	# 		Debug("[Episodes Sync] Episodes updated: %s" % s)
 
@@ -375,7 +375,7 @@ class Sync():
 		xbmcShows = self.xbmcLoadShows()
 		Debug("xbmcShows %s" % xbmcShows)
 		if not isinstance(xbmcShows, list) and not xbmcShows:
-			Debug("[Episodes Sync] XBMC show list is empty, aborting tv show Sync.")
+			Debug("[Episodes Sync] Kodi show list is empty, aborting tv show Sync.")
 			if self.show_progress and not self.run_silent:
 				progress.close()
 			return
@@ -413,9 +413,9 @@ class Sync():
 			self.updateProgress(100, line1=" ", line2=utilities.getString(1442), line3=" ")
 			progress.close()
 
-		Debug("[Episodes Sync] Shows on trakt.tv (%d), shows in XBMC (%d)." % (len(utilities.findAllInList(traktShows['shows'], 'collected_at', True)), len(xbmcShows['shows'])))
+		Debug("[Episodes Sync] Shows on trakt.tv (%d), shows in Kodi (%d)." % (len(utilities.findAllInList(traktShows['shows'], 'collected_at', True)), len(xbmcShows['shows'])))
 
-		Debug("[Episodes Sync] Episodes on trakt.tv (%d), episodes in XBMC (%d)." % (self.countEpisodes(traktShows), self.countEpisodes(xbmcShows)))
+		Debug("[Episodes Sync] Episodes on trakt.tv (%d), episodes in Kodi (%d)." % (self.countEpisodes(traktShows), self.countEpisodes(xbmcShows)))
 		Debug("[Episodes Sync] Complete.")
 
 	''' begin code for movie sync '''
@@ -445,10 +445,10 @@ class Sync():
 	def xbmcLoadMovies(self):
 		self.updateProgress(1, line2=utilities.getString(1460))
 
-		Debug("[Movies Sync] Getting movie data from XBMC")
+		Debug("[Movies Sync] Getting movie data from Kodi")
 		data = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['title', 'imdbnumber', 'year', 'playcount', 'lastplayed', 'file']}})
 		if not data:
-			Debug("[Movies Sync] XBMC JSON request was empty.")
+			Debug("[Movies Sync] Kodi JSON request was empty.")
 			return
 		
 		if not 'movies' in data:
@@ -456,7 +456,7 @@ class Sync():
 			return
 
 		movies = data['movies']
-		Debug("[Movies Sync] XBMC JSON Result: '%s'" % str(movies))
+		Debug("[Movies Sync] Kodi JSON Result: '%s'" % str(movies))
 
 		i = 0
 		x = float(len(movies))
@@ -607,11 +607,11 @@ class Sync():
 	# def xbmcUpdateMovies(self, movies):
 	# 	if len(movies) == 0:
 	# 		self.updateProgress(80, line2=utilities.getString(1471))
-	# 		Debug("[Movies Sync] XBMC movie playcount is up to date.")
+	# 		Debug("[Movies Sync] Kodi movie playcount is up to date.")
 	# 		return
 		
 	# 	titles = ", ".join(["%s (%s)" % (m['title'], m['imdb_id']) for m in movies])
-	# 	Debug("[Movies Sync] %i movie(s) playcount will be updated in XBMC" % len(movies))
+	# 	Debug("[Movies Sync] %i movie(s) playcount will be updated in Kodi" % len(movies))
 	# 	Debug("[Movies Sync] Movies updated: %s" % titles)
 
 	# 	self.updateProgress(60, line2="%i %s" % (len(movies), utilities.getString(1430)))
@@ -642,7 +642,7 @@ class Sync():
 
 		xbmcMovies = self.xbmcLoadMovies()
 		if not isinstance(xbmcMovies, list) and not xbmcMovies:
-			Debug("[Movies Sync] XBMC movie list is empty, aborting movie Sync.")
+			Debug("[Movies Sync] Kodi movie list is empty, aborting movie Sync.")
 			if self.show_progress and not self.run_silent:
 				progress.close()
 			return
@@ -680,7 +680,7 @@ class Sync():
 		if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1402)), utilities.getString(1421)) #Sync complete
 		
-		Debug("[Movies Sync] Movies on trakt.tv (%d), movies in XBMC (%d)." % (len(traktMovies), self.countMovies(xbmcMovies)))
+		Debug("[Movies Sync] Movies on trakt.tv (%d), movies in Kodi (%d)." % (len(traktMovies), self.countMovies(xbmcMovies)))
 		Debug("[Movies Sync] Complete.")
 
 	def syncCheck(self, media_type):

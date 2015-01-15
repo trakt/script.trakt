@@ -30,8 +30,8 @@ What can this addon do?
 
 - Automatically scrobble all TV episodes and movies you are watching
 - Sync your TV episode and movie collections to trakt (triggered after a library update)
-- Auto clean your trakt collection so that it matches up with XBMC
-- Keep watched statuses synced between XBMC and trakt
+- Auto clean your trakt collection so that it matches up with Kodi
+- Keep watched statuses synced between Kodi and trakt
 - Rate movies and episode after watching them
 - Custom skin/keymap actions for toggling watched status, rating, tagging, and listing
 
@@ -56,8 +56,8 @@ Special thanks to all who contributed to this plugin! Check the commit history a
 
 - Scrobble automático de las Episodios y Películas que estás viendo
 - Sincronizar tus colecciones Series y Películas con trakt.tv (después de la actualización de la biblioteca)
-- Limpiar automáticamente tu colección de trakt.tv para que sea idéntica a la de XBMC
-- Mantener el mismo estado de visionado entre XBMC y trakt.tv
+- Limpiar automáticamente tu colección de trakt.tv para que sea idéntica a la de Kodi
+- Mantener el mismo estado de visionado entre Kodi y trakt.tv
 - Valorar Películas y Episodios después de verlos
 - Skin/teclas personalizadas para acciones como: marcar como visto, valorar, etiquetas y listas
 
@@ -65,7 +65,7 @@ Special thanks to all who contributed to this plugin! Check the commit history a
 		<platform>all</platform>
 		<website>http://trakt.tv</website>
 		<source>https://github.com/trakt/script.trakt</source>
-		<forum>http://forum.xbmc.org/showthread.php?tid=138745</forum>
+		<forum>http://forum.kodi.tv/showthread.php?tid=138745</forum>
 		<email></email>
 	</extension>
 </addon>
