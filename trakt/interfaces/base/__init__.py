@@ -55,10 +55,15 @@ class Interface(object):
         return self.client.http.configure(self.path)
 
     @staticmethod
-    def get_data(response):
+    def get_data(response, parse=True):
         if response is None:
             return None
 
+        # Return response, if parse=False
+        if not parse:
+            return response
+
+        # Parse response, return data
         if response.headers['content-type'].startswith('application/json'):
             # Try parse json response
             try:
