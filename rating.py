@@ -33,10 +33,10 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 		return
 	
 	if utils.isEpisode(media_type):
-		if 'rating' in summary_info['episode']:
-			summary_info['rating'] = summary_info['episode']['rating']
-		if 'rating_advanced' in summary_info['episode']:
-			summary_info['rating_advanced'] = summary_info['episode']['rating_advanced']
+		if 'rating' in summary_info['user']['ratings']['episode']:
+			summary_info['user']['ratings']['rating'] = summary_info['user']['ratings']['episode']['rating']
+		if 'rating' in summary_info['user']['ratings']['episode']:
+			summary_info['user']['ratings']['rating'] = summary_info['user']['ratings']['episode']['rating']
 
 	s = utils.getFormattedItemName(media_type, summary_info)
 
@@ -45,7 +45,7 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 	if unrate:
 		rating = None
 
-		if summary_info['rating_advanced'] > 0:
+		if summary_info['user']['ratings']['rating'] > 0:
 			rating = 0
 
 		if not rating is None:
@@ -58,12 +58,12 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 
 	rerate = utils.getSettingAsBool('rate_rerate')
 	if not rating is None:
-		if summary_info['rating_advanced'] == 0:
+		if summary_info['user']['ratings']['rating'] == 0:
 			utils.Debug("[Rating] Rating for '%s' is being set to '%d' manually." % (s, rating))
 			rateOnTrakt(rating, media_type, summary_info)
 		else:
 			if rerate:
-				if not summary_info['rating_advanced'] == rating:
+				if not summary_info['user']['ratings']['rating'] == rating:
 					utils.Debug("[Rating] Rating for '%s' is being set to '%d' manually." % (s, rating))
 					rateOnTrakt(rating, media_type, summary_info)
 				else:
@@ -74,7 +74,7 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 				utils.Debug("[Rating] '%s' is already rated." % s)
 		return
 
-	if summary_info['rating']:
+	if summary_info['user']['ratings']['rating']:
 		if not rerate:
 			utils.Debug("[Rating] '%s' has already been rated." % s)
 			utils.notification(utils.getString(1351), s)
@@ -99,7 +99,7 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 		if rerate:
 			rating = gui.rating
 			
-			if summary_info['rating'] > 0 and rating == summary_info['rating_advanced']:
+			if summary_info['user']['ratings']['rating'] > 0 and rating == summary_info['user']['ratings']['rating']:
 				rating = 0
 
 		if rating == 0 or rating == "unrate":
@@ -118,11 +118,11 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 	params['rating'] = rating
 
 	if utils.isMovie(media_type):
-		params['title'] = media['title']
-		params['year'] = media['year']
+		params['title'] = media['user']['ratings']['movie']['title']
+		params['year'] = media['user']['ratings']['movie']['year']
 		params['ids'] = {}
-		params['ids']['tmdb'] = media['tmdb_id']
-		params['ids']['imdb'] = media['imdb_id']
+		params['ids']['tmdb'] = media['user']['ratings']['movie']['ids']['tmdb']
+		params['ids']['imdb'] = media['user']['ratings']['movie']['ids']['imdb']
 		root = {}
 		listing = []
 		listing = [params]
@@ -131,12 +131,12 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 		data = globals.traktapi.rateMovie(root)
 
 	elif utils.isShow(media_type):
-		params['title'] = media['title']
-		params['year'] = media['year']
+		params['title'] = media['user']['ratings']['show']['title']
+		params['year'] = media['user']['ratings']['show']['year']
 		params['ids'] = {}
-		params['ids']['tmdb'] = media['tmdb_id']
-		params['ids']['imdb'] = media['imdb_id']
-		params['ids']['tvdb'] = media['tvdb_id']
+		params['ids']['tmdb'] = media['user']['ratings']['show']['ids']['tmdb']
+		params['ids']['imdb'] = media['user']['ratings']['show']['ids']['imdb']
+		params['ids']['tvdb'] = media['user']['ratings']['show']['ids']['tvdb']
 
 		root = {}
 		listing = []
@@ -153,9 +153,9 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 		params['number'] = media['episode']['number']
 		params['ids'] = {}
 		if media['episode']['tvdb_id']:
-			params['ids']['tvdb'] = media['episode']['tvdb_id']
+			params['ids']['tvdb'] = media['user']['ratings']['episode']['ids']['tvdb']
 		if media['episode']['imdb_id']:
-			params['ids']['imdb'] = media['episode']['imdb_id']
+			params['ids']['imdb'] = media['user']['ratings']['episode']['ids']['imdb']
 
 		root = {}
 		listing = []

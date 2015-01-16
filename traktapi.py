@@ -5,6 +5,7 @@ import xbmcaddon
 import time, socket
 import math
 import urllib2
+import logging
 
 from trakt import Trakt
 from utilities import Debug, notification, getSetting, getSettingAsBool, getSettingAsInt, getString, setSetting, findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList
@@ -47,6 +48,7 @@ class traktAPI(object):
 	__password = ""
 
 	def __init__(self):
+		logging.basicConfig()
 		Debug("[traktAPI] Initializing.")
 
 		# Get user login data
@@ -78,12 +80,11 @@ class traktAPI(object):
 
 	def getToken(self):
 		# Attempt authentication (retrieve new token)
-		x = Trakt['auth'].login(getSetting('username'), getSetting('password'))
-		Debug("[traktAPI] getToken(): token: %s" % self.__token)
+		self.__token = Trakt['auth'].login(getSetting('username'), getSetting('password'))
 
 
 	def scrobbleEpisode(self, info, percent, status):
-		show = { 'show': {'title': info['showtitle'], 'year': info['year']} }
+		show = {'title': info['showtitle'], 'year': info['year']}
 		episode = { 'episode': { 'season': info['season'], 'number': info['episode'], 'ids': {}} }
 
 		if 'uniqueid' in info:
@@ -114,7 +115,7 @@ class traktAPI(object):
 
 	def scrobbleMovie(self, info, percent, status):
 
-		movie = { 'movie': { 'ids': {'imdb': info['imdbnumber']}, 'title': info['title'], 'year': info['year']} }
+		movie = { 'ids': {'imdb': info['imdbnumber']}, 'title': info['title'], 'year': info['year']}
 		Debug("[traktAPI] scrobble(data: %s)" % (str(movie)))
 
 		result = None

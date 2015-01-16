@@ -200,6 +200,8 @@ def getShowDetailsFromXBMC(showID, fields):
 	result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': showID, 'properties': fields}, 'id': 1})
 	Debug("getShowDetailsFromXBMC(): %s" % str(result))
 
+	#TODO we're getting the tvdb id so we need to translate it to trakt slug via search http://docs.trakt.apiary.io/#reference/search/id-lookup/get-id-lookup-results
+
 	if not result:
 		Debug("getEpisodeDetailsFromXbmc(): Result from Kodi was empty.")
 		return None
@@ -225,7 +227,10 @@ def getEpisodeDetailsFromXbmc(libraryId, fields):
 		Debug("getEpisodeDetailsFromXbmc(): Result from getShowDetailsFromXBMC() was empty.")
 		return None
 
-	result['episodedetails']['tvdb_id'] = show_data['imdbnumber']
+	Debug("episodedetails(): %s" % result['episodedetails'])
+	Debug("show_data(): %s" % show_data)
+	Debug("show_data['imdbnumber'](): %s" % show_data['imdbnumber'])
+	result['episodedetails']['imdbnumber'] = show_data['imdbnumber']
 	result['episodedetails']['year'] = show_data['year']
 
 	try:

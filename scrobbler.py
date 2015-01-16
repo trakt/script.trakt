@@ -139,12 +139,13 @@ class Scrobbler():
 						return
 					if utilities.getSettingAsBool('rate_episode'):
 						# pre-get sumamry information, for faster rating dialog.
+						#todo find a way to match by tvdb or tmdb ids
 						Debug("[Scrobbler] Episode rating is enabled, pre-fetching summary information.")
-						tvdb_id = self.curVideoInfo['tvdb_id']
-						if tvdb_id.isdigit() or tvdb_id.startswith("tt"):
-							self.traktSummaryInfo = self.traktapi.getEpisodeSummary(tvdb_id, self.curVideoInfo['season'], self.curVideoInfo['episode'])
+						imdb = self.curVideoInfo['imdbnumber']
+						if imdb.isdigit() or imdb.startswith("tt"):
+							self.traktSummaryInfo = self.traktapi.getEpisodeSummary(imdb, self.curVideoInfo['season'], self.curVideoInfo['episode'])
 						else:
-							self.curVideoInfo['tvdb_id'] = None
+							self.curVideoInfo['imdb'] = None
 							Debug("[Scrobbler] Can not get summary information for '%s - S%02dE%02d' as it has no valid id, will retry during a watching call." % (self.curVideoInfo['showtitle'], self.curVideoInfo['season'], self.curVideoInfo['episode']))
 				elif 'showtitle' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
 					self.curVideoInfo = {}
@@ -212,6 +213,7 @@ class Scrobbler():
 		if self.watchedTime != 0:
 			if 'type' in self.curVideo:
 				self.scrobble('stop')
+				Debug("traktSummaryInfo %s" % self.traktSummaryInfo)
 				ratingCheck(self.curVideo['type'], self.traktSummaryInfo, self.watchedTime, self.videoDuration, self.playlistLength)
 			self.watchedTime = 0
 			self.isMultiPartEpisode = False
