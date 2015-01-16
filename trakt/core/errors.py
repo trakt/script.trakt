@@ -8,5 +8,7 @@ ERRORS = {
     422: ("Unprocessable Entity",   "validation errors"),
     429: ("Rate Limit Exceeded",    ""),
     500: ("Server Error",           ""),
+    502: ("Bad Gateway",            "server down"),
     503: ("Service Unavailable",    "server overloaded"),
+    504: ("Gateway Timeout",        "server timeout")
 }
