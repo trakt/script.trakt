@@ -143,7 +143,10 @@ class Scrobbler():
 						Debug("[Scrobbler] Episode rating is enabled, pre-fetching summary information.")
 						tvdb = self.curVideoInfo['imdbnumber']
 						if tvdb.isdigit() or tvdb.startswith("tt"):
-							lookup = self.traktapi.getIdLookup('tvdb', tvdb)
+							if tvdb.isdigit():
+								lookup = self.traktapi.getIdLookup('tvdb', tvdb)
+							else:
+								lookup = self.traktapi.getIdLookup('imdb', tvdb)
 							self.traktShowSummary = self.traktapi.getShowSummary(lookup['ids']['slug'])
 							self.traktSummaryInfo = self.traktapi.getEpisodeSummary(lookup['ids']['slug'], self.curVideoInfo['season'], self.curVideoInfo['episode'])
 						else:
