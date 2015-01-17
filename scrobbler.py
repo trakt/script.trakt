@@ -25,6 +25,7 @@ class Scrobbler():
 	playlistIndex = 0
 	markedAsWatched = []
 	traktSummaryInfo = None
+	traktShowSummary = None
 
 	def __init__(self, api):
 		self.traktapi = api
@@ -62,7 +63,7 @@ class Scrobbler():
 						adjustedDuration = int(self.videoDuration / self.curVideo['multi_episode_count'])
 						duration = adjustedDuration / 60
 						watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
-						response = self.traktapi.scrobbleEpisode(self.curVideoInfo, watchedPercent)
+						response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.traktSummaryInfo, watchedPercent)
 						if response != None:
 							Debug("[Scrobbler] Scrobble response: %s" % str(response))
 
@@ -77,8 +78,7 @@ class Scrobbler():
 			return
 		self.curVideo = data
 		self.curVideoInfo = None
-		# {"jsonrpc":"2.0","method":"Player.OnPlay","params":{"data":{"item":{"type":"movie"},"player":{"playerid":1,"speed":1},"title":"Shooter","year":2007},"sender":"xbmc"}}
-		# {"jsonrpc":"2.0","method":"Player.OnPlay","params":{"data":{"episode":3,"item":{"type":"episode"},"player":{"playerid":1,"speed":1},"season":4,"showtitle":"24","title":"9:00 A.M. - 10:00 A.M."},"sender":"xbmc"}}
+
 		if 'type' in self.curVideo:
 			Debug("[Scrobbler] Watching: %s" % self.curVideo['type'])
 			if not xbmc.Player().isPlayingVideo():
@@ -88,7 +88,7 @@ class Scrobbler():
 			try:
 				self.watchedTime = xbmc.Player().getTime()
 				self.videoDuration = xbmc.Player().getTotalTime()
-			except Exception, e:
+			except Exception as e:
 				Debug("[Scrobbler] Suddenly stopped watching item: %s" % e.message)
 				self.curVideo = None
 				return
@@ -141,9 +141,11 @@ class Scrobbler():
 						# pre-get sumamry information, for faster rating dialog.
 						#todo find a way to match by tvdb or tmdb ids
 						Debug("[Scrobbler] Episode rating is enabled, pre-fetching summary information.")
-						imdb = self.curVideoInfo['imdbnumber']
-						if imdb.isdigit() or imdb.startswith("tt"):
-							self.traktSummaryInfo = self.traktapi.getEpisodeSummary(imdb, self.curVideoInfo['season'], self.curVideoInfo['episode'])
+						tvdb = self.curVideoInfo['imdbnumber']
+						if tvdb.isdigit() or tvdb.startswith("tt"):
+							lookup = self.traktapi.getIdLookup('tvdb', tvdb)
+							self.traktShowSummary = self.traktapi.getShowSummary(lookup['ids']['slug'])
+							self.traktSummaryInfo = self.traktapi.getEpisodeSummary(lookup['ids']['slug'], self.curVideoInfo['season'], self.curVideoInfo['episode'])
 						else:
 							self.curVideoInfo['imdb'] = None
 							Debug("[Scrobbler] Can not get summary information for '%s - S%02dE%02d' as it has no valid id, will retry during a watching call." % (self.curVideoInfo['showtitle'], self.curVideoInfo['season'], self.curVideoInfo['episode']))
@@ -235,15 +237,12 @@ class Scrobbler():
 		watchedPercent = (self.watchedTime / self.videoDuration) * 100
 
 		if utilities.isMovie(self.curVideo['type']) and scrobbleMovieOption:
-			response = self.traktapi.scrobbleMovie(self.curVideoInfo, watchedPercent, status)
+			response = self.traktapi.scrobbleMovie(self.traktSummaryInfo, watchedPercent, status)
 			if not response is None and 'status' in response:
-				if response['status'] == "success":
-					response['title'] = response['movie']['title']
-					response['year'] = response['movie']['year']
-					self.scrobbleNotification(response)
-					Debug("[Scrobbler] Scrobble response: %s" % str(response))
-				elif response['status'] == "failure":
-						Debug("[Scrobbler] Movie '%s' was not found on trakt.tv, possible malformed Kodi metadata." % self.curVideoInfo['title'])
+				self.scrobbleNotification(response)
+				#todo handle this
+				Debug("[Scrobbler] Scrobble response: %s" % str(response))
+
 
 		elif utilities.isEpisode(self.curVideo['type']) and scrobbleEpisodeOption:
 			if self.isMultiPartEpisode:
@@ -252,14 +251,12 @@ class Scrobbler():
 				duration = adjustedDuration / 60
 				watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
 			
-			response = self.traktapi.scrobbleEpisode(self.curVideoInfo, watchedPercent, status)
+			response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.traktSummaryInfo, watchedPercent, status)
 			if not response is None and 'status' in response:
-				if response['status'] == "success":
-					response['episode']['season'] = response['season']
-					self.scrobbleNotification(response)
-					Debug("[Scrobbler] Scrobble response: %s" % str(response))
-				elif response['status'] == "failure":
-						Debug("[Scrobbler] Show '%s' was not found on trakt.tv, possible malformed Kodi metadata." % self.curVideoInfo['showtitle'])
+				self.scrobbleNotification(response)
+				#handle this
+				Debug("[Scrobbler] Scrobble response: %s" % str(response))
+
 
 	def scrobbleNotification(self, info):
 		if not self.curVideoInfo:

@@ -83,14 +83,14 @@ class traktAPI(object):
 		self.__token = Trakt['auth'].login(getSetting('username'), getSetting('password'))
 
 
-	def scrobbleEpisode(self, info, percent, status):
-		show = {'title': info['showtitle'], 'year': info['year']}
-		episode = { 'episode': { 'season': info['season'], 'number': info['episode'], 'ids': {}} }
+	def scrobbleEpisode(self, show, episode, percent, status):
+		Debug('show info %s' % show)
+		Debug('episode info %s' % episode)
+		if episode.get('user'):
+			del episode['user']
 
-		if 'uniqueid' in info:
-			episode['ids']['tvdb'] = info['uniqueid']['unknown']
 
-		result = {}
+		result = None
 
 		with Trakt.configuration.auth(self.__username, self.__token):
 			if status == 'start':
@@ -113,9 +113,8 @@ class traktAPI(object):
 		return result
 
 
-	def scrobbleMovie(self, info, percent, status):
+	def scrobbleMovie(self, movie, percent, status):
 
-		movie = { 'ids': {'imdb': info['imdbnumber']}, 'title': info['title'], 'year': info['year']}
 		Debug("[traktAPI] scrobble(data: %s)" % (str(movie)))
 
 		result = None
@@ -426,3 +425,10 @@ class traktAPI(object):
 		return self.rate('episodes', data)
 	def rateMovie(self, data):
 		return self.rate('movies', data)
+
+	def getIdLookup(self, idType, id):
+		url = "%s/search?id_type=%s&id=%s" % (self.__baseURL, idType, id)
+		Debug("[traktAPI] getIdLookup(url: %s)" % url)
+		lookup = self.traktRequest('GET', url)
+		return lookup[0][lookup[0]['type']]
+
