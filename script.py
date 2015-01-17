@@ -3,7 +3,7 @@
 import utilities as utils
 import xbmc
 import sys
-import queue
+import sqliteQueue
 import time
 from traktContextMenu import traktContextMenu
 
@@ -402,7 +402,7 @@ def Main():
 			elif result['imdbnumber'].isdigit():
 				data['tvdb_id'] = result['imdbnumber']
 
-	q = queue.SqliteQueue()
+	q = sqliteQueue.SqliteQueue()
 	if 'action' in data:
 		utils.Debug("Queuing for dispatch: %s" % data)
 		q.append(data)

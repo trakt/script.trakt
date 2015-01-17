@@ -3,7 +3,7 @@
 import xbmc
 import threading
 from time import time
-import queue
+import sqliteQueue
 import globals
 import utilities
 from traktapi import traktAPI
@@ -21,7 +21,7 @@ class traktService:
 	scrobbler = None
 	updateTagsThread = None
 	syncThread = None
-	dispatchQueue = queue.SqliteQueue()
+	dispatchQueue = sqliteQueue.SqliteQueue()
 	_interval = 10 * 60 # how often to send watching call
 	
 	def __init__(self):
