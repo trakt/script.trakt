@@ -80,10 +80,6 @@ def Main():
 		if 'library' in args and args['library'] in ['episodes', 'movies']:
 			data['library'] = args['library']
 
-	elif args['action'] == 'loadsettings':
-		data = {'action': 'loadsettings', 'force': True}
-		utils.notification(utils.getString(1201), utils.getString(1111))
-
 	elif args['action'] == 'settings':
 		data = {'action': 'settings'}
 

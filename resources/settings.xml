@@ -3,10 +3,9 @@
 	<category label="1010"><!-- General -->
 		<setting id="username" type="text" label="1013" default="" />
 		<setting id="password" type="text" option="hidden" label="1014" default="" />
-		<!-- <setting id="retries" type="slider" label="1017" range="1,1,10" default="5" option="int"/>
-		<setting id="startup_delay" type="slider" label="1018" range="0,30" default="0" option="int"/>-->
+		<setting id="retries" type="slider" label="1017" range="1,1,10" default="5" option="int"/>
+		<setting id="startup_delay" type="slider" label="1018" range="0,30" default="0" option="int"/>
 		<setting id="default_action" type="enum" label="1020" lvalues="1021|1022" default="0" />
-		<!--<setting type="action" label="1019" action="RunScript(script.trakt,action=loadsettings)"/>-->
 	</category>
 	<category label="1050"><!-- Exclusions -->
 		<setting id="ExcludeLiveTV" type="bool" label="1051" default="false"/>
@@ -25,8 +24,8 @@
 		<setting id="scrobble_notification" type="bool" label="1048" default="false"/>
 		<!--<setting id="update_imdb_id" type="bool" label="1044" default="false"/>
 		<setting id="update_tvdb_id" type="bool" label="1045" default="false"/>
-		<!--<setting id="watching_call_on_seek" type="bool" label="1046" default="true"/>
-		<setting id="watching_call_on_resume" type="bool" label="1047" default="true"/>-->
+		<!--<setting id="watching_call_on_seek" type="bool" label="1046" default="true"/>-->
+		<setting id="watching_call_on_resume" type="bool" label="1047" default="true"/>
 	</category>
 	<category label="1400"><!-- Synchronize -->
 		<setting label="1410" type="lsep"/><!-- Service -->

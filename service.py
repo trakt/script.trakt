@@ -82,9 +82,6 @@ class traktService:
 		# purge queue before doing anything
 		self.dispatchQueue.purge()
 
-		# queue a loadsettings action
-		self.dispatchQueue.append({'action': 'loadsettings'})
-
 		# setup event driven classes
 		self.Player = traktPlayer(action = self._dispatchQueue)
 		self.Monitor = traktMonitor(action = self._dispatchQueue)
