@@ -498,8 +498,7 @@ class Sync():
 		movies = []
 		for movie_col1 in movies_col1:
 			movie_col2 = utilities.findMediaObject(movie_col1, movies_col2)
-			Debug("movie_col1: %s" % movie_col1)
-			Debug("movie_col2: %s" % movie_col2)
+
 			if movie_col2:
 				if watched:
 					if (movie_col2['plays'] == 0) and (movie_col1['plays'] > movie_col2['plays']):
