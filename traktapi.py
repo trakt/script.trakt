@@ -39,6 +39,8 @@ class traktNetworkError(traktError):
 		super(traktNetworkError, self).__init__(value)
 		self.timeout = timeout
 
+
+
 class traktAPI(object):
 
 	__baseURL = "https://api.trakt.tv"
@@ -46,6 +48,7 @@ class traktAPI(object):
 	__token = ""
 	__username = ""
 	__password = ""
+	__timeout = 15
 
 	def __init__(self):
 		logging.basicConfig()
@@ -190,62 +193,6 @@ class traktAPI(object):
     #TODO move this to the new api wrapper
 
 
-	def __getData(self, url, args, method, timeout=60):
-		data = None
-		try:
-			Debug("[traktAPI] __getData(): urllib2.Request(%s)" % url)
-
-			headers = {'trakt-user-login': self.__username,
-						'trakt-user-token': self.__token,
-						'Content-type': 'application/json',
-						'trakt-api-key': self.__apikey,
-						'trakt-api-version': '2'
-						}
-			if args == None:
-				req = Request(url, headers)
-			else:
-				req = Request(url, args, headers)
-
-			req.get_method = lambda: method
-			Debug("[traktAPI] __getData(): urllib2.urlopen()")
-			t1 = time.time()
-			response = urlopen(req, timeout=timeout)
-			t2 = time.time()
-
-			Debug("[traktAPI] __getData(): response.read()")
-			data = response.read()
-
-			Debug("[traktAPI] __getData(): Response Code: %i" % response.getcode())
-			Debug("[traktAPI] __getData(): Response Time: %0.2f ms" % ((t2 - t1) * 1000))
-			Debug("[traktAPI] __getData(): Response Headers: %s" % str(response.info().dict))
-
-		except BadStatusLine as e:
-			raise traktUnknownError("BadStatusLine: '%s' from URL: '%s'" % (e.line, url))
-		except IOError as e:
-			if hasattr(e, 'code'): # error 401 or 503, possibly others
-				# read the error document, strip newlines, this will make an html page 1 line
-				error_data = e.read().replace("\n", "").replace("\r", "")
-
-				if e.code == 401: # authentication problem
-					raise traktAuthProblem(error_data)
-				elif e.code == 503: # server busy problem
-					raise traktServerBusy(error_data)
-				else:
-					try:
-						_data = json.loads(error_data)
-						if 'status' in _data:
-							data = error_data
-					except ValueError:
-						raise traktUnknownError(error_data, e.code)
-
-			elif hasattr(e, 'reason'): # usually a read timeout, or unable to reach host
-				raise traktNetworkError(str(e.reason), isinstance(e.reason, socket.timeout))
-
-			else:
-				raise traktUnknownError(e.message)
-
-		return data
-
 	# make a JSON api request to trakt
 	# method: http method (GET or POST or PUT or DELETE)
 	# args: arguments to be passed by JSON, default:{}
@@ -267,7 +214,7 @@ class traktAPI(object):
 			Debug("[traktAPI] traktRequest(): Unknown method '%s'." % method)
 			return None
 
-		# debug log before username and sha1hash are injected
+		# debug log before username and token are injected
 		Debug("[traktAPI] traktRequest(): Request data: '%s'." % str(json.dumps(args)))
 
 		# convert to json data
@@ -286,7 +233,62 @@ class traktAPI(object):
 
 			try:
 				# get data from trakt.tv
-				raw = self.__getData(url, jdata, method)
+				data = None
+				try:
+					Debug("[traktAPI] __getData(): urllib2.Request(%s)" % url)
+
+					headers = {'trakt-user-login': self.__username,
+								'trakt-user-token': self.__token,
+								'Content-type': 'application/json',
+								'trakt-api-key': self.__apikey,
+								'trakt-api-version': '2'
+								}
+					if jdata == None:
+						req = Request(url, headers)
+					else:
+						req = Request(url, jdata, headers)
+
+					req.get_method = lambda: method
+					Debug("[traktAPI] __getData(): urllib2.urlopen()")
+					t1 = time.time()
+					response = urlopen(req, timeout=self.__timeout)
+					t2 = time.time()
+
+					Debug("[traktAPI] __getData(): response.read()")
+					data = response.read()
+
+					Debug("[traktAPI] __getData(): Response Code: %i" % response.getcode())
+					Debug("[traktAPI] __getData(): Response Time: %0.2f ms" % ((t2 - t1) * 1000))
+					Debug("[traktAPI] __getData(): Response Headers: %s" % str(response.info().dict))
+
+				#TODO review these. Possible to merge with the ones below, from the retry loop?
+				except BadStatusLine as e:
+					raise traktUnknownError("BadStatusLine: '%s' from URL: '%s'" % (e.line, url))
+				except IOError as e:
+					if hasattr(e, 'code'): # error 401 or 503, possibly others
+						# read the error document, strip newlines, this will make an html page 1 line
+						error_data = e.read().replace("\n", "").replace("\r", "")
+
+						if e.code == 401: # authentication problem
+							raise traktAuthProblem(error_data)
+						elif e.code == 503: # server busy problem
+							raise traktServerBusy(error_data)
+						else:
+							try:
+								_data = json.loads(error_data)
+								if 'status' in _data:
+									data = error_data
+							except ValueError:
+								raise traktUnknownError(error_data, e.code)
+
+					elif hasattr(e, 'reason'): # usually a read timeout, or unable to reach host
+						raise traktNetworkError(str(e.reason), isinstance(e.reason, socket.timeout))
+
+					else:
+						raise traktUnknownError(e.message)
+
+				raw = data
+
 			except traktError as e:
 				if isinstance(e, traktServerBusy):
 					Debug("[traktAPI] traktRequest(): (%i) Server Busy (%s)" % (i, e.value))
