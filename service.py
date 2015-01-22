@@ -49,8 +49,6 @@ class traktService:
 			if utilities.getSettingAsBool('sync_on_update'):
 				utilities.Debug("Performing sync after library update.")
 				self.doSync()
-		elif action == 'scanStarted':
-			pass
 		elif action == 'settingsChanged':
 			utilities.Debug("Settings changed, reloading.")
 			globals.traktapi.updateSettings()
@@ -68,6 +66,8 @@ class traktService:
 				utilities.Debug("There already is a sync in progress.")
 		elif action == 'settings':
 			utilities.showSettings()
+		elif action == 'scanStarted':
+			pass
 		else:
 			utilities.Debug("Unknown dispatch action, '%s'." % action)
 
@@ -160,15 +160,12 @@ class traktService:
 					rateMedia(media_type, summaryInfo)
 				else:
 					rateMedia(media_type, summaryInfo, rating=data['rating'])
-			elif action == 'unrate':
-				rateMedia(media_type, summaryInfo, unrate=True)
 		else:
 			utilities.Debug("doManualRating(): Summary info was empty, possible problem retrieving data from trakt.tv")
 
 	def doMarkWatched(self, data):
 
 		media_type = data['media_type']
-		simulate = utilities.getSettingAsBool('simulate_sync')
 		markedNotification = utilities.getSettingAsBool('show_marked_notification')
 		
 		if utilities.isMovie(media_type):

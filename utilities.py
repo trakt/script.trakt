@@ -256,7 +256,6 @@ def getMovieDetailsFromXbmc(libraryId, fields):
 
 def findInList(list, returnIndex=False, returnCopy=False, case_sensitive=True, *args, **kwargs):
 	for index in range(len(list)):
-		Debug("findInList index %s" % index)
 		item = list[index]
 		i = 0
 		for key in kwargs:

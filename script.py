@@ -80,9 +80,6 @@ def Main():
 		if 'library' in args and args['library'] in ['episodes', 'movies']:
 			data['library'] = args['library']
 
-	elif args['action'] == 'settings':
-		data = {'action': 'settings'}
-
 	elif args['action'] in ['rate', 'unrate']:
 		data = {}
 		data['action'] = args['action']
@@ -265,12 +262,6 @@ def Main():
 		# execute toggle watched action
 		xbmc.executebuiltin("Action(ToggleWatched)")
 
-	elif args['action'] == 'updatetags':
-		data = {'action': 'updatetags'}
-
-	elif args['action'] == 'managelists':
-		data = {'action': 'managelists'}
-
 	elif args['action'] == 'timertest':
 		utils.Debug("Timing JSON requests.")
 		import time
@@ -336,67 +327,6 @@ def Main():
 		e = time.time() - t
 		utils.Debug("VideoLibrary.GetMovies with tags from: %0.3f seconds, %d items at %0.5f seconds per item." % (e, len(data), e / len(data)))
 
-	elif args['action'] in ['itemlists', 'addtolist', 'removefromlist']:
-		data = {}
-		data['action'] = args['action']
-		media_type = None
-		dbid = None
-		if 'media_type' in args and 'dbid' in args:
-			media_type = args['media_type']
-			try:
-				dbid = int(args['dbid'])
-			except ValueError:
-				utils.Debug("'%s' triggered for library item, but DBID is invalid." % args['action'])
-				return
-		else:
-			media_type = getMediaType()
-			if not media_type in ['movie', 'show']:
-				utils.Debug("Error, not in video library.")
-				return
-			try:
-				dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
-			except ValueError:
-				utils.Debug("'%s' triggered for library item, but there is a problem with ListItem.DBID." % args['action'])
-				return
-		
-		if not media_type in ['movie', 'show']:
-			utils.Debug("'%s' is not a valid media type for '%s'." % (media_type, args['action']))
-			return
-
-		if args['action'] in ['addtolist', 'removefromlist']:
-			if 'list' in args:
-				data['list'] = args['list']
-			else:
-				utils.Debug("'%s' requires a list parameter." % data['action'])
-
-		data['type'] = media_type
-
-		if utils.isMovie(media_type):
-			result = utils.getMovieDetailsFromXbmc(dbid, ['imdbnumber', 'title', 'year', 'tag'])
-			if not result:
-				utils.Debug("Error getting movie details from Kodi.")
-				return
-			data['tag'] = result['tag']
-			data['movieid'] = result['movieid']
-			data['title'] = result['title']
-			data['year'] = result['year']
-			if result['imdbnumber'].startswith("tt"):
-				data['imdb_id'] = result['imdbnumber']
-			elif result['imdbnumber'].isdigit():
-				data['tmdb_id'] = result['imdbnumber']
-		
-		elif utils.isShow(media_type):
-			result = utils.getShowDetailsFromXBMC(dbid, ['imdbnumber', 'title', 'tag'])
-			if not result:
-				utils.Debug("Error getting show details from Kodi.")
-				return
-			data['tag'] = result['tag']
-			data['tvshowid'] = result['tvshowid']
-			data['title'] = result['title']
-			if result['imdbnumber'].startswith("tt"):
-				data['imdb_id'] = result['imdbnumber']
-			elif result['imdbnumber'].isdigit():
-				data['tvdb_id'] = result['imdbnumber']
 
 	q = sqliteQueue.SqliteQueue()
 	if 'action' in data:
