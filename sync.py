@@ -472,12 +472,12 @@ class Sync():
 			movie['plays'] = movie.pop('playcount')
 			movie['collected_at'] = datetime.datetime.now().isoformat()
 			movie['ids'] = {}
-			movie['ids']['imdb'] = ""
-			movie['ids']['tmdb'] = ""
 			id = movie['imdbnumber']
 			if id.startswith("tt"):
+				movie['ids']['imdb'] = ""
 				movie['ids']['imdb'] = id
 			if id.isdigit():
+				movie['ids']['tmdb'] = ""
 				movie['ids']['tmdb'] = id
 			del(movie['imdbnumber'])
 			del(movie['lastplayed'])
@@ -494,30 +494,12 @@ class Sync():
 
 		return xbmc_movies
 
-	def sanitizeMoviesData(self, movies):
-		data = copy.deepcopy(movies)
-		for x in data:
-			if 'plays' in x:
-				del(x['plays'])				
-			if 'movieid' in x:
-				del(x['movieid'])
-			if not x['ids']['tmdb']:
-				del(x['ids']['tmdb'])				
-		return data
-
-	def countMovies(self, movies, collection=True):
-		if len(movies) > 0:
-			if 'collected_at' in movies[0]:
-				return len(utilities.findAllInList(movies, 'collected_at', collection))
-			else:
-				return len(movies)
-		return 0
-
-	def compareMovies(self, movies_col1, movies_col2, watched=False, restrict=False):
+	def compareMovies(self, movies_col1, movies_col2, watched=False):
 		movies = []
 		for movie_col1 in movies_col1:
 			movie_col2 = utilities.findMediaObject(movie_col1, movies_col2)
-			
+			Debug("movie_col1: %s" % movie_col1)
+			Debug("movie_col2: %s" % movie_col2)
 			if movie_col2:
 				if watched:
 					if (movie_col2['plays'] == 0) and (movie_col1['plays'] > movie_col2['plays']):
@@ -527,13 +509,6 @@ class Sync():
 				else:
 					if 'collected_at' in movie_col2 and not movie_col2['collected_at']:
 						movies.append(movie_col1)
-			else:
-				if not restrict:
-					if 'collected_at' in movie_col1 and movie_col1['collected_at']:
-						if watched and (movie_col1['plays'] > 0):
-							movies.append(movie_col1)
-						elif not watched:
-							movies.append(movie_col1)
 		return movies
 
 	def traktAddMovies(self, movies):
@@ -548,11 +523,36 @@ class Sync():
 		self.updateProgress(20, line2="%i %s" % (len(movies), utilities.getString(1426)))
 
 		moviesToAdd = {}
-		moviesToAdd['movies'] = self.sanitizeMoviesData(movies)
+		moviesToAdd['movies'] = movies
 
 		self.traktapi.addToCollection(moviesToAdd)
 
 		self.updateProgress(40, line2=utilities.getString(1468) % len(movies))
+
+	def kodiUpdateMovies(self, movies):
+		if len(movies) == 0:
+			self.updateProgress(80, line2=utilities.getString(1471))
+			Debug("[Movies Sync] XBMC movie playcount is up to date.")
+			return
+		
+		Debug("[Movies Sync] %i movie(s) playcount will be updated in XBMC" % len(movies))
+
+		self.updateProgress(60, line2="%i %s" % (len(movies), utilities.getString(1430)))
+
+		#split movie list into chunks of 50
+		chunked_movies = utilities.chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": movies[i]['movieid'], "playcount": movies[i]['plays']}, "id": i} for i in range(len(movies))], 50)
+		i = 0
+		x = float(len(chunked_movies))
+		for chunk in chunked_movies:
+			if self.isCanceled():
+				return
+			utilities.xbmcJsonRequest(chunk)
+
+			i = i + 1
+			y = ((i / x) * 20) + 60
+			self.updateProgress(int(y), line2=utilities.getString(1472))
+
+		self.updateProgress(80, line2=utilities.getString(1473) % len(movies))
 
 	def traktRemoveMovies(self, movies):
 		if len(movies) == 0:
@@ -567,72 +567,11 @@ class Sync():
 		self.updateProgress(80, line2="%i %s" % (len(movies), utilities.getString(1444)))
 		
 		moviesToRemove = {}
-		moviesToRemove['movies'] = self.sanitizeMoviesData(movies)
+		moviesToRemove['movies'] = movies
 
 		self.traktapi.removeFromCollection(moviesToRemove)
 
 		self.updateProgress(98, line2=utilities.getString(1475) % len(movies))
-
-	# def traktUpdateMovies(self, movies):
-	# 	if len(movies) == 0:
-	# 		self.updateProgress(60, line2=utilities.getString(1469))
-	# 		Debug("[Movies Sync] trakt.tv movie playcount is up to date")
-	# 		return
-		
-	# 	titles = ", ".join(["%s (%s)" % (m['title'], m['imdb_id']) for m in movies])
-	# 	Debug("[Movies Sync] %i movie(s) playcount will be updated on trakt.tv" % len(movies))
-	# 	Debug("[Movies Sync] Movies updated: %s" % titles)
-
-	# 	self.updateProgress(40, line2="%i %s" % (len(movies), utilities.getString(1428)))
-
-	# 	# Send request to update playcounts on trakt.tv
-	# 	chunked_movies = utilities.chunks([self.sanitizeMovieData(movie) for movie in movies], 50)
-	# 	i = 0
-	# 	x = float(len(chunked_movies))
-	# 	for chunk in chunked_movies:
-	# 		if self.isCanceled():
-	# 			return
-	# 		params = {'movies': chunk}
-	# 		if self.simulate:
-	# 			Debug("[Movies Sync] %s" % str(params))
-	# 		else:
-	# 			self.traktapi.updateSeenMovie(params)
-
-	# 		i = i + 1
-	# 		y = ((i / x) * 20) + 40
-	# 		self.updateProgress(int(y), line2=utilities.getString(1478))
-
-	# 	self.updateProgress(60, line2=utilities.getString(1470) % len(movies))
-
-	# def xbmcUpdateMovies(self, movies):
-	# 	if len(movies) == 0:
-	# 		self.updateProgress(80, line2=utilities.getString(1471))
-	# 		Debug("[Movies Sync] Kodi movie playcount is up to date.")
-	# 		return
-		
-	# 	titles = ", ".join(["%s (%s)" % (m['title'], m['imdb_id']) for m in movies])
-	# 	Debug("[Movies Sync] %i movie(s) playcount will be updated in Kodi" % len(movies))
-	# 	Debug("[Movies Sync] Movies updated: %s" % titles)
-
-	# 	self.updateProgress(60, line2="%i %s" % (len(movies), utilities.getString(1430)))
-
-	# 	#split movie list into chunks of 50
-	# 	chunked_movies = utilities.chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": movies[i]['movieid'], "playcount": movies[i]['plays']}, "id": i} for i in range(len(movies))], 50)
-	# 	i = 0
-	# 	x = float(len(chunked_movies))
-	# 	for chunk in chunked_movies:
-	# 		if self.isCanceled():
-	# 			return
-	# 		if self.simulate:
-	# 			Debug("[Movies Sync] %s" % str(chunk))
-	# 		else:
-	# 			utilities.xbmcJsonRequest(chunk)
-
-	# 		i = i + 1
-	# 		y = ((i / x) * 20) + 60
-	# 		self.updateProgress(int(y), line2=utilities.getString(1472))
-
-	# 	self.updateProgress(80, line2=utilities.getString(1473) % len(movies))
 
 	def syncMovies(self):
 		if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
@@ -640,8 +579,8 @@ class Sync():
 		if self.show_progress and not self.run_silent:
 			progress.create("%s %s" % (utilities.getString(1400), utilities.getString(1402)), line1=" ", line2=" ", line3=" ")
 
-		xbmcMovies = self.xbmcLoadMovies()
-		if not isinstance(xbmcMovies, list) and not xbmcMovies:
+		kodiMovies = self.xbmcLoadMovies()
+		if not isinstance(kodiMovies, list) and not kodiMovies:
 			Debug("[Movies Sync] Kodi movie list is empty, aborting movie Sync.")
 			if self.show_progress and not self.run_silent:
 				progress.close()
@@ -655,21 +594,17 @@ class Sync():
 			return
 
 		if utilities.getSettingAsBool('add_movies_to_trakt') and not self.isCanceled():
-			traktMoviesToAdd = self.compareMovies(xbmcMovies, traktMovies)
+			traktMoviesToAdd = self.compareMovies(kodiMovies, traktMovies)
 			Debug("[Movies Sync] Compared movies, found %s to add." % len(traktMoviesToAdd))
 			self.traktAddMovies(traktMoviesToAdd)
-		
-		#if utilities.getSettingAsBool('trakt_movie_playcount') and not self.isCanceled():
-		#	traktMoviesToUpdate = self.compareMovies(xbmcMovies, traktMovies, watched=True)
-		#	self.traktUpdateMovies(traktMoviesToUpdate)
 
-		#if utilities.getSettingAsBool('xbmc_movie_playcount') and not self.isCanceled():
-		#	xbmcMoviesToUpdate = self.compareMovies(traktMovies, xbmcMovies, watched=True, restrict=True)
-		#	self.xbmcUpdateMovies(xbmcMoviesToUpdate)
+		if utilities.getSettingAsBool('kodi_movie_playcount') and not self.isCanceled():
+			kodiMoviesToUpdate = self.compareMovies(traktMovies, kodiMovies, watched=True)
+			self.kodiUpdateMovies(kodiMoviesToUpdate)
 
 		if utilities.getSettingAsBool('clean_trakt_movies') and not self.isCanceled():
 			Debug("[Movies Sync] Starting to remove.")
-			traktMoviesToRemove = self.compareMovies(traktMovies, xbmcMovies)
+			traktMoviesToRemove = self.compareMovies(traktMovies, kodiMovies)
 			Debug("[Movies Sync] Compared movies, found %s to remove." % len(traktMoviesToRemove))
 			self.traktRemoveMovies(traktMoviesToRemove)
 
@@ -680,7 +615,7 @@ class Sync():
 		if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1402)), utilities.getString(1421)) #Sync complete
 		
-		Debug("[Movies Sync] Movies on trakt.tv (%d), movies in Kodi (%d)." % (len(traktMovies), self.countMovies(xbmcMovies)))
+		Debug("[Movies Sync] Movies on trakt.tv (%d), movies in Kodi (%d)." % (len(traktMovies), len(kodiMovies)))
 		Debug("[Movies Sync] Complete.")
 
 	def syncCheck(self, media_type):

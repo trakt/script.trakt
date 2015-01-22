@@ -34,10 +34,10 @@
 		<setting id="hide_notifications_playback" type="bool" label="1417" default="false"/>
 		<setting id="show_marked_notification" type="bool" label="1416" default="true"/>
 		<setting type="sep"/>
-		<<setting label="1402" type="lsep"/><!-- Movies -->
+		<setting label="1402" type="lsep"/><!-- Movies -->
 		<setting id="add_movies_to_trakt" type="bool" label="1403" default="true"/>
-		<!--<setting id="trakt_movie_playcount" type="bool" label="1404" default="true"/>
-		<setting id="kodi_movie_playcount" type="bool" label="1405" default="true"/>-->
+		<!--<setting id="trakt_movie_playcount" type="bool" label="1404" default="true"/>-->
+		<setting id="kodi_movie_playcount" type="bool" label="1405" default="true"/>
 		<setting id="clean_trakt_movies" type="bool" label="1413" default="false"/>
 		<setting type="sep"/>
 		<setting label="1406" type="lsep"/><!-- Episodes -->
