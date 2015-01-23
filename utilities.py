@@ -286,7 +286,7 @@ def findAllInList(list, key, value):
 
 def findMediaObject(xbmcMovie, traktMovies, returnIndex=False):
 	result = None
-	if 'ids' in xbmcMovie and imdb' in xbmcMovie['ids'] and unicode(xbmcMovie['ids']['imdb']).startswith("tt"):
+	if 'ids' in xbmcMovie and 'imdb' in xbmcMovie['ids'] and unicode(xbmcMovie['ids']['imdb']).startswith("tt"):
 		result = findInList(traktMovies, returnIndex=returnIndex, imdb=xbmcMovie['ids']['imdb'])
 	# we don't want to give up if we don't find a match based on the first field so we use if instead of elif
 	if result is None and 'ids' in xbmcMovie and 'tmdb' in xbmcMovie['ids'] and unicode(xbmcMovie['ids']['tmdb'].replace("'","")).isdigit():
