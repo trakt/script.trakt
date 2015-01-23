@@ -3,6 +3,8 @@
 	<requires>
 		<import addon="xbmc.python" version="2.1.0"/>
 		<import addon="script.module.simplejson" version="2.0.10"/>
+		<import addon="script.module.requests" version="2.4.3"/>
+		<import addon="script.module.six" version="1.7.3"/>
 	</requires>
 	<extension point="xbmc.python.script" library="script.py">
 		<provides>executable</provides>
