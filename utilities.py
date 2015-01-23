@@ -293,8 +293,8 @@ def findMediaObject(xbmcMovie, traktMovies, returnIndex=False):
 		result = findInList(traktMovies, returnIndex=returnIndex, tmdb=unicode(xbmcMovie['ids']['tmdb']))
 	if result is None and 'tvdb' in xbmcMovie['ids'] and unicode(xbmcMovie['ids']['tvdb'].replace("'","")).isdigit():
 		result = findInList(traktMovies, returnIndex=returnIndex, tvdb=unicode(xbmcMovie['ids']['tvdb']))
-	if result is None and 'title' in xbmcMovie and 'year' in xbmcMovie and xbmcMovie['title'] and xbmcMovie['year'] > 0:		result = findInList(traktMovies, returnIndex=returnIndex, title=xbmcMovie['title'], year=xbmcMovie['year'])	
-		result = findInList(traktMovies, returnIndex=returnIndex, title=xbmcMovie['title'], year=xbmcMovie['year'])
+	if result is None and 'title' in xbmcMovie and 'year' in xbmcMovie and xbmcMovie['title'] and xbmcMovie['year'] > 0:
+		result = findInList(traktMovies, returnIndex=returnIndex, title=xbmcMovie['title'], year=xbmcMovie['year'])	
 	return result
 
 def regex_tvshow(compare, file, sub = ""):
