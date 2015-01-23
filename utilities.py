@@ -260,7 +260,7 @@ def findInList(list, returnIndex=False, returnCopy=False, case_sensitive=True, *
 			if key in item:
 				key_val = item[key]
 			else:
-				if ids in item and key in item['ids']:
+				if 'ids' in item and key in item['ids']:
 					key_val = item['ids'][key]
 				else:
 					continue
