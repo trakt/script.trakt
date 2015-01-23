@@ -87,12 +87,6 @@ class traktAPI(object):
 
 
 	def scrobbleEpisode(self, show, episode, percent, status):
-		Debug('show info %s' % show)
-		Debug('episode info %s' % episode)
-		if episode.get('user'):
-			del episode['user']
-
-
 		result = None
 
 		with Trakt.configuration.auth(self.__username, self.__token):

@@ -183,10 +183,7 @@ def getFormattedItemName(type, info, short=False):
 	if isShow(type):
 		s = info['title']
 	elif isEpisode(type):
-		if short:
-			s = "S%02dE%02d - %s" % (info['episode']['season'], info['episode']['number'], info['episode']['title'])
-		else:
-			s = "%s - S%02dE%02d - %s" % (info['show']['title'], info['episode']['season'], info['episode']['number'], info['episode']['title'])
+			s = "S%02dE%02d - %s" % (info['season'], info['number'], info['title'])
 	elif isSeason(type):
 		if info['season'] > 0:
 			s = "%s - Season %d" % (info['title'], info['season'])

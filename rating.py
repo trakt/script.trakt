@@ -113,14 +113,11 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 	utils.Debug("[Rating] Sending rating (%s) to trakt.tv" % rating)
 
 	params = {}
-	params['rating'] = rating
+	
 
 	if utils.isMovie(media_type):
-		params['title'] = media['title']
-		params['year'] = media['year']
-		params['ids'] = {}
-		params['ids']['tmdb'] = media['ids']['tmdb']
-		params['ids']['imdb'] = media['ids']['imdb']
+		params = media
+		params['rating'] = rating
 		root = {}
 		listing = []
 		listing = [params]
@@ -129,6 +126,7 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 		data = globals.traktapi.rateMovie(root)
 
 	elif utils.isShow(media_type):
+		params['rating'] = rating
 		params['title'] = media['title']
 		params['year'] = media['year']
 		params['ids'] = {}
@@ -144,17 +142,8 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 		data = globals.traktapi.rateShow(root)
 	
 	elif utils.isEpisode(media_type):
-		utils.Debug("%s" % media)
-		#params['title'] = media['show']['title']
-		#params['year'] = media['show']['year']
-		params['season'] = media['episode']['season']
-		params['number'] = media['episode']['number']
-		params['ids'] = {}
-		if media['episode']['tvdb_id']:
-			params['ids']['tvdb'] = media['episode']['ids']['tvdb']
-		if media['episode']['imdb_id']:
-			params['ids']['imdb'] = media['episode']['ids']['imdb']
-
+		params = media
+		params['rating'] = rating
 		root = {}
 		listing = []
 		listing = [params]

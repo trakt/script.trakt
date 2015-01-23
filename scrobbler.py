@@ -218,7 +218,6 @@ class Scrobbler():
 		if self.watchedTime != 0:
 			if 'type' in self.curVideo:
 				self.scrobble('stop')
-				Debug("traktSummaryInfo %s" % self.traktSummaryInfo)
 				ratingCheck(self.curVideo['type'], self.traktSummaryInfo, self.watchedTime, self.videoDuration, self.playlistLength)
 			self.watchedTime = 0
 			self.isMultiPartEpisode = False
