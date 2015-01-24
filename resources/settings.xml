@@ -5,7 +5,6 @@
 		<setting id="password" type="text" option="hidden" label="1014" default="" />
 		<setting id="retries" type="slider" label="1017" range="1,1,10" default="5" option="int"/>
 		<setting id="startup_delay" type="slider" label="1018" range="0,30" default="0" option="int"/>
-		<setting id="default_action" type="enum" label="1020" lvalues="1021|1022" default="0" />
 	</category>
 	<category label="1050"><!-- Exclusions -->
 		<setting id="ExcludeLiveTV" type="bool" label="1051" default="false"/>
@@ -22,9 +21,7 @@
 		<setting id="scrobble_episode" type="bool" label="1042" default="true"/>
 		<setting id="scrobble_min_view_time" type="slider" label="1043" range="0,5,100" default="80"/>
 		<setting id="scrobble_notification" type="bool" label="1048" default="false"/>
-		<!--<setting id="update_imdb_id" type="bool" label="1044" default="false"/>
-		<setting id="update_tvdb_id" type="bool" label="1045" default="false"/>
-		<!--<setting id="watching_call_on_seek" type="bool" label="1046" default="true"/>-->
+		<setting id="watching_call_on_seek" type="bool" label="1046" default="true"/>
 		<setting id="watching_call_on_resume" type="bool" label="1047" default="true"/>
 	</category>
 	<category label="1400"><!-- Synchronize -->
@@ -38,13 +35,13 @@
 		<setting id="add_movies_to_trakt" type="bool" label="1403" default="true"/>
 		<!--<setting id="trakt_movie_playcount" type="bool" label="1404" default="true"/>-->
 		<setting id="kodi_movie_playcount" type="bool" label="1405" default="true"/>
-		<setting id="clean_trakt_movies" type="bool" label="1413" default="false"/>
+		<!--<setting id="clean_trakt_movies" type="bool" label="1413" default="false"/>-->
 		<setting type="sep"/>
 		<setting label="1406" type="lsep"/><!-- Episodes -->
 		<setting id="add_episodes_to_trakt" type="bool" label="1407" default="true"/>
-		<!--<setting id="trakt_episode_playcount" type="bool" label="1408" default="true"/>
-		<setting id="kodi_episode_playcount" type="bool" label="1409" default="true"/>-->
-		<setting id="clean_trakt_episodes" type="bool" label="1414" default="false"/>
+		<!--<setting id="trakt_episode_playcount" type="bool" label="1408" default="true"/>-->
+		<setting id="kodi_episode_playcount" type="bool" label="1409" default="true"/>
+		<!--<setting id="clean_trakt_episodes" type="bool" label="1414" default="false"/>-->
 	</category>
 	<category label="1030"><!-- Rating -->
 		<setting id="rate_movie" type="bool" label="1031" default="true"/>
@@ -54,23 +51,8 @@
 		<setting id="rate_rerate" type="bool" label="1035" default="false"/>
 		<setting id="rating_default_advanced" type="slider" label="1037" range="1,10" default="8" option="int"/>
 	</category>
-	<!-- <category label="1600"><!-- Tagging -->
-		<!-- <setting id="tagging_enable" type="bool" label="1601" default="false"/>
-		<setting id="tagging_tag_after_sync" type="bool" label="1602" default="false"/>
-		<setting id="tagging_watchlists" type="bool" label="1603" default="false"/>
-		<setting id="tagging_ratings" type="bool" label="1604" default="false"/>
-		<setting id="tagging_ratings_min" type="slider" label="1605" range="1,10" default="8" option="int"/>
-		<setting id="tagging_list_privacy" type="enum" label="1606" lvalues="1671|1672|1673" default="0"/>
-		<setting id="tagging_list_allowshouts" type="bool" label="1607" default="false"/>
-		<setting id="tagging_notifications" type="bool" label="1608" default="true"/>
-	</category>-->
 	<category label="1700"><!-- Debug -->
 		<setting label="1720" type="lsep"/>
 		<setting id="debug" type="bool" label="1701" default="true"/>
-		<!-- <setting type="sep"/>
-		<setting label="1721" type="lsep"/><!-- Simulated settings header -->
-		<!-- <setting id="simulate_scrobbling" type="bool" label="1702" default="false"/>
-		<setting id="simulate_sync" type="bool" label="1703" default="false"/>
-		<setting id="simulate_tagging" type="bool" label="1704" default="false"/>-->
 	</category>
 </settings>

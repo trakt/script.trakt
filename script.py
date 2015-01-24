@@ -27,7 +27,7 @@ def getMediaType():
 
 def getArguments():
 	data = None
-	default_actions = {0: "sync", 1: "managelists"}
+	default_actions = {0: "sync"}
 	default = utils.getSettingAsInt('default_action')
 	if len(sys.argv) == 1:
 		data = {'action': default_actions[default]}
