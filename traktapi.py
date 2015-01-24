@@ -182,7 +182,10 @@ class traktAPI(object):
 			result = Trakt['sync/collection'].remove(mediaObject)
 		return result
 
-
+	def updateSeenEpisode(self, mediaObject):
+		with Trakt.configuration.auth(self.__username, self.__token):
+			result = Trakt['sync/history'].add(mediaObject)
+		return result
 
     #TODO move this to the new api wrapper
 
