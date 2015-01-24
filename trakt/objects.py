@@ -68,7 +68,12 @@ class Show(Media):
         return {
             'ids': dict(self.keys),
             'title': self.title,
-            'year': self.year
+            'year': self.year,
+            'seasons': [
+                season.to_info()
+                for season in self.seasons.values()
+            ],
+            'rating': self.rating 
         }
 
     def update(self, info=None, **kwargs):
@@ -99,7 +104,8 @@ class Season(Media):
             'episodes': [
                 episode.to_info()
                 for episode in self.episodes.values()
-            ]
+            ],
+            'rating': self.rating
         }
 
     @classmethod
@@ -118,8 +124,15 @@ class Episode(Video):
         super(Episode, self).__init__([number])
 
     def to_info(self):
+        # add ids as well since trakt adds ids to the episodes as well
         return {
-            'number': self.pk
+            'number': self.pk,
+            'watched': 1 if self.is_watched else 0,
+            'collected': 1 if self.is_collected else 0,
+            'plays': self.plays,
+            'rating': self.rating,
+            'collected_at': self.collected_at,
+            'ids': {}
         }
 
     @classmethod

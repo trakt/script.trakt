@@ -10,5 +10,6 @@ ERRORS = {
     500: ("Server Error",           ""),
     502: ("Bad Gateway",            "server down"),
     503: ("Service Unavailable",    "server overloaded"),
-    504: ("Gateway Timeout",        "server timeout")
+    504: ("Gateway Timeout",        "server timeout"),
+    520: ("Website is offline",     "Web server is returning an unknown error")
 }
