@@ -178,67 +178,10 @@
 	<string id="1550">trakt.tv - Marked as watched</string>
 	<string id="1551">trakt.tv - Failed making as watched</string>
 	<string id="1552">%d episode(s) of '%s'</string>
-
-	<!-- Tagger Settings -->
-	<!--<string id="1600">Tagging</string>
-	<string id="1601">Enable Tagging</string>
-	<string id="1602">Update tags after a library sync</string>
-	<string id="1603">Create tags from watch lists</string>
-	<string id="1604">Create tags from personal ratings</string>
-	<string id="1605">Minimum rating to create tags for</string>
-	<string id="1606">Default privacy setting for new lists</string>
-	<string id="1607">Allow shouts for new lists</string>
-	<string id="1608">Enable notifications</string>
-	
-	<!-- Tagger String -->
-	<!--<string id="1650">Manage trakt.tv Lists</string>
-	<string id="1651">Add List</string>
-	<string id="1652">OK</string>
-	<string id="1653">Cancel</string>
-	<string id="1654">New List</string>
-	<string id="1655">'%s' is a reserved name, can not add to lists.</string>
-	<string id="1656">'%s' is already in your list.</string>
-	<string id="1657">Updated tags for '%s'</string>
-	<string id="1658">Tag sync started</string>
-	<string id="1659">Tag sync finished</string>
-	<string id="1660">Pick a List to Manage</string>
-	<string id="1661">Loading data to manage lists</string>
-	<string id="1662">There was a problem loading Kodi data</string>
-	<string id="1663">There was a problem loading trakt.tv data</string>
-	<string id="1664">There was a problem loading your watchlists</string>
-	<string id="1665">There was a problem loading your rating data</string>
-	<string id="1666">Tags/Lists have been updated</string>
-	<string id="1667">Privacy Setting</string>
-	<string id="1668">Other Settings</string>
-	<string id="1669">Edit Description</string>
-	<string id="1670">Rename List</string>
-	<string id="1671">Public</string>
-	<string id="1672">Friends</string>
-	<string id="1673">Private</string>
-	<string id="1674">Allow Shouts</string>
-	<string id="1675">Show Numbers</string>
-	<string id="1676">Hide in Item List</string>
-	<string id="1677">Can't rename to an already existing list %s</string>
 	
 	<!-- Debug Settings -->
 	<string id="1700">Debug</string>
 	<string id="1701">Enable debug mode</string>
-	<string id="1702">Simulate scrobbling</string>
-	<string id="1703">Simulate sync</string>
-	<string id="1704">Simulate tagging</string>
 	<string id="1720">Logging</string>
-	<string id="1721">Simulate settings, if enabled will not make changes in Kodi or trakt.tv</string>
 
-	<!-- Context Menu Entries -->
-	<string id="2000">Manage Movie's Lists</string>
-	<string id="2001">Manage Show's Lists</string>
-	<string id="2010">Remove from Watchlist</string>
-	<string id="2020">Add to Watchlist</string>
-	<string id="2030">Rate this Movie</string>
-	<string id="2031">Rate this Show</string>
-	<string id="2032">Rate this Episode</string>
-	<string id="2040">Toggle Watched</string>
-	<string id="2050">Manage All Lists</string>
-	<string id="2060">Update All Tags</string>
-	<string id="2070">Synchronize Library</string>
 </strings>

@@ -48,7 +48,7 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 
 		if not rating is None:
 			utils.Debug("[Rating] '%s' is being unrated." % s)
-			rateOnTrakt(rating, media_type, summary_info, unrate=True)
+			__rateOnTrakt(rating, media_type, summary_info, unrate=True)
 		else:
 			utils.Debug("[Rating] '%s' has not been rated, so not unrating." % s)
 
@@ -58,12 +58,12 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 	if not rating is None:
 		if summary_info['user']['ratings']['rating'] == 0:
 			utils.Debug("[Rating] Rating for '%s' is being set to '%d' manually." % (s, rating))
-			rateOnTrakt(rating, media_type, summary_info)
+			__rateOnTrakt(rating, media_type, summary_info)
 		else:
 			if rerate:
 				if not summary_info['user']['ratings']['rating'] == rating:
 					utils.Debug("[Rating] Rating for '%s' is being set to '%d' manually." % (s, rating))
-					rateOnTrakt(rating, media_type, summary_info)
+					__rateOnTrakt(rating, media_type, summary_info)
 				else:
 					utils.notification(utils.getString(1353), s)
 					utils.Debug("[Rating] '%s' already has a rating of '%d'." % (s, rating))
@@ -101,15 +101,15 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 				rating = 0
 
 		if rating == 0 or rating == "unrate":
-			rateOnTrakt(rating, gui.media_type, gui.media, unrate=True)
+			__rateOnTrakt(rating, gui.media_type, gui.media, unrate=True)
 		else:
-			rateOnTrakt(rating, gui.media_type, gui.media)
+			__rateOnTrakt(rating, gui.media_type, gui.media)
 	else:
 		utils.Debug("[Rating] Rating dialog was closed with no rating.")
 
 	del gui
 
-def rateOnTrakt(rating, media_type, media, unrate=False):
+def __rateOnTrakt(rating, media_type, media, unrate=False):
 	utils.Debug("[Rating] Sending rating (%s) to trakt.tv" % rating)
 
 	params = {}
@@ -119,11 +119,10 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 		params = media
 		params['rating'] = rating
 		root = {}
-		listing = []
 		listing = [params]
 		root['movies'] = listing
 
-		data = globals.traktapi.rateMovie(root)
+		data = globals.traktapi.Rate(root)
 
 	elif utils.isShow(media_type):
 		params['rating'] = rating
@@ -135,21 +134,19 @@ def rateOnTrakt(rating, media_type, media, unrate=False):
 		params['ids']['tvdb'] = media['ids']['tvdb']
 
 		root = {}
-		listing = []
 		listing = [params]
 		root['shows'] = listing
 
-		data = globals.traktapi.rateShow(root)
+		data = globals.traktapi.Rate(root)
 	
 	elif utils.isEpisode(media_type):
 		params = media
 		params['rating'] = rating
 		root = {}
-		listing = []
 		listing = [params]
 		root['episodes'] = listing
 
-		data = globals.traktapi.rateEpisode(root)
+		data = globals.traktapi.Rate(root)
 
 	else:
 		return
@@ -206,7 +203,7 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 	def onInit(self):
 		self.getControl(10015).setVisible(self.rating_type == 'advanced')
 
-		s = utils.getFormattedItemName(self.media_type, self.media, short=True)
+		s = utils.getFormattedItemName(self.media_type, self.media)
 		self.getControl(10012).setLabel(s)
 
 		rateID = None

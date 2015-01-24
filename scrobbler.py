@@ -111,7 +111,7 @@ class Scrobbler():
 			self.isMultiPartEpisode = False
 			if utilities.isMovie(self.curVideo['type']):
 				if 'id' in self.curVideo:
-					self.curVideoInfo = utilities.getMovieDetailsFromXbmc(self.curVideo['id'], ['imdbnumber', 'title', 'year'])
+					self.curVideoInfo = utilities.getMovieDetailsFromKodi(self.curVideo['id'], ['imdbnumber', 'title', 'year'])
 					if utilities.getSettingAsBool('rate_movie'):
 						# pre-get sumamry information, for faster rating dialog.
 						Debug("[Scrobbler] Movie rating is enabled, pre-fetching summary information.")
@@ -148,7 +148,7 @@ class Scrobbler():
 							else:
 								lookup = self.traktapi.getIdLookup('imdb', tvdb)
 							self.traktShowSummary = self.traktapi.getShowSummary(lookup['ids']['slug'])
-							self.traktSummaryInfo = self.traktapi.getEpisodeSummary(lookup['ids']['slug'], self.curVideoInfo['season'], self.curVideoInfo['episode'])
+							self.traktSummaryInfo = self.traktapi.getEpisodeSummary(lookup['ids'], self.curVideoInfo['season'], self.curVideoInfo['episode'])
 						else:
 							self.curVideoInfo['imdb'] = None
 							Debug("[Scrobbler] Can not get summary information for '%s - S%02dE%02d' as it has no valid id, will retry during a watching call." % (self.curVideoInfo['showtitle'], self.curVideoInfo['season'], self.curVideoInfo['episode']))
@@ -171,7 +171,7 @@ class Scrobbler():
 
 			self.isPlaying = True
 			self.isPaused = False
-			self.scrobble('start')
+			self.__scrobble('start')
 
 	def playbackResumed(self):
 		if not self.isPlaying:
@@ -184,7 +184,7 @@ class Scrobbler():
 			self.pausedAt = 0
 			self.isPaused = False
 			self.update(True)
-			self.scrobble('start')
+			self.__scrobble('start')
 
 	def playbackPaused(self):
 		if not self.isPlaying:
@@ -195,7 +195,7 @@ class Scrobbler():
 		Debug("[Scrobbler] Paused after: %s" % str(self.watchedTime))
 		self.isPaused = True
 		self.pausedAt = time.time()
-		self.scrobble('pause')
+		self.__scrobble('pause')
 
 	def playbackSeek(self):
 		if not self.isPlaying:
@@ -203,7 +203,7 @@ class Scrobbler():
 
 		Debug("[Scrobbler] playbackSeek()")
 		self.update(True)
-		self.scrobble('start')
+		self.__scrobble('start')
 
 	def playbackEnded(self):
 		if not self.isPlaying:
@@ -217,7 +217,7 @@ class Scrobbler():
 		self.markedAsWatched = []
 		if self.watchedTime != 0:
 			if 'type' in self.curVideo:
-				self.scrobble('stop')
+				self.__scrobble('stop')
 				ratingCheck(self.curVideo['type'], self.traktSummaryInfo, self.watchedTime, self.videoDuration, self.playlistLength)
 			self.watchedTime = 0
 			self.isMultiPartEpisode = False
@@ -227,7 +227,7 @@ class Scrobbler():
 		self.playlistIndex = 0
 
 
-	def scrobble(self, status):
+	def __scrobble(self, status):
 		if not self.curVideoInfo:
 			return
 
@@ -235,14 +235,12 @@ class Scrobbler():
 		scrobbleMovieOption = utilities.getSettingAsBool('scrobble_movie')
 		scrobbleEpisodeOption = utilities.getSettingAsBool('scrobble_episode')
 
-		duration = self.videoDuration / 60
 		watchedPercent = (self.watchedTime / self.videoDuration) * 100
 
 		if utilities.isMovie(self.curVideo['type']) and scrobbleMovieOption:
 			response = self.traktapi.scrobbleMovie(self.traktSummaryInfo, watchedPercent, status)
-			if not response is None and 'status' in response:
-				self.scrobbleNotification(response)
-				#todo handle this
+			if not response is None:
+				self.__scrobbleNotification(response)
 				Debug("[Scrobbler] Scrobble response: %s" % str(response))
 
 
@@ -250,21 +248,19 @@ class Scrobbler():
 			if self.isMultiPartEpisode:
 				Debug("[Scrobbler] Multi-part episode, scrobbling part %d of %d." % (self.curMPEpisode + 1, self.curVideo['multi_episode_count']))
 				adjustedDuration = int(self.videoDuration / self.curVideo['multi_episode_count'])
-				duration = adjustedDuration / 60
 				watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
 			
 			response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.traktSummaryInfo, watchedPercent, status)
-			if not response is None and 'status' in response:
-				self.scrobbleNotification(response)
-				#handle this
+			if not response is None:
+				self.__scrobbleNotification(response)
 				Debug("[Scrobbler] Scrobble response: %s" % str(response))
 
 
-	def scrobbleNotification(self, info):
+	def __scrobbleNotification(self, info):
 		if not self.curVideoInfo:
 			return
 		
 		if utilities.getSettingAsBool("scrobble_notification"):
-			s = utilities.getFormattedItemName(self.curVideo['type'], info)
+			s = utilities.getFormattedItemName(self.curVideo['type'], info[self.curVideo['type']])
 			utilities.notification(utilities.getString(1049), s)
 

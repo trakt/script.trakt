@@ -4,11 +4,10 @@ import xbmc
 import xbmcaddon
 import time, socket
 import math
-import urllib2
 import logging
 
 from trakt import Trakt
-from utilities import Debug, notification, getSetting, getSettingAsBool, getSettingAsInt, getString, setSetting, findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList
+from utilities import Debug, notification, getSetting, getSettingAsInt, getString, findMovieMatchInList, findEpisodeMatchInList
 from urllib2 import Request, urlopen, HTTPError, URLError
 from httplib import HTTPException, BadStatusLine
 
@@ -33,7 +32,6 @@ class traktError(Exception):
 class traktAuthProblem(traktError): pass
 class traktServerBusy(traktError): pass
 class traktUnknownError(traktError): pass
-class traktNotFoundError(traktError): pass
 class traktNetworkError(traktError):
 	def __init__(self, value, timeout):
 		super(traktNetworkError, self).__init__(value)
@@ -61,7 +59,7 @@ class traktAPI(object):
 
 		# Configure
 		Trakt.configuration.defaults.client(
-		    id=self.__apikey
+			id=self.__apikey
 		)
 
 		if not self.__token:
@@ -111,37 +109,31 @@ class traktAPI(object):
 
 
 	def scrobbleMovie(self, movie, percent, status):
-
-		Debug("[traktAPI] scrobble(data: %s)" % (str(movie)))
-
 		result = None
+
 		with Trakt.configuration.auth(self.__username, self.__token):
 			if status == 'start':
-				Debug("[traktAPI] scrobble() Start")
 				result = Trakt['scrobble'].start(
 					movie=movie,
 					progress=math.ceil(percent))
 			elif status == 'pause':
-				Debug("[traktAPI] scrobble() Pause")
 				result = Trakt['scrobble'].pause(
 					movie=movie,
 					progress=math.ceil(percent))
 			elif status == 'stop':
-				Debug("[traktAPI] scrobble() Stop")
 				result = Trakt['scrobble'].stop(
 					movie=movie,
 					progress=math.ceil(percent))
 			else:
 				Debug("[traktAPI] scrobble() Bad scrobble status")
-		Debug("[traktAPI] scrobble() %s" % result)				
 		return result
 
-	def getShowsLibrary(self, shows):
+	def getShowsCollected(self, shows):
 		with Trakt.configuration.auth(self.__username, self.__token):
 				Trakt['sync/collection'].shows(shows)
 		return shows
 
-	def getMoviesLibrary(self, movies):
+	def getMoviesCollected(self, movies):
 		with Trakt.configuration.auth(self.__username, self.__token):
 				Trakt['sync/collection'].movies(movies)
 		return movies
@@ -155,21 +147,6 @@ class traktAPI(object):
 	def getMoviesWatched(self, movies):
 		with Trakt.configuration.auth(self.__username, self.__token):
 				Trakt['sync/watched'].movies(movies)
-		return movies
-
-	def getShowsRated(self, shows):
-		with Trakt.configuration.auth(self.__username, self.__token):
-				Trakt['sync/ratings'].shows(shows)
-		return shows
-
-	def getEpisodesRated(self, episodes):
-		with Trakt.configuration.auth(self.__username, self.__token):
-				Trakt['sync/ratings'].episodes(episodes)
-		return episodes
-
-	def getMoviesRated(self, movies):
-		with Trakt.configuration.auth(self.__username, self.__token):
-				Trakt['sync/ratings'].movies(movies)
 		return movies
 
 	def addToCollection(self, mediaObject):
@@ -187,7 +164,21 @@ class traktAPI(object):
 			result = Trakt['sync/history'].add(mediaObject)
 		return result
 
-    #TODO move this to the new api wrapper
+	def getEpisodeRatingForUser(self, id, season, episode):
+		ratings = {}
+		with Trakt.configuration.auth(self.__username, self.__token):
+				Trakt['sync/ratings'].episodes(ratings)
+		Debug("Rating: %s" % ratings)
+		return findEpisodeMatchInList(id, season, episode, ratings)
+
+	def getMovieRatingForUser(self, id):
+		ratings = {}
+		with Trakt.configuration.auth(self.__username, self.__token):
+				Trakt['sync/ratings'].movies(ratings)
+		Debug("Rating: %s" % ratings)
+		return findMovieMatchInList(id, ratings)
+
+	#TODO move this to the new api wrapper
 
 
 	# make a JSON api request to trakt
@@ -199,9 +190,8 @@ class traktAPI(object):
 	# silent: default is True, when true it disable any error notifications (but not debug messages)
 	# hideResponse: used to not output the json response to the log
 	def traktRequest(self, method, url, args=None, returnStatus=False, returnOnFailure=False, silent=True, hideResponse=False):
-		raw = None
 		data = None
-		jdata = {}
+
 		retries = getSettingAsInt('retries')
 
 		if args is None:
@@ -240,7 +230,7 @@ class traktAPI(object):
 								'trakt-api-key': self.__apikey,
 								'trakt-api-version': '2'
 								}
-					if jdata == None:
+					if jdata is None:
 						req = Request(url, headers)
 					else:
 						req = Request(url, jdata, headers)
@@ -292,7 +282,6 @@ class traktAPI(object):
 					xbmc.sleep(5000)
 				elif isinstance(e, traktAuthProblem):
 					Debug("[traktAPI] traktRequest(): (%i) Authentication Failure (%s)" % (i, e.value))
-					setSetting('account_valid', False)
 					notification('trakt', getString(1110))
 					return
 				elif isinstance(e, traktNetworkError):
@@ -374,16 +363,14 @@ class traktAPI(object):
 		url = "%s/shows/%s" % (self.__baseURL, id)
 		Debug("[traktAPI] getShowSummary(url: %s)" % (url))
 		result = self.traktRequest('GET', url)
-		result['user'] = {}
-		result['user']['ratings'] = self.getShowRatingForUser(id)
 		return result
 
 	def getEpisodeSummary(self, id, season, episode):
-		url = "%s/shows/%s/seasons/%s/episodes/%s" % (self.__baseURL, id, season, episode)
-		Debug("[traktAPI] getEpisodeSummary(url: %s)" % (url))
+		url = "%s/shows/%s/seasons/%s/episodes/%s" % (self.__baseURL, id['slug'], season, episode)
+		Debug("[traktAPI] getEpisodeSummary(url: %s)" % url)
 		result = self.traktRequest('GET', url)
 		result['user'] = {}
-		result['user']['ratings'] = self.getEpisodeRatingForUser(id, season, episode)
+		result['user']['ratings'] = self.getEpisodeRatingForUser(id['tvdb'], season, episode)
 		return result
 
 	def getMovieSummary(self, id):
@@ -394,36 +381,11 @@ class traktAPI(object):
 		result['user']['ratings'] = self.getMovieRatingForUser(id)
 		return result
 
-	def getShowRatingForUser(self, id):
-		ratings = self.getRatedItems('shows')
-		return findShowMatchInList(id, ratings)
-	def getEpisodeRatingForUser(self, id, season, episode):
-		ratings = self.getRatedItems('episodes')
-		return findEpisodeMatchInList(id, season, episode, ratings, 'rating')
-	def getMovieRatingForUser(self, id):
-		ratings = self.getRatedItems('movies')
-		return findMovieMatchInList(id, ratings)
-
-	# url: https://api.trakt.tv/sync/ratings/<type>
-	# note: if no items, returns []
-	def getRatedItems(self, type):
-			url = "%s/sync/ratings/%s" % (self.__baseURL, type)
-			Debug("[traktAPI] getRatedItems(url: %s)" % url)
-			return self.traktRequest('GET', url)					
-
-    # url: http://api.trakt.tv/sync/ratings
-	def rate(self, type, data):
-
-			url = "%s/sync/ratings" % (self.__baseURL)
+	# Send a rating to trakt as mediaObject
+	def Rate(self, data):
+			url = "%s/sync/ratings" % self.__baseURL
 			Debug("[traktAPI] rate(url: %s, data: %s)" % (url, str(data)))
 			return self.traktRequest('POST', url, data)
-
-	def rateShow(self, data):
-		return self.rate('shows', data)
-	def rateEpisode(self, data):
-		return self.rate('episodes', data)
-	def rateMovie(self, data):
-		return self.rate('movies', data)
 
 	def getIdLookup(self, idType, id):
 		url = "%s/search?id_type=%s&id=%s" % (self.__baseURL, idType, id)
