@@ -5,7 +5,6 @@ import xbmc
 import sys
 import sqliteQueue
 import time
-from traktContextMenu import traktContextMenu
 
 try:
 	import simplejson as json
@@ -45,31 +44,6 @@ def Main():
 
 	args = getArguments()
 	data = {}
-
-	if args['action'] == 'contextmenu':
-		buttons = []
-		media_type = getMediaType()
-
-		if media_type in ['movie', 'show', 'episode']:
-			buttons.append("rate")
-
-		if media_type in ['movie', 'show', 'season', 'episode']:
-			buttons.append("togglewatched")
-
-		buttons.append("sync")
-
-		contextMenu = traktContextMenu(media_type=media_type, buttons=buttons)
-		contextMenu.doModal()
-		_action = contextMenu.action
-		del contextMenu
-
-		if _action is None:
-			return
-
-		utils.Debug("'%s' selected from trakt.tv action menu" % _action)
-		args['action'] = _action
-		if _action in ['addtolist', 'removefromlist']:
-			args['list'] = "watchlist"
 
 	if args['action'] == 'sync':
 		data = {'action': 'manualSync'}
