@@ -157,7 +157,12 @@ class Movie(Video):
         return {
             'ids': dict(self.keys),
             'title': self.title,
-            'year': self.year
+            'year': self.year,
+            'watched': 1 if self.is_watched else 0,
+            'collected': 1 if self.is_collected else 0,
+            'plays': self.plays,
+            'rating': self.rating,
+            'collected_at': self.collected_at
         }
 
     def update(self, info=None, **kwargs):
