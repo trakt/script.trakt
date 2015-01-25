@@ -568,19 +568,19 @@ class Sync():
 
 	def __traktAddMovies(self, movies):
 		if len(movies) == 0:
-			self.__updateProgress(40, line2=utilities.getString(1467))
+			self.__updateProgress(98, line2=utilities.getString(1467))
 			Debug("[Movies Sync] trakt.tv movie collection is up to date.")
 			return
 
 		Debug("[Movies Sync] %i movie(s) will be added to trakt.tv collection." % len(movies))
 
-		self.__updateProgress(20, line2="%i %s" % (len(movies), utilities.getString(1426)))
+		self.__updateProgress(80, line2="%i %s" % (len(movies), utilities.getString(1426)))
 
 		moviesToAdd = {'movies': movies}
 
 		self.traktapi.addToCollection(moviesToAdd)
 
-		self.__updateProgress(40, line2=utilities.getString(1468) % len(movies))
+		self.__updateProgress(98, line2=utilities.getString(1468) % len(movies))
 
 	def __kodiUpdateMovies(self, movies):
 		if len(movies) == 0:
@@ -609,7 +609,7 @@ class Sync():
 
 	def __traktRemoveMovies(self, movies):
 		if len(movies) == 0:
-			self.__updateProgress(98, line2=utilities.getString(1474))
+			self.__updateProgress(40, line2=utilities.getString(1474))
 			Debug("[Movies Sync] trakt.tv movie collection is clean, no movies to remove.")
 			return
 		
@@ -617,7 +617,7 @@ class Sync():
 		Debug("[Movies Sync] %i movie(s) will be removed from trakt.tv collection." % len(movies))
 		Debug("[Movies Sync] Movies removed: %s" % titles)
 
-		self.__updateProgress(80, line2="%i %s" % (len(movies), utilities.getString(1444)))
+		self.__updateProgress(20, line2="%i %s" % (len(movies), utilities.getString(1444)))
 		
 		for movie in movies:
 			del(movie['collected_at'])
@@ -626,7 +626,7 @@ class Sync():
 
 		self.traktapi.removeFromCollection(moviesToRemove)
 
-		self.__updateProgress(98, line2=utilities.getString(1475) % len(movies))
+		self.__updateProgress(40, line2=utilities.getString(1475) % len(movies))
 
 	def __syncMovies(self):
 		if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
