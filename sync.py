@@ -112,7 +112,6 @@ class Sync():
 		tvshows = self.__kodiLoadShowList()
 		if tvshows is None:
 			return None
-		Debug("tvshows %s" % tvshows)
 		self.__updateProgress(2, line2=utilities.getString(1482))
 		result = {'shows': []}
 		i = 0
@@ -428,7 +427,6 @@ class Sync():
 			progress.create("%s %s" % (utilities.getString(1400), utilities.getString(1406)), line1=" ", line2=" ", line3=" ")
 
 		kodiShows = self.__kodiLoadShows()
-		Debug("kodiShows %s" % kodiShows)
 		if not isinstance(kodiShows, list) and not kodiShows:
 			Debug("[Episodes Sync] Kodi show list is empty, aborting tv show Sync.")
 			if self.show_progress and not self.run_silent:
@@ -436,7 +434,6 @@ class Sync():
 			return
 
 		traktShows = self.__traktLoadShows()
-		Debug("traktShows %s" % traktShows)
 		if not isinstance(traktShows['shows'], list):
 			Debug("[Episodes Sync] Error getting trakt.tv show list, aborting tv show sync.")
 			if self.show_progress and not self.run_silent:
