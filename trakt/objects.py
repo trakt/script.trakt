@@ -73,7 +73,7 @@ class Show(Media):
                 season.to_info()
                 for season in self.seasons.values()
             ],
-            'rating': self.rating 
+            'rating': self.rating.value
         }
 
     def update(self, info=None, **kwargs):
@@ -130,7 +130,7 @@ class Episode(Video):
             'watched': 1 if self.is_watched else 0,
             'collected': 1 if self.is_collected else 0,
             'plays': self.plays,
-            'rating': self.rating,
+            'rating': self.rating.value,
             'collected_at': self.collected_at,
             'ids': {}
         }
@@ -161,7 +161,7 @@ class Movie(Video):
             'watched': 1 if self.is_watched else 0,
             'collected': 1 if self.is_collected else 0,
             'plays': self.plays,
-            'rating': self.rating,
+            'rating': self.rating.value,
             'collected_at': self.collected_at
         }
 
