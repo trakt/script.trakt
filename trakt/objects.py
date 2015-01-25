@@ -65,16 +65,18 @@ class Show(Media):
                 yield (sk, ek), episode
 
     def to_info(self):
-        return {
+        info = {
             'ids': dict(self.keys),
             'title': self.title,
             'year': self.year,
             'seasons': [
                 season.to_info()
                 for season in self.seasons.values()
-            ],
-            'rating': self.rating.value
+            ]
         }
+        if self.rating:
+            info['rating'] = self.rating.value
+        return info
 
     def update(self, info=None, **kwargs):
         super(Show, self).update(info, **kwargs)
@@ -99,14 +101,16 @@ class Season(Media):
         self.episodes = {}
 
     def to_info(self):
-        return {
+        info = {
             'number': self.pk,
             'episodes': [
                 episode.to_info()
                 for episode in self.episodes.values()
-            ],
-            'rating': self.rating
+            ]
         }
+        if self.rating:
+            info['rating'] = self.rating.value
+        return info
 
     @classmethod
     def create(cls, number, info=None, **kwargs):
@@ -125,15 +129,17 @@ class Episode(Video):
 
     def to_info(self):
         # add ids as well since trakt adds ids to the episodes as well
-        return {
+        info = {
             'number': self.pk,
             'watched': 1 if self.is_watched else 0,
             'collected': 1 if self.is_collected else 0,
             'plays': self.plays,
-            'rating': self.rating.value,
             'collected_at': self.collected_at,
             'ids': {}
         }
+        if self.rating:
+            info['rating'] = self.rating.value
+        return info
 
     @classmethod
     def create(cls, pk, info=None, **kwargs):
@@ -154,16 +160,18 @@ class Movie(Video):
         self.year = None
 
     def to_info(self):
-        return {
+        info = {
             'ids': dict(self.keys),
             'title': self.title,
             'year': self.year,
             'watched': 1 if self.is_watched else 0,
             'collected': 1 if self.is_collected else 0,
             'plays': self.plays,
-            'rating': self.rating.value,
             'collected_at': self.collected_at
         }
+        if self.rating:
+            info['rating'] = self.rating.value
+        return info
 
     def update(self, info=None, **kwargs):
         super(Movie, self).update(info, **kwargs)
