@@ -301,7 +301,13 @@ def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list):
 	if not show:
 		return {}
 	else:
-		season = show.seasons[seasonNumber]
-		episode = season.episodes[episodeNumber]
-		return episode.to_info()
+		if not seasonNumber in show.seasons:
+			return {}
+		else:	
+			season = show.seasons[seasonNumber]
+			if not episodeNumber in season.episodes:
+				return {}
+			else:	
+				episode = season.episodes[episodeNumber]
+				return episode.to_info()
 		
