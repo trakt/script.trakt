@@ -31,10 +31,6 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 	"""Launches the rating dialog"""
 	if not utils.isValidMediaType(media_type):
 		return
-	utils.Debug("summary_info: %s" % summary_info)
-	if utils.isEpisode(media_type):
-		if summary_info['user']['ratings'] and 'rating' in summary_info['user']['ratings']['episode']:
-			summary_info['user']['ratings']['rating'] = summary_info['user']['ratings']['episode']['rating']
 
 	s = utils.getFormattedItemName(media_type, summary_info)
 

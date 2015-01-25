@@ -293,15 +293,15 @@ def regex_tvshow(compare, file, sub = ""):
 		return "","",""
 
 def findMovieMatchInList(id, list):
-	return next((item for key, item in list.items() if key == id), {})
+	return next((item.to_info() for key, item in list.items() if key[1] == str(id)), {})  #key[1] should be the imdb id
 
-def findEpisodeMatchInList(id, season, episode, list):
-	#todo fix this method
-	show = next((item for key, item in list.items() if key == id), {})
-	Debug("show %s" % show)
-	season = next((item for key, item in show.items() if key == season), {})
-	Debug("season %s" % season)
-	episode = next((item for key, item in season.items() if key == episode), {})
-	Debug("episode %s" % episode)
-	return episode
+def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list):
+	show = next((item for key, item in list.items() if int(key[1]) == id), {}) #key[1] should be the tvdb id
+	Debug("findEpisodeMatchInList %s" % show)
+	if not show:
+		return {}
+	else:
+		season = show.seasons[seasonNumber]
+		episode = season.episodes[episodeNumber]
+		return episode.to_info()
 		

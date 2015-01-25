@@ -168,14 +168,12 @@ class traktAPI(object):
 		ratings = {}
 		with Trakt.configuration.auth(self.__username, self.__token):
 				Trakt['sync/ratings'].episodes(ratings)
-		Debug("Rating: %s" % ratings)
 		return findEpisodeMatchInList(id, season, episode, ratings)
 
 	def getMovieRatingForUser(self, id):
 		ratings = {}
 		with Trakt.configuration.auth(self.__username, self.__token):
 				Trakt['sync/ratings'].movies(ratings)
-		Debug("Rating: %s" % ratings)
 		return findMovieMatchInList(id, ratings)
 
 	#TODO move this to the new api wrapper
@@ -371,6 +369,7 @@ class traktAPI(object):
 		result = self.traktRequest('GET', url)
 		result['user'] = {}
 		result['user']['ratings'] = self.getEpisodeRatingForUser(id['tvdb'], season, episode)
+		Debug("User Rating: %s" % result['user']['ratings'])
 		return result
 
 	def getMovieSummary(self, id):
@@ -379,6 +378,7 @@ class traktAPI(object):
 		result = self.traktRequest('GET', url)
 		result['user'] = {}
 		result['user']['ratings'] = self.getMovieRatingForUser(id)
+		Debug("User Rating: %s" % result['user']['ratings'])
 		return result
 
 	# Send a rating to trakt as mediaObject
