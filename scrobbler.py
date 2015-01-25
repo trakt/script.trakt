@@ -139,7 +139,6 @@ class Scrobbler():
 						return
 					if utilities.getSettingAsBool('rate_episode'):
 						# pre-get sumamry information, for faster rating dialog.
-						#todo find a way to match by tvdb or tmdb ids
 						Debug("[Scrobbler] Episode rating is enabled, pre-fetching summary information.")
 						tvdb = self.curVideoInfo['imdbnumber']
 						if tvdb.isdigit() or tvdb.startswith("tt"):

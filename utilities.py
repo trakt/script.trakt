@@ -168,8 +168,6 @@ def getShowDetailsFromKodi(showID, fields):
 	result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': showID, 'properties': fields}, 'id': 1})
 	Debug("getShowDetailsFromKodi(): %s" % str(result))
 
-	#TODO we're getting the tvdb id so we need to translate it to trakt slug via search http://docs.trakt.apiary.io/#reference/search/id-lookup/get-id-lookup-results
-
 	if not result:
 		Debug("getShowDetailsFromKodi(): Result from Kodi was empty.")
 		return None
