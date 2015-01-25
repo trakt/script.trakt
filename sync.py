@@ -158,6 +158,18 @@ class Sync():
 		return result
 
 	#todo move this to utilities?
+	def __countMovies(self, movies, mode='collected'):
+		count = 0
+
+		if 'movies' in movies:
+			movies = movies['movies']
+		for movie in movies:			
+			if mode in movie and movie[mode]:
+				count += 1
+					
+		return count
+
+	#todo move this to utilities?
 	def __countEpisodes(self, shows, collection=True, all=False):
 		count = 0
 		p = 'seasons'
@@ -168,7 +180,7 @@ class Sync():
 				for s in show[p]:
 					count += len(show[p][s])
 			else:
-				if 'collected_at' in show and not show['collected_at'] == collection:
+				if 'collected' in show and not show['collected'] == collection:
 					continue
 				for seasonKey in show[p]:
 					for episodeKey in seasonKey['episodes']:
@@ -510,6 +522,7 @@ class Sync():
 			if movie['lastplayed']:
 				movie['last_played'] = utilities.sqlDateToUnixDate(movie['lastplayed'])
 			movie['plays'] = movie.pop('playcount')
+			#todo check if we can remove collected_at safely
 			movie['collected_at'] = datetime.datetime.now().isoformat()
 			movie['ids'] = {}
 			id = movie['imdbnumber']
@@ -534,14 +547,12 @@ class Sync():
 
 		return xbmc_movies
 
-	#TODO fix movies being added multiple times
 	def __compareMovies(self, movies_col1, movies_col2, watched=False, restrict=False):
 		movies = []
 
 		for movie_col1 in movies_col1:
 			movie_col2 = utilities.findMediaObject(movie_col1, movies_col2)
-			Debug("movie_col1 %s" % movie_col1)
-			Debug("movie_col2 %s" % movie_col2)
+
 			if movie_col2:
 				if watched:
 					if (movie_col2['plays'] == 0) and (movie_col1['plays'] > movie_col2['plays']):
@@ -549,11 +560,11 @@ class Sync():
 							movie_col1['movieid'] = movie_col2['movieid']
 						movies.append(movie_col1)
 				else:
-					if 'collected_at' in movie_col2 and not movie_col2['collected_at']:
+					if 'collected' in movie_col2 and not movie_col2['collected']:
 						movies.append(movie_col1)
 			else:
 				if not restrict:
-					if 'collected_at' in movie_col1 and movie_col1['collected_at']:
+					if 'collected' in movie_col1 and movie_col1['collected']:
 						movies.append(movie_col1)
 
 		return movies
@@ -662,7 +673,7 @@ class Sync():
 		if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1402)), utilities.getString(1421)) #Sync complete
 		
-		Debug("[Movies Sync] Movies on trakt.tv (%d), movies in Kodi (%d)." % (len(traktMovies), len(kodiMovies)))
+		Debug("[Movies Sync] Movies on trakt.tv (%d), movies in Kodi (%d)." % (self.__countMovies(traktMovies), len(kodiMovies)))
 		Debug("[Movies Sync] Complete.")
 
 	def __syncCheck(self, media_type):
