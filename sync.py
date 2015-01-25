@@ -81,7 +81,7 @@ class Sync():
 		Debug("[Episodes Sync] Getting show data from Kodi")
 		data = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
 		if not data:
-			Debug("[Episodes Sync] xbmc json request was empty.")
+			Debug("[Episodes Sync] Kodi json request was empty.")
 			return None
 		
 		if not 'tvshows' in data:
@@ -260,7 +260,7 @@ class Sync():
 						diff = list(set(a).difference(set(b)))
 						if len(diff) > 0:
 							if restrict:
-								# get all the episodes that we have in XBMC, watched or not
+								# get all the episodes that we have in Kodi, watched or not
 								_seasons = self.__getEpisodes(show_col2['seasons'], False)
 								t = list(set(_seasons[season]).intersection(set(diff)))
 								if len(t) > 0:
@@ -584,10 +584,10 @@ class Sync():
 	def __kodiUpdateMovies(self, movies):
 		if len(movies) == 0:
 			self.__updateProgress(80, line2=utilities.getString(1471))
-			Debug("[Movies Sync] XBMC movie playcount is up to date.")
+			Debug("[Movies Sync] Kodi movie playcount is up to date.")
 			return
 		
-		Debug("[Movies Sync] %i movie(s) playcount will be updated in XBMC" % len(movies))
+		Debug("[Movies Sync] %i movie(s) playcount will be updated in Kodi" % len(movies))
 
 		self.__updateProgress(60, line2="%i %s" % (len(movies), utilities.getString(1430)))
 

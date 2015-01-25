@@ -106,7 +106,7 @@ def Main():
 					data['tag'] = result['tag']
 
 				elif utils.isEpisode(media_type):
-					result = utils.getEpisodeDetailsFromXbmc(data['dbid'], ['showtitle', 'season', 'episode', 'imdbnumber'])
+					result = utils.getEpisodeDetailsFromKodi(data['dbid'], ['showtitle', 'season', 'episode', 'imdbnumber'])
 					if not result:
 						utils.Debug("No data was returned from Kodi, aborting manual %s." % args['action'])
 						return
@@ -149,7 +149,7 @@ def Main():
 
 			elif utils.isEpisode(media_type):
 				dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
-				result = utils.getEpisodeDetailsFromXbmc(dbid, ['showtitle', 'season', 'episode', 'tvshowid', 'playcount'])
+				result = utils.getEpisodeDetailsFromKodi(dbid, ['showtitle', 'season', 'episode', 'tvshowid', 'playcount'])
 				if result:
 					if result['playcount'] == 0:
 						data['id'] = result['tvdb_id']

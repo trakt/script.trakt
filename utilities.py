@@ -178,19 +178,19 @@ def getShowDetailsFromKodi(showID, fields):
 		Debug("getShowDetailsFromKodi(): KeyError: result['tvshowdetails']")
 		return None
 
-# get a single episode from xbmc given the id
-def getEpisodeDetailsFromXbmc(libraryId, fields):
+# get a single episode from kodi given the id
+def getEpisodeDetailsFromKodi(libraryId, fields):
 	result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params':{'episodeid': libraryId, 'properties': fields}, 'id': 1})
-	Debug("getEpisodeDetailsFromXbmc(): %s" % str(result))
+	Debug("getEpisodeDetailsFromKodi(): %s" % str(result))
 
 	if not result:
-		Debug("getEpisodeDetailsFromXbmc(): Result from Kodi was empty.")
+		Debug("getEpisodeDetailsFromKodi(): Result from Kodi was empty.")
 		return None
 
 	show_data = getShowDetailsFromKodi(result['episodedetails']['tvshowid'], ['year', 'imdbnumber'])
 
 	if not show_data:
-		Debug("getEpisodeDetailsFromXbmc(): Result from getShowDetailsFromXBMC() was empty.")
+		Debug("getEpisodeDetailsFromKodi(): Result from getShowDetailsFromKodi() was empty.")
 		return None
 
 	result['episodedetails']['imdbnumber'] = show_data['imdbnumber']
@@ -199,7 +199,7 @@ def getEpisodeDetailsFromXbmc(libraryId, fields):
 	try:
 		return result['episodedetails']
 	except KeyError:
-		Debug("getEpisodeDetailsFromXbmc(): KeyError: result['episodedetails']")
+		Debug("getEpisodeDetailsFromKodi(): KeyError: result['episodedetails']")
 		return None
 
 # get a single movie from kodi given the id

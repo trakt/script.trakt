@@ -22,7 +22,6 @@ class traktService:
 	updateTagsThread = None
 	syncThread = None
 	dispatchQueue = sqliteQueue.SqliteQueue()
-	_interval = 10 * 60 # how often to send watching call
 	
 	def __init__(self):
 		threading.Thread.name = 'trakt'
@@ -311,7 +310,7 @@ class traktPlayer(xbmc.Player):
 		self.action = kwargs['action']
 		utilities.Debug("[traktPlayer] Initalized.")
 
-	# called when xbmc starts playing a file
+	# called when kodi starts playing a file
 	def onPlayBackStarted(self):
 		xbmc.sleep(1000)
 		self.type = None
@@ -434,7 +433,7 @@ class traktPlayer(xbmc.Player):
 			# send dispatch
 			self.action(data)
 
-	# called when xbmc stops playing a file
+	# called when kodi stops playing a file
 	def onPlayBackEnded(self):
 		if self._playing:
 			utilities.Debug("[traktPlayer] onPlayBackEnded() - %s" % self.isPlayingVideo())
@@ -443,7 +442,7 @@ class traktPlayer(xbmc.Player):
 			data = {'action': 'ended'}
 			self.action(data)
 
-	# called when user stops xbmc playing a file
+	# called when user stops kodi playing a file
 	def onPlayBackStopped(self):
 		if self._playing:
 			utilities.Debug("[traktPlayer] onPlayBackStopped() - %s" % self.isPlayingVideo())
