@@ -550,8 +550,8 @@ class Sync():
 		for movie_col1 in movies_col1:
 			movie_col2 = utilities.findMediaObject(movie_col1, movies_col2)
 
-			if movie_col2:
-				if watched:
+			if movie_col2:  #match found
+				if watched: #are we looking for watched items
 					if (movie_col2['plays'] == 0) and (movie_col1['plays'] > movie_col2['plays']):
 						if 'movieid' not in movie_col1:
 							movie_col1['movieid'] = movie_col2['movieid']
@@ -559,7 +559,7 @@ class Sync():
 				else:
 					if 'collected' in movie_col2 and not movie_col2['collected']:
 						movies.append(movie_col1)
-			else:
+			else: #no match found
 				if not restrict:
 					if 'collected' in movie_col1 and movie_col1['collected']:
 						movies.append(movie_col1)
@@ -648,20 +648,20 @@ class Sync():
 				progress.close()
 			return
 
-		if utilities.getSettingAsBool('add_movies_to_trakt') and not self.__isCanceled():
-			traktMoviesToAdd = self.__compareMovies(kodiMovies, traktMovies)
-			Debug("[Movies Sync] Compared movies, found %s to add." % len(traktMoviesToAdd))
-			self.__traktAddMovies(traktMoviesToAdd)
+		if utilities.getSettingAsBool('clean_trakt_movies') and not self.__isCanceled():
+			Debug("[Movies Sync] Starting to remove.")
+			traktMoviesToRemove = self.__compareMovies(traktMovies, kodiMovies)
+			Debug("[Movies Sync] Compared movies, found %s to remove." % traktMoviesToRemove)
+			self.__traktRemoveMovies(traktMoviesToRemove)
 
 		if utilities.getSettingAsBool('kodi_movie_playcount') and not self.__isCanceled():
 			kodiMoviesToUpdate = self.__compareMovies(traktMovies, kodiMovies, watched=True, restrict=True)
 			self.__kodiUpdateMovies(kodiMoviesToUpdate)
 
-		if utilities.getSettingAsBool('clean_trakt_movies') and not self.__isCanceled():
-			Debug("[Movies Sync] Starting to remove.")
-			traktMoviesToRemove = self.__compareMovies(traktMovies, kodiMovies)
-			Debug("[Movies Sync] Compared movies, found %s to remove." % len(traktMoviesToRemove))
-			self.__traktRemoveMovies(traktMoviesToRemove)
+		if utilities.getSettingAsBool('add_movies_to_trakt') and not self.__isCanceled():
+			traktMoviesToAdd = self.__compareMovies(kodiMovies, traktMovies)
+			Debug("[Movies Sync] Compared movies, found %s to add." % traktMoviesToAdd)
+			self.__traktAddMovies(traktMoviesToAdd)
 
 		if not self.__isCanceled() and self.show_progress and not self.run_silent:
 			self.__updateProgress(100, line1=utilities.getString(1431), line2=" ", line3=" ")

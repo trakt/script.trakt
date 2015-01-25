@@ -247,17 +247,18 @@ def __findInList(list, returnIndex=False, returnCopy=False, case_sensitive=True,
 					return list[index]
 	return None
 
-def findMediaObject(xbmcMovie, traktMovies, returnIndex=False):
+def findMediaObject(mediaObjectToMatch, listToSearch, returnIndex=False):
 	result = None
-	if result is None and 'ids' in xbmcMovie and 'imdb' in xbmcMovie['ids'] and unicode(xbmcMovie['ids']['imdb']).startswith("tt"):
-		result = __findInList(traktMovies, returnIndex=returnIndex, imdb=xbmcMovie['ids']['imdb'])
+	if result is None and 'ids' in mediaObjectToMatch and 'imdb' in mediaObjectToMatch['ids'] and unicode(mediaObjectToMatch['ids']['imdb']).startswith("tt"):
+		result = __findInList(listToSearch, returnIndex=returnIndex, imdb=mediaObjectToMatch['ids']['imdb'])
 	# we don't want to give up if we don't find a match based on the first field so we use if instead of elif
-	if result is None and 'ids' in xbmcMovie and 'tmdb' in xbmcMovie['ids'] and unicode(xbmcMovie['ids']['tmdb'].replace("'","")).isdigit():
-		result = __findInList(traktMovies, returnIndex=returnIndex, tmdb=xbmcMovie['ids']['tmdb'])
-	if result is None and 'ids' in xbmcMovie and 'tvdb' in xbmcMovie['ids'] and unicode(xbmcMovie['ids']['tvdb'].replace("'","")).isdigit():
-		result = __findInList(traktMovies, returnIndex=returnIndex, tvdb=xbmcMovie['ids']['tvdb'])
-	if result is None and 'title' in xbmcMovie and 'year' in xbmcMovie and xbmcMovie['title'] and xbmcMovie['year'] > 0:
-		result = __findInList(traktMovies, returnIndex=returnIndex, title=xbmcMovie['title'], year=xbmcMovie['year'])
+	if result is None and 'ids' in mediaObjectToMatch and 'tmdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tmdb'].isdigit():
+		result = __findInList(listToSearch, returnIndex=returnIndex, tmdb=mediaObjectToMatch['ids']['tmdb'])
+	if result is None and 'ids' in mediaObjectToMatch and 'tvdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tvdb'].isdigit():
+		result = __findInList(listToSearch, returnIndex=returnIndex, tvdb=mediaObjectToMatch['ids']['tvdb'])
+	# match by title and year it will result in movies with the same title and year to mismatch - but what should we do instead?
+	if result is None and 'title' in mediaObjectToMatch and 'year' in mediaObjectToMatch['ids']:
+		result = __findInList(listToSearch, returnIndex=returnIndex, tvdb=mediaObjectToMatch['ids']['tvdb'])
 	return result
 
 def regex_tvshow(compare, file, sub = ""):
