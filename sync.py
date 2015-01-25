@@ -535,7 +535,7 @@ class Sync():
 		return xbmc_movies
 
 	#TODO fix movies being added multiple times
-	def __compareMovies(self, movies_col1, movies_col2, watched=False):
+	def __compareMovies(self, movies_col1, movies_col2, watched=False, restrict=False):
 		movies = []
 
 		for movie_col1 in movies_col1:
@@ -552,8 +552,9 @@ class Sync():
 					if 'collected_at' in movie_col2 and not movie_col2['collected_at']:
 						movies.append(movie_col1)
 			else:
-				if 'collected_at' in movie_col1 and movie_col1['collected_at']:
-					movies.append(movie_col1)
+				if not restrict:
+					if 'collected_at' in movie_col1 and movie_col1['collected_at']:
+						movies.append(movie_col1)
 
 		return movies
 
@@ -604,12 +605,15 @@ class Sync():
 			Debug("[Movies Sync] trakt.tv movie collection is clean, no movies to remove.")
 			return
 		
-		titles = ", ".join(["%s (%s)" % (m['title'], m['ids']['imdb']) for m in movies])
+		titles = ", ".join(["%s (%s)" % (m['title'], m['ids']['tmdb']) for m in movies])
 		Debug("[Movies Sync] %i movie(s) will be removed from trakt.tv collection." % len(movies))
 		Debug("[Movies Sync] Movies removed: %s" % titles)
 
 		self.__updateProgress(80, line2="%i %s" % (len(movies), utilities.getString(1444)))
 		
+		for movie in movies:
+			del(movie['collected_at'])
+
 		moviesToRemove = {'movies': movies}
 
 		self.traktapi.removeFromCollection(moviesToRemove)
@@ -642,7 +646,7 @@ class Sync():
 			self.__traktAddMovies(traktMoviesToAdd)
 
 		if utilities.getSettingAsBool('kodi_movie_playcount') and not self.__isCanceled():
-			kodiMoviesToUpdate = self.__compareMovies(traktMovies, kodiMovies, watched=True)
+			kodiMoviesToUpdate = self.__compareMovies(traktMovies, kodiMovies, watched=True, restrict=True)
 			self.__kodiUpdateMovies(kodiMoviesToUpdate)
 
 		if utilities.getSettingAsBool('clean_trakt_movies') and not self.__isCanceled():
