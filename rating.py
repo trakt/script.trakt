@@ -218,18 +218,7 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 	def onFocus(self, controlID):
 		if controlID in self.focus_labels:
 			s = utils.getString(self.focus_labels[controlID])
-			# TODO do we need this? - Manual Rating
-			#if self.rerate:
-			#	if self.media['rating'] == self.buttons[controlID] or self.media['rating_advanced'] == self.buttons[controlID]:
-			#		if utils.isMovie(self.media_type):
-			#			s = utils.getString(1325)
-			#		elif utils.isShow(self.media_type):
-			#			s = utils.getString(1326)
-			#		elif utils.isEpisode(self.media_type):
-			#			s = utils.getString(1327)
-			#		else:
-			#			pass
-			
+		
 			self.getControl(10013).setLabel(s)
 		else:
 			self.getControl(10013).setLabel('')

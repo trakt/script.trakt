@@ -35,7 +35,6 @@ What can this addon do?
 - Auto clean your trakt collection so that it matches up with Kodi
 - Keep watched statuses synced between Kodi and trakt
 - Rate movies and episode after watching them
-- Custom skin/keymap actions for toggling watched status, rating, tagging, and listing
 
 Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers.</description>
 <summary lang="es">Scrobbler de Películas y Series para trakt.tv</summary>
@@ -61,7 +60,6 @@ Special thanks to all who contributed to this plugin! Check the commit history a
 - Limpiar automáticamente tu colección de trakt.tv para que sea idéntica a la de Kodi
 - Mantener el mismo estado de visionado entre Kodi y trakt.tv
 - Valorar Películas y Episodios después de verlos
-- Skin/teclas personalizadas para acciones como: marcar como visto, valorar, etiquetas y listas
 
 ¡Un agradecimiento especial a todos los que han contribuido en este plugin! Revisa el histórico de commits y el histórico de cambios para ver todos esos desarrolladores con talento.</description>
 		<platform>all</platform>

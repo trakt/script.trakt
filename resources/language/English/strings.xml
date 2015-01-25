@@ -6,10 +6,6 @@
 	<string id="1014">Password</string>
 	<string id="1017">Number of Retries</string>
 	<string id="1018">Startup Delay</string>
-	<string id="1019">Force a reload of settings from trakt.tv, save settings when finished</string>
-	<string id="1020">Default script action</string>
-	<string id="1021">Manual Sync</string>
-	<string id="1022">Manage Lists</string>
 	
 	<!-- Rating Settings -->
 	<string id="1030">Rating</string>
@@ -24,9 +20,6 @@
 	<string id="1040">Scrobbling</string>
 	<string id="1041">Scrobble movies</string>
 	<string id="1042">Scrobble TV episodes</string>
-	<string id="1043">Minimum percent watched to scrobble</string>
-	<string id="1044">During scrobbling, update ID for library movie if ID is missing</string>
-	<string id="1045">During scrobbling, update ID for library tv show if ID is missing</string>
 	<string id="1046">Send watching call on seek</string>
 	<string id="1047">Send watching call on resume</string>
 	<string id="1048">Show notification on scrobble</string>
@@ -64,9 +57,6 @@
 	<string id="1321">Good</string>
 	<string id="1322">Great</string>
 	<string id="1323">Superb</string>
-	<string id="1325">Unrate this movie</string>
-	<string id="1326">Unrate this show</string>
-	<string id="1327">Unrate this episode</string>
 
 	<!-- Titles -->
 	<string id="1201">trakt.tv</string>
