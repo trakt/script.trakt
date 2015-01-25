@@ -322,24 +322,24 @@ class Sync():
 
 	def __traktAddEpisodes(self, shows):
 		if len(shows['shows']) == 0:
-			self.__updateProgress(46, line1=utilities.getString(1435), line2=utilities.getString(1490))
+			self.__updateProgress(98, line1=utilities.getString(1435), line2=utilities.getString(1490))
 			Debug("[Episodes Sync] trakt.tv episode collection is up to date.")
 			return
 		Debug("[Episodes Sync] %i show(s) have episodes (%d) to be added to your trakt.tv collection." % (len(shows['shows']), self.__countEpisodes(shows['shows'])))
 		for show in shows['shows']:
 			Debug("[Episodes Sync] Episodes added: %s" % self.__getShowAsString(show, short=True))
 		
-		self.__updateProgress(28, line1=utilities.getString(1435), line2="%i %s" % (len(shows['shows']), utilities.getString(1436)), line3=" ")
+		self.__updateProgress(82, line1=utilities.getString(1435), line2="%i %s" % (len(shows['shows']), utilities.getString(1436)), line3=" ")
 
 		Debug("[trakt][traktAddEpisodes] Shows to add %s" % shows)
 		result = self.traktapi.addToCollection(shows)
 		Debug("[trakt][traktAddEpisodes] Result %s" % result)
 
-		self.__updateProgress(46, line1=utilities.getString(1435), line2=utilities.getString(1491) % self.__countEpisodes(shows['shows']))
+		self.__updateProgress(98, line1=utilities.getString(1435), line2=utilities.getString(1491) % self.__countEpisodes(shows['shows']))
 
 	def __traktRemoveEpisodes(self, shows):
 		if len(shows['shows']) == 0:
-			self.__updateProgress(98, line1=utilities.getString(1445), line2=utilities.getString(1496))
+			self.__updateProgress(46, line1=utilities.getString(1445), line2=utilities.getString(1496))
 			Debug('[Episodes Sync] trakt.tv episode collection is clean')
 			return
 
@@ -347,13 +347,13 @@ class Sync():
 		for show in shows['shows']:
 			Debug("[Episodes Sync] Episodes removed: %s" % self.__getShowAsString(show, short=True))
 
-		self.__updateProgress(82, line1=utilities.getString(1445), line2=utilities.getString(1497) % self.__countEpisodes(shows['shows']), line3=" ")
+		self.__updateProgress(28, line1=utilities.getString(1445), line2=utilities.getString(1497) % self.__countEpisodes(shows['shows']), line3=" ")
 
 		Debug("[trakt][traktRemoveEpisodes] Shows to remove %s" % shows)
 		result = self.traktapi.removeFromCollection(shows)
 		Debug("[trakt][traktRemoveEpisodes] Result %s" % result)
 
-		self.__updateProgress(98, line2=utilities.getString(1498) % self.__countEpisodes(shows['shows']), line3=" ")
+		self.__updateProgress(46, line2=utilities.getString(1498) % self.__countEpisodes(shows['shows']), line3=" ")
 
 	def __traktUpdateEpisodes(self, shows):
 		if len(shows['shows']) == 0:
@@ -440,10 +440,9 @@ class Sync():
 				progress.close()
 			return
 
-		if utilities.getSettingAsBool('add_episodes_to_trakt') and not self.__isCanceled():
-			traktShowsAdd = self.__compareShows(kodiShows, traktShows)
-			self.__traktAddEpisodes(traktShowsAdd)
-
+		if utilities.getSettingAsBool('clean_trakt_episodes') and not self.__isCanceled():
+			traktShowsRemove = self.__compareShows(traktShows, kodiShows)
+			self.__traktRemoveEpisodes(traktShowsRemove)
 		
 		if utilities.getSettingAsBool('trakt_episode_playcount') and not self.__isCanceled():
 			traktShowsUpdate = self.__compareShows(kodiShows, traktShows, watched=True)
@@ -453,9 +452,9 @@ class Sync():
 			kodiShowsUpadate = self.__compareShows(traktShows, kodiShows, watched=True, restrict=True)
 			self.__kodiUpdateEpisodes(kodiShowsUpadate)
 
-		if utilities.getSettingAsBool('clean_trakt_episodes') and not self.__isCanceled():
-			traktShowsRemove = self.__compareShows(traktShows, kodiShows)
-			self.__traktRemoveEpisodes(traktShowsRemove)
+		if utilities.getSettingAsBool('add_episodes_to_trakt') and not self.__isCanceled():
+			traktShowsAdd = self.__compareShows(kodiShows, traktShows)
+			self.__traktAddEpisodes(traktShowsAdd)
 
 		if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1406)), utilities.getString(1421)) #Sync complete
