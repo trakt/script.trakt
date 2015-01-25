@@ -19,7 +19,6 @@
 	<category label="1040"><!-- Scrobbling -->
 		<setting id="scrobble_movie" type="bool" label="1041" default="true"/>
 		<setting id="scrobble_episode" type="bool" label="1042" default="true"/>
-		<setting id="scrobble_min_view_time" type="slider" label="1043" range="0,5,100" default="80"/>
 		<setting id="scrobble_notification" type="bool" label="1048" default="false"/>
 		<setting id="watching_call_on_seek" type="bool" label="1046" default="true"/>
 		<setting id="watching_call_on_resume" type="bool" label="1047" default="true"/>
