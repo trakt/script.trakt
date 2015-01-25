@@ -320,7 +320,7 @@ class traktPlayer(xbmc.Player):
 		# only do anything if we're playing a video
 		if self.isPlayingVideo():
 			# get item data from json rpc
-			result = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'Player.GetItem', 'params': {'playerid': 1}, 'id': 1})
+			result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'Player.GetItem', 'params': {'playerid': 1}, 'id': 1})
 			utilities.Debug("[traktPlayer] onPlayBackStarted() - %s" % result)
 
 			# check for exclusion
@@ -389,7 +389,7 @@ class traktPlayer(xbmc.Player):
 
 				if self.type == 'episode':
 					utilities.Debug("[traktPlayer] onPlayBackStarted() - Doing multi-part episode check.")
-					result = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': self.id, 'properties': ['tvshowid', 'season', 'episode']}, 'id': 1})
+					result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': self.id, 'properties': ['tvshowid', 'season', 'episode']}, 'id': 1})
 					if result:
 						utilities.Debug("[traktPlayer] onPlayBackStarted() - %s" % result)
 						tvshowid = int(result['episodedetails']['tvshowid'])
@@ -397,7 +397,7 @@ class traktPlayer(xbmc.Player):
 						episode = int(result['episodedetails']['episode'])
 						episode_index = episode - 1
 
-						result = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': tvshowid, 'season': season, 'properties': ['episode', 'file'], 'sort': {'method': 'episode'}}, 'id': 1})
+						result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': tvshowid, 'season': season, 'properties': ['episode', 'file'], 'sort': {'method': 'episode'}}, 'id': 1})
 						if result:
 							utilities.Debug("[traktPlayer] onPlayBackStarted() - %s" % result)
 							# make sure episodes array exists in results

@@ -83,7 +83,7 @@ def isSeason(type):
 def isValidMediaType(type):
 	return type in ['movie', 'show', 'episode']
 
-def xbmcJsonRequest(params):
+def kodiJsonRequest(params):
 	data = json.dumps(params)
 	request = xbmc.executeJSONRPC(data)
 
@@ -165,7 +165,7 @@ def getFormattedItemName(type, info):
 	return s.encode('utf-8', 'ignore')
 
 def getShowDetailsFromKodi(showID, fields):
-	result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': showID, 'properties': fields}, 'id': 1})
+	result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': showID, 'properties': fields}, 'id': 1})
 	Debug("getShowDetailsFromKodi(): %s" % str(result))
 
 	if not result:
@@ -180,7 +180,7 @@ def getShowDetailsFromKodi(showID, fields):
 
 # get a single episode from xbmc given the id
 def getEpisodeDetailsFromXbmc(libraryId, fields):
-	result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params':{'episodeid': libraryId, 'properties': fields}, 'id': 1})
+	result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params':{'episodeid': libraryId, 'properties': fields}, 'id': 1})
 	Debug("getEpisodeDetailsFromXbmc(): %s" % str(result))
 
 	if not result:
@@ -204,7 +204,7 @@ def getEpisodeDetailsFromXbmc(libraryId, fields):
 
 # get a single movie from kodi given the id
 def getMovieDetailsFromKodi(libraryId, fields):
-	result = xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params':{'movieid': libraryId, 'properties': fields}, 'id': 1})
+	result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params':{'movieid': libraryId, 'properties': fields}, 'id': 1})
 	Debug("getMovieDetailsFromKodi(): %s" % str(result))
 
 	if not result:

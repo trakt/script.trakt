@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
+import sys
+
 import utilities as utils
 import xbmc
-import sys
 import sqliteQueue
-import time
+
 
 try:
 	import simplejson as json
@@ -163,7 +164,7 @@ def Main():
 			elif utils.isSeason(media_type):
 				showID = None
 				showTitle = xbmc.getInfoLabel('ListItem.TVShowTitle')
-				result = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
+				result = utils.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
 				if result and 'tvshows' in result:
 					for show in result['tvshows']:
 						if show['title'] == showTitle:
@@ -180,7 +181,7 @@ def Main():
 				else:
 					season = int(season)
 
-				result = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': showID, 'season': season, 'properties': ['season', 'episode', 'playcount']}, 'id': 0})
+				result = utils.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': showID, 'season': season, 'properties': ['season', 'episode', 'playcount']}, 'id': 0})
 				if result and 'episodes' in result:
 					episodes = []
 					for episode in result['episodes']:
@@ -205,7 +206,7 @@ def Main():
 					return
 				showTitle = result['label']
 				data['id'] = result['imdbnumber']
-				result = utils.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': dbid, 'properties': ['season', 'episode', 'playcount']}, 'id': 0})
+				result = utils.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': dbid, 'properties': ['season', 'episode', 'playcount']}, 'id': 0})
 				if result and 'episodes' in result:
 					i = 0
 					s = {}

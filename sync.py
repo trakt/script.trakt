@@ -79,7 +79,7 @@ class Sync():
 
 	def __kodiLoadShowList(self):
 		Debug("[Episodes Sync] Getting show data from Kodi")
-		data = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
+		data = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
 		if not data:
 			Debug("[Episodes Sync] xbmc json request was empty.")
 			return None
@@ -121,7 +121,7 @@ class Sync():
 
 			show = {'title': show_col1['title'], 'ids': {'tvdb': show_col1['ids']['tvdb']}, 'year': show_col1['year'], 'seasons': []}
 
-			data = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show_col1['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid', 'file']}, 'id': 0})
+			data = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show_col1['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid', 'file']}, 'id': 0})
 			if not data:
 				Debug("[Episodes Sync] There was a problem getting episode data for '%s', aborting sync." % show['title'])
 				return None
@@ -139,7 +139,7 @@ class Sync():
 					s_no = episode['season']
 					a_episodes[s_no] = []
 				s_no = episode['season']
-				a_episodes[s_no].append({ 'number': episode['episode'], 'collected_at': datetime.datetime.now().isoformat(), 'ids': { 'tvdb': episode['uniqueid']['unknown'], 'episodeid' : episode['episodeid']}, 'watched': watched })
+				a_episodes[s_no].append({ 'number': episode['episode'], 'ids': { 'tvdb': episode['uniqueid']['unknown'], 'episodeid' : episode['episodeid']}, 'watched': watched })
 				
 			for episode in a_episodes:
 				seasons.append({'number': episode, 'episodes': a_episodes[episode]})
@@ -411,7 +411,7 @@ class Sync():
 				return
 
 			Debug("[Episodes Sync] chunk %s" % str(chunk))
-			result = utilities.xbmcJsonRequest(chunk)
+			result = utilities.kodiJsonRequest(chunk)
 			Debug("[Episodes Sync] result %s" % str(result))
 
 			i += 1
@@ -491,11 +491,11 @@ class Sync():
 
 		return movies
 
-	def __xbmcLoadMovies(self):
+	def __kodiLoadMovies(self):
 		self.__updateProgress(1, line2=utilities.getString(1460))
 
 		Debug("[Movies Sync] Getting movie data from Kodi")
-		data = utilities.xbmcJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['title', 'imdbnumber', 'year', 'playcount', 'lastplayed', 'file']}})
+		data = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['title', 'imdbnumber', 'year', 'playcount', 'lastplayed', 'file']}})
 		if not data:
 			Debug("[Movies Sync] Kodi JSON request was empty.")
 			return
@@ -519,8 +519,8 @@ class Sync():
 			if movie['lastplayed']:
 				movie['last_played'] = utilities.sqlDateToUnixDate(movie['lastplayed'])
 			movie['plays'] = movie.pop('playcount')
-			#todo check if we can remove collected_at safely
-			movie['collected_at'] = datetime.datetime.now().isoformat()
+			movie['collected'] = 1 #this is in our kodi so it should be collected
+			movie['watched'] = 1 if movie['plays'] > 0 else 0
 			movie['ids'] = {}
 			id = movie['imdbnumber']
 			if id.startswith("tt"):
@@ -599,7 +599,7 @@ class Sync():
 		for chunk in chunked_movies:
 			if self.__isCanceled():
 				return
-			utilities.xbmcJsonRequest(chunk)
+			utilities.kodiJsonRequest(chunk)
 
 			i += 1
 			y = ((i / x) * 20) + 60
@@ -634,7 +634,7 @@ class Sync():
 		if self.show_progress and not self.run_silent:
 			progress.create("%s %s" % (utilities.getString(1400), utilities.getString(1402)), line1=" ", line2=" ", line3=" ")
 
-		kodiMovies = self.__xbmcLoadMovies()
+		kodiMovies = self.__kodiLoadMovies()
 		if not isinstance(kodiMovies, list) and not kodiMovies:
 			Debug("[Movies Sync] Kodi movie list is empty, aborting movie Sync.")
 			if self.show_progress and not self.run_silent:
