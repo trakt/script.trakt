@@ -369,7 +369,6 @@ class traktAPI(object):
 		result = self.traktRequest('GET', url)
 		result['user'] = {}
 		result['user']['ratings'] = self.getEpisodeRatingForUser(id['tvdb'], season, episode)
-		Debug("User Rating: %s" % result['user']['ratings'])
 		return result
 
 	def getMovieSummary(self, id):
@@ -378,14 +377,19 @@ class traktAPI(object):
 		result = self.traktRequest('GET', url)
 		result['user'] = {}
 		result['user']['ratings'] = self.getMovieRatingForUser(id)
-		Debug("User Rating: %s" % result['user']['ratings'])
 		return result
 
 	# Send a rating to trakt as mediaObject
-	def Rate(self, data):
-			url = "%s/sync/ratings" % self.__baseURL
-			Debug("[traktAPI] rate(url: %s, data: %s)" % (url, str(data)))
-			return self.traktRequest('POST', url, data)
+	def addRating(self, data):
+		url = "%s/sync/ratings" % self.__baseURL
+		Debug("[traktAPI] addRating(url: %s, data: %s)" % (url, str(data)))
+		return self.traktRequest('POST', url, data)
+
+	# Send a rating to trakt as mediaObject
+	def removeRating(self, data):
+		url = "%s/sync/ratings/remove" % self.__baseURL
+		Debug("[traktAPI] removeRating(url: %s, data: %s)" % (url, str(data)))
+		return self.traktRequest('POST', url, data)
 
 	def getIdLookup(self, idType, id):
 		url = "%s/search?id_type=%s&id=%s" % (self.__baseURL, idType, id)

@@ -57,6 +57,9 @@
 	<string id="1321">Good</string>
 	<string id="1322">Great</string>
 	<string id="1323">Superb</string>
+    <string id="1325">Unrate this movie</string>
+    <string id="1326">Unrate this show</string>
+    <string id="1327">Unrate this episode</string>
 
 	<!-- Titles -->
 	<string id="1201">trakt.tv</string>
