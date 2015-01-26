@@ -476,7 +476,7 @@ class Sync():
 			Debug("[Movies Sync] trakt.tv movie playcount is up to date")
 			return
 
-		titles = ", ".join(["%s (%s)" % (m['title'], m['ids']['tmdb']) for m in movies])
+		titles = ", ".join(["%s (%s)" % (m['title'], m['ids']['imdb']) for m in movies if m['ids'] and m['ids']['imdb']])
 		Debug("[Movies Sync] %i movie(s) playcount will be updated on trakt.tv" % len(movies))
 		Debug("[Movies Sync] Movies updated: %s" % titles)
 
