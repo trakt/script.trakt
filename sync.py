@@ -133,7 +133,7 @@ class Sync():
 							continue
 						if 'collected' in episodeKey and not episodeKey['collected'] == collection:
 							continue
-						if episodeKey['number']:
+						if 'number' in episodeKey and episodeKey['number']:
 							count += 1
 		return count
 
