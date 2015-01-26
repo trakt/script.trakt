@@ -364,20 +364,24 @@ class Sync():
 
 		self.__updateProgress(46, line1=utilities.getString(1438), line2="%i %s" % (len(shows['shows']), utilities.getString(1439)), line3=" ")
 
+		i = 0
+		x = float(len(shows['shows']))
 		for show in shows['shows']:
 			if self.__isCanceled():
 				return
 
+			s = { 'shows': [show]}
+			#todo batch this
+			Debug("[trakt][traktUpdateEpisodes] Shows to update %s" % s)
+			result = self.traktapi.addToHistory(s)
+			Debug("[trakt][traktUpdateEpisodes] Result %s" % result)
+
 			epCount = self.__countEpisodes([show])
 			title = show['title'].encode('utf-8', 'ignore')
 
-			self.__updateProgress(70, line2=title, line3="%i %s" % (epCount, utilities.getString(1440)))
-
-			s = { 'shows': [show]}
-
-			Debug("[trakt][traktUpdateEpisodes] Shows to update %s" % s)
-			result = self.traktapi.updateSeenEpisode(s)
-			Debug("[trakt][traktUpdateEpisodes] Result %s" % result)
+			i += 1
+			y = ((i / x) * 18) + 46
+			self.__updateProgress(int(y), line2=title, line3="%i %s" % (epCount, utilities.getString(1440)))
 
 		self.__updateProgress(64, line2="%i %s" % (len(shows['shows']), utilities.getString(1439)))
 
@@ -545,10 +549,12 @@ class Sync():
 
 		for movie_col1 in movies_col1:
 			movie_col2 = utilities.findMediaObject(movie_col1, movies_col2)
+			#Debug("movie_col1 %s" % movie_col1)
+			#Debug("movie_col2 %s" % movie_col2)
 
 			if movie_col2:  #match found
 				if watched: #are we looking for watched items
-					if (movie_col2['plays'] == 0) and (movie_col1['plays'] > movie_col2['plays']):
+					if movie_col2['watched'] == 0 and movie_col1['watched'] == 1:
 						if 'movieid' not in movie_col1:
 							movie_col1['movieid'] = movie_col2['movieid']
 						movies.append(movie_col1)
@@ -577,6 +583,34 @@ class Sync():
 		self.traktapi.addToCollection(moviesToAdd)
 
 		self.__updateProgress(98, line2=utilities.getString(1468) % len(movies))
+
+	def __traktUpdateMovies(self, movies):
+		if len(movies) == 0:
+			self.__updateProgress(60, line2=utilities.getString(1469))
+			Debug("[Movies Sync] trakt.tv movie playcount is up to date")
+			return
+
+		titles = ", ".join(["%s (%s)" % (m['title'], m['ids']['imdb']) for m in movies])
+		Debug("[Movies Sync] %i movie(s) playcount will be updated on trakt.tv" % len(movies))
+		Debug("[Movies Sync] Movies updated: %s" % titles)
+
+		self.__updateProgress(40, line2="%i %s" % (len(movies), utilities.getString(1428)))
+
+		# Send request to update playcounts on trakt.tv
+		chunked_movies = utilities.chunks([movie for movie in movies], 50)
+		i = 0
+		x = float(len(chunked_movies))
+		for chunk in chunked_movies:
+			if self.__isCanceled():
+				return
+			params = {'movies': chunk}
+			self.traktapi.addToHistory(params)
+
+			i += 1
+			y = ((i / x) * 20) + 40
+			self.__updateProgress(int(y), line2=utilities.getString(1478))
+
+		self.__updateProgress(60, line2=utilities.getString(1470) % len(movies))
 
 	def __kodiUpdateMovies(self, movies):
 		if len(movies) == 0:
@@ -647,8 +681,12 @@ class Sync():
 		if utilities.getSettingAsBool('clean_trakt_movies') and not self.__isCanceled():
 			Debug("[Movies Sync] Starting to remove.")
 			traktMoviesToRemove = self.__compareMovies(traktMovies, kodiMovies)
-			Debug("[Movies Sync] Compared movies, found %s to remove." % traktMoviesToRemove)
+			Debug("[Movies Sync] Compared movies, found %s to remove." % len(traktMoviesToRemove))
 			self.__traktRemoveMovies(traktMoviesToRemove)
+
+		if utilities.getSettingAsBool('trakt_movie_playcount') and not self.__isCanceled():
+			traktMoviesToUpdate = self.__compareMovies(kodiMovies, traktMovies, watched=True)
+			self.__traktUpdateMovies(traktMoviesToUpdate)
 
 		if utilities.getSettingAsBool('kodi_movie_playcount') and not self.__isCanceled():
 			kodiMoviesToUpdate = self.__compareMovies(traktMovies, kodiMovies, watched=True, restrict=True)
@@ -656,7 +694,7 @@ class Sync():
 
 		if utilities.getSettingAsBool('add_movies_to_trakt') and not self.__isCanceled():
 			traktMoviesToAdd = self.__compareMovies(kodiMovies, traktMovies)
-			Debug("[Movies Sync] Compared movies, found %s to add." % traktMoviesToAdd)
+			Debug("[Movies Sync] Compared movies, found %s to add." % len(traktMoviesToAdd))
 			self.__traktAddMovies(traktMoviesToAdd)
 
 		if not self.__isCanceled() and self.show_progress and not self.run_silent:
