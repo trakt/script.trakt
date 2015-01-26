@@ -147,8 +147,6 @@ class traktService:
 			summaryInfo = globals.traktapi.getMovieSummary(data['imdbnumber'])
 		
 		if not summaryInfo is None:
-			if utilities.isMovie(media_type) or utilities.isShow(media_type):
-				summaryInfo['xbmc_id'] = data['dbid']
 
 			if action == 'rate':
 				if not 'rating' in data:
