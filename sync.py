@@ -156,7 +156,6 @@ class Sync():
 		self.__updateProgress(10, line2=utilities.getString(1484))
 		return result
 
-	#todo move this to utilities?
 	def __countMovies(self, movies, mode='collected'):
 		count = 0
 
@@ -168,7 +167,6 @@ class Sync():
 					
 		return count
 
-	#todo move this to utilities?
 	def __countEpisodes(self, shows, collection=True, all=False):
 		count = 0
 		p = 'seasons'
@@ -188,7 +186,6 @@ class Sync():
 					
 		return count
 
-	#todo move this to utilities?
 	def __getShowAsString(self, show, short=False):
 		p = []
 		if 'seasons' in show:

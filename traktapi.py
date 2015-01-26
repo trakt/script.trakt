@@ -246,7 +246,6 @@ class traktAPI(object):
 					Debug("[traktAPI] __getData(): Response Time: %0.2f ms" % ((t2 - t1) * 1000))
 					Debug("[traktAPI] __getData(): Response Headers: %s" % str(response.info().dict))
 
-				#TODO review these. Possible to merge with the ones below, from the retry loop?
 				except BadStatusLine as e:
 					raise traktUnknownError("BadStatusLine: '%s' from URL: '%s'" % (e.line, url))
 				except IOError as e:
