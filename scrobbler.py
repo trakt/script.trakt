@@ -69,7 +69,7 @@ class Scrobbler():
 
 						# update current information
 						self.curMPEpisode = epIndex
-						self.curVideoInfo = utilities.getEpisodeDetailsFromXbmc(self.curVideo['multi_episode_data'][self.curMPEpisode], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
+						self.curVideoInfo = utilities.getEpisodeDetailsFromKodi(self.curVideo['multi_episode_data'][self.curMPEpisode], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
 
 
 	def playbackStarted(self, data):
@@ -130,8 +130,8 @@ class Scrobbler():
 
 			elif utilities.isEpisode(self.curVideo['type']):
 				if 'id' in self.curVideo:
-					self.curVideoInfo = utilities.getEpisodeDetailsFromXbmc(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
-					if not self.curVideoInfo: # getEpisodeDetailsFromXbmc was empty
+					self.curVideoInfo = utilities.getEpisodeDetailsFromKodi(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
+					if not self.curVideoInfo: # getEpisodeDetailsFromKodi was empty
 						Debug("[Scrobbler] Episode details from Kodi was empty, ID (%d) seems invalid, aborting further scrobbling of this episode." % self.curVideo['id'])
 						self.curVideo = None
 						self.isPlaying = False
