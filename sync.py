@@ -4,8 +4,6 @@ import xbmc
 import xbmcgui
 import utilities
 from utilities import Debug, notification
-import copy
-import datetime
 
 progress = xbmcgui.DialogProgress()
 
@@ -22,15 +20,6 @@ class Sync():
 		self.notify = utilities.getSettingAsBool('show_sync_notifications')
 		self.notify_during_playback = not (xbmc.Player().isPlayingVideo() and utilities.getSettingAsBool("hide_notifications_playback"))
 
-		_opts = ['ExcludePathOption', 'ExcludePathOption2', 'ExcludePathOption3']
-		_vals = ['ExcludePath', 'ExcludePath2', 'ExcludePath3']
-		self.exclusions = []
-		for i in range(3):
-			if utilities.getSettingAsBool(_opts[i]):
-				_path = utilities.getSetting(_vals[i])
-				if _path != "":
-					self.exclusions.append(_path)
-
 	def __isCanceled(self):
 		if self.show_progress and not self.run_silent and progress.iscanceled():
 			Debug("[Sync] Sync was canceled by user.")
@@ -45,12 +34,6 @@ class Sync():
 		if self.show_progress and not self.run_silent:
 			kwargs['percent'] = args[0]
 			progress.update(**kwargs)
-
-	def __checkExclusion(self, file):
-		for _path in self.exclusions:
-			if file.find(_path) > -1:
-				return True
-		return False
 
 	''' begin code for episode sync '''
 	def __traktLoadShows(self):
@@ -84,25 +67,7 @@ class Sync():
 			Debug("[Episodes Sync] Kodi json request was empty.")
 			return None
 		
-		if not 'tvshows' in data:
-			Debug('[Episodes Sync] Key "tvshows" not found')
-			return None
-
-		shows = data['tvshows']
-		Debug("[Episodes Sync] Kodi JSON Result: '%s'" % str(shows))
-
-		# reformat show array
-		for show in shows:
-			show['ids'] = {}
-			show['ids']['tvdb'] = ""
-			show['ids']['imdb'] = ""
-			id = show['imdbnumber']
-			if id.startswith("tt"):
-				show['ids']['imdb'] = id
-			if id.isdigit():
-				show['ids']['tvdb'] = id
-			del(show['imdbnumber'])
-			del(show['label'])
+		shows = utilities.kodiRpcToTraktMediaObject(data)
 		Debug("[Episode Sync] Shows finished %s" % shows)
 		return shows
 
@@ -125,24 +90,9 @@ class Sync():
 			if not data:
 				Debug("[Episodes Sync] There was a problem getting episode data for '%s', aborting sync." % show['title'])
 				return None
-			if not 'episodes' in data:
-				Debug("[Episodes Sync] '%s' has no episodes in Kodi." % show['title'])
-				continue
 
-			a_episodes = {}
-			seasons = []
-			for episode in data['episodes']:
-				watched = 0;
-				if episode['playcount'] > 0:
-					watched = 1
-				while not episode['season'] in a_episodes :
-					s_no = episode['season']
-					a_episodes[s_no] = []
-				s_no = episode['season']
-				a_episodes[s_no].append({ 'number': episode['episode'], 'ids': { 'tvdb': episode['uniqueid']['unknown'], 'episodeid' : episode['episodeid']}, 'watched': watched })
-				
-			for episode in a_episodes:
-				seasons.append({'number': episode, 'episodes': a_episodes[episode]})
+			seasons = utilities.kodiRpcToTraktMediaObject(data)
+
 			show['seasons'] = seasons
 
 			if 'tvshowid' in show_col1:
@@ -499,50 +449,12 @@ class Sync():
 		if not data:
 			Debug("[Movies Sync] Kodi JSON request was empty.")
 			return
-		
-		if not 'movies' in data:
-			Debug('[Movies Sync] Key "movies" not found')
-			return
 
-		movies = data['movies']
-		Debug("[Movies Sync] Kodi JSON Result: '%s'" % str(movies))
+		kodi_movies = utilities.kodiRpcToTraktMediaObject(data)
 
-		i = 0
-		x = float(len(movies))
-		
-		xbmc_movies = []
-
-		# reformat movie array
-		for movie in movies:
-			if self.__checkExclusion(movie['file']):
-				continue
-			if movie['lastplayed']:
-				movie['last_played'] = utilities.sqlDateToUnixDate(movie['lastplayed'])
-			movie['plays'] = movie.pop('playcount')
-			movie['collected'] = 1 #this is in our kodi so it should be collected
-			movie['watched'] = 1 if movie['plays'] > 0 else 0
-			movie['ids'] = {}
-			id = movie['imdbnumber']
-			if id.startswith("tt"):
-				movie['ids']['imdb'] = ""
-				movie['ids']['imdb'] = id
-			if id.isdigit():
-				movie['ids']['tmdb'] = ""
-				movie['ids']['tmdb'] = id
-			del(movie['imdbnumber'])
-			del(movie['lastplayed'])
-			del(movie['label'])
-			del(movie['file'])
-
-			xbmc_movies.append(movie)
-
-			i += 1
-			y = ((i / x) * 4) + 1
-			self.__updateProgress(int(y))
-			
 		self.__updateProgress(5, line2=utilities.getString(1461))
 
-		return xbmc_movies
+		return kodi_movies
 
 	def __compareMovies(self, movies_col1, movies_col2, watched=False, restrict=False):
 		movies = []
