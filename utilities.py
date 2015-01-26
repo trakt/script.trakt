@@ -329,7 +329,7 @@ def kodiRpcToTraktMediaObject(mode, data):
 		watched = 0;
 		if data['playcount'] > 0:
 			watched = 1
-		return { 'number': data['episode'], 'ids': { 'tvdb': data['uniqueid']['unknown'], 'episodeid' : data['episodeid']}, 'watched': watched }
+		return { 'season': data['season'], 'number': data['episode'], 'title': data['label'], 'ids': { 'tvdb': data['uniqueid']['unknown'], 'episodeid' : data['episodeid']}, 'watched': watched }
 
 	elif mode == 'movie':
 		if checkExclusion(data['file']):

@@ -395,12 +395,8 @@ class traktAPI(object):
 		Debug("[traktAPI] getIdLookup(url: %s)" % url)
 		lookup = self.traktRequest('GET', url)
 		for result in lookup:
-			if result['type'] == 'movie':
-				return result[result['type']]
-			elif result['type'] == 'show':
+			if result['type'] == 'movie' or result['type'] == 'show': #returning episode will break the code dependent on this
 				return result[result['type']]
 
 		Debug('Could not find movie or show object with this id')
-
 		return None
-
