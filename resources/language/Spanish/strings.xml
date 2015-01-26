@@ -18,10 +18,7 @@
 	<string id="1033">Valorar cada elemento de la lista de reproducción</string>
 	<string id="1034">Porcentaje mínimo antes de hacer la valoración</string>
 	<string id="1035">Permitir volver a valorar contenido</string>
-	<string id="1036">Valoración por Defecto (Simple)</string>
-	<string id="1037">Valoración por Defecto (Avanzada)</string>
-	<string id="1038">Love</string>
-	<string id="1039">Hate</string>
+	<string id="1037">Valoración por Defecto</string>
 	
 	<!-- Scrobbling Settings -->
 	<string id="1040">Scrobbling</string>
@@ -79,11 +76,11 @@
 	<string id="1402">Películas</string>
 	<string id="1403">Añadir Películas a la Colección de trakt.tv</string>
 	<string id="1404">Actualizar contador de reproducciones en trakt.tv</string>
-	<string id="1405">Actualizar contador de reproducciones en XBMC</string>
+	<string id="1405">Actualizar contador de reproducciones en Kodi</string>
 	<string id="1406">Episodios de Series</string>
 	<string id="1407">Añadir Episodios a la Colección de trakt.tv</string>
 	<string id="1408">Actualizar contador de reproducciones en trakt.tv</string>
-	<string id="1409">Actualizar contador de reproducciones en XBMC</string>
+	<string id="1409">Actualizar contador de reproducciones en Kodi</string>
 	<string id="1410">Servicio</string>
 	<string id="1411">Sincronizar después de actualizar la librería</string>
 	<string id="1412">Mostrar notificaciones</string>
@@ -96,9 +93,9 @@
 	<string id="1420">Sincronización iniciada</string>
 	<string id="1421">Sincronización completada</string>
 	
-	<!-- Sync Movies - load from xbmc -->
-	<string id="1460">Comprobando Películas en XBMC</string>
-	<string id="1461">Comprobación de Películas en XBMC completada</string>
+	<!-- Sync Movies - load from kodi -->
+	<string id="1460">Comprobando Películas en Kodi</string>
+	<string id="1461">Comprobación de Películas en Kodi completada</string>
 	
 	<!-- Sync Movies - load from trakt -->
 	<string id="1462">Recuperando Colección de Películas en trakt.tv</string>
@@ -119,11 +116,11 @@
 	<string id="1478">Actualizar el contador de reproducciones en trakt.tv</string>
 	<string id="1470">El contador de reproducciones de %i película(s) fue actualizado en trakt.tv</string>
 	
-	<!-- Sync Movies - update xbmc -->
-	<string id="1471">El contador de reproducciones de Películas en XBMC está actualizado.</string>
-	<string id="1430">película(s) verán el contador de reproducciones actualizado en XBMC.</string>
-	<string id="1472">Actualizando el contador de reproducciones en XBMC.</string>
-	<string id="1473">El contador de reproducciones de %i película(s) fue actualizado en XBMC.</string>
+	<!-- Sync Movies - update kodi -->
+	<string id="1471">El contador de reproducciones de Películas en Kodi está actualizado.</string>
+	<string id="1430">película(s) verán el contador de reproducciones actualizado en Kodi.</string>
+	<string id="1472">Actualizando el contador de reproducciones en Kodi.</string>
+	<string id="1473">El contador de reproducciones de %i película(s) fue actualizado en Kodi.</string>
 
 	<!-- Sync Movies - clean trakt -->
 	<string id="1474">La Colección de Películas de trakt.tv está actualizada.</string>
@@ -134,12 +131,12 @@
 	<!-- Sync Movies - complete -->
 	<string id="1431">Sincronización de Películas completada</string>
 	
-	<!-- Sync Episodes - load from xbmc -->
-	<string id="1480">Recuperando información de Episodios en XBMC</string>
-	<string id="1481">Recuperando Series en XBMC</string>
-	<string id="1482">Series cargadas desde XBMC</string>
-	<string id="1483">Analizando Episodios en XBMC</string>
-	<string id="1484">Información de episodios cargada desde XBMC</string>
+	<!-- Sync Episodes - load from kodi -->
+	<string id="1480">Recuperando información de Episodios en Kodi</string>
+	<string id="1481">Recuperando Series en Kodi</string>
+	<string id="1482">Series cargadas desde Kodi</string>
+	<string id="1483">Analizando Episodios en Kodi</string>
+	<string id="1484">Información de episodios cargada desde Kodi</string>
 
 	<!-- Sync Episodes - load from trakt -->
 	<string id="1485">Recuperando información de Episodios en trakt.tv</string>
@@ -161,11 +158,11 @@
 	<string id="1439">serie(s) tiene Episodios que no están marcados como vistos.</string>
 	<string id="1440">episodio(s) serán actualizados.</string>
 	
-	<!-- Sync Episodes - update xbmc -->
-	<string id="1441">Comprobando Episodios vistos en XBMC.</string>
-	<string id="1493">El contador de reproducciones de Episodios en XBMC está actualizado.</string>
-	<string id="1494">Actualizando contador de reproducciones en XBMC.</string>
-	<string id="1495">El contador de reproducciones de %i episodio(s) fue actualizado en XBMC.</string>
+	<!-- Sync Episodes - update kodi -->
+	<string id="1441">Comprobando Episodios vistos en Kodi.</string>
+	<string id="1493">El contador de reproducciones de Episodios en Kodi está actualizado.</string>
+	<string id="1494">Actualizando contador de reproducciones en Kodi.</string>
+	<string id="1495">El contador de reproducciones de %i episodio(s) fue actualizado en Kodi.</string>
 
 	<!-- Sync Episodes - clean trakt -->
 	<string id="1445">Limpiando colección de Series en trakt.tv</string>
@@ -206,7 +203,7 @@
 	<string id="1659">Sincronización de Etiquetas finalizada</string>
 	<string id="1660">Escoge la Lista que quieres administrar</string>
 	<string id="1661">Cargando datos para gestionar Listas</string>
-	<string id="1662">Se encontró un problema al cargar datos de XBMC</string>
+	<string id="1662">Se encontró un problema al cargar datos de Kodi</string>
 	<string id="1663">Se encontró un problema al cargar datos de trakt.tv</string>
 	<string id="1664">Se encontró un problema al cargar tus Watchlists</string>
 	<string id="1665">Se encontró un problema al cargar tus Valoraciones</string>
@@ -230,7 +227,7 @@
 	<string id="1703">Simular Sincronización</string>
 	<string id="1704">Simular Etiquetas</string>
 	<string id="1720">Registrar Eventos</string>
-	<string id="1721">Simular configuración (La simulación no guarda cambios en XBMC o trakt.tv)</string>
+	<string id="1721">Simular configuración (La simulación no guarda cambios en Kodi o trakt.tv)</string>
 
 	<!-- Context Menu Entries -->
 	<string id="2000">Administrar Listas de Películas</string>
