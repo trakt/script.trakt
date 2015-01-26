@@ -117,23 +117,24 @@ class Sync():
 					
 		return count
 
-	def __countEpisodes(self, shows, collection=True, all=False):
+	def __countEpisodes(self, shows, watched=False, collection=True, all=False):
+		Debug("shows %s" % shows)
 		count = 0
-		p = 'seasons'
 		if 'shows' in shows:
 			shows = shows['shows']
 		for show in shows:
 			if all:
-				for s in show[p]:
-					count += len(show[p][s])
+				for s in show['seasons']:
+					count += len(show['seasons'][s])
 			else:
-				if 'collected' in show and not show['collected'] == collection:
-					continue
-				for seasonKey in show[p]:
+				for seasonKey in show['seasons']:
 					for episodeKey in seasonKey['episodes']:
+						if 'watched' in episodeKey and not episodeKey['watched'] == watched:
+							continue
+						if 'collected' in episodeKey and not episodeKey['collected'] == collection:
+							continue
 						if episodeKey['number']:
 							count += 1
-					
 		return count
 
 	def __getShowAsString(self, show, short=False):
@@ -151,59 +152,34 @@ class Sync():
 			p = ["All"]
 		return "%s [tvdb: %s] - %s" % (show['title'], show['ids']['tvdb'], ", ".join(p))
 
-
-	# def traktFormatShow(self, show):
-	# 	data = {'title': show['title'], 'ids': {'tvdb': show['tvdb']}, 'year': show['year'], 'episodes': []}
-	# 	if 'imdb' in show:
-	# 		data['ids']['imdb'] = show['imdb']
-	# 	if 'tvdb' in show:
-	# 		data['ids']['tvdb'] = show['tvdb']			
-	# 	for season in show['seasons']:
-	# 		for episode in show['seasons'][season]:
-	# 			data['episodes'].append({'season': season, 'episode': episode})
-	# 	return data
-	
-	# this would return the data in format:
-	#{1: {'tvdb': u'4954616', 'episodeid': 21736}, 
-	# 2: {'tvdb': u'4954617', 'episodeid': 21737},
-	# 3: {'tvdb': u'4942484', 'episodeid': 21738},
-	# 4: {'tvdb': u'4973699', 'episodeid': 21739},
-	# 5: {'tvdb': u'4982277', 'episodeid': 21740},
-	# 6: {'tvdb': u'5017373', 'episodeid': 22303}}
 	def __getEpisodes(self, seasons, watched=False):
 		data = {}
 		for season in seasons:
-			#Debug("getEpisodes season %s" % season)
 			episodes = {}
 			for episode in season['episodes']:
-				#Debug("getEpisodes episode %s" % episode)
 				if watched and episode['watched'] == 0:
 						continue
-				if (not watched) and 'collected' in episode and episode['collected'] == 0:
+				elif 'collected' in episode and episode['collected'] == 0:
 						continue
 				episodes[episode['number']] = episode['ids']
-			#Debug("getEpisodes episodes %s" % episodes)    
-			#if len(episodes) > 0 :
 			data[season['number']] = episodes
-			#Debug("getEpisodes season %s episoded %s" % (season['number'],data[season['number']]))
-		#Debug("getEpisodes %s" % data)   
+
 		return data
 
 	def __compareShows(self, shows_col1, shows_col2, watched=False, restrict=False):
 		shows = []
-		p = 'watched' if watched else 'seasons'
 		for show_col1 in shows_col1['shows']:
 			show_col2 = utilities.findMediaObject(show_col1, shows_col2['shows'])
 
 			if show_col2:
 				season_diff = {}
 				# format the data to be easy to compare trakt and KODI data
-				season1 = self.__getEpisodes(show_col1['seasons'], watched)
-				season2 = self.__getEpisodes(show_col2['seasons'], watched)
-				for season in season1:
-					a = season1[season]
-					if season in season2:
-						b = season2[season]
+				season_col1 = self.__getEpisodes(show_col1['seasons'], watched)
+				season_col2 = self.__getEpisodes(show_col2['seasons'], watched)
+				for season in season_col1:
+					a = season_col1[season]
+					if season in season_col2:
+						b = season_col2[season]
 						diff = list(set(a).difference(set(b)))
 						if len(diff) > 0:
 							if restrict:
@@ -243,27 +219,25 @@ class Sync():
 					shows.append(show)
 			else:
 				if not restrict:
-					if self.__countEpisodes([show_col1]) > 0:
-						
+					if self.__countEpisodes([show_col1], watched=watched) > 0:
 						show = {'title': show_col1['title'], 'ids': {'tvdb': show_col1['ids']['tvdb']}, 'year': show_col1['year'], 'seasons': []}
 						for seasonKey in show_col1['seasons']:
 							episodes = []
 							for episodeKey in seasonKey['episodes']:
-								if 'ids' in episodeKey:
-									ids = episodeKey['ids']
-									if 'episodeid' in ids:
-										del(ids['episodeid'])
-								else:
-									ids = {}
-								episodes.append({ 'number': episodeKey['number'], 'ids': ids })
+								if watched == episodeKey['watched']:
+									if 'ids' in episodeKey:
+										ids = episodeKey['ids']
+										if 'episodeid' in ids:
+											del(ids['episodeid'])
+									else:
+										ids = {}
+									episodes.append({ 'number': episodeKey['number'], 'ids': ids })
 									
 							show['seasons'].append({ 'number': seasonKey['number'], 'episodes': episodes })
 
 						if 'tvshowid' in show_col1:
 							del(show_col1['tvshowid'])
-						#	show['tvshowid'] = show_col1['tvshowid']
 						shows.append(show)
-						Debug('show %s' % show)
 		result = { 'shows': shows}
 		return result
 
