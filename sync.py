@@ -67,7 +67,7 @@ class Sync():
 			Debug("[Episodes Sync] Kodi json request was empty.")
 			return None
 		
-		shows = utilities.kodiRpcToTraktMediaObject(data)
+		shows = utilities.kodiRpcToTraktMediaObjects(data)
 		Debug("[Episode Sync] Shows finished %s" % shows)
 		return shows
 
@@ -91,7 +91,7 @@ class Sync():
 				Debug("[Episodes Sync] There was a problem getting episode data for '%s', aborting sync." % show['title'])
 				return None
 
-			seasons = utilities.kodiRpcToTraktMediaObject(data)
+			seasons = utilities.kodiRpcToTraktMediaObjects(data)
 
 			show['seasons'] = seasons
 
@@ -450,7 +450,7 @@ class Sync():
 			Debug("[Movies Sync] Kodi JSON request was empty.")
 			return
 
-		kodi_movies = utilities.kodiRpcToTraktMediaObject(data)
+		kodi_movies = utilities.kodiRpcToTraktMediaObjects(data)
 
 		self.__updateProgress(5, line2=utilities.getString(1461))
 

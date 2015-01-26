@@ -311,40 +311,70 @@ def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list):
 			else:	
 				episode = season.episodes[episodeNumber]
 				return episode.to_info()
-		
-def kodiRpcToTraktMediaObject(data):
-	Debug("[Utilities] kodiRpcToTraktMediaObject() Kodi JSON Result: '%s'" % data)
+
+def kodiRpcToTraktMediaObject(mode, data):
+	if mode == 'tvshow':
+		data['ids'] = {}
+		id = data['imdbnumber']
+		if id.startswith("tt"):
+			data['ids']['imdb'] = id
+		if id.isdigit():
+			data['ids']['tvdb'] = id
+		del(data['imdbnumber'])
+		del(data['label'])
+		return data
+	elif mode == 'episode':
+		if checkExclusion(data['file']):
+			return
+		watched = 0;
+		if data['playcount'] > 0:
+			watched = 1
+		return { 'number': data['episode'], 'ids': { 'tvdb': data['uniqueid']['unknown'], 'episodeid' : data['episodeid']}, 'watched': watched }
+
+	elif mode == 'movie':
+		if checkExclusion(data['file']):
+			return
+		if data['lastplayed']:
+			data['last_played'] = sqlDateToUnixDate(data['lastplayed'])
+		data['plays'] = data.pop('playcount')
+		data['collected'] = 1 #this is in our kodi so it should be collected
+		data['watched'] = 1 if data['plays'] > 0 else 0
+		data['ids'] = {}
+		id = data['imdbnumber']
+		if id.startswith("tt"):
+			data['ids']['imdb'] = ""
+			data['ids']['imdb'] = id
+		if id.isdigit():
+			data['ids']['tmdb'] = ""
+			data['ids']['tmdb'] = id
+		del(data['imdbnumber'])
+		del(data['lastplayed'])
+		del(data['label'])
+		del(data['file'])
+		return data
+	else:
+		Debug('[Utilities] kodiRpcToTraktMediaObject() No valid mode')
+		return
+
+def kodiRpcToTraktMediaObjects(data):
+	Debug("[Utilities] kodiRpcToTraktMediaObjects() Kodi JSON Result: '%s'" % data)
 	if 'tvshows' in data:
 		shows = data['tvshows']
 
 		# reformat show array
 		for show in shows:
-			show['ids'] = {}
-			show['ids']['tvdb'] = ""
-			show['ids']['imdb'] = ""
-			id = show['imdbnumber']
-			if id.startswith("tt"):
-				show['ids']['imdb'] = id
-			if id.isdigit():
-				show['ids']['tvdb'] = id
-			del(show['imdbnumber'])
-			del(show['label'])
+			kodiRpcToTraktMediaObject('tvshow', show)
 		return shows
 
 	elif 'episodes' in data:
 		a_episodes = {}
 		seasons = []
 		for episode in data['episodes']:
-			if checkExclusion(episode['file']):
-				continue
-			watched = 0;
-			if episode['playcount'] > 0:
-				watched = 1
 			while not episode['season'] in a_episodes :
 				s_no = episode['season']
 				a_episodes[s_no] = []
 			s_no = episode['season']
-			a_episodes[s_no].append({ 'number': episode['episode'], 'ids': { 'tvdb': episode['uniqueid']['unknown'], 'episodeid' : episode['episodeid']}, 'watched': watched })
+			a_episodes[s_no].append(kodiRpcToTraktMediaObject('episode', episode))
 
 		for episode in a_episodes:
 			seasons.append({'number': episode, 'episodes': a_episodes[episode]})
@@ -356,28 +386,8 @@ def kodiRpcToTraktMediaObject(data):
 
 		# reformat movie array
 		for movie in movies:
-			if checkExclusion(movie['file']):
-				continue
-			if movie['lastplayed']:
-				movie['last_played'] = sqlDateToUnixDate(movie['lastplayed'])
-			movie['plays'] = movie.pop('playcount')
-			movie['collected'] = 1 #this is in our kodi so it should be collected
-			movie['watched'] = 1 if movie['plays'] > 0 else 0
-			movie['ids'] = {}
-			id = movie['imdbnumber']
-			if id.startswith("tt"):
-				movie['ids']['imdb'] = ""
-				movie['ids']['imdb'] = id
-			if id.isdigit():
-				movie['ids']['tmdb'] = ""
-				movie['ids']['tmdb'] = id
-			del(movie['imdbnumber'])
-			del(movie['lastplayed'])
-			del(movie['label'])
-			del(movie['file'])
-
-			kodi_movies.append(movie)
+			kodi_movies.append(kodiRpcToTraktMediaObject('movie', movie))
 		return kodi_movies
 	else:
-		Debug('[Utilities] No valid key found in rpc data')
+		Debug('[Utilities] kodiRpcToTraktMediaObjects() No valid key found in rpc data')
 		return
