@@ -453,7 +453,10 @@ class Sync():
 			else: #no match found
 				if not restrict:
 					if 'collected' in movie_col1 and movie_col1['collected']:
-						movies.append(movie_col1)
+						if watched and (movie_col1['plays'] > 0):
+							movies.append(movie_col1)
+						elif not watched:
+							movies.append(movie_col1)
 
 		return movies
 
@@ -479,7 +482,7 @@ class Sync():
 			Debug("[Movies Sync] trakt.tv movie playcount is up to date")
 			return
 
-		titles = ", ".join(["%s (%s)" % (m['title'], m['ids']['imdb']) for m in movies if m['ids'] and m['ids']['imdb']])
+		titles = ", ".join(["%s" % (m['title']) for m in movies])
 		Debug("[Movies Sync] %i movie(s) playcount will be updated on trakt.tv" % len(movies))
 		Debug("[Movies Sync] Movies updated: %s" % titles)
 
