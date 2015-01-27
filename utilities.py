@@ -333,13 +333,17 @@ def kodiRpcToTraktMediaObject(mode, data):
 		episode = { 'season': data['season'], 'number': data['episode'], 'title': data['label'], 'ids': { 'tvdb': data['uniqueid']['unknown'], 'episodeid' : data['episodeid']}, 'watched': watched }
 		if 'lastplayed' in data:
 			episode['watched_at'] = data['lastplayed']
+		if 'dateadded' in data:
+			episode['collected_at'] = data['dateadded']
 		return episode
 
 	elif mode == 'movie':
 		if checkExclusion(data['file']):
 			return
-		if data['lastplayed']:
+		if 'lastplayed' in data:
 			data['watched_at'] = data['lastplayed']
+		if 'dateadded' in data:
+			data['collected_at'] = data['dateadded']
 		data['plays'] = data.pop('playcount')
 		data['collected'] = 1 #this is in our kodi so it should be collected
 		data['watched'] = 1 if data['plays'] > 0 else 0
@@ -353,6 +357,7 @@ def kodiRpcToTraktMediaObject(mode, data):
 			data['ids']['tmdb'] = id
 		del(data['imdbnumber'])
 		del(data['lastplayed'])
+		del(data['dateadded'])
 		del(data['label'])
 		del(data['file'])
 		return data
