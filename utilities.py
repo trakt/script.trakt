@@ -257,8 +257,8 @@ def findMediaObject(mediaObjectToMatch, listToSearch, returnIndex=False):
 	if result is None and 'ids' in mediaObjectToMatch and 'tvdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tvdb'].isdigit():
 		result = __findInList(listToSearch, returnIndex=returnIndex, tvdb=mediaObjectToMatch['ids']['tvdb'])
 	# match by title and year it will result in movies with the same title and year to mismatch - but what should we do instead?
-	if result is None and 'title' in mediaObjectToMatch and 'year' in mediaObjectToMatch['ids']:
-		result = __findInList(listToSearch, returnIndex=returnIndex, tvdb=mediaObjectToMatch['ids']['tvdb'])
+	if result is None and 'title' in mediaObjectToMatch and 'year' in mediaObjectToMatch:
+		result = __findInList(listToSearch, returnIndex=returnIndex, title=mediaObjectToMatch['title'], year=mediaObjectToMatch['year'])
 	return result
 
 def regex_tvshow(compare, file, sub = ""):
