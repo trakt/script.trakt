@@ -234,7 +234,7 @@ class Sync():
 											del(ids['episodeid'])
 									else:
 										ids = {}
-									episodes.append({ 'number': episodeKey['number'], 'ids': ids, 'watched_at': [episodeKey]['watched_at'] })
+									episodes.append({ 'number': episodeKey['number'], 'ids': ids })
 									
 							show['seasons'].append({ 'number': seasonKey['number'], 'episodes': episodes })
 
