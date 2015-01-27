@@ -535,7 +535,7 @@ class Sync():
 			Debug("[Movies Sync] trakt.tv movie collection is clean, no movies to remove.")
 			return
 		
-		titles = ", ".join(["%s (%s)" % (m['title'], m['ids']['tmdb']) for m in movies])
+		titles = ", ".join(["%s" % (m['title']) for m in movies])
 		Debug("[Movies Sync] %i movie(s) will be removed from trakt.tv collection." % len(movies))
 		Debug("[Movies Sync] Movies removed: %s" % titles)
 
