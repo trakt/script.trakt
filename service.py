@@ -11,10 +11,6 @@ from rating import rateMedia
 from scrobbler import Scrobbler
 from sync import Sync
 
-try:
-	import simplejson as json
-except ImportError:
-	import json
 
 class traktService:
 
