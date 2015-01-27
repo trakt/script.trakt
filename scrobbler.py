@@ -61,7 +61,6 @@ class Scrobbler():
 
 						# recalculate watchedPercent and duration for multi-part, and scrobble
 						adjustedDuration = int(self.videoDuration / self.curVideo['multi_episode_count'])
-						duration = adjustedDuration / 60
 						watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
 						response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.traktSummaryInfo, watchedPercent)
 						if response != None:

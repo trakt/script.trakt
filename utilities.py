@@ -283,7 +283,6 @@ def regex_tvshow(compare, file, sub = ""):
 			response_sub = re.findall(regex, sub)
 			if len(response_sub) > 0 :
 				try :
-					sub_info = "Regex Subtitle Ep: %s," % (str(response_sub[0][1]),)
 					if (int(response_sub[0][1]) == int(response_file[0][1])):
 						return True
 				except: pass
