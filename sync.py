@@ -90,6 +90,9 @@ class Sync():
 			if not data:
 				Debug("[Episodes Sync] There was a problem getting episode data for '%s', aborting sync." % show['title'])
 				return None
+			elif 'episodes' not in data:
+				Debug("[Episodes Sync] '%s' has no episodes in Kodi." % show['title'])
+				continue
 
 			seasons = utilities.kodiRpcToTraktMediaObjects(data)
 
