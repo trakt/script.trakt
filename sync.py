@@ -131,13 +131,14 @@ class Sync():
 					count += len(show['seasons'][s])
 			else:
 				for seasonKey in show['seasons']:
-					for episodeKey in seasonKey['episodes']:
-						if 'watched' in episodeKey and not episodeKey['watched'] == watched:
-							continue
-						if 'collected' in episodeKey and not episodeKey['collected'] == collection:
-							continue
-						if 'number' in episodeKey and episodeKey['number']:
-							count += 1
+					if 'seasons' in show:
+						for episodeKey in seasonKey['episodes']:
+							if 'watched' in episodeKey and not episodeKey['watched'] == watched:
+								continue
+							if 'collected' in episodeKey and not episodeKey['collected'] == collection:
+								continue
+							if 'number' in episodeKey and episodeKey['number']:
+								count += 1
 		return count
 
 	def __getShowAsString(self, show, short=False):
@@ -252,7 +253,7 @@ class Sync():
 		Debug("[Episodes Sync] %i show(s) have episodes (%d) to be added to your trakt.tv collection." % (len(shows['shows']), self.__countEpisodes(shows['shows'])))
 		for show in shows['shows']:
 			Debug("[Episodes Sync] Episodes added: %s" % self.__getShowAsString(show, short=True))
-		
+
 		self.__updateProgress(82, line1=utilities.getString(1435), line2="%i %s" % (len(shows['shows']), utilities.getString(1436)), line3=" ")
 
 		Debug("[trakt][traktAddEpisodes] Shows to add %s" % shows)
@@ -471,7 +472,7 @@ class Sync():
 		self.__updateProgress(80, line2="%i %s" % (len(movies), utilities.getString(1426)))
 
 		moviesToAdd = {'movies': movies}
-
+		Debug("Movies to add: %s" % movies)
 		self.traktapi.addToCollection(moviesToAdd)
 
 		self.__updateProgress(98, line2=utilities.getString(1468) % len(movies))
