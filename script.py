@@ -1,16 +1,8 @@
 # -*- coding: utf-8 -*-
-
-import sys
-
 import utilities as utils
 import xbmc
 import sqliteQueue
 
-
-try:
-	import simplejson as json
-except ImportError:
-	import json
 
 def __getMediaType():
 	
