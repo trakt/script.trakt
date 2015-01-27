@@ -112,7 +112,7 @@ class Scrobbler():
 			if utilities.isMovie(self.curVideo['type']):
 				if 'id' in self.curVideo:
 					self.curVideoInfo = utilities.kodiRpcToTraktMediaObject('movie', utilities.getMovieDetailsFromKodi(self.curVideo['id'], ['imdbnumber', 'title', 'year', 'file', 'lastplayed', 'playcount']))
-
+					Debug("Trakt ticket: %s" % self.curVideo)
 					if utilities.getSettingAsBool('rate_movie'):
 						# pre-get sumamry information, for faster rating dialog.
 						Debug("[Scrobbler] Movie rating is enabled, pre-fetching summary information.")
@@ -150,13 +150,15 @@ class Scrobbler():
 							self.traktSummaryInfo = self.traktapi.getEpisodeSummary(lookupShow['ids'], self.curVideoInfo['season'], self.curVideoInfo['number'])
 						else:
 							Debug("[Scrobbler] Can not get summary information for '%s - S%02dE%02d' as it has no valid id, will retry during a watching call." % (self.curVideoInfo['showtitle'], self.curVideoInfo['season'], self.curVideoInfo['episode']))
-				elif 'showtitle' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
-					self.curVideoInfo = {'tvdb_id': None, 'year': None}
-					if 'year' in self.curVideo:
-						self.curVideoInfo['year'] = self.curVideo['year']
-					self.curVideoInfo['showtitle'] = self.curVideo['showtitle']
+				elif 'title' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
+					self.curVideoInfo = {'tvdb_id': None}
+					self.curVideoInfo['title'] = self.curVideo['title']
 					self.curVideoInfo['season'] = self.curVideo['season']
-					self.curVideoInfo['episode'] = self.curVideo['episode']
+					self.curVideoInfo['number'] = self.curVideo['episode']
+
+					self.traktShowSummary = {'title': self.curVideo['showtitle']}
+					if 'year' in self.curVideo:
+						self.traktShowSummary['year'] = self.curVideo['year']
 
 				if 'multi_episode_count' in self.curVideo:
 					self.isMultiPartEpisode = True
@@ -245,8 +247,9 @@ class Scrobbler():
 				Debug("[Scrobbler] Multi-part episode, scrobbling part %d of %d." % (self.curMPEpisode + 1, self.curVideo['multi_episode_count']))
 				adjustedDuration = int(self.videoDuration / self.curVideo['multi_episode_count'])
 				watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
-			
+			Debug("Hä? %s" % self.curVideoInfo)
 			response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.curVideoInfo, watchedPercent, status)
+
 			if not response is None:
 				self.__scrobbleNotification(response)
 				Debug("[Scrobbler] Scrobble response: %s" % str(response))
