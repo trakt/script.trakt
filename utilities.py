@@ -279,7 +279,7 @@ def regex_tvshow(compare, file, sub = ""):
 				break
 
 	if tvshow == 1:
-		for regex in regex_expressions:
+		for regex in REGEX_EXPRESSIONS:
 			response_sub = re.findall(regex, sub)
 			if len(response_sub) > 0 :
 				try :
