@@ -86,7 +86,7 @@ class Sync():
 
 			show = {'title': show_col1['title'], 'ids': {'tvdb': show_col1['ids']['tvdb']}, 'year': show_col1['year'], 'seasons': []}
 
-			data = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show_col1['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid', 'file']}, 'id': 0})
+			data = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show_col1['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid', 'lastplayed', 'file']}, 'id': 0})
 			if not data:
 				Debug("[Episodes Sync] There was a problem getting episode data for '%s', aborting sync." % show['title'])
 				return None
@@ -234,7 +234,7 @@ class Sync():
 											del(ids['episodeid'])
 									else:
 										ids = {}
-									episodes.append({ 'number': episodeKey['number'], 'ids': ids })
+									episodes.append({ 'number': episodeKey['number'], 'ids': ids, 'watched_at': [episodeKey]['watched_at'] })
 									
 							show['seasons'].append({ 'number': seasonKey['number'], 'episodes': episodes })
 
@@ -487,9 +487,8 @@ class Sync():
 		Debug("[Movies Sync] Movies updated: %s" % titles)
 
 		self.__updateProgress(40, line2="%i %s" % (len(movies), utilities.getString(1428)))
-
 		# Send request to update playcounts on trakt.tv
-		chunked_movies = utilities.chunks([movie for movie in movies], 50)
+		chunked_movies = utilities.chunks([movie for movie in movies], 200)
 		i = 0
 		x = float(len(chunked_movies))
 		for chunk in chunked_movies:

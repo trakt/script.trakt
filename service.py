@@ -168,7 +168,7 @@ class traktService:
 					s = utilities.getFormattedItemName(media_type, summaryInfo)
 					utilities.Debug("doMarkWatched(): '%s' is not watched on trakt, marking it as watched." % s)
 					movie = {'imdb_id': data['id'], 'title': summaryInfo['title'], 'year': summaryInfo['year'],
-					         'plays': 1, 'last_played': int(time())}
+					         'plays': 1, 'watched_at': int(time())}
 					params = {'movies': [movie]}
 					utilities.Debug("doMarkWatched(): %s" % str(params))
 					
