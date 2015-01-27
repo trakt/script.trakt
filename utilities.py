@@ -357,7 +357,8 @@ def kodiRpcToTraktMediaObject(mode, data):
 			data['ids']['tmdb'] = id
 		del(data['imdbnumber'])
 		del(data['lastplayed'])
-		del(data['dateadded'])
+		if 'dateadded' in data:
+			del(data['dateadded'])
 		del(data['label'])
 		del(data['file'])
 		return data
