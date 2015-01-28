@@ -157,7 +157,10 @@ class Sync():
 				p.append(s)
 		else:
 			p = ["All"]
-		return "%s [tvdb: %s] - %s" % (show['title'], show['ids']['tvdb'], ", ".join(p))
+		if 'tvdb' in show['ids']:
+			return "%s [tvdb: %s] - %s" % (show['title'], show['ids']['tvdb'], ", ".join(p))
+		else:
+			return "%s [tvdb: No id] - %s" % (show['title'], ", ".join(p))
 
 	def __getEpisodes(self, seasons, watched=False):
 		data = {}
