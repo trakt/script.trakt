@@ -85,7 +85,7 @@ class Sync():
 		for show_col1 in tvshows:
 
 			show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
-			
+
 			if 'ids' in show_col1 and 'tvdb' in show_col1['ids']:
 				show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
 
@@ -164,7 +164,7 @@ class Sync():
 		for season in seasons:
 			episodes = {}
 			for episode in season['episodes']:
-				if watched and episode['watched'] == 0:
+				if watched and 'watched' in episode and episode['watched'] == 0:
 						continue
 				elif 'collected' in episode and episode['collected'] == 0:
 						continue
@@ -227,7 +227,9 @@ class Sync():
 			else:
 				if not restrict:
 					if self.__countEpisodes([show_col1], watched=watched) > 0:
-						show = {'title': show_col1['title'], 'ids': {'tvdb': show_col1['ids']['tvdb']}, 'year': show_col1['year'], 'seasons': []}
+						show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
+						if 'tvdb' in show_col1['ids']:
+							show['ids'] = show_col1['ids']['tvdb']
 						for seasonKey in show_col1['seasons']:
 							episodes = []
 							for episodeKey in seasonKey['episodes']:
