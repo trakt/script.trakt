@@ -124,7 +124,6 @@ class Sync():
 		return count
 
 	def __countEpisodes(self, shows, watched=False, collection=True, all=False):
-		Debug("shows %s" % shows)
 		count = 0
 		if 'shows' in shows:
 			shows = shows['shows']
@@ -214,7 +213,6 @@ class Sync():
 					show = {'title': show_col1['title'], 'ids' : {'tvdb': show_col1['ids']['tvdb']}, 'year': show_col1['year'], 'seasons': []}
 					for seasonKey in season_diff:
 						episodes = []
-						#Debug("seasonKey %s" % seasonKey)                        
 						for episodeKey in season_diff[seasonKey]:
 							episodes.append(season_diff[seasonKey][episodeKey])
 						show['seasons'].append({ 'number': seasonKey, 'episodes': episodes })
