@@ -246,7 +246,7 @@ class Scrobbler():
 				Debug("[Scrobbler] Multi-part episode, scrobbling part %d of %d." % (self.curMPEpisode + 1, self.curVideo['multi_episode_count']))
 				adjustedDuration = int(self.videoDuration / self.curVideo['multi_episode_count'])
 				watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
-			Debug("Hä? %s" % self.curVideoInfo)
+
 			response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.curVideoInfo, watchedPercent, status)
 
 			if not response is None:
