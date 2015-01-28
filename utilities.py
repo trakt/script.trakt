@@ -119,8 +119,6 @@ def checkExclusion(fullpath):
 	if not fullpath:
 		return True
 
-	Debug("checkExclusion(): Checking exclusion settings for '%s'." % fullpath)
-
 	if (fullpath.find("pvr://") > -1) and getSettingAsBool('ExcludeLiveTV'):
 		Debug("checkExclusion(): Video is playing via Live TV, which is currently set as excluded location.")
 		return True
@@ -329,7 +327,8 @@ def kodiRpcToTraktMediaObject(mode, data):
 		if data['playcount'] > 0:
 			watched = 1
 
-		episode = { 'season': data['season'], 'number': data['episode'], 'title': data['label'], 'ids': { 'tvdb': data['uniqueid']['unknown'], 'episodeid' : data['episodeid']}, 'watched': watched }
+		episode = { 'season': data['season'], 'number': data['episode'], 'title': data['label'],
+		            'ids': { 'tvdb': data['uniqueid']['unknown'], 'episodeid' : data['episodeid']}, 'watched': watched }
 		if 'lastplayed' in data:
 			episode['watched_at'] = data['lastplayed']
 		if 'dateadded' in data:
