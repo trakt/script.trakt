@@ -366,7 +366,6 @@ def kodiRpcToTraktMediaObject(mode, data):
 		return
 
 def kodiRpcToTraktMediaObjects(data):
-	Debug("[Utilities] kodiRpcToTraktMediaObjects() Kodi JSON Result: '%s'" % data)
 	if 'tvshows' in data:
 		shows = data['tvshows']
 
