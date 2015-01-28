@@ -171,7 +171,7 @@ class Sync():
 						continue
 				elif 'collected' in episode and episode['collected'] == 0:
 						continue
-				episodes[episode['number']] = episode['ids']
+				episodes[episode['number']] = episode
 			data[season['number']] = episodes
 
 		return data
@@ -216,14 +216,10 @@ class Sync():
 						episodes = []
 						#Debug("seasonKey %s" % seasonKey)                        
 						for episodeKey in season_diff[seasonKey]:
-							episodes.append({ 'number': episodeKey, 'ids': season_diff[seasonKey][episodeKey]})
+							episodes.append(season_diff[seasonKey][episodeKey])
 						show['seasons'].append({ 'number': seasonKey, 'episodes': episodes })
-					if 'imdb' in show_col1 and show_col1['imdb']:
-						show['ids']['imdb'] = show_col1['imdb']
 					if 'imdb' in show_col2 and show_col2['imdb']:
 						show['ids']['imdb'] = show_col2['imdb']
-					if 'tvshowid' in show_col1:
-						show['tvshowid'] = show_col1['tvshowid']
 					if 'tvshowid' in show_col2:
 						show['tvshowid'] = show_col2['tvshowid']
 					shows.append(show)
