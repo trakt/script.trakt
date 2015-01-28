@@ -84,7 +84,10 @@ class Sync():
 		Debug("[Episodes Sync] Getting episode data from Kodi")
 		for show_col1 in tvshows:
 
-			show = {'title': show_col1['title'], 'ids': {'tvdb': show_col1['ids']['tvdb']}, 'year': show_col1['year'], 'seasons': []}
+			show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
+			
+			if 'ids' in show_col1 and 'tvdb' in show_col1['ids']:
+				show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
 
 			data = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show_col1['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid', 'lastplayed', 'file', 'dateadded']}, 'id': 0})
 			if not data:
