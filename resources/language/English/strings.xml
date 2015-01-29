@@ -23,7 +23,7 @@
 	<string id="1046">Send watching call on seek</string>
 	<string id="1047">Send watching call on resume</string>
 	<string id="1048">Show notification on scrobble</string>
-	<string id="1049">trakt.tv - Scrobbled</string>
+	<string id="1049">trakt - Scrobbled</string>
 	<string id="1050">Exclusions</string>
 	<string id="1051">Exclude Live TV</string>
 	<string id="1052">Exclude HTTP sources</string>	
@@ -36,14 +36,14 @@
 	<string id="1108">Can't connect to trakt</string>
 	<string id="1109">Error</string>
 	<string id="1110">Incorrect username or password</string>
-	<string id="1111">Loading settings from trakt.tv</string>
+	<string id="1111">Loading settings from trakt</string>
 
 	<!-- Manual Rating Notifications -->
-	<string id="1350">trakt.tv - Rating submitted successfully</string>
-	<string id="1351">trakt.tv - Already rated</string>
-	<string id="1352">trakt.tv - Unrated successfully</string>
-	<string id="1353">trakt.tv - Already has the same rating</string>
-	<string id="1354">trakt.tv - Problem submitting rating</string>
+	<string id="1350">trakt - Rating submitted successfully</string>
+	<string id="1351">trakt - Already rated</string>
+	<string id="1352">trakt - Unrated successfully</string>
+	<string id="1353">trakt - Already has the same rating</string>
+	<string id="1354">trakt - Problem submitting rating</string>
 	
 	<!-- Rating Dialog -->
 	<string id="1313">What Did You Think?</string>
@@ -62,7 +62,7 @@
     <string id="1327">Unrate this episode</string>
 
 	<!-- Titles -->
-	<string id="1201">trakt.tv</string>
+	<string id="1201">trakt</string>
 	
 	<!-- Sync Settings -->
 	<string id="1400">Synchronize</string>
@@ -91,35 +91,31 @@
 	<string id="1461">Movies loaded from Kodi</string>
 	
 	<!-- Sync Movies - load from trakt -->
-	<string id="1462">Retrieving movie collection from trakt.tv</string>
-	<string id="1463">Retrieving seen movies from trakt.tv</string>
-	<string id="1464">Retrieved seen movies from trakt.tv</string>
-	<string id="1465">Parsing movies from trakt.tv</string>
-	<string id="1466">Retrieved movie data from trakt.tv</string>
+	<string id="1462">Retrieving movie collection from trakt</string>
+	<string id="1463">Retrieving seen movies from trakt</string>
+	<string id="1466">Retrieved movie data from trakt</string>
 
-	<!-- Sync Movies - add to trakt -->
-	<string id="1467">trakt.tv movie collection is up to date, no movies to add.</string>
-	<string id="1426">movie(s) will be added to trakt collection</string>
-	<string id="1477">Adding movies to trakt.tv collection</string>
-	<string id="1468">%i movie(s) were added to your trakt.tv collection.</string>
+    <!-- Sync Movies - clean trakt -->
+	<string id="1474">trakt movie collection is up to date, no movies removed</string>
+	<string id="1444">%i movie(s) will be removed from trakt collection</string>
+	<string id="1475">%i movie(s) were removed from your trakt collection</string>
 
 	<!-- Sync Movies - update trakt -->
-	<string id="1469">trakt.tv movie playcount is up to date.</string>
-	<string id="1428">movie(s) playcount will be updated on trakt</string>
-	<string id="1478">Updating movie play counts on trakt.tv</string>
-	<string id="1470">Play counts updated for %i movie(s) on trakt.tv</string>
+	<string id="1469">trakt movie playcount is up to date</string>
+	<string id="1428">%i movie(s) playcount will be updated on trakt</string>
+	<string id="1478">Updating %i of %i movie play counts on trakt</string>
+	<string id="1470">Play counts updated for %i movie(s) on trakt</string>
 	
 	<!-- Sync Movies - update kodi -->
-	<string id="1471">Kodi movie playcount is up to date.</string>
-	<string id="1430">movie(s) playcount will be updated on Kodi</string>
-	<string id="1472">Updating movie play counts in Kodi.</string>
-	<string id="1473">Play counts updated for %i movie(s) in Kodi.</string>
+	<string id="1471">Kodi movie playcount is up to date</string>
+	<string id="1430">%i movie(s) playcount will be updated in Kodi</string>
+	<string id="1472">Updating %i of %i movie play counts in Kodi</string>
+	<string id="1473">Play counts updated for %i movie(s) in Kodi</string>
 
-	<!-- Sync Movies - clean trakt -->
-	<string id="1474">trakt.tv movie collection is up to date.</string>
-	<string id="1444">movie(s) will be removed from trakt collection</string>
-	<string id="1476">Removing movies from trakt.tv collection</string>
-	<string id="1475">%i movie(s) were removed from your trakt.tv collection</string>
+    <!-- Sync Movies - add to trakt -->
+	<string id="1467">trakt movie collection is up to date, no movies to add</string>
+	<string id="1426">%i movie(s) will be added to trakt collection</string>
+	<string id="1468">%i movie(s) were added to your trakt collection</string>
 
 	<!-- Sync Movies - complete -->
 	<string id="1431">Movie Sync Complete</string>
@@ -128,48 +124,48 @@
 	<string id="1480">Loading episode data from Kodi</string>
 	<string id="1481">Loading shows from Kodi</string>
 	<string id="1482">Shows loaded from Kodi</string>
-	<string id="1483">Parsing episode data from Kodi</string>
+	<string id="1483">Parsing %i of %i episode data from Kodi</string>
 	<string id="1484">Loaded TV episode data from Kodi</string>
 
 	<!-- Sync Episodes - load from trakt -->
-	<string id="1485">Loading episode data from trakt.tv</string>
-	<string id="1486">Retrieving episode collection from trakt.tv</string>
-	<string id="1487">Retrieving seen episodes from trakt.tv</string>
-	<string id="1488">Parsing episode data from trakt.tv</string>
-	<string id="1489">Retrieved episode data from trakt.tv</string>
+	<string id="1485">Loading episode data from trakt</string>
+	<string id="1486">Retrieving episode collection from trakt</string>
+	<string id="1487">Retrieving seen episodes from trakt</string>
+	<string id="1488">Parsing episode data %i of %i from trakt</string>
+	<string id="1489">Retrieved episode data from trakt</string>
 
-	<!-- Sync Episodes - add to trakt -->
-	<string id="1435">Checking for episodes missing from trakt collection</string>
-	<string id="1490">trakt.tv episode collection is up to date, no episodes to add.</string>
-	<string id="1436">shows(s) have episodes added to trakt collection</string>
-	<string id="1437">episodes missing</string>
-	<string id="1491">%i episode(s) were added to your trakt.tv collection</string>
+    <!-- Sync Episodes - clean trakt -->
+	<string id="1445">Cleaning trakt tvshow collection</string>
+	<string id="1496">trakt episode collection is clean, no episodes to remove</string>
+	<string id="1497">%i episode(s) are being removed from your trakt collection</string>
+	<string id="1447">episodes are being removed</string>
+	<string id="1498">%i episode(s) were removed from your trakt collection</string>
 
 	<!-- Sync Episodes - update trakt -->
 	<string id="1438">Checking watched episodes on trakt</string>
-	<string id="1492">trakt.tv episode play count is up to date.</string>
-	<string id="1439">shows have missing watched status</string>
-	<string id="1440">episodes are being updated</string>
+	<string id="1492">trakt episode play count is up to date</string>
+	<string id="1439">%i shows had missing watched status</string>
+	<string id="1440">%i episodes are being updated</string>
 	
 	<!-- Sync Episodes - update kodi -->
 	<string id="1441">Checking watched episodes on Kodi</string>
-	<string id="1493">Kodi episode play count is up to date.</string>
-	<string id="1494">Updating episode play counts in Kodi</string>
+	<string id="1493">Kodi episode play count is up to date</string>
+	<string id="1494">Updating %i of %i episode play counts in Kodi</string>
 	<string id="1495">Play counts updated for %i episode(s) in Kodi</string>
 
-	<!-- Sync Episodes - clean trakt -->
-	<string id="1445">Cleaning trakt tvshow collection</string>
-	<string id="1496">trakt.tv episode collection is clean, no episodes to remove.</string>
-	<string id="1497">%i episode(s) are being removed from your trakt.tv collection.</string>
-	<string id="1447">episodes are being removed</string>
-	<string id="1498">%i episode(s) were removed from your trakt.tv collection</string>
+    <!-- Sync Episodes - add to trakt -->
+	<string id="1435">Checking for episodes missing from trakt collection</string>
+	<string id="1490">trakt episode collection is up to date, no episodes to add</string>
+	<string id="1436">%i of %i show(s) have episodes added to trakt collection</string>
+	<string id="1437">%i episodes missing</string>
+	<string id="1491">%i episode(s) were added to your trakt collection</string>
 
 	<!-- Sync Episodes - complete -->
 	<string id="1442">Episode Sync Complete</string>
 
 	<!-- Sync - manual mark watched -->
-	<string id="1550">trakt.tv - Marked as watched</string>
-	<string id="1551">trakt.tv - Failed making as watched</string>
+	<string id="1550">trakt - Marked as watched</string>
+	<string id="1551">trakt - Failed making as watched</string>
 	<string id="1552">%d episode(s) of '%s'</string>
 	
 	<!-- Debug Settings -->
