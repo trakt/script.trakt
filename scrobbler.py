@@ -149,6 +149,9 @@ class Scrobbler():
 							self.traktSummaryInfo = self.traktapi.getEpisodeSummary(lookupShow['ids'], self.curVideoInfo['season'], self.curVideoInfo['number'])
 						else:
 							Debug("[Scrobbler] Can not get summary information for '%s - S%02dE%02d' as it has no valid id, will retry during a watching call." % (self.curVideoInfo['showtitle'], self.curVideoInfo['season'], self.curVideoInfo['episode']))
+                                        else:
+                                                self.traktShowSummary = {'title': episodeDetailsKodi['showtitle']}
+                                                self.traktShowSummary['ids'] = {'tvdb': tvdb}
 				elif 'title' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
 					self.curVideoInfo = {'tvdb_id': None}
 					self.curVideoInfo['title'] = self.curVideo['title']
