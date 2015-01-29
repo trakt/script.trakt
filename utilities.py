@@ -114,37 +114,35 @@ def chunks(l, n):
 	return [l[i:i+n] for i in range(0, len(l), n)]
 
 # check exclusion settings for filename passed as argument
-def checkScrobblingExclusion(fullpath):
+def checkExclusion(fullpath):
 
 	if not fullpath:
 		return True
 
-	Debug("checkScrobblingExclusion(): Checking exclusion settings for '%s'." % fullpath)
-
 	if (fullpath.find("pvr://") > -1) and getSettingAsBool('ExcludeLiveTV'):
-		Debug("checkScrobblingExclusion(): Video is playing via Live TV, which is currently set as excluded location.")
+		Debug("checkExclusion(): Video is playing via Live TV, which is currently set as excluded location.")
 		return True
 
 	if (fullpath.find("http://") > -1) and getSettingAsBool('ExcludeHTTP'):
-		Debug("checkScrobblingExclusion(): Video is playing via HTTP source, which is currently set as excluded location.")
+		Debug("checkExclusion(): Video is playing via HTTP source, which is currently set as excluded location.")
 		return True
 
 	ExcludePath = getSetting('ExcludePath')
 	if ExcludePath != "" and getSettingAsBool('ExcludePathOption'):
 		if fullpath.find(ExcludePath) > -1:
-			Debug("checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 1.")
+			Debug("checkExclusion(): Video is playing from location, which is currently set as excluded path 1.")
 			return True
 
 	ExcludePath2 = getSetting('ExcludePath2')
 	if ExcludePath2 != "" and getSettingAsBool('ExcludePathOption2'):
 		if fullpath.find(ExcludePath2) > -1:
-			Debug("checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 2.")
+			Debug("checkExclusion(): Video is playing from location, which is currently set as excluded path 2.")
 			return True
 
 	ExcludePath3 = getSetting('ExcludePath3')
 	if ExcludePath3 != "" and getSettingAsBool('ExcludePathOption3'):
 		if fullpath.find(ExcludePath3) > -1:
-			Debug("checkScrobblingExclusion(): Video is playing from location, which is currently set as excluded path 3.")
+			Debug("checkExclusion(): Video is playing from location, which is currently set as excluded path 3.")
 			return True
 
 	return False
@@ -257,8 +255,8 @@ def findMediaObject(mediaObjectToMatch, listToSearch, returnIndex=False):
 	if result is None and 'ids' in mediaObjectToMatch and 'tvdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tvdb'].isdigit():
 		result = __findInList(listToSearch, returnIndex=returnIndex, tvdb=mediaObjectToMatch['ids']['tvdb'])
 	# match by title and year it will result in movies with the same title and year to mismatch - but what should we do instead?
-	if result is None and 'title' in mediaObjectToMatch and 'year' in mediaObjectToMatch['ids']:
-		result = __findInList(listToSearch, returnIndex=returnIndex, tvdb=mediaObjectToMatch['ids']['tvdb'])
+	if result is None and 'title' in mediaObjectToMatch and 'year' in mediaObjectToMatch:
+		result = __findInList(listToSearch, returnIndex=returnIndex, title=mediaObjectToMatch['title'], year=mediaObjectToMatch['year'])
 	return result
 
 def regex_tvshow(compare, file, sub = ""):
@@ -279,11 +277,10 @@ def regex_tvshow(compare, file, sub = ""):
 				break
 
 	if tvshow == 1:
-		for regex in regex_expressions:
+		for regex in REGEX_EXPRESSIONS:
 			response_sub = re.findall(regex, sub)
 			if len(response_sub) > 0 :
 				try :
-					sub_info = "Regex Subtitle Ep: %s," % (str(response_sub[0][1]),)
 					if (int(response_sub[0][1]) == int(response_file[0][1])):
 						return True
 				except: pass
@@ -311,4 +308,94 @@ def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list):
 			else:	
 				episode = season.episodes[episodeNumber]
 				return episode.to_info()
-		
+
+def kodiRpcToTraktMediaObject(mode, data):
+	if mode == 'tvshow':
+		data['ids'] = {}
+		id = data['imdbnumber']
+		if id.startswith("tt"):
+			data['ids']['imdb'] = id
+		if id.isdigit():
+			data['ids']['tvdb'] = id
+		del(data['imdbnumber'])
+		del(data['label'])
+		return data
+	elif mode == 'episode':
+		if checkExclusion(data['file']):
+			return
+		watched = 0;
+		if data['playcount'] > 0:
+			watched = 1
+
+		episode = { 'season': data['season'], 'number': data['episode'], 'title': data['label'],
+		            'ids': { 'tvdb': data['uniqueid']['unknown'], 'episodeid' : data['episodeid']}, 'watched': watched }
+		episode['collected'] = 1 #this is in our kodi so it should be collected
+		if 'lastplayed' in data:
+			episode['watched_at'] = data['lastplayed']
+		if 'dateadded' in data:
+			episode['collected_at'] = data['dateadded']
+		return episode
+
+	elif mode == 'movie':
+		if checkExclusion(data['file']):
+			return
+		if 'lastplayed' in data:
+			data['watched_at'] = data['lastplayed']
+		if 'dateadded' in data:
+			data['collected_at'] = data['dateadded']
+		data['plays'] = data.pop('playcount')
+		data['collected'] = 1 #this is in our kodi so it should be collected
+		data['watched'] = 1 if data['plays'] > 0 else 0
+		data['ids'] = {}
+		id = data['imdbnumber']
+		if id.startswith("tt"):
+			data['ids']['imdb'] = ""
+			data['ids']['imdb'] = id
+		if id.isdigit():
+			data['ids']['tmdb'] = ""
+			data['ids']['tmdb'] = id
+		del(data['imdbnumber'])
+		del(data['lastplayed'])
+		if 'dateadded' in data:
+			del(data['dateadded'])
+		del(data['label'])
+		del(data['file'])
+		return data
+	else:
+		Debug('[Utilities] kodiRpcToTraktMediaObject() No valid mode')
+		return
+
+def kodiRpcToTraktMediaObjects(data):
+	if 'tvshows' in data:
+		shows = data['tvshows']
+
+		# reformat show array
+		for show in shows:
+			kodiRpcToTraktMediaObject('tvshow', show)
+		return shows
+
+	elif 'episodes' in data:
+		a_episodes = {}
+		seasons = []
+		for episode in data['episodes']:
+			while not episode['season'] in a_episodes :
+				s_no = episode['season']
+				a_episodes[s_no] = []
+			s_no = episode['season']
+			a_episodes[s_no].append(kodiRpcToTraktMediaObject('episode', episode))
+
+		for episode in a_episodes:
+			seasons.append({'number': episode, 'episodes': a_episodes[episode]})
+		return seasons
+
+	elif 'movies' in data:
+		movies = data['movies']
+		kodi_movies = []
+
+		# reformat movie array
+		for movie in movies:
+			kodi_movies.append(kodiRpcToTraktMediaObject('movie', movie))
+		return kodi_movies
+	else:
+		Debug('[Utilities] kodiRpcToTraktMediaObjects() No valid key found in rpc data')
+		return

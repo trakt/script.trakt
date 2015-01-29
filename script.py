@@ -1,16 +1,8 @@
 # -*- coding: utf-8 -*-
-
-import sys
-
 import utilities as utils
 import xbmc
 import sqliteQueue
 
-
-try:
-	import simplejson as json
-except ImportError:
-	import json
 
 def __getMediaType():
 	
@@ -26,18 +18,7 @@ def __getMediaType():
 		return None
 
 def __getArguments():
-	data = None
-	default_actions = {0: "sync"}
-	default = utils.getSettingAsInt('default_action')
-	if len(sys.argv) == 1:
-		data = {'action': default_actions[default]}
-	else:
-		data = {}
-		for item in sys.argv:
-			values = item.split("=")
-			if len(values) == 2:
-				data[values[0].lower()] = values[1]
-		data['action'] = data['action'].lower()
+	data = {'action': "sync"}
 
 	return data
 

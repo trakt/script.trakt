@@ -159,7 +159,7 @@ class traktAPI(object):
 			result = Trakt['sync/collection'].remove(mediaObject)
 		return result
 
-	def updateSeenEpisode(self, mediaObject):
+	def addToHistory(self, mediaObject):
 		with Trakt.configuration.auth(self.__username, self.__token):
 			result = Trakt['sync/history'].add(mediaObject)
 		return result
@@ -395,12 +395,8 @@ class traktAPI(object):
 		Debug("[traktAPI] getIdLookup(url: %s)" % url)
 		lookup = self.traktRequest('GET', url)
 		for result in lookup:
-			if result['type'] == 'movie':
-				return result[result['type']]
-			elif result['type'] == 'show':
+			if result['type'] == 'movie' or result['type'] == 'show': #returning episode will break the code dependent on this
 				return result[result['type']]
 
 		Debug('Could not find movie or show object with this id')
-
 		return None
-

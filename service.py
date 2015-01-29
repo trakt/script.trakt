@@ -10,6 +10,7 @@ from traktapi import traktAPI
 from rating import rateMedia
 from scrobbler import Scrobbler
 from sync import Sync
+import traceback
 
 try:
 	import simplejson as json
@@ -31,45 +32,56 @@ class traktService:
 		self.dispatchQueue.append(data)
 	
 	def _dispatch(self, data):
-		utilities.Debug("Dispatch: %s" % data)
-		action = data['action']
-		if action == 'started':
-			del data['action']
-			self.scrobbler.playbackStarted(data)
-		elif action == 'ended' or action == 'stopped':
-			self.scrobbler.playbackEnded()
-		elif action == 'paused':
-			self.scrobbler.playbackPaused()
-		elif action == 'resumed':
-			self.scrobbler.playbackResumed()
-		elif action == 'seek' or action == 'seekchapter':
-			self.scrobbler.playbackSeek()
-		elif action == 'databaseUpdated':
-			if utilities.getSettingAsBool('sync_on_update'):
-				utilities.Debug("Performing sync after library update.")
-				self.doSync()
-		elif action == 'settingsChanged':
-			utilities.Debug("Settings changed, reloading.")
-			globals.traktapi.updateSettings()
-		elif action == 'markWatched':
-			del data['action']
-			self.doMarkWatched(data)
-		elif action == 'manualRating':
-			ratingData = data['ratingData']
-			self.doManualRating(ratingData)
-		elif action == 'manualSync':
-			if not self.syncThread.isAlive():
-				utilities.Debug("Performing a manual sync.")
-				self.doSync(manual=True, silent=data['silent'], library=data['library'])
+		try:
+			utilities.Debug("Dispatch: %s" % data)
+			action = data['action']
+			if action == 'started':
+				del data['action']
+				self.scrobbler.playbackStarted(data)
+			elif action == 'ended' or action == 'stopped':
+				self.scrobbler.playbackEnded()
+			elif action == 'paused':
+				self.scrobbler.playbackPaused()
+			elif action == 'resumed':
+				self.scrobbler.playbackResumed()
+			elif action == 'seek' or action == 'seekchapter':
+				self.scrobbler.playbackSeek()
+			elif action == 'databaseUpdated':
+				if utilities.getSettingAsBool('sync_on_update'):
+					utilities.Debug("Performing sync after library update.")
+					self.doSync()
+			elif action == 'settingsChanged':
+				utilities.Debug("Settings changed, reloading.")
+				globals.traktapi.updateSettings()
+			elif action == 'markWatched':
+				del data['action']
+				self.doMarkWatched(data)
+			elif action == 'manualRating':
+				ratingData = data['ratingData']
+				self.doManualRating(ratingData)
+			elif action == 'manualSync':
+				if not self.syncThread.isAlive():
+					utilities.Debug("Performing a manual sync.")
+					self.doSync(manual=True, silent=data['silent'], library=data['library'])
+				else:
+					utilities.Debug("There already is a sync in progress.")
+			elif action == 'settings':
+				utilities.showSettings()
+			elif action == 'scanStarted':
+				pass
 			else:
-				utilities.Debug("There already is a sync in progress.")
-		elif action == 'settings':
-			utilities.showSettings()
-		elif action == 'scanStarted':
-			pass
-		else:
-			utilities.Debug("Unknown dispatch action, '%s'." % action)
-
+				utilities.Debug("Unknown dispatch action, '%s'." % action)
+		except Exception as ex:
+			template = (
+			"[TRAKT] EXCEPTION Thrown (PythonToCppException) : -->Python callback/script returned the following error<--\n"
+			" - NOTE: IGNORING THIS CAN LEAD TO MEMORY LEAKS!\n"
+			"Error Type: <type '{0}'>\n"
+			"Error Contents: {1!r}\n"
+			"{2}"
+			"-->End of Python script error report<--"
+			)
+			message = template.format(type(ex).__name__, ex.args, traceback.format_exc())
+			print message
 	def run(self):
 		startup_delay = utilities.getSettingAsInt('startup_delay')
 		if startup_delay:
@@ -330,7 +342,7 @@ class traktPlayer(xbmc.Player):
 				utilities.Debug("[traktPlayer] onPlayBackStarted() - Exception trying to get playing filename, player suddenly stopped.")
 				return
 
-			if utilities.checkScrobblingExclusion(_filename):
+			if utilities.checkExclusion(_filename):
 				utilities.Debug("[traktPlayer] onPlayBackStarted() - '%s' is in exclusion settings, ignoring." % _filename)
 				return
 
