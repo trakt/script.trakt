@@ -22,8 +22,13 @@ class HttpClient(object):
         return self
 
     def request(self, method, path=None, params=None, data=None, **kwargs):
+        # retrieve configuration
         ctx = self.configuration.pop()
 
+        retry = self.client.configuration.get('http.retry', False)
+        max_retries = self.client.configuration.get('http.max_retries', 3)
+
+        # build request
         if ctx.base_path and path:
             path = ctx.base_path + '/' + path
         elif ctx.base_path:
@@ -41,29 +46,32 @@ class HttpClient(object):
 
         prepared = request.prepare()
 
-        # retrying requests on errors >= 500 
-        try:
-            for i in range(5):
-                if i > 0 :
-                    log.warn('Retry # %s',i)
+        # retrying requests on errors >= 500
+        response = None
+
+        for i in range(max_retries + 1):
+            if i > 0 :
+                log.warn('Retry # %s', i)
+
+            try:
                 response = self.session.send(prepared)
-                
-                if response.status_code < 500:
-                    #log.warn('Breaking out of retries with status %s', response.status_code)
-                    break
-                else:
-                    log.warn('Continue retry since status is %s', response.status_code)
-                    time.sleep(5)
-            return response
-        except socket.gaierror, e:
-            code, _ = e
+            except socket.gaierror, e:
+                code, _ = e
 
-            if code != 8:
-                raise e
+                if code != 8:
+                    raise e
 
-            log.warn('Encountered socket.gaierror (code: 8)')
+                log.warn('Encountered socket.gaierror (code: 8)')
 
-            return self._rebuild().send(prepared)
+                response = self._rebuild().send(prepared)
+
+            if not retry or response.status_code < 500:
+                break
+
+            log.warn('Continue retry since status is %s', response.status_code)
+            time.sleep(5)
+
+        return response
 
     def get(self, path=None, params=None, data=None, **kwargs):
         return self.request('GET', path, params, data, **kwargs)

@@ -64,19 +64,26 @@ class Show(Media):
             for ek, episode in season.episodes.iteritems():
                 yield (sk, ek), episode
 
-    def to_info(self):
-        info = {
+    def to_identifier(self):
+        return {
             'ids': dict(self.keys),
             'title': self.title,
-            'year': self.year,
-            'seasons': [
-                season.to_info()
-                for season in self.seasons.values()
-            ]
+            'year': self.year
         }
+
+    def to_info(self):
+        result = self.to_identifier()
+
+        result['seasons'] = [
+            season.to_info()
+            for season in self.seasons.values()
+        ]
+
         if self.rating:
-            info['rating'] = self.rating.value
-        return info
+            result['rating'] = self.rating.value
+            result['rated_at'] = self.rating.timestamp
+
+        return result
 
     def update(self, info=None, **kwargs):
         super(Show, self).update(info, **kwargs)
@@ -100,17 +107,23 @@ class Season(Media):
 
         self.episodes = {}
 
-    def to_info(self):
-        info = {
+    def to_identifier(self):
+        return {
             'number': self.pk,
             'episodes': [
                 episode.to_info()
                 for episode in self.episodes.values()
             ]
         }
+
+    def to_info(self):
+        result = self.to_identifier()
+
         if self.rating:
-            info['rating'] = self.rating.value
-        return info
+            result['rating'] = self.rating.value
+            result['rated_at'] = self.rating.timestamp
+
+        return result
 
     @classmethod
     def create(cls, number, info=None, **kwargs):
@@ -127,19 +140,28 @@ class Episode(Video):
     def __init__(self, number):
         super(Episode, self).__init__([number])
 
+    def to_identifier(self):
+        return {
+            'number': self.pk
+        }
+
     def to_info(self):
+        result = self.to_identifier()
+
         # add ids as well since trakt adds ids to the episodes as well
-        info = {
-            'number': self.pk,
+        result.update({
             'watched': 1 if self.is_watched else 0,
             'collected': 1 if self.is_collected else 0,
             'plays': self.plays,
             'collected_at': self.collected_at,
             'ids': {}
-        }
+        })
+
         if self.rating:
-            info['rating'] = self.rating.value
-        return info
+            result['rating'] = self.rating.value
+            result['rated_at'] = self.rating.timestamp
+
+        return result
 
     @classmethod
     def create(cls, pk, info=None, **kwargs):
@@ -159,19 +181,28 @@ class Movie(Video):
         self.title = None
         self.year = None
 
-    def to_info(self):
-        info = {
+    def to_identifier(self):
+        return {
             'ids': dict(self.keys),
             'title': self.title,
-            'year': self.year,
+            'year': self.year
+        }
+
+    def to_info(self):
+        result = self.to_identifier()
+
+        result.update({
             'watched': 1 if self.is_watched else 0,
             'collected': 1 if self.is_collected else 0,
             'plays': self.plays,
             'collected_at': self.collected_at
-        }
+        })
+
         if self.rating:
-            info['rating'] = self.rating.value
-        return info
+            result['rating'] = self.rating.value
+            result['rated_at'] = self.rating.timestamp
+
+        return result
 
     def update(self, info=None, **kwargs):
         super(Movie, self).update(info, **kwargs)

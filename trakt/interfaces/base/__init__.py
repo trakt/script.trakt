@@ -1,4 +1,5 @@
 from trakt.core.errors import ERRORS
+from trakt.core.exceptions import ServerError, ClientError
 from trakt.helpers import setdefault
 from trakt.media_mapper import MediaMapper
 
@@ -55,7 +56,7 @@ class Interface(object):
         return self.client.http.configure(self.path)
 
     @staticmethod
-    def get_data(response, parse=True):
+    def get_data(response, exceptions=False, parse=True):
         if response is None:
             return None
 
@@ -85,6 +86,13 @@ class Interface(object):
             name, desc = ERRORS.get(response.status_code, ("Unknown", "Unknown"))
 
             log.warning('request failed: %s - "%s" (code: %s)', name, desc, response.status_code)
+
+            if exceptions:
+                # Raise an exception (including the response for further processing)
+                if response.status_code >= 500:
+                    raise ServerError(response)
+                else:
+                    raise ClientError(response)
 
             # Set error flag
             error = True
