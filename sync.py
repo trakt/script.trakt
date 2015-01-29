@@ -231,13 +231,7 @@ class Sync():
 							episodes = []
 							for episodeKey in seasonKey['episodes']:
 								if watched == episodeKey['watched']:
-									if 'ids' in episodeKey:
-										ids = episodeKey['ids']
-										if 'episodeid' in ids:
-											del(ids['episodeid'])
-									else:
-										ids = {}
-									episodes.append({ 'number': episodeKey['number'], 'ids': ids })
+									episodes.append(episodeKey)
 									
 							show['seasons'].append({ 'number': seasonKey['number'], 'episodes': episodes })
 
@@ -256,11 +250,24 @@ class Sync():
 		for show in shows['shows']:
 			Debug("[Episodes Sync] Episodes added: %s" % self.__getShowAsString(show, short=True))
 
-		self.__updateProgress(82, line1=utilities.getString(1435), line2="%i %s" % (len(shows['shows']), utilities.getString(1436)), line3=" ")
+		self.__updateProgress(82, line1=utilities.getString(1435), line2="0/%i %s" % (len(shows['shows']), utilities.getString(1436)), line3=" ")
 
-		Debug("[trakt][traktAddEpisodes] Shows to add %s" % shows)
-		result = self.traktapi.addToCollection(shows)
-		Debug("[trakt][traktAddEpisodes] Result %s" % result)
+		#split episode list into chunks of 50
+		chunksize = 1
+		chunked_episodes = utilities.chunks(shows['shows'], chunksize)
+		i = 0
+		x = float(len(chunked_episodes))
+		for chunk in chunked_episodes:
+			if self.__isCanceled():
+				return
+			request = {'shows': chunk}
+			Debug("[trakt][traktAddEpisodes] Shows to add %s" % request)
+			result = self.traktapi.addToCollection(request)
+			Debug("[trakt][traktAddEpisodes] Result %s" % result)
+
+			i += 1
+			y = ((i / x) * 16) + 82
+			self.__updateProgress(int(y), line2="%i/%i %s" % (i*chunksize, x, utilities.getString(1436)))
 
 		self.__updateProgress(98, line1=utilities.getString(1435), line2=utilities.getString(1491) % self.__countEpisodes(shows['shows']))
 
@@ -377,6 +384,7 @@ class Sync():
 		
 		if utilities.getSettingAsBool('trakt_episode_playcount') and not self.__isCanceled():
 			traktShowsUpdate = self.__compareShows(kodiShows, traktShows, watched=True)
+			Debug("traktShowsUpdate %s" % traktShowsUpdate)
 			self.__traktUpdateEpisodes(traktShowsUpdate)
 
 		if utilities.getSettingAsBool('kodi_episode_playcount') and not self.__isCanceled():
@@ -385,6 +393,7 @@ class Sync():
 
 		if utilities.getSettingAsBool('add_episodes_to_trakt') and not self.__isCanceled():
 			traktShowsAdd = self.__compareShows(kodiShows, traktShows)
+			Debug("traktShowsAdd %s" % traktShowsAdd)
 			self.__traktAddEpisodes(traktShowsAdd)
 
 		if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
