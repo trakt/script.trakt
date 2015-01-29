@@ -67,18 +67,18 @@
 	<!-- Sync Settings -->
 	<string id="1400">Synchronize</string>
 	<string id="1402">Movies</string>
-	<string id="1403">Add movies to trakt collection</string>
-	<string id="1404">Update trakt movie playcounts</string>
-	<string id="1405">Update Kodi movie playcounts</string>
+	<string id="1403">Add new movies to trakt collection</string>
+	<string id="1404">Add watched movies to trakt history</string>
+	<string id="1405">Mark movies from trakt history as watched in kodi</string>
 	<string id="1406">TV Episodes</string>
-	<string id="1407">Add TV episodes to trakt collection</string>
-	<string id="1408">Update trakt TV episode playcounts</string>
-	<string id="1409">Update Kodi TV episode playcounts</string>
+	<string id="1407">Add new TV episodes to trakt collection</string>
+	<string id="1408">Add watched TV episodes to trakt history</string>
+	<string id="1409">Mark TV episodes from trakt history as watched in kodi</string>
 	<string id="1410">Service</string>
 	<string id="1411">Sync after library updates</string>
 	<string id="1412">Show notifications</string>
-	<string id="1413">Clean trakt movie collection</string>
-	<string id="1414">Clean trakt episode collection</string>
+	<string id="1413">Remove deleted movies from trakt collection</string>
+	<string id="1414">Remove deleted TV episodes from trakt collection</string>
 	<string id="1416">Show marked as watched notification</string>
 	<string id="1417">Hide notifications during playback</string>
 

@@ -3,7 +3,7 @@
 	<category label="1010"><!-- General -->
 		<setting id="username" type="text" label="1013" default="" />
 		<setting id="password" type="text" option="hidden" label="1014" default="" />
-		<setting id="retries" type="slider" label="1017" range="1,1,10" default="5" option="int"/>
+		<setting id="retries" type="slider" label="1017" range="1,1,10" default="1" option="int"/>
 		<setting id="startup_delay" type="slider" label="1018" range="0,30" default="0" option="int"/>
 	</category>
 	<category label="1050"><!-- Exclusions -->
@@ -32,15 +32,15 @@
 		<setting type="sep"/>
 		<setting label="1402" type="lsep"/><!-- Movies -->
 		<setting id="add_movies_to_trakt" type="bool" label="1403" default="true"/>
+        <setting id="clean_trakt_movies" type="bool" label="1413" default="false"/>
 		<setting id="trakt_movie_playcount" type="bool" label="1404" default="true"/>
 		<setting id="kodi_movie_playcount" type="bool" label="1405" default="true"/>
-		<setting id="clean_trakt_movies" type="bool" label="1413" default="false"/>
 		<setting type="sep"/>
 		<setting label="1406" type="lsep"/><!-- Episodes -->
 		<setting id="add_episodes_to_trakt" type="bool" label="1407" default="true"/>
+        <setting id="clean_trakt_episodes" type="bool" label="1414" default="false"/>
 		<setting id="trakt_episode_playcount" type="bool" label="1408" default="true"/>
 		<setting id="kodi_episode_playcount" type="bool" label="1409" default="true"/>
-		<setting id="clean_trakt_episodes" type="bool" label="1414" default="false"/>
 	</category>
 	<category label="1030"><!-- Rating -->
 		<setting id="rate_movie" type="bool" label="1031" default="true"/>
