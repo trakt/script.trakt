@@ -169,7 +169,7 @@
 
 	<!-- Sync - manual mark watched -->
 	<string id="1550">trakt.tv - Marked as watched</string>
-	<string id="1551">trakt.tv - Failed making as watched</string>
+	<string id="1551">trakt.tv - Failed marking as watched</string>
 	<string id="1552">%d episode(s) of '%s'</string>
 	
 	<!-- Debug Settings -->
