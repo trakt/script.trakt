@@ -1,3 +1,10 @@
+version 3.0.0
+  - ported to trakt.tv api v2
+  - removed lists management and contextmenu (for now)
+  - default rating is now a neutral 6 "Okay"
+  - various improvements and bugfixes
+
+  
 version 2.3.2
   - fixed update tags not running after sync, if the setting was enabled (nate1280)
   - fixed usage of sync after library update, was always syncing (nate1280)
