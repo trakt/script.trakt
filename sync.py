@@ -389,7 +389,7 @@ class Sync():
 		if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1406)), utilities.getString(1421)) #Sync complete
 
-		if not self.__isCanceled() and self.show_progress and not self.run_silent:
+		if self.show_progress and not self.run_silent:
 			self.__updateProgress(100, line1=" ", line2=utilities.getString(1442), line3=" ")
 			progress.close()
 
@@ -567,7 +567,7 @@ class Sync():
 			Debug("[Movies Sync] Compared movies, found %s to add." % len(traktMoviesToAdd))
 			self.__traktAddMovies(traktMoviesToAdd)
 
-		if not self.__isCanceled() and self.show_progress and not self.run_silent:
+		if self.show_progress and not self.run_silent:
 			self.__updateProgress(100, line1=utilities.getString(1431), line2=" ", line3=" ")
 			progress.close()
 
