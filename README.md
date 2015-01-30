@@ -36,7 +36,7 @@ Remote streaming content will scrobble assuming the metadata is correctly set in
 
 1. Clone this repository (or [download it here](https://github.com/rectifyer/script.trakt/zipball/master)) into a folder called **script.trakt** inside your Kodi **addons** folder
 2. Start up Kodi (or restart if its already running)
-3. Make sure you have six and requests installed. Check under *Settings* > *Add-ons* > *Get Add-ons* > *All Add-ons* > *Add-on libraries* (restart if you had to install these)
+3. Make sure you have six, pytz and requests installed. Check under *Settings* > *Add-ons* > *Get Add-ons* > *All Add-ons* > *Add-on libraries* (restart if you had to install these)
 4. Navigate to *Settings* > *Add-ons* > *Enabled add-ons* > *Services* > **trakt**
 5. Select *trakt* and go to **Configure**
 6. Enter your **username**, **password**, and change any other settings as needed
