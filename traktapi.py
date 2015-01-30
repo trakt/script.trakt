@@ -57,7 +57,7 @@ class traktAPI(object):
 		self.__token = getSetting('token')
 
 		# Configure
-		logging.basicConfig(level=logging.DEBUG)
+		logging.basicConfig(level=logging.INFO)
 		Trakt.configuration.http(retry=True, max_retries=getSettingAsInt('retries'))
 		Trakt.configuration.defaults.client(
 			id=self.__apikey
@@ -131,23 +131,23 @@ class traktAPI(object):
 
 	def getShowsCollected(self, shows):
 		with Trakt.configuration.auth(self.__username, self.__token):
-				Trakt['sync/collection'].shows(shows)
+				Trakt['sync/collection'].shows(shows, exceptions=True)
 		return shows
 
 	def getMoviesCollected(self, movies):
 		with Trakt.configuration.auth(self.__username, self.__token):
-				Trakt['sync/collection'].movies(movies)
+				Trakt['sync/collection'].movies(movies, exceptions=True)
 		return movies
 
 
 	def getShowsWatched(self, shows):
 		with Trakt.configuration.auth(self.__username, self.__token):
-				Trakt['sync/watched'].shows(shows)
+				Trakt['sync/watched'].shows(shows, exceptions=True)
 		return shows
 
 	def getMoviesWatched(self, movies):
 		with Trakt.configuration.auth(self.__username, self.__token):
-				Trakt['sync/watched'].movies(movies)
+				Trakt['sync/watched'].movies(movies, exceptions=True)
 		return movies
 
 	def addToCollection(self, mediaObject):
