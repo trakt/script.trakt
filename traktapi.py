@@ -6,7 +6,7 @@ import time, socket
 import math
 import logging
 
-from trakt import Trakt
+from trakt import Trakt, ClientError, ServerError
 from utilities import Debug, notification, getSetting, getSettingAsInt, getString, findMovieMatchInList, findEpisodeMatchInList
 from urllib2 import Request, urlopen, HTTPError, URLError
 from httplib import HTTPException, BadStatusLine
@@ -49,7 +49,6 @@ class traktAPI(object):
 	__timeout = 15
 
 	def __init__(self):
-		logging.basicConfig()
 		Debug("[traktAPI] Initializing.")
 
 		# Get user login data
@@ -58,6 +57,8 @@ class traktAPI(object):
 		self.__token = getSetting('token')
 
 		# Configure
+		logging.basicConfig(level=logging.DEBUG)
+		Trakt.configuration.http(retry=True, max_retries=getSettingAsInt('retries'))
 		Trakt.configuration.defaults.client(
 			id=self.__apikey
 		)
@@ -71,10 +72,10 @@ class traktAPI(object):
 		_username = getSetting('username')
 		_password = getSetting('password')
 
-		if not ((self.__username == _username)):
+		if not (self.__username == _username):
 			self.__username = _username
 
-		if not ((self.__password == _password)):
+		if not (self.__password == _password):
 			self.__password = _password
 
 		self.getToken()
