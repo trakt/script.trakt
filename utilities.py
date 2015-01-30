@@ -6,6 +6,9 @@ import xbmcaddon
 import time
 import copy
 import re
+import datetime
+import pytz
+from tzlocal import get_localzone
 
 try:
 	import simplejson as json
@@ -331,18 +334,18 @@ def kodiRpcToTraktMediaObject(mode, data):
 		            'ids': { 'tvdb': data['uniqueid']['unknown'], 'episodeid' : data['episodeid']}, 'watched': watched }
 		episode['collected'] = 1 #this is in our kodi so it should be collected
 		if 'lastplayed' in data:
-			episode['watched_at'] = data['lastplayed']
+			episode['watched_at'] = convertDateTimeToUTC(data['lastplayed'])
 		if 'dateadded' in data:
-			episode['collected_at'] = data['dateadded']
+			episode['collected_at'] = convertDateTimeToUTC(data['dateadded'])
 		return episode
 
 	elif mode == 'movie':
 		if checkExclusion(data['file']):
 			return
 		if 'lastplayed' in data:
-			data['watched_at'] = data['lastplayed']
+			data['watched_at'] = convertDateTimeToUTC(data['lastplayed'])
 		if 'dateadded' in data:
-			data['collected_at'] = data['dateadded']
+			data['collected_at'] = convertDateTimeToUTC(data['dateadded'])
 		data['plays'] = data.pop('playcount')
 		data['collected'] = 1 #this is in our kodi so it should be collected
 		data['watched'] = 1 if data['plays'] > 0 else 0
@@ -399,3 +402,17 @@ def kodiRpcToTraktMediaObjects(data):
 	else:
 		Debug('[Utilities] kodiRpcToTraktMediaObjects() No valid key found in rpc data')
 		return
+
+def convertDateTimeToUTC(toConvert):
+	if toConvert:
+		tz = get_localzone()
+		local = pytz.timezone (str(tz))
+		naive = datetime.datetime.strptime (toConvert, "%Y-%m-%d %H:%M:%S")
+		#todo set dst
+		local_dt = local.localize(naive, is_dst=False)
+		utc_dt = local_dt.astimezone (pytz.utc)
+
+		# Return naive datetime object
+		return unicode(utc_dt)
+	else:
+		return toConvert
