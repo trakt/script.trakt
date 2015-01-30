@@ -18,6 +18,8 @@ except ImportError:
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')
 
+__local = pytz.timezone (str(get_localzone()))
+
 # make strptime call prior to doing anything, to try and prevent threading errors
 time.strptime("1970-01-01 12:00:00", "%Y-%m-%d %H:%M:%S")
 
@@ -405,11 +407,10 @@ def kodiRpcToTraktMediaObjects(data):
 
 def convertDateTimeToUTC(toConvert):
 	if toConvert:
-		tz = get_localzone()
-		local = pytz.timezone (str(tz))
+
 		naive = datetime.datetime.strptime (toConvert, "%Y-%m-%d %H:%M:%S")
 		#todo set dst
-		local_dt = local.localize(naive, is_dst=False)
+		local_dt = __local.localize(naive, is_dst=False)
 		utc_dt = local_dt.astimezone (pytz.utc)
 
 		# Return naive datetime object
