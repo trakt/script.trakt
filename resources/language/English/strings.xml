@@ -75,7 +75,7 @@
 	<string id="1408">Add watched TV episodes to trakt history</string>
 	<string id="1409">Mark TV episodes from trakt history as watched in Kodi</string>
 	<string id="1410">Service</string>
-	<string id="1411">Sync after library updates</string>
+	<string id="1411">Sync collection on library update or cleaning</string>
 	<string id="1412">Show notifications</string>
 	<string id="1413">Remove deleted movies from trakt collection</string>
 	<string id="1414">Remove deleted TV episodes from trakt collection</string>

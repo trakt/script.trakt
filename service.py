@@ -1,21 +1,19 @@
 # -*- coding: utf-8 -*-
-
-import xbmc
 import threading
 from time import time
-import sqliteQueue
-import globals
-import utilities
-from traktapi import traktAPI
-from rating import rateMedia
-from scrobbler import Scrobbler
-from sync import Sync
 import traceback
 
-try:
-	import simplejson as json
-except ImportError:
-	import json
+import xbmc
+
+from traktapi import traktAPI
+
+import globals
+from rating import rateMedia
+from scrobbler import Scrobbler
+import sqliteQueue
+from sync import Sync
+import utilities
+
 
 class traktService:
 
@@ -50,6 +48,10 @@ class traktService:
 				if utilities.getSettingAsBool('sync_on_update'):
 					utilities.Debug("Performing sync after library update.")
 					self.doSync()
+			elif action == 'databaseCleaned':
+				if utilities.getSettingAsBool('sync_on_update') and (utilities.getSettingAsBool('clean_trakt_movies') or utilities.getSettingAsBool('clean_trakt_episodes')):
+					utilities.Debug("Performing sync after library clean.")
+					self.doSync()
 			elif action == 'settingsChanged':
 				utilities.Debug("Settings changed, reloading.")
 				globals.traktapi.updateSettings()
@@ -82,6 +84,7 @@ class traktService:
 			)
 			message = template.format(type(ex).__name__, ex.args, traceback.format_exc())
 			print message
+
 	def run(self):
 		startup_delay = utilities.getSettingAsInt('startup_delay')
 		if startup_delay:
@@ -292,11 +295,14 @@ class traktMonitor(xbmc.Monitor):
 	def __init__(self, *args, **kwargs):
 		xbmc.Monitor.__init__(self)
 		self.action = kwargs['action']
+		# xbmc.getCondVisibility('Library.IsScanningVideo') returns false when cleaning during update...
+		self.scanning_video = False
 		utilities.Debug("[traktMonitor] Initalized.")
 
 	# called when database gets updated and return video or music to indicate which DB has been changed
 	def onDatabaseUpdated(self, database):
 		if database == 'video':
+			self.scanning_video = False
 			utilities.Debug("[traktMonitor] onDatabaseUpdated(database: %s)" % database)
 			data = {'action': 'databaseUpdated'}
 			self.action(data)
@@ -304,6 +310,7 @@ class traktMonitor(xbmc.Monitor):
 	# called when database update starts and return video or music to indicate which DB is being updated
 	def onDatabaseScanStarted(self, database):
 		if database == "video":
+			self.scanning_video = True
 			utilities.Debug("[traktMonitor] onDatabaseScanStarted(database: %s)" % database)
 			data = {'action': 'scanStarted'}
 			self.action(data)
@@ -311,6 +318,13 @@ class traktMonitor(xbmc.Monitor):
 	def onSettingsChanged(self):
 		data = {'action': 'settingsChanged'}
 		self.action(data)
+
+	# Generic notification handler.  Only available in Gotham and later.
+	def onNotification(self, sender, method, data):
+		# onCleanFinished callback is only available in Helix and later.
+		if method == 'VideoLibrary.OnCleanFinished' and not self.scanning_video: # Ignore clean on update.
+			data = {'action': 'databaseCleaned'}
+			self.action(data)
 
 class traktPlayer(xbmc.Player):
 
