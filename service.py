@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
-
-import xbmc
-import threading
 from time import time
-import sqliteQueue
-import globals
-import utilities
-from traktapi import traktAPI
-from rating import rateMedia
-from scrobbler import Scrobbler
-from sync import Sync
+import threading
 import traceback
 
-try:
-	import simplejson as json
-except ImportError:
-	import json
+import xbmc
+
+import simplejson
+
+from traktapi import traktAPI
+
+import globals
+from rating import rateMedia
+from scrobbler import Scrobbler
+import sqliteQueue
+from sync import Sync
+import utilities
 
 class traktService:
 
