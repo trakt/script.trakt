@@ -144,7 +144,7 @@ class Sync():
 		for show in shows['shows']:
 			Debug("[Episodes Sync] Episodes updated: %s" % self.__getShowAsString(show, short=True))
 
-		self.__updateProgress(49, line1=utilities.getString(1438), line2=utilities.getString(1439) % (len(shows['shows'])), line3=" ")
+		self.__updateProgress(49, line1=utilities.getString(1438), line2=utilities.getString(1437) % (len(shows['shows'])), line3="")
 
 		i = 0
 		x = float(len(shows['shows']))
@@ -164,7 +164,7 @@ class Sync():
 			y = ((i / x) * 16) + 49
 			self.__updateProgress(int(y), line2=title, line3=utilities.getString(1440) % epCount)
 
-		self.__updateProgress(65, line2="%i %s" % (len(shows['shows']), utilities.getString(1439)))
+		self.__updateProgress(65, line2=utilities.getString(1439) % (len(shows['shows'])), line3="")
 
 	def __kodiUpdateEpisodes(self, shows):
 		if len(shows['shows']) == 0:
@@ -210,7 +210,7 @@ class Sync():
 		for show in shows['shows']:
 			Debug("[Episodes Sync] Episodes added: %s" % self.__getShowAsString(show, short=True))
 
-		self.__updateProgress(82, line1=utilities.getString(1435), line2=utilities.getString(1436) % (0, len(shows['shows'])), line3=" ")
+		self.__updateProgress(82, line1=utilities.getString(1435), line2=utilities.getString(1434) % (len(shows['shows'])), line3=" ")
 
 		#split episode list into chunks of 50
 		chunksize = 1
@@ -287,6 +287,8 @@ class Sync():
 		shows = []
 		for show_col1 in shows_col1['shows']:
 			show_col2 = utilities.findMediaObject(show_col1, shows_col2['shows'])
+			#Debug("show_col1 %s" % show_col1)
+			#Debug("show_col2 %s" % show_col2)
 
 			if show_col2:
 				season_diff = {}

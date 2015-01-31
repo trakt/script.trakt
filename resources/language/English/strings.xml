@@ -144,9 +144,10 @@
 	<!-- Sync Episodes - update trakt -->
 	<string id="1438">Checking watched episodes on trakt</string>
 	<string id="1492">trakt episode playcounts are up to date</string>
-	<string id="1439">%i shows had missing watched status</string>
+    <string id="1437">Going to update %i show(s) missing watched status</string>
+	<string id="1439">%i show(s) had missing watched status</string>
 	<string id="1440">%i episodes are being updated</string>
-	
+
 	<!-- Sync Episodes - update Kodi -->
 	<string id="1441">Checking watched episodes on Kodi</string>
 	<string id="1493">Kodi episode playcounts are up to date</string>
@@ -156,6 +157,7 @@
     <!-- Sync Episodes - add to trakt -->
 	<string id="1435">Checking for episodes missing from trakt collection</string>
 	<string id="1490">trakt episode collection is up to date, no episodes to add</string>
+    <string id="1434">Going to add %i show(s) to trakt collection</string>
 	<string id="1436">%i of %i show(s) have episodes added to trakt collection</string>
 	<string id="1437">%i episodes missing</string>
 	<string id="1491">%i episode(s) were added to your trakt collection</string>
