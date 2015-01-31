@@ -8,12 +8,14 @@ import copy
 import re
 import datetime
 import pytz
+import sys
+
 from tzlocal import get_localzone
 
-try:
+if sys.version_info >=  (2, 7):
+	import json as json
+else:
 	import simplejson as json
-except ImportError:
-	import json
 
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')

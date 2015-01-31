@@ -5,16 +5,17 @@ import xbmcaddon
 import time, socket
 import math
 import logging
+import sys
 
 from trakt import Trakt, ClientError, ServerError
 from utilities import Debug, notification, getSetting, getSettingAsInt, getString, findMovieMatchInList, findEpisodeMatchInList
 from urllib2 import Request, urlopen, HTTPError, URLError
 from httplib import HTTPException, BadStatusLine
 
-try:
+if sys.version_info >=  (2, 7):
+	import json as json
+else:
 	import simplejson as json
-except ImportError:
-	import json
 
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')

@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import os
+import sys
 import sqlite3
 import utilities as utils
 
-try:
-	from simplejson import loads, dumps
-except ImportError:
+if sys.version_info >=  (2, 7):
 	from json import loads, dumps
+else:
+	from simplejson import loads, dumps
+
 from time import sleep
 
 try:
