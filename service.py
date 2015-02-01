@@ -83,7 +83,7 @@ class traktService:
 			"-->End of Python script error report<--"
 			)
 			message = template.format(type(ex).__name__, ex.args, traceback.format_exc())
-			print message
+			xbmc.log(message, level=xbmc.LOGDEBUG)
 
 	def run(self):
 		startup_delay = utilities.getSettingAsInt('startup_delay')

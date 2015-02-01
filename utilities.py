@@ -39,10 +39,9 @@ REGEX_EXPRESSIONS = [ '[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
 
 def Debug(msg, force = False):
 	if getSettingAsBool('debug') or force:
-		try:
-			print("[trakt] " + msg)
-		except UnicodeEncodeError:
-			print("[trakt] " + msg.encode('utf-8', 'ignore'))
+		xbmc.log("[trakt] " + msg, level=xbmc.LOGNOTICE)
+	else:
+		xbmc.log("[trakt] " + msg, level=xbmc.LOGDEBUG)
 
 
 def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')):
