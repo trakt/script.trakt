@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import copy
 import xbmc
 import xbmcgui
 import utilities
@@ -243,9 +244,7 @@ class Sync():
 				for seasonKey in show['seasons']:
 					if 'seasons' in show:
 						for episodeKey in seasonKey['episodes']:
-							if 'watched' in episodeKey and not episodeKey['watched'] == watched:
-								continue
-							if 'collected' in episodeKey and not episodeKey['collected'] == collection:
+							if ('watched' in episodeKey and not episodeKey['watched'] == watched) and ('collected' in episodeKey and not episodeKey['collected'] == collection):
 								continue
 							if 'number' in episodeKey and episodeKey['number']:
 								count += 1
@@ -342,8 +341,7 @@ class Sync():
 						for seasonKey in show_col1['seasons']:
 							episodes = []
 							for episodeKey in seasonKey['episodes']:
-								if watched == episodeKey['watched']:
-									episodes.append(episodeKey)
+								episodes.append(episodeKey)
 									
 							show['seasons'].append({ 'number': seasonKey['number'], 'episodes': episodes })
 
@@ -374,22 +372,35 @@ class Sync():
 			return
 
 		if utilities.getSettingAsBool('clean_trakt_episodes') and not self.__isCanceled():
-			traktShowsRemove = self.__compareShows(traktShows, kodiShows)
+			removeTraktShows = copy.deepcopy(traktShows)
+			removeKodiShows = copy.deepcopy(kodiShows)
+
+			traktShowsRemove = self.__compareShows(removeTraktShows, removeKodiShows)
 			self.sanitizeShows(traktShowsRemove)
 			self.__traktRemoveEpisodes(traktShowsRemove)
 		
 		if utilities.getSettingAsBool('trakt_episode_playcount') and not self.__isCanceled():
-			traktShowsUpdate = self.__compareShows(kodiShows, traktShows, watched=True)
+			updateTraktTraktShows = copy.deepcopy(traktShows)
+			updateTraktKodiShows = copy.deepcopy(kodiShows)
+
+			traktShowsUpdate = self.__compareShows(updateTraktKodiShows, updateTraktTraktShows, watched=True)
 			self.sanitizeShows(traktShowsUpdate)
 			Debug("traktShowsUpdate %s" % traktShowsUpdate)
 			self.__traktUpdateEpisodes(traktShowsUpdate)
 
 		if utilities.getSettingAsBool('kodi_episode_playcount') and not self.__isCanceled():
-			kodiShowsUpadate = self.__compareShows(traktShows, kodiShows, watched=True, restrict=True)
+			updateKodiTraktShows = copy.deepcopy(traktShows)
+			updateKodiKodiShows = copy.deepcopy(kodiShows)
+
+			kodiShowsUpadate = self.__compareShows(updateKodiTraktShows, updateKodiKodiShows, watched=True, restrict=True)
 			self.__kodiUpdateEpisodes(kodiShowsUpadate)
 
 		if utilities.getSettingAsBool('add_episodes_to_trakt') and not self.__isCanceled():
-			traktShowsAdd = self.__compareShows(kodiShows, traktShows)
+			addTraktShows = copy.deepcopy(traktShows)
+			addKodiShows = copy.deepcopy(kodiShows)
+
+			tmpTraktShowsAdd = self.__compareShows(addKodiShows, addTraktShows)
+			traktShowsAdd = copy.deepcopy(tmpTraktShowsAdd)
 			self.sanitizeShows(traktShowsAdd)
 			Debug("traktShowsAdd %s" % traktShowsAdd)
 			self.__traktAddEpisodes(traktShowsAdd)
@@ -572,23 +583,35 @@ class Sync():
 			return
 
 		if utilities.getSettingAsBool('clean_trakt_movies') and not self.__isCanceled():
+			removeTraktMovies = copy.deepcopy(traktMovies)
+			removeKodiMovies = copy.deepcopy(kodiMovies)
+
 			Debug("[Movies Sync] Starting to remove.")
-			traktMoviesToRemove = self.__compareMovies(traktMovies, kodiMovies)
+			traktMoviesToRemove = self.__compareMovies(removeTraktMovies, removeKodiMovies)
 			self.sanitizeMovies(traktMoviesToRemove)
 			Debug("[Movies Sync] Compared movies, found %s to remove." % len(traktMoviesToRemove))
 			self.__traktRemoveMovies(traktMoviesToRemove)
 
 		if utilities.getSettingAsBool('trakt_movie_playcount') and not self.__isCanceled():
-			traktMoviesToUpdate = self.__compareMovies(kodiMovies, traktMovies, watched=True)
+			updateTraktTraktMovies = copy.deepcopy(traktMovies)
+			updateTraktKodiMovies = copy.deepcopy(kodiMovies)
+
+			traktMoviesToUpdate = self.__compareMovies(updateTraktKodiMovies, updateTraktTraktMovies, watched=True)
 			self.sanitizeMovies(traktMoviesToUpdate)
 			self.__traktUpdateMovies(traktMoviesToUpdate)
 
 		if utilities.getSettingAsBool('kodi_movie_playcount') and not self.__isCanceled():
-			kodiMoviesToUpdate = self.__compareMovies(traktMovies, kodiMovies, watched=True, restrict=True)
+			updateKodiTraktMovies = copy.deepcopy(traktMovies)
+			updateKodiKodiMovies = copy.deepcopy(kodiMovies)
+
+			kodiMoviesToUpdate = self.__compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, watched=True, restrict=True)
 			self.__kodiUpdateMovies(kodiMoviesToUpdate)
 
 		if utilities.getSettingAsBool('add_movies_to_trakt') and not self.__isCanceled():
-			traktMoviesToAdd = self.__compareMovies(kodiMovies, traktMovies)
+			addTraktMovies = copy.deepcopy(traktMovies)
+			addKodiMovies = copy.deepcopy(kodiMovies)
+
+			traktMoviesToAdd = self.__compareMovies(addKodiMovies, addTraktMovies)
 			self.sanitizeMovies(traktMoviesToAdd)
 			Debug("[Movies Sync] Compared movies, found %s to add." % len(traktMoviesToAdd))
 			self.__traktAddMovies(traktMoviesToAdd)
