@@ -6,11 +6,10 @@ import xbmcaddon
 import time
 import copy
 import re
-import datetime
-import pytz
 import sys
+from datetime import datetime
+from dateutil.tz import tzutc, tzlocal
 
-from tzlocal import get_localzone
 
 if sys.version_info >=  (2, 7):
 	import json as json
@@ -19,8 +18,6 @@ else:
 
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')
-
-__local = pytz.timezone (str(get_localzone()))
 
 # make strptime call prior to doing anything, to try and prevent threading errors
 time.strptime("1970-01-01 12:00:00", "%Y-%m-%d %H:%M:%S")
@@ -58,7 +55,7 @@ def getSetting(setting):
 	return __addon__.getSetting(setting).strip()
 
 def getSettingAsBool(setting):
-    return getSetting(setting).lower() == "true"
+	return getSetting(setting).lower() == "true"
 
 def getSettingAsFloat(setting):
 	try:
@@ -288,7 +285,7 @@ def regex_tvshow(compare, file, sub = ""):
 			response_sub = re.findall(regex, sub)
 			if len(response_sub) > 0 :
 				try :
-					if (int(response_sub[0][1]) == int(response_file[0][1])):
+					if int(response_sub[0][1]) == int(response_file[0][1]):
 						return True
 				except: pass
 		return False
@@ -409,13 +406,10 @@ def kodiRpcToTraktMediaObjects(data):
 
 def convertDateTimeToUTC(toConvert):
 	if toConvert:
+		naive = datetime.strptime (toConvert, "%Y-%m-%d %H:%M:%S")
+		local = naive.replace(tzinfo=tzlocal())
+		utc = local.astimezone(tzutc())
 
-		naive = datetime.datetime.strptime (toConvert, "%Y-%m-%d %H:%M:%S")
-		#todo set dst
-		local_dt = __local.localize(naive, is_dst=False)
-		utc_dt = local_dt.astimezone (pytz.utc)
-
-		# Return naive datetime object
-		return unicode(utc_dt)
+		return unicode(utc)
 	else:
 		return toConvert
