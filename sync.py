@@ -41,7 +41,7 @@ class Sync():
 
 		Debug("[Episodes Sync] Getting show data from Kodi")
 		data = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
-		if not data:
+		if data['limits']['total'] == 0:
 			Debug("[Episodes Sync] Kodi json request was empty.")
 			return None
 
@@ -119,7 +119,7 @@ class Sync():
 	def __traktRemoveEpisodes(self, shows):
 		if len(shows['shows']) == 0:
 			self.__updateProgress(48, line1=utilities.getString(1445), line2=utilities.getString(1496))
-			Debug('[Episodes Sync] trakt.tv episode collection is clean')
+			Debug('[Episodes Sync] trakt.tv episode collection is clean, no episodes to remove.')
 			return
 
 		Debug("[Episodes Sync] %i show(s) will have episodes removed from trakt.tv collection." % len(shows['shows']))
@@ -375,12 +375,12 @@ class Sync():
 
 		if utilities.getSettingAsBool('clean_trakt_episodes') and not self.__isCanceled():
 			traktShowsRemove = self.__compareShows(traktShows, kodiShows)
-			self.sanitizeShows(traktShowsRemove, collected=True, watched=True)
+			self.sanitizeShows(traktShowsRemove)
 			self.__traktRemoveEpisodes(traktShowsRemove)
 		
 		if utilities.getSettingAsBool('trakt_episode_playcount') and not self.__isCanceled():
 			traktShowsUpdate = self.__compareShows(kodiShows, traktShows, watched=True)
-			self.sanitizeShows(traktShowsUpdate, watched=True)
+			self.sanitizeShows(traktShowsUpdate)
 			Debug("traktShowsUpdate %s" % traktShowsUpdate)
 			self.__traktUpdateEpisodes(traktShowsUpdate)
 
@@ -390,7 +390,7 @@ class Sync():
 
 		if utilities.getSettingAsBool('add_episodes_to_trakt') and not self.__isCanceled():
 			traktShowsAdd = self.__compareShows(kodiShows, traktShows)
-			self.sanitizeShows(traktShowsAdd, collected=True)
+			self.sanitizeShows(traktShowsAdd)
 			Debug("traktShowsAdd %s" % traktShowsAdd)
 			self.__traktAddEpisodes(traktShowsAdd)
 
@@ -407,7 +407,8 @@ class Sync():
 		Debug("[Episodes Sync] Complete.")
 
 	@staticmethod
-	def sanitizeShows(shows, watched=False, collected=False):
+	def sanitizeShows(shows):
+		# do not remove watched_at and collected_at may cause problems between the 4 sync types (would probably have to deepcopy etc)
 		for show in shows['shows']:
 			for season in show['seasons']:
 				for episode in season['episodes']:
@@ -419,10 +420,6 @@ class Sync():
 						del episode['season']
 					if 'plays' in episode:
 						del episode['plays']
-					if collected and 'watched_at' in episode:
-						del episode['watched_at']
-					if watched and 'collected_at' in episode:
-						del episode['collected_at']
 					if 'ids' in episode and 'episodeid' in episode['ids']:
 						del episode['ids']['episodeid']
 
@@ -432,7 +429,7 @@ class Sync():
 
 		Debug("[Movies Sync] Getting movie data from Kodi")
 		data = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'id': 0, 'method': 'VideoLibrary.GetMovies', 'params': {'properties': ['title', 'imdbnumber', 'year', 'playcount', 'lastplayed', 'file', 'dateadded']}})
-		if not data:
+		if data['limits']['total'] == 0:
 			Debug("[Movies Sync] Kodi JSON request was empty.")
 			return
 
@@ -474,9 +471,6 @@ class Sync():
 		Debug("[Movies Sync] Movies removed: %s" % titles)
 
 		self.__updateProgress(33, line2=utilities.getString(1444) % len(movies))
-
-		for movie in movies:
-			del(movie['collected_at'])
 
 		moviesToRemove = {'movies': movies}
 
@@ -580,13 +574,13 @@ class Sync():
 		if utilities.getSettingAsBool('clean_trakt_movies') and not self.__isCanceled():
 			Debug("[Movies Sync] Starting to remove.")
 			traktMoviesToRemove = self.__compareMovies(traktMovies, kodiMovies)
-			self.sanitizeMovies(traktMoviesToRemove, watched=True, collected=True)
+			self.sanitizeMovies(traktMoviesToRemove)
 			Debug("[Movies Sync] Compared movies, found %s to remove." % len(traktMoviesToRemove))
 			self.__traktRemoveMovies(traktMoviesToRemove)
 
 		if utilities.getSettingAsBool('trakt_movie_playcount') and not self.__isCanceled():
 			traktMoviesToUpdate = self.__compareMovies(kodiMovies, traktMovies, watched=True)
-			self.sanitizeMovies(traktMoviesToUpdate, watched=True)
+			self.sanitizeMovies(traktMoviesToUpdate)
 			self.__traktUpdateMovies(traktMoviesToUpdate)
 
 		if utilities.getSettingAsBool('kodi_movie_playcount') and not self.__isCanceled():
@@ -595,7 +589,7 @@ class Sync():
 
 		if utilities.getSettingAsBool('add_movies_to_trakt') and not self.__isCanceled():
 			traktMoviesToAdd = self.__compareMovies(kodiMovies, traktMovies)
-			self.sanitizeMovies(traktMoviesToAdd, collected=True)
+			self.sanitizeMovies(traktMoviesToAdd)
 			Debug("[Movies Sync] Compared movies, found %s to add." % len(traktMoviesToAdd))
 			self.__traktAddMovies(traktMoviesToAdd)
 
@@ -648,7 +642,8 @@ class Sync():
 		return count
 
 	@staticmethod
-	def sanitizeMovies(movies, watched=False, collected=False):
+	def sanitizeMovies(movies):
+		# do not remove watched_at and collected_at may cause problems between the 4 sync types (would probably have to deepcopy etc)
 		for movie in movies:
 			if 'collected' in movie:
 				del movie['collected']
@@ -658,10 +653,6 @@ class Sync():
 				del movie['movieid']
 			if 'plays' in movie:
 				del movie['plays']
-			if collected and 'watched_at' in movie:
-				del movie['watched_at']
-			if watched and 'collected_at' in movie:
-				del movie['collected_at']
 
 	def __syncCheck(self, media_type):
 		if media_type == 'movies':
