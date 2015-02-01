@@ -341,7 +341,8 @@ class Sync():
 						for seasonKey in show_col1['seasons']:
 							episodes = []
 							for episodeKey in seasonKey['episodes']:
-								episodes.append(episodeKey)
+								if watched == episodeKey['watched']:
+									episodes.append(episodeKey)
 									
 							show['seasons'].append({ 'number': seasonKey['number'], 'episodes': episodes })
 
