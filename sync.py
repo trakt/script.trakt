@@ -47,7 +47,7 @@ class Sync():
 			return None
 
 		tvshows = utilities.kodiRpcToTraktMediaObjects(data)
-		Debug("[Episode Sync] Shows finished %s" % tvshows)
+		Debug("[Episode Sync] Getting shows from kodi finished %s" % tvshows)
 
 		if tvshows is None:
 			return None
@@ -242,9 +242,9 @@ class Sync():
 					count += len(show['seasons'][s])
 			else:
 				for seasonKey in show['seasons']:
-					if 'seasons' in show:
+					if 'episodes' in seasonKey:
 						for episodeKey in seasonKey['episodes']:
-							if ('watched' in episodeKey and not episodeKey['watched'] == watched) and ('collected' in episodeKey and not episodeKey['collected'] == collection):
+							if ('watched' in episodeKey and not episodeKey['watched'] == watched) or ('collected' in episodeKey and not episodeKey['collected'] == collection):
 								continue
 							if 'number' in episodeKey and episodeKey['number']:
 								count += 1
@@ -660,7 +660,7 @@ class Sync():
 		if 'movies' in movies:
 			movies = movies['movies']
 		for movie in movies:
-			if mode in movie and movie[mode]:
+			if mode in movie and movie[mode] == 1:
 				count += 1
 
 		return count
