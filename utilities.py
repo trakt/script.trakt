@@ -410,6 +410,11 @@ def kodiRpcToTraktMediaObjects(data):
 
 def convertDateTimeToUTC(toConvert):
 	if toConvert:
+		dateFormat = "%Y-%m-%d %H:%M:%S"
+		try:
+			datetime.strptime(toConvert, dateFormat)
+		except TypeError:
+			datetime(*(time.strptime(toConvert, dateFormat)[0:6]))
 		naive = datetime.strptime (toConvert, "%Y-%m-%d %H:%M:%S")
 		local = naive.replace(tzinfo=tzlocal())
 		utc = local.astimezone(tzutc())
