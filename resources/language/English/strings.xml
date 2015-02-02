@@ -152,7 +152,7 @@
 	<string id="1441">Checking watched episodes on Kodi</string>
 	<string id="1493">Kodi episode playcounts are up to date</string>
 	<string id="1494">Updating %i of %i episode playcount(s) in Kodi</string>
-	<string id="1495">Playcounts updated for %i episode(s) in Kodi</string>
+	<string id="1495">Playcounts updated for %i show(s) in Kodi</string>
 
     <!-- Sync Episodes - add to trakt -->
 	<string id="1435">Checking for episodes missing from trakt collection</string>
