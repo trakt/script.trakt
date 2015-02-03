@@ -57,6 +57,9 @@ class Sync():
 		x = float(len(tvshows))
 		Debug("[Episodes Sync] Getting episode data from Kodi")
 		for show_col1 in tvshows:
+			i += 1
+			y = ((i / x) * 8) + 2
+			self.__updateProgress(int(y), line2=utilities.getString(1483) % (i+1, x))
 
 			show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
 
@@ -78,10 +81,6 @@ class Sync():
 			if 'tvshowid' in show_col1:
 				del(show_col1['tvshowid'])
 			result['shows'].append(show)
-
-			i += 1
-			y = ((i / x) * 8) + 2
-			self.__updateProgress(int(y), line2=utilities.getString(1483) % (i+1, x))
 
 		self.__updateProgress(10, line2=utilities.getString(1484))
 		return result
@@ -105,13 +104,15 @@ class Sync():
 		x = float(len(traktShows))
 		shows = {'shows': []}
 		for key, show in traktShows:
+			i += 1
+			y = ((i / x) * 20) + 12
+			self.__updateProgress(int(y), line2=utilities.getString(1488) % (i+1, x))
+
 			#will keep the data in python structures - just like the KODI response
 			show = show.to_info()
 			
 			shows['shows'].append(show)
-			i += 1
-			y = ((i / x) * 20) + 12
-			self.__updateProgress(int(y), line2=utilities.getString(1488) % (i+1, x))
+
 
 		self.__updateProgress(32, line2=utilities.getString(1489))
 
@@ -152,18 +153,16 @@ class Sync():
 		for show in shows['shows']:
 			if self.__isCanceled():
 				return
+			epCount = self.__countEpisodes([show])
+			title = show['title'].encode('utf-8', 'ignore')
+			i += 1
+			y = ((i / x) * 16) + 49
+			self.__updateProgress(int(y), line2=title, line3=utilities.getString(1440) % epCount)
 
 			s = { 'shows': [show]}
 			Debug("[trakt][traktUpdateEpisodes] Shows to update %s" % s)
 			result = self.traktapi.addToHistory(s)
 			Debug("[trakt][traktUpdateEpisodes] Result %s" % result)
-
-			epCount = self.__countEpisodes([show])
-			title = show['title'].encode('utf-8', 'ignore')
-
-			i += 1
-			y = ((i / x) * 16) + 49
-			self.__updateProgress(int(y), line2=title, line3=utilities.getString(1440) % epCount)
 
 		self.__updateProgress(65, line2=utilities.getString(1439) % (len(shows['shows'])), line3="")
 
@@ -191,14 +190,13 @@ class Sync():
 		for chunk in chunked_episodes:
 			if self.__isCanceled():
 				return
+			i += 1
+			y = ((i / x) * 16) + 66
+			self.__updateProgress(int(y), line2=utilities.getString(1494) % ((i+1)*chunksize if (i+1)*chunksize < x else x, x))
 
 			Debug("[Episodes Sync] chunk %s" % str(chunk))
 			result = utilities.kodiJsonRequest(chunk)
 			Debug("[Episodes Sync] result %s" % str(result))
-
-			i += 1
-			y = ((i / x) * 16) + 66
-			self.__updateProgress(int(y), line2=utilities.getString(1494) % ((i+1)*chunksize if (i+1)*chunksize < x else x, x))
 
 		self.__updateProgress(82, line2=utilities.getString(1495) % len(episodes))
 
@@ -221,14 +219,14 @@ class Sync():
 		for chunk in chunked_episodes:
 			if self.__isCanceled():
 				return
+			i += 1
+			y = ((i / x) * 16) + 82
+			self.__updateProgress(int(y), line2=utilities.getString(1436) % ((i+1)*chunksize if (i+1)*chunksize < x else x, x))
+
 			request = {'shows': chunk}
 			Debug("[trakt][traktAddEpisodes] Shows to add %s" % request)
 			result = self.traktapi.addToCollection(request)
 			Debug("[trakt][traktAddEpisodes] Result %s" % result)
-
-			i += 1
-			y = ((i / x) * 16) + 82
-			self.__updateProgress(int(y), line2=utilities.getString(1436) % ((i+1)*chunksize if (i+1)*chunksize < x else x, x))
 
 		self.__updateProgress(98, line2=utilities.getString(1491) % self.__countEpisodes(shows))
 
@@ -510,13 +508,13 @@ class Sync():
 		for chunk in chunked_movies:
 			if self.__isCanceled():
 				return
-			params = {'movies': chunk}
-			Debug("moviechunk: %s" % params)
-			self.traktapi.addToHistory(params)
-
 			i += 1
 			y = ((i / x) * 16) + 49
 			self.__updateProgress(int(y), line2=utilities.getString(1478) % ((i+1)*chunksize if (i+1)*chunksize < x else x, x))
+
+			params = {'movies': chunk}
+			Debug("moviechunk: %s" % params)
+			self.traktapi.addToHistory(params)
 
 		self.__updateProgress(65, line2=utilities.getString(1470) % len(movies))
 
@@ -538,13 +536,11 @@ class Sync():
 		for chunk in chunked_movies:
 			if self.__isCanceled():
 				return
-			utilities.kodiJsonRequest(chunk)
-
 			i += 1
 			y = ((i / x) * 16) + 66
-
-
 			self.__updateProgress(int(y), line2=utilities.getString(1472) % ((i+1)*chunksize if (i+1)*chunksize < x else x, x))
+
+			utilities.kodiJsonRequest(chunk)
 
 		self.__updateProgress(82, line2=utilities.getString(1473) % len(movies))
 
@@ -684,8 +680,6 @@ class Sync():
 			return utilities.getSettingAsBool('add_movies_to_trakt') or utilities.getSettingAsBool('trakt_movie_playcount') or utilities.getSettingAsBool('kodi_movie_playcount') or utilities.getSettingAsBool('clean_trakt_movies')
 		else:
 			return utilities.getSettingAsBool('add_episodes_to_trakt') or utilities.getSettingAsBool('trakt_episode_playcount') or utilities.getSettingAsBool('kodi_episode_playcount') or utilities.getSettingAsBool('clean_trakt_episodes')
-
-		return False
 
 	def sync(self):
 		Debug("[Sync] Starting synchronization with trakt.tv")
