@@ -153,7 +153,7 @@ class Episode(Video):
             'watched': 1 if self.is_watched else 0,
             'collected': 1 if self.is_collected else 0,
             'plays': self.plays,
-            'collected_at': self.collected_at,
+            'collected_at':  str(self.collected_at),
             'ids': {}
         })
 
@@ -195,7 +195,7 @@ class Movie(Video):
             'watched': 1 if self.is_watched else 0,
             'collected': 1 if self.is_collected else 0,
             'plays': self.plays,
-            'collected_at': self.collected_at
+            'collected_at':  str(self.collected_at)
         })
 
         if self.rating:
