@@ -242,12 +242,13 @@ class Sync():
 					count += len(show['seasons'][s])
 			else:
 				for seasonKey in show['seasons']:
-					if 'episodes' in seasonKey and seasonKey is not None:
+					if seasonKey is not None and 'episodes' in seasonKey:
 						for episodeKey in seasonKey['episodes']:
-							if ('watched' in episodeKey and not episodeKey['watched'] == watched) or ('collected' in episodeKey and not episodeKey['collected'] == collection):
-								continue
-							if 'number' in episodeKey and episodeKey['number']:
-								count += 1
+							if episodeKey is not None:
+								if ('watched' in episodeKey and not episodeKey['watched'] == watched) or ('collected' in episodeKey and not episodeKey['collected'] == collection):
+									continue
+								if 'number' in episodeKey and episodeKey['number']:
+									count += 1
 		return count
 
 	def __getShowAsString(self, show, short=False):
