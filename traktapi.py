@@ -59,7 +59,7 @@ class traktAPI(object):
 
 		# Configure
 		logging.basicConfig(level=logging.INFO)
-		Trakt.configuration.http(retry=True, max_retries=getSettingAsInt('retries'))
+		Trakt.configuration.defaults.http(retry=True, max_retries=getSettingAsInt('retries'))
 		Trakt.configuration.defaults.client(
 			id=self.__apikey
 		)
