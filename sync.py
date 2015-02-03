@@ -186,7 +186,7 @@ class Sync():
 		chunksize = 50
 		chunked_episodes = utilities.chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetEpisodeDetails", "params": episodes[i], "id": i} for i in range(len(episodes))], chunksize)
 		i = 0
-		x = float(len(chunked_episodes))
+		x = float(len(episodes))
 		for chunk in chunked_episodes:
 			if self.__isCanceled():
 				return
@@ -215,7 +215,7 @@ class Sync():
 		chunksize = 1
 		chunked_episodes = utilities.chunks(shows['shows'], chunksize)
 		i = 0
-		x = float(len(chunked_episodes))
+		x = float(len(shows['shows']))
 		for chunk in chunked_episodes:
 			if self.__isCanceled():
 				return
@@ -504,7 +504,7 @@ class Sync():
 		chunksize = 200
 		chunked_movies = utilities.chunks([movie for movie in movies], chunksize)
 		i = 0
-		x = float(len(chunked_movies))
+		x = float(len(movies))
 		for chunk in chunked_movies:
 			if self.__isCanceled():
 				return
@@ -532,7 +532,7 @@ class Sync():
 		chunksize = 50
 		chunked_movies = utilities.chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": movies[i]['movieid'], "playcount": movies[i]['plays']}, "id": i} for i in range(len(movies))], chunksize)
 		i = 0
-		x = float(len(chunked_movies))
+		x = float(len(movies))
 		for chunk in chunked_movies:
 			if self.__isCanceled():
 				return
