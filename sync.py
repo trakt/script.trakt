@@ -242,7 +242,7 @@ class Sync():
 					count += len(show['seasons'][s])
 			else:
 				for seasonKey in show['seasons']:
-					if 'episodes' in seasonKey:
+					if 'episodes' in seasonKey and seasonKey is not None:
 						for episodeKey in seasonKey['episodes']:
 							if ('watched' in episodeKey and not episodeKey['watched'] == watched) or ('collected' in episodeKey and not episodeKey['collected'] == collection):
 								continue
