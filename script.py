@@ -2,6 +2,7 @@
 import utilities as utils
 import xbmc
 import sqliteQueue
+import sys
 
 
 def __getMediaType():
@@ -18,7 +19,17 @@ def __getMediaType():
 		return None
 
 def __getArguments():
-	data = {'action': "sync"}
+	data = None
+	default_actions = {0: "sync"}
+	if len(sys.argv) == 1:
+		data = {'action': default_actions[0]}
+	else:
+		data = {}
+		for item in sys.argv:
+			values = item.split("=")
+			if len(values) == 2:
+				data[values[0].lower()] = values[1]
+		data['action'] = data['action'].lower()
 
 	return data
 
