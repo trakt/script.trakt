@@ -284,70 +284,71 @@ class Sync():
 	def __compareShows(self, shows_col1, shows_col2, watched=False, restrict=False):
 		shows = []
 		for show_col1 in shows_col1['shows']:
-			show_col2 = utilities.findMediaObject(show_col1, shows_col2['shows'])
-			#Debug("show_col1 %s" % show_col1)
-			#Debug("show_col2 %s" % show_col2)
+			if show_col1:
+				show_col2 = utilities.findMediaObject(show_col1, shows_col2['shows'])
+				#Debug("show_col1 %s" % show_col1)
+				#Debug("show_col2 %s" % show_col2)
 
-			if show_col2:
-				season_diff = {}
-				# format the data to be easy to compare trakt and KODI data
-				season_col1 = self.__getEpisodes(show_col1['seasons'], watched)
-				season_col2 = self.__getEpisodes(show_col2['seasons'], watched)
-				for season in season_col1:
-					a = season_col1[season]
-					if season in season_col2:
-						b = season_col2[season]
-						diff = list(set(a).difference(set(b)))
-						if len(diff) > 0:
-							if restrict:
-								# get all the episodes that we have in Kodi, watched or not
-								_seasons = self.__getEpisodes(show_col2['seasons'], False)
-								t = list(set(_seasons[season]).intersection(set(diff)))
-								if len(t) > 0:
+				if show_col2:
+					season_diff = {}
+					# format the data to be easy to compare trakt and KODI data
+					season_col1 = self.__getEpisodes(show_col1['seasons'], watched)
+					season_col2 = self.__getEpisodes(show_col2['seasons'], watched)
+					for season in season_col1:
+						a = season_col1[season]
+						if season in season_col2:
+							b = season_col2[season]
+							diff = list(set(a).difference(set(b)))
+							if len(diff) > 0:
+								if restrict:
+									# get all the episodes that we have in Kodi, watched or not
+									_seasons = self.__getEpisodes(show_col2['seasons'], False)
+									t = list(set(_seasons[season]).intersection(set(diff)))
+									if len(t) > 0:
+										eps = {}
+										for ep in t:
+											eps[ep] = _seasons[season][ep]
+										season_diff[season] = eps
+								else:
 									eps = {}
-									for ep in t:
-										eps[ep] = _seasons[season][ep]
+									for ep in diff:
+										eps[ep] = a[ep]
 									season_diff[season] = eps
-							else:
-								eps = {}
-								for ep in diff:
-									eps[ep] = a[ep]
-								season_diff[season] = eps
-					else:
-						if not restrict:
-							if len(a) > 0:
-								season_diff[season] = a
-				if len(season_diff) > 0:
-					show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
-					if 'tvdb' in show_col1['ids']:
-						show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
-					for seasonKey in season_diff:
-						episodes = []
-						for episodeKey in season_diff[seasonKey]:
-							episodes.append(season_diff[seasonKey][episodeKey])
-						show['seasons'].append({ 'number': seasonKey, 'episodes': episodes })
-					if 'imdb' in show_col2 and show_col2['imdb']:
-						show['ids']['imdb'] = show_col2['imdb']
-					if 'tvshowid' in show_col2:
-						show['tvshowid'] = show_col2['tvshowid']
-					shows.append(show)
-			else:
-				if not restrict:
-					if self.__countEpisodes([show_col1], watched=watched) > 0:
+						else:
+							if not restrict:
+								if len(a) > 0:
+									season_diff[season] = a
+					if len(season_diff) > 0:
 						show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
 						if 'tvdb' in show_col1['ids']:
 							show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
-						for seasonKey in show_col1['seasons']:
+						for seasonKey in season_diff:
 							episodes = []
-							for episodeKey in seasonKey['episodes']:
-								if watched == episodeKey['watched']:
-									episodes.append(episodeKey)
-									
-							show['seasons'].append({ 'number': seasonKey['number'], 'episodes': episodes })
-
-						if 'tvshowid' in show_col1:
-							del(show_col1['tvshowid'])
+							for episodeKey in season_diff[seasonKey]:
+								episodes.append(season_diff[seasonKey][episodeKey])
+							show['seasons'].append({ 'number': seasonKey, 'episodes': episodes })
+						if 'imdb' in show_col2 and show_col2['imdb']:
+							show['ids']['imdb'] = show_col2['imdb']
+						if 'tvshowid' in show_col2:
+							show['tvshowid'] = show_col2['tvshowid']
 						shows.append(show)
+				else:
+					if not restrict:
+						if self.__countEpisodes([show_col1], watched=watched) > 0:
+							show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
+							if 'tvdb' in show_col1['ids']:
+								show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
+							for seasonKey in show_col1['seasons']:
+								episodes = []
+								for episodeKey in seasonKey['episodes']:
+									if watched == episodeKey['watched']:
+										episodes.append(episodeKey)
+
+								show['seasons'].append({ 'number': seasonKey['number'], 'episodes': episodes })
+
+							if 'tvshowid' in show_col1:
+								del(show_col1['tvshowid'])
+							shows.append(show)
 		result = { 'shows': shows}
 		return result
 
@@ -628,26 +629,27 @@ class Sync():
 		movies = []
 
 		for movie_col1 in movies_col1:
-			movie_col2 = utilities.findMediaObject(movie_col1, movies_col2)
-			#Debug("movie_col1 %s" % movie_col1)
-			#Debug("movie_col2 %s" % movie_col2)
+			if movie_col1:
+				movie_col2 = utilities.findMediaObject(movie_col1, movies_col2)
+				#Debug("movie_col1 %s" % movie_col1)
+				#Debug("movie_col2 %s" % movie_col2)
 
-			if movie_col2:  #match found
-				if watched: #are we looking for watched items
-					if movie_col2['watched'] == 0 and movie_col1['watched'] == 1:
-						if 'movieid' not in movie_col1:
-							movie_col1['movieid'] = movie_col2['movieid']
-						movies.append(movie_col1)
-				else:
-					if 'collected' in movie_col2 and not movie_col2['collected']:
-						movies.append(movie_col1)
-			else: #no match found
-				if not restrict:
-					if 'collected' in movie_col1 and movie_col1['collected']:
-						if watched and (movie_col1['plays'] > 0):
+				if movie_col2:  #match found
+					if watched: #are we looking for watched items
+						if movie_col2['watched'] == 0 and movie_col1['watched'] == 1:
+							if 'movieid' not in movie_col1:
+								movie_col1['movieid'] = movie_col2['movieid']
 							movies.append(movie_col1)
-						elif not watched:
+					else:
+						if 'collected' in movie_col2 and not movie_col2['collected']:
 							movies.append(movie_col1)
+				else: #no match found
+					if not restrict:
+						if 'collected' in movie_col1 and movie_col1['collected']:
+							if watched and (movie_col1['plays'] > 0):
+								movies.append(movie_col1)
+							elif not watched:
+								movies.append(movie_col1)
 
 		return movies
 
