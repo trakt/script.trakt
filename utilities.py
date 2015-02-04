@@ -138,19 +138,19 @@ def checkExclusion(fullpath):
 	ExcludePath = getSetting('ExcludePath')
 	if ExcludePath != "" and getSettingAsBool('ExcludePathOption'):
 		if fullpath.find(ExcludePath) > -1:
-			Debug("checkExclusion(): Video is playing from location, which is currently set as excluded path 1.")
+			Debug("checkExclusion(): Video is from location, which is currently set as excluded path 1.")
 			return True
 
 	ExcludePath2 = getSetting('ExcludePath2')
 	if ExcludePath2 != "" and getSettingAsBool('ExcludePathOption2'):
 		if fullpath.find(ExcludePath2) > -1:
-			Debug("checkExclusion(): Video is playing from location, which is currently set as excluded path 2.")
+			Debug("checkExclusion(): Video is from location, which is currently set as excluded path 2.")
 			return True
 
 	ExcludePath3 = getSetting('ExcludePath3')
 	if ExcludePath3 != "" and getSettingAsBool('ExcludePathOption3'):
 		if fullpath.find(ExcludePath3) > -1:
-			Debug("checkExclusion(): Video is playing from location, which is currently set as excluded path 3.")
+			Debug("checkExclusion(): Video is from location, which is currently set as excluded path 3.")
 			return True
 
 	return False
