@@ -44,7 +44,7 @@
                 <description>Title</description>
                 <posx>0</posx>
                 <posy>75</posy>
-                <width>600</width>
+                <width>590</width>
                 <height>20</height>
                 <label></label>
                 <align>center</align>
@@ -80,7 +80,6 @@
             </control>
         </control>
 
-        <!--ADVANCED-->
         <control type="group" id="10015">
             <control type="button" id="11030">
                 <description>1 Button</description>
