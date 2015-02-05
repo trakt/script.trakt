@@ -42,9 +42,9 @@
 
             <control type="label" id="10012"> <!--MEDIA TITLE-->
                 <description>Title</description>
-                <posx>0</posx>
+                <posx>45</posx>
                 <posy>75</posy>
-                <width>590</width>
+                <width>515</width>
                 <height>20</height>
                 <label></label>
                 <align>center</align>
