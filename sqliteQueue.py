@@ -51,7 +51,7 @@ class SqliteQueue(object):
 	def __init__(self):
 		self.path = xbmc.translatePath(__addon__.getAddonInfo("profile")).decode("utf-8")
 		if not xbmcvfs.exists(self.path):
-			utils.Debug("Making path structure: " + repr(self.path))
+			utils.Debug("Making path structure: %s" % repr(self.path))
 			xbmcvfs.mkdir(self.path)
 		self.path = os.path.join(self.path, 'queue.db')
 		self._connection_cache = {}
