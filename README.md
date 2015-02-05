@@ -43,6 +43,9 @@ Remote streaming content will scrobble assuming the metadata is correctly set in
 7. Select **OK** to save your settings
 8. Watch something and see it show up on trakt.tv!
 
+###Translations
+* Translations are done via the Transiflex project of Kodi. If you want to support via translations, read [this] (http://kodi.wiki/view/Translation_System) and look for script.trakt in the translation project.
+
 ###Thanks
 
 * Special thanks to all who contribute to this plugin! Check the commit history and changelog to see these talented developers.

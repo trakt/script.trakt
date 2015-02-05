@@ -1,0 +1,45 @@
+# Kodi Media Center language file
+# Addon Name: trakt
+# Addon id: script.trakt
+# Addon Provider: trakt.tv
+msgid ""
+msgstr ""
+"Project-Id-Version: XBMC Addons\n"
+"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Burmese (http://www.transifex.com/projects/p/xbmc-addons/language/my/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: my\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgctxt "#1010"
+msgid "General"
+msgstr "ယေဘုယျ"
+
+msgctxt "#1013"
+msgid "Username"
+msgstr "အသုံးပြုသူအမည်"
+
+msgctxt "#1014"
+msgid "Password"
+msgstr "စကားဝှက်"
+
+msgctxt "#1030"
+msgid "Rating"
+msgstr "အဆင့်သတ်မှတ်မှု့"
+
+msgctxt "#1109"
+msgid "Error"
+msgstr "ချို့ယွင်းချက်"
+
+msgctxt "#1402"
+msgid "Movies"
+msgstr "ရုပ်ရှင်များ"
+
+msgctxt "#1700"
+msgid "Debug"
+msgstr "အပြစ်ရှာဖွေရန်"

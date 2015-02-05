@@ -3,7 +3,7 @@ version 3.0.0
   - removed lists management and contextmenu (for now)
   - default rating is now a neutral 6 "Okay"
   - various improvements and bugfixes
-
+  - updated language files from Transifex
   
 version 2.3.2
   - fixed update tags not running after sync, if the setting was enabled (nate1280)
