@@ -136,9 +136,9 @@ class Sync():
 
 			self.__updateProgress(33, line1=utilities.getString(1445), line2=utilities.getString(1497) % self.__countEpisodes(traktShowsRemove), line3=" ")
 
-			Debug("[trakt][traktRemoveEpisodes] Shows to remove %s" % traktShowsRemove)
+			Debug("[traktRemoveEpisodes] Shows to remove %s" % traktShowsRemove)
 			result = self.traktapi.removeFromCollection(traktShowsRemove)
-			Debug("[trakt][traktRemoveEpisodes] Result %s" % result)
+			Debug("[traktRemoveEpisodes] Result %s" % result)
 
 			self.__updateProgress(48, line2=utilities.getString(1498) % self.__countEpisodes(traktShowsRemove), line3=" ")
 
@@ -174,9 +174,9 @@ class Sync():
 				self.__updateProgress(int(y), line2=title, line3=utilities.getString(1440) % epCount)
 
 				s = { 'shows': [show]}
-				Debug("[trakt][traktUpdateEpisodes] Shows to update %s" % s)
+				Debug("[traktUpdateEpisodes] Shows to update %s" % s)
 				result = self.traktapi.addToHistory(s)
-				Debug("[trakt][traktUpdateEpisodes] Result %s" % result)
+				Debug("[traktUpdateEpisodes] Result %s" % result)
 
 			self.__updateProgress(65, line2=utilities.getString(1439) % (len(traktShowsUpdate['shows'])), line3="")
 
@@ -254,9 +254,9 @@ class Sync():
 				self.__updateProgress(int(y), line2=utilities.getString(1436) % ((i)*chunksize if (i)*chunksize < x else x, x))
 
 				request = {'shows': chunk}
-				Debug("[trakt][traktAddEpisodes] Shows to add %s" % request)
+				Debug("[traktAddEpisodes] Shows to add %s" % request)
 				result = self.traktapi.addToCollection(request)
-				Debug("[trakt][traktAddEpisodes] Result %s" % result)
+				Debug("[traktAddEpisodes] Result %s" % result)
 
 			self.__updateProgress(98, line2=utilities.getString(1491) % self.__countEpisodes(traktShowsAdd))
 
