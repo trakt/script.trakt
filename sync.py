@@ -377,12 +377,13 @@ class Sync():
 										episodes.append(episodeKey)
 									elif not watched:
 										episodes.append(episodeKey)
-
-								show['seasons'].append({ 'number': seasonKey['number'], 'episodes': episodes })
+								if len(episodes) > 0:
+									show['seasons'].append({ 'number': seasonKey['number'], 'episodes': episodes })
 
 							if 'tvshowid' in show_col1:
 								del(show_col1['tvshowid'])
-							shows.append(show)
+							if self.__countEpisodes([show]) > 0:
+								shows.append(show)
 		result = { 'shows': shows}
 		return result
 
