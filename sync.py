@@ -328,7 +328,7 @@ class Sync():
 							diff = list(set(a).difference(set(b)))
 							if len(diff) > 0:
 								if restrict:
-									# get all the episodes that we have in Kodi, watched or not
+									# get all the episodes that we have in Kodi, watched or not - update kodi
 									_seasons = self.__getEpisodes(show_col2['seasons'], False)
 									t = list(set(_seasons[season]).intersection(set(diff)))
 									if len(t) > 0:
@@ -345,7 +345,8 @@ class Sync():
 									eps = {}
 									for ep in diff:
 										eps[ep] = a[ep]
-									season_diff[season] = eps
+									if len(eps) > 0:
+										season_diff[season] = eps
 						else:
 							if not restrict:
 								if len(a) > 0:
