@@ -44,9 +44,9 @@ def Debug(msg, force = False):
 		debuglevel = xbmc.LOGDEBUG
 
 	try:
-		xbmc.log("[trakt] " + msg, level=debuglevel)
+		xbmc.log("[trakt] %s" % msg, level=debuglevel)
 	except UnicodeEncodeError:
-		xbmc.log("[trakt] " + msg.encode('utf-8', 'ignore'))
+		xbmc.log("[trakt] %s" % msg.encode('utf-8', 'ignore'), level=debuglevel)
 
 
 def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')):
@@ -223,9 +223,8 @@ def getMovieDetailsFromKodi(libraryId, fields):
 		Debug("getMovieDetailsFromKodi(): KeyError: result['moviedetails']")
 		return None
 
-def __findInList(list, returnIndex=False, returnCopy=False, case_sensitive=True, **kwargs):
-	for index in range(len(list)):
-		item = list[index]
+def __findInList(list, case_sensitive=True, **kwargs):
+	for item in list:
 		i = 0
 		for key in kwargs:
 			# becuause we can need to find at the root level and inside ids this is is required
@@ -244,27 +243,21 @@ def __findInList(list, returnIndex=False, returnCopy=False, case_sensitive=True,
 				if unicode(key_val) == unicode(kwargs[key]):
 					i = i + 1
 		if i == len(kwargs):
-			if returnIndex:
-				return index
-			else:
-				if returnCopy:
-					return copy.deepcopy(list[index])
-				else:
-					return list[index]
+			return item
 	return None
 
-def findMediaObject(mediaObjectToMatch, listToSearch, returnIndex=False):
+def findMediaObject(mediaObjectToMatch, listToSearch):
 	result = None
 	if result is None and 'ids' in mediaObjectToMatch and 'imdb' in mediaObjectToMatch['ids'] and unicode(mediaObjectToMatch['ids']['imdb']).startswith("tt"):
-		result = __findInList(listToSearch, returnIndex=returnIndex, imdb=mediaObjectToMatch['ids']['imdb'])
+		result = __findInList(listToSearch, imdb=mediaObjectToMatch['ids']['imdb'])
 	# we don't want to give up if we don't find a match based on the first field so we use if instead of elif
 	if result is None and 'ids' in mediaObjectToMatch and 'tmdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tmdb'].isdigit():
-		result = __findInList(listToSearch, returnIndex=returnIndex, tmdb=mediaObjectToMatch['ids']['tmdb'])
+		result = __findInList(listToSearch, tmdb=mediaObjectToMatch['ids']['tmdb'])
 	if result is None and 'ids' in mediaObjectToMatch and 'tvdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tvdb'].isdigit():
-		result = __findInList(listToSearch, returnIndex=returnIndex, tvdb=mediaObjectToMatch['ids']['tvdb'])
+		result = __findInList(listToSearch, tvdb=mediaObjectToMatch['ids']['tvdb'])
 	# match by title and year it will result in movies with the same title and year to mismatch - but what should we do instead?
 	if result is None and 'title' in mediaObjectToMatch and 'year' in mediaObjectToMatch:
-		result = __findInList(listToSearch, returnIndex=returnIndex, title=mediaObjectToMatch['title'], year=mediaObjectToMatch['year'])
+		result = __findInList(listToSearch, title=mediaObjectToMatch['title'], year=mediaObjectToMatch['year'])
 	return result
 
 def regex_tvshow(compare, file, sub = ""):
@@ -320,23 +313,29 @@ def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list):
 def kodiRpcToTraktMediaObject(mode, data):
 	if mode == 'tvshow':
 		data['ids'] = {}
-		id = data['imdbnumber']
+		id = data.pop('imdbnumber')
 		if id.startswith("tt"):
 			data['ids']['imdb'] = id
-		if id.isdigit():
+		elif id.isdigit():
 			data['ids']['tvdb'] = id
-		del(data['imdbnumber'])
 		del(data['label'])
 		return data
 	elif mode == 'episode':
 		if checkExclusion(data['file']):
 			return
-		watched = 0;
-		if data['playcount'] > 0:
+
+		if data['playcount'] is None:
+			plays = 0
+		else:
+			plays = data.pop('playcount')
+
+		if plays > 0:
 			watched = 1
+		else:
+			watched = 0
 
 		episode = { 'season': data['season'], 'number': data['episode'], 'title': data['label'],
-		            'ids': { 'tvdb': data['uniqueid']['unknown'], 'episodeid' : data['episodeid']}, 'watched': watched }
+		            'ids': { 'tvdb': data['uniqueid']['unknown'], 'episodeid' : data['episodeid']}, 'watched': watched, 'plays': plays }
 		episode['collected'] = 1 #this is in our kodi so it should be collected
 		if 'lastplayed' in data:
 			episode['watched_at'] = convertDateTimeToUTC(data['lastplayed'])
@@ -345,29 +344,25 @@ def kodiRpcToTraktMediaObject(mode, data):
 		return episode
 
 	elif mode == 'movie':
-		if checkExclusion(data['file']):
+		if checkExclusion(data.pop('file')):
 			return
 		if 'lastplayed' in data:
-			data['watched_at'] = convertDateTimeToUTC(data['lastplayed'])
+			data['watched_at'] = convertDateTimeToUTC(data.pop('lastplayed'))
 		if 'dateadded' in data:
-			data['collected_at'] = convertDateTimeToUTC(data['dateadded'])
-		data['plays'] = data.pop('playcount')
+			data['collected_at'] = convertDateTimeToUTC(data.pop('dateadded'))
+		if data['playcount'] is None:
+			data['plays'] = 0
+		else:
+			data['plays'] = data.pop('playcount')
 		data['collected'] = 1 #this is in our kodi so it should be collected
 		data['watched'] = 1 if data['plays'] > 0 else 0
 		data['ids'] = {}
-		id = data['imdbnumber']
+		id = data.pop('imdbnumber')
 		if id.startswith("tt"):
-			data['ids']['imdb'] = ""
 			data['ids']['imdb'] = id
-		if id.isdigit():
-			data['ids']['tmdb'] = ""
+		elif id.isdigit():
 			data['ids']['tmdb'] = id
-		del(data['imdbnumber'])
-		del(data['lastplayed'])
-		if 'dateadded' in data:
-			del(data['dateadded'])
 		del(data['label'])
-		del(data['file'])
 		return data
 	else:
 		Debug('[Utilities] kodiRpcToTraktMediaObject() No valid mode')
