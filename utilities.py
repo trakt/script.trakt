@@ -292,7 +292,7 @@ def regex_tvshow(compare, file, sub = ""):
 		return "","",""
 
 def findMovieMatchInList(id, list):
-	return next((item.to_info() for key, item in list.items() if key[1] == str(id)), {})  #key[1] should be the imdb id
+	return next((item.to_dict() for key, item in list.items() if key[1] == str(id)), {})  #key[1] should be the imdb id
 
 def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list):
 	show = next((item for key, item in list.items() if int(key[1]) == id), {}) #key[1] should be the tvdb id
@@ -308,7 +308,7 @@ def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list):
 				return {}
 			else:	
 				episode = season.episodes[episodeNumber]
-				return episode.to_info()
+				return episode.to_dict()
 
 def kodiRpcToTraktMediaObject(mode, data):
 	if mode == 'tvshow':

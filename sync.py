@@ -109,7 +109,7 @@ class Sync():
 			self.__updateProgress(int(y), line2=utilities.getString(1488) % (i, x))
 
 			#will keep the data in python structures - just like the KODI response
-			show = show.to_info()
+			show = show.to_dict()
 			
 			shows['shows'].append(show)
 
@@ -475,7 +475,7 @@ class Sync():
 		self.__updateProgress(32, line2=utilities.getString(1466))
 		movies = []
 		for key, movie in traktMovies:
-			movie = movie.to_info()
+			movie = movie.to_dict()
 			
 			movies.append(movie)
 
