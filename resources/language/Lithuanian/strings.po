@@ -232,6 +232,10 @@ msgctxt "#1404"
 msgid "Add watched movies to trakt history"
 msgstr "Pridėti peržiūrėtus filmus į Trakt.tv istoriją"
 
+msgctxt "#1405"
+msgid "Mark movies from trakt history as watched in Kodi"
+msgstr "Pažymėti filmus iš Trakt.tv istorijos kaip peržiūrėtus Kodi bibliotekoje"
+
 msgctxt "#1406"
 msgid "TV Episodes"
 msgstr "TV epizodai"
@@ -244,9 +248,17 @@ msgctxt "#1408"
 msgid "Add watched TV episodes to trakt history"
 msgstr "Pridėti peržiūrėtus TV epizodus į Trakt.tv kolekciją"
 
+msgctxt "#1409"
+msgid "Mark TV episodes from trakt history as watched in Kodi"
+msgstr "Pažymėti TV epizodus iš Trakt.tv istorijos kaip peržiūrėtus Kodi bibliotekoje"
+
 msgctxt "#1410"
 msgid "Service"
 msgstr "Paslauga"
+
+msgctxt "#1411"
+msgid "Sync collection on library update or cleaning"
+msgstr "Sinchronizuoti kolekciją po bibliotekos atnaujino ar išvalymo"
 
 msgctxt "#1412"
 msgid "Show notifications"
@@ -292,6 +304,10 @@ msgctxt "#1431"
 msgid "Movie Sync Complete"
 msgstr "Filmų sinchronizavimas baigtas"
 
+msgctxt "#1434"
+msgid "Going to add %i show(s) to trakt collection"
+msgstr "Bus pridėta laidų į Trakt.tv kolekciją: %i"
+
 msgctxt "#1435"
 msgid "Checking for episodes missing from trakt collection"
 msgstr "Ieškomi epizodų, kurių trūksta Trakt.tv kolekcijoje"
@@ -300,9 +316,17 @@ msgctxt "#1436"
 msgid "%i of %i show(s) have episodes added to trakt collection"
 msgstr "%i iš %i laidų(os) epizodai buvo pridėti į Trakt.tv kolekciją"
 
+msgctxt "#1437"
+msgid "Going to update %i show(s) missing watched status"
+msgstr "Laidų, kurioms bus atnaujintos trūkstamos peržiūros būsenos: %i"
+
 msgctxt "#1438"
 msgid "Checking watched episodes on trakt"
 msgstr "Pažymimi peržiūrėti epizodai Trakt.tv kolekcijoje"
+
+msgctxt "#1439"
+msgid "%i show(s) had missing watched status"
+msgstr "Laidų, kurioms trūksta peržiūros būsenos: %i"
 
 msgctxt "#1440"
 msgid "%i episodes are being updated"
@@ -447,6 +471,10 @@ msgstr "Kodi epizodų atkūrimų skaičiai yra atnaujinti"
 msgctxt "#1494"
 msgid "Updating %i of %i episode playcount(s) in Kodi"
 msgstr "Atnaujinamas atkūrimų skaičius %i iš %i epizodų Kodi bibliotekoje"
+
+msgctxt "#1495"
+msgid "Playcounts updated for %i show(s) in Kodi"
+msgstr "Laidų, kurioms atnaujintas atkūrimų skaičius Kodi bibliotekoje: %i"
 
 msgctxt "#1496"
 msgid "trakt episode collection is clean, no episodes to remove"
