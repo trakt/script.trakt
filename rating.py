@@ -146,7 +146,6 @@ def __rateOnTrakt(rating, media_type, media, unrate=False):
 		data = globals.traktapi.removeRating(root)
 
 	if data:
-		utils.Debug("data rate: %s" % data)
 		s = utils.getFormattedItemName(media_type, media)
 		if 'not_found' in data and not data['not_found']['movies'] and not data['not_found']['episodes'] and not data['not_found']['shows']:
 
