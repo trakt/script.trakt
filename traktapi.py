@@ -5,7 +5,7 @@ import math
 import logging
 
 from trakt import Trakt, ClientError, ServerError
-from utilities import Debug, getSetting, findMovieMatchInList, findEpisodeMatchInList
+from utilities import Debug, getSetting, findMovieMatchInList, findEpisodeMatchInList, notification, getString
 
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')
@@ -52,7 +52,12 @@ class traktAPI(object):
 	def getToken(self):
 		# Attempt authentication (retrieve new token)
 		with Trakt.configuration.http(retry=True):
-			self.__token = Trakt['auth'].login(getSetting('username'), getSetting('password'))
+			auth = Trakt['auth'].login(getSetting('username'), getSetting('password'))
+			if auth:
+				self.__token = auth
+			else:
+				Debug("[traktAPI] Authentication Failure")
+				notification('trakt', getString(1110))
 
 
 	def scrobbleEpisode(self, show, episode, percent, status):
