@@ -131,23 +131,27 @@ class traktAPI(object):
 		return result
 
 	def getShowsCollected(self, shows):
-		with Trakt.configuration.auth(self.__username, self.__token), Trakt.configuration.http(retry=True):
+		with Trakt.configuration.auth(self.__username, self.__token):
+			with Trakt.configuration.http(retry=True):
 				Trakt['sync/collection'].shows(shows, exceptions=True)
 		return shows
 
 	def getMoviesCollected(self, movies):
-		with Trakt.configuration.auth(self.__username, self.__token), Trakt.configuration.http(retry=True):
+		with Trakt.configuration.auth(self.__username, self.__token):
+			with Trakt.configuration.http(retry=True):
 				Trakt['sync/collection'].movies(movies, exceptions=True)
 		return movies
 
 
 	def getShowsWatched(self, shows):
-		with Trakt.configuration.auth(self.__username, self.__token), Trakt.configuration.http(retry=True):
+		with Trakt.configuration.auth(self.__username, self.__token):
+			with Trakt.configuration.http(retry=True):
 				Trakt['sync/watched'].shows(shows, exceptions=True)
 		return shows
 
 	def getMoviesWatched(self, movies):
-		with Trakt.configuration.auth(self.__username, self.__token), Trakt.configuration.http(retry=True):
+		with Trakt.configuration.auth(self.__username, self.__token):
+			with Trakt.configuration.http(retry=True):
 				Trakt['sync/watched'].movies(movies, exceptions=True)
 		return movies
 
@@ -168,13 +172,15 @@ class traktAPI(object):
 
 	def getEpisodeRatingForUser(self, id, season, episode):
 		ratings = {}
-		with Trakt.configuration.auth(self.__username, self.__token), Trakt.configuration.http(retry=True):
+		with Trakt.configuration.auth(self.__username, self.__token):
+			with Trakt.configuration.http(retry=True):
 				Trakt['sync/ratings'].episodes(ratings)
 		return findEpisodeMatchInList(id, season, episode, ratings)
 
 	def getMovieRatingForUser(self, id):
 		ratings = {}
-		with Trakt.configuration.auth(self.__username, self.__token), Trakt.configuration.http(retry=True):
+		with Trakt.configuration.auth(self.__username, self.__token):
+			with Trakt.configuration.http(retry=True):
 				Trakt['sync/ratings'].movies(ratings)
 		return findMovieMatchInList(id, ratings)
 
