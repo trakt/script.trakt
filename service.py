@@ -75,7 +75,7 @@ class traktService:
 				utilities.Debug("Unknown dispatch action, '%s'." % action)
 		except Exception as ex:
 			template = (
-			"[TRAKT] EXCEPTION Thrown (PythonToCppException) : -->Python callback/script returned the following error<--\n"
+			"EXCEPTION Thrown (PythonToCppException) : -->Python callback/script returned the following error<--\n"
 			" - NOTE: IGNORING THIS CAN LEAD TO MEMORY LEAKS!\n"
 			"Error Type: <type '{0}'>\n"
 			"Error Contents: {1!r}\n"
@@ -83,7 +83,7 @@ class traktService:
 			"-->End of Python script error report<--"
 			)
 			message = template.format(type(ex).__name__, ex.args, traceback.format_exc())
-			xbmc.log(message, level=xbmc.LOGDEBUG)
+			utilities.Debug(message, force=True)
 
 	def run(self):
 		startup_delay = utilities.getSettingAsInt('startup_delay')
