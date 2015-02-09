@@ -42,7 +42,7 @@ class traktNetworkError(traktError):
 
 class traktAPI(object):
 
-	__baseURL = "https://api.trakt.tv"
+	__baseURL = "https://api-v2launch.trakt.tv"
 	__apikey = "d4161a7a106424551add171e5470112e4afdaf2438e6ef2fe0548edc75924868"
 	__token = ""
 	__username = ""
@@ -364,28 +364,6 @@ class traktAPI(object):
 				Debug("[traktAPI] traktRequest(): JSON request was successful.")
 		return data
 
-	def getShowSummary(self, id):
-		url = "%s/shows/%s" % (self.__baseURL, id)
-		Debug("[traktAPI] getShowSummary(url: %s)" % (url))
-		result = self.traktRequest('GET', url)
-		return result
-
-	def getEpisodeSummary(self, id, season, episode):
-		url = "%s/shows/%s/seasons/%s/episodes/%s" % (self.__baseURL, id['slug'], season, episode)
-		Debug("[traktAPI] getEpisodeSummary(url: %s)" % url)
-		result = self.traktRequest('GET', url)
-		result['user'] = {}
-		result['user']['ratings'] = self.getEpisodeRatingForUser(id['tvdb'], season, episode)
-		return result
-
-	def getMovieSummary(self, id):
-		url = "%s/movies/%s" % (self.__baseURL, id)
-		Debug("[traktAPI] getMovieSummary(url: %s)" % (url))
-		result = self.traktRequest('GET', url)
-		result['user'] = {}
-		result['user']['ratings'] = self.getMovieRatingForUser(id)
-		return result
-
 	# Send a rating to trakt as mediaObject
 	def addRating(self, data):
 		url = "%s/sync/ratings" % self.__baseURL
@@ -397,14 +375,3 @@ class traktAPI(object):
 		url = "%s/sync/ratings/remove" % self.__baseURL
 		Debug("[traktAPI] removeRating(url: %s, data: %s)" % (url, str(data)))
 		return self.traktRequest('POST', url, data)
-
-	def getIdLookup(self, idType, id):
-		url = "%s/search?id_type=%s&id=%s" % (self.__baseURL, idType, id)
-		Debug("[traktAPI] getIdLookup(url: %s)" % url)
-		lookup = self.traktRequest('GET', url)
-		for result in lookup:
-			if result['type'] == 'movie' or result['type'] == 'show': #returning episode will break the code dependent on this
-				return result[result['type']]
-
-		Debug('Could not find movie or show object with this id')
-		return None

@@ -295,7 +295,7 @@ def findMovieMatchInList(id, list):
 	return next((item.to_dict() for key, item in list.items() if key[1] == str(id)), {})  #key[1] should be the imdb id
 
 def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list):
-	show = next((item for key, item in list.items() if int(key[1]) == id), {}) #key[1] should be the tvdb id
+	show = next((item for key, item in list.items() if int(key[1]) == int(id)), {}) #key[1] should be the tvdb id
 	Debug("findEpisodeMatchInList %s" % show)
 	if not show:
 		return {}
