@@ -4,7 +4,6 @@
 import xbmc
 import xbmcaddon
 import time
-import copy
 import re
 import sys
 from datetime import datetime
@@ -107,16 +106,6 @@ def kodiJsonRequest(params):
 	except KeyError:
 		Debug("[%s] %s" % (params['method'], response['error']['message']), True)
 		return None
-
-def sqlDateToUnixDate(date):
-	if not date:
-		return 0
-	t = time.strptime(date, "%Y-%m-%d %H:%M:%S")
-	try:
-		utime = int(time.mktime(t))
-	except OverflowError:
-		utime = None
-	return utime
 
 def chunks(l, n):
 	return [l[i:i+n] for i in range(0, len(l), n)]
