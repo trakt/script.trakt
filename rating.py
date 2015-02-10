@@ -15,7 +15,7 @@ def ratingCheck(media_type, summary_info, watched_time, total_time, playlist_len
 	if not utils.getSettingAsBool("rate_%s" % media_type):
 		utils.Debug("[Rating] '%s' is configured to not be rated." % media_type)
 		return
-	if summary_info is None:
+	if summary_info is None or 'user' not in summary_info:
 		utils.Debug("[Rating] Summary information is empty, aborting.")
 		return
 	watched = (watched_time / total_time) * 100
@@ -34,7 +34,7 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 
 	s = utils.getFormattedItemName(media_type, summary_info)
 
-	utils.Debug("[Rating] Summary Info %s" % (summary_info))
+	utils.Debug("[Rating] Summary Info %s" % summary_info)
 
 	if unrate:
 		rating = None
