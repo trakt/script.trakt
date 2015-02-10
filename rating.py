@@ -83,7 +83,6 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 		__addon__.getAddonInfo('path'),
 		media_type=media_type,
 		media=summary_info,
-		rating_type='advanced',
 		rerate=rerate
 	)
 
@@ -147,7 +146,6 @@ def __rateOnTrakt(rating, media_type, media, unrate=False):
 		data = globals.traktapi.removeRating(root)
 
 	if data:
-		utils.Debug("data rate: %s" % data)
 		s = utils.getFormattedItemName(media_type, media)
 		if 'not_found' in data and not data['not_found']['movies'] and not data['not_found']['episodes'] and not data['not_found']['shows']:
 
@@ -185,21 +183,18 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 		11039: 1314
 	}
 
-	def __init__(self, xmlFile, resourcePath, forceFallback=False, media_type=None, media=None, rating_type=None, rerate=False):
+	def __init__(self, xmlFile, resourcePath, forceFallback=False, media_type=None, media=None, rerate=False):
 		self.media_type = media_type
 		self.media = media
-		self.rating_type = rating_type
 		self.rating = None
 		self.rerate = rerate
-		self.default_advanced = utils.getSettingAsInt('rating_default_advanced')
+		self.default_rating = utils.getSettingAsInt('rating_default')
 
 	def onInit(self):
-		self.getControl(10015).setVisible(self.rating_type == 'advanced')
-
 		s = utils.getFormattedItemName(self.media_type, self.media)
 		self.getControl(10012).setLabel(s)
 
-		rateID = 11029 + self.default_advanced
+		rateID = 11029 + self.default_rating
 		if self.rerate and self.media['user']['ratings'] and int(self.media['user']['ratings']['rating']) > 0:
 			rateID = 11029 + int(self.media['user']['ratings']['rating'])
 		self.setFocus(self.getControl(rateID))

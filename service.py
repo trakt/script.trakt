@@ -75,7 +75,7 @@ class traktService:
 				utilities.Debug("Unknown dispatch action, '%s'." % action)
 		except Exception as ex:
 			template = (
-			"[TRAKT] EXCEPTION Thrown (PythonToCppException) : -->Python callback/script returned the following error<--\n"
+			"EXCEPTION Thrown (PythonToCppException) : -->Python callback/script returned the following error<--\n"
 			" - NOTE: IGNORING THIS CAN LEAD TO MEMORY LEAKS!\n"
 			"Error Type: <type '{0}'>\n"
 			"Error Contents: {1!r}\n"
@@ -83,7 +83,7 @@ class traktService:
 			"-->End of Python script error report<--"
 			)
 			message = template.format(type(ex).__name__, ex.args, traceback.format_exc())
-			xbmc.log(message, level=xbmc.LOGDEBUG)
+			utilities.Debug(message, force=True)
 
 	def run(self):
 		startup_delay = utilities.getSettingAsInt('startup_delay')
@@ -374,7 +374,7 @@ class traktPlayer(xbmc.Player):
 				showtitle = xbmc.getInfoLabel('VideoPlayer.TVShowTitle')
 				year = xbmc.getInfoLabel('VideoPlayer.Year')
 				
-				utilities.Debug("[traktPlayer] info - showtitle:"+ showtitle +", Year:"+ year +", Season:"+ season +", Episode:"+ episode)
+				utilities.Debug("[traktPlayer] info - showtitle: %s, Year: %s, Season: %s, Episode: %s"  % (showtitle, year, season, episode))
 
 				if season and episode and showtitle:
 					# we have season, episode and show title, can scrobble this as an episode
@@ -401,7 +401,7 @@ class traktPlayer(xbmc.Player):
 					data['episode'] = int(episode)
 					data['showtitle'] = title
 					data['title'] = title
-					utilities.Debug("[traktPlayer] onPlayBackStarted() - Title:"+title+", showtitle:"+showtitle+", season:"+season+", episode:"+episode)
+					utilities.Debug("[traktPlayer] onPlayBackStarted() - Title: %s, showtitle: %s, season: %d, episode: %d" % (title, showtitle, season, episode))
 				else:
 					utilities.Debug("[traktPlayer] onPlayBackStarted() - Non-library file, not enough data for scrobbling, skipping.")
 					return

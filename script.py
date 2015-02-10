@@ -47,6 +47,7 @@ def Main():
 			data['library'] = args['library']
 
 	elif args['action'] in ['rate', 'unrate']:
+		#todo fix this
 		data = {'action': args['action']}
 		media_type = None
 		if 'media_type' in args and 'dbid' in args:
@@ -124,6 +125,7 @@ def Main():
 			utils.Debug("Manual %s of '%s' is unsupported." % (args['action'], media_type))
 
 	elif args['action'] == 'togglewatched':
+		#todo fix this
 		media_type = __getMediaType()
 		if media_type in ['movie', 'show', 'season', 'episode']:
 			data = {'media_type': media_type}

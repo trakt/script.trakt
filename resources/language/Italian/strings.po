@@ -1,0 +1,205 @@
+# Kodi Media Center language file
+# Addon Name: trakt
+# Addon id: script.trakt
+# Addon Provider: trakt.tv
+msgid ""
+msgstr ""
+"Project-Id-Version: XBMC Addons\n"
+"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Italian (http://www.transifex.com/projects/p/xbmc-addons/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "#1010"
+msgid "General"
+msgstr "Generale"
+
+msgctxt "#1013"
+msgid "Username"
+msgstr "Nome utente"
+
+msgctxt "#1014"
+msgid "Password"
+msgstr "Password"
+
+msgctxt "#1030"
+msgid "Rating"
+msgstr "Voto"
+
+msgctxt "#1037"
+msgid "Default rating"
+msgstr "Voto predefinito"
+
+msgctxt "#1050"
+msgid "Exclusions"
+msgstr "Esclusioni"
+
+msgctxt "#1051"
+msgid "Exclude Live TV"
+msgstr "Escludere la Live TV"
+
+msgctxt "#1106"
+msgid "Enter your Username and Password in settings"
+msgstr "Inserire la sua Nome utente e la sua Password nelle impostazioni"
+
+msgctxt "#1107"
+msgid "Enter your Password in settings"
+msgstr "Inserire la sua Password nelle impostazioni"
+
+msgctxt "#1108"
+msgid "Can not connect to trakt"
+msgstr "Connessione a trakt impossibile"
+
+msgctxt "#1109"
+msgid "Error"
+msgstr "Errore"
+
+msgctxt "#1110"
+msgid "Incorrect username or password"
+msgstr "Nome utente o password errati"
+
+msgctxt "#1111"
+msgid "Loading settings from trakt"
+msgstr "Caricamento delle impostazioni da trakt"
+
+msgctxt "#1201"
+msgid "trakt"
+msgstr "trakt"
+
+msgctxt "#1320"
+msgid "Fair"
+msgstr "Sereno"
+
+msgctxt "#1400"
+msgid "Synchronize"
+msgstr "Sincronizzare"
+
+msgctxt "#1402"
+msgid "Movies"
+msgstr "Film"
+
+msgctxt "#1403"
+msgid "Add new movies to trakt collection"
+msgstr "Aggiungere nuovi film alla collezione trakt"
+
+msgctxt "#1406"
+msgid "TV Episodes"
+msgstr "Episodi TV"
+
+msgctxt "#1407"
+msgid "Add new TV episodes to trakt collection"
+msgstr "Aggiungere nuovi episodi TV alla collezione trakt"
+
+msgctxt "#1410"
+msgid "Service"
+msgstr "Servizio"
+
+msgctxt "#1412"
+msgid "Show notifications"
+msgstr "Mostra notifiche"
+
+msgctxt "#1420"
+msgid "Sync started"
+msgstr "Sincronizzazione iniziata"
+
+msgctxt "#1421"
+msgid "Sync complete"
+msgstr "Sincronizzazione completata"
+
+msgctxt "#1426"
+msgid "%i movie(s) will be added to trakt collection"
+msgstr "%i film saranno aggiunti alla collezione trakt"
+
+msgctxt "#1431"
+msgid "Movie Sync Complete"
+msgstr "Sincronizzazione dei film completata"
+
+msgctxt "#1440"
+msgid "%i episodes are being updated"
+msgstr "%i episodi sono stati aggiornati"
+
+msgctxt "#1460"
+msgid "Loading movies from Kodi"
+msgstr "Caricamento dei film da Kodi"
+
+msgctxt "#1461"
+msgid "Movies loaded from Kodi"
+msgstr "Film caricati da Kodi"
+
+msgctxt "#1462"
+msgid "Retrieving movie collection from trakt"
+msgstr "Recuperazione della collezione di film da trakt"
+
+msgctxt "#1463"
+msgid "Retrieving watched movies from trakt"
+msgstr "Recuperazione dei film visti da trakt"
+
+msgctxt "#1466"
+msgid "Retrieved movie data from trakt"
+msgstr "Recuperazione dei dati di film da trakt"
+
+msgctxt "#1467"
+msgid "trakt movie collection is up to date, no movies to add"
+msgstr "la collezione di film trakt è aggiornata, nessun film da aggiungere"
+
+msgctxt "#1468"
+msgid "%i movie(s) were added to your trakt collection"
+msgstr "%i film sono stati aggiunti alla sua collezione trakt"
+
+msgctxt "#1480"
+msgid "Loading episode data from Kodi"
+msgstr "Caricamento dei dati d'episodi da Kodi"
+
+msgctxt "#1483"
+msgid "Parsing %i of %i episode data from Kodi"
+msgstr "Analisi di %i su %i dati d'episodi da Kodi"
+
+msgctxt "#1484"
+msgid "Loaded episode data from Kodi"
+msgstr "Dati d'episodi da Kodi caricati"
+
+msgctxt "#1485"
+msgid "Loading episode data from trakt"
+msgstr "Caricamento dei dati d'episodi da trakt"
+
+msgctxt "#1486"
+msgid "Retrieving episode collection from trakt"
+msgstr "Recuperazione della collezione d'episodi da trakt"
+
+msgctxt "#1487"
+msgid "Retrieving watched episodes from trakt"
+msgstr "Recuperazione degli episodi visti da trakt"
+
+msgctxt "#1488"
+msgid "Parsing episode data %i of %i from trakt"
+msgstr "Analisi di %i su %i dati d'episodi da trakt"
+
+msgctxt "#1489"
+msgid "Retrieved episode data from trakt"
+msgstr "Dati d'episodi recuperati da trakt"
+
+msgctxt "#1490"
+msgid "trakt episode collection is up to date, no episodes to add"
+msgstr "la collezione d'episodi di trakt è aggiornata, nessun episodio da aggiungere"
+
+msgctxt "#1491"
+msgid "%i episode(s) were added to your trakt collection"
+msgstr "%i episodi(o) aggiunto(i) alla sua collezione trakt"
+
+msgctxt "#1552"
+msgid "%d episode(s) of '%s'"
+msgstr "%d episodi(o) di '%s'"
+
+msgctxt "#1700"
+msgid "Debug"
+msgstr "Debug"
+
+msgctxt "#1701"
+msgid "Enable debug mode"
+msgstr "Attivare la modalità debug"

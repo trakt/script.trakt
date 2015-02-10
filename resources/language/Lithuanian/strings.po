@@ -1,0 +1,513 @@
+# Kodi Media Center language file
+# Addon Name: trakt
+# Addon id: script.trakt
+# Addon Provider: trakt.tv
+msgid ""
+msgstr ""
+"Project-Id-Version: XBMC Addons\n"
+"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Lithuanian (http://www.transifex.com/projects/p/xbmc-addons/language/lt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: lt\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgctxt "#1010"
+msgid "General"
+msgstr "Pagrindinis"
+
+msgctxt "#1013"
+msgid "Username"
+msgstr "Vartotojo vardas"
+
+msgctxt "#1014"
+msgid "Password"
+msgstr "Slaptažodis"
+
+msgctxt "#1017"
+msgid "Number of Retries"
+msgstr "Bandymų skaičius"
+
+msgctxt "#1018"
+msgid "Startup Delay"
+msgstr "Paleidimo uždelsimas"
+
+msgctxt "#1030"
+msgid "Rating"
+msgstr "Reitingas"
+
+msgctxt "#1031"
+msgid "Rate Movie after watching"
+msgstr "Įvertinti filmą peržiūrėjus"
+
+msgctxt "#1032"
+msgid "Rate TV show Episode after watching"
+msgstr "Įvertinti TV laidos epizodą peržiūrėjus"
+
+msgctxt "#1033"
+msgid "Rate each playlist item"
+msgstr "Įvertinti kiekvieną grojaraščio elementą"
+
+msgctxt "#1034"
+msgid "Minimum percent watched to display rating dialog"
+msgstr "Minimalus peržiūrėjimo procentas, kad būtų rodomas įvertinimo dialogas"
+
+msgctxt "#1035"
+msgid "Allow re-rating of media"
+msgstr "Leisti iš naujo įvertinti media įrašą"
+
+msgctxt "#1037"
+msgid "Default rating"
+msgstr "Numatytasis įvertinimas"
+
+msgctxt "#1040"
+msgid "Scrobbling"
+msgstr "Registruojama"
+
+msgctxt "#1041"
+msgid "Scrobble movies"
+msgstr "Registruoti filmus"
+
+msgctxt "#1042"
+msgid "Scrobble TV show episodes"
+msgstr "Registruoti TV laidos epizodus"
+
+msgctxt "#1046"
+msgid "Send scrobble call on seek"
+msgstr "Siųsti registracijos kreipinį prasukus"
+
+msgctxt "#1047"
+msgid "Send scrobble call on resume"
+msgstr "Siųsti registracijos kreipinį pratęsus"
+
+msgctxt "#1048"
+msgid "Show notification on scrobble"
+msgstr "Rodyti pranešimą registruojant"
+
+msgctxt "#1049"
+msgid "trakt - Scrobbled successfully"
+msgstr "Trakt.tv - registravimas sėkminga"
+
+msgctxt "#1050"
+msgid "Exclusions"
+msgstr "Išimtys"
+
+msgctxt "#1051"
+msgid "Exclude Live TV"
+msgstr "Išskirti televiziją"
+
+msgctxt "#1052"
+msgid "Exclude HTTP sources"
+msgstr "Išskirti HTTP šaltinius"
+
+msgctxt "#1053"
+msgid "Exclude path"
+msgstr "Išskirti kelią"
+
+msgctxt "#1054"
+msgid "Folder's path (including subfolders)"
+msgstr "Aplanko kelias (įskaitant poaplankius)"
+
+msgctxt "#1106"
+msgid "Enter your Username and Password in settings"
+msgstr "Įveskite vartotojo vardą ir slaptažodį nustatymuose"
+
+msgctxt "#1107"
+msgid "Enter your Password in settings"
+msgstr "Įveskite slaptažodį nustatymuose"
+
+msgctxt "#1108"
+msgid "Can not connect to trakt"
+msgstr "Neįmanoma prisijungti prie Trakt.tv"
+
+msgctxt "#1109"
+msgid "Error"
+msgstr "Klaida"
+
+msgctxt "#1110"
+msgid "Incorrect username or password"
+msgstr "Klaidingas vartotojo vardas arba slaptažodis"
+
+msgctxt "#1111"
+msgid "Loading settings from trakt"
+msgstr "Įkeliami nustatymai iš Trakt.tv"
+
+msgctxt "#1201"
+msgid "trakt"
+msgstr "Trakt.tv"
+
+msgctxt "#1313"
+msgid "What Did You Think?"
+msgstr "Ką jūs galvojote?"
+
+msgctxt "#1314"
+msgid "Totally Ninja!"
+msgstr "Visiška nindzė!"
+
+msgctxt "#1315"
+msgid "Weak Sauce :("
+msgstr "Silpnas padažas :("
+
+msgctxt "#1316"
+msgid "Terrible"
+msgstr "Siaubingas"
+
+msgctxt "#1317"
+msgid "Bad"
+msgstr "Blogas"
+
+msgctxt "#1318"
+msgid "Poor"
+msgstr "Silpnas"
+
+msgctxt "#1319"
+msgid "Meh"
+msgstr "Šiaip sau"
+
+msgctxt "#1320"
+msgid "Fair"
+msgstr "Neblogas"
+
+msgctxt "#1321"
+msgid "Good"
+msgstr "Geras"
+
+msgctxt "#1322"
+msgid "Great"
+msgstr "Puikus"
+
+msgctxt "#1323"
+msgid "Superb"
+msgstr "Nuostabus"
+
+msgctxt "#1325"
+msgid "Unrate this movie"
+msgstr "Pašalinti šio filmo įvertinimą"
+
+msgctxt "#1326"
+msgid "Unrate this show"
+msgstr "Pašalinti šio laidos įvertinimą"
+
+msgctxt "#1327"
+msgid "Unrate this episode"
+msgstr "Pašalinti šio epizodo įvertinimą"
+
+msgctxt "#1350"
+msgid "trakt - Rating submitted successfully"
+msgstr "Trakt.tv - įvertinimas įkeltas sėkmingai"
+
+msgctxt "#1351"
+msgid "trakt - Already rated"
+msgstr "Trakt.tv - jau įvertinta"
+
+msgctxt "#1352"
+msgid "trakt - Unrated successfully"
+msgstr "Trakt.tv - įvertinimas pašalintas sėkmingai"
+
+msgctxt "#1353"
+msgid "trakt - Already has the same rating"
+msgstr "Trakt.tv - jau yra toks pat įvertinimas"
+
+msgctxt "#1354"
+msgid "trakt - Problem submitting rating"
+msgstr "Trakt.tv - problema įkeliant įvertinimą"
+
+msgctxt "#1400"
+msgid "Synchronize"
+msgstr "Sinchronizuoti"
+
+msgctxt "#1402"
+msgid "Movies"
+msgstr "Filmai"
+
+msgctxt "#1403"
+msgid "Add new movies to trakt collection"
+msgstr "Pridėti naujus filmus į Trakt.tv kolekciją"
+
+msgctxt "#1404"
+msgid "Add watched movies to trakt history"
+msgstr "Pridėti peržiūrėtus filmus į Trakt.tv istoriją"
+
+msgctxt "#1405"
+msgid "Mark movies from trakt history as watched in Kodi"
+msgstr "Pažymėti filmus iš Trakt.tv istorijos kaip peržiūrėtus Kodi bibliotekoje"
+
+msgctxt "#1406"
+msgid "TV Episodes"
+msgstr "TV epizodai"
+
+msgctxt "#1407"
+msgid "Add new TV episodes to trakt collection"
+msgstr "Pridėti naujus TV epizodus į Trakt.tv kolekciją"
+
+msgctxt "#1408"
+msgid "Add watched TV episodes to trakt history"
+msgstr "Pridėti peržiūrėtus TV epizodus į Trakt.tv kolekciją"
+
+msgctxt "#1409"
+msgid "Mark TV episodes from trakt history as watched in Kodi"
+msgstr "Pažymėti TV epizodus iš Trakt.tv istorijos kaip peržiūrėtus Kodi bibliotekoje"
+
+msgctxt "#1410"
+msgid "Service"
+msgstr "Paslauga"
+
+msgctxt "#1411"
+msgid "Sync collection on library update or cleaning"
+msgstr "Sinchronizuoti kolekciją po bibliotekos atnaujino ar išvalymo"
+
+msgctxt "#1412"
+msgid "Show notifications"
+msgstr "Rodyti pranešimus"
+
+msgctxt "#1413"
+msgid "Remove deleted movies from trakt collection"
+msgstr "Pašalinti ištrintus filmus iš Trakt.tv kolekcijos"
+
+msgctxt "#1414"
+msgid "Remove deleted TV episodes from trakt collection"
+msgstr "Pašalinti ištrintus TV epizodus iš Trakt.tv kolekcijos"
+
+msgctxt "#1416"
+msgid "Show marked as watched notification"
+msgstr "Rodyti pažymėta kaip peržiūrėta pranešimus"
+
+msgctxt "#1417"
+msgid "Hide notifications during playback"
+msgstr "Slėpti pranešimus atkūrimo metu"
+
+msgctxt "#1420"
+msgid "Sync started"
+msgstr "Sinchronizavimas pradėtas"
+
+msgctxt "#1421"
+msgid "Sync complete"
+msgstr "Sinchronizavimas baigtas"
+
+msgctxt "#1426"
+msgid "%i movie(s) will be added to trakt collection"
+msgstr "Filmų, kurie bus pridėti į Trakt.tv kolekciją: %i"
+
+msgctxt "#1428"
+msgid "%i movie playcount(s) will be updated on trakt"
+msgstr "Filmų, kurių atkūrimų skaičius bus atnaujintas Trakt.tv sistemoje: %i"
+
+msgctxt "#1430"
+msgid "%i movie(s) playcount will be updated in Kodi"
+msgstr "Filmų, kurių atkūrimų skaičius bus atnaujinta Kodi sistemoje: %i"
+
+msgctxt "#1431"
+msgid "Movie Sync Complete"
+msgstr "Filmų sinchronizavimas baigtas"
+
+msgctxt "#1434"
+msgid "Going to add %i show(s) to trakt collection"
+msgstr "Bus pridėta laidų į Trakt.tv kolekciją: %i"
+
+msgctxt "#1435"
+msgid "Checking for episodes missing from trakt collection"
+msgstr "Ieškomi epizodų, kurių trūksta Trakt.tv kolekcijoje"
+
+msgctxt "#1436"
+msgid "%i of %i show(s) have episodes added to trakt collection"
+msgstr "%i iš %i laidų(os) epizodai buvo pridėti į Trakt.tv kolekciją"
+
+msgctxt "#1437"
+msgid "Going to update %i show(s) missing watched status"
+msgstr "Laidų, kurioms bus atnaujintos trūkstamos peržiūros būsenos: %i"
+
+msgctxt "#1438"
+msgid "Checking watched episodes on trakt"
+msgstr "Pažymimi peržiūrėti epizodai Trakt.tv kolekcijoje"
+
+msgctxt "#1439"
+msgid "%i show(s) had missing watched status"
+msgstr "Laidų, kurioms trūksta peržiūros būsenos: %i"
+
+msgctxt "#1440"
+msgid "%i episodes are being updated"
+msgstr "Atnaujinama epizodų: %i"
+
+msgctxt "#1441"
+msgid "Checking watched episodes on Kodi"
+msgstr "Tikrinami peržiūrėti epizodai Kodi sistemoje"
+
+msgctxt "#1442"
+msgid "Episode Sync Complete"
+msgstr "Epizodų sinchronizavimas baigtas"
+
+msgctxt "#1444"
+msgid "%i movie(s) will be removed from trakt collection"
+msgstr "Filmų, kurie bus pašalinti iš Trakt.tv kolekcijos: %i"
+
+msgctxt "#1445"
+msgid "Cleaning trakt TV show collection"
+msgstr "Valoma Trakt.tv laidų kolekcija"
+
+msgctxt "#1447"
+msgid "episodes are being removed"
+msgstr "epizodai pašalinami"
+
+msgctxt "#1460"
+msgid "Loading movies from Kodi"
+msgstr "Įkeliami filmai iš Kodi"
+
+msgctxt "#1461"
+msgid "Movies loaded from Kodi"
+msgstr "Filmai įkelti iš Kodi"
+
+msgctxt "#1462"
+msgid "Retrieving movie collection from trakt"
+msgstr "Gaunama filmų kolekcija iš Trakt.tv"
+
+msgctxt "#1463"
+msgid "Retrieving watched movies from trakt"
+msgstr "Gaunami peržiūrėti filmai iš Trakt.tv"
+
+msgctxt "#1466"
+msgid "Retrieved movie data from trakt"
+msgstr "Gaunama filmų informacija iš Trakt.tv"
+
+msgctxt "#1467"
+msgid "trakt movie collection is up to date, no movies to add"
+msgstr "Trakt.tv filmų kolekcija yra atnaujinta, nėra filmų, kuriuos būtų galima pridėti"
+
+msgctxt "#1468"
+msgid "%i movie(s) were added to your trakt collection"
+msgstr "Pridėta filmų į Trakt.tv kolekciją: %i"
+
+msgctxt "#1469"
+msgid "trakt movie playcounts are up to date"
+msgstr "Trakt.tv filmų atkūrimų skaičiai yra atnaujinti"
+
+msgctxt "#1470"
+msgid "Playcounts updated for %i movie(s) on trakt"
+msgstr "Filmų, kuriems atnaujintas atkūrimų skaičius Trakt.tv sistemoje: %i"
+
+msgctxt "#1471"
+msgid "Kodi movie playcounts are up to date"
+msgstr "Kodi filmų atkūrimų skaičiai yra atnaujinti"
+
+msgctxt "#1472"
+msgid "Updating %i of %i movie playcount(s) in Kodi"
+msgstr "Atnaujinamas atkūrimų skaičius %i iš %i filmų Kodi bibliotekoje"
+
+msgctxt "#1473"
+msgid "Playcounts updated for %i movie(s) in Kodi"
+msgstr "Filmų, kuriems atnaujintas atkūrimų skaičius Kodi bibliotekoje: %i"
+
+msgctxt "#1474"
+msgid "trakt movie collection is up to date, no movies removed"
+msgstr "Trakt.tv filmų kolekcija atnaujinta, nebuvo pašalinta jokių filmų"
+
+msgctxt "#1475"
+msgid "%i movie(s) were removed from your trakt collection"
+msgstr "Pašalinta filmų iš Trakt.tv kolekcijos: %i"
+
+msgctxt "#1478"
+msgid "Updating %i of %i movie playcount(s) on trakt"
+msgstr "Atnaujinamas atkūrimų skaičius %i iš %i filmų Trakt.tv sistemoje"
+
+msgctxt "#1480"
+msgid "Loading episode data from Kodi"
+msgstr "Įkeliami epizodo duomenys iš Kodi"
+
+msgctxt "#1481"
+msgid "Loading shows from Kodi"
+msgstr "Įkeliamos laidos iš Kodi"
+
+msgctxt "#1482"
+msgid "Shows loaded from Kodi"
+msgstr "Laidos įkeltos iš Kodi"
+
+msgctxt "#1483"
+msgid "Parsing %i of %i episode data from Kodi"
+msgstr "Analizuojami %i iš %i epizodų duomenys iš Kodi"
+
+msgctxt "#1484"
+msgid "Loaded episode data from Kodi"
+msgstr "Įkelti epizodo duomenys iš Kodi"
+
+msgctxt "#1485"
+msgid "Loading episode data from trakt"
+msgstr "Įkeliami epizodo duomenys iš Kodi"
+
+msgctxt "#1486"
+msgid "Retrieving episode collection from trakt"
+msgstr "Gaunama epizodų kolekcija iš Trakt.tv"
+
+msgctxt "#1487"
+msgid "Retrieving watched episodes from trakt"
+msgstr "Gaunami peržiūrėti epizodai iš Trakt.tv"
+
+msgctxt "#1488"
+msgid "Parsing episode data %i of %i from trakt"
+msgstr "Analizuojami %i iš %i epizodų duomenys iš Trakt.tv"
+
+msgctxt "#1489"
+msgid "Retrieved episode data from trakt"
+msgstr "Gauti epizodų duomenys iš Trakt.tv"
+
+msgctxt "#1490"
+msgid "trakt episode collection is up to date, no episodes to add"
+msgstr "Trakt.tv epizodų kolekcija yra atnaujinta, nėra epizodų, kuriuos būtų galima pridėti"
+
+msgctxt "#1491"
+msgid "%i episode(s) were added to your trakt collection"
+msgstr "Pridėta epizodų į Trakt.tv kolekciją: %i"
+
+msgctxt "#1492"
+msgid "trakt episode playcounts are up to date"
+msgstr "Trakt.tv epizodų atkūrimų skaičiai yra atnaujinti"
+
+msgctxt "#1493"
+msgid "Kodi episode playcounts are up to date"
+msgstr "Kodi epizodų atkūrimų skaičiai yra atnaujinti"
+
+msgctxt "#1494"
+msgid "Updating %i of %i episode playcount(s) in Kodi"
+msgstr "Atnaujinamas atkūrimų skaičius %i iš %i epizodų Kodi bibliotekoje"
+
+msgctxt "#1495"
+msgid "Playcounts updated for %i show(s) in Kodi"
+msgstr "Laidų, kurioms atnaujintas atkūrimų skaičius Kodi bibliotekoje: %i"
+
+msgctxt "#1496"
+msgid "trakt episode collection is clean, no episodes to remove"
+msgstr "Trakt.tv epizodų kolekcija yra švari, nėra epizodų, kuriuos būtų galima pašalinti"
+
+msgctxt "#1497"
+msgid "%i episode(s) are being removed from your trakt collection"
+msgstr "Pašalinama epizodų iš Trakt.tv kolekcijos: %i"
+
+msgctxt "#1498"
+msgid "%i episode(s) were removed from your trakt collection"
+msgstr "Pašalinta epizodų iš Trakt.tv kolekcijos: %i"
+
+msgctxt "#1550"
+msgid "trakt - Marked as watched"
+msgstr "Trakt.tv - pažymėta kaip peržiūrėta"
+
+msgctxt "#1551"
+msgid "trakt - Failed making as watched"
+msgstr "Trakt.tv - nepavyko pažymėti kaip peržiūrėta"
+
+msgctxt "#1552"
+msgid "%d episode(s) of '%s'"
+msgstr "%d epizodas(ai) iš '%s'"
+
+msgctxt "#1700"
+msgid "Debug"
+msgstr "Derinimas"
+
+msgctxt "#1701"
+msgid "Enable debug mode"
+msgstr "Įjungti derinimo režimą"
+
+msgctxt "#1720"
+msgid "Logging"
+msgstr "Rašomas žurnalas"

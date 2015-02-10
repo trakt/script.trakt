@@ -48,7 +48,7 @@
 		<setting id="rate_each_playlist_item" type="bool" label="1033" default="true"/>
 		<setting id="rate_min_view_time" type="slider" label="1034" range="0,5,100" default="75"/>
 		<setting id="rate_rerate" type="bool" label="1035" default="false"/>
-		<setting id="rating_default_advanced" type="slider" label="1037" range="1,10" default="6" option="int"/>
+		<setting id="rating_default" type="slider" label="1037" range="1,10" default="6" option="int"/>
 	</category>
 	<category label="1700"><!-- Debug -->
 		<setting label="1720" type="lsep"/>

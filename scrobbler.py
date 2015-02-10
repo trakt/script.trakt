@@ -23,8 +23,6 @@ class Scrobbler():
 	curVideoInfo = None
 	playlistLength = 1
 	playlistIndex = 0
-	markedAsWatched = []
-	traktSummaryInfo = None
 	traktShowSummary = None
 
 	def __init__(self, api):
@@ -62,7 +60,7 @@ class Scrobbler():
 						# recalculate watchedPercent and duration for multi-part, and scrobble
 						adjustedDuration = int(self.videoDuration / self.curVideo['multi_episode_count'])
 						watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
-						response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.traktSummaryInfo, watchedPercent)
+						response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.curVideoInfo, watchedPercent)
 						if response != None:
 							Debug("[Scrobbler] Scrobble response: %s" % str(response))
 
@@ -102,29 +100,22 @@ class Scrobbler():
 
 			self.playlistLength = len(xbmc.PlayList(xbmc.PLAYLIST_VIDEO))
 			self.playlistIndex = xbmc.PlayList(xbmc.PLAYLIST_VIDEO).getposition()
-			if (self.playlistLength == 0):
+			if self.playlistLength == 0:
 				Debug("[Scrobbler] Warning: Cant find playlist length, assuming that this item is by itself")
 				self.playlistLength = 1
 
-			self.traktSummaryInfo = None
 			self.isMultiPartEpisode = False
 			if utilities.isMovie(self.curVideo['type']):
 				if 'id' in self.curVideo:
 					self.curVideoInfo = utilities.kodiRpcToTraktMediaObject('movie', utilities.getMovieDetailsFromKodi(self.curVideo['id'], ['imdbnumber', 'title', 'year', 'file', 'lastplayed', 'playcount']))
-					Debug("Trakt ticket: %s" % self.curVideo)
 					if utilities.getSettingAsBool('rate_movie'):
 						# pre-get sumamry information, for faster rating dialog.
 						Debug("[Scrobbler] Movie rating is enabled, pre-fetching summary information.")
 						if self.curVideoInfo['ids']['imdb']:
-							self.traktSummaryInfo = self.traktapi.getMovieSummary(self.curVideoInfo['ids']['imdb'])
-						elif self.curVideoInfo['ids']['tmdb']:
-							self.traktSummaryInfo = self.traktapi.getMovieSummary(self.curVideoInfo['ids']['tmdb'])
+							self.curVideoInfo['user'] = {'ratings': self.traktapi.getMovieRatingForUser(self.curVideoInfo['ids']['imdb'])}
 						else:
-							self.curVideoInfo['ids']['imdb'] = None
 							Debug("[Scrobbler] Can not get summary information for '%s (%d)' as is has no valid id, will retry during a watching call." % (self.curVideoInfo['title'], self.curVideoInfo['year']))
 				elif 'title' in self.curVideo and 'year' in self.curVideo:
-					self.curVideoInfo = {'ids': {}}
-					self.curVideoInfo['ids']['imdb'] = None
 					self.curVideoInfo['title'] = self.curVideo['title']
 					self.curVideoInfo['year'] = self.curVideo['year']
 
@@ -132,6 +123,9 @@ class Scrobbler():
 				if 'id' in self.curVideo:
 					episodeDetailsKodi = utilities.getEpisodeDetailsFromKodi(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid', 'file', 'playcount'])
 					tvdb = episodeDetailsKodi['imdbnumber']
+					self.traktShowSummary = {'title': episodeDetailsKodi['showtitle'], 'year': episodeDetailsKodi['year']}
+					if tvdb:
+						self.traktShowSummary['ids'] = {'tvdb': tvdb}
 					self.curVideoInfo = utilities.kodiRpcToTraktMediaObject('episode', episodeDetailsKodi)
 					if not self.curVideoInfo: # getEpisodeDetailsFromKodi was empty
 						Debug("[Scrobbler] Episode details from Kodi was empty, ID (%d) seems invalid, aborting further scrobbling of this episode." % self.curVideo['id'])
@@ -144,18 +138,10 @@ class Scrobbler():
 						Debug("[Scrobbler] Episode rating is enabled, pre-fetching summary information.")
 
 						if tvdb:
-							lookupShow = self.traktapi.getIdLookup('tvdb', tvdb)
-							self.traktShowSummary = self.traktapi.getShowSummary(lookupShow['ids']['slug'])
-							self.traktSummaryInfo = self.traktapi.getEpisodeSummary(lookupShow['ids'], self.curVideoInfo['season'], self.curVideoInfo['number'])
+							self.curVideoInfo['user'] = {'ratings' : self.traktapi.getEpisodeRatingForUser(tvdb, self.curVideoInfo['season'], self.curVideoInfo['number'])}
 						else:
 							Debug("[Scrobbler] Can not get summary information for '%s - S%02dE%02d' as it has no valid id, will retry during a watching call." % (self.curVideoInfo['showtitle'], self.curVideoInfo['season'], self.curVideoInfo['episode']))
-					else:
-						self.traktShowSummary = {'title': episodeDetailsKodi['showtitle'], 'year': episodeDetailsKodi['year']}
-						if tvdb:
-							self.traktShowSummary['ids'] = {'tvdb': tvdb}
-						Debug("Scrobble Debug: %s" % self.traktShowSummary)
 				elif 'title' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
-					self.curVideoInfo = {'tvdb_id': None}
 					self.curVideoInfo['title'] = self.curVideo['title']
 					self.curVideoInfo['season'] = self.curVideo['season']
 					self.curVideoInfo['number'] = self.curVideo['episode']
@@ -166,10 +152,6 @@ class Scrobbler():
 
 				if 'multi_episode_count' in self.curVideo:
 					self.isMultiPartEpisode = True
-					self.markedAsWatched = []
-					episode_count = self.curVideo['multi_episode_count']
-					for i in range(episode_count):
-						self.markedAsWatched.append(False)
 
 			self.isPlaying = True
 			self.isPaused = False
@@ -212,18 +194,17 @@ class Scrobbler():
 			return
 
 		Debug("[Scrobbler] playbackEnded()")
-		if self.curVideo == None:
+		if self.curVideo is None:
 			Debug("[Scrobbler] Warning: Playback ended but video forgotten.")
 			return
 		self.isPlaying = False
-		self.markedAsWatched = []
 		if self.watchedTime != 0:
 			if 'type' in self.curVideo:
 				self.__scrobble('stop')
-				ratingCheck(self.curVideo['type'], self.traktSummaryInfo, self.watchedTime, self.videoDuration, self.playlistLength)
+				ratingCheck(self.curVideo['type'], self.curVideoInfo, self.watchedTime, self.videoDuration, self.playlistLength)
 			self.watchedTime = 0
 			self.isMultiPartEpisode = False
-		self.traktSummaryInfo = None
+		self.curVideoInfo = None
 		self.curVideo = None
 		self.playlistLength = 0
 		self.playlistIndex = 0

@@ -1,0 +1,53 @@
+# Kodi Media Center language file
+# Addon Name: trakt
+# Addon id: script.trakt
+# Addon Provider: trakt.tv
+msgid ""
+msgstr ""
+"Project-Id-Version: XBMC Addons\n"
+"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Chinese (Simple) (http://www.transifex.com/projects/p/xbmc-addons/language/zh/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgctxt "#1010"
+msgid "General"
+msgstr "常规"
+
+msgctxt "#1013"
+msgid "Username"
+msgstr "用户名"
+
+msgctxt "#1014"
+msgid "Password"
+msgstr "密码"
+
+msgctxt "#1030"
+msgid "Rating"
+msgstr "评分"
+
+msgctxt "#1109"
+msgid "Error"
+msgstr "错误"
+
+msgctxt "#1320"
+msgid "Fair"
+msgstr "晴"
+
+msgctxt "#1402"
+msgid "Movies"
+msgstr "电影"
+
+msgctxt "#1410"
+msgid "Service"
+msgstr "服务"
+
+msgctxt "#1700"
+msgid "Debug"
+msgstr "调试"
