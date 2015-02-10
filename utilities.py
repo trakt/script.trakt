@@ -374,7 +374,9 @@ def kodiRpcToTraktMediaObjects(data):
 				s_no = episode['season']
 				a_episodes[s_no] = []
 			s_no = episode['season']
-			a_episodes[s_no].append(kodiRpcToTraktMediaObject('episode', episode))
+			episodeObject = kodiRpcToTraktMediaObject('episode', episode)
+			if episodeObject:
+				a_episodes[s_no].append(episodeObject)
 
 		for episode in a_episodes:
 			seasons.append({'number': episode, 'episodes': a_episodes[episode]})
@@ -386,7 +388,9 @@ def kodiRpcToTraktMediaObjects(data):
 
 		# reformat movie array
 		for movie in movies:
-			kodi_movies.append(kodiRpcToTraktMediaObject('movie', movie))
+			movieObject = kodiRpcToTraktMediaObject('movie', movie)
+			if movieObject:
+				kodi_movies.append(movieObject)
 		return kodi_movies
 	else:
 		Debug('[Utilities] kodiRpcToTraktMediaObjects() No valid key found in rpc data')
