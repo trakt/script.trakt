@@ -146,7 +146,7 @@ class Scrobbler():
 					if result['movie']['ids']['imdb']:
 						self.curVideoInfo['user'] = {'ratings': self.traktapi.getMovieRatingForUser(result['movie']['ids']['imdb'])}
 					else:
-						Debug("[Scrobbler] Can not get summary information for '%s (%d)' as is has no valid id, will retry during a watching call." % (self.curVideoInfo['title'], self.curVideoInfo['year']))
+						Debug("[Scrobbler] '%s (%d)' has no valid id, can't get rating." % (self.curVideoInfo['title'], self.curVideoInfo['year']))
 				elif utilities.isEpisode(self.curVideo['type']) and utilities.getSettingAsBool('rate_episode'):
 					# pre-get sumamry information, for faster rating dialog.
 					Debug("[Scrobbler] Episode rating is enabled, pre-fetching summary information.")
@@ -154,7 +154,7 @@ class Scrobbler():
 					if result['show']['ids']['tvdb']:
 						self.curVideoInfo['user'] = {'ratings' : self.traktapi.getEpisodeRatingForUser(result['show']['ids']['tvdb'], self.curVideoInfo['season'], self.curVideoInfo['number'])}
 					else:
-						Debug("[Scrobbler] Can not get summary information for '%s - S%02dE%02d' as it has no valid id, will retry during a watching call." % (self.curVideoInfo['showtitle'], self.curVideoInfo['season'], self.curVideoInfo['episode']))
+						Debug("[Scrobbler] '%s - S%02dE%02d' has no valid id, can't get rating." % (self.curVideoInfo['showtitle'], self.curVideoInfo['season'], self.curVideoInfo['episode']))
 
 	def playbackResumed(self):
 		if not self.isPlaying:
