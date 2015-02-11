@@ -145,6 +145,7 @@ class Scrobbler():
 					Debug("[Scrobbler] Movie rating is enabled, pre-fetching summary information.")
 					if result['movie']['ids']['imdb']:
 						self.curVideoInfo['user'] = {'ratings': self.traktapi.getMovieRatingForUser(result['movie']['ids']['imdb'])}
+						self.curVideoInfo['ids'] = result['movie']['ids']
 					else:
 						Debug("[Scrobbler] '%s (%d)' has no valid id, can't get rating." % (self.curVideoInfo['title'], self.curVideoInfo['year']))
 				elif utilities.isEpisode(self.curVideo['type']) and utilities.getSettingAsBool('rate_episode'):
@@ -153,6 +154,7 @@ class Scrobbler():
 
 					if result['show']['ids']['tvdb']:
 						self.curVideoInfo['user'] = {'ratings' : self.traktapi.getEpisodeRatingForUser(result['show']['ids']['tvdb'], self.curVideoInfo['season'], self.curVideoInfo['number'])}
+						self.curVideoInfo['ids'] = result['episode']['ids']
 					else:
 						Debug("[Scrobbler] '%s - S%02dE%02d' has no valid id, can't get rating." % (self.curVideoInfo['showtitle'], self.curVideoInfo['season'], self.curVideoInfo['episode']))
 
