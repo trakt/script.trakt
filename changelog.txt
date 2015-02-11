@@ -1,4 +1,5 @@
 version 3.0.0
+  - new trakt branded rating dialog (by Piers)
   - ported to trakt.tv api v2
   - removed lists management and contextmenu (for now)
   - default rating is now a neutral 6 "Okay"
