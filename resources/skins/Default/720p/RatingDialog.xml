@@ -1,85 +1,110 @@
-<window>
+<?xml version="1.0" encoding="UTF-8"?>
+<window> <!-- Trakt dialog redesign v0.0.4 by Piers -->
     <coordinates>
         <system>1</system>
         <posx>340</posx>
         <posy>235</posy>
     </coordinates>
-
-    <animation effect="fade" time="250">WindowOpen</animation>
-    <animation effect="fade" time="250">WindowClose</animation>
-
+	
     <controls>
-        <!--DIALOG BASE-->
+
+	<control type="image">
+		<description>Lazy Background Fade</description>
+		<posx>-700</posx>
+		<posy>-500</posy>
+		<width>2200</width>
+		<height>2200</height>
+		<texture>trakt-bg-fade.png</texture>
+	</control>
+				
+	<control type="group">
+		<animation type="WindowOpen" reversible="false">
+			<effect type="zoom" start="75" end="100" center="640,360" easing="out" tween="back" time="300" />
+			<effect type="fade" start="0" end="100" time="175" />
+		</animation>
+		<animation type="WindowClose" reversible="false">
+			<effect type="zoom" start="100" end="75" center="640,360" easing="in" tween="back" time="300" />
+			<effect type="fade" start="100" end="0" delay="200" time="100" />
+		</animation>
+		<animation type="Visible" reversible="false">
+			<effect type="zoom" start="75" end="100" center="640,360" easing="out" tween="back" time="300" />
+			<effect type="fade" start="0" end="100" time="175" />
+		</animation>
+		<animation type="Hidden" reversible="false">
+			<effect type="zoom" start="100" end="75" center="640,360" easing="in" tween="back" time="300" />
+			<effect type="fade" start="100" end="0" delay="200" time="100" />
+		</animation>	
+	 
+
+
+        <!-- Dialogue content -->
         <control type="group">
-            <control type="image"> <!--DIALOG BACKGROUND-->
-                <description>Background</description>
+            <control type="image">
+                <description>Trakt Background</description>
                 <posx>0</posx>
                 <posy>0</posy>
                 <width>600</width>
                 <height>250</height>
-                <texture>ConfluenceDialogBack.png</texture>
+                <texture>trakt-bg.png</texture>
             </control>
 
-            <control type="image">
-                <description>Dialog Header Image</description>
-                <posx>40</posx>
-                <posy>16</posy>
-                <width>520</width>
-                <height>40</height>
-                <texture>Confluencedialogheader.png</texture>
-            </control>
-
-            <control type="label" id="10011"> <!--DIALOG TITLE-->
-                <description>Title</description>
-                <posx>0</posx>
-                <posy>27</posy>
-                <width>600</width>
-                <height>20</height>
+            <control type="label" id="10011">
+                <description>Trakt Question</description>
+                <posx>580</posx>
+                <posy>13</posy>
+                <width>580</width>
+                <height>25</height>
                 <label>$ADDON[script.trakt 1313]</label>
-                <align>center</align>
+                <align>right</align>
                 <aligny>center</aligny>
-            </control>
+                <font>font14</font>
+				<textcolor>FFEB1518</textcolor>
+				<scroll>true</scroll>
+				<autoscroll time="2000" delay="1000" repeat="5000">true</autoscroll>			
+             </control>
 
-            <control type="label" id="10012"> <!--MEDIA TITLE-->
-                <description>Title</description>
-                <posx>45</posx>
-                <posy>75</posy>
-                <width>515</width>
+            <control type="label" id="10012">
+                <description>Item to Rate Title</description>
+                <posx>578</posx>
+                <posy>76</posy>
+                <width>420</width>
                 <height>20</height>
                 <label></label>
-                <align>center</align>
+                <align>right</align>
                 <aligny>center</aligny>
                 <font>font12</font>
-                <textcolor>FFBBBBBB</textcolor>
+				<textcolor>FFEB1518</textcolor>
+				<scroll>true</scroll>
+				<autoscroll time="2000" delay="1000" repeat="5000">true</autoscroll>
             </control>
 
-            <control type="label" id="10013"> <!--RATING TITLE-->
-                <description>Title</description>
+            <control type="label" id="10013">
+                <description>Bottom Ratings text</description>
                 <posx>0</posx>
-                <posy>185</posy>
+                <posy>200</posy>
                 <width>600</width>
-                <height>20</height>
+                <height>25</height>
                 <label></label>
                 <align>center</align>
                 <aligny>center</aligny>
-                <font>font12</font>
-                <textcolor>FFBBBBBB</textcolor>
+                <font>font13</font>
+				<textcolor>FFEB1518</textcolor>
             </control>
 
             <control type="button">
                 <description>Close Window button</description>
-                <posx>510</posx>
-                <posy>8</posy>
+                <posx>536</posx>
+                <posy>-26</posy>
                 <width>64</width>
                 <height>32</height>
                 <label></label>
                 <onclick>PreviousMenu</onclick>
-                <texturefocus>ConfluenceDialogCloseButton-focus.png</texturefocus>
-                <texturenofocus>ConfluenceDialogCloseButton.png</texturenofocus>
+                <texturefocus>close-fo.png</texturefocus>
+                <texturenofocus>close-nofo.png</texturenofocus>
                 <visible>system.getbool(input.enablemouse)</visible>
             </control>
         </control>
-
+		<!-- Dialogue Button content -->
         <control type="group" id="10015">
             <control type="button" id="11030">
                 <description>1 Button</description>
@@ -360,7 +385,7 @@
                 <visible>Control.HasFocus(11030)|Control.HasFocus(11031)|Control.HasFocus(11032)|Control.HasFocus(11033)|Control.HasFocus(11034)|Control.HasFocus(11035)|Control.HasFocus(11036)|Control.HasFocus(11037)|Control.HasFocus(11038)</visible>
             </control>
         </control>
-
+		</control>
     </controls>
 
 </window>
