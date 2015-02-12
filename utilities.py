@@ -4,7 +4,6 @@
 import xbmc
 import xbmcaddon
 import time
-import copy
 import re
 import sys
 from datetime import datetime
@@ -107,16 +106,6 @@ def kodiJsonRequest(params):
 	except KeyError:
 		Debug("[%s] %s" % (params['method'], response['error']['message']), True)
 		return None
-
-def sqlDateToUnixDate(date):
-	if not date:
-		return 0
-	t = time.strptime(date, "%Y-%m-%d %H:%M:%S")
-	try:
-		utime = int(time.mktime(t))
-	except OverflowError:
-		utime = None
-	return utime
 
 def chunks(l, n):
 	return [l[i:i+n] for i in range(0, len(l), n)]
@@ -385,7 +374,9 @@ def kodiRpcToTraktMediaObjects(data):
 				s_no = episode['season']
 				a_episodes[s_no] = []
 			s_no = episode['season']
-			a_episodes[s_no].append(kodiRpcToTraktMediaObject('episode', episode))
+			episodeObject = kodiRpcToTraktMediaObject('episode', episode)
+			if episodeObject:
+				a_episodes[s_no].append(episodeObject)
 
 		for episode in a_episodes:
 			seasons.append({'number': episode, 'episodes': a_episodes[episode]})
@@ -397,7 +388,9 @@ def kodiRpcToTraktMediaObjects(data):
 
 		# reformat movie array
 		for movie in movies:
-			kodi_movies.append(kodiRpcToTraktMediaObject('movie', movie))
+			movieObject = kodiRpcToTraktMediaObject('movie', movie)
+			if movieObject:
+				kodi_movies.append(movieObject)
 		return kodi_movies
 	else:
 		Debug('[Utilities] kodiRpcToTraktMediaObjects() No valid key found in rpc data')

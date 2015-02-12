@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <strings>
+    <!-- Settings -->
 	<!-- General Settings -->
 	<string id="1010">General</string>
 	<string id="1013">Username</string>
 	<string id="1014">Password</string>
 	<string id="1017">Number of Retries</string>
 	<string id="1018">Startup Delay</string>
-	
-	<!-- Rating Settings -->
-	<string id="1030">Rating</string>
-	<string id="1031">Rate Movie after watching</string>
-	<string id="1032">Rate TV show Episode after watching</string>
-	<string id="1033">Rate each playlist item</string>
-	<string id="1034">Minimum percent watched to display rating dialog</string>
-	<string id="1035">Allow re-rating of media</string>
-	<string id="1037">Default rating</string>
-	
+	<string id="1701">Enable debug mode</string>
+
+	<!-- Exclusions Settings -->
+    <string id="1050">Exclusions</string>
+	<string id="1051">Exclude Live TV</string>
+	<string id="1052">Exclude HTTP sources</string>
+	<string id="1053">Exclude path</string>
+	<string id="1054">Folder's path (including subfolders)</string>
+
 	<!-- Scrobbling Settings -->
 	<string id="1040">Scrobbling</string>
 	<string id="1041">Scrobble movies</string>
@@ -23,20 +23,42 @@
 	<string id="1046">Send scrobble call on seek</string>
 	<string id="1047">Send scrobble call on resume</string>
 	<string id="1048">Show notification on scrobble</string>
-	<string id="1049">trakt - Scrobbled successfully</string>
-	<string id="1050">Exclusions</string>
-	<string id="1051">Exclude Live TV</string>
-	<string id="1052">Exclude HTTP sources</string>	
-	<string id="1053">Exclude path</string>
-	<string id="1054">Folder's path (including subfolders)</string>
-	
+
+	<!-- Sync Settings -->
+	<string id="1400">Synchronize</string>
+	<string id="1402">Movies</string>
+	<string id="1403">Add new movies to trakt collection</string>
+	<string id="1404">Add watched movies to trakt history</string>
+	<string id="1405">Mark movies from trakt history as watched in Kodi</string>
+	<string id="1406">TV Episodes</string>
+	<string id="1407">Add new TV episodes to trakt collection</string>
+	<string id="1408">Add watched TV episodes to trakt history</string>
+	<string id="1409">Mark TV episodes from trakt history as watched in Kodi</string>
+	<string id="1410">Service</string>
+	<string id="1411">Sync collection on library update or cleaning</string>
+	<string id="1412">Show notifications</string>
+	<string id="1413">Remove deleted movies from trakt collection</string>
+	<string id="1414">Remove deleted TV episodes from trakt collection</string>
+	<string id="1416">Show marked as watched notification</string>
+	<string id="1417">Hide notifications during playback</string>
+
+    <!-- Rating Settings -->
+	<string id="1030">Rating</string>
+	<string id="1031">Rate Movie after watching</string>
+	<string id="1032">Rate TV show Episode after watching</string>
+	<string id="1033">Rate each playlist item</string>
+	<string id="1034">Minimum percent watched to display rating dialog</string>
+	<string id="1035">Allow re-rating of media</string>
+	<string id="1037">Default rating</string>
+
+    <!-- Notifications -->
 	<!-- General Notifications -->
 	<string id="1106">Enter your Username and Password in settings</string>
 	<string id="1107">Enter your Password in settings</string>
 	<string id="1108">Can not connect to trakt</string>
 	<string id="1109">Error</string>
 	<string id="1110">Incorrect username or password</string>
-	<string id="1111">Loading settings from trakt</string>
+    <string id="1049">trakt - Scrobbled successfully</string>
 
 	<!-- Manual Rating Notifications -->
 	<string id="1350">trakt - Rating submitted successfully</string>
@@ -60,27 +82,6 @@
     <string id="1325">Unrate this movie</string>
     <string id="1326">Unrate this show</string>
     <string id="1327">Unrate this episode</string>
-
-	<!-- Titles -->
-	<string id="1201">trakt</string>
-	
-	<!-- Sync Settings -->
-	<string id="1400">Synchronize</string>
-	<string id="1402">Movies</string>
-	<string id="1403">Add new movies to trakt collection</string>
-	<string id="1404">Add watched movies to trakt history</string>
-	<string id="1405">Mark movies from trakt history as watched in Kodi</string>
-	<string id="1406">TV Episodes</string>
-	<string id="1407">Add new TV episodes to trakt collection</string>
-	<string id="1408">Add watched TV episodes to trakt history</string>
-	<string id="1409">Mark TV episodes from trakt history as watched in Kodi</string>
-	<string id="1410">Service</string>
-	<string id="1411">Sync collection on library update or cleaning</string>
-	<string id="1412">Show notifications</string>
-	<string id="1413">Remove deleted movies from trakt collection</string>
-	<string id="1414">Remove deleted TV episodes from trakt collection</string>
-	<string id="1416">Show marked as watched notification</string>
-	<string id="1417">Hide notifications during playback</string>
 
 	<!-- Sync Notifications -->
 	<string id="1420">Sync started</string>
@@ -169,10 +170,6 @@
 	<string id="1550">trakt - Marked as watched</string>
 	<string id="1551">trakt - Failed marking as watched</string>
 	<string id="1552">%d episode(s) of '%s'</string>
-	
-	<!-- Debug Settings -->
-	<string id="1700">Debug</string>
-	<string id="1701">Enable debug mode</string>
-	<string id="1720">Logging</string>
+
 
 </strings>
