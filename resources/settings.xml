@@ -5,6 +5,7 @@
 		<setting id="password" type="text" option="hidden" label="1014" default="" />
 		<setting id="retries" type="slider" label="1017" range="1,1,10" default="1" option="int"/>
 		<setting id="startup_delay" type="slider" label="1018" range="0,30" default="0" option="int"/>
+		<setting id="debug" type="bool" label="1701" default="false"/>
 	</category>
 	<category label="1050"><!-- Exclusions -->
 		<setting id="ExcludeLiveTV" type="bool" label="1051" default="false"/>
@@ -49,9 +50,5 @@
 		<setting id="rate_min_view_time" type="slider" label="1034" range="0,5,100" default="75"/>
 		<setting id="rate_rerate" type="bool" label="1035" default="false"/>
 		<setting id="rating_default" type="slider" label="1037" range="1,10" default="6" option="int"/>
-	</category>
-	<category label="1700"><!-- Debug -->
-		<setting label="1720" type="lsep"/>
-		<setting id="debug" type="bool" label="1701" default="true"/>
 	</category>
 </settings>
