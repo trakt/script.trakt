@@ -299,7 +299,7 @@ def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list):
 				episode = season.episodes[episodeNumber]
 				return episode.to_dict()
 
-def kodiRpcToTraktMediaObject(type, data, mode):
+def kodiRpcToTraktMediaObject(type, data, mode='collected'):
 	if type == 'tvshow':
 		data['ids'] = {}
 		id = data.pop('imdbnumber')
