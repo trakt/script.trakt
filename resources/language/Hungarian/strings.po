@@ -47,7 +47,3 @@ msgstr "Filmek"
 msgctxt "#1410"
 msgid "Service"
 msgstr "Szolgáltatás"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Hibakeresés"

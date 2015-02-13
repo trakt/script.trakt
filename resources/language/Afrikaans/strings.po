@@ -47,7 +47,3 @@ msgstr "Flieks"
 msgctxt "#1410"
 msgid "Service"
 msgstr "Diens"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Ontfout"

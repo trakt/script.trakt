@@ -39,7 +39,3 @@ msgstr "ချို့ယွင်းချက်"
 msgctxt "#1402"
 msgid "Movies"
 msgstr "ရုပ်ရှင်များ"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "အပြစ်ရှာဖွေရန်"

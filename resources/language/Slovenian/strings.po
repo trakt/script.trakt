@@ -47,7 +47,3 @@ msgstr "Filmi"
 msgctxt "#1410"
 msgid "Service"
 msgstr "Storitev"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Razhroščevanje"

@@ -43,7 +43,3 @@ msgstr "Сонечна"
 msgctxt "#1402"
 msgid "Movies"
 msgstr "Фільмы"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Debug"

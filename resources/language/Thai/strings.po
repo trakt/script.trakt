@@ -47,7 +47,3 @@ msgstr "ภาพยนตร์"
 msgctxt "#1410"
 msgid "Service"
 msgstr "บริการ"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "การแก้ปัญหา"

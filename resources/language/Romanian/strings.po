@@ -43,7 +43,3 @@ msgstr "senin"
 msgctxt "#1402"
 msgid "Movies"
 msgstr "Filme"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Depanare"

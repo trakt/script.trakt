@@ -22,7 +22,7 @@ msgstr "Général"
 
 msgctxt "#1013"
 msgid "Username"
-msgstr "Utilisateur"
+msgstr "Nom d'utilisateur"
 
 msgctxt "#1014"
 msgid "Password"
@@ -34,7 +34,7 @@ msgstr "Nombre de Tentatives"
 
 msgctxt "#1018"
 msgid "Startup Delay"
-msgstr "Délai de Démarrage"
+msgstr "Délai avant démarrage"
 
 msgctxt "#1030"
 msgid "Rating"
@@ -54,15 +54,15 @@ msgstr "Evaluer chaque élément de liste de lecture"
 
 msgctxt "#1034"
 msgid "Minimum percent watched to display rating dialog"
-msgstr "Pourcentage minimum regardé pour afficher le dialogue d'évaluation"
+msgstr "Pourcentage minimum de visionage requis pour attribuer une note au média"
 
 msgctxt "#1035"
 msgid "Allow re-rating of media"
-msgstr "Permettre la réévaluation de media"
+msgstr "Permettre la réévaluation du média"
 
 msgctxt "#1037"
 msgid "Default rating"
-msgstr "Evaluation par défault"
+msgstr "Note par défault"
 
 msgctxt "#1040"
 msgid "Scrobbling"
@@ -76,6 +76,18 @@ msgctxt "#1042"
 msgid "Scrobble TV show episodes"
 msgstr "Scrobbler les épisodes TV"
 
+msgctxt "#1046"
+msgid "Send scrobble call on seek"
+msgstr "Lancer le scrobble lors de la recherche"
+
+msgctxt "#1047"
+msgid "Send scrobble call on resume"
+msgstr "Lancer le scrobble lors de la reprise"
+
+msgctxt "#1048"
+msgid "Show notification on scrobble"
+msgstr "Afficher une notification lors du scrobble"
+
 msgctxt "#1049"
 msgid "trakt - Scrobbled successfully"
 msgstr "trakt - Scrobblé avec succès"
@@ -86,7 +98,7 @@ msgstr "Exclusions"
 
 msgctxt "#1051"
 msgid "Exclude Live TV"
-msgstr "Exclure la TV Live"
+msgstr "Exclure la TV en direct"
 
 msgctxt "#1052"
 msgid "Exclude HTTP sources"
@@ -120,21 +132,49 @@ msgctxt "#1110"
 msgid "Incorrect username or password"
 msgstr "Nom d'utilisateur ou mot de passe incorrect"
 
-msgctxt "#1111"
-msgid "Loading settings from trakt"
-msgstr "Télécharger les paramètres depuis trakt"
-
-msgctxt "#1201"
-msgid "trakt"
-msgstr "trakt"
-
 msgctxt "#1313"
 msgid "What Did You Think?"
 msgstr "Qu'en avez-vous pensé?"
 
+msgctxt "#1314"
+msgid "Totally Ninja!"
+msgstr "Un chef-d'oeuvre !"
+
+msgctxt "#1315"
+msgid "Weak Sauce :("
+msgstr "Un navet :("
+
+msgctxt "#1316"
+msgid "Terrible"
+msgstr "Nul"
+
+msgctxt "#1317"
+msgid "Bad"
+msgstr "Mauvais"
+
+msgctxt "#1318"
+msgid "Poor"
+msgstr "Médiocre"
+
+msgctxt "#1319"
+msgid "Meh"
+msgstr "Mouais"
+
 msgctxt "#1320"
 msgid "Fair"
 msgstr "Beau"
+
+msgctxt "#1321"
+msgid "Good"
+msgstr "Bon"
+
+msgctxt "#1322"
+msgid "Great"
+msgstr "Très bon"
+
+msgctxt "#1323"
+msgid "Superb"
+msgstr "Superbe"
 
 msgctxt "#1325"
 msgid "Unrate this movie"
@@ -142,11 +182,11 @@ msgstr "Supprimer l'évaluation de ce film"
 
 msgctxt "#1326"
 msgid "Unrate this show"
-msgstr "Supprimer l'évaluation de cette série"
+msgstr "Supprimer l'évaluation de cette émission"
 
 msgctxt "#1327"
 msgid "Unrate this episode"
-msgstr "Supprimer l'évaluation de cette épisode"
+msgstr "Supprimer l'évaluation de cet épisode"
 
 msgctxt "#1350"
 msgid "trakt - Rating submitted successfully"
@@ -230,7 +270,7 @@ msgstr "Afficher les notifications \"marqué comme vu\""
 
 msgctxt "#1417"
 msgid "Hide notifications during playback"
-msgstr "Cacher les notification pendant la lecture"
+msgstr "Cacher les notifications pendant la lecture"
 
 msgctxt "#1420"
 msgid "Sync started"
@@ -238,7 +278,7 @@ msgstr "Synchronisation démarrée"
 
 msgctxt "#1421"
 msgid "Sync complete"
-msgstr "Synchronisation complète"
+msgstr "Synchronisation terminée"
 
 msgctxt "#1426"
 msgid "%i movie(s) will be added to trakt collection"
@@ -254,7 +294,7 @@ msgstr "le compteur de lecture de %i film(s) seront mis à jour dans Kodi"
 
 msgctxt "#1431"
 msgid "Movie Sync Complete"
-msgstr "Synchronisation des films complète"
+msgstr "Synchronisation des films terminée"
 
 msgctxt "#1434"
 msgid "Going to add %i show(s) to trakt collection"
@@ -268,21 +308,29 @@ msgctxt "#1436"
 msgid "%i of %i show(s) have episodes added to trakt collection"
 msgstr "%i de %i série(s) ont des épisodes qui ont été ajoutés à la collection trakt"
 
+msgctxt "#1437"
+msgid "Going to update %i show(s) missing watched status"
+msgstr "%i série(s) vue(s) vont être mis-à-jour"
+
 msgctxt "#1438"
 msgid "Checking watched episodes on trakt"
 msgstr "Vérification des épisodes vus sur trakt"
 
+msgctxt "#1439"
+msgid "%i show(s) had missing watched status"
+msgstr "%i série(s) vue(s) ne sont pas à jour."
+
 msgctxt "#1440"
 msgid "%i episodes are being updated"
-msgstr "Mise à jour de %i épisodes"
+msgstr "Mise à jour de %i épisode(s)"
 
 msgctxt "#1441"
 msgid "Checking watched episodes on Kodi"
-msgstr "Vérification des épisodes vu sur Kodi"
+msgstr "Vérification des épisodes vus sur Kodi"
 
 msgctxt "#1442"
 msgid "Episode Sync Complete"
-msgstr "Synchronisation des épisodes complète"
+msgstr "Synchronisation des épisodes terminée"
 
 msgctxt "#1444"
 msgid "%i movie(s) will be removed from trakt collection"
@@ -290,7 +338,11 @@ msgstr "%i film(s) seront retirés de la collection trakt"
 
 msgctxt "#1445"
 msgid "Cleaning trakt TV show collection"
-msgstr "Nettoyage de la collection de séries TV"
+msgstr "Nettoyage de la collection de séries TV sur trakt"
+
+msgctxt "#1447"
+msgid "episodes are being removed"
+msgstr "Episodes en cours de retrait"
 
 msgctxt "#1460"
 msgid "Loading movies from Kodi"
@@ -310,11 +362,11 @@ msgstr "Récupération des films vus depuis trakt"
 
 msgctxt "#1466"
 msgid "Retrieved movie data from trakt"
-msgstr "Récupération des données de films depuis trakt"
+msgstr "Récupération des données du film depuis trakt"
 
 msgctxt "#1467"
 msgid "trakt movie collection is up to date, no movies to add"
-msgstr "la collection de films trakt est à jour, pas de films à ajouter"
+msgstr "la collection de films trakt est à jour, il n'y a pas de film à ajouter"
 
 msgctxt "#1468"
 msgid "%i movie(s) were added to your trakt collection"
@@ -342,7 +394,7 @@ msgstr "Les compteurs de lecture de %i film(s) ont été mis à jour dans Kodi"
 
 msgctxt "#1474"
 msgid "trakt movie collection is up to date, no movies removed"
-msgstr "la collection de films de trakt est à jour, aucun film retiré"
+msgstr "la collection de films de trakt est à jour, aucun film n'a été retiré"
 
 msgctxt "#1475"
 msgid "%i movie(s) were removed from your trakt collection"
@@ -432,17 +484,9 @@ msgctxt "#1550"
 msgid "trakt - Marked as watched"
 msgstr "trakt - Marqué comme vu"
 
-msgctxt "#1551"
-msgid "trakt - Failed making as watched"
-msgstr "trakt - Echec du marquage comme vu"
-
 msgctxt "#1552"
 msgid "%d episode(s) of '%s'"
 msgstr "%d épisode(s) de '%s'"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Débogage"
 
 msgctxt "#1701"
 msgid "Enable debug mode"

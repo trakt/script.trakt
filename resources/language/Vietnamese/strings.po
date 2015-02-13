@@ -47,7 +47,3 @@ msgstr "Phim"
 msgctxt "#1410"
 msgid "Service"
 msgstr "Dịch Vụ"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Tìm sửa lỗi"

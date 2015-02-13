@@ -43,3 +43,7 @@ msgstr "آفتابی"
 msgctxt "#1402"
 msgid "Movies"
 msgstr "فیلم ها"
+
+msgctxt "#1410"
+msgid "Service"
+msgstr "سرویس"

@@ -132,14 +132,6 @@ msgctxt "#1110"
 msgid "Incorrect username or password"
 msgstr "Incorrect username or password"
 
-msgctxt "#1111"
-msgid "Loading settings from trakt"
-msgstr "Loading settings from trakt"
-
-msgctxt "#1201"
-msgid "trakt"
-msgstr "trakt"
-
 msgctxt "#1313"
 msgid "What Did You Think?"
 msgstr "What Did You Think?"
@@ -492,22 +484,10 @@ msgctxt "#1550"
 msgid "trakt - Marked as watched"
 msgstr "trakt - Marked as watched"
 
-msgctxt "#1551"
-msgid "trakt - Failed making as watched"
-msgstr "trakt - Failed making as watched"
-
 msgctxt "#1552"
 msgid "%d episode(s) of '%s'"
 msgstr "%d episode(s) of '%s'"
 
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Debug"
-
 msgctxt "#1701"
 msgid "Enable debug mode"
 msgstr "Enable debug mode"
-
-msgctxt "#1720"
-msgid "Logging"
-msgstr "Logging"

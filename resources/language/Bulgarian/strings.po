@@ -47,7 +47,3 @@ msgstr "Филми"
 msgctxt "#1410"
 msgid "Service"
 msgstr "Услуга"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Дебъг"

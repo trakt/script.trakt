@@ -28,26 +28,466 @@ msgctxt "#1014"
 msgid "Password"
 msgstr "Wachtwoord"
 
+msgctxt "#1017"
+msgid "Number of Retries"
+msgstr "Aantal keer opnieuw geprobeerd"
+
+msgctxt "#1018"
+msgid "Startup Delay"
+msgstr "Start vertraging"
+
 msgctxt "#1030"
 msgid "Rating"
 msgstr "Waardering"
+
+msgctxt "#1031"
+msgid "Rate Movie after watching"
+msgstr "Waardeer film na bekijken"
+
+msgctxt "#1032"
+msgid "Rate TV show Episode after watching"
+msgstr "Waardeer Tv-serie aflevering na bekijken"
+
+msgctxt "#1033"
+msgid "Rate each playlist item"
+msgstr "Waardeer elke afspeellijst item"
+
+msgctxt "#1034"
+msgid "Minimum percent watched to display rating dialog"
+msgstr "Minimum percentage bekeken om waardering dialoog te tonen"
+
+msgctxt "#1035"
+msgid "Allow re-rating of media"
+msgstr "Toestaan herwaardering van media"
+
+msgctxt "#1037"
+msgid "Default rating"
+msgstr "Standaard Waardering"
+
+msgctxt "#1040"
+msgid "Scrobbling"
+msgstr "Scrobbling"
+
+msgctxt "#1041"
+msgid "Scrobble movies"
+msgstr "Scrobble films"
+
+msgctxt "#1042"
+msgid "Scrobble TV show episodes"
+msgstr "Scrobble TV-serie afleveringen"
+
+msgctxt "#1046"
+msgid "Send scrobble call on seek"
+msgstr "Stuur scrobble verzoek op oproep"
+
+msgctxt "#1047"
+msgid "Send scrobble call on resume"
+msgstr "Stuur scrobble verzoek bij hervatten"
+
+msgctxt "#1048"
+msgid "Show notification on scrobble"
+msgstr "Toon notificatie tijdens schrobble"
+
+msgctxt "#1049"
+msgid "trakt - Scrobbled successfully"
+msgstr "Trakt - scrobbled succesvol"
+
+msgctxt "#1050"
+msgid "Exclusions"
+msgstr "Uitsluitingen"
+
+msgctxt "#1051"
+msgid "Exclude Live TV"
+msgstr "Uitsluiten live TV"
+
+msgctxt "#1052"
+msgid "Exclude HTTP sources"
+msgstr "Uitsluiten HTTP bronnen"
+
+msgctxt "#1053"
+msgid "Exclude path"
+msgstr "Uitsluiten locatie"
+
+msgctxt "#1054"
+msgid "Folder's path (including subfolders)"
+msgstr "Folders locatie (inclusief onderliggende folders)"
+
+msgctxt "#1106"
+msgid "Enter your Username and Password in settings"
+msgstr "Voeg je gebruikersnaam en wachtwoord in in instellingen"
+
+msgctxt "#1107"
+msgid "Enter your Password in settings"
+msgstr "Voeg je wachtwoord in in instellingen"
+
+msgctxt "#1108"
+msgid "Can not connect to trakt"
+msgstr "Kan niet verbinden met trakt"
 
 msgctxt "#1109"
 msgid "Error"
 msgstr "Fout"
 
+msgctxt "#1110"
+msgid "Incorrect username or password"
+msgstr "Verkeerde gebruikersnaam of wachtwoord"
+
+msgctxt "#1313"
+msgid "What Did You Think?"
+msgstr "Wat dacht je?"
+
+msgctxt "#1314"
+msgid "Totally Ninja!"
+msgstr "Totaal ninja!"
+
+msgctxt "#1315"
+msgid "Weak Sauce :("
+msgstr "Zwakke saus :("
+
+msgctxt "#1316"
+msgid "Terrible"
+msgstr "Verschrikkelijk"
+
+msgctxt "#1317"
+msgid "Bad"
+msgstr "Slecht"
+
+msgctxt "#1318"
+msgid "Poor"
+msgstr "Zwak"
+
+msgctxt "#1319"
+msgid "Meh"
+msgstr "Meh"
+
 msgctxt "#1320"
 msgid "Fair"
 msgstr "Mooi"
+
+msgctxt "#1321"
+msgid "Good"
+msgstr "Goed"
+
+msgctxt "#1322"
+msgid "Great"
+msgstr "Groots"
+
+msgctxt "#1323"
+msgid "Superb"
+msgstr "Superb"
+
+msgctxt "#1325"
+msgid "Unrate this movie"
+msgstr "De-waardeer deze film"
+
+msgctxt "#1326"
+msgid "Unrate this show"
+msgstr "De-waardeer deze serie"
+
+msgctxt "#1327"
+msgid "Unrate this episode"
+msgstr "De-waardeer deze aflevering"
+
+msgctxt "#1350"
+msgid "trakt - Rating submitted successfully"
+msgstr "Trakt - waardering succesvol toegevoegd"
+
+msgctxt "#1351"
+msgid "trakt - Already rated"
+msgstr "Trakt - al gewaardeerd"
+
+msgctxt "#1352"
+msgid "trakt - Unrated successfully"
+msgstr "trakt - De-waardering succesvol"
+
+msgctxt "#1353"
+msgid "trakt - Already has the same rating"
+msgstr "Trakt- heeft al de zelfde waardering"
+
+msgctxt "#1354"
+msgid "trakt - Problem submitting rating"
+msgstr "Trakt- probleem met toevoegen waardering"
+
+msgctxt "#1400"
+msgid "Synchronize"
+msgstr "Synchroniseer"
 
 msgctxt "#1402"
 msgid "Movies"
 msgstr "Films"
 
+msgctxt "#1403"
+msgid "Add new movies to trakt collection"
+msgstr "Voeg nieuwe films toe aan trakt collectie"
+
+msgctxt "#1404"
+msgid "Add watched movies to trakt history"
+msgstr "Toon bekeken films aan trakt historie"
+
+msgctxt "#1405"
+msgid "Mark movies from trakt history as watched in Kodi"
+msgstr "Markeer films van trakt historie al bekeken in Kodi"
+
+msgctxt "#1406"
+msgid "TV Episodes"
+msgstr "TV afleveringen"
+
+msgctxt "#1407"
+msgid "Add new TV episodes to trakt collection"
+msgstr "Voeg nieuwe tv afleveringen toe aan trakt collectie"
+
+msgctxt "#1408"
+msgid "Add watched TV episodes to trakt history"
+msgstr "Voeg bekeken TV afleveringen toe aan trakt historie"
+
+msgctxt "#1409"
+msgid "Mark TV episodes from trakt history as watched in Kodi"
+msgstr "Markeer TV afleveringen van trakt historie als bekeken in kodi"
+
 msgctxt "#1410"
 msgid "Service"
 msgstr "Dienst"
 
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Debuggen"
+msgctxt "#1411"
+msgid "Sync collection on library update or cleaning"
+msgstr "Synchoroniseer collect tijdens bibliotheek update of opruiming"
+
+msgctxt "#1412"
+msgid "Show notifications"
+msgstr "Toon Notificaties"
+
+msgctxt "#1413"
+msgid "Remove deleted movies from trakt collection"
+msgstr "Verwijder verwijderde films van de trakt collectie"
+
+msgctxt "#1414"
+msgid "Remove deleted TV episodes from trakt collection"
+msgstr "Verwijder verwijderde tv afleveringen van trakt collectie"
+
+msgctxt "#1416"
+msgid "Show marked as watched notification"
+msgstr "Toon gemarkeerd als bekeken notificatie"
+
+msgctxt "#1417"
+msgid "Hide notifications during playback"
+msgstr "Verberg notificaties tijdens afspelen"
+
+msgctxt "#1420"
+msgid "Sync started"
+msgstr "Sync gestart"
+
+msgctxt "#1421"
+msgid "Sync complete"
+msgstr "Sync compleet"
+
+msgctxt "#1426"
+msgid "%i movie(s) will be added to trakt collection"
+msgstr "%i film(s) worden toegevoegd aan de trakt collectie"
+
+msgctxt "#1428"
+msgid "%i movie playcount(s) will be updated on trakt"
+msgstr "%i film aantal(en) keer afgespeelt worden geüpdate naar trakt"
+
+msgctxt "#1430"
+msgid "%i movie(s) playcount will be updated in Kodi"
+msgstr "%i film(s) aantal keren worden ge:update in Kodi"
+
+msgctxt "#1431"
+msgid "Movie Sync Complete"
+msgstr "Film sync compleet"
+
+msgctxt "#1434"
+msgid "Going to add %i show(s) to trakt collection"
+msgstr "Gaat %i aflevering(en) toevoegen aan de trakt collectie"
+
+msgctxt "#1435"
+msgid "Checking for episodes missing from trakt collection"
+msgstr "Controleert voor missende afleveringen van trakt collectie"
+
+msgctxt "#1436"
+msgid "%i of %i show(s) have episodes added to trakt collection"
+msgstr "%i van %i aflevering(en) zijn toegevoegd aan de trakt collectie"
+
+msgctxt "#1437"
+msgid "Going to update %i show(s) missing watched status"
+msgstr "Gaat %i  bekeken status van afleverignen(en) updaten"
+
+msgctxt "#1438"
+msgid "Checking watched episodes on trakt"
+msgstr "Controleren bekeken afleveringen op trakt"
+
+msgctxt "#1439"
+msgid "%i show(s) had missing watched status"
+msgstr "%i serie(s) missen bekeken status"
+
+msgctxt "#1440"
+msgid "%i episodes are being updated"
+msgstr "%i afleveringen worden geüpdate"
+
+msgctxt "#1441"
+msgid "Checking watched episodes on Kodi"
+msgstr "Controleren bekeken afleveringen op Kodi"
+
+msgctxt "#1442"
+msgid "Episode Sync Complete"
+msgstr "Aflevering sync compleet"
+
+msgctxt "#1444"
+msgid "%i movie(s) will be removed from trakt collection"
+msgstr "%i film(s) worden verwijderd uit de trakt collectie"
+
+msgctxt "#1445"
+msgid "Cleaning trakt TV show collection"
+msgstr "Opruimen trakt TV serie collectie"
+
+msgctxt "#1447"
+msgid "episodes are being removed"
+msgstr "Afleveringen gaanworden verwijderd"
+
+msgctxt "#1460"
+msgid "Loading movies from Kodi"
+msgstr "Laden films van Kodi"
+
+msgctxt "#1461"
+msgid "Movies loaded from Kodi"
+msgstr "Films geladen van Kodi"
+
+msgctxt "#1462"
+msgid "Retrieving movie collection from trakt"
+msgstr "Verkrijgen film collectie van Trakt"
+
+msgctxt "#1463"
+msgid "Retrieving watched movies from trakt"
+msgstr "Verkrijgen bekeken films van trakt"
+
+msgctxt "#1466"
+msgid "Retrieved movie data from trakt"
+msgstr "Verkrijgen film date van trakt"
+
+msgctxt "#1467"
+msgid "trakt movie collection is up to date, no movies to add"
+msgstr "Trakt film collectie is up to date, geen films toe te voegen"
+
+msgctxt "#1468"
+msgid "%i movie(s) were added to your trakt collection"
+msgstr "%i film(s) werden toegevoegd aan jouw trakt collectie"
+
+msgctxt "#1469"
+msgid "trakt movie playcounts are up to date"
+msgstr "Trakt film keren afgespeeld zijn up to date"
+
+msgctxt "#1470"
+msgid "Playcounts updated for %i movie(s) on trakt"
+msgstr "Keren afgespeeld zijn geüpdated voor %i film(s) op trakt"
+
+msgctxt "#1471"
+msgid "Kodi movie playcounts are up to date"
+msgstr "Kodi Film keren afgepeeld zijn up to date"
+
+msgctxt "#1472"
+msgid "Updating %i of %i movie playcount(s) in Kodi"
+msgstr "Updaten %i van %i film ker(en) afgespeeld"
+
+msgctxt "#1473"
+msgid "Playcounts updated for %i movie(s) in Kodi"
+msgstr "keren afgespeeld geüpdated van %i film(s) in Kodi"
+
+msgctxt "#1474"
+msgid "trakt movie collection is up to date, no movies removed"
+msgstr "Trakt Flm collecti is upto date, geen films verwijderd"
+
+msgctxt "#1475"
+msgid "%i movie(s) were removed from your trakt collection"
+msgstr "%i film(s) zijn verwijderd van jouw trakt collectie"
+
+msgctxt "#1478"
+msgid "Updating %i of %i movie playcount(s) on trakt"
+msgstr "Updaten %i van%i film ker(en) afgespeeld naar trakt"
+
+msgctxt "#1480"
+msgid "Loading episode data from Kodi"
+msgstr "Laden afleveringdata van Kodi"
+
+msgctxt "#1481"
+msgid "Loading shows from Kodi"
+msgstr "Laden series van Kodi"
+
+msgctxt "#1482"
+msgid "Shows loaded from Kodi"
+msgstr "Toon geladen van Kodi"
+
+msgctxt "#1483"
+msgid "Parsing %i of %i episode data from Kodi"
+msgstr "Parsing %i van %i aflevering data van Kodi"
+
+msgctxt "#1484"
+msgid "Loaded episode data from Kodi"
+msgstr "Geladen afleveringsdata van Kodi"
+
+msgctxt "#1485"
+msgid "Loading episode data from trakt"
+msgstr "Laden afleveringsdata van trakt"
+
+msgctxt "#1486"
+msgid "Retrieving episode collection from trakt"
+msgstr "Verkrijgen afleveringscollectie van trakt"
+
+msgctxt "#1487"
+msgid "Retrieving watched episodes from trakt"
+msgstr "Verkrijgen bekeken afleveringen van trakt"
+
+msgctxt "#1488"
+msgid "Parsing episode data %i of %i from trakt"
+msgstr "Parsing afleveringsdate %i van%i van trakt"
+
+msgctxt "#1489"
+msgid "Retrieved episode data from trakt"
+msgstr "Verkrijgen afleveringsdata van trakt"
+
+msgctxt "#1490"
+msgid "trakt episode collection is up to date, no episodes to add"
+msgstr "Trakt afleveringscollectie is up to date, geen afleveringen toe te voegen"
+
+msgctxt "#1491"
+msgid "%i episode(s) were added to your trakt collection"
+msgstr "%i aflevering(en) zijn toegevoegd aan jouw trakt collectie"
+
+msgctxt "#1492"
+msgid "trakt episode playcounts are up to date"
+msgstr "Trakt afllevering keren afgespeeld zijn up to date"
+
+msgctxt "#1493"
+msgid "Kodi episode playcounts are up to date"
+msgstr "Kodi afleveringen keren afgespeeld zijn up to date"
+
+msgctxt "#1494"
+msgid "Updating %i of %i episode playcount(s) in Kodi"
+msgstr "Updaten %i van %i aflevering ker(en) afgespeeld in Kodi"
+
+msgctxt "#1495"
+msgid "Playcounts updated for %i show(s) in Kodi"
+msgstr "keren afgespeeld geüpdated voor %i serie(s) in Kodi"
+
+msgctxt "#1496"
+msgid "trakt episode collection is clean, no episodes to remove"
+msgstr "Trakt afleveringscollectie is schoon, geen afleveringen te verwijderen"
+
+msgctxt "#1497"
+msgid "%i episode(s) are being removed from your trakt collection"
+msgstr "%i aflevering(s) worden verwijderd van jouw trakt collectie"
+
+msgctxt "#1498"
+msgid "%i episode(s) were removed from your trakt collection"
+msgstr "%i aflevering(en) werden verwijderd van jouw trakt collectie"
+
+msgctxt "#1550"
+msgid "trakt - Marked as watched"
+msgstr "Trakt - Markeert als bekeken"
+
+msgctxt "#1552"
+msgid "%d episode(s) of '%s'"
+msgstr "%d aflevering(en) van '%s'"
+
+msgctxt "#1701"
+msgid "Enable debug mode"
+msgstr "Activeer debug modus"
