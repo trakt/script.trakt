@@ -44,13 +44,13 @@ class Sync():
 		data = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
 		if data['limits']['total'] == 0:
 			Debug("[Episodes Sync] Kodi json request was empty.")
-			return None
+			return None, None
 
 		tvshows = utilities.kodiRpcToTraktMediaObjects(data)
 		Debug("[Episode Sync] Getting shows from kodi finished %s" % tvshows)
 
 		if tvshows is None:
-			return None
+			return None, None
 		self.__updateProgress(2, line2=utilities.getString(1482))
 		resultCollected = {'shows': []}
 		resultWatched = {'shows': []}
@@ -70,7 +70,7 @@ class Sync():
 			data = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show_col1['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid', 'lastplayed', 'file', 'dateadded']}, 'id': 0})
 			if not data:
 				Debug("[Episodes Sync] There was a problem getting episode data for '%s', aborting sync." % show['title'])
-				return None
+				return None, None
 			elif 'episodes' not in data:
 				Debug("[Episodes Sync] '%s' has no episodes in Kodi." % show['title'])
 				continue
@@ -105,7 +105,7 @@ class Sync():
 			traktShowsWatched = traktShowsWatched.items()
 		except Exception:
 			Debug("[Episodes Sync] Invalid trakt.tv show list, possible error getting data from trakt, aborting trakt.tv collection update.")
-			return False
+			return False, False
 
 		i = 0
 		x = float(len(traktShowsCollected))
