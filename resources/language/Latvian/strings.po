@@ -47,7 +47,3 @@ msgstr "Filmas"
 msgctxt "#1410"
 msgid "Service"
 msgstr "Pakalpojums"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Atkļūdo"

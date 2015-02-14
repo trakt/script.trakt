@@ -104,14 +104,6 @@ msgctxt "#1110"
 msgid "Incorrect username or password"
 msgstr "Senha ou usuário incorreto"
 
-msgctxt "#1111"
-msgid "Loading settings from trakt"
-msgstr "Carregando ajustes do trakt"
-
-msgctxt "#1201"
-msgid "trakt"
-msgstr "trakt"
-
 msgctxt "#1313"
 msgid "What Did You Think?"
 msgstr "O que você achou?"
@@ -175,6 +167,14 @@ msgstr "trakt - Avaliação enviada com sucesso"
 msgctxt "#1351"
 msgid "trakt - Already rated"
 msgstr "trakt - Já avaliado"
+
+msgctxt "#1352"
+msgid "trakt - Unrated successfully"
+msgstr "trakt - Removido avaliação com sucesso"
+
+msgctxt "#1353"
+msgid "trakt - Already has the same rating"
+msgstr "trakt - Sempre usar a mesma avaliação"
 
 msgctxt "#1354"
 msgid "trakt - Problem submitting rating"
@@ -260,13 +260,29 @@ msgctxt "#1431"
 msgid "Movie Sync Complete"
 msgstr "Sincronização de Filmes Completada"
 
+msgctxt "#1434"
+msgid "Going to add %i show(s) to trakt collection"
+msgstr "Indo adicionar %i seriado(s) para sua coleção no trakt"
+
 msgctxt "#1435"
 msgid "Checking for episodes missing from trakt collection"
 msgstr "Verificando por episódios ausentes na coleção do trakt"
 
+msgctxt "#1436"
+msgid "%i of %i show(s) have episodes added to trakt collection"
+msgstr "%i de %i seriado(s) possuem episódios que foram adicionados a sua coleção no trakt"
+
+msgctxt "#1437"
+msgid "Going to update %i show(s) missing watched status"
+msgstr "Indo atualizar %i seriado(s) com estatus de assistido ausente"
+
 msgctxt "#1438"
 msgid "Checking watched episodes on trakt"
 msgstr "Verificando episódios assistidos no trakt"
+
+msgctxt "#1439"
+msgid "%i show(s) had missing watched status"
+msgstr "%i seriado(s) estão com estatus de assistidos ausentes"
 
 msgctxt "#1440"
 msgid "%i episodes are being updated"
@@ -376,6 +392,10 @@ msgctxt "#1491"
 msgid "%i episode(s) were added to your trakt collection"
 msgstr "%i episódio(s) foram adicionados em sua coleção no trakt"
 
+msgctxt "#1496"
+msgid "trakt episode collection is clean, no episodes to remove"
+msgstr "Coleção de episódios no trakt está limpa, nenhum episódio para remover"
+
 msgctxt "#1497"
 msgid "%i episode(s) are being removed from your trakt collection"
 msgstr "%i episódio(s) estão sendo removidos de sua coleção no trakt"
@@ -388,22 +408,10 @@ msgctxt "#1550"
 msgid "trakt - Marked as watched"
 msgstr "trakt - Marcado como assistido"
 
-msgctxt "#1551"
-msgid "trakt - Failed making as watched"
-msgstr "trakt - Falhou marcando como assistido"
-
 msgctxt "#1552"
 msgid "%d episode(s) of '%s'"
 msgstr "%d episódio(s) de '%s'"
 
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Debug"
-
 msgctxt "#1701"
 msgid "Enable debug mode"
 msgstr "Ativar Modo Debug"
-
-msgctxt "#1720"
-msgid "Logging"
-msgstr "Logando"

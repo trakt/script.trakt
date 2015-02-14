@@ -47,7 +47,3 @@ msgstr "影片"
 msgctxt "#1410"
 msgid "Service"
 msgstr "服務"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "除錯"

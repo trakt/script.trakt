@@ -47,7 +47,3 @@ msgstr "Kvikmyndir"
 msgctxt "#1410"
 msgid "Service"
 msgstr "Þjónusta"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Kemba"

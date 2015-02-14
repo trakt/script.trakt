@@ -39,7 +39,3 @@ msgstr "Ralat"
 msgctxt "#1402"
 msgid "Movies"
 msgstr "Cereka"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Nyahpepijat"

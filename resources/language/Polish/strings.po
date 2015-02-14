@@ -132,14 +132,6 @@ msgctxt "#1110"
 msgid "Incorrect username or password"
 msgstr "Niepoprawny użytkownik lub hasło"
 
-msgctxt "#1111"
-msgid "Loading settings from trakt"
-msgstr "Wczytywanie ustawień z serwisu Trakt"
-
-msgctxt "#1201"
-msgid "trakt"
-msgstr "Trakt"
-
 msgctxt "#1313"
 msgid "What Did You Think?"
 msgstr "Co sądzisz?"
@@ -492,22 +484,10 @@ msgctxt "#1550"
 msgid "trakt - Marked as watched"
 msgstr "Trakt - Oznaczone jako obejrzane"
 
-msgctxt "#1551"
-msgid "trakt - Failed making as watched"
-msgstr "Trakt - Nieudane oznaczenie jako obejrzane"
-
 msgctxt "#1552"
 msgid "%d episode(s) of '%s'"
 msgstr "%d odcinek(ów) / '%s'"
 
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Diagnostyka"
-
 msgctxt "#1701"
 msgid "Enable debug mode"
 msgstr "Uruchom tryb diagnostyki"
-
-msgctxt "#1720"
-msgid "Logging"
-msgstr "Rejestrowanie komunikatów"

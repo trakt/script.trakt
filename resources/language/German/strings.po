@@ -50,7 +50,7 @@ msgstr "Bewertung nach Serien Episode abgeben"
 
 msgctxt "#1033"
 msgid "Rate each playlist item"
-msgstr "Jedeb Playlist-Eintrag bewerten"
+msgstr "Jeden Playlist-Eintrag bewerten"
 
 msgctxt "#1034"
 msgid "Minimum percent watched to display rating dialog"
@@ -66,7 +66,7 @@ msgstr "Standard Bewertung"
 
 msgctxt "#1040"
 msgid "Scrobbling"
-msgstr "Scrobblling"
+msgstr "Scrobbling"
 
 msgctxt "#1041"
 msgid "Scrobble movies"
@@ -132,21 +132,49 @@ msgctxt "#1110"
 msgid "Incorrect username or password"
 msgstr "Falscher Benutzername oder Passwort"
 
-msgctxt "#1111"
-msgid "Loading settings from trakt"
-msgstr "Lade Einstellungen von trakt"
-
-msgctxt "#1201"
-msgid "trakt"
-msgstr "trakt"
-
 msgctxt "#1313"
 msgid "What Did You Think?"
 msgstr "Deine Meinung?"
 
+msgctxt "#1314"
+msgid "Totally Ninja!"
+msgstr "Total Ninja!"
+
+msgctxt "#1315"
+msgid "Weak Sauce :("
+msgstr "Schwache Soße :("
+
+msgctxt "#1316"
+msgid "Terrible"
+msgstr "Fürchterlich"
+
+msgctxt "#1317"
+msgid "Bad"
+msgstr "Schlecht"
+
+msgctxt "#1318"
+msgid "Poor"
+msgstr "Arm"
+
+msgctxt "#1319"
+msgid "Meh"
+msgstr "Meh"
+
 msgctxt "#1320"
 msgid "Fair"
-msgstr "Schön"
+msgstr "Fair"
+
+msgctxt "#1321"
+msgid "Good"
+msgstr "Gut"
+
+msgctxt "#1322"
+msgid "Great"
+msgstr "Toll"
+
+msgctxt "#1323"
+msgid "Superb"
+msgstr "Super"
 
 msgctxt "#1325"
 msgid "Unrate this movie"
@@ -238,7 +266,7 @@ msgstr "Entferne gelöschte Episoden aus der trakt Sammlung"
 
 msgctxt "#1416"
 msgid "Show marked as watched notification"
-msgstr "Zeige als gesehen markiert Benachrichtigung"
+msgstr "Zeige \"als gesehen markiert\" Benachrichtigung"
 
 msgctxt "#1417"
 msgid "Hide notifications during playback"
@@ -390,7 +418,7 @@ msgstr "Serien aus Kodi geladen"
 
 msgctxt "#1483"
 msgid "Parsing %i of %i episode data from Kodi"
-msgstr "Verarbeite %i von %i Episodeninformationen von kodi"
+msgstr "Verarbeite %i von %i Episodeninformationen von Kodi"
 
 msgctxt "#1484"
 msgid "Loaded episode data from Kodi"
@@ -456,22 +484,10 @@ msgctxt "#1550"
 msgid "trakt - Marked as watched"
 msgstr "trakt - Als gesehen markiert"
 
-msgctxt "#1551"
-msgid "trakt - Failed making as watched"
-msgstr "trakt - Fehler beim als gesehen markieren"
-
 msgctxt "#1552"
 msgid "%d episode(s) of '%s'"
 msgstr "%d Episode(n) von '%s'"
 
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Debug"
-
 msgctxt "#1701"
 msgid "Enable debug mode"
 msgstr "Debugmodus aktivieren"
-
-msgctxt "#1720"
-msgid "Logging"
-msgstr "Protokollierung"

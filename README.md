@@ -46,6 +46,9 @@ Remote streaming content will scrobble assuming the metadata is correctly set in
 ###Translations
 * Translations are done via the Transiflex project of Kodi. If you want to support via translations, read [this] (http://kodi.wiki/view/Translation_System) and look for script.trakt in the translation project.
 
+##Debugging
+* If you want to create a logfile, be sure to enable the debug setting in kodi AND script.trakt, otherwise the logfile won't show any data from script.trakt.
+
 ###Thanks
 
 * Special thanks to all who contribute to this plugin! Check the commit history and changelog to see these talented developers.

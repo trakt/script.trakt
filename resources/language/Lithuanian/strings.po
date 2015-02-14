@@ -132,14 +132,6 @@ msgctxt "#1110"
 msgid "Incorrect username or password"
 msgstr "Klaidingas vartotojo vardas arba slaptažodis"
 
-msgctxt "#1111"
-msgid "Loading settings from trakt"
-msgstr "Įkeliami nustatymai iš Trakt.tv"
-
-msgctxt "#1201"
-msgid "trakt"
-msgstr "Trakt.tv"
-
 msgctxt "#1313"
 msgid "What Did You Think?"
 msgstr "Ką jūs galvojote?"
@@ -492,22 +484,10 @@ msgctxt "#1550"
 msgid "trakt - Marked as watched"
 msgstr "Trakt.tv - pažymėta kaip peržiūrėta"
 
-msgctxt "#1551"
-msgid "trakt - Failed making as watched"
-msgstr "Trakt.tv - nepavyko pažymėti kaip peržiūrėta"
-
 msgctxt "#1552"
 msgid "%d episode(s) of '%s'"
 msgstr "%d epizodas(ai) iš '%s'"
 
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Derinimas"
-
 msgctxt "#1701"
 msgid "Enable debug mode"
 msgstr "Įjungti derinimo režimą"
-
-msgctxt "#1720"
-msgid "Logging"
-msgstr "Rašomas žurnalas"

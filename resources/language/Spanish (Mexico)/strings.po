@@ -47,7 +47,3 @@ msgstr "Películas"
 msgctxt "#1410"
 msgid "Service"
 msgstr "Servicio"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Debug"

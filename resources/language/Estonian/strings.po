@@ -47,7 +47,3 @@ msgstr "Filmid"
 msgctxt "#1410"
 msgid "Service"
 msgstr "Teenus"
-
-msgctxt "#1700"
-msgid "Debug"
-msgstr "Silu"
