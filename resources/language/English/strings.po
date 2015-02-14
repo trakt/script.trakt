@@ -90,15 +90,7 @@ msgctxt "#1042"
 msgid "Scrobble TV show episodes"
 msgstr ""
 
-#empty strings from id 1043 to 1045
-
-msgctxt "#1046"
-msgid "Send scrobble call on seek"
-msgstr ""
-
-msgctxt "#1047"
-msgid "Send scrobble call on resume"
-msgstr ""
+#empty strings from id 1043 to 1047
 
 msgctxt "#1048"
 msgid "Show notification on scrobble"
