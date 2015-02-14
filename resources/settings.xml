@@ -21,8 +21,6 @@
 		<setting id="scrobble_movie" type="bool" label="1041" default="true"/>
 		<setting id="scrobble_episode" type="bool" label="1042" default="true"/>
 		<setting id="scrobble_notification" type="bool" label="1048" default="false"/>
-		<setting id="watching_call_on_seek" type="bool" label="1046" default="true"/>
-		<setting id="watching_call_on_resume" type="bool" label="1047" default="true"/>
 	</category>
 	<category label="1400"><!-- Synchronize -->
 		<setting label="1410" type="lsep"/><!-- Service -->

@@ -55,19 +55,24 @@ class Scrobbler():
 					epIndex = self._currentEpisode(watchedPercent, self.curVideo['multi_episode_count'])
 					if self.curMPEpisode != epIndex:
 						# current episode in multi-part episode has changed
-						Debug("[Scrobbler] Attempting to scrobble episode part %d of %d." % (self.curMPEpisode + 1, self.curVideo['multi_episode_count']))
+						Debug("[Scrobbler] Attempting to stop scrobble episode part %d of %d." % (self.curMPEpisode + 1, self.curVideo['multi_episode_count']))
 
 						# recalculate watchedPercent and duration for multi-part, and scrobble
 						adjustedDuration = int(self.videoDuration / self.curVideo['multi_episode_count'])
 						watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
-						response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.curVideoInfo, watchedPercent)
-						if response != None:
+						response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.curVideoInfo, watchedPercent, 'stop')
+						if response is not None:
 							Debug("[Scrobbler] Scrobble response: %s" % str(response))
 
 						# update current information
 						self.curMPEpisode = epIndex
-						self.curVideoInfo = utilities.getEpisodeDetailsFromKodi(self.curVideo['multi_episode_data'][self.curMPEpisode], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid'])
+						self.curVideoInfo = utilities.kodiRpcToTraktMediaObject('episode', utilities.getEpisodeDetailsFromKodi(self.curVideo['multi_episode_data'][self.curMPEpisode], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid', 'file', 'playcount']))
 
+						if not forceCheck:
+							Debug("[Scrobbler] Attempting to start scrobble episode part %d of %d." % (self.curMPEpisode + 1, self.curVideo['multi_episode_count']))
+							response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.curVideoInfo, 0, 'start')
+							if response is not None:
+								Debug("[Scrobbler] Scrobble response: %s" % str(response))
 
 	def playbackStarted(self, data):
 		Debug("[Scrobbler] playbackStarted(data: %s)" % data)
