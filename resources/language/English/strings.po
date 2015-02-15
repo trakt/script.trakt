@@ -147,48 +147,48 @@ msgstr ""
 #Rating Dialog
 
 msgctxt "#1313"
-msgid "RateHeading"
-msgstr "What Did You Think?"
+msgid "What Did You Think?"
+msgstr ""
 
 msgctxt "#1314"
-msgid "RateLove"
-msgstr "Totally Ninja!"
+msgid "Totally Ninja!"
+msgstr ""
 
 msgctxt "#1315"
-msgid "RateHate"
-msgstr "Weak Sauce :("
+msgid "Weak Sauce :("
+msgstr ""
 
 msgctxt "#1316"
-msgid "RateTwo"
-msgstr "Terrible"
+msgid "Terrible"
+msgstr ""
 
 msgctxt "#1317"
-msgid "RateThree"
-msgstr "Bad"
+msgid "Bad"
+msgstr ""
 
 msgctxt "#1318"
-msgid "RateFour"
-msgstr "Poor"
+msgid "Poor"
+msgstr ""
 
 msgctxt "#1319"
-msgid "RateFive"
-msgstr "Meh"
+msgid "Meh"
+msgstr ""
 
 msgctxt "#1320"
-msgid "RateSix"
-msgstr "Fair"
+msgid "Fair"
+msgstr ""
 
 msgctxt "#1321"
-msgid "RateSeven"
-msgstr "Good"
+msgid "Good"
+msgstr ""
 
 msgctxt "#1322"
-msgid "RateEight"
-msgstr "Great"
+msgid "Great"
+msgstr ""
 
 msgctxt "#1323"
-msgid "RateNine"
-msgstr "Superb"
+msgid "Superb"
+msgstr ""
 
 #empty string with id 1324
 
