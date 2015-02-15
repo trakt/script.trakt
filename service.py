@@ -83,7 +83,7 @@ class traktService:
 			"-->End of Python script error report<--"
 			)
 			message = template.format(type(ex).__name__, ex.args, traceback.format_exc())
-			logger.debug(message, force=True)
+			logger.fatal(message)
 
 	def run(self):
 		startup_delay = utilities.getSettingAsInt('startup_delay')

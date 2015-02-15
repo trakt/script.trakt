@@ -16,6 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import unicode_literals
+from utilities import getSettingAsBool
 
 import logging
 import xbmc
@@ -28,7 +29,7 @@ class KodiLogHandler(logging.StreamHandler):
         logging.StreamHandler.__init__(self)
         addon_id = xbmcaddon.Addon().getAddonInfo('id')
         prefix = b"[%s] " % addon_id
-        formatter = logging.Formatter(prefix + b'%(name)s:%(message)s')
+        formatter = logging.Formatter(prefix + b'%(name)s: %(message)s')
         self.setFormatter(formatter)
 
     def emit(self, record):
@@ -40,7 +41,8 @@ class KodiLogHandler(logging.StreamHandler):
             logging.DEBUG: xbmc.LOGDEBUG,
             logging.NOTSET: xbmc.LOGNONE,
         }
-        xbmc.log(self.format(record), levels[record.levelno])
+        if getSettingAsBool('debug'):
+            xbmc.log(self.format(record), levels[record.levelno])
 
     def flush(self):
         pass

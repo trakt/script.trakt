@@ -19,14 +19,14 @@ class Sync():
 		self.run_silent = run_silent
 		self.library = library
 		if self.show_progress and self.run_silent:
-			logger.debug("[Sync] Sync is being run silently.")
+			logger.debug("Sync is being run silently.")
 		self.sync_on_update = utilities.getSettingAsBool('sync_on_update')
 		self.notify = utilities.getSettingAsBool('show_sync_notifications')
 		self.notify_during_playback = not (xbmc.Player().isPlayingVideo() and utilities.getSettingAsBool("hide_notifications_playback"))
 
 	def __isCanceled(self):
 		if self.show_progress and not self.run_silent and progress.iscanceled():
-			logger.debug("[Sync] Sync was canceled by user.")
+			logger.debug("Sync was canceled by user.")
 			return True
 		elif xbmc.abortRequested:
 			logger.debug('Kodi abort requested')
@@ -148,7 +148,7 @@ class Sync():
 			tmpTraktShowsAdd = self.__compareShows(addKodiShows, addTraktShows)
 			traktShowsAdd = copy.deepcopy(tmpTraktShowsAdd)
 			self.sanitizeShows(traktShowsAdd)
-			logger.debug("traktShowsAdd %s" % traktShowsAdd)
+			#logger.debug("traktShowsAdd %s" % traktShowsAdd)
 
 			if len(traktShowsAdd['shows']) == 0:
 				self.__updateProgress(48, line1=utilities.getString(1435), line2=utilities.getString(1490))
@@ -211,7 +211,7 @@ class Sync():
 
 			traktShowsUpdate = self.__compareShows(updateTraktKodiShows, updateTraktTraktShows, watched=True)
 			self.sanitizeShows(traktShowsUpdate)
-			logger.debug("traktShowsUpdate %s" % traktShowsUpdate)
+			#logger.debug("traktShowsUpdate %s" % traktShowsUpdate)
 
 			if len(traktShowsUpdate['shows']) == 0:
 				self.__updateProgress(82, line1=utilities.getString(1438), line2=utilities.getString(1492))
@@ -258,7 +258,7 @@ class Sync():
 			for s in ["%s" % self.__getShowAsString(s, short=True) for s in kodiShowsUpadate['shows']]:
 				logger.debug("[Episodes Sync] Episodes updated: %s" % s)
 
-			logger.debug("kodiShowsUpadate: %s" % kodiShowsUpadate)
+			#logger.debug("kodiShowsUpadate: %s" % kodiShowsUpadate)
 			episodes = []
 			for show in kodiShowsUpadate['shows']:
 				for season in show['seasons']:
@@ -349,7 +349,7 @@ class Sync():
 								if restrict:
 									# get all the episodes that we have in Kodi, watched or not - update kodi
 									collectedShow = utilities.findMediaObject(show_col1, collected['shows'])
-									logger.debug("collected %s" % collectedShow)
+									#logger.debug("collected %s" % collectedShow)
 									collectedSeasons = self.__getEpisodes(collectedShow['seasons'])
 									t = list(set(collectedSeasons[season]).intersection(set(diff)))
 									if len(t) > 0:
@@ -372,9 +372,9 @@ class Sync():
 							if not restrict:
 								if len(a) > 0:
 									season_diff[season] = a
-					logger.debug("season_diff %s" % season_diff)
+					#logger.debug("season_diff %s" % season_diff)
 					if len(season_diff) > 0:
-						utilities.logger.debug("Season_diff")
+						#logger.debug("Season_diff")
 						show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
 						if 'tvdb' in show_col1['ids']:
 							show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
@@ -387,7 +387,7 @@ class Sync():
 							show['ids']['imdb'] = show_col2['imdb']
 						if 'tvshowid' in show_col2:
 							show['tvshowid'] = show_col2['tvshowid']
-						utilities.logger.debug("show %s" % show)
+						#logger.debug("show %s" % show)
 						shows.append(show)
 				else:
 					if not restrict:
@@ -535,7 +535,7 @@ class Sync():
 			self.__updateProgress(33, line2=utilities.getString(1426) % len(traktMoviesToAdd))
 
 			moviesToAdd = {'movies': traktMoviesToAdd}
-			logger.debug("Movies to add: %s" % moviesToAdd)
+			#logger.debug("Movies to add: %s" % moviesToAdd)
 			self.traktapi.addToCollection(moviesToAdd)
 
 			self.__updateProgress(48, line2=utilities.getString(1468) % len(traktMoviesToAdd))
@@ -601,7 +601,7 @@ class Sync():
 				self.__updateProgress(int(y), line2=utilities.getString(1478) % ((i)*chunksize if (i)*chunksize < x else x, x))
 
 				params = {'movies': chunk}
-				logger.debug("moviechunk: %s" % params)
+				#logger.debug("moviechunk: %s" % params)
 				self.traktapi.addToHistory(params)
 
 			self.__updateProgress(82, line2=utilities.getString(1470) % len(traktMoviesToUpdate))
@@ -747,26 +747,26 @@ class Sync():
 			return utilities.getSettingAsBool('trakt_episode_playcount') or utilities.getSettingAsBool('kodi_episode_playcount')
 
 	def sync(self):
-		logger.debug("[Sync] Starting synchronization with trakt.tv")
+		logger.debug("Starting synchronization with trakt.tv")
 
 		if self.__syncCheck('movies'):
 			if self.library in ["all", "movies"]:
 				self.__syncMovies()
 			else:
-				logger.debug("[Sync] Movie sync is being skipped for this manual sync.")
+				logger.debug("Movie sync is being skipped for this manual sync.")
 		else:
-			logger.debug("[Sync] Movie sync is disabled, skipping.")
+			logger.debug("Movie sync is disabled, skipping.")
 
 		if self.__syncCheck('episodes'):
 			if self.library in ["all", "episodes"]:
 				if not (self.__syncCheck('movies') and self.__isCanceled()):
 					self.__syncEpisodes()
 				else:
-					logger.debug("[Sync] Episode sync is being skipped because movie sync was canceled.")
+					logger.debug("Episode sync is being skipped because movie sync was canceled.")
 			else:
-				logger.debug("[Sync] Episode sync is being skipped for this manual sync.")
+				logger.debug("Episode sync is being skipped for this manual sync.")
 		else:
-			logger.debug("[Sync] Episode sync is disabled, skipping.")
+			logger.debug("Episode sync is disabled, skipping.")
 
-		logger.debug("[Sync] Finished synchronization with trakt.tv")
+		logger.debug("Finished synchronization with trakt.tv")
 	

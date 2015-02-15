@@ -95,7 +95,7 @@ def kodiJsonRequest(params):
 			return response['result']
 		return None
 	except KeyError:
-		logger.debug("[%s] %s" % (params['method'], response['error']['message']), True)
+		logger.warn("[%s] %s" % (params['method'], response['error']['message']))
 		return None
 
 def chunks(l, n):
@@ -350,7 +350,7 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
 		del(data['label'])
 		return data
 	else:
-		logger.debug('[Utilities] kodiRpcToTraktMediaObject() No valid type')
+		logger.debug('kodiRpcToTraktMediaObject() No valid type')
 		return
 
 def kodiRpcToTraktMediaObjects(data, mode='collected'):
@@ -389,7 +389,7 @@ def kodiRpcToTraktMediaObjects(data, mode='collected'):
 				kodi_movies.append(movieObject)
 		return kodi_movies
 	else:
-		logger.debug('[Utilities] kodiRpcToTraktMediaObjects() No valid key found in rpc data')
+		logger.debug('kodiRpcToTraktMediaObjects() No valid key found in rpc data')
 		return
 
 def convertDateTimeToUTC(toConvert):
