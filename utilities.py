@@ -6,6 +6,7 @@ import xbmcaddon
 import time
 import re
 import sys
+import logging
 from datetime import datetime
 from dateutil.tz import tzutc, tzlocal
 
@@ -21,6 +22,8 @@ __addon__ = xbmcaddon.Addon('script.trakt')
 # make strptime call prior to doing anything, to try and prevent threading errors
 time.strptime("1970-01-01 12:00:00", "%Y-%m-%d %H:%M:%S")
 
+logger = logging.getLogger(__name__)
+
 REGEX_EXPRESSIONS = [ '[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
 					  '[\._ \-]([0-9]+)x([0-9]+)([^\\/]*)',                     # foo.1x09
 					  '[\._ \-]([0-9]+)([0-9][0-9])([\._ \-][^\\/]*)',          # foo.109
@@ -35,14 +38,6 @@ REGEX_EXPRESSIONS = [ '[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
 					  '[Ss]([0-9]+)[][ ._-]*[Ee]([0-9]+)([^\\\\/]*)$',
 					  '[\\\\/\\._ \\[\\(-]([0-9]+)x([0-9]+)([^\\\\/]*)$'
 					 ]
-
-def Debug(msg, force = False):
-	if getSettingAsBool('debug') or force:
-		try:
-			xbmc.log("[script.trakt] %s" % msg, level=xbmc.LOGDEBUG)
-		except UnicodeEncodeError:
-			xbmc.log("[script.trakt] %s" % msg.encode('utf-8', 'ignore'), level=xbmc.LOGDEBUG)
-
 
 def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')):
 	xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message, time, icon))
@@ -100,7 +95,7 @@ def kodiJsonRequest(params):
 			return response['result']
 		return None
 	except KeyError:
-		Debug("[%s] %s" % (params['method'], response['error']['message']), True)
+		logger.debug("[%s] %s" % (params['method'], response['error']['message']), True)
 		return None
 
 def chunks(l, n):
@@ -113,29 +108,29 @@ def checkExclusion(fullpath):
 		return True
 
 	if (fullpath.find("pvr://") > -1) and getSettingAsBool('ExcludeLiveTV'):
-		Debug("checkExclusion(): Video is playing via Live TV, which is currently set as excluded location.")
+		logger.debug("checkExclusion(): Video is playing via Live TV, which is currently set as excluded location.")
 		return True
 
 	if (fullpath.find("http://") > -1) and getSettingAsBool('ExcludeHTTP'):
-		Debug("checkExclusion(): Video is playing via HTTP source, which is currently set as excluded location.")
+		logger.debug("checkExclusion(): Video is playing via HTTP source, which is currently set as excluded location.")
 		return True
 
 	ExcludePath = getSetting('ExcludePath')
 	if ExcludePath != "" and getSettingAsBool('ExcludePathOption'):
 		if fullpath.find(ExcludePath) > -1:
-			Debug("checkExclusion(): Video is from location, which is currently set as excluded path 1.")
+			logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 1.")
 			return True
 
 	ExcludePath2 = getSetting('ExcludePath2')
 	if ExcludePath2 != "" and getSettingAsBool('ExcludePathOption2'):
 		if fullpath.find(ExcludePath2) > -1:
-			Debug("checkExclusion(): Video is from location, which is currently set as excluded path 2.")
+			logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 2.")
 			return True
 
 	ExcludePath3 = getSetting('ExcludePath3')
 	if ExcludePath3 != "" and getSettingAsBool('ExcludePathOption3'):
 		if fullpath.find(ExcludePath3) > -1:
-			Debug("checkExclusion(): Video is from location, which is currently set as excluded path 3.")
+			logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 3.")
 			return True
 
 	return False
@@ -157,31 +152,31 @@ def getFormattedItemName(type, info):
 
 def getShowDetailsFromKodi(showID, fields):
 	result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params':{'tvshowid': showID, 'properties': fields}, 'id': 1})
-	Debug("getShowDetailsFromKodi(): %s" % str(result))
+	logger.debug("getShowDetailsFromKodi(): %s" % str(result))
 
 	if not result:
-		Debug("getShowDetailsFromKodi(): Result from Kodi was empty.")
+		logger.debug("getShowDetailsFromKodi(): Result from Kodi was empty.")
 		return None
 
 	try:
 		return result['tvshowdetails']
 	except KeyError:
-		Debug("getShowDetailsFromKodi(): KeyError: result['tvshowdetails']")
+		logger.debug("getShowDetailsFromKodi(): KeyError: result['tvshowdetails']")
 		return None
 
 # get a single episode from kodi given the id
 def getEpisodeDetailsFromKodi(libraryId, fields):
 	result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params':{'episodeid': libraryId, 'properties': fields}, 'id': 1})
-	Debug("getEpisodeDetailsFromKodi(): %s" % str(result))
+	logger.debug("getEpisodeDetailsFromKodi(): %s" % str(result))
 
 	if not result:
-		Debug("getEpisodeDetailsFromKodi(): Result from Kodi was empty.")
+		logger.debug("getEpisodeDetailsFromKodi(): Result from Kodi was empty.")
 		return None
 
 	show_data = getShowDetailsFromKodi(result['episodedetails']['tvshowid'], ['year', 'imdbnumber'])
 
 	if not show_data:
-		Debug("getEpisodeDetailsFromKodi(): Result from getShowDetailsFromKodi() was empty.")
+		logger.debug("getEpisodeDetailsFromKodi(): Result from getShowDetailsFromKodi() was empty.")
 		return None
 
 	result['episodedetails']['imdbnumber'] = show_data['imdbnumber']
@@ -190,22 +185,22 @@ def getEpisodeDetailsFromKodi(libraryId, fields):
 	try:
 		return result['episodedetails']
 	except KeyError:
-		Debug("getEpisodeDetailsFromKodi(): KeyError: result['episodedetails']")
+		logger.debug("getEpisodeDetailsFromKodi(): KeyError: result['episodedetails']")
 		return None
 
 # get a single movie from kodi given the id
 def getMovieDetailsFromKodi(libraryId, fields):
 	result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params':{'movieid': libraryId, 'properties': fields}, 'id': 1})
-	Debug("getMovieDetailsFromKodi(): %s" % str(result))
+	logger.debug("getMovieDetailsFromKodi(): %s" % str(result))
 
 	if not result:
-		Debug("getMovieDetailsFromKodi(): Result from Kodi was empty.")
+		logger.debug("getMovieDetailsFromKodi(): Result from Kodi was empty.")
 		return None
 
 	try:
 		return result['moviedetails']
 	except KeyError:
-		Debug("getMovieDetailsFromKodi(): KeyError: result['moviedetails']")
+		logger.debug("getMovieDetailsFromKodi(): KeyError: result['moviedetails']")
 		return None
 
 def __findInList(list, case_sensitive=True, **kwargs):
@@ -251,7 +246,7 @@ def regex_tvshow(compare, file, sub = ""):
 	for regex in REGEX_EXPRESSIONS:
 		response_file = re.findall(regex, file)
 		if len(response_file) > 0 :
-			Debug("regex_tvshow(): Regex File Se: %s, Ep: %s," % (str(response_file[0][0]),str(response_file[0][1]),) )
+			logger.debug("regex_tvshow(): Regex File Se: %s, Ep: %s," % (str(response_file[0][0]),str(response_file[0][1]),) )
 			tvshow = 1
 			if not compare :
 				title = re.split(regex, file)[0]
@@ -281,7 +276,7 @@ def findMovieMatchInList(id, list):
 
 def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list):
 	show = next((item for key, item in list.items() if int(key[1]) == int(id)), {}) #key[1] should be the tvdb id
-	Debug("findEpisodeMatchInList %s" % show)
+	logger.debug("findEpisodeMatchInList %s" % show)
 	if not show:
 		return {}
 	else:
@@ -355,7 +350,7 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
 		del(data['label'])
 		return data
 	else:
-		Debug('[Utilities] kodiRpcToTraktMediaObject() No valid type')
+		logger.debug('[Utilities] kodiRpcToTraktMediaObject() No valid type')
 		return
 
 def kodiRpcToTraktMediaObjects(data, mode='collected'):
@@ -394,7 +389,7 @@ def kodiRpcToTraktMediaObjects(data, mode='collected'):
 				kodi_movies.append(movieObject)
 		return kodi_movies
 	else:
-		Debug('[Utilities] kodiRpcToTraktMediaObjects() No valid key found in rpc data')
+		logger.debug('[Utilities] kodiRpcToTraktMediaObjects() No valid key found in rpc data')
 		return
 
 def convertDateTimeToUTC(toConvert):

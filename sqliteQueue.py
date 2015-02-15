@@ -20,6 +20,9 @@ except ImportError:
 import xbmc
 import xbmcvfs
 import xbmcaddon
+import logging
+
+logger = logging.getLogger(__name__)
 
 __addon__ = xbmcaddon.Addon('script.trakt')
 
@@ -51,7 +54,7 @@ class SqliteQueue(object):
 	def __init__(self):
 		self.path = xbmc.translatePath(__addon__.getAddonInfo("profile")).decode("utf-8")
 		if not xbmcvfs.exists(self.path):
-			utils.Debug("Making path structure: %s" % repr(self.path))
+			logger.debug("Making path structure: %s" % repr(self.path))
 			xbmcvfs.mkdir(self.path)
 		self.path = os.path.join(self.path, 'queue.db')
 		self._connection_cache = {}
