@@ -1,10 +1,14 @@
 version 3.0.0
   - new trakt branded rating dialog (by Piers)
-  - ported to trakt.tv api v2
+  - ported to trakt.tv api v2 (using trakt.py by fuzeman)
+  - renamed everything from xbmc to kodi
+  - more languages supported
+  - send collected date from kodi to trakt
+  - send watched date from kodi to trakt
   - removed lists management and contextmenu (for now)
   - default rating is now a neutral 6 "Okay"
+  - improved logging
   - various improvements and bugfixes
-  - updated language files from Transifex
   
 version 2.3.2
   - fixed update tags not running after sync, if the setting was enabled (nate1280)
