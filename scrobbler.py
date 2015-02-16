@@ -120,7 +120,11 @@ class Scrobbler():
 				if 'id' in self.curVideo:
 					episodeDetailsKodi = utilities.getEpisodeDetailsFromKodi(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid', 'file', 'playcount'])
 					tvdb = episodeDetailsKodi['imdbnumber']
-					self.traktShowSummary = {'title': episodeDetailsKodi['showtitle'], 'year': episodeDetailsKodi['year']}
+					title, year = utilities.regex_year(episodeDetailsKodi['showtitle'])
+					if not year:
+						self.traktShowSummary = {'title': episodeDetailsKodi['showtitle'], 'year': episodeDetailsKodi['year']}
+					else:
+						self.traktShowSummary = {'title': title, 'year': year}
 					if tvdb:
 						self.traktShowSummary['ids'] = {'tvdb': tvdb}
 					self.curVideoInfo = utilities.kodiRpcToTraktMediaObject('episode', episodeDetailsKodi)
@@ -134,7 +138,12 @@ class Scrobbler():
 					self.curVideoInfo = {'title': self.curVideo['title'], 'season': self.curVideo['season'],
 					                     'number': self.curVideo['episode']}
 
-					self.traktShowSummary = {'title': self.curVideo['showtitle']}
+					title, year = utilities.regex_year(self.curVideo['showtitle'])
+					if not year:
+						self.traktShowSummary = {'title': self.curVideo['showtitle']}
+					else:
+						self.traktShowSummary = {'title': title, 'year': year}
+
 					if 'year' in self.curVideo:
 						self.traktShowSummary['year'] = self.curVideo['year']
 

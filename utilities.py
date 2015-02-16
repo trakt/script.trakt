@@ -39,6 +39,8 @@ REGEX_EXPRESSIONS = [ '[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
 					  '[\\\\/\\._ \\[\\(-]([0-9]+)x([0-9]+)([^\\\\/]*)$'
 					 ]
 
+REGEX_YEAR = '^(.+) \((\d{4})\)$'
+
 def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')):
 	xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message, time, icon))
 
@@ -270,6 +272,17 @@ def regex_tvshow(compare, file, sub = ""):
 		return True
 	else:
 		return "","",""
+
+def regex_year(title):
+	prog = re.compile(REGEX_YEAR)
+	result = prog.match(title)
+
+	if result:
+		return result.group(1), result.group(2)
+	else:
+		return "", ""
+
+
 
 def findMovieMatchInList(id, list):
 	return next((item.to_dict() for key, item in list.items() if key[1] == str(id)), {})  #key[1] should be the imdb id
