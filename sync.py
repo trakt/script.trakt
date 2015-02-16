@@ -765,5 +765,106 @@ class Sync():
 		else:
 			Debug("[Sync] Episode sync is disabled, skipping.")
 
+		if utilities.getSettingAsBool('get_playcounts_from_trakt'):
+			if self.library in ["all", "movies", "episodes"]:
+				if not ((self.__syncCheck('movies') or self.__syncCheck('episodes')) and self.__isCanceled()):
+					self.__syncPlaybackProgress()
+				else:
+					Debug("[Sync] Playlist sync is being skipped because movie or episode sync was canceled.")
+			else:
+				Debug("[Sync] Playlist sync is being skipped for this manual sync.")
+		else:
+			Debug("[Sync] Playlist sync is disabled, skipping.")
+
+
 		Debug("[Sync] Finished synchronization with trakt.tv")
-	
+
+	def __syncPlaybackProgress(self):
+		if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
+			notification('%s %s' % (utilities.getString(1400), utilities.getString(1406)), utilities.getString(1420)) #Sync started
+		if self.show_progress and not self.run_silent:
+			progress.create("%s %s" % (utilities.getString(1400), utilities.getString(1406)), line1=" ", line2=" ", line3=" ")
+
+		kodiShowsCollected = self.__kodiLoadShows()
+		if not isinstance(kodiShowsCollected, list) and not kodiShowsCollected:
+			Debug("[Playlist Sync] Kodi collected show list is empty, aborting playback Sync.")
+			if self.show_progress and not self.run_silent:
+				progress.close()
+			return
+
+		kodiMovies = self.__kodiLoadMovies()
+		if not isinstance(kodiMovies, list) and not kodiMovies:
+			Debug("[Playlist Sync] Kodi movie list is empty, aborting playback Sync.")
+			if self.show_progress and not self.run_silent:
+				progress.close()
+			return
+
+		traktShowsProgress, traktMoviesProgress = self.__traktLoadPlaybackProgress()
+		if not traktShowsProgress:
+			Debug("[Playback Sync] Error getting trakt.tv show playback list, aborting playback sync.")
+			if self.show_progress and not self.run_silent:
+				progress.close()
+			return
+		if not traktMoviesProgress:
+			Debug("[Playback Sync] Error getting trakt.tv movie playback list, aborting playback sync.")
+			if self.show_progress and not self.run_silent:
+				progress.close()
+			return
+
+
+		self.__addMovieProgressToKodi(kodiMovies, traktMoviesProgress)
+
+		self.__addEpisodeProgressToKodi(kodiShowsCollected, traktShowsProgress)
+
+		if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
+			notification('%s %s' % (utilities.getString(1400), utilities.getString(1406)), utilities.getString(1421)) #Sync complete
+
+		if self.show_progress and not self.run_silent:
+			self.__updateProgress(100, line1=" ", line2=utilities.getString(1442), line3=" ")
+			progress.close()
+
+		Debug("[Playback Sync] Complete.")
+
+	def __traktLoadPlaybackProgress(self):
+		self.__updateProgress(10, line1=utilities.getString(1485), line2=utilities.getString(1486))
+
+		Debug('[Playback Sync] Getting playback progress from trakt.tv')
+		try:
+			traktProgress = {}
+			traktProgress = self.traktapi.getPlaybackProgress(traktProgress)
+			traktProgress = traktProgress.items()
+			logger.debug(traktProgress)
+			self.__updateProgress(12, line2=utilities.getString(1487))
+		except Exception:
+			Debug("[Playback Sync] Invalid trakt.tv progress list, possible error getting data from trakt, aborting trakt.tv playback update.")
+			return False, False
+
+		i = 0
+		x = float(len(traktProgress['shows']))
+		showsProgress = {'shows': []}
+		for key, show in traktProgress['shows']:
+			i += 1
+			y = ((i / x) * 20) + 6
+			self.__updateProgress(int(y), line2=utilities.getString(1488) % (i, x))
+
+			#will keep the data in python structures - just like the KODI response
+			show = show.to_dict()
+
+			showsProgress['shows'].append(show)
+
+		i = 0
+		x = float(len(traktProgress['movies']))
+		moviesProgress = {'movies': []}
+		for key, show in traktProgress['movies']:
+			i += 1
+			y = ((i / x) * 26) + 6
+			self.__updateProgress(int(y), line2=utilities.getString(1488) % (i, x))
+
+			#will keep the data in python structures - just like the KODI response
+			show = show.to_dict()
+
+			moviesProgress['movies'].append(show)
+
+		self.__updateProgress(32, line2=utilities.getString(1489))
+
+		return showsProgress, moviesProgress

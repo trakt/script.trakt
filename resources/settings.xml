@@ -40,6 +40,8 @@
         <setting id="clean_trakt_episodes" type="bool" label="1414" default="false"/>
 		<setting id="trakt_episode_playcount" type="bool" label="1408" default="true"/>
 		<setting id="kodi_episode_playcount" type="bool" label="1409" default="true"/>
+        <setting label="1418" type="lsep"/><!-- Playback -->
+        <setting id="get_playcounts_from_trakt" type="bool" label="1419" default="false"/>
 	</category>
 	<category label="1030"><!-- Rating -->
 		<setting id="rate_movie" type="bool" label="1031" default="true"/>

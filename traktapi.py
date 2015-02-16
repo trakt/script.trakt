@@ -176,3 +176,9 @@ class traktAPI(object):
 		with Trakt.configuration.auth(self.__username, self.__token):
 			result = Trakt['sync/ratings'].remove(mediaObject)
 		return result
+
+	def getPlaybackProgress(self, shows):
+		with Trakt.configuration.auth(self.__username, self.__token):
+			with Trakt.configuration.http(retry=True):
+				Trakt['sync/playback'].shows(shows, exceptions=True)
+		return shows
