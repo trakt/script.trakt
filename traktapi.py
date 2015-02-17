@@ -5,7 +5,7 @@ import math
 import logging
 from trakt import Trakt, ClientError, ServerError
 from trakt.objects import Movie, Show
-from utilities import Debug, getSetting, findMovieMatchInList, findEpisodeMatchInList, notification, getString
+from utilities import getSetting, findMovieMatchInList, findEpisodeMatchInList, notification, getString
 
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')

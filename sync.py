@@ -774,14 +774,14 @@ class Sync():
 				if not ((self.__syncCheck('movies') or self.__syncCheck('episodes')) and self.__isCanceled()):
 					self.__syncPlaybackProgress()
 				else:
-					Debug("[Sync] Playlist sync is being skipped because movie or episode sync was canceled.")
+					logger.debug("[Sync] Playlist sync is being skipped because movie or episode sync was canceled.")
 			else:
-				Debug("[Sync] Playlist sync is being skipped for this manual sync.")
+				logger.debug("[Sync] Playlist sync is being skipped for this manual sync.")
 		else:
-			Debug("[Sync] Playlist sync is disabled, skipping.")
+			logger.debug("[Sync] Playlist sync is disabled, skipping.")
 
 
-		Debug("[Sync] Finished synchronization with trakt.tv")
+		logger.debug("[Sync] Finished synchronization with trakt.tv")
 
 	def __syncPlaybackProgress(self):
 		if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
@@ -791,26 +791,26 @@ class Sync():
 
 		kodiShowsCollected = self.__kodiLoadShows()
 		if not isinstance(kodiShowsCollected, list) and not kodiShowsCollected:
-			Debug("[Playlist Sync] Kodi collected show list is empty, aborting playback Sync.")
+			logger.debug("[Playlist Sync] Kodi collected show list is empty, aborting playback Sync.")
 			if self.show_progress and not self.run_silent:
 				progress.close()
 			return
 
 		kodiMovies = self.__kodiLoadMovies()
 		if not isinstance(kodiMovies, list) and not kodiMovies:
-			Debug("[Playlist Sync] Kodi movie list is empty, aborting playback Sync.")
+			logger.debug("[Playlist Sync] Kodi movie list is empty, aborting playback Sync.")
 			if self.show_progress and not self.run_silent:
 				progress.close()
 			return
 
 		traktShowsProgress, traktMoviesProgress = self.__traktLoadPlaybackProgress()
 		if not traktShowsProgress:
-			Debug("[Playback Sync] Error getting trakt.tv show playback list, aborting playback sync.")
+			logger.debug("[Playback Sync] Error getting trakt.tv show playback list, aborting playback sync.")
 			if self.show_progress and not self.run_silent:
 				progress.close()
 			return
 		if not traktMoviesProgress:
-			Debug("[Playback Sync] Error getting trakt.tv movie playback list, aborting playback sync.")
+			logger.debug("[Playback Sync] Error getting trakt.tv movie playback list, aborting playback sync.")
 			if self.show_progress and not self.run_silent:
 				progress.close()
 			return
@@ -827,19 +827,19 @@ class Sync():
 			self.__updateProgress(100, line1=" ", line2=utilities.getString(1442), line3=" ")
 			progress.close()
 
-		Debug("[Playback Sync] Complete.")
+		logger.debug("[Playback Sync] Complete.")
 
 	def __traktLoadPlaybackProgress(self):
 		self.__updateProgress(10, line1=utilities.getString(1485), line2=utilities.getString(1486))
 
-		Debug('[Playback Sync] Getting playback progress from trakt.tv')
+		logger.debug('[Playback Sync] Getting playback progress from trakt.tv')
 		try:
 			traktProgressMovies, traktProgressShows = self.traktapi.getPlaybackProgress()
 			logger.debug(traktProgressMovies)
 			logger.debug(traktProgressShows)
 			self.__updateProgress(12, line2=utilities.getString(1487))
 		except Exception:
-			Debug("[Playback Sync] Invalid trakt.tv progress list, possible error getting data from trakt, aborting trakt.tv playback update.")
+			logger.debug("[Playback Sync] Invalid trakt.tv progress list, possible error getting data from trakt, aborting trakt.tv playback update.")
 			return False, False
 
 		i = 0
