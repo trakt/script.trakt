@@ -50,19 +50,23 @@ class traktAPI(object):
 
 	def getToken(self):
 		if not self.__username and not self.__password:
-
-			notification('trakt', getString(1106)) #Sync started
+			notification('trakt', getString(1106)) #Username and password error
 		elif not self.__password:
-			notification('trakt', getString(1107)) #Sync started
+			notification('trakt', getString(1107)) #Password error
 		else:
 			# Attempt authentication (retrieve new token)
 			with Trakt.configuration.http(retry=True):
-				auth = Trakt['auth'].login(getSetting('username'), getSetting('password'))
-				if auth:
-					self.__token = auth
-				else:
-					logger.debug("Authentication Failure")
-					notification('trakt', getString(1110))
+				try:
+					auth = Trakt['auth'].login(getSetting('username'), getSetting('password'))
+					if auth:
+						self.__token = auth
+					else:
+						logger.debug("Authentication Failure")
+						notification('trakt', getString(1110))
+				except Exception:
+					logger.debug("Cannot connect to server")
+					notification('trakt', getString(1108))
+
 
 
 	def scrobbleEpisode(self, show, episode, percent, status):
