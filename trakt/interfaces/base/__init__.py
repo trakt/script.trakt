@@ -106,7 +106,7 @@ class Interface(object):
         return data
 
     @staticmethod
-    def media_mapper(store, media, items, **kwargs):
+    def media_mapper(store, items, media=None, **kwargs):
         if items is None:
             return
 
@@ -116,7 +116,7 @@ class Interface(object):
         mapper = MediaMapper(store)
 
         for item in items:
-            result = mapper.process(media, item, **kwargs)
+            result = mapper.process(item, media, **kwargs)
 
             if result is None:
                 log.warn('Unable to map item: %s', item)

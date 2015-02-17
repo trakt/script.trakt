@@ -26,7 +26,14 @@ class SyncInterface(Interface):
             **kwargs
         )
 
-    def playback(self):
-        return self.get_data(
-            self.http.get('playback')
+    def playback(self, store=None, **kwargs):
+        response = self.http.get('playback')
+
+        items = self.get_data(response, **kwargs)
+
+        if type(items) is not list:
+            return None
+
+        return self.media_mapper(
+            store, items
         )

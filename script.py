@@ -3,7 +3,9 @@ import utilities as utils
 import xbmc
 import sqliteQueue
 import sys
+import logging
 
+logger = logging.getLogger(__name__)
 
 def __getMediaType():
 	
@@ -55,45 +57,45 @@ def Main():
 			try:
 				data['dbid'] = int(args['dbid'])
 			except ValueError:
-				utils.Debug("Manual %s triggered for library item, but DBID is invalid." % args['action'])
+				logger.debug("Manual %s triggered for library item, but DBID is invalid." % args['action'])
 				return
 		elif 'media_type' in args and 'remoteid' in args:
 			media_type = args['media_type']
 			data['remoteid'] = args['remoteid']
 			if 'season' in args:
 				if not 'episode' in args:
-					utils.Debug("Manual %s triggered for non-library episode, but missing episode number." % args['action'])
+					logger.debug("Manual %s triggered for non-library episode, but missing episode number." % args['action'])
 					return
 				try:
 					data['season'] = int(args['season'])
 					data['episode'] = int(args['episode'])
 				except ValueError:
-					utils.Debug("Error parsing season or episode for manual %s" % args['action'])
+					logger.debug("Error parsing season or episode for manual %s" % args['action'])
 					return
 		else:
 			media_type = __getMediaType()
 			if not utils.isValidMediaType(media_type):
-				utils.Debug("Error, not in video library.")
+				logger.debug("Error, not in video library.")
 				return
 			data['dbid'] = int(xbmc.getInfoLabel('ListItem.DBID'))
 
 		if media_type is None:
-			utils.Debug("Manual %s triggered on an unsupported content container." % args['action'])
+			logger.debug("Manual %s triggered on an unsupported content container." % args['action'])
 		elif utils.isValidMediaType(media_type):
 			data['media_type'] = media_type
 			if 'dbid' in data:
-				utils.Debug("Manual %s of library '%s' with an ID of '%s'." % (args['action'], media_type, data['dbid']))
+				logger.debug("Manual %s of library '%s' with an ID of '%s'." % (args['action'], media_type, data['dbid']))
 				if utils.isMovie(media_type):
 					result = utils.getMovieDetailsFromKodi(data['dbid'], ['imdbnumber', 'title', 'year'])
 					if not result:
-						utils.Debug("No data was returned from Kodi, aborting manual %s." % args['action'])
+						logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
 						return
 					data['imdbnumber'] = result['imdbnumber']
 
 				elif utils.isShow(media_type):
 					result = utils.getShowDetailsFromKodi(data['dbid'], ['imdbnumber', 'tag'])
 					if not result:
-						utils.Debug("No data was returned from Kodi, aborting manual %s." % args['action'])
+						logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
 						return
 					data['imdbnumber'] = result['imdbnumber']
 					data['tag'] = result['tag']
@@ -101,7 +103,7 @@ def Main():
 				elif utils.isEpisode(media_type):
 					result = utils.getEpisodeDetailsFromKodi(data['dbid'], ['showtitle', 'season', 'episode', 'imdbnumber'])
 					if not result:
-						utils.Debug("No data was returned from Kodi, aborting manual %s." % args['action'])
+						logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
 						return
 					data['imdbnumber'] = result['imdbnumber']
 					data['season'] = result['season']
@@ -109,10 +111,10 @@ def Main():
 
 			else:
 				if 'season' in data:
-					utils.Debug("Manual %s of non-library '%s' S%02dE%02d, with an ID of '%s'." % (args['action'], media_type, data['season'], data['episode'], data['remoteid']))
+					logger.debug("Manual %s of non-library '%s' S%02dE%02d, with an ID of '%s'." % (args['action'], media_type, data['season'], data['episode'], data['remoteid']))
 					data['imdbnumber'] = data['remoteid']
 				else:
-					utils.Debug("Manual %s of non-library '%s' with an ID of '%s'." % (args['action'], media_type, data['remoteid']))
+					logger.debug("Manual %s of non-library '%s' with an ID of '%s'." % (args['action'], media_type, data['remoteid']))
 					data['imdbnumber'] = data['remoteid']
 
 			if args['action'] == 'rate' and 'rating' in args:
@@ -122,7 +124,7 @@ def Main():
 			data = {'action': 'manualRating', 'ratingData': data}
 
 		else:
-			utils.Debug("Manual %s of '%s' is unsupported." % (args['action'], media_type))
+			logger.debug("Manual %s of '%s' is unsupported." % (args['action'], media_type))
 
 	elif args['action'] == 'togglewatched':
 		#todo fix this
@@ -136,9 +138,9 @@ def Main():
 					if result['playcount'] == 0:
 						data['id'] = result['imdbnumber']
 					else:
-						utils.Debug("Movie alread marked as watched in Kodi.")
+						logger.debug("Movie alread marked as watched in Kodi.")
 				else:
-					utils.Debug("Error getting movie details from Kodi.")
+					logger.debug("Error getting movie details from Kodi.")
 					return
 
 			elif utils.isEpisode(media_type):
@@ -150,9 +152,9 @@ def Main():
 						data['season'] = result['season']
 						data['episode'] = result['episode']
 					else:
-						utils.Debug("Episode already marked as watched in Kodi.")
+						logger.debug("Episode already marked as watched in Kodi.")
 				else:
-					utils.Debug("Error getting episode details from Kodi.")
+					logger.debug("Error getting episode details from Kodi.")
 					return
 
 			elif utils.isSeason(media_type):
@@ -166,7 +168,7 @@ def Main():
 							data['id'] = show['imdbnumber']
 							break
 				else:
-					utils.Debug("Error getting TV shows from Kodi.")
+					logger.debug("Error getting TV shows from Kodi.")
 					return
 
 				season = xbmc.getInfoLabel('ListItem.Season')
@@ -183,20 +185,20 @@ def Main():
 							episodes.append(episode['episode'])
 					
 					if len(episodes) == 0:
-						utils.Debug("'%s - Season %d' is already marked as watched." % (showTitle, season))
+						logger.debug("'%s - Season %d' is already marked as watched." % (showTitle, season))
 						return
 
 					data['season'] = season
 					data['episodes'] = episodes
 				else:
-					utils.Debug("Error getting episodes from '%s' for Season %d" % (showTitle, season))
+					logger.debug("Error getting episodes from '%s' for Season %d" % (showTitle, season))
 					return
 
 			elif utils.isShow(media_type):
 				dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
 				result = utils.getShowDetailsFromKodi(dbid, ['year', 'imdbnumber'])
 				if not result:
-					utils.Debug("Error getting show details from Kodi.")
+					logger.debug("Error getting show details from Kodi.")
 					return
 				showTitle = result['label']
 				data['id'] = result['imdbnumber']
@@ -213,16 +215,16 @@ def Main():
 							i += 1
 
 					if i == 0:
-						utils.Debug("'%s' is already marked as watched." % showTitle)
+						logger.debug("'%s' is already marked as watched." % showTitle)
 						return
 
 					data['seasons'] = dict((k, v) for k, v in s.iteritems() if v)
 				else:
-					utils.Debug("Error getting episode details for '%s' from Kodi." % showTitle)
+					logger.debug("Error getting episode details for '%s' from Kodi." % showTitle)
 					return
 
 			if len(data) > 1:
-				utils.Debug("Marking '%s' with the following data '%s' as watched on trakt.tv" % (media_type, str(data)))
+				logger.debug("Marking '%s' with the following data '%s' as watched on trakt.tv" % (media_type, str(data)))
 				data['action'] = 'markWatched'
 
 		# execute toggle watched action
@@ -230,7 +232,7 @@ def Main():
 
 	q = sqliteQueue.SqliteQueue()
 	if 'action' in data:
-		utils.Debug("Queuing for dispatch: %s" % data)
+		logger.debug("Queuing for dispatch: %s" % data)
 		q.append(data)
 
 if __name__ == '__main__':

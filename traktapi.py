@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 #
-import xbmc
 import xbmcaddon
 import math
 import logging
-
 from trakt import Trakt, ClientError, ServerError
 from trakt.objects import Movie, Show
 from utilities import Debug, getSetting, findMovieMatchInList, findEpisodeMatchInList, notification, getString
@@ -13,15 +11,16 @@ from utilities import Debug, getSetting, findMovieMatchInList, findEpisodeMatchI
 __addon__ = xbmcaddon.Addon('script.trakt')
 __addonversion__ = __addon__.getAddonInfo('version')
 
-class traktAPI(object):
+logger = logging.getLogger(__name__)
 
+class traktAPI(object):
 	__apikey = "d4161a7a106424551add171e5470112e4afdaf2438e6ef2fe0548edc75924868"
 	__token = ""
 	__username = ""
 	__password = ""
 
 	def __init__(self):
-		Debug("[traktAPI] Initializing.")
+		logger.debug("Initializing.")
 
 		# Get user login data
 		self.__username = getSetting('username')
@@ -29,7 +28,6 @@ class traktAPI(object):
 		self.__token = getSetting('token')
 
 		# Configure
-		logging.basicConfig(format='[script.trakt] %(message)s', level=xbmc.LOGDEBUG)
 		Trakt.configuration.defaults.client(
 			id=self.__apikey
 		)
@@ -64,7 +62,7 @@ class traktAPI(object):
 				if auth:
 					self.__token = auth
 				else:
-					Debug("[traktAPI] Authentication Failure")
+					logger.debug("Authentication Failure")
 					notification('trakt', getString(1110))
 
 
@@ -88,7 +86,7 @@ class traktAPI(object):
 					episode=episode,
 					progress=math.ceil(percent))
 			else:
-					Debug("[traktAPI] scrobble() Bad scrobble status")
+					logger.debug("scrobble() Bad scrobble status")
 		return result
 
 
@@ -109,7 +107,7 @@ class traktAPI(object):
 					movie=movie,
 					progress=math.ceil(percent))
 			else:
-				Debug("[traktAPI] scrobble() Bad scrobble status")
+				logger.debug("scrobble() Bad scrobble status")
 		return result
 
 	def getShowsCollected(self, shows):

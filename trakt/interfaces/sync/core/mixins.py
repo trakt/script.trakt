@@ -21,7 +21,7 @@ class Get(Interface):
             return None
 
         return self.media_mapper(
-            store, media, items,
+            store, items, media,
             **self.flags
         )
 
