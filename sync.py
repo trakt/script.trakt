@@ -830,10 +830,9 @@ class Sync():
 
 		Debug('[Playback Sync] Getting playback progress from trakt.tv')
 		try:
-			traktProgress = {}
-			traktProgress = self.traktapi.getPlaybackProgress(traktProgress)
-			traktProgress = traktProgress.items()
-			logger.debug(traktProgress)
+			traktProgressMovies, traktProgressShows = self.traktapi.getPlaybackProgress()
+			logger.debug(traktProgressMovies)
+			logger.debug(traktProgressShows)
 			self.__updateProgress(12, line2=utilities.getString(1487))
 		except Exception:
 			Debug("[Playback Sync] Invalid trakt.tv progress list, possible error getting data from trakt, aborting trakt.tv playback update.")

@@ -6,6 +6,7 @@ import math
 import logging
 
 from trakt import Trakt, ClientError, ServerError
+from trakt.objects import Movie, Show
 from utilities import Debug, getSetting, findMovieMatchInList, findEpisodeMatchInList, notification, getString
 
 # read settings
@@ -178,7 +179,21 @@ class traktAPI(object):
 		return result
 
 	def getPlaybackProgress(self, shows):
+
+		progressMovies = []
+		progressShows = []
+
+		# Fetch playback
 		with Trakt.configuration.auth(self.__username, self.__token):
 			with Trakt.configuration.http(retry=True):
-				Trakt['sync/playback'].shows(shows, exceptions=True)
-		return shows
+				playback = Trakt['sync'].playback(exceptions=True)
+
+				for key, item in playback.items():
+					print item
+
+					if type(item) is Movie:
+						progressMovies.append(item)
+					elif type(item) is Show:
+						progressShows.append(item)
+
+		return progressMovies, progressShows
