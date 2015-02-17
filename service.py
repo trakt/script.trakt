@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import threading
 from time import time
-import traceback
 import logging
 import xbmc
 
@@ -74,15 +73,7 @@ class traktService:
 			else:
 				logger.debug("Unknown dispatch action, '%s'." % action)
 		except Exception as ex:
-			template = (
-			"EXCEPTION Thrown (PythonToCppException) : -->Python callback/script returned the following error<--\n"
-			" - NOTE: IGNORING THIS CAN LEAD TO MEMORY LEAKS!\n"
-			"Error Type: <type '{0}'>\n"
-			"Error Contents: {1!r}\n"
-			"{2}"
-			"-->End of Python script error report<--"
-			)
-			message = template.format(type(ex).__name__, ex.args, traceback.format_exc())
+			message = utilities.createError(ex)
 			logger.fatal(message)
 
 	def run(self):

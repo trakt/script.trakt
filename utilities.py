@@ -7,6 +7,7 @@ import time
 import re
 import sys
 import logging
+import traceback
 from datetime import datetime
 from dateutil.tz import tzutc, tzlocal
 
@@ -418,3 +419,15 @@ def convertDateTimeToUTC(toConvert):
 		return unicode(utc)
 	else:
 		return toConvert
+
+
+def createError(ex):
+	template = (
+			"EXCEPTION Thrown (PythonToCppException) : -->Python callback/script returned the following error<--\n"
+			" - NOTE: IGNORING THIS CAN LEAD TO MEMORY LEAKS!\n"
+			"Error Type: <type '{0}'>\n"
+			"Error Contents: {1!r}\n"
+			"{2}"
+			"-->End of Python script error report<--"
+			)
+	return template.format(type(ex).__name__, ex.args, traceback.format_exc())

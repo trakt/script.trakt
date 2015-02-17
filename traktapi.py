@@ -4,7 +4,7 @@ import xbmcaddon
 import math
 import logging
 from trakt import Trakt, ClientError, ServerError
-from utilities import getSetting, findMovieMatchInList, findEpisodeMatchInList, notification, getString
+from utilities import getSetting, findMovieMatchInList, findEpisodeMatchInList, notification, getString, createError
 
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')
@@ -63,7 +63,9 @@ class traktAPI(object):
 					else:
 						logger.debug("Authentication Failure")
 						notification('trakt', getString(1110))
-				except Exception:
+				except Exception as ex:
+					message = createError(ex)
+					logger.fatal(message)
 					logger.debug("Cannot connect to server")
 					notification('trakt', getString(1108))
 
