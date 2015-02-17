@@ -1,11 +1,11 @@
 from trakt.objects import Episode, Movie, Show, Season
 
 IDENTIFIERS = {
-    'movies': [
+    'movie': [
         'imdb',
         'tmdb'
     ],
-    'shows': [
+    'show': [
         'tvdb',
         'imdb',
         'tvrage'
@@ -17,17 +17,23 @@ class MediaMapper(object):
     def __init__(self, store):
         self.store = store
 
-    def process(self, media, item, **kwargs):
-        if media == 'movies':
+    def process(self, item, media=None, **kwargs):
+        if media is None:
+            media = item.get('type')
+
+        if media:
+            media = media.rstrip('s')
+
+        if media == 'movie':
             return self.movie(media, item, **kwargs)
 
-        if media == 'shows':
+        if media == 'show':
             return self.show(media, item, **kwargs)
 
-        if media == 'episodes':
+        if media == 'episode':
             return self.episode(media, item, **kwargs)
 
-        raise ValueError('Unknown media provided')
+        raise ValueError('Unknown media type: %r', media)
 
     def movie(self, media, item, **kwargs):
         pk, keys = self.get_ids(media, item['movie'])
@@ -111,7 +117,7 @@ class MediaMapper(object):
         episode_num = i_episode.get('number')
 
         # Build `show`
-        show = self.show('shows', item['show'])
+        show = self.show('show', item['show'])
 
         if show is None:
             # Unable to create show
@@ -141,7 +147,7 @@ class MediaMapper(object):
 
             keys.append((key, str(value)))
 
-        if media == 'episodes':
+        if media == 'episode':
             keys.append((item.get('season'), item.get('number')))
 
         if not len(keys):
@@ -156,13 +162,13 @@ class MediaMapper(object):
         else:
             pk = keys[0]
 
-        if media == 'shows':
+        if media == 'show':
             return Show.create(keys, item, **kwargs)
 
-        if media == 'movies':
+        if media == 'movie':
             return Movie.create(keys, item, **kwargs)
 
-        if media == 'episodes':
+        if media == 'episode':
             return Episode.create(pk, **kwargs)
 
         raise ValueError('Unknown media type provided')
