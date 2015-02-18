@@ -843,9 +843,22 @@ class Sync():
 			return False, False
 
 		i = 0
-		x = float(len(traktProgress['shows']))
+		x = float(len(traktProgressMovies))
+		moviesProgress = {'movies': []}
+		for movie in traktProgressMovies:
+			i += 1
+			y = ((i / x) * 26) + 6
+			self.__updateProgress(int(y), line2=utilities.getString(1488) % (i, x))
+
+			#will keep the data in python structures - just like the KODI response
+			movie = movie.to_dict()
+
+			moviesProgress['movies'].append(movie)
+
+		i = 0
+		x = float(len(traktProgressShows))
 		showsProgress = {'shows': []}
-		for key, show in traktProgress['shows']:
+		for show in traktProgressShows:
 			i += 1
 			y = ((i / x) * 20) + 6
 			self.__updateProgress(int(y), line2=utilities.getString(1488) % (i, x))
@@ -854,19 +867,6 @@ class Sync():
 			show = show.to_dict()
 
 			showsProgress['shows'].append(show)
-
-		i = 0
-		x = float(len(traktProgress['movies']))
-		moviesProgress = {'movies': []}
-		for key, show in traktProgress['movies']:
-			i += 1
-			y = ((i / x) * 26) + 6
-			self.__updateProgress(int(y), line2=utilities.getString(1488) % (i, x))
-
-			#will keep the data in python structures - just like the KODI response
-			show = show.to_dict()
-
-			moviesProgress['movies'].append(show)
 
 		self.__updateProgress(32, line2=utilities.getString(1489))
 

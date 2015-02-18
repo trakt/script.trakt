@@ -176,7 +176,7 @@ class traktAPI(object):
 			result = Trakt['sync/ratings'].remove(mediaObject)
 		return result
 
-	def getPlaybackProgress(self, shows):
+	def getPlaybackProgress(self):
 
 		progressMovies = []
 		progressShows = []
@@ -187,8 +187,6 @@ class traktAPI(object):
 				playback = Trakt['sync'].playback(exceptions=True)
 
 				for key, item in playback.items():
-					print item
-
 					if type(item) is Movie:
 						progressMovies.append(item)
 					elif type(item) is Show:
