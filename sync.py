@@ -816,9 +816,9 @@ class Sync():
 			return
 
 
-		self.__addMovieProgressToKodi(kodiMovies, traktMoviesProgress)
+		self.__addMovieProgressToKodi(traktMoviesProgress, kodiMovies)
 
-		self.__addEpisodeProgressToKodi(kodiShowsCollected, traktShowsProgress)
+		self.__addEpisodeProgressToKodi(traktShowsProgress, kodiShowsCollected)
 
 		if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
 			notification('%s %s' % (utilities.getString(1400), utilities.getString(1406)), utilities.getString(1421)) #Sync complete
@@ -871,3 +871,80 @@ class Sync():
 		self.__updateProgress(32, line2=utilities.getString(1489))
 
 		return showsProgress, moviesProgress
+
+	def __addMovieProgressToKodi(self, traktMovies, kodiMovies):
+
+		if not self.__isCanceled():
+			updateKodiTraktMovies = copy.deepcopy(traktMovies)
+			updateKodiKodiMovies = copy.deepcopy(kodiMovies)
+
+			kodiMoviesToUpdate = self.__compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, watched=True, restrict=True)
+
+			if len(kodiMoviesToUpdate) == 0:
+				self.__updateProgress(99, line2=utilities.getString(1471))
+				logger.debug("[Playback Sync] Kodi movie playcount is up to date.")
+				return
+
+			logger.debug("[Playback Sync] %i movie(s) playcount will be updated in Kodi" % len(kodiMoviesToUpdate))
+
+			self.__updateProgress(83, line2=utilities.getString(1430) % len(kodiMoviesToUpdate))
+			logger.debug("kodiMoviesToUpdate %s" % kodiMoviesToUpdate)
+			#need to calculate the progress in int from progress in percent from trakt
+			#split movie list into chunks of 50
+			chunksize = 50
+			chunked_movies = utilities.chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": kodiMoviesToUpdate[i]['movieid'], "resume": {"position": kodiMoviesToUpdate[i]['progress']}}} for i in range(len(kodiMoviesToUpdate))], chunksize)
+			i = 0
+			x = float(len(kodiMoviesToUpdate))
+			for chunk in chunked_movies:
+				if self.__isCanceled():
+					return
+				i += 1
+				y = ((i / x) * 16) + 83
+				self.__updateProgress(int(y), line2=utilities.getString(1472) % ((i)*chunksize if (i)*chunksize < x else x, x))
+
+				utilities.kodiJsonRequest(chunk)
+
+			self.__updateProgress(99, line2=utilities.getString(1473) % len(kodiMoviesToUpdate))
+
+	def __addEpisodeProgressToKodi(self, traktShows, kodiShows):
+		if not self.__isCanceled():
+			updateKodiTraktShows = copy.deepcopy(traktShows)
+			updateKodiKodiShows = copy.deepcopy(kodiShows)
+
+			kodiShowsUpadate = self.__compareShows(updateKodiTraktShows, updateKodiKodiShows, watched=True, restrict=True)
+
+			if len(kodiShowsUpadate['shows']) == 0:
+				self.__updateProgress(98, line1=utilities.getString(1441), line2=utilities.getString(1493))
+				logger.debug("[Playback Sync] Kodi episode playcounts are up to date.")
+				return
+
+			logger.debug("[Playback Sync] %i show(s) shows are missing playcounts on Kodi" % len(kodiShowsUpadate['shows']))
+			for s in ["%s" % self.__getShowAsString(s, short=True) for s in kodiShowsUpadate['shows']]:
+				logger.debug("[Playback Sync] Episodes updated: %s" % s)
+
+			#logger.debug("kodiShowsUpadate: %s" % kodiShowsUpadate)
+			episodes = []
+			for show in kodiShowsUpadate['shows']:
+				for season in show['seasons']:
+					for episode in season['episodes']:
+						episodes.append({'episodeid': episode['ids']['episodeid'], 'progress': episode['progress']})
+
+			logger.debug("episodes %s" % episodes)
+			#need to calculate the progress in int from progress in percent from trakt
+			#split episode list into chunks of 50
+			chunksize = 50
+			chunked_episodes = utilities.chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetEpisodeDetails", "params": {"episodeid":episodes[i]['episodeid'], "resume": {"position": episodes[i]['progress']}}} for i in range(len(episodes))], chunksize)
+			i = 0
+			x = float(len(episodes))
+			for chunk in chunked_episodes:
+				if self.__isCanceled():
+					return
+				i += 1
+				y = ((i / x) * 16) + 82
+				self.__updateProgress(int(y), line2=utilities.getString(1494) % ((i)*chunksize if (i)*chunksize < x else x, x))
+
+				logger.debug("[Playback Sync] chunk %s" % str(chunk))
+				result = utilities.kodiJsonRequest(chunk)
+				logger.debug("[Playback Sync] result %s" % str(result))
+
+			self.__updateProgress(98, line2=utilities.getString(1495) % len(episodes))
