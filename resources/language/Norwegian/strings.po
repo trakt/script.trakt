@@ -28,22 +28,462 @@ msgctxt "#1014"
 msgid "Password"
 msgstr "Passord"
 
+msgctxt "#1017"
+msgid "Number of Retries"
+msgstr "Antall forsøk"
+
+msgctxt "#1018"
+msgid "Startup Delay"
+msgstr "Forsinkelse av oppstart"
+
 msgctxt "#1030"
 msgid "Rating"
 msgstr "Rangering/aldersgrense"
+
+msgctxt "#1031"
+msgid "Rate Movie after watching"
+msgstr "Gi vurdering etter å ha sett"
+
+msgctxt "#1032"
+msgid "Rate TV show Episode after watching"
+msgstr "Gi vurdering på Tv-program etter å ha sett"
+
+msgctxt "#1033"
+msgid "Rate each playlist item"
+msgstr "Gi vurdering på alle elementer i spillelisten"
+
+msgctxt "#1034"
+msgid "Minimum percent watched to display rating dialog"
+msgstr "Minimum prosent sett for å spørre om vurdering"
+
+msgctxt "#1035"
+msgid "Allow re-rating of media"
+msgstr "Tillat overskriving av vurdering"
+
+msgctxt "#1037"
+msgid "Default rating"
+msgstr "Standard vurdering"
+
+msgctxt "#1040"
+msgid "Scrobbling"
+msgstr "Scrobbling"
+
+msgctxt "#1041"
+msgid "Scrobble movies"
+msgstr "Scrobble filmer"
+
+msgctxt "#1042"
+msgid "Scrobble TV show episodes"
+msgstr "Scrobble TV-programmer og episoder"
+
+msgctxt "#1048"
+msgid "Show notification on scrobble"
+msgstr "Vis scrobble-varsel"
+
+msgctxt "#1049"
+msgid "trakt - Scrobbled successfully"
+msgstr "trakt - Scrobble vellykket"
+
+msgctxt "#1050"
+msgid "Exclusions"
+msgstr "Unntak"
+
+msgctxt "#1051"
+msgid "Exclude Live TV"
+msgstr "Ekskluder Live TV"
+
+msgctxt "#1052"
+msgid "Exclude HTTP sources"
+msgstr "Ekskluder HTTP-kilder"
+
+msgctxt "#1053"
+msgid "Exclude path"
+msgstr "Ekskluder sti"
+
+msgctxt "#1054"
+msgid "Folder's path (including subfolders)"
+msgstr "Mappens sti (inkludert undermapper)"
+
+msgctxt "#1106"
+msgid "Enter your Username and Password in settings"
+msgstr "Skriv inn brukernavn og Passord i innstillingene"
+
+msgctxt "#1107"
+msgid "Enter your Password in settings"
+msgstr "Skriv inn passord i innstillingene"
+
+msgctxt "#1108"
+msgid "Can not connect to trakt"
+msgstr "Kunne ikke koble til trakt"
 
 msgctxt "#1109"
 msgid "Error"
 msgstr "Feil"
 
+msgctxt "#1110"
+msgid "Incorrect username or password"
+msgstr "Feil brukernavn eller passord"
+
+msgctxt "#1313"
+msgid "What Did You Think?"
+msgstr "Hva synes du?"
+
+msgctxt "#1314"
+msgid "Totally Ninja!"
+msgstr "Helt ninja!"
+
+msgctxt "#1315"
+msgid "Weak Sauce :("
+msgstr "Svak saus :("
+
+msgctxt "#1316"
+msgid "Terrible"
+msgstr "Forferdelig"
+
+msgctxt "#1317"
+msgid "Bad"
+msgstr "Elendig"
+
+msgctxt "#1318"
+msgid "Poor"
+msgstr "Dårlig"
+
+msgctxt "#1319"
+msgid "Meh"
+msgstr "Meh"
+
 msgctxt "#1320"
 msgid "Fair"
-msgstr "lettskyet"
+msgstr "Greit"
+
+msgctxt "#1321"
+msgid "Good"
+msgstr "Bra"
+
+msgctxt "#1322"
+msgid "Great"
+msgstr "Kjempebra"
+
+msgctxt "#1323"
+msgid "Superb"
+msgstr "Supert"
+
+msgctxt "#1325"
+msgid "Unrate this movie"
+msgstr "Fjern vurdering av denne filmen"
+
+msgctxt "#1326"
+msgid "Unrate this show"
+msgstr "Fjern vurdering av dette TV-programmet"
+
+msgctxt "#1327"
+msgid "Unrate this episode"
+msgstr "Fjern vurdering av denne episoden"
+
+msgctxt "#1350"
+msgid "trakt - Rating submitted successfully"
+msgstr "trakt - Vurdering ble lagt til"
+
+msgctxt "#1351"
+msgid "trakt - Already rated"
+msgstr "trakt - Allerede vurdert"
+
+msgctxt "#1352"
+msgid "trakt - Unrated successfully"
+msgstr "trakt - Vurdering fjernet"
+
+msgctxt "#1353"
+msgid "trakt - Already has the same rating"
+msgstr "trakt - Har allerede samme vurdering"
+
+msgctxt "#1354"
+msgid "trakt - Problem submitting rating"
+msgstr "trakt - Kunne ikke legge til vurdering"
+
+msgctxt "#1400"
+msgid "Synchronize"
+msgstr "Synkroniser"
 
 msgctxt "#1402"
 msgid "Movies"
 msgstr "Filmer"
 
+msgctxt "#1403"
+msgid "Add new movies to trakt collection"
+msgstr "Legg til filmer i trakt-samlingen"
+
+msgctxt "#1404"
+msgid "Add watched movies to trakt history"
+msgstr "Legg til filmer markert sett i trakt-historien"
+
+msgctxt "#1405"
+msgid "Mark movies from trakt history as watched in Kodi"
+msgstr "Marker filmer fra trakt-historien som sett i Kodi"
+
+msgctxt "#1406"
+msgid "TV Episodes"
+msgstr "TV-Episoder"
+
+msgctxt "#1407"
+msgid "Add new TV episodes to trakt collection"
+msgstr "Legg til TV-episoder i trakt-samling"
+
+msgctxt "#1408"
+msgid "Add watched TV episodes to trakt history"
+msgstr "Legg til TV-episoder markert sett i trakt-historie"
+
+msgctxt "#1409"
+msgid "Mark TV episodes from trakt history as watched in Kodi"
+msgstr "Merk TV-episoder fra trakt-historie som sett i Kodi"
+
 msgctxt "#1410"
 msgid "Service"
 msgstr "Tjeneste"
+
+msgctxt "#1411"
+msgid "Sync collection on library update or cleaning"
+msgstr "Synkroniser samling når biblioteket oppdateres eller renses"
+
+msgctxt "#1412"
+msgid "Show notifications"
+msgstr "Vis varslinger"
+
+msgctxt "#1413"
+msgid "Remove deleted movies from trakt collection"
+msgstr "Fjern slettede filmer fra trakt-samling"
+
+msgctxt "#1414"
+msgid "Remove deleted TV episodes from trakt collection"
+msgstr "Fjern slettede TV-episoder fra trakt-samling"
+
+msgctxt "#1416"
+msgid "Show marked as watched notification"
+msgstr "Vis varsling når noe blir markert sett"
+
+msgctxt "#1417"
+msgid "Hide notifications during playback"
+msgstr "Skjul varslinger under avspilling"
+
+msgctxt "#1420"
+msgid "Sync started"
+msgstr "Synkronisering startet"
+
+msgctxt "#1421"
+msgid "Sync complete"
+msgstr "Synkronisering ferdig"
+
+msgctxt "#1426"
+msgid "%i movie(s) will be added to trakt collection"
+msgstr "%i film(er) vil bli lagt til i trakt-samlingen"
+
+msgctxt "#1428"
+msgid "%i movie playcount(s) will be updated on trakt"
+msgstr "%i filmavspilling(er) vil bli oppdatert på trakt"
+
+msgctxt "#1430"
+msgid "%i movie(s) playcount will be updated in Kodi"
+msgstr "%i filmavspilling(er) vil bli oppdatert i Kodi"
+
+msgctxt "#1431"
+msgid "Movie Sync Complete"
+msgstr "Synkronisering av filmer ferdig"
+
+msgctxt "#1434"
+msgid "Going to add %i show(s) to trakt collection"
+msgstr "Legger til %i program(mer) til trakt-samling"
+
+msgctxt "#1435"
+msgid "Checking for episodes missing from trakt collection"
+msgstr "Sjekker etter manglende episoder i trakt-samling"
+
+msgctxt "#1436"
+msgid "%i of %i show(s) have episodes added to trakt collection"
+msgstr "%i av %i program(mer) har episoder lagt til i trakt-samlingen"
+
+msgctxt "#1437"
+msgid "Going to update %i show(s) missing watched status"
+msgstr "Oppdaterer %i program(mer)s manglende sett-status"
+
+msgctxt "#1438"
+msgid "Checking watched episodes on trakt"
+msgstr "Sjekker etter episoder markert sett på trakt"
+
+msgctxt "#1439"
+msgid "%i show(s) had missing watched status"
+msgstr "%i program(mer) manglet sett-status"
+
+msgctxt "#1440"
+msgid "%i episodes are being updated"
+msgstr "%i episoder blir oppdatert"
+
+msgctxt "#1441"
+msgid "Checking watched episodes on Kodi"
+msgstr "Sjekker episoder markert sett i Kodi"
+
+msgctxt "#1442"
+msgid "Episode Sync Complete"
+msgstr "Synkronisering av episode ferdig"
+
+msgctxt "#1444"
+msgid "%i movie(s) will be removed from trakt collection"
+msgstr "%i film(er) blir fjernet fra trakt-samlingen"
+
+msgctxt "#1445"
+msgid "Cleaning trakt TV show collection"
+msgstr "Renser TV-programsamling"
+
+msgctxt "#1447"
+msgid "episodes are being removed"
+msgstr "episoder fjernes"
+
+msgctxt "#1460"
+msgid "Loading movies from Kodi"
+msgstr "Laster filmer fra Kodi"
+
+msgctxt "#1461"
+msgid "Movies loaded from Kodi"
+msgstr "Filmer fra Kodi lastet"
+
+msgctxt "#1462"
+msgid "Retrieving movie collection from trakt"
+msgstr "Henter film-samling fra trakt"
+
+msgctxt "#1463"
+msgid "Retrieving watched movies from trakt"
+msgstr "Henter filmer markert sett fra trakt"
+
+msgctxt "#1466"
+msgid "Retrieved movie data from trakt"
+msgstr "Hentet data om film fra trakt"
+
+msgctxt "#1467"
+msgid "trakt movie collection is up to date, no movies to add"
+msgstr "Film-samlingen på trakt er oppdatert. Ingen filmer å legge til."
+
+msgctxt "#1468"
+msgid "%i movie(s) were added to your trakt collection"
+msgstr "%i film(er) ble lagt til i trakt-samlingen"
+
+msgctxt "#1469"
+msgid "trakt movie playcounts are up to date"
+msgstr "trakt filmavspillinger er oppdatert"
+
+msgctxt "#1470"
+msgid "Playcounts updated for %i movie(s) on trakt"
+msgstr "Avspillinger oppdatert for %i film(er) på trakt"
+
+msgctxt "#1471"
+msgid "Kodi movie playcounts are up to date"
+msgstr "Kodi filmavspillinger er oppdatert"
+
+msgctxt "#1472"
+msgid "Updating %i of %i movie playcount(s) in Kodi"
+msgstr "Oppdaterer %i av %i filmavspilling(er) i Kodi"
+
+msgctxt "#1473"
+msgid "Playcounts updated for %i movie(s) in Kodi"
+msgstr "Avspillingsteller oppdatert for %i film(er) i Kodi"
+
+msgctxt "#1474"
+msgid "trakt movie collection is up to date, no movies removed"
+msgstr "filmsamlingen på trakt er oppdatert. Ingen filmer å fjerne"
+
+msgctxt "#1475"
+msgid "%i movie(s) were removed from your trakt collection"
+msgstr "%i film(er) ble fjernet fra trakt-samlingen"
+
+msgctxt "#1478"
+msgid "Updating %i of %i movie playcount(s) on trakt"
+msgstr "Oppdaterer %i av %i filmavspilling(er) på trakt"
+
+msgctxt "#1480"
+msgid "Loading episode data from Kodi"
+msgstr "Laster data om episode fra Kodi"
+
+msgctxt "#1481"
+msgid "Loading shows from Kodi"
+msgstr "Laster TV-programmer fra Kodi"
+
+msgctxt "#1482"
+msgid "Shows loaded from Kodi"
+msgstr "TV-programmer lastet fra kodi"
+
+msgctxt "#1483"
+msgid "Parsing %i of %i episode data from Kodi"
+msgstr "Analyserer %i av %i episodedata fra Kodi"
+
+msgctxt "#1484"
+msgid "Loaded episode data from Kodi"
+msgstr "Lastet episode-data fra Kodi"
+
+msgctxt "#1485"
+msgid "Loading episode data from trakt"
+msgstr "Laster episode-data fra trakt"
+
+msgctxt "#1486"
+msgid "Retrieving episode collection from trakt"
+msgstr "Henter episode-samling fra trakt"
+
+msgctxt "#1487"
+msgid "Retrieving watched episodes from trakt"
+msgstr "Henter episoder markert sett fra trakt"
+
+msgctxt "#1488"
+msgid "Parsing episode data %i of %i from trakt"
+msgstr "Analyserer episodedata %i av %i fra trakt"
+
+msgctxt "#1489"
+msgid "Retrieved episode data from trakt"
+msgstr "Henter episode-data fra trakt"
+
+msgctxt "#1490"
+msgid "trakt episode collection is up to date, no episodes to add"
+msgstr "episode-samling på trakt er oppdatert. Ingen episoder å legge til."
+
+msgctxt "#1491"
+msgid "%i episode(s) were added to your trakt collection"
+msgstr "%i episode(r) ble lagt til i trakt-samlingen"
+
+msgctxt "#1492"
+msgid "trakt episode playcounts are up to date"
+msgstr "trakt episodeavspillinger er oppdatert"
+
+msgctxt "#1493"
+msgid "Kodi episode playcounts are up to date"
+msgstr "Kodi episodeavspillinger er oppdatert"
+
+msgctxt "#1494"
+msgid "Updating %i of %i episode playcount(s) in Kodi"
+msgstr "Oppdaterer %i av %i episodeavspilling(er) i Kodi"
+
+msgctxt "#1495"
+msgid "Playcounts updated for %i show(s) in Kodi"
+msgstr "Avspillinger oppdatert for %i program(mer) i Kodi"
+
+msgctxt "#1496"
+msgid "trakt episode collection is clean, no episodes to remove"
+msgstr "episodesamlingen på trakt er renset. Ingen episoder å fjerne."
+
+msgctxt "#1497"
+msgid "%i episode(s) are being removed from your trakt collection"
+msgstr "%i episode(r) blir fjernet fra trakt-samlingen"
+
+msgctxt "#1498"
+msgid "%i episode(s) were removed from your trakt collection"
+msgstr "%i episode(r) ble fjernet fra trakt-samlingen"
+
+msgctxt "#1550"
+msgid "trakt - Marked as watched"
+msgstr "trakt - Markert som sett"
+
+msgctxt "#1551"
+msgid "trakt - Failed marking as watched"
+msgstr "trakt - Kunne ikke markere som sett"
+
+msgctxt "#1552"
+msgid "%d episode(s) of '%s'"
+msgstr "%d episode(r) av '%s'"
+
+msgctxt "#1701"
+msgid "Enable debug mode"
+msgstr "Aktiver feilsøkingsmodus"

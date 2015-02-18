@@ -76,14 +76,6 @@ msgctxt "#1042"
 msgid "Scrobble TV show episodes"
 msgstr "Scrobblar TV-serie avsnitt"
 
-msgctxt "#1046"
-msgid "Send scrobble call on seek"
-msgstr "Skicka anrop att scrobbla vid sök"
-
-msgctxt "#1047"
-msgid "Send scrobble call on resume"
-msgstr "Skicka anrop att scrobbla vid återuppspelning"
-
 msgctxt "#1048"
 msgid "Show notification on scrobble"
 msgstr "Visa notifiering vid scrobbling"
@@ -483,6 +475,10 @@ msgstr "%i avsnitt togs bort från din samling på trakt"
 msgctxt "#1550"
 msgid "trakt - Marked as watched"
 msgstr "trakt - Markerades som sedd"
+
+msgctxt "#1551"
+msgid "trakt - Failed marking as watched"
+msgstr "trakt - Fel vid markering som sedd"
 
 msgctxt "#1552"
 msgid "%d episode(s) of '%s'"
