@@ -163,6 +163,7 @@ class Sync():
 			#split episode list into chunks of 50
 			chunksize = 1
 			chunked_episodes = utilities.chunks(traktShowsAdd['shows'], chunksize)
+			errorcount = 0
 			i = 0
 			x = float(len(traktShowsAdd['shows']))
 			for chunk in chunked_episodes:
@@ -174,9 +175,14 @@ class Sync():
 
 				request = {'shows': chunk}
 				logger.debug("[traktAddEpisodes] Shows to add %s" % request)
-				result = self.traktapi.addToCollection(request)
-				logger.debug("[traktAddEpisodes] Result %s" % result)
+				try:
+					self.traktapi.addToCollection(request)
+				except Exception as ex:
+					message = utilities.createError(ex)
+					logging.fatal(message)
+					errorcount += 1
 
+			logger.debug("[traktAddEpisodes] Finished with %d error(s)" % errorcount)
 			self.__updateProgress(49, line2=utilities.getString(1491) % self.__countEpisodes(traktShowsAdd))
 
 	def __deleteEpisodesFromTraktCollection(self, traktShows, kodiShows):
@@ -199,8 +205,11 @@ class Sync():
 			self.__updateProgress(50, line1=utilities.getString(1445), line2=utilities.getString(1497) % self.__countEpisodes(traktShowsRemove), line3=" ")
 
 			logger.debug("[traktRemoveEpisodes] Shows to remove %s" % traktShowsRemove)
-			result = self.traktapi.removeFromCollection(traktShowsRemove)
-			logger.debug("[traktRemoveEpisodes] Result %s" % result)
+			try:
+				self.traktapi.removeFromCollection(traktShowsRemove)
+			except Exception as ex:
+				message = utilities.createError(ex)
+				logging.fatal(message)
 
 			self.__updateProgress(65, line2=utilities.getString(1498) % self.__countEpisodes(traktShowsRemove), line3=" ")
 
@@ -223,7 +232,7 @@ class Sync():
 				logger.debug("[Episodes Sync] Episodes updated: %s" % self.__getShowAsString(show, short=True))
 
 			self.__updateProgress(66, line1=utilities.getString(1438), line2=utilities.getString(1437) % (len(traktShowsUpdate['shows'])), line3="")
-
+			errorcount = 0
 			i = 0
 			x = float(len(traktShowsUpdate['shows']))
 			for show in traktShowsUpdate['shows']:
@@ -235,11 +244,16 @@ class Sync():
 				y = ((i / x) * 16) + 66
 				self.__updateProgress(int(y), line2=title, line3=utilities.getString(1440) % epCount)
 
-				s = { 'shows': [show]}
+				s = {'shows': [show]}
 				logger.debug("[traktUpdateEpisodes] Shows to update %s" % s)
-				result = self.traktapi.addToHistory(s)
-				logger.debug("[traktUpdateEpisodes] Result %s" % result)
+				try:
+					self.traktapi.addToHistory(s)
+				except Exception as ex:
+					message = utilities.createError(ex)
+					logging.fatal(message)
+					errorcount += 1
 
+			logger.debug("[traktUpdateEpisodes] Finished with %d error(s)" % errorcount)
 			self.__updateProgress(82, line2=utilities.getString(1439) % (len(traktShowsUpdate['shows'])), line3="")
 
 	def __addEpisodesToKodiWatched(self, traktShows, kodiShows, kodiShowsCollected):
@@ -536,7 +550,11 @@ class Sync():
 
 			moviesToAdd = {'movies': traktMoviesToAdd}
 			#logger.debug("Movies to add: %s" % moviesToAdd)
-			self.traktapi.addToCollection(moviesToAdd)
+			try:
+				self.traktapi.addToCollection(moviesToAdd)
+			except Exception as ex:
+				message = utilities.createError(ex)
+				logging.fatal(message)
 
 			self.__updateProgress(48, line2=utilities.getString(1468) % len(traktMoviesToAdd))
 
@@ -563,7 +581,11 @@ class Sync():
 			self.__updateProgress(49, line2=utilities.getString(1444) % len(traktMoviesToRemove))
 
 			moviesToRemove = {'movies': traktMoviesToRemove}
-
+			try:
+				self.traktapi.removeFromCollection(moviesToRemove)
+			except Exception as ex:
+				message = utilities.createError(ex)
+				logging.fatal(message)
 			self.traktapi.removeFromCollection(moviesToRemove)
 
 			self.__updateProgress(65, line2=utilities.getString(1475) % len(traktMoviesToRemove))
@@ -591,6 +613,7 @@ class Sync():
 			# Send request to update playcounts on trakt.tv
 			chunksize = 200
 			chunked_movies = utilities.chunks([movie for movie in traktMoviesToUpdate], chunksize)
+			errorcount = 0
 			i = 0
 			x = float(len(traktMoviesToUpdate))
 			for chunk in chunked_movies:
@@ -602,8 +625,14 @@ class Sync():
 
 				params = {'movies': chunk}
 				#logger.debug("moviechunk: %s" % params)
-				self.traktapi.addToHistory(params)
+				try:
+					self.traktapi.addToHistory(params)
+				except Exception as ex:
+					message = utilities.createError(ex)
+					logging.fatal(message)
+					errorcount += 1
 
+			logger.debug("[Movies Sync] Movies updated: %d error(s)" % errorcount)
 			self.__updateProgress(82, line2=utilities.getString(1470) % len(traktMoviesToUpdate))
 
 	def __addMoviesToKodiWatched(self, traktMovies, kodiMovies):
