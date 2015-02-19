@@ -29,52 +29,49 @@ class traktService:
 		self.dispatchQueue.append(data)
 	
 	def _dispatch(self, data):
-		try:
-			logger.debug("Dispatch: %s" % data)
-			action = data['action']
-			if action == 'started':
-				del data['action']
-				self.scrobbler.playbackStarted(data)
-			elif action == 'ended' or action == 'stopped':
-				self.scrobbler.playbackEnded()
-			elif action == 'paused':
-				self.scrobbler.playbackPaused()
-			elif action == 'resumed':
-				self.scrobbler.playbackResumed()
-			elif action == 'seek' or action == 'seekchapter':
-				self.scrobbler.playbackSeek()
-			elif action == 'databaseUpdated':
-				if utilities.getSettingAsBool('sync_on_update'):
-					logger.debug("Performing sync after library update.")
-					self.doSync()
-			elif action == 'databaseCleaned':
-				if utilities.getSettingAsBool('sync_on_update') and (utilities.getSettingAsBool('clean_trakt_movies') or utilities.getSettingAsBool('clean_trakt_episodes')):
-					logger.debug("Performing sync after library clean.")
-					self.doSync()
-			elif action == 'settingsChanged':
-				logger.debug("Settings changed, reloading.")
-				globals.traktapi.updateSettings()
-			elif action == 'markWatched':
-				del data['action']
-				self.doMarkWatched(data)
-			elif action == 'manualRating':
-				ratingData = data['ratingData']
-				self.doManualRating(ratingData)
-			elif action == 'manualSync':
-				if not self.syncThread.isAlive():
-					logger.debug("Performing a manual sync.")
-					self.doSync(manual=True, silent=data['silent'], library=data['library'])
-				else:
-					logger.debug("There already is a sync in progress.")
-			elif action == 'settings':
-				utilities.showSettings()
-			elif action == 'scanStarted':
-				pass
+		logger.debug("Dispatch: %s" % data)
+		action = data['action']
+		if action == 'started':
+			del data['action']
+			self.scrobbler.playbackStarted(data)
+		elif action == 'ended' or action == 'stopped':
+			self.scrobbler.playbackEnded()
+		elif action == 'paused':
+			self.scrobbler.playbackPaused()
+		elif action == 'resumed':
+			self.scrobbler.playbackResumed()
+		elif action == 'seek' or action == 'seekchapter':
+			self.scrobbler.playbackSeek()
+		elif action == 'databaseUpdated':
+			if utilities.getSettingAsBool('sync_on_update'):
+				logger.debug("Performing sync after library update.")
+				self.doSync()
+		elif action == 'databaseCleaned':
+			if utilities.getSettingAsBool('sync_on_update') and (utilities.getSettingAsBool('clean_trakt_movies') or utilities.getSettingAsBool('clean_trakt_episodes')):
+				logger.debug("Performing sync after library clean.")
+				self.doSync()
+		elif action == 'settingsChanged':
+			logger.debug("Settings changed, reloading.")
+			globals.traktapi.updateSettings()
+		elif action == 'markWatched':
+			del data['action']
+			self.doMarkWatched(data)
+		elif action == 'manualRating':
+			ratingData = data['ratingData']
+			self.doManualRating(ratingData)
+		elif action == 'manualSync':
+			if not self.syncThread.isAlive():
+				logger.debug("Performing a manual sync.")
+				self.doSync(manual=True, silent=data['silent'], library=data['library'])
 			else:
-				logger.debug("Unknown dispatch action, '%s'." % action)
-		except Exception as ex:
-			message = utilities.createError(ex)
-			logger.fatal(message)
+				logger.debug("There already is a sync in progress.")
+		elif action == 'settings':
+			utilities.showSettings()
+		elif action == 'scanStarted':
+			pass
+		else:
+			logger.debug("Unknown dispatch action, '%s'." % action)
+
 
 	def run(self):
 		startup_delay = utilities.getSettingAsInt('startup_delay')

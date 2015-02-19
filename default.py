@@ -12,5 +12,11 @@ kodilogging.config()
 logger = logging.getLogger(__name__)
 
 logger.debug("Loading '%s' version '%s'" % (__addonid__, __addonversion__))
-traktService().run()
+
+try:
+	traktService().run()
+except Exception as ex:
+	message = utilities.createError(ex)
+	logger.fatal(message)
+
 logger.debug("'%s' shutting down." % __addonid__)
