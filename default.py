@@ -4,6 +4,7 @@ import xbmcaddon
 import logging
 import kodilogging
 from service import traktService
+from utilities import createError
 
 __addon__ = xbmcaddon.Addon('script.trakt')
 __addonversion__ = __addon__.getAddonInfo('version')
@@ -16,7 +17,7 @@ logger.debug("Loading '%s' version '%s'" % (__addonid__, __addonversion__))
 try:
 	traktService().run()
 except Exception as ex:
-	message = utilities.createError(ex)
+	message = createError(ex)
 	logger.fatal(message)
 
 logger.debug("'%s' shutting down." % __addonid__)
