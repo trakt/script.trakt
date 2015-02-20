@@ -117,26 +117,26 @@ class traktAPI(object):
 
 	def getShowsCollected(self, shows):
 		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
+			with Trakt.configuration.http(retry=True, timeout=90):
 				Trakt['sync/collection'].shows(shows, exceptions=True)
 		return shows
 
 	def getMoviesCollected(self, movies):
 		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
+			with Trakt.configuration.http(retry=True, timeout=90):
 				Trakt['sync/collection'].movies(movies, exceptions=True)
 		return movies
 
 
 	def getShowsWatched(self, shows):
 		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
+			with Trakt.configuration.http(retry=True, timeout=90):
 				Trakt['sync/watched'].shows(shows, exceptions=True)
 		return shows
 
 	def getMoviesWatched(self, movies):
 		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
+			with Trakt.configuration.http(retry=True, timeout=90):
 				Trakt['sync/watched'].movies(movies, exceptions=True)
 		return movies
 
