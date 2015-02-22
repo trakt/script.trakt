@@ -3,3 +3,4 @@
 .DS*
 .pylint_rc
 /.idea
+/.project
