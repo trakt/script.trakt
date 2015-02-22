@@ -32,11 +32,7 @@ msgctxt "#1014"
 msgid "Password"
 msgstr ""
 
-#empty strings from id 1015 to 1016
-
-msgctxt "#1017"
-msgid "Number of Retries"
-msgstr ""
+#empty strings from id 1015 to 1017
 
 msgctxt "#1018"
 msgid "Startup Delay"

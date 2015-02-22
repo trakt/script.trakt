@@ -76,14 +76,6 @@ msgctxt "#1042"
 msgid "Scrobble TV show episodes"
 msgstr "Scrobble TV show episodes"
 
-msgctxt "#1046"
-msgid "Send scrobble call on seek"
-msgstr "Send scrobble call on seek"
-
-msgctxt "#1047"
-msgid "Send scrobble call on resume"
-msgstr "Send scrobble call on resume"
-
 msgctxt "#1048"
 msgid "Show notification on scrobble"
 msgstr "Show notification on scrobble"
@@ -483,6 +475,10 @@ msgstr "%i episode(s) were removed from your trakt collection"
 msgctxt "#1550"
 msgid "trakt - Marked as watched"
 msgstr "trakt - Marked as watched"
+
+msgctxt "#1551"
+msgid "trakt - Failed marking as watched"
+msgstr "trakt - Failed marking as watched"
 
 msgctxt "#1552"
 msgid "%d episode(s) of '%s'"

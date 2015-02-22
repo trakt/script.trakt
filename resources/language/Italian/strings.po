@@ -58,7 +58,7 @@ msgstr "Percentuale minima per visualizzare la votazione"
 
 msgctxt "#1035"
 msgid "Allow re-rating of media"
-msgstr "Permetti rivalutazione dei media"
+msgstr "Permetti la rivalutazione dei media"
 
 msgctxt "#1037"
 msgid "Default rating"
@@ -74,19 +74,11 @@ msgstr "Scrobbling dei film"
 
 msgctxt "#1042"
 msgid "Scrobble TV show episodes"
-msgstr "Scrobbling delle serie TV"
-
-msgctxt "#1046"
-msgid "Send scrobble call on seek"
-msgstr "Invia scrobble in ricerca"
-
-msgctxt "#1047"
-msgid "Send scrobble call on resume"
-msgstr "Invia scrobble dopo la pausa"
+msgstr "Scrobbling degli episodi delle serie TV"
 
 msgctxt "#1048"
 msgid "Show notification on scrobble"
-msgstr "Visualizza notifica di scrobbling"
+msgstr "Visualizza le notifiche dello scrobbling"
 
 msgctxt "#1049"
 msgid "trakt - Scrobbled successfully"
@@ -182,7 +174,7 @@ msgstr "Togli voto al film"
 
 msgctxt "#1326"
 msgid "Unrate this show"
-msgstr "Togli voto alla serie TV"
+msgstr "Togli voto alla serie"
 
 msgctxt "#1327"
 msgid "Unrate this episode"
@@ -198,7 +190,7 @@ msgstr "trakt - Già valutato"
 
 msgctxt "#1352"
 msgid "trakt - Unrated successfully"
-msgstr "trakt - Votazione rimossa"
+msgstr "trakt - Valutazione rimossa"
 
 msgctxt "#1353"
 msgid "trakt - Already has the same rating"
@@ -250,7 +242,7 @@ msgstr "Servizio"
 
 msgctxt "#1411"
 msgid "Sync collection on library update or cleaning"
-msgstr "Sincronizza collezione su Aggiornamento Archivio o Pulizia Archivio"
+msgstr "Sincronizza la collezione all'aggiornamento o alla pulizia della libreria"
 
 msgctxt "#1412"
 msgid "Show notifications"
@@ -310,7 +302,7 @@ msgstr "Tag \"visto(i)\" della serie %i verrà aggionato su trakt"
 
 msgctxt "#1437"
 msgid "Going to update %i show(s) missing watched status"
-msgstr "Aggiotno la serie TV %i con tag visto(i) mancanti"
+msgstr "Aggiorno %i serie non segnate come viste"
 
 msgctxt "#1438"
 msgid "Checking watched episodes on trakt"
@@ -318,7 +310,7 @@ msgstr "Verifico gli episodi visti su trakt"
 
 msgctxt "#1439"
 msgid "%i show(s) had missing watched status"
-msgstr "Serie TV %i con tag visto(i) mancante"
+msgstr "%i serie non sono segnate come viste"
 
 msgctxt "#1440"
 msgid "%i episodes are being updated"
@@ -338,11 +330,11 @@ msgstr "%i film verranno rimossi dalla collezione su trakt"
 
 msgctxt "#1445"
 msgid "Cleaning trakt TV show collection"
-msgstr "Pulizia collezione delle serie TV"
+msgstr "Pulisco la collezione delle serie TV su trakt"
 
 msgctxt "#1447"
 msgid "episodes are being removed"
-msgstr "episodi rimossi"
+msgstr "episodi verranno rimossi"
 
 msgctxt "#1460"
 msgid "Loading movies from Kodi"
@@ -484,10 +476,14 @@ msgctxt "#1550"
 msgid "trakt - Marked as watched"
 msgstr "trakt - Segnato come visto"
 
+msgctxt "#1551"
+msgid "trakt - Failed marking as watched"
+msgstr "trakt - Impossibile segnare come visto"
+
 msgctxt "#1552"
 msgid "%d episode(s) of '%s'"
 msgstr "%d episodi(o) di '%s'"
 
 msgctxt "#1701"
 msgid "Enable debug mode"
-msgstr "Attivare la modalità debug"
+msgstr "Abilita la modalità di debug"

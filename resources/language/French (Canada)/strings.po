@@ -76,14 +76,6 @@ msgctxt "#1042"
 msgid "Scrobble TV show episodes"
 msgstr "Scrobbler les épisodes d'émissions télé"
 
-msgctxt "#1046"
-msgid "Send scrobble call on seek"
-msgstr "Envoyer un appel de scrobble lors du positionnement"
-
-msgctxt "#1047"
-msgid "Send scrobble call on resume"
-msgstr "Envoyer un appel de scrobble lors de la reprise"
-
 msgctxt "#1048"
 msgid "Show notification on scrobble"
 msgstr "Afficher une notification lors du scrobble"
@@ -483,6 +475,10 @@ msgstr "%i épisode(s) a/ont été retiré(s) de votre collection trakt "
 msgctxt "#1550"
 msgid "trakt - Marked as watched"
 msgstr "trakt - Marqué comme regardé"
+
+msgctxt "#1551"
+msgid "trakt - Failed marking as watched"
+msgstr "trakt - Impossible de marquer comme regardé"
 
 msgctxt "#1552"
 msgid "%d episode(s) of '%s'"
