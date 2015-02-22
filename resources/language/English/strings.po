@@ -284,18 +284,22 @@ msgctxt "#1414"
 msgid "Remove deleted TV episodes from trakt collection"
 msgstr ""
 
-#empty string with id 1415 to 1416
+#empty string with id 1415
+
+msgctxt "#1416"
+msgid "Show marked as watched notification"
+msgstr ""
 
 msgctxt "#1417"
 msgid "Hide notifications during playback"
 msgstr ""
 
 msgctxt "#1418"
-msgid "Playback"
+msgid "Sync movie playback progress"
 msgstr ""
 
 msgctxt "#1419"
-msgid "Sync playbacks"
+msgid "Sync episode playback progress"
 msgstr ""
 
 
