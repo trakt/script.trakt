@@ -544,7 +544,9 @@ class Sync():
 				logger.debug("[Movies Sync] trakt.tv movie collection is up to date.")
 				return
 
+			titles = ", ".join(["%s" % (m['title']) for m in traktMoviesToAdd])
 			logger.debug("[Movies Sync] %i movie(s) will be added to trakt.tv collection." % len(traktMoviesToAdd))
+			logger.debug("[Movies Sync] Movies to add : %s" % titles)
 
 			self.__updateProgress(33, line2=utilities.getString(1426) % len(traktMoviesToAdd))
 
@@ -648,7 +650,9 @@ class Sync():
 				logger.debug("[Movies Sync] Kodi movie playcount is up to date.")
 				return
 
+			titles = ", ".join(["%s" % (m['title']) for m in kodiMoviesToUpdate])
 			logger.debug("[Movies Sync] %i movie(s) playcount will be updated in Kodi" % len(kodiMoviesToUpdate))
+			logger.debug("[Movies Sync] Movies to add: %s" % titles)
 
 			self.__updateProgress(83, line2=utilities.getString(1430) % len(kodiMoviesToUpdate))
 
