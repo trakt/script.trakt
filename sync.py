@@ -341,7 +341,7 @@ class Sync():
 		return data
 
 	#always return shows_col1 if you have enrich it, but don't return shows_col2
-	def __compareShows(self, shows_col1, shows_col2, watched=False, restrict=False, collected=False):
+	def __compareShows(self, shows_col1, shows_col2, watched=False, restrict=False, collected=False, playback=False):
 		shows = []
 		for show_col1 in shows_col1['shows']:
 			if show_col1:
@@ -382,6 +382,19 @@ class Sync():
 										eps[ep] = a[ep]
 									if len(eps) > 0:
 										season_diff[season] = eps
+							elif playback:
+								t = list(set(a).intersection(set(b)))
+								if len(t) > 0:
+									eps = {}
+									for ep in t:
+										eps[ep] = a[ep]
+										if 'episodeid' in season_col2[season][ep]['ids']:
+											if 'ids' in eps:
+												eps[ep]['ids']['episodeid'] = season_col2[season][ep]['ids']['episodeid']
+											else:
+												eps[ep]['ids'] = {'episodeid': season_col2[season][ep]['ids']['episodeid']}
+										eps[ep]['runtime'] = season_col2[season][ep]['runtime']
+									season_diff[season] = eps
 						else:
 							if not restrict:
 								if len(a) > 0:
@@ -835,7 +848,7 @@ class Sync():
 			progress.create("%s %s" % (utilities.getString(1400), utilities.getString(1406)), line1=" ", line2=" ", line3=" ")
 
 		if utilities.getSettingAsBool('trakt_episode_playback'):
-			kodiShowsCollected = self.__kodiLoadShows()
+			kodiShowsCollected, kodiShowsWatched = self.__kodiLoadShows()
 			if not isinstance(kodiShowsCollected, list) and not kodiShowsCollected:
 				logger.debug("[Playback Sync] Kodi collected show list is empty, aborting playback Sync.")
 				if self.show_progress and not self.run_silent:
@@ -963,7 +976,7 @@ class Sync():
 			updateKodiKodiShows = copy.deepcopy(kodiShows)
 			logger.debug(updateKodiTraktShows)
 			logger.debug(updateKodiKodiShows)
-			kodiShowsUpadate = self.__compareShows(updateKodiTraktShows, updateKodiKodiShows, watched=True, restrict=True)
+			kodiShowsUpadate = self.__compareShows(updateKodiTraktShows, updateKodiKodiShows, restrict=True, playback=True)
 
 			if len(kodiShowsUpadate['shows']) == 0:
 				self.__updateProgress(98, line1=utilities.getString(1441), line2=utilities.getString(1493))
@@ -979,7 +992,7 @@ class Sync():
 			for show in kodiShowsUpadate['shows']:
 				for season in show['seasons']:
 					for episode in season['episodes']:
-						episodes.append({'episodeid': episode['ids']['episodeid'], 'progress': episode['progress']})
+						episodes.append({'episodeid': episode['ids']['episodeid'], 'progress': episode['progress'], 'runtime': episode['runtime']})
 
 			logger.debug("episodes %s" % episodes)
 			#need to calculate the progress in int from progress in percent from trakt
