@@ -4,7 +4,7 @@ import xbmcaddon
 import math
 import logging
 from trakt import Trakt, ClientError, ServerError
-from utilities import getSetting, findMovieMatchInList, findEpisodeMatchInList, notification, getString
+from utilities import getSetting, findMovieMatchInList, findEpisodeMatchInList, notification, getString, createError
 
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')
@@ -50,19 +50,25 @@ class traktAPI(object):
 
 	def getToken(self):
 		if not self.__username and not self.__password:
-
-			notification('trakt', getString(1106)) #Sync started
+			notification('trakt', getString(1106)) #Username and password error
 		elif not self.__password:
-			notification('trakt', getString(1107)) #Sync started
+			notification('trakt', getString(1107)) #Password error
 		else:
 			# Attempt authentication (retrieve new token)
 			with Trakt.configuration.http(retry=True):
-				auth = Trakt['auth'].login(getSetting('username'), getSetting('password'))
-				if auth:
-					self.__token = auth
-				else:
-					logger.debug("Authentication Failure")
-					notification('trakt', getString(1110))
+				try:
+					auth = Trakt['auth'].login(getSetting('username'), getSetting('password'))
+					if auth:
+						self.__token = auth
+					else:
+						logger.debug("Authentication Failure")
+						notification('trakt', getString(1110))
+				except Exception as ex:
+					message = createError(ex)
+					logger.fatal(message)
+					logger.debug("Cannot connect to server")
+					notification('trakt', getString(1108))
+
 
 
 	def scrobbleEpisode(self, show, episode, percent, status):
@@ -111,26 +117,26 @@ class traktAPI(object):
 
 	def getShowsCollected(self, shows):
 		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
+			with Trakt.configuration.http(retry=True, timeout=90):
 				Trakt['sync/collection'].shows(shows, exceptions=True)
 		return shows
 
 	def getMoviesCollected(self, movies):
 		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
+			with Trakt.configuration.http(retry=True, timeout=90):
 				Trakt['sync/collection'].movies(movies, exceptions=True)
 		return movies
 
 
 	def getShowsWatched(self, shows):
 		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
+			with Trakt.configuration.http(retry=True, timeout=90):
 				Trakt['sync/watched'].shows(shows, exceptions=True)
 		return shows
 
 	def getMoviesWatched(self, movies):
 		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
+			with Trakt.configuration.http(retry=True, timeout=90):
 				Trakt['sync/watched'].movies(movies, exceptions=True)
 		return movies
 

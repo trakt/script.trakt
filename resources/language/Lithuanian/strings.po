@@ -76,14 +76,6 @@ msgctxt "#1042"
 msgid "Scrobble TV show episodes"
 msgstr "Registruoti TV laidos epizodus"
 
-msgctxt "#1046"
-msgid "Send scrobble call on seek"
-msgstr "Siųsti registracijos kreipinį prasukus"
-
-msgctxt "#1047"
-msgid "Send scrobble call on resume"
-msgstr "Siųsti registracijos kreipinį pratęsus"
-
 msgctxt "#1048"
 msgid "Show notification on scrobble"
 msgstr "Rodyti pranešimą registruojant"
@@ -483,6 +475,10 @@ msgstr "Pašalinta epizodų iš Trakt.tv kolekcijos: %i"
 msgctxt "#1550"
 msgid "trakt - Marked as watched"
 msgstr "Trakt.tv - pažymėta kaip peržiūrėta"
+
+msgctxt "#1551"
+msgid "trakt - Failed marking as watched"
+msgstr "Trakt.tv - nepavyko pažymėta kaip peržiūrėta"
 
 msgctxt "#1552"
 msgid "%d episode(s) of '%s'"

@@ -40,6 +40,10 @@ msgctxt "#1320"
 msgid "Fair"
 msgstr "Serè"
 
+msgctxt "#1400"
+msgid "Synchronize"
+msgstr "Sincronitzar"
+
 msgctxt "#1402"
 msgid "Movies"
 msgstr "Pel·lícules"

@@ -54,7 +54,7 @@ msgstr "재생목록 항목 평가"
 
 msgctxt "#1034"
 msgid "Minimum percent watched to display rating dialog"
-msgstr "평가를 하기 위해 시청해야 할 최소 분량(%)"
+msgstr "평가를 위해 시청해야 할 최소 분량(%)"
 
 msgctxt "#1035"
 msgid "Allow re-rating of media"
@@ -146,7 +146,7 @@ msgstr "영화"
 
 msgctxt "#1403"
 msgid "Add new movies to trakt collection"
-msgstr "trakt 컬렉션에 애 영화 추가"
+msgstr "trakt 컬렉션에 새 영화 추가"
 
 msgctxt "#1404"
 msgid "Add watched movies to trakt history"
@@ -170,7 +170,7 @@ msgstr "서비스"
 
 msgctxt "#1411"
 msgid "Sync collection on library update or cleaning"
-msgstr "라이브러리를 업데이트하거나 정리할 때 컬렌션 동기화"
+msgstr "라이브러리를 업데이트하거나 정리할 때 컬렉션 동기화"
 
 msgctxt "#1412"
 msgid "Show notifications"
@@ -258,7 +258,7 @@ msgstr "trakt 에피소드 컬렉션에서 제거할 에피소드 없음"
 
 msgctxt "#1497"
 msgid "%i episode(s) are being removed from your trakt collection"
-msgstr "%i 페이소드를 trakt 컬렉션에서 제거 중"
+msgstr "%i 에피소드를 trakt 컬렉션에서 제거 중"
 
 msgctxt "#1498"
 msgid "%i episode(s) were removed from your trakt collection"

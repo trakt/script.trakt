@@ -28,9 +28,25 @@ msgctxt "#1014"
 msgid "Password"
 msgstr "Palavra-passe"
 
+msgctxt "#1017"
+msgid "Number of Retries"
+msgstr "Número de Tentativas"
+
 msgctxt "#1030"
 msgid "Rating"
 msgstr "Classificação"
+
+msgctxt "#1031"
+msgid "Rate Movie after watching"
+msgstr "Classificar Filme após visualização"
+
+msgctxt "#1032"
+msgid "Rate TV show Episode after watching"
+msgstr "Classificar Episódio após visualização"
+
+msgctxt "#1050"
+msgid "Exclusions"
+msgstr "Exclusões"
 
 msgctxt "#1109"
 msgid "Error"
@@ -39,6 +55,10 @@ msgstr "Erro"
 msgctxt "#1320"
 msgid "Fair"
 msgstr "Calmo"
+
+msgctxt "#1400"
+msgid "Synchronize"
+msgstr "Sincronizar"
 
 msgctxt "#1402"
 msgid "Movies"

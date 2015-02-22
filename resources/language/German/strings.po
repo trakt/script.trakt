@@ -76,14 +76,6 @@ msgctxt "#1042"
 msgid "Scrobble TV show episodes"
 msgstr "Serien Episoden scrobbeln"
 
-msgctxt "#1046"
-msgid "Send scrobble call on seek"
-msgstr "Sende Scrobble beim Vor-/Zurückspulen"
-
-msgctxt "#1047"
-msgid "Send scrobble call on resume"
-msgstr "Sende Scrobble beim fortsetzen"
-
 msgctxt "#1048"
 msgid "Show notification on scrobble"
 msgstr "Zeige Benachrichtigung bei Scrobble"
@@ -134,19 +126,19 @@ msgstr "Falscher Benutzername oder Passwort"
 
 msgctxt "#1313"
 msgid "What Did You Think?"
-msgstr "Deine Meinung?"
+msgstr "Was denkst du?"
 
 msgctxt "#1314"
 msgid "Totally Ninja!"
-msgstr "Total Ninja!"
+msgstr "Ganz großartig!"
 
 msgctxt "#1315"
 msgid "Weak Sauce :("
-msgstr "Schwache Soße :("
+msgstr "Billiger Mist :("
 
 msgctxt "#1316"
 msgid "Terrible"
-msgstr "Fürchterlich"
+msgstr "Furchtbar"
 
 msgctxt "#1317"
 msgid "Bad"
@@ -158,11 +150,11 @@ msgstr "Arm"
 
 msgctxt "#1319"
 msgid "Meh"
-msgstr "Meh"
+msgstr "Naja"
 
 msgctxt "#1320"
 msgid "Fair"
-msgstr "Fair"
+msgstr "Geht so"
 
 msgctxt "#1321"
 msgid "Good"
@@ -170,7 +162,7 @@ msgstr "Gut"
 
 msgctxt "#1322"
 msgid "Great"
-msgstr "Toll"
+msgstr "Großartig"
 
 msgctxt "#1323"
 msgid "Superb"
@@ -483,6 +475,10 @@ msgstr "%i Episode(n) wurden aus deiner trakt Sammlung entfernt"
 msgctxt "#1550"
 msgid "trakt - Marked as watched"
 msgstr "trakt - Als gesehen markiert"
+
+msgctxt "#1551"
+msgid "trakt - Failed marking as watched"
+msgstr "trakt - Fehler beim als gesehen markieren"
 
 msgctxt "#1552"
 msgid "%d episode(s) of '%s'"

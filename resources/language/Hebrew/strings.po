@@ -28,22 +28,462 @@ msgctxt "#1014"
 msgid "Password"
 msgstr "סיסמה"
 
+msgctxt "#1017"
+msgid "Number of Retries"
+msgstr "מספר נסיונות"
+
+msgctxt "#1018"
+msgid "Startup Delay"
+msgstr "השהיית הפעלה"
+
 msgctxt "#1030"
 msgid "Rating"
 msgstr "דירוג"
+
+msgctxt "#1031"
+msgid "Rate Movie after watching"
+msgstr "דרג סרט לאחר צפייה"
+
+msgctxt "#1032"
+msgid "Rate TV show Episode after watching"
+msgstr "דרג פרק סדרה לאחר צפייה"
+
+msgctxt "#1033"
+msgid "Rate each playlist item"
+msgstr "דרג כל פריט רשימת נגינה"
+
+msgctxt "#1034"
+msgid "Minimum percent watched to display rating dialog"
+msgstr "מינימום אחוזי צפייה כדי להציג מסך דירוג"
+
+msgctxt "#1035"
+msgid "Allow re-rating of media"
+msgstr "אפשר דירוג בשנית למדיה"
+
+msgctxt "#1037"
+msgid "Default rating"
+msgstr "דירוג ברירת מחדל"
+
+msgctxt "#1040"
+msgid "Scrobbling"
+msgstr "מבצע Scrobble"
+
+msgctxt "#1041"
+msgid "Scrobble movies"
+msgstr "Scrobble סרטים"
+
+msgctxt "#1042"
+msgid "Scrobble TV show episodes"
+msgstr "Scrobble פרקי סדרות"
+
+msgctxt "#1048"
+msgid "Show notification on scrobble"
+msgstr "הצג התראה בעת ביצוע Scrobble"
+
+msgctxt "#1049"
+msgid "trakt - Scrobbled successfully"
+msgstr "trakt - Scrobble הצליח"
+
+msgctxt "#1050"
+msgid "Exclusions"
+msgstr "הכללות"
+
+msgctxt "#1051"
+msgid "Exclude Live TV"
+msgstr "אל תכלול טלוויזיה חיה"
+
+msgctxt "#1052"
+msgid "Exclude HTTP sources"
+msgstr "אל תכלול מקורות HTTP"
+
+msgctxt "#1053"
+msgid "Exclude path"
+msgstr "אל תכלול נתיב"
+
+msgctxt "#1054"
+msgid "Folder's path (including subfolders)"
+msgstr "נתיב תיקיה (כולל תת-תיקיות)"
+
+msgctxt "#1106"
+msgid "Enter your Username and Password in settings"
+msgstr "הזן את שם המשתמש וסיסמה שלך בהגדרות"
+
+msgctxt "#1107"
+msgid "Enter your Password in settings"
+msgstr "הזן את הסיסמה בהגדרות"
+
+msgctxt "#1108"
+msgid "Can not connect to trakt"
+msgstr "אין אפשרות להתחבר אל trakt"
 
 msgctxt "#1109"
 msgid "Error"
 msgstr "שגיאה"
 
+msgctxt "#1110"
+msgid "Incorrect username or password"
+msgstr "שם משתמש או סיסמה שגויים"
+
+msgctxt "#1313"
+msgid "What Did You Think?"
+msgstr "מה חשבת?"
+
+msgctxt "#1314"
+msgid "Totally Ninja!"
+msgstr "מטורף לגמרי!"
+
+msgctxt "#1315"
+msgid "Weak Sauce :("
+msgstr "על הפנים :("
+
+msgctxt "#1316"
+msgid "Terrible"
+msgstr "נוראי"
+
+msgctxt "#1317"
+msgid "Bad"
+msgstr "רע"
+
+msgctxt "#1318"
+msgid "Poor"
+msgstr "חלש"
+
+msgctxt "#1319"
+msgid "Meh"
+msgstr "נחמד"
+
 msgctxt "#1320"
 msgid "Fair"
-msgstr "קלילה"
+msgstr "בסדר"
+
+msgctxt "#1321"
+msgid "Good"
+msgstr "טוב"
+
+msgctxt "#1322"
+msgid "Great"
+msgstr "מעולה"
+
+msgctxt "#1323"
+msgid "Superb"
+msgstr "סוף הדרך"
+
+msgctxt "#1325"
+msgid "Unrate this movie"
+msgstr "הסר דירוג מסרט זה"
+
+msgctxt "#1326"
+msgid "Unrate this show"
+msgstr "הסר דירוג מסדרה זו"
+
+msgctxt "#1327"
+msgid "Unrate this episode"
+msgstr "הסר דירוג מפרק זה"
+
+msgctxt "#1350"
+msgid "trakt - Rating submitted successfully"
+msgstr "trakt - דירוג נשלח בהצלחה"
+
+msgctxt "#1351"
+msgid "trakt - Already rated"
+msgstr "trakt - כבר דורג"
+
+msgctxt "#1352"
+msgid "trakt - Unrated successfully"
+msgstr "trakt - הסרת דירוג הצליחה"
+
+msgctxt "#1353"
+msgid "trakt - Already has the same rating"
+msgstr "trakt - כבר יש את אותו דירוג"
+
+msgctxt "#1354"
+msgid "trakt - Problem submitting rating"
+msgstr "trakt - בעיה בשליחת דירוג"
+
+msgctxt "#1400"
+msgid "Synchronize"
+msgstr "סנכרון"
 
 msgctxt "#1402"
 msgid "Movies"
 msgstr "סרטים"
 
+msgctxt "#1403"
+msgid "Add new movies to trakt collection"
+msgstr "הוסף סרטים חדשים לאוסף של trakt"
+
+msgctxt "#1404"
+msgid "Add watched movies to trakt history"
+msgstr "הוסף סרטים שנצפו להיסטוריה של trakt"
+
+msgctxt "#1405"
+msgid "Mark movies from trakt history as watched in Kodi"
+msgstr "סמן סרטים מהיסטוריה של trakt כנצפו ב-Kodi"
+
+msgctxt "#1406"
+msgid "TV Episodes"
+msgstr "פרקי סדרה"
+
+msgctxt "#1407"
+msgid "Add new TV episodes to trakt collection"
+msgstr "הוסף פרקי סדרה חדשים לאוסף של trakt"
+
+msgctxt "#1408"
+msgid "Add watched TV episodes to trakt history"
+msgstr "הוסף פרקי סדרה שנצפו להיסטוריה של trakt"
+
+msgctxt "#1409"
+msgid "Mark TV episodes from trakt history as watched in Kodi"
+msgstr "סמן פרקי סדרה מהיסטוריה של trakt כנצפו ב-Kodi"
+
 msgctxt "#1410"
 msgid "Service"
 msgstr "שירות"
+
+msgctxt "#1411"
+msgid "Sync collection on library update or cleaning"
+msgstr "סנכרן אוסף בעדכון ספריה או ניקוי"
+
+msgctxt "#1412"
+msgid "Show notifications"
+msgstr "הצג התראות"
+
+msgctxt "#1413"
+msgid "Remove deleted movies from trakt collection"
+msgstr "הסר סרטים שנמחקו מהאוסף של trakt"
+
+msgctxt "#1414"
+msgid "Remove deleted TV episodes from trakt collection"
+msgstr "הסר פרקי סדרה שנמחקו מהאוסף של trakt"
+
+msgctxt "#1416"
+msgid "Show marked as watched notification"
+msgstr "הצג התראת סומנו כנצפו"
+
+msgctxt "#1417"
+msgid "Hide notifications during playback"
+msgstr "הסתר התראות בזמן צפייה"
+
+msgctxt "#1420"
+msgid "Sync started"
+msgstr "סנכרון התחיל"
+
+msgctxt "#1421"
+msgid "Sync complete"
+msgstr "סנכרון הסתיים"
+
+msgctxt "#1426"
+msgid "%i movie(s) will be added to trakt collection"
+msgstr "%i סרט(ים) יתווספו לאוסף של trakt"
+
+msgctxt "#1428"
+msgid "%i movie playcount(s) will be updated on trakt"
+msgstr "%i מספר(י) ניגון סרט יועדכנו ב-trakt"
+
+msgctxt "#1430"
+msgid "%i movie(s) playcount will be updated in Kodi"
+msgstr "%i מספר ניגון סרט(ים) יועדכנו ב-trakt"
+
+msgctxt "#1431"
+msgid "Movie Sync Complete"
+msgstr "סנכרון סרט הסתיים"
+
+msgctxt "#1434"
+msgid "Going to add %i show(s) to trakt collection"
+msgstr "מתכונן להוסיף %i סדרה(ות) לאוסף של trakt"
+
+msgctxt "#1435"
+msgid "Checking for episodes missing from trakt collection"
+msgstr "בודק פרקים שחסרים מהאוסף של trakt"
+
+msgctxt "#1436"
+msgid "%i of %i show(s) have episodes added to trakt collection"
+msgstr "%i מתוך %i סדרה(ות) יש פרקים שמתווספים לאוסף של trakt"
+
+msgctxt "#1437"
+msgid "Going to update %i show(s) missing watched status"
+msgstr "מתכונן לעדכן %i סדרה(ות) סטטוס צפייה שחסרים"
+
+msgctxt "#1438"
+msgid "Checking watched episodes on trakt"
+msgstr "בודק פרקים שנצפו ב- trakt"
+
+msgctxt "#1439"
+msgid "%i show(s) had missing watched status"
+msgstr "ל- %i סדרה(ות) יש סטטוס צפייה שחסרים"
+
+msgctxt "#1440"
+msgid "%i episodes are being updated"
+msgstr "%i פרקים מתעדכנים כעת"
+
+msgctxt "#1441"
+msgid "Checking watched episodes on Kodi"
+msgstr "בודק פרקים שנצפו ב- Kodi"
+
+msgctxt "#1442"
+msgid "Episode Sync Complete"
+msgstr "סנכרון פרק הסתיים"
+
+msgctxt "#1444"
+msgid "%i movie(s) will be removed from trakt collection"
+msgstr "%i סרט(ים) יוסרו מהאוסף של trakt"
+
+msgctxt "#1445"
+msgid "Cleaning trakt TV show collection"
+msgstr "מנקה את האוסף סדרות של trakt"
+
+msgctxt "#1447"
+msgid "episodes are being removed"
+msgstr "פרקים נמחקים"
+
+msgctxt "#1460"
+msgid "Loading movies from Kodi"
+msgstr "טוען סרטים מ-Kodi"
+
+msgctxt "#1461"
+msgid "Movies loaded from Kodi"
+msgstr "סרטים נטענו מ-Kodi"
+
+msgctxt "#1462"
+msgid "Retrieving movie collection from trakt"
+msgstr "מקבל אוסף סרטים מ-trakt"
+
+msgctxt "#1463"
+msgid "Retrieving watched movies from trakt"
+msgstr "מקבל סרטים שנצפו נ-trakt"
+
+msgctxt "#1466"
+msgid "Retrieved movie data from trakt"
+msgstr "התקבלו נתוני סרט מ-trakt"
+
+msgctxt "#1467"
+msgid "trakt movie collection is up to date, no movies to add"
+msgstr "אוסף הסרטים של trakt מעודכן, אין סרטים להוסיף"
+
+msgctxt "#1468"
+msgid "%i movie(s) were added to your trakt collection"
+msgstr "%i סרט(ים) התווספו לאוסף trakt שלך"
+
+msgctxt "#1469"
+msgid "trakt movie playcounts are up to date"
+msgstr "מספרי ניגון סרט מעודכנים ב-trakt"
+
+msgctxt "#1470"
+msgid "Playcounts updated for %i movie(s) on trakt"
+msgstr "מספרי ניגון עודכנו עבור %i סרט(ים) ב-trakt"
+
+msgctxt "#1471"
+msgid "Kodi movie playcounts are up to date"
+msgstr "מספרי ניגון סרט מעודכנים ב-Kodi"
+
+msgctxt "#1472"
+msgid "Updating %i of %i movie playcount(s) in Kodi"
+msgstr "מעדכן %i מתוך %i מספר(י) ניגון סרט ב-Kodi"
+
+msgctxt "#1473"
+msgid "Playcounts updated for %i movie(s) in Kodi"
+msgstr "מספרי ניגון עודכנו עבור %i סרט(ים) ב-Kodi"
+
+msgctxt "#1474"
+msgid "trakt movie collection is up to date, no movies removed"
+msgstr "אוסף הסרטים של trakt מעודכן, אין סרטים להסיר"
+
+msgctxt "#1475"
+msgid "%i movie(s) were removed from your trakt collection"
+msgstr "%i סרט(ים) הוסרו מהאוסף trakt שלך"
+
+msgctxt "#1478"
+msgid "Updating %i of %i movie playcount(s) on trakt"
+msgstr "מעדכן %i מתוך %i מספר(י) ניגון סרט ב-trakt"
+
+msgctxt "#1480"
+msgid "Loading episode data from Kodi"
+msgstr "טוען נתוני פרק מ-Kodi"
+
+msgctxt "#1481"
+msgid "Loading shows from Kodi"
+msgstr "טוען סדרות Kodi"
+
+msgctxt "#1482"
+msgid "Shows loaded from Kodi"
+msgstr "סדרות נטענו מ-Kodi"
+
+msgctxt "#1483"
+msgid "Parsing %i of %i episode data from Kodi"
+msgstr "מנתח %i מתוך %i נתוני פרק מ-Kodi"
+
+msgctxt "#1484"
+msgid "Loaded episode data from Kodi"
+msgstr "נטענו נתוני פרק מ-Kodi"
+
+msgctxt "#1485"
+msgid "Loading episode data from trakt"
+msgstr "טוען נתוני פרק מ-trakt"
+
+msgctxt "#1486"
+msgid "Retrieving episode collection from trakt"
+msgstr "מקבל אוסף פרקים מ-trakt"
+
+msgctxt "#1487"
+msgid "Retrieving watched episodes from trakt"
+msgstr "מקבל פרקים שנצפו מ-trakt"
+
+msgctxt "#1488"
+msgid "Parsing episode data %i of %i from trakt"
+msgstr "מנתח %i מתוך %i נתוני פרק מ-trakt"
+
+msgctxt "#1489"
+msgid "Retrieved episode data from trakt"
+msgstr "התקבל נתוני פרק מ-trakt"
+
+msgctxt "#1490"
+msgid "trakt episode collection is up to date, no episodes to add"
+msgstr "אוסף הפרקים של trakt מעודכן, אין סרטים להוסיף"
+
+msgctxt "#1491"
+msgid "%i episode(s) were added to your trakt collection"
+msgstr "%i פרק(ים) התווספו לאוסף trakt שלך"
+
+msgctxt "#1492"
+msgid "trakt episode playcounts are up to date"
+msgstr "מספרי ניגון פרק מעודכנים ב-trakt"
+
+msgctxt "#1493"
+msgid "Kodi episode playcounts are up to date"
+msgstr "מספרי ניגון פרק מעודכנים ב-Kodi"
+
+msgctxt "#1494"
+msgid "Updating %i of %i episode playcount(s) in Kodi"
+msgstr "מעדכן %i מתוך %i מספר(י) ניגון פרק ב-Kodi"
+
+msgctxt "#1495"
+msgid "Playcounts updated for %i show(s) in Kodi"
+msgstr "מספרי ניגון עודכנו עבור %i סדרה(ות) ב-Kodi"
+
+msgctxt "#1496"
+msgid "trakt episode collection is clean, no episodes to remove"
+msgstr "אוסף הפרקים של trakt מעודכן, אין סרטים להסיר"
+
+msgctxt "#1497"
+msgid "%i episode(s) are being removed from your trakt collection"
+msgstr "%i פרק(ים) נמחקים כעת מהאוסף trakt שלך"
+
+msgctxt "#1498"
+msgid "%i episode(s) were removed from your trakt collection"
+msgstr "%i פרק(ים) הוסרו מהאוסף trakt שלך"
+
+msgctxt "#1550"
+msgid "trakt - Marked as watched"
+msgstr "trakt - סומנו כנצפו"
+
+msgctxt "#1551"
+msgid "trakt - Failed marking as watched"
+msgstr "trakt - נכשל בסימון כנצפו"
+
+msgctxt "#1552"
+msgid "%d episode(s) of '%s'"
+msgstr "%d פרק(ים) מתוך '%s'"
+
+msgctxt "#1701"
+msgid "Enable debug mode"
+msgstr "הפעל מצב ניפוי שגיאות"

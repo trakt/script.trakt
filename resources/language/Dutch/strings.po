@@ -76,14 +76,6 @@ msgctxt "#1042"
 msgid "Scrobble TV show episodes"
 msgstr "Scrobble TV-serie afleveringen"
 
-msgctxt "#1046"
-msgid "Send scrobble call on seek"
-msgstr "Stuur scrobble verzoek op oproep"
-
-msgctxt "#1047"
-msgid "Send scrobble call on resume"
-msgstr "Stuur scrobble verzoek bij hervatten"
-
 msgctxt "#1048"
 msgid "Show notification on scrobble"
 msgstr "Toon notificatie tijdens schrobble"
@@ -483,6 +475,10 @@ msgstr "%i aflevering(en) werden verwijderd van jouw trakt collectie"
 msgctxt "#1550"
 msgid "trakt - Marked as watched"
 msgstr "Trakt - Markeert als bekeken"
+
+msgctxt "#1551"
+msgid "trakt - Failed marking as watched"
+msgstr "Trakt - niet gelukt te markeren als bekeken"
 
 msgctxt "#1552"
 msgid "%d episode(s) of '%s'"
