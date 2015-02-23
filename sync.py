@@ -425,7 +425,20 @@ class Sync():
 						if season in season_col2:
 							b = season_col2[season]
 							diff = list(set(a).difference(set(b)))
-							if len(diff) > 0:
+							if playback:
+								t = list(set(a).intersection(set(b)))
+								if len(t) > 0:
+									eps = {}
+									for ep in t:
+										eps[ep] = a[ep]
+										if 'episodeid' in season_col2[season][ep]['ids']:
+											if 'ids' in eps:
+												eps[ep]['ids']['episodeid'] = season_col2[season][ep]['ids']['episodeid']
+											else:
+												eps[ep]['ids'] = {'episodeid': season_col2[season][ep]['ids']['episodeid']}
+										eps[ep]['runtime'] = season_col2[season][ep]['runtime']
+									season_diff[season] = eps
+							elif len(diff) > 0:
 								if restrict:
 									# get all the episodes that we have in Kodi, watched or not - update kodi
 									collectedShow = utilities.findMediaObject(show_col1, collected['shows'])
@@ -448,19 +461,6 @@ class Sync():
 										eps[ep] = a[ep]
 									if len(eps) > 0:
 										season_diff[season] = eps
-							elif playback:
-								t = list(set(a).intersection(set(b)))
-								if len(t) > 0:
-									eps = {}
-									for ep in t:
-										eps[ep] = a[ep]
-										if 'episodeid' in season_col2[season][ep]['ids']:
-											if 'ids' in eps:
-												eps[ep]['ids']['episodeid'] = season_col2[season][ep]['ids']['episodeid']
-											else:
-												eps[ep]['ids'] = {'episodeid': season_col2[season][ep]['ids']['episodeid']}
-										eps[ep]['runtime'] = season_col2[season][ep]['runtime']
-									season_diff[season] = eps
 						else:
 							if not restrict:
 								if len(a) > 0:
