@@ -610,7 +610,7 @@ msgctxt "#1511"
 msgid "Playbacks updated for %i show(s) in Kodi"
 msgstr ""
 
-#empty strings from id 1505 to 1549
+#empty strings from id 1512 to 1549
 #Sync - manual mark watched
 
 msgctxt "#1550"
