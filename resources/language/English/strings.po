@@ -558,7 +558,59 @@ msgctxt "#1498"
 msgid "%i episode(s) were removed from your trakt collection"
 msgstr ""
 
-#empty strings from id 1499 to 1549
+msgctxt "#1499"
+msgid "Retrieving episode playback progress from trakt"
+msgstr ""
+
+msgctxt "#1500"
+msgid "Parsing episode playback progress %i of %i from trakt"
+msgstr ""
+
+msgctxt "#1501"
+msgid "Retrieved episode playback progress from trakt"
+msgstr ""
+
+msgctxt "#1502"
+msgid "Retrieving movie playback progress from trakt"
+msgstr ""
+
+msgctxt "#1503"
+msgid "Parsing movie playback progress %i of %i from trakt"
+msgstr ""
+
+msgctxt "#1504"
+msgid "Retrieved movie playback progress from trakt"
+msgstr ""
+
+msgctxt "#1505"
+msgid "Kodi movie playbacks are up to date"
+msgstr ""
+
+msgctxt "#1506"
+msgid "%i movie playbacks will be updated in Kodi"
+msgstr ""
+
+msgctxt "#1507"
+msgid "Updating %i of %i movie playbacks in Kodi"
+msgstr ""
+
+msgctxt "#1508"
+msgid "Playbacks updated for %i movie(s) in Kodi"
+msgstr ""
+
+msgctxt "#1509"
+msgid "Kodi episode playbacks are up to date"
+msgstr ""
+
+msgctxt "#1510"
+msgid "Updating %i of %i episode playbacks in Kodi"
+msgstr ""
+
+msgctxt "#1511"
+msgid "Playbacks updated for %i show(s) in Kodi"
+msgstr ""
+
+#empty strings from id 1505 to 1549
 #Sync - manual mark watched
 
 msgctxt "#1550"
