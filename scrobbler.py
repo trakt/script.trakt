@@ -262,5 +262,5 @@ class Scrobbler():
 		
 		if utilities.getSettingAsBool("scrobble_notification"):
 			s = utilities.getFormattedItemName(self.curVideo['type'], info[self.curVideo['type']])
-			utilities.notification(utilities.getString(1049), s)
+			utilities.notification(utilities.getString(32015), s)
 

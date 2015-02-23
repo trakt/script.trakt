@@ -16,26 +16,26 @@ msgstr ""
 "Language: hi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "सामान्य"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "उपयोगकर्ता नाम"
 
-msgctxt "#1030"
+msgctxt "#32004"
 msgid "Rating"
 msgstr "रेटिंग"
 
-msgctxt "#1109"
+msgctxt "#32024"
 msgid "Error"
 msgstr "एर्रोर"
 
-msgctxt "#1320"
+msgctxt "#32033"
 msgid "Fair"
 msgstr "निष्पक्ष"
 
-msgctxt "#1402"
+msgctxt "#32046"
 msgid "Movies"
 msgstr "सिनेमा"

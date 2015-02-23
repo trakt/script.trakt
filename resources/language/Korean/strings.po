@@ -16,15 +16,15 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "일반"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "사용자명"
 
-msgctxt "#1014"
+msgctxt "#32002"
 msgid "Password"
 msgstr "비밀번호"
 
@@ -32,242 +32,242 @@ msgctxt "#1017"
 msgid "Number of Retries"
 msgstr "다시 시도 횟수"
 
-msgctxt "#1018"
+msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "시작 지연"
 
-msgctxt "#1030"
+msgctxt "#32004"
 msgid "Rating"
 msgstr "평점"
 
-msgctxt "#1031"
+msgctxt "#32005"
 msgid "Rate Movie after watching"
 msgstr "시청 후 영화 평가"
 
-msgctxt "#1032"
+msgctxt "#32006"
 msgid "Rate TV show Episode after watching"
 msgstr "시청 후 TV 쇼 에피소드 평가"
 
-msgctxt "#1033"
+msgctxt "#32007"
 msgid "Rate each playlist item"
 msgstr "재생목록 항목 평가"
 
-msgctxt "#1034"
+msgctxt "#32008"
 msgid "Minimum percent watched to display rating dialog"
 msgstr "평가를 위해 시청해야 할 최소 분량(%)"
 
-msgctxt "#1035"
+msgctxt "#32009"
 msgid "Allow re-rating of media"
 msgstr "다시 평가하기 허용"
 
-msgctxt "#1037"
+msgctxt "#32010"
 msgid "Default rating"
 msgstr "기본 평점"
 
-msgctxt "#1040"
+msgctxt "#32011"
 msgid "Scrobbling"
 msgstr "시청 여부 전송"
 
-msgctxt "#1041"
+msgctxt "#32012"
 msgid "Scrobble movies"
 msgstr "영화 시청 여부 전송"
 
-msgctxt "#1042"
+msgctxt "#32013"
 msgid "Scrobble TV show episodes"
 msgstr "TV 쇼 시청 여부 전송"
 
-msgctxt "#1049"
+msgctxt "#32015"
 msgid "trakt - Scrobbled successfully"
 msgstr "trakt - 전송 성공"
 
-msgctxt "#1050"
+msgctxt "#32016"
 msgid "Exclusions"
 msgstr "제외"
 
-msgctxt "#1051"
+msgctxt "#32017"
 msgid "Exclude Live TV"
 msgstr "TV 시청 제외"
 
-msgctxt "#1052"
+msgctxt "#32018"
 msgid "Exclude HTTP sources"
 msgstr "HTTP 소스 제외"
 
-msgctxt "#1053"
+msgctxt "#32019"
 msgid "Exclude path"
 msgstr "특정 경로 제외"
 
-msgctxt "#1054"
+msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "폴더 경로 (하위 폴더 포함됨)"
 
-msgctxt "#1106"
+msgctxt "#32021"
 msgid "Enter your Username and Password in settings"
 msgstr "설정에서 사용자 이름과 비밀번호를 입력하세요"
 
-msgctxt "#1107"
+msgctxt "#32022"
 msgid "Enter your Password in settings"
 msgstr "설정에서 비밀번호를 입력하세요"
 
-msgctxt "#1108"
+msgctxt "#32023"
 msgid "Can not connect to trakt"
 msgstr "trakt에 접속할 수 없음"
 
-msgctxt "#1109"
+msgctxt "#32024"
 msgid "Error"
 msgstr "오류"
 
-msgctxt "#1110"
+msgctxt "#32025"
 msgid "Incorrect username or password"
 msgstr "사용자 이름 또는 비밀번호가 일치하지 않음"
 
-msgctxt "#1320"
+msgctxt "#32033"
 msgid "Fair"
 msgstr "맑음"
 
-msgctxt "#1325"
+msgctxt "#32037"
 msgid "Unrate this movie"
 msgstr "이 영화를 평가하지 않음"
 
-msgctxt "#1326"
+msgctxt "#32038"
 msgid "Unrate this show"
 msgstr "이 TV 쇼를 평가하지 않음"
 
-msgctxt "#1327"
+msgctxt "#32039"
 msgid "Unrate this episode"
 msgstr "이 에피소드를 평가하지 않음"
 
-msgctxt "#1400"
+msgctxt "#32045"
 msgid "Synchronize"
 msgstr "동기화"
 
-msgctxt "#1402"
+msgctxt "#32046"
 msgid "Movies"
 msgstr "영화"
 
-msgctxt "#1403"
+msgctxt "#32047"
 msgid "Add new movies to trakt collection"
 msgstr "trakt 컬렉션에 새 영화 추가"
 
-msgctxt "#1404"
+msgctxt "#32048"
 msgid "Add watched movies to trakt history"
 msgstr "trakt 이력에 시청한 영화 추가"
 
-msgctxt "#1406"
+msgctxt "#32050"
 msgid "TV Episodes"
 msgstr "TV 에피소드"
 
-msgctxt "#1407"
+msgctxt "#32051"
 msgid "Add new TV episodes to trakt collection"
 msgstr "trakt 컬렉션에 새 TV 에피소드 추가"
 
-msgctxt "#1408"
+msgctxt "#32052"
 msgid "Add watched TV episodes to trakt history"
 msgstr "trakt 이력에 시청한 TV 에피소드 추가"
 
-msgctxt "#1410"
+msgctxt "#32054"
 msgid "Service"
 msgstr "서비스"
 
-msgctxt "#1411"
+msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "라이브러리를 업데이트하거나 정리할 때 컬렉션 동기화"
 
-msgctxt "#1412"
+msgctxt "#32056"
 msgid "Show notifications"
 msgstr "알림 보기"
 
-msgctxt "#1413"
+msgctxt "#32057"
 msgid "Remove deleted movies from trakt collection"
 msgstr "삭제한 영화를 trakt 컬렉션에서 지우기"
 
-msgctxt "#1414"
+msgctxt "#32058"
 msgid "Remove deleted TV episodes from trakt collection"
 msgstr "삭제한 TV 에피소드를 trakt 컬렉션에서 지우기"
 
-msgctxt "#1420"
+msgctxt "#32061"
 msgid "Sync started"
 msgstr "동기화 시작됨"
 
-msgctxt "#1421"
+msgctxt "#32062"
 msgid "Sync complete"
 msgstr "동기화 완료"
 
-msgctxt "#1426"
+msgctxt "#32063"
 msgid "%i movie(s) will be added to trakt collection"
 msgstr "%i 영화를 trakt 컬렉션에 추가합니다"
 
-msgctxt "#1428"
+msgctxt "#32064"
 msgid "%i movie playcount(s) will be updated on trakt"
 msgstr "%i 영화의 재생 횟수를 trakt에 업데이트합니다"
 
-msgctxt "#1430"
+msgctxt "#32065"
 msgid "%i movie(s) playcount will be updated in Kodi"
 msgstr "%i 영화의 재생 횟수를 Kodi에 업데이트 합니다"
 
-msgctxt "#1431"
+msgctxt "#32066"
 msgid "Movie Sync Complete"
 msgstr "영화 동기화 완료"
 
-msgctxt "#1435"
+msgctxt "#32068"
 msgid "Checking for episodes missing from trakt collection"
 msgstr "trakt 컬렉션에서 누락된 에피소드 확인 중 "
 
-msgctxt "#1438"
+msgctxt "#32071"
 msgid "Checking watched episodes on trakt"
 msgstr "trakt의 시청한 에피소드 확인 중"
 
-msgctxt "#1441"
+msgctxt "#32074"
 msgid "Checking watched episodes on Kodi"
 msgstr "Kodi의 시청한 에피소드 확인 중"
 
-msgctxt "#1442"
+msgctxt "#32075"
 msgid "Episode Sync Complete"
 msgstr "에피소드 동기화 완료"
 
-msgctxt "#1444"
+msgctxt "#32076"
 msgid "%i movie(s) will be removed from trakt collection"
 msgstr "%i 영화를 trakt 컬렉션에서 제거합니다"
 
-msgctxt "#1445"
+msgctxt "#32077"
 msgid "Cleaning trakt TV show collection"
 msgstr "trakt TV 쇼 컬렉션 정리 중"
 
-msgctxt "#1460"
+msgctxt "#32079"
 msgid "Loading movies from Kodi"
 msgstr "Kodi에서 영화 불러오는 중"
 
-msgctxt "#1462"
+msgctxt "#32081"
 msgid "Retrieving movie collection from trakt"
 msgstr "trakt에서 영화 컬렉션 가져오는 중"
 
-msgctxt "#1463"
+msgctxt "#32082"
 msgid "Retrieving watched movies from trakt"
 msgstr "trakt에서 시청한 영화 가져오는 중"
 
-msgctxt "#1494"
+msgctxt "#32108"
 msgid "Updating %i of %i episode playcount(s) in Kodi"
 msgstr "Kodi의 %i / %i 에피소드 재생횟수 업데이트 중"
 
-msgctxt "#1495"
+msgctxt "#32109"
 msgid "Playcounts updated for %i show(s) in Kodi"
 msgstr "Kodi의 %i TV 쇼 재생횟수가 업데이트 됨"
 
-msgctxt "#1496"
+msgctxt "#32110"
 msgid "trakt episode collection is clean, no episodes to remove"
 msgstr "trakt 에피소드 컬렉션에서 제거할 에피소드 없음"
 
-msgctxt "#1497"
+msgctxt "#32111"
 msgid "%i episode(s) are being removed from your trakt collection"
 msgstr "%i 에피소드를 trakt 컬렉션에서 제거 중"
 
-msgctxt "#1498"
+msgctxt "#32112"
 msgid "%i episode(s) were removed from your trakt collection"
 msgstr "%i 에피소드를 trakt 컬렉션에서 제거하였습니다"
 
-msgctxt "#1550"
+msgctxt "#32113"
 msgid "trakt - Marked as watched"
 msgstr "trakt - 시청한 상태로 기록됨"
 
-msgctxt "#1701"
+msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "디버그 모드 사용"

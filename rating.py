@@ -64,17 +64,17 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 					logger.debug("Rating for '%s' is being set to '%d' manually." % (s, rating))
 					__rateOnTrakt(rating, media_type, summary_info)
 				else:
-					utils.notification(utils.getString(1353), s)
+					utils.notification(utils.getString(32043), s)
 					logger.debug("'%s' already has a rating of '%d'." % (s, rating))
 			else:
-				utils.notification(utils.getString(1351), s)
+				utils.notification(utils.getString(32041), s)
 				logger.debug("'%s' is already rated." % s)
 		return
 
 	if summary_info['user']['ratings'] and summary_info['user']['ratings']['rating']:
 		if not rerate:
 			logger.debug("'%s' has already been rated." % s)
-			utils.notification(utils.getString(1351), s)
+			utils.notification(utils.getString(32041), s)
 			return
 		else:
 			logger.debug("'%s' is being re-rated." % s)
@@ -153,11 +153,11 @@ def __rateOnTrakt(rating, media_type, media, unrate=False):
 		if 'not_found' in data and not data['not_found']['movies'] and not data['not_found']['episodes'] and not data['not_found']['shows']:
 
 			if not unrate:
-				utils.notification(utils.getString(1350), s)
+				utils.notification(utils.getString(32040), s)
 			else:
-				utils.notification(utils.getString(1352), s)
+				utils.notification(utils.getString(32042), s)
 		else:
-			utils.notification(utils.getString(1354), s)
+			utils.notification(utils.getString(32044), s)
 
 class RatingDialog(xbmcgui.WindowXMLDialog):
 	buttons = {
@@ -174,16 +174,16 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 	}
 
 	focus_labels = {
-		11030: 1315,
-		11031: 1316,
-		11032: 1317,
-		11033: 1318,
-		11034: 1319,
-		11035: 1320,
-		11036: 1321,
-		11037: 1322,
-		11038: 1323,
-		11039: 1314
+		11030: 32028,
+		11031: 32029,
+		11032: 32030,
+		11033: 32031,
+		11034: 32032,
+		11035: 32033,
+		11036: 32034,
+		11037: 32035,
+		11038: 32036,
+		11039: 32027
 	}
 
 	def __init__(self, xmlFile, resourcePath, forceFallback=False, media_type=None, media=None, rerate=False):
@@ -214,11 +214,11 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 			if self.rerate:
 				if self.media['user']['ratings'] and self.media['user']['ratings']['rating'] == self.buttons[controlID]:
 					if utils.isMovie(self.media_type):
-						s = utils.getString(1325)
+						s = utils.getString(32037)
 					elif utils.isShow(self.media_type):
-						s = utils.getString(1326)
+						s = utils.getString(32038)
 					elif utils.isEpisode(self.media_type):
-						s = utils.getString(1327)
+						s = utils.getString(32039)
 					else:
 						pass
 

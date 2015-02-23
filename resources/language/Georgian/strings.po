@@ -16,14 +16,14 @@ msgstr ""
 "Language: ka\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "მთავარი"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "მომხმარებელი"
 
-msgctxt "#1014"
+msgctxt "#32002"
 msgid "Password"
 msgstr "პაროლი"

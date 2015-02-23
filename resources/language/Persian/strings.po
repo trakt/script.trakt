@@ -16,14 +16,14 @@ msgstr ""
 "Language: fa\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "عمومی"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "نام کاربری"
 
-msgctxt "#1014"
+msgctxt "#32002"
 msgid "Password"
 msgstr "کلمه عبور"
