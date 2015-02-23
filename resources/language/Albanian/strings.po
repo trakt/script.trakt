@@ -16,30 +16,30 @@ msgstr ""
 "Language: sq\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "I përgjithsëm"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "Emër-kalues"
 
-msgctxt "#1014"
+msgctxt "#32002"
 msgid "Password"
 msgstr "Fjalkalim"
 
-msgctxt "#1030"
+msgctxt "#32004"
 msgid "Rating"
 msgstr "Vlerësimi"
 
-msgctxt "#1109"
+msgctxt "#32024"
 msgid "Error"
 msgstr "Gabim"
 
-msgctxt "#1320"
+msgctxt "#32033"
 msgid "Fair"
 msgstr "Bukur"
 
-msgctxt "#1402"
+msgctxt "#32046"
 msgid "Movies"
 msgstr "Filma"

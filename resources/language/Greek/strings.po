@@ -16,34 +16,34 @@ msgstr ""
 "Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "Γενικά"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "Όνομα χρήστη"
 
-msgctxt "#1014"
+msgctxt "#32002"
 msgid "Password"
 msgstr "Κωδικός πρόσβασης"
 
-msgctxt "#1030"
+msgctxt "#32004"
 msgid "Rating"
 msgstr "Καταλληλότητα"
 
-msgctxt "#1109"
+msgctxt "#32024"
 msgid "Error"
 msgstr "Σφάλμα"
 
-msgctxt "#1320"
+msgctxt "#32033"
 msgid "Fair"
 msgstr "Ήπιος"
 
-msgctxt "#1402"
+msgctxt "#32046"
 msgid "Movies"
 msgstr "Ταινίες"
 
-msgctxt "#1410"
+msgctxt "#32054"
 msgid "Service"
 msgstr "Υπηρεσία"

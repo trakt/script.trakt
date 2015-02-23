@@ -181,9 +181,9 @@ class traktService:
 					result = globals.traktapi.updateSeenMovie(params)
 					if result:
 						if markedNotification:
-							utilities.notification(utilities.getString(1550), s)
+							utilities.notification(utilities.getString(32113), s)
 					else:
-						utilities.notification(utilities.getString(1551), s)
+						utilities.notification(utilities.getString(32114), s)
 
 					
 		elif utilities.isEpisode(media_type):
@@ -201,9 +201,9 @@ class traktService:
 					result = globals.traktapi.updateSeenEpisode(params)
 					if result:
 						if markedNotification:
-							utilities.notification(utilities.getString(1550), s)
+							utilities.notification(utilities.getString(32113), s)
 					else:
-						utilities.notification(utilities.getString(1551), s)
+						utilities.notification(utilities.getString(32114), s)
 
 		elif utilities.isSeason(media_type):
 			showInfo = globals.traktapi.getShowSummary(data['id'])
@@ -228,9 +228,9 @@ class traktService:
 					result = globals.traktapi.updateSeenEpisode(params)
 					if result:
 						if markedNotification:
-							utilities.notification(utilities.getString(1550), utilities.getString(1552) % (len(params['episodes']), s))
+							utilities.notification(utilities.getString(32113), utilities.getString(32115) % (len(params['episodes']), s))
 					else:
-						utilities.notification(utilities.getString(1551), utilities.getString(1552) % (len(params['episodes']), s))
+						utilities.notification(utilities.getString(32114), utilities.getString(32115) % (len(params['episodes']), s))
 
 
 		elif utilities.isShow(media_type):
@@ -253,9 +253,9 @@ class traktService:
 					result = globals.traktapi.updateSeenEpisode(params)
 					if result:
 						if markedNotification:
-							utilities.notification(utilities.getString(1550), utilities.getString(1552) % (len(params['episodes']), s))
+							utilities.notification(utilities.getString(32113), utilities.getString(32115) % (len(params['episodes']), s))
 					else:
-						utilities.notification(utilities.getString(1551), utilities.getString(1552) % (len(params['episodes']), s))
+						utilities.notification(utilities.getString(32114), utilities.getString(32115) % (len(params['episodes']), s))
 
 
 	def doSync(self, manual=False, silent=False, library="all"):
