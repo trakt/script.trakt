@@ -16,34 +16,34 @@ msgstr ""
 "Language: th\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "ทั่วไป"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "ชื่อผู้ใช้"
 
-msgctxt "#1014"
+msgctxt "#32002"
 msgid "Password"
 msgstr "รหัสผ่าน"
 
-msgctxt "#1030"
+msgctxt "#32004"
 msgid "Rating"
 msgstr "เรตติ้ง"
 
-msgctxt "#1109"
+msgctxt "#32024"
 msgid "Error"
 msgstr "ผิดพลาด"
 
-msgctxt "#1320"
+msgctxt "#32033"
 msgid "Fair"
 msgstr "ปกติ"
 
-msgctxt "#1402"
+msgctxt "#32046"
 msgid "Movies"
 msgstr "ภาพยนตร์"
 
-msgctxt "#1410"
+msgctxt "#32054"
 msgid "Service"
 msgstr "บริการ"

@@ -50,9 +50,9 @@ class traktAPI(object):
 
 	def getToken(self):
 		if not self.__username and not self.__password:
-			notification('trakt', getString(1106)) #Username and password error
+			notification('trakt', getString(32021)) #Username and password error
 		elif not self.__password:
-			notification('trakt', getString(1107)) #Password error
+			notification('trakt', getString(32022)) #Password error
 		else:
 			# Attempt authentication (retrieve new token)
 			with Trakt.configuration.http(retry=True):
@@ -62,12 +62,12 @@ class traktAPI(object):
 						self.__token = auth
 					else:
 						logger.debug("Authentication Failure")
-						notification('trakt', getString(1110))
+						notification('trakt', getString(32025))
 				except Exception as ex:
 					message = createError(ex)
 					logger.fatal(message)
 					logger.debug("Cannot connect to server")
-					notification('trakt', getString(1108))
+					notification('trakt', getString(32023))
 
 
 

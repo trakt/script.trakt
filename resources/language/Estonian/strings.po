@@ -16,34 +16,34 @@ msgstr ""
 "Language: et\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "Üldine"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "Kasutajanimi"
 
-msgctxt "#1014"
+msgctxt "#32002"
 msgid "Password"
 msgstr "Salasõna"
 
-msgctxt "#1030"
+msgctxt "#32004"
 msgid "Rating"
 msgstr "Hinne"
 
-msgctxt "#1109"
+msgctxt "#32024"
 msgid "Error"
 msgstr "Viga"
 
-msgctxt "#1320"
+msgctxt "#32033"
 msgid "Fair"
 msgstr "keskmine"
 
-msgctxt "#1402"
+msgctxt "#32046"
 msgid "Movies"
 msgstr "Filmid"
 
-msgctxt "#1410"
+msgctxt "#32054"
 msgid "Service"
 msgstr "Teenus"

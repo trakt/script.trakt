@@ -16,26 +16,26 @@ msgstr ""
 "Language: my\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "ယေဘုယျ"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "အသုံးပြုသူအမည်"
 
-msgctxt "#1014"
+msgctxt "#32002"
 msgid "Password"
 msgstr "စကားဝှက်"
 
-msgctxt "#1030"
+msgctxt "#32004"
 msgid "Rating"
 msgstr "အဆင့်သတ်မှတ်မှု့"
 
-msgctxt "#1109"
+msgctxt "#32024"
 msgid "Error"
 msgstr "ချို့ယွင်းချက်"
 
-msgctxt "#1402"
+msgctxt "#32046"
 msgid "Movies"
 msgstr "ရုပ်ရှင်များ"
