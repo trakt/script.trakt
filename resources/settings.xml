@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-	<category label="1010"><!-- General -->
-		<setting id="username" type="text" label="1013" default="" />
-		<setting id="password" type="text" option="hidden" label="1014" default="" />
-		<setting id="startup_delay" type="slider" label="1018" range="0,30" default="0" option="int"/>
-		<setting id="debug" type="bool" label="1701" default="false"/>
+	<category label="32000"><!-- General -->
+		<setting id="username" type="text" label="32001" default="" />
+		<setting id="password" type="text" option="hidden" label="32002" default="" />
+		<setting id="startup_delay" type="slider" label="32003" range="0,30" default="0" option="int"/>
+		<setting id="debug" type="bool" label="32116" default="false"/>
 	</category>
-	<category label="1050"><!-- Exclusions -->
-		<setting id="ExcludeLiveTV" type="bool" label="1051" default="false"/>
-		<setting id="ExcludeHTTP" type="bool" label="1052" default="false"/>
-		<setting id="ExcludePathOption" type="bool" label="1053" default="false" />
-		<setting id="ExcludePath" type="folder" source="video" label="1054" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
-		<setting id="ExcludePathOption2" type="bool" label="1053" default="false" visible= "eq(-2,true)" enable="eq(-2,true)" />
-		<setting id="ExcludePath2" type="folder" source="video" label="1054" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
-		<setting id="ExcludePathOption3" type="bool" label="1053" default="false" visible= "eq(-2,true)" enable="eq(-2,true)" />
-		<setting id="ExcludePath3" type="folder" source="video" label="1054" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
+	<category label="32016"><!-- Exclusions -->
+		<setting id="ExcludeLiveTV" type="bool" label="32017" default="false"/>
+		<setting id="ExcludeHTTP" type="bool" label="32018" default="false"/>
+		<setting id="ExcludePathOption" type="bool" label="32019" default="false" />
+		<setting id="ExcludePath" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
+		<setting id="ExcludePathOption2" type="bool" label="32019" default="false" visible= "eq(-2,true)" enable="eq(-2,true)" />
+		<setting id="ExcludePath2" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
+		<setting id="ExcludePathOption3" type="bool" label="32019" default="false" visible= "eq(-2,true)" enable="eq(-2,true)" />
+		<setting id="ExcludePath3" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
 	</category>
-	<category label="1040"><!-- Scrobbling -->
-		<setting id="scrobble_movie" type="bool" label="1041" default="true"/>
-		<setting id="scrobble_episode" type="bool" label="1042" default="true"/>
-		<setting id="scrobble_notification" type="bool" label="1048" default="false"/>
+	<category label="32011"><!-- Scrobbling -->
+		<setting id="scrobble_movie" type="bool" label="32012" default="true"/>
+		<setting id="scrobble_episode" type="bool" label="32013" default="true"/>
+		<setting id="scrobble_notification" type="bool" label="32014" default="false"/>
 	</category>
-	<category label="1400"><!-- Synchronize -->
-		<setting label="1410" type="lsep"/><!-- Service -->
-		<setting id="sync_on_update" type="bool" label="1411" default="false"/>
-		<setting id="show_sync_notifications" type="bool" label="1412" default="false"/>
-		<setting id="hide_notifications_playback" type="bool" label="1417" default="false"/>
-		<setting id="show_marked_notification" type="bool" label="1416" default="true"/>
+	<category label="32045"><!-- Synchronize -->
+		<setting label="32054" type="lsep"/><!-- Service -->
+		<setting id="sync_on_update" type="bool" label="32055" default="false"/>
+		<setting id="show_sync_notifications" type="bool" label="32056" default="false"/>
+		<setting id="hide_notifications_playback" type="bool" label="32060" default="false"/>
+		<setting id="show_marked_notification" type="bool" label="32059" default="true"/>
 		<setting type="sep"/>
-		<setting label="1402" type="lsep"/><!-- Movies -->
-		<setting id="add_movies_to_trakt" type="bool" label="1403" default="true"/>
-        <setting id="clean_trakt_movies" type="bool" label="1413" default="false"/>
-		<setting id="trakt_movie_playcount" type="bool" label="1404" default="true"/>
-		<setting id="kodi_movie_playcount" type="bool" label="1405" default="true"/>
+		<setting label="32046" type="lsep"/><!-- Movies -->
+		<setting id="add_movies_to_trakt" type="bool" label="32047" default="true"/>
+        <setting id="clean_trakt_movies" type="bool" label="32057" default="false"/>
+		<setting id="trakt_movie_playcount" type="bool" label="32048" default="true"/>
+		<setting id="kodi_movie_playcount" type="bool" label="32049" default="true"/>
 		<setting type="sep"/>
-		<setting label="1406" type="lsep"/><!-- Episodes -->
-		<setting id="add_episodes_to_trakt" type="bool" label="1407" default="true"/>
-        <setting id="clean_trakt_episodes" type="bool" label="1414" default="false"/>
-		<setting id="trakt_episode_playcount" type="bool" label="1408" default="true"/>
-		<setting id="kodi_episode_playcount" type="bool" label="1409" default="true"/>
+		<setting label="32050" type="lsep"/><!-- Episodes -->
+		<setting id="add_episodes_to_trakt" type="bool" label="32051" default="true"/>
+        <setting id="clean_trakt_episodes" type="bool" label="32058" default="false"/>
+		<setting id="trakt_episode_playcount" type="bool" label="32052" default="true"/>
+		<setting id="kodi_episode_playcount" type="bool" label="32053" default="true"/>
 	</category>
-	<category label="1030"><!-- Rating -->
-		<setting id="rate_movie" type="bool" label="1031" default="true"/>
-		<setting id="rate_episode" type="bool" label="1032" default="true"/>
-		<setting id="rate_each_playlist_item" type="bool" label="1033" default="true"/>
-		<setting id="rate_min_view_time" type="slider" label="1034" range="0,5,100" default="75"/>
-		<setting id="rate_rerate" type="bool" label="1035" default="false"/>
-		<setting id="rating_default" type="slider" label="1037" range="1,10" default="6" option="int"/>
+	<category label="32004"><!-- Rating -->
+		<setting id="rate_movie" type="bool" label="32005" default="true"/>
+		<setting id="rate_episode" type="bool" label="32006" default="true"/>
+		<setting id="rate_each_playlist_item" type="bool" label="32007" default="true"/>
+		<setting id="rate_min_view_time" type="slider" label="32008" range="0,5,100" default="75"/>
+		<setting id="rate_rerate" type="bool" label="32009" default="false"/>
+		<setting id="rating_default" type="slider" label="32010" range="1,10" default="6" option="int"/>
 	</category>
 </settings>

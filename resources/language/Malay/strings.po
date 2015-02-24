@@ -16,26 +16,26 @@ msgstr ""
 "Language: ms\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "Am"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "Nama Pengguna"
 
-msgctxt "#1014"
+msgctxt "#32002"
 msgid "Password"
 msgstr "Kata Laluan"
 
-msgctxt "#1030"
+msgctxt "#32004"
 msgid "Rating"
 msgstr "Penarafan"
 
-msgctxt "#1109"
+msgctxt "#32024"
 msgid "Error"
 msgstr "Ralat"
 
-msgctxt "#1402"
+msgctxt "#32046"
 msgid "Movies"
 msgstr "Cereka"

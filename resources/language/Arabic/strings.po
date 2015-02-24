@@ -16,30 +16,30 @@ msgstr ""
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "عام"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "اسم المستخدم"
 
-msgctxt "#1014"
+msgctxt "#32002"
 msgid "Password"
 msgstr "كلمة المرور"
 
-msgctxt "#1030"
+msgctxt "#32004"
 msgid "Rating"
 msgstr "التقييم"
 
-msgctxt "#1109"
+msgctxt "#32024"
 msgid "Error"
 msgstr "خطأ"
 
-msgctxt "#1320"
+msgctxt "#32033"
 msgid "Fair"
 msgstr ":عادل"
 
-msgctxt "#1402"
+msgctxt "#32046"
 msgid "Movies"
 msgstr "أفلام"

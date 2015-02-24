@@ -16,30 +16,30 @@ msgstr ""
 "Language: sr_RS\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "Опште"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "Корисничко име"
 
-msgctxt "#1014"
+msgctxt "#32002"
 msgid "Password"
 msgstr "Лозинка"
 
-msgctxt "#1030"
+msgctxt "#32004"
 msgid "Rating"
 msgstr "Оцена"
 
-msgctxt "#1109"
+msgctxt "#32024"
 msgid "Error"
 msgstr "Грешка"
 
-msgctxt "#1320"
+msgctxt "#32033"
 msgid "Fair"
 msgstr "умерено"
 
-msgctxt "#1402"
+msgctxt "#32046"
 msgid "Movies"
 msgstr "Филмови"

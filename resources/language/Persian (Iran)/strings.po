@@ -16,34 +16,34 @@ msgstr ""
 "Language: fa_IR\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "عمومی"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "نام کاربری"
 
-msgctxt "#1014"
+msgctxt "#32002"
 msgid "Password"
 msgstr "رمز عبور"
 
-msgctxt "#1030"
+msgctxt "#32004"
 msgid "Rating"
 msgstr "رتبه بندی"
 
-msgctxt "#1109"
+msgctxt "#32024"
 msgid "Error"
 msgstr "خطا"
 
-msgctxt "#1320"
+msgctxt "#32033"
 msgid "Fair"
 msgstr "آفتابی"
 
-msgctxt "#1402"
+msgctxt "#32046"
 msgid "Movies"
 msgstr "فیلم ها"
 
-msgctxt "#1410"
+msgctxt "#32054"
 msgid "Service"
 msgstr "سرویس"

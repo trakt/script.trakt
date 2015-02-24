@@ -16,15 +16,15 @@ msgstr ""
 "Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "Menus"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "Nome de utilizador"
 
-msgctxt "#1014"
+msgctxt "#32002"
 msgid "Password"
 msgstr "Palavra-passe"
 
@@ -32,38 +32,38 @@ msgctxt "#1017"
 msgid "Number of Retries"
 msgstr "Número de Tentativas"
 
-msgctxt "#1030"
+msgctxt "#32004"
 msgid "Rating"
 msgstr "Classificação"
 
-msgctxt "#1031"
+msgctxt "#32005"
 msgid "Rate Movie after watching"
 msgstr "Classificar Filme após visualização"
 
-msgctxt "#1032"
+msgctxt "#32006"
 msgid "Rate TV show Episode after watching"
 msgstr "Classificar Episódio após visualização"
 
-msgctxt "#1050"
+msgctxt "#32016"
 msgid "Exclusions"
 msgstr "Exclusões"
 
-msgctxt "#1109"
+msgctxt "#32024"
 msgid "Error"
 msgstr "Erro"
 
-msgctxt "#1320"
+msgctxt "#32033"
 msgid "Fair"
 msgstr "Calmo"
 
-msgctxt "#1400"
+msgctxt "#32045"
 msgid "Synchronize"
 msgstr "Sincronizar"
 
-msgctxt "#1402"
+msgctxt "#32046"
 msgid "Movies"
 msgstr "Filmes"
 
-msgctxt "#1410"
+msgctxt "#32054"
 msgid "Service"
 msgstr "Serviço"

@@ -16,34 +16,34 @@ msgstr ""
 "Language: cy\n"
 "Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != 11) ? 2 : 3;\n"
 
-msgctxt "#1010"
+msgctxt "#32000"
 msgid "General"
 msgstr "Cyffredinol"
 
-msgctxt "#1013"
+msgctxt "#32001"
 msgid "Username"
 msgstr "Enw defnyddiwr"
 
-msgctxt "#1014"
+msgctxt "#32002"
 msgid "Password"
 msgstr "Cyfrinair"
 
-msgctxt "#1030"
+msgctxt "#32004"
 msgid "Rating"
 msgstr "Graddio"
 
-msgctxt "#1109"
+msgctxt "#32024"
 msgid "Error"
 msgstr "Gwall"
 
-msgctxt "#1320"
+msgctxt "#32033"
 msgid "Fair"
 msgstr "Braf"
 
-msgctxt "#1402"
+msgctxt "#32046"
 msgid "Movies"
 msgstr "Ffilmiau"
 
-msgctxt "#1410"
+msgctxt "#32054"
 msgid "Service"
 msgstr "Gwasanaeth"
