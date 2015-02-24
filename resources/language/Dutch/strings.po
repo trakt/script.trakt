@@ -28,10 +28,6 @@ msgctxt "#32002"
 msgid "Password"
 msgstr "Wachtwoord"
 
-msgctxt "#1017"
-msgid "Number of Retries"
-msgstr "Aantal keer opnieuw geprobeerd"
-
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "Start vertraging"
