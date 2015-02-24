@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 #
 import xbmcaddon
-import math
 import logging
 from trakt import Trakt, ClientError, ServerError
 from trakt.objects import Movie, Show
@@ -80,17 +79,17 @@ class traktAPI(object):
 				result =Trakt['scrobble'].start(
 					show=show,
 					episode=episode,
-					progress=math.ceil(percent))
+					progress=percent)
 			elif status == 'pause':
 				result = Trakt['scrobble'].pause(
 					show=show,
 					episode=episode,
-					progress=math.ceil(percent))
+					progress=percent)
 			elif status == 'stop':
 				result = Trakt['scrobble'].stop(
 					show=show,
 					episode=episode,
-					progress=math.ceil(percent))
+					progress=percent)
 			else:
 					logger.debug("scrobble() Bad scrobble status")
 		return result
@@ -103,15 +102,15 @@ class traktAPI(object):
 			if status == 'start':
 				result = Trakt['scrobble'].start(
 					movie=movie,
-					progress=math.ceil(percent))
+					progress=percent)
 			elif status == 'pause':
 				result = Trakt['scrobble'].pause(
 					movie=movie,
-					progress=math.ceil(percent))
+					progress=percent)
 			elif status == 'stop':
 				result = Trakt['scrobble'].stop(
 					movie=movie,
-					progress=math.ceil(percent))
+					progress=percent)
 			else:
 				logger.debug("scrobble() Bad scrobble status")
 		return result
