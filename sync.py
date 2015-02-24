@@ -602,11 +602,11 @@ class Sync():
 		traktMovies = {}
 		traktMovies = self.traktapi.getMoviesCollected(traktMovies)
 
-		self.__updateProgress(21, line2=utilities.getString(32082))
+		self.__updateProgress(17, line2=utilities.getString(32082))
 		traktMovies = self.traktapi.getMoviesWatched(traktMovies)
 		traktMovies = traktMovies.items()
 
-		self.__updateProgress(32, line2=utilities.getString(32083))
+		self.__updateProgress(24, line2=utilities.getString(32083))
 		movies = []
 		for key, movie in traktMovies:
 			movie = movie.to_dict()
@@ -617,7 +617,7 @@ class Sync():
 
 	def __traktLoadMoviesPlaybackProgress(self):
 		if utilities.getSettingAsBool('trakt_movie_playback') and not self.__isCanceled():
-			self.__updateProgress(10, line2=utilities.getString(32122))
+			self.__updateProgress(25, line2=utilities.getString(32122))
 
 			logger.debug('[Movies Sync] Getting playback progress from trakt.tv')
 			try:
@@ -631,7 +631,7 @@ class Sync():
 			moviesProgress = {'movies': []}
 			for movie in traktProgressMovies:
 				i += 1
-				y = ((i / x) * 26) + 6
+				y = ((i / x) * 25) + 11
 				self.__updateProgress(int(y), line2=utilities.getString(32123) % (i, x))
 
 				#will keep the data in python structures - just like the KODI response
@@ -639,7 +639,7 @@ class Sync():
 
 				moviesProgress['movies'].append(movie)
 
-			self.__updateProgress(32, line2=utilities.getString(32124))
+			self.__updateProgress(36, line2=utilities.getString(32124))
 
 			return moviesProgress
 
@@ -661,7 +661,7 @@ class Sync():
 			logger.debug("[Movies Sync] %i movie(s) will be added to trakt.tv collection." % len(traktMoviesToAdd))
 			logger.debug("[Movies Sync] Movies to add : %s" % titles)
 
-			self.__updateProgress(33, line2=utilities.getString(32063) % len(traktMoviesToAdd))
+			self.__updateProgress(37, line2=utilities.getString(32063) % len(traktMoviesToAdd))
 
 			moviesToAdd = {'movies': traktMoviesToAdd}
 			#logger.debug("Movies to add: %s" % moviesToAdd)
@@ -685,7 +685,7 @@ class Sync():
 			logger.debug("[Movies Sync] Compared movies, found %s to remove." % len(traktMoviesToRemove))
 
 			if len(traktMoviesToRemove) == 0:
-				self.__updateProgress(65, line2=utilities.getString(32091))
+				self.__updateProgress(60, line2=utilities.getString(32091))
 				logger.debug("[Movies Sync] trakt.tv movie collection is clean, no movies to remove.")
 				return
 
@@ -703,7 +703,7 @@ class Sync():
 				logging.fatal(message)
 			self.traktapi.removeFromCollection(moviesToRemove)
 
-			self.__updateProgress(65, line2=utilities.getString(32092) % len(traktMoviesToRemove))
+			self.__updateProgress(60, line2=utilities.getString(32092) % len(traktMoviesToRemove))
 
 
 	def __addMoviesToTraktWatched(self, kodiMovies, traktMovies):
@@ -716,7 +716,7 @@ class Sync():
 			self.sanitizeMovies(traktMoviesToUpdate)
 
 			if len(traktMoviesToUpdate) == 0:
-				self.__updateProgress(82, line2=utilities.getString(32086))
+				self.__updateProgress(72, line2=utilities.getString(32086))
 				logger.debug("[Movies Sync] trakt.tv movie playcount is up to date")
 				return
 
@@ -724,7 +724,7 @@ class Sync():
 			logger.debug("[Movies Sync] %i movie(s) playcount will be updated on trakt.tv" % len(traktMoviesToUpdate))
 			logger.debug("[Movies Sync] Movies updated: %s" % titles)
 
-			self.__updateProgress(66, line2=utilities.getString(32064) % len(traktMoviesToUpdate))
+			self.__updateProgress(61, line2=utilities.getString(32064) % len(traktMoviesToUpdate))
 			# Send request to update playcounts on trakt.tv
 			chunksize = 200
 			chunked_movies = utilities.chunks([movie for movie in traktMoviesToUpdate], chunksize)
@@ -735,7 +735,7 @@ class Sync():
 				if self.__isCanceled():
 					return
 				i += 1
-				y = ((i / x) * 16) + 66
+				y = ((i / x) * 11) + 61
 				self.__updateProgress(int(y), line2=utilities.getString(32093) % ((i)*chunksize if (i)*chunksize < x else x, x))
 
 				params = {'movies': chunk}
@@ -748,7 +748,7 @@ class Sync():
 					errorcount += 1
 
 			logger.debug("[Movies Sync] Movies updated: %d error(s)" % errorcount)
-			self.__updateProgress(82, line2=utilities.getString(32087) % len(traktMoviesToUpdate))
+			self.__updateProgress(72, line2=utilities.getString(32087) % len(traktMoviesToUpdate))
 
 	def __addMoviesToKodiWatched(self, traktMovies, kodiMovies):
 
@@ -759,7 +759,7 @@ class Sync():
 			kodiMoviesToUpdate = self.__compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, watched=True, restrict=True)
 
 			if len(kodiMoviesToUpdate) == 0:
-				self.__updateProgress(99, line2=utilities.getString(32088))
+				self.__updateProgress(84, line2=utilities.getString(32088))
 				logger.debug("[Movies Sync] Kodi movie playcount is up to date.")
 				return
 
@@ -767,7 +767,7 @@ class Sync():
 			logger.debug("[Movies Sync] %i movie(s) playcount will be updated in Kodi" % len(kodiMoviesToUpdate))
 			logger.debug("[Movies Sync] Movies to add: %s" % titles)
 
-			self.__updateProgress(83, line2=utilities.getString(32065) % len(kodiMoviesToUpdate))
+			self.__updateProgress(73, line2=utilities.getString(32065) % len(kodiMoviesToUpdate))
 
 			#split movie list into chunks of 50
 			chunksize = 50
@@ -778,12 +778,12 @@ class Sync():
 				if self.__isCanceled():
 					return
 				i += 1
-				y = ((i / x) * 16) + 83
+				y = ((i / x) * 11) + 73
 				self.__updateProgress(int(y), line2=utilities.getString(32089) % ((i)*chunksize if (i)*chunksize < x else x, x))
 
 				utilities.kodiJsonRequest(chunk)
 
-			self.__updateProgress(99, line2=utilities.getString(32090) % len(kodiMoviesToUpdate))
+			self.__updateProgress(84, line2=utilities.getString(32090) % len(kodiMoviesToUpdate))
 
 	def __addMovieProgressToKodi(self, traktMovies, kodiMovies):
 
@@ -799,7 +799,7 @@ class Sync():
 
 			logger.debug("[Movies Sync] %i movie(s) playbacks will be updated in Kodi" % len(kodiMoviesToUpdate))
 
-			self.__updateProgress(83, line2=utilities.getString(32126) % len(kodiMoviesToUpdate))
+			self.__updateProgress(85, line2=utilities.getString(32126) % len(kodiMoviesToUpdate))
 			#need to calculate the progress in int from progress in percent from trakt
 			#split movie list into chunks of 50
 			chunksize = 50
@@ -810,7 +810,7 @@ class Sync():
 				if self.__isCanceled():
 					return
 				i += 1
-				y = ((i / x) * 16) + 83
+				y = ((i / x) * 14) + 85
 				self.__updateProgress(int(y), line2=utilities.getString(32127) % ((i)*chunksize if (i)*chunksize < x else x, x))
 				utilities.kodiJsonRequest(chunk)
 
