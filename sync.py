@@ -349,7 +349,7 @@ class Sync():
 			#need to calculate the progress in int from progress in percent from trakt
 			#split episode list into chunks of 50
 			chunksize = 50
-			chunked_episodes = utilities.chunks([{"jsonrpc": "2.0", "id": i, "method": "VideoLibrary.SetEpisodeDetails", "params": {"episodeid":episodes[i]['episodeid'], "resume": {"position": episodes[i]['runtime']/100*episodes[i]['progress']}}} for i in range(len(episodes))], chunksize)
+			chunked_episodes = utilities.chunks([{"jsonrpc": "2.0", "id": i, "method": "VideoLibrary.SetEpisodeDetails", "params": {"episodeid":episodes[i]['episodeid'], "resume": {"position": episodes[i]['runtime']/100.0*episodes[i]['progress']}}} for i in range(len(episodes))], chunksize)
 			i = 0
 			x = float(len(episodes))
 			for chunk in chunked_episodes:
@@ -803,7 +803,7 @@ class Sync():
 			#need to calculate the progress in int from progress in percent from trakt
 			#split movie list into chunks of 50
 			chunksize = 50
-			chunked_movies = utilities.chunks([{"jsonrpc": "2.0", "id": i, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": kodiMoviesToUpdate[i]['movieid'], "resume": {"position": kodiMoviesToUpdate[i]['runtime']/100*kodiMoviesToUpdate[i]['progress']}}} for i in range(len(kodiMoviesToUpdate))], chunksize)
+			chunked_movies = utilities.chunks([{"jsonrpc": "2.0", "id": i, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": kodiMoviesToUpdate[i]['movieid'], "resume": {"position": kodiMoviesToUpdate[i]['runtime']/100.0*kodiMoviesToUpdate[i]['progress']}}} for i in range(len(kodiMoviesToUpdate))], chunksize)
 			i = 0
 			x = float(len(kodiMoviesToUpdate))
 			for chunk in chunked_movies:
