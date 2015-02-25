@@ -535,9 +535,10 @@ class Sync():
 				progress.close()
 			return
 
-		traktShowsProgress = self.__traktLoadShowsPlaybackProgress()
-		if not traktShowsProgress:
-			logger.debug("[Episodes Sync] Error getting trakt.tv show playback list, skipping playback sync.")
+		#we need a correct runtime for episodes until we have that this is commented out
+		#traktShowsProgress = self.__traktLoadShowsPlaybackProgress()
+		#if not traktShowsProgress:
+		#	logger.debug("[Episodes Sync] Error getting trakt.tv show playback list, skipping playback sync.")
 
 		self.__addEpisodesToTraktCollection(kodiShowsCollected, traktShowsCollected)
 
@@ -547,7 +548,8 @@ class Sync():
 
 		self.__addEpisodesToKodiWatched(traktShowsWatched, kodiShowsWatched, kodiShowsCollected)
 
-		self.__addEpisodeProgressToKodi(traktShowsProgress, kodiShowsCollected)
+		#we need a correct runtime for episodes until we have that this is commented out
+		#self.__addEpisodeProgressToKodi(traktShowsProgress, kodiShowsCollected)
 
 		if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
 			notification('%s %s' % (utilities.getString(32045), utilities.getString(32050)), utilities.getString(32062)) #Sync complete
@@ -925,7 +927,9 @@ class Sync():
 		if media_type == 'movies':
 			return utilities.getSettingAsBool('trakt_movie_playback')
 		else:
-			return utilities.getSettingAsBool('trakt_episode_playback')
+			return False
+			#we need a correct runtime for episodes until we have that this is commented out
+			#return utilities.getSettingAsBool('trakt_episode_playback')
 
 
 	def __syncCollectionCheck(self, media_type):

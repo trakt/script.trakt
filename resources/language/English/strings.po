@@ -511,11 +511,11 @@ msgid "Enable debug mode"
 msgstr ""
 
 msgctxt "#32117"
-msgid "Sync movie playback progress"
+msgid "Sync movie playback progress to Kodi"
 msgstr ""
 
 msgctxt "#32118"
-msgid "Sync episode playback progress"
+msgid "Sync episode playback progress to Kodi"
 msgstr ""
 
 msgctxt "#32119"
