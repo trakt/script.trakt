@@ -5,6 +5,7 @@ import xbmc
 import time
 import logging
 import utilities
+import math
 from rating import ratingCheck
 
 logger = logging.getLogger(__name__)
@@ -51,7 +52,7 @@ class Scrobbler():
 				# do transition check every minute
 				if (time.time() > (self.lastMPCheck + 60)) or forceCheck:
 					self.lastMPCheck = time.time()
-					watchedPercent = (self.watchedTime / self.videoDuration) * 100
+					watchedPercent = self.__calculateWatchedPercent()
 					epIndex = self._currentEpisode(watchedPercent, self.curVideo['multi_episode_count'])
 					if self.curMPEpisode != epIndex:
 						# current episode in multi-part episode has changed
@@ -224,6 +225,8 @@ class Scrobbler():
 		self.playlistLength = 0
 		self.playlistIndex = 0
 
+	def __calculateWatchedPercent(self):
+		return (self.watchedTime / math.floor(self.videoDuration)) * 100 #we need to floor this, so this calculation yields the same result as the playback progress calculation
 
 	def __scrobble(self, status):
 		if not self.curVideoInfo:
@@ -233,7 +236,7 @@ class Scrobbler():
 		scrobbleMovieOption = utilities.getSettingAsBool('scrobble_movie')
 		scrobbleEpisodeOption = utilities.getSettingAsBool('scrobble_episode')
 
-		watchedPercent = (self.watchedTime / self.videoDuration) * 100
+		watchedPercent = self.__calculateWatchedPercent()
 
 		if utilities.isMovie(self.curVideo['type']) and scrobbleMovieOption:
 			response = self.traktapi.scrobbleMovie(self.curVideoInfo, watchedPercent, status)
