@@ -28,10 +28,6 @@ msgctxt "#32002"
 msgid "Password"
 msgstr "비밀번호"
 
-msgctxt "#1017"
-msgid "Number of Retries"
-msgstr "다시 시도 횟수"
-
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "시작 지연"
