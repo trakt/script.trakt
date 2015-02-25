@@ -28,10 +28,6 @@ msgctxt "#32002"
 msgid "Password"
 msgstr "Password"
 
-msgctxt "#1017"
-msgid "Number of Retries"
-msgstr "Number of Retries"
-
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "Startup Delay"

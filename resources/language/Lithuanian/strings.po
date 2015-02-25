@@ -28,10 +28,6 @@ msgctxt "#32002"
 msgid "Password"
 msgstr "Slaptažodis"
 
-msgctxt "#1017"
-msgid "Number of Retries"
-msgstr "Bandymų skaičius"
-
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "Paleidimo uždelsimas"
