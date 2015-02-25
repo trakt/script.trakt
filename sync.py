@@ -537,9 +537,7 @@ class Sync():
 
 		#we need a correct runtime for episodes until we have that this is commented out
 		#traktShowsProgress = self.__traktLoadShowsPlaybackProgress()
-		#if not traktShowsProgress:
-		#	logger.debug("[Episodes Sync] Error getting trakt.tv show playback list, skipping playback sync.")
-
+		
 		self.__addEpisodesToTraktCollection(kodiShowsCollected, traktShowsCollected)
 
 		self.__deleteEpisodesFromTraktCollection(traktShowsCollected, kodiShowsCollected)
@@ -839,8 +837,6 @@ class Sync():
 			return
 
 		traktMoviesProgress = self.__traktLoadMoviesPlaybackProgress()
-		if not traktMoviesProgress:
-			logger.debug("[Movies Sync] Error getting trakt.tv movie playback list, skipping playback sync.")
 
 		self.__addMoviesToTraktCollection(kodiMovies, traktMovies)
 
