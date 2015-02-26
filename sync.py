@@ -864,8 +864,8 @@ class Sync():
 		for movie_col1 in movies_col1:
 			if movie_col1:
 				movie_col2 = utilities.findMediaObject(movie_col1, movies_col2)
-				logger.debug("movie_col1 %s" % movie_col1)
-				logger.debug("movie_col2 %s" % movie_col2)
+				#logger.debug("movie_col1 %s" % movie_col1)
+				#logger.debug("movie_col2 %s" % movie_col2)
 
 				if movie_col2:  #match found
 					if watched: #are we looking for watched items
