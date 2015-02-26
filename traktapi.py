@@ -3,6 +3,7 @@
 import xbmcaddon
 import logging
 from trakt import Trakt, ClientError, ServerError
+from trakt.objects import Movie, Show
 from utilities import getSetting, findMovieMatchInList, findEpisodeMatchInList, notification, getString, createError
 
 # read settings
@@ -75,16 +76,19 @@ class traktAPI(object):
 
 		with Trakt.configuration.auth(self.__username, self.__token):
 			if status == 'start':
-				result =Trakt['scrobble'].start(
-					show=show,
-					episode=episode,
-					progress=percent)
+				with Trakt.configuration.http(retry=True):
+					result =Trakt['scrobble'].start(
+						show=show,
+						episode=episode,
+						progress=percent)
 			elif status == 'pause':
-				result = Trakt['scrobble'].pause(
-					show=show,
-					episode=episode,
-					progress=percent)
+				with Trakt.configuration.http(retry=True):
+					result = Trakt['scrobble'].pause(
+						show=show,
+						episode=episode,
+						progress=percent)
 			elif status == 'stop':
+				#don't retry on stop, this will cause multiple scrobbles
 				result = Trakt['scrobble'].stop(
 					show=show,
 					episode=episode,
@@ -99,14 +103,17 @@ class traktAPI(object):
 
 		with Trakt.configuration.auth(self.__username, self.__token):
 			if status == 'start':
-				result = Trakt['scrobble'].start(
-					movie=movie,
-					progress=percent)
+				with Trakt.configuration.http(retry=True):
+					result = Trakt['scrobble'].start(
+						movie=movie,
+						progress=percent)
 			elif status == 'pause':
-				result = Trakt['scrobble'].pause(
-					movie=movie,
-					progress=percent)
+				with Trakt.configuration.http(retry=True):
+					result = Trakt['scrobble'].pause(
+						movie=movie,
+						progress=percent)
 			elif status == 'stop':
+				#don't retry on stop, this will cause multiple scrobbles
 				result = Trakt['scrobble'].stop(
 					movie=movie,
 					progress=percent)
@@ -179,3 +186,21 @@ class traktAPI(object):
 		with Trakt.configuration.auth(self.__username, self.__token):
 			result = Trakt['sync/ratings'].remove(mediaObject)
 		return result
+
+	def getPlaybackProgress(self):
+
+		progressMovies = []
+		progressShows = []
+
+		# Fetch playback
+		with Trakt.configuration.auth(self.__username, self.__token):
+			with Trakt.configuration.http(retry=True):
+				playback = Trakt['sync'].playback(exceptions=True)
+
+				for key, item in playback.items():
+					if type(item) is Movie:
+						progressMovies.append(item)
+					elif type(item) is Show:
+						progressShows.append(item)
+
+		return progressMovies, progressShows

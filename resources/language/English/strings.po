@@ -269,6 +269,7 @@ msgctxt "#32060"
 msgid "Hide notifications during playback"
 msgstr ""
 
+
 #Sync Notifications
 msgctxt "#32061"
 msgid "Sync started"
@@ -507,4 +508,64 @@ msgstr ""
 
 msgctxt "#32116"
 msgid "Enable debug mode"
+msgstr ""
+
+msgctxt "#32117"
+msgid "Sync movie playback progress to Kodi"
+msgstr ""
+
+msgctxt "#32118"
+msgid "Sync episode playback progress to Kodi"
+msgstr ""
+
+msgctxt "#32119"
+msgid "Retrieving episode playback progress from trakt"
+msgstr ""
+
+msgctxt "#32120"
+msgid "Parsing episode playback progress %i of %i from trakt"
+msgstr ""
+
+msgctxt "#32121"
+msgid "Retrieved episode playback progress from trakt"
+msgstr ""
+
+msgctxt "#32122"
+msgid "Retrieving movie playback progress from trakt"
+msgstr ""
+
+msgctxt "#32123"
+msgid "Parsing movie playback progress %i of %i from trakt"
+msgstr ""
+
+msgctxt "#32124"
+msgid "Retrieved movie playback progress from trakt"
+msgstr ""
+
+msgctxt "#32125"
+msgid "Kodi movie playbacks are up to date"
+msgstr ""
+
+msgctxt "#32126"
+msgid "%i movie playbacks will be updated in Kodi"
+msgstr ""
+
+msgctxt "#32127"
+msgid "Updating %i of %i movie playbacks in Kodi"
+msgstr ""
+
+msgctxt "#32128"
+msgid "Playbacks updated for %i movie(s) in Kodi"
+msgstr ""
+
+msgctxt "#32129"
+msgid "Kodi episode playbacks are up to date"
+msgstr ""
+
+msgctxt "#32130"
+msgid "Updating %i of %i episode playbacks in Kodi"
+msgstr ""
+
+msgctxt "#32131"
+msgid "Playbacks updated for %i show(s) in Kodi"
 msgstr ""
