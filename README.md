@@ -9,7 +9,7 @@ Automatically scrobble all TV episodes and movies you are watching to trakt.tv! 
 * Share what you're watching (in real time) and rating to facebook and twitter
 * Personalized calendar so you never miss a TV show
 * Follow your friends and people you're interesed in
-* Use watchlists so you don't forget to what to watch
+* Use watchlists so you don't forget what to watch
 * Track your media collections and impress your friends
 * Create custom lists around any topics you choose
 * Easily track your TV show progress across all seasons and episodes
