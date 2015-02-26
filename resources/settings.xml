@@ -33,12 +33,15 @@
         <setting id="clean_trakt_movies" type="bool" label="32057" default="false"/>
 		<setting id="trakt_movie_playcount" type="bool" label="32048" default="true"/>
 		<setting id="kodi_movie_playcount" type="bool" label="32049" default="true"/>
+        <setting id="trakt_movie_playback" type="bool" label="32117" default="false"/>
 		<setting type="sep"/>
 		<setting label="32050" type="lsep"/><!-- Episodes -->
 		<setting id="add_episodes_to_trakt" type="bool" label="32051" default="true"/>
         <setting id="clean_trakt_episodes" type="bool" label="32058" default="false"/>
 		<setting id="trakt_episode_playcount" type="bool" label="32052" default="true"/>
 		<setting id="kodi_episode_playcount" type="bool" label="32053" default="true"/>
+        <!--<setting id="trakt_episode_playback" type="bool" label="32118" default="false"/>-->
+
 	</category>
 	<category label="32004"><!-- Rating -->
 		<setting id="rate_movie" type="bool" label="32005" default="true"/>
