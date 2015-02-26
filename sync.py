@@ -708,7 +708,7 @@ class Sync():
 		if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
 			notification('%s %s' % (utilities.getString(32045), utilities.getString(32046)), utilities.getString(32062)) #Sync complete
 		
-		logger.debug("[Movies Sync] Movies on trakt.tv (%d), movies in Kodi (%d)." % (self.__countMovies(traktMovies), len(kodiMovies)))
+		logger.debug("[Movies Sync] Movies on trakt.tv (%d), movies in Kodi (%d)." % (len(traktMovies), len(kodiMovies)))
 		logger.debug("[Movies Sync] Complete.")
 
 	def __compareMovies(self, movies_col1, movies_col2, watched=False, restrict=False):
@@ -738,17 +738,6 @@ class Sync():
 								movies.append(movie_col1)
 
 		return movies
-
-	def __countMovies(self, movies, mode='collected'):
-		count = 0
-
-		if 'movies' in movies:
-			movies = movies['movies']
-		for movie in movies:
-			if mode in movie and movie[mode] == 1:
-				count += 1
-
-		return count
 
 	@staticmethod
 	def sanitizeMovies(movies):
