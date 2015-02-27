@@ -701,7 +701,6 @@ class Sync():
 			except Exception as ex:
 				message = utilities.createError(ex)
 				logging.fatal(message)
-			self.traktapi.removeFromCollection(moviesToRemove)
 
 			self.__updateProgress(60, line2=utilities.getString(32092) % len(traktMoviesToRemove))
 
