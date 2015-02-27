@@ -24,7 +24,6 @@ class traktAPI(object):
 		# Get user login data
 		self.__username = getSetting('username')
 		self.__password = getSetting('password')
-		self.__token = getSetting('token')
 
 		# Configure
 		Trakt.configuration.defaults.client(
@@ -40,13 +39,17 @@ class traktAPI(object):
 		_username = getSetting('username')
 		_password = getSetting('password')
 
-		if not (self.__username == _username):
+		updated = False
+		if self.__username != _username:
 			self.__username = _username
+			updated = True
 
-		if not (self.__password == _password):
+		if self.__password != _password:
 			self.__password = _password
+			updated = True
 
-		self.getToken()
+		if updated:
+			self.getToken()
 
 	def getToken(self):
 		if not self.__username and not self.__password:
