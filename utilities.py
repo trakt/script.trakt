@@ -8,6 +8,7 @@ import re
 import sys
 import logging
 import traceback
+import dateutil.parser
 from datetime import datetime
 from dateutil.tz import tzutc, tzlocal
 
@@ -422,6 +423,15 @@ def convertDateTimeToUTC(toConvert):
 	else:
 		return toConvert
 
+def convertUtcToDateTime(toConvert):
+	if toConvert:
+		naive = dateutil.parser.parse(toConvert)
+		utc = naive.replace(tzinfo=tzutc())
+		local = utc.astimezone(tzlocal())
+
+		return local.strftime("%Y-%m-%d %H:%M:%S")
+	else:
+		return toConvert
 
 def createError(ex):
 	template = (
