@@ -16,6 +16,7 @@ INTERFACES = [
     SyncInterface,
     SyncCollectionInterface,
     SyncHistoryInterface,
+    SyncPlaybackInterface,
     SyncRatingsInterface,
     SyncWatchedInterface,
     SyncWatchlistInterface
