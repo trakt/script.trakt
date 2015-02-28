@@ -151,16 +151,19 @@ class traktAPI(object):
 
 	def addToCollection(self, mediaObject):
 		with Trakt.configuration.auth(self.__username, self.__token):
-			result = Trakt['sync/collection'].add(mediaObject)
+			with Trakt.configuration.http(retry=True):
+				result = Trakt['sync/collection'].add(mediaObject)
 		return result
 
 	def removeFromCollection(self, mediaObject):
 		with Trakt.configuration.auth(self.__username, self.__token):
-			result = Trakt['sync/collection'].remove(mediaObject)
+			with Trakt.configuration.http(retry=True):
+				result = Trakt['sync/collection'].remove(mediaObject)
 		return result
 
 	def addToHistory(self, mediaObject):
 		with Trakt.configuration.auth(self.__username, self.__token):
+			#don't rtry this call it may cause multiple watches
 			result = Trakt['sync/history'].add(mediaObject)
 		return result
 
@@ -181,13 +184,15 @@ class traktAPI(object):
 	# Send a rating to trakt as mediaObject so we can add the rating
 	def addRating(self, mediaObject):
 		with Trakt.configuration.auth(self.__username, self.__token):
-			result = Trakt['sync/ratings'].add(mediaObject)
+			with Trakt.configuration.http(retry=True):
+				result = Trakt['sync/ratings'].add(mediaObject)
 		return result
 
 	# Send a rating to trakt as mediaObject so we can remove the rating
 	def removeRating(self, mediaObject):
 		with Trakt.configuration.auth(self.__username, self.__token):
-			result = Trakt['sync/ratings'].remove(mediaObject)
+			with Trakt.configuration.http(retry=True):
+				result = Trakt['sync/ratings'].remove(mediaObject)
 		return result
 
 	def getPlaybackProgress(self):
