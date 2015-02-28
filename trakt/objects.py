@@ -26,6 +26,7 @@ class Video(Media):
     def __init__(self, keys=None):
         super(Video, self).__init__(keys)
 
+        self.last_watched_at = None
         self.collected_at = None
         self.paused_at = None
 
@@ -42,6 +43,9 @@ class Video(Media):
             'plays',
             'progress'
         ])
+
+        if 'last_watched_at' in info:
+            self.last_watched_at = from_iso8601(info.get('last_watched_at'))
 
         if 'collected_at' in info:
             self.collected_at = from_iso8601(info.get('collected_at'))
@@ -176,6 +180,7 @@ class Episode(Video):
             'plays': self.plays if self.plays is not None else 0,
             'progress': self.progress,
 
+            'last_watched_at': to_iso8601(self.last_watched_at),
             'collected_at': to_iso8601(self.collected_at),
             'paused_at': to_iso8601(self.paused_at),
 
@@ -227,6 +232,7 @@ class Movie(Video):
             'plays': self.plays if self.plays is not None else 0,
             'progress': self.progress,
 
+            'last_watched_at': to_iso8601(self.last_watched_at),
             'collected_at': to_iso8601(self.collected_at),
             'paused_at': to_iso8601(self.paused_at)
         })
