@@ -195,20 +195,32 @@ class traktAPI(object):
 				result = Trakt['sync/ratings'].remove(mediaObject)
 		return result
 
-	def getPlaybackProgress(self):
+	def getMoviePlaybackProgress(self):
 
 		progressMovies = []
+
+		# Fetch playback
+		with Trakt.configuration.auth(self.__username, self.__token):
+			with Trakt.configuration.http(retry=True):
+				playback = Trakt['sync/playback'].movie(exceptions=True)
+
+				for key, item in playback.items():
+					if type(item) is Movie:
+						progressMovies.append(item)
+
+		return progressMovies
+
+	def getEpisodePlaybackProgress(self):
+
 		progressShows = []
 
 		# Fetch playback
 		with Trakt.configuration.auth(self.__username, self.__token):
 			with Trakt.configuration.http(retry=True):
-				playback = Trakt['sync'].playback(exceptions=True)
+				playback = Trakt['sync/playback'].shows(exceptions=True)
 
 				for key, item in playback.items():
-					if type(item) is Movie:
-						progressMovies.append(item)
-					elif type(item) is Show:
+					if type(item) is Show:
 						progressShows.append(item)
 
-		return progressMovies, progressShows
+		return progressShows
