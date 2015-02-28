@@ -196,7 +196,6 @@ class traktAPI(object):
 		return result
 
 	def getMoviePlaybackProgress(self):
-
 		progressMovies = []
 
 		# Fetch playback
@@ -211,7 +210,6 @@ class traktAPI(object):
 		return progressMovies
 
 	def getEpisodePlaybackProgress(self):
-
 		progressShows = []
 
 		# Fetch playback

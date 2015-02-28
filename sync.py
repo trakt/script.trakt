@@ -149,7 +149,7 @@ class Sync():
 				traktProgressShows = self.traktapi.getEpisodePlaybackProgress()
 			except Exception:
 				logger.debug("[Playback Sync] Invalid trakt.tv progress list, possible error getting data from trakt, aborting trakt.tv playback update.")
-				return False, False
+				return False
 
 			i = 0
 			x = float(len(traktProgressShows))
@@ -624,7 +624,7 @@ class Sync():
 				traktProgressMovies = self.traktapi.getMoviePlaybackProgress()
 			except Exception:
 				logger.debug("[Movies Sync] Invalid trakt.tv playback progress list, possible error getting data from trakt, aborting trakt.tv playback update.")
-				return False, False
+				return False
 
 			i = 0
 			x = float(len(traktProgressMovies))
