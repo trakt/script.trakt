@@ -1,10 +1,12 @@
 version 3.0.0
   - new trakt branded rating dialog (by Piers)
   - ported to trakt.tv api v2 (using trakt.py by fuzeman)
+  - added playback progress sync for movies
   - renamed everything from xbmc to kodi
   - more languages supported
   - send collected date from kodi to trakt
   - send watched date from kodi to trakt
+  - send watched times and last watched date from trakt to kodi
   - removed lists management and contextmenu (for now)
   - default rating is now a neutral 6 "Okay"
   - improved logging
