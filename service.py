@@ -9,7 +9,7 @@ from traktapi import traktAPI
 import globals
 from rating import rateMedia
 from scrobbler import Scrobbler
-import sqliteQueue
+import sqlitequeue
 from sync import Sync
 import utilities
 
@@ -19,7 +19,7 @@ class traktService:
 	scrobbler = None
 	updateTagsThread = None
 	syncThread = None
-	dispatchQueue = sqliteQueue.SqliteQueue()
+	dispatchQueue = sqlitequeue.SqliteQueue()
 	
 	def __init__(self):
 		threading.Thread.name = 'trakt'

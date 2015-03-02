@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import utilities as utils
 import xbmc
-import sqliteQueue
+import sqlitequeue
 import sys
 import logging
 
@@ -230,7 +230,7 @@ def Main():
 		# execute toggle watched action
 		xbmc.executebuiltin("Action(ToggleWatched)")
 
-	q = sqliteQueue.SqliteQueue()
+	q = sqlitequeue.SqliteQueue()
 	if 'action' in data:
 		logger.debug("Queuing for dispatch: %s" % data)
 		q.append(data)
