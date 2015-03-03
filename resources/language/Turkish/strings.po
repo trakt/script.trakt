@@ -28,13 +28,37 @@ msgctxt "#32002"
 msgid "Password"
 msgstr "Parola"
 
+msgctxt "#32003"
+msgid "Startup Delay"
+msgstr "Başlama gecikmesi"
+
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Derecelendirme"
 
+msgctxt "#32005"
+msgid "Rate Movie after watching"
+msgstr "İzledikten sonra filmi derecelendir"
+
+msgctxt "#32006"
+msgid "Rate TV show Episode after watching"
+msgstr "Televizyon yayını izledikten sonra derecelendir"
+
+msgctxt "#32010"
+msgid "Default rating"
+msgstr "Varsayılan derecelendirme"
+
+msgctxt "#32016"
+msgid "Exclusions"
+msgstr "İstisnalar"
+
 msgctxt "#32024"
 msgid "Error"
 msgstr "Hata"
+
+msgctxt "#32026"
+msgid "What Did You Think?"
+msgstr "Ne Düşünüyorsun?"
 
 msgctxt "#32033"
 msgid "Fair"

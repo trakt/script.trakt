@@ -86,15 +86,15 @@ msgstr "Wykluczenia"
 
 msgctxt "#32017"
 msgid "Exclude Live TV"
-msgstr "Wykluczaj programy telewizyjne"
+msgstr "Ignoruj programy telewizyjne"
 
 msgctxt "#32018"
 msgid "Exclude HTTP sources"
-msgstr "Wykluczaj źródła HTTP"
+msgstr "Ignoruj źródła HTTP"
 
 msgctxt "#32019"
 msgid "Exclude path"
-msgstr "Ścieżka wykluczenia"
+msgstr "Ignoruj ścieżkę"
 
 msgctxt "#32020"
 msgid "Folder's path (including subfolders)"

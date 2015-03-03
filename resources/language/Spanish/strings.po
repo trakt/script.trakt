@@ -50,7 +50,7 @@ msgstr "Valorar cada elemento de la lista de reproducción"
 
 msgctxt "#32008"
 msgid "Minimum percent watched to display rating dialog"
-msgstr "Porcentaje mínimo de visión para mostrar el cuadro de dialogo de valoración"
+msgstr "Porcentaje mínimo para mostrar el cuadro de valoración"
 
 msgctxt "#32009"
 msgid "Allow re-rating of media"
