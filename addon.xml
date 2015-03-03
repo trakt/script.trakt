@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.trakt" name="trakt" version="3.0.0~beta8" provider-name="trakt.tv">
+<addon id="script.trakt" name="trakt" version="3.0.0~beta9" provider-name="trakt.tv">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0"/>
 		<import addon="script.module.simplejson" version="3.3.0"/>
