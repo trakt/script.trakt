@@ -9,7 +9,7 @@
     <controls>
 
 	<control type="image">
-		<description>Background Fade</description>
+		<description>Fade</description>
 		<posx>-700</posx>
 		<posy>-500</posy>
 		<width>2200</width>
