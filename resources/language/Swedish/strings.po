@@ -34,31 +34,31 @@ msgstr "Uppstartsfördröjning"
 
 msgctxt "#32004"
 msgid "Rating"
-msgstr "Gradering"
+msgstr "Betyg"
 
 msgctxt "#32005"
 msgid "Rate Movie after watching"
-msgstr "Gradera film efter visning"
+msgstr "Betygsätt film efter visning"
 
 msgctxt "#32006"
 msgid "Rate TV show Episode after watching"
-msgstr "Gradera TV-serie avsnitt efter visning"
+msgstr "Betygsätt TV-serie avsnitt efter visning"
 
 msgctxt "#32007"
 msgid "Rate each playlist item"
-msgstr "Gradera spellistinnehåll "
+msgstr "Betygsätt spellistinnehåll "
 
 msgctxt "#32008"
 msgid "Minimum percent watched to display rating dialog"
-msgstr "Minst sedd andel (i procent) för att visa dialogruta för gradering"
+msgstr "Minst sedd andel (i procent) för att visa dialogruta för betygsättning"
 
 msgctxt "#32009"
 msgid "Allow re-rating of media"
-msgstr "Tillåt omgradering av media"
+msgstr "Tillåt ändring av betyg för media"
 
 msgctxt "#32010"
 msgid "Default rating"
-msgstr "Ursprungsgradering"
+msgstr "Ursprungsbetyg"
 
 msgctxt "#32011"
 msgid "Scrobbling"
@@ -166,35 +166,35 @@ msgstr "Utmärkt"
 
 msgctxt "#32037"
 msgid "Unrate this movie"
-msgstr "Tag bort gradering för denna film"
+msgstr "Tag bort betyg för denna film"
 
 msgctxt "#32038"
 msgid "Unrate this show"
-msgstr "Tag bort gradering för denna serie"
+msgstr "Tag bort betyg för denna serie"
 
 msgctxt "#32039"
 msgid "Unrate this episode"
-msgstr "Tag bort gradering för detta avsnitt"
+msgstr "Tag bort betyg för detta avsnitt"
 
 msgctxt "#32040"
 msgid "trakt - Rating submitted successfully"
-msgstr "trakt - Gradering togs emot"
+msgstr "trakt - Betyg togs emot"
 
 msgctxt "#32041"
 msgid "trakt - Already rated"
-msgstr "trakt - Redan graderad"
+msgstr "trakt - Redan betygsatt"
 
 msgctxt "#32042"
 msgid "trakt - Unrated successfully"
-msgstr "trakt - Gradering borttagen"
+msgstr "trakt - Betyg borttagen"
 
 msgctxt "#32043"
 msgid "trakt - Already has the same rating"
-msgstr "trakt - Har redan samma gradering"
+msgstr "trakt - Har redan samma betyg"
 
 msgctxt "#32044"
 msgid "trakt - Problem submitting rating"
-msgstr "trakt - Problem att ta emot gradering"
+msgstr "trakt - Problem att ta avge betyg"
 
 msgctxt "#32045"
 msgid "Synchronize"
@@ -278,7 +278,7 @@ msgstr "%i film uppspelning(ar) kommer att läggas till trakt"
 
 msgctxt "#32065"
 msgid "%i movie(s) playcount will be updated in Kodi"
-msgstr "%i film uppspelning(ar) kommer att läggas till Kodi"
+msgstr "%i film(s/ers) uppspelningar kommer att uppdateras i Kodi"
 
 msgctxt "#32066"
 msgid "Movie Sync Complete"

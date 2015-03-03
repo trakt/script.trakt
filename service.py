@@ -9,7 +9,7 @@ from traktapi import traktAPI
 import globals
 from rating import rateMedia
 from scrobbler import Scrobbler
-import sqliteQueue
+import sqlitequeue
 from sync import Sync
 import utilities
 
@@ -19,7 +19,7 @@ class traktService:
 	scrobbler = None
 	updateTagsThread = None
 	syncThread = None
-	dispatchQueue = sqliteQueue.SqliteQueue()
+	dispatchQueue = sqlitequeue.SqliteQueue()
 	
 	def __init__(self):
 		threading.Thread.name = 'trakt'
@@ -356,7 +356,7 @@ class traktPlayer(xbmc.Player):
 			data = {'action': 'started'}
 
 			# check type of item
-			if self.type == 'unknown':
+			if 'id' not in result['item']:
 				# do a deeper check to see if we have enough data to perform scrobbles
 				logger.debug("[traktPlayer] onPlayBackStarted() - Started playing a non-library file, checking available data.")
 				

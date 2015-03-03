@@ -34,7 +34,7 @@ msgstr "Forsinket start"
 
 msgctxt "#32004"
 msgid "Rating"
-msgstr "Bedømmelse"
+msgstr "Vurdering"
 
 msgctxt "#32005"
 msgid "Rate Movie after watching"
@@ -102,7 +102,7 @@ msgstr "Mappe-stier (inklusiv undermapper)"
 
 msgctxt "#32021"
 msgid "Enter your Username and Password in settings"
-msgstr "Indtast dit bruger ogpassword under indstillinger"
+msgstr "Indtast dit brugernavn og password under indstillinger"
 
 msgctxt "#32022"
 msgid "Enter your Password in settings"
@@ -186,11 +186,11 @@ msgstr "trakt - Allerede vurderet"
 
 msgctxt "#32042"
 msgid "trakt - Unrated successfully"
-msgstr "trakt - Vurdering sendt"
+msgstr "trakt - Vurdering fjernet"
 
 msgctxt "#32043"
 msgid "trakt - Already has the same rating"
-msgstr "trakt - Tidligere samme vurdering"
+msgstr "trakt - Har allerede samme vurdering"
 
 msgctxt "#32044"
 msgid "trakt - Problem submitting rating"
@@ -214,11 +214,11 @@ msgstr "Tilføj sete film til trakt-historie"
 
 msgctxt "#32049"
 msgid "Mark movies from trakt history as watched in Kodi"
-msgstr "Marker film from trakt-historie som sete i Kodi"
+msgstr "Marker film fra trakt-historie som sete i Kodi"
 
 msgctxt "#32050"
 msgid "TV Episodes"
-msgstr "TV afsnit"
+msgstr "TV-afsnit"
 
 msgctxt "#32051"
 msgid "Add new TV episodes to trakt collection"
@@ -230,7 +230,7 @@ msgstr "Tilføj sete TV-afsnit til trakt-historie"
 
 msgctxt "#32053"
 msgid "Mark TV episodes from trakt history as watched in Kodi"
-msgstr "Marker TV-afsnit from trakt-historie som sete i Kodi"
+msgstr "Marker TV-afsnit fra trakt-historie som sete i Kodi"
 
 msgctxt "#32054"
 msgid "Service"
@@ -258,7 +258,7 @@ msgstr "Vis markeret som set notifikation"
 
 msgctxt "#32060"
 msgid "Hide notifications during playback"
-msgstr "Skjul notifikation under afspilning"
+msgstr "Skjul notifikationer under afspilning"
 
 msgctxt "#32061"
 msgid "Sync started"
@@ -274,11 +274,11 @@ msgstr "%i film vil blive tilføjet til trakt-samling"
 
 msgctxt "#32064"
 msgid "%i movie playcount(s) will be updated on trakt"
-msgstr "%i film afspilninger blive opdateret på trakt"
+msgstr "%i film afspilning(er) vil blive opdateret på trakt"
 
 msgctxt "#32065"
 msgid "%i movie(s) playcount will be updated in Kodi"
-msgstr "%i film afspilninger blive opdateret i Kodi"
+msgstr "%i film afspilning(er) vil blive opdateret i Kodi"
 
 msgctxt "#32066"
 msgid "Movie Sync Complete"
@@ -286,7 +286,7 @@ msgstr "Film synkronisering færdig"
 
 msgctxt "#32067"
 msgid "Going to add %i show(s) to trakt collection"
-msgstr "Tilføjer %i serier til trakt-samling"
+msgstr "Tilføjer %i serie(r) til trakt-samling"
 
 msgctxt "#32068"
 msgid "Checking for episodes missing from trakt collection"
@@ -294,11 +294,11 @@ msgstr "Søger efter manglende afsnit i trakt-samling"
 
 msgctxt "#32069"
 msgid "%i of %i show(s) have episodes added to trakt collection"
-msgstr "%i af %i serier har fået tilføjet afsnit til trakt-samling"
+msgstr "%i af %i serie(r) har fået tilføjet afsnit til trakt-samling"
 
 msgctxt "#32070"
 msgid "Going to update %i show(s) missing watched status"
-msgstr "Opdaterer %i serier's set status"
+msgstr "Opdaterer %i serie(r)'s set status"
 
 msgctxt "#32071"
 msgid "Checking watched episodes on trakt"
@@ -306,7 +306,7 @@ msgstr "Undersøger sete afsnit på trakt"
 
 msgctxt "#32072"
 msgid "%i show(s) had missing watched status"
-msgstr "%i serier mangler set status"
+msgstr "%i serier() mangler set status"
 
 msgctxt "#32073"
 msgid "%i episodes are being updated"
@@ -350,7 +350,7 @@ msgstr "Henter sete film fra trakt"
 
 msgctxt "#32083"
 msgid "Retrieved movie data from trakt"
-msgstr "Sete film hentet fra trakt"
+msgstr "Film data hentet fra trakt"
 
 msgctxt "#32084"
 msgid "trakt movie collection is up to date, no movies to add"
@@ -378,7 +378,7 @@ msgstr "Opdaterer %i af %i filmafspilnings antal i Kodi"
 
 msgctxt "#32090"
 msgid "Playcounts updated for %i movie(s) in Kodi"
-msgstr "Filmafspilnings antal opdateret %i Kodi"
+msgstr "Filmafspilnings antal opdateret for %i film i Kodi"
 
 msgctxt "#32091"
 msgid "trakt movie collection is up to date, no movies removed"
@@ -406,19 +406,19 @@ msgstr "Serier indlæst fra Kodi"
 
 msgctxt "#32097"
 msgid "Parsing %i of %i episode data from Kodi"
-msgstr "Indlæser %i af %i TV-data fra Kodi"
+msgstr "Indlæser %i af %i afsnit data fra Kodi"
 
 msgctxt "#32098"
 msgid "Loaded episode data from Kodi"
-msgstr "Indlæser serie-data fra Kodi"
+msgstr "Indlæser afsnit data fra Kodi"
 
 msgctxt "#32099"
 msgid "Loading episode data from trakt"
-msgstr "Indlæser serie-data fra trakt"
+msgstr "Indlæser afsnit data fra trakt"
 
 msgctxt "#32100"
 msgid "Retrieving episode collection from trakt"
-msgstr "Henter serie-data fra trakt"
+msgstr "Henter afsnit-samling fra trakt"
 
 msgctxt "#32101"
 msgid "Retrieving watched episodes from trakt"
@@ -426,15 +426,15 @@ msgstr "Henter sete afsnit fra trakt"
 
 msgctxt "#32102"
 msgid "Parsing episode data %i of %i from trakt"
-msgstr "Indlæser serie-data %i af %i fra trakt"
+msgstr "Indlæser afsnit data %i af %i fra trakt"
 
 msgctxt "#32103"
 msgid "Retrieved episode data from trakt"
-msgstr "Serie-data hentet fra trakt"
+msgstr "Afsnit data hentet fra trakt"
 
 msgctxt "#32104"
 msgid "trakt episode collection is up to date, no episodes to add"
-msgstr "Serie-data er opdateret. Ingen afsnit at tilføje"
+msgstr "trakt afsnit-samling er opdateret. Ingen afsnit at tilføje"
 
 msgctxt "#32105"
 msgid "%i episode(s) were added to your trakt collection"
@@ -454,11 +454,11 @@ msgstr "Opdaterer %i af %i afsnit afspilningsantal i Kodi"
 
 msgctxt "#32109"
 msgid "Playcounts updated for %i show(s) in Kodi"
-msgstr "Afspilningsantal for %i serier opdateret i Kodi"
+msgstr "Afspilningsantal for %i serie(r) opdateret i Kodi"
 
 msgctxt "#32110"
 msgid "trakt episode collection is clean, no episodes to remove"
-msgstr "TV-samlingen er ryddet op. Ingen afsnit fjernes"
+msgstr "trakt afsnit-samling er ryddet op. Ingen afsnit fjernes"
 
 msgctxt "#32111"
 msgid "%i episode(s) are being removed from your trakt collection"
