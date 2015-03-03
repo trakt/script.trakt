@@ -34,7 +34,6 @@ msgctxt "#32003"
 msgid "Startup Delay"
 msgstr ""
 
-#Rating Settings
 msgctxt "#32004"
 msgid "Rating"
 msgstr ""
@@ -105,7 +104,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr ""
 
-#General Notifications
 msgctxt "#32021"
 msgid "Enter your Username and Password in settings"
 msgstr ""
@@ -126,7 +124,6 @@ msgctxt "#32025"
 msgid "Incorrect username or password"
 msgstr ""
 
-#Rating Dialog
 msgctxt "#32026"
 msgid "What Did You Think?"
 msgstr ""
@@ -183,7 +180,6 @@ msgctxt "#32039"
 msgid "Unrate this episode"
 msgstr ""
 
-#Manual Rating Notifications
 msgctxt "#32040"
 msgid "trakt - Rating submitted successfully"
 msgstr ""
@@ -204,7 +200,6 @@ msgctxt "#32044"
 msgid "trakt - Problem submitting rating"
 msgstr ""
 
-#Sync Settings
 msgctxt "#32045"
 msgid "Synchronize"
 msgstr ""
@@ -269,8 +264,6 @@ msgctxt "#32060"
 msgid "Hide notifications during playback"
 msgstr ""
 
-
-#Sync Notifications
 msgctxt "#32061"
 msgid "Sync started"
 msgstr ""
@@ -291,7 +284,6 @@ msgctxt "#32065"
 msgid "%i movie(s) playcount will be updated in Kodi"
 msgstr ""
 
-#Sync Movies - complete
 msgctxt "#32066"
 msgid "Movie Sync Complete"
 msgstr ""
@@ -300,7 +292,6 @@ msgctxt "#32067"
 msgid "Going to add %i show(s) to trakt collection"
 msgstr ""
 
-#Sync Episodes - add to trakt
 msgctxt "#32068"
 msgid "Checking for episodes missing from trakt collection"
 msgstr ""
@@ -313,7 +304,6 @@ msgctxt "#32070"
 msgid "Going to update %i show(s) missing watched status"
 msgstr ""
 
-#Sync Episodes - update trakt
 msgctxt "#32071"
 msgid "Checking watched episodes on trakt"
 msgstr ""
@@ -326,12 +316,10 @@ msgctxt "#32073"
 msgid "%i episodes are being updated"
 msgstr ""
 
-#Sync Episodes - update Kodi
 msgctxt "#32074"
 msgid "Checking watched episodes on Kodi"
 msgstr ""
 
-#Sync Episodes - complete
 msgctxt "#32075"
 msgid "Episode Sync Complete"
 msgstr ""
@@ -340,7 +328,6 @@ msgctxt "#32076"
 msgid "%i movie(s) will be removed from trakt collection"
 msgstr ""
 
-#Sync Episodes - clean trakt
 msgctxt "#32077"
 msgid "Cleaning trakt TV show collection"
 msgstr ""
@@ -349,7 +336,6 @@ msgctxt "#32078"
 msgid "episodes are being removed"
 msgstr ""
 
-#Sync Movies - load from Kodi
 msgctxt "#32079"
 msgid "Loading movies from Kodi"
 msgstr ""
@@ -358,7 +344,6 @@ msgctxt "#32080"
 msgid "Movies loaded from Kodi"
 msgstr ""
 
-#Sync Movies - load from trakt
 msgctxt "#32081"
 msgid "Retrieving movie collection from trakt"
 msgstr ""
@@ -371,7 +356,6 @@ msgctxt "#32083"
 msgid "Retrieved movie data from trakt"
 msgstr ""
 
-#Sync Movies - add to trakt
 msgctxt "#32084"
 msgid "trakt movie collection is up to date, no movies to add"
 msgstr ""
@@ -380,7 +364,6 @@ msgctxt "#32085"
 msgid "%i movie(s) were added to your trakt collection"
 msgstr ""
 
-#Sync Movies - update trakt
 msgctxt "#32086"
 msgid "trakt movie playcounts are up to date"
 msgstr ""
@@ -389,7 +372,6 @@ msgctxt "#32087"
 msgid "Playcounts updated for %i movie(s) on trakt"
 msgstr ""
 
-#Sync Movies - update Kodi
 msgctxt "#32088"
 msgid "Kodi movie playcounts are up to date"
 msgstr ""
@@ -402,7 +384,6 @@ msgctxt "#32090"
 msgid "Playcounts updated for %i movie(s) in Kodi"
 msgstr ""
 
-#Sync Movies - clean trakt
 msgctxt "#32091"
 msgid "trakt movie collection is up to date, no movies removed"
 msgstr ""
@@ -415,7 +396,6 @@ msgctxt "#32093"
 msgid "Updating %i of %i movie playcount(s) on trakt"
 msgstr ""
 
-#Sync Episodes - load from Kodi
 msgctxt "#32094"
 msgid "Loading episode data from Kodi"
 msgstr ""
@@ -436,7 +416,6 @@ msgctxt "#32098"
 msgid "Loaded episode data from Kodi"
 msgstr ""
 
-#Sync Episodes - load from trakt
 msgctxt "#32099"
 msgid "Loading episode data from trakt"
 msgstr ""
@@ -493,7 +472,6 @@ msgctxt "#32112"
 msgid "%i episode(s) were removed from your trakt collection"
 msgstr ""
 
-#Sync - manual mark watched
 msgctxt "#32113"
 msgid "trakt - Marked as watched"
 msgstr ""
