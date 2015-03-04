@@ -521,15 +521,15 @@ msgid "Retrieved movie playback progress from trakt"
 msgstr ""
 
 msgctxt "#32125"
-msgid "Kodi movie playback progress are up to date"
+msgid "Kodi movie playback progress is up to date"
 msgstr ""
 
 msgctxt "#32126"
-msgid "%i movie playback progress will be updated in Kodi"
+msgid "%i movie(s) playback progress will be updated in Kodi"
 msgstr ""
 
 msgctxt "#32127"
-msgid "Updating %i of %i movie playback progress in Kodi"
+msgid "Updating %i of %i movie(s) playback progress in Kodi"
 msgstr ""
 
 msgctxt "#32128"
@@ -537,13 +537,13 @@ msgid "Playback progress updated for %i movie(s) in Kodi"
 msgstr ""
 
 msgctxt "#32129"
-msgid "Kodi episode playback progress are up to date"
+msgid "Kodi episode playback progress is up to date"
 msgstr ""
 
 msgctxt "#32130"
-msgid "Updating %i of %i episode playback progress in Kodi"
+msgid "Updating %i of %i episode(s) playback progress in Kodi"
 msgstr ""
 
 msgctxt "#32131"
-msgid "Playback progress updated for %i show(s) in Kodi"
+msgid "Playback progress updated for %i episode(s) in Kodi"
 msgstr ""
