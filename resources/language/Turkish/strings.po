@@ -1,0 +1,73 @@
+# Kodi Media Center language file
+# Addon Name: trakt
+# Addon id: script.trakt
+# Addon Provider: trakt.tv
+msgid ""
+msgstr ""
+"Project-Id-Version: XBMC Addons\n"
+"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Turkish (http://www.transifex.com/projects/p/xbmc-addons/language/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgctxt "#32000"
+msgid "General"
+msgstr "Genel"
+
+msgctxt "#32001"
+msgid "Username"
+msgstr "Kullanıcı adı"
+
+msgctxt "#32002"
+msgid "Password"
+msgstr "Parola"
+
+msgctxt "#32003"
+msgid "Startup Delay"
+msgstr "Başlama gecikmesi"
+
+msgctxt "#32004"
+msgid "Rating"
+msgstr "Derecelendirme"
+
+msgctxt "#32005"
+msgid "Rate Movie after watching"
+msgstr "İzledikten sonra filmi derecelendir"
+
+msgctxt "#32006"
+msgid "Rate TV show Episode after watching"
+msgstr "Televizyon yayını izledikten sonra derecelendir"
+
+msgctxt "#32010"
+msgid "Default rating"
+msgstr "Varsayılan derecelendirme"
+
+msgctxt "#32016"
+msgid "Exclusions"
+msgstr "İstisnalar"
+
+msgctxt "#32024"
+msgid "Error"
+msgstr "Hata"
+
+msgctxt "#32026"
+msgid "What Did You Think?"
+msgstr "Ne Düşünüyorsun?"
+
+msgctxt "#32033"
+msgid "Fair"
+msgstr "Güzel"
+
+msgctxt "#32046"
+msgid "Movies"
+msgstr "Filmler"
+
+msgctxt "#32054"
+msgid "Service"
+msgstr "Hizmet"
