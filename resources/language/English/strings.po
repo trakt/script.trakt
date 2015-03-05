@@ -81,7 +81,7 @@ msgid "Show notification on scrobble"
 msgstr ""
 
 msgctxt "#32015"
-msgid "trakt - Scrobbled successfully"
+msgid "Trakt - Scrobbled successfully"
 msgstr ""
 
 msgctxt "#32016"
@@ -113,7 +113,7 @@ msgid "Enter your Password in settings"
 msgstr ""
 
 msgctxt "#32023"
-msgid "Can not connect to trakt"
+msgid "Can not connect to Trakt"
 msgstr ""
 
 msgctxt "#32024"
@@ -181,23 +181,23 @@ msgid "Unrate this episode"
 msgstr ""
 
 msgctxt "#32040"
-msgid "trakt - Rating submitted successfully"
+msgid "Trakt - Rating submitted successfully"
 msgstr ""
 
 msgctxt "#32041"
-msgid "trakt - Already rated"
+msgid "Trakt - Already rated"
 msgstr ""
 
 msgctxt "#32042"
-msgid "trakt - Unrated successfully"
+msgid "Trakt - Unrated successfully"
 msgstr ""
 
 msgctxt "#32043"
-msgid "trakt - Already has the same rating"
+msgid "Trakt - Already has the same rating"
 msgstr ""
 
 msgctxt "#32044"
-msgid "trakt - Problem submitting rating"
+msgid "Trakt - Problem submitting rating"
 msgstr ""
 
 msgctxt "#32045"
@@ -209,15 +209,15 @@ msgid "Movies"
 msgstr ""
 
 msgctxt "#32047"
-msgid "Add new movies to trakt collection"
+msgid "Add new movies to Trakt collection"
 msgstr ""
 
 msgctxt "#32048"
-msgid "Add watched movies to trakt history"
+msgid "Add watched movies to Trakt history"
 msgstr ""
 
 msgctxt "#32049"
-msgid "Mark movies from trakt history as watched in Kodi"
+msgid "Mark movies from Trakt history as watched in Kodi"
 msgstr ""
 
 msgctxt "#32050"
@@ -225,15 +225,15 @@ msgid "TV Episodes"
 msgstr ""
 
 msgctxt "#32051"
-msgid "Add new TV episodes to trakt collection"
+msgid "Add new TV episodes to Trakt collection"
 msgstr ""
 
 msgctxt "#32052"
-msgid "Add watched TV episodes to trakt history"
+msgid "Add watched TV episodes to Trakt history"
 msgstr ""
 
 msgctxt "#32053"
-msgid "Mark TV episodes from trakt history as watched in Kodi"
+msgid "Mark TV episodes from Trakt history as watched in Kodi"
 msgstr ""
 
 msgctxt "#32054"
@@ -249,11 +249,11 @@ msgid "Show notifications"
 msgstr ""
 
 msgctxt "#32057"
-msgid "Remove deleted movies from trakt collection"
+msgid "Remove deleted movies from Trakt collection"
 msgstr ""
 
 msgctxt "#32058"
-msgid "Remove deleted TV episodes from trakt collection"
+msgid "Remove deleted TV episodes from Trakt collection"
 msgstr ""
 
 msgctxt "#32059"
@@ -273,11 +273,11 @@ msgid "Sync complete"
 msgstr ""
 
 msgctxt "#32063"
-msgid "%i movie(s) will be added to trakt collection"
+msgid "%i movie(s) will be added to Trakt collection"
 msgstr ""
 
 msgctxt "#32064"
-msgid "%i movie playcount(s) will be updated on trakt"
+msgid "%i movie playcount(s) will be updated on Trakt"
 msgstr ""
 
 msgctxt "#32065"
@@ -289,15 +289,15 @@ msgid "Movie Sync Complete"
 msgstr ""
 
 msgctxt "#32067"
-msgid "Going to add %i show(s) to trakt collection"
+msgid "Going to add %i show(s) to Trakt collection"
 msgstr ""
 
 msgctxt "#32068"
-msgid "Checking for episodes missing from trakt collection"
+msgid "Checking for episodes missing from Trakt collection"
 msgstr ""
 
 msgctxt "#32069"
-msgid "%i of %i show(s) have episodes added to trakt collection"
+msgid "%i of %i show(s) have episodes added to Trakt collection"
 msgstr ""
 
 msgctxt "#32070"
@@ -305,7 +305,7 @@ msgid "Going to update %i show(s) missing watched status"
 msgstr ""
 
 msgctxt "#32071"
-msgid "Checking watched episodes on trakt"
+msgid "Checking watched episodes on Trakt"
 msgstr ""
 
 msgctxt "#32072"
@@ -325,11 +325,11 @@ msgid "Episode Sync Complete"
 msgstr ""
 
 msgctxt "#32076"
-msgid "%i movie(s) will be removed from trakt collection"
+msgid "%i movie(s) will be removed from Trakt collection"
 msgstr ""
 
 msgctxt "#32077"
-msgid "Cleaning trakt TV show collection"
+msgid "Cleaning Trakt TV show collection"
 msgstr ""
 
 msgctxt "#32078"
@@ -345,31 +345,31 @@ msgid "Movies loaded from Kodi"
 msgstr ""
 
 msgctxt "#32081"
-msgid "Retrieving movie collection from trakt"
+msgid "Retrieving movie collection from Trakt"
 msgstr ""
 
 msgctxt "#32082"
-msgid "Retrieving watched movies from trakt"
+msgid "Retrieving watched movies from Trakt"
 msgstr ""
 
 msgctxt "#32083"
-msgid "Retrieved movie data from trakt"
+msgid "Retrieved movie data from Trakt"
 msgstr ""
 
 msgctxt "#32084"
-msgid "trakt movie collection is up to date, no movies to add"
+msgid "Trakt movie collection is up to date, no movies to add"
 msgstr ""
 
 msgctxt "#32085"
-msgid "%i movie(s) were added to your trakt collection"
+msgid "%i movie(s) were added to your Trakt collection"
 msgstr ""
 
 msgctxt "#32086"
-msgid "trakt movie playcounts are up to date"
+msgid "Trakt movie playcounts are up to date"
 msgstr ""
 
 msgctxt "#32087"
-msgid "Playcounts updated for %i movie(s) on trakt"
+msgid "Playcounts updated for %i movie(s) on Trakt"
 msgstr ""
 
 msgctxt "#32088"
@@ -385,15 +385,15 @@ msgid "Playcounts updated for %i movie(s) in Kodi"
 msgstr ""
 
 msgctxt "#32091"
-msgid "trakt movie collection is up to date, no movies removed"
+msgid "Trakt movie collection is up to date, no movies removed"
 msgstr ""
 
 msgctxt "#32092"
-msgid "%i movie(s) were removed from your trakt collection"
+msgid "%i movie(s) were removed from your Trakt collection"
 msgstr ""
 
 msgctxt "#32093"
-msgid "Updating %i of %i movie playcount(s) on trakt"
+msgid "Updating %i of %i movie playcount(s) on Trakt"
 msgstr ""
 
 msgctxt "#32094"
@@ -417,35 +417,35 @@ msgid "Loaded episode data from Kodi"
 msgstr ""
 
 msgctxt "#32099"
-msgid "Loading episode data from trakt"
+msgid "Loading episode data from Trakt"
 msgstr ""
 
 msgctxt "#32100"
-msgid "Retrieving episode collection from trakt"
+msgid "Retrieving episode collection from Trakt"
 msgstr ""
 
 msgctxt "#32101"
-msgid "Retrieving watched episodes from trakt"
+msgid "Retrieving watched episodes from Trakt"
 msgstr ""
 
 msgctxt "#32102"
-msgid "Parsing episode data %i of %i from trakt"
+msgid "Parsing episode data %i of %i from Trakt"
 msgstr ""
 
 msgctxt "#32103"
-msgid "Retrieved episode data from trakt"
+msgid "Retrieved episode data from Trakt"
 msgstr ""
 
 msgctxt "#32104"
-msgid "trakt episode collection is up to date, no episodes to add"
+msgid "Trakt episode collection is up to date, no episodes to add"
 msgstr ""
 
 msgctxt "#32105"
-msgid "%i episode(s) were added to your trakt collection"
+msgid "%i episode(s) were added to your Trakt collection"
 msgstr ""
 
 msgctxt "#32106"
-msgid "trakt episode playcounts are up to date"
+msgid "Trakt episode playcounts are up to date"
 msgstr ""
 
 msgctxt "#32107"
@@ -461,23 +461,23 @@ msgid "Playcounts updated for %i show(s) in Kodi"
 msgstr ""
 
 msgctxt "#32110"
-msgid "trakt episode collection is clean, no episodes to remove"
+msgid "Trakt episode collection is clean, no episodes to remove"
 msgstr ""
 
 msgctxt "#32111"
-msgid "%i episode(s) are being removed from your trakt collection"
+msgid "%i episode(s) are being removed from your Trakt collection"
 msgstr ""
 
 msgctxt "#32112"
-msgid "%i episode(s) were removed from your trakt collection"
+msgid "%i episode(s) were removed from your Trakt collection"
 msgstr ""
 
 msgctxt "#32113"
-msgid "trakt - Marked as watched"
+msgid "Trakt - Marked as watched"
 msgstr ""
 
 msgctxt "#32114"
-msgid "trakt - Failed marking as watched"
+msgid "Trakt - Failed marking as watched"
 msgstr ""
 
 msgctxt "#32115"
@@ -497,27 +497,27 @@ msgid "Sync episode playback progress to Kodi"
 msgstr ""
 
 msgctxt "#32119"
-msgid "Retrieving episode playback progress from trakt"
+msgid "Retrieving episode playback progress from Trakt"
 msgstr ""
 
 msgctxt "#32120"
-msgid "Parsing episode playback progress %i of %i from trakt"
+msgid "Parsing episode playback progress %i of %i from Trakt"
 msgstr ""
 
 msgctxt "#32121"
-msgid "Retrieved episode playback progress from trakt"
+msgid "Retrieved episode playback progress from Trakt"
 msgstr ""
 
 msgctxt "#32122"
-msgid "Retrieving movie playback progress from trakt"
+msgid "Retrieving movie playback progress from Trakt"
 msgstr ""
 
 msgctxt "#32123"
-msgid "Parsing movie playback progress %i of %i from trakt"
+msgid "Parsing movie playback progress %i of %i from Trakt"
 msgstr ""
 
 msgctxt "#32124"
-msgid "Retrieved movie playback progress from trakt"
+msgid "Retrieved movie playback progress from Trakt"
 msgstr ""
 
 msgctxt "#32125"

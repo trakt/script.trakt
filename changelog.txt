@@ -1,12 +1,12 @@
 version 3.0.0
-  - new trakt branded rating dialog (by Piers)
-  - ported to trakt.tv api v2 (using trakt.py by fuzeman)
+  - new Trakt branded rating dialog (by Piers)
+  - ported to Trakt.tv api v2 (using trakt.py by fuzeman)
   - added playback progress sync for movies
   - renamed everything from xbmc to kodi
   - more languages supported
-  - send collected date from kodi to trakt
-  - send watched date from kodi to trakt
-  - send watched times and last watched date from trakt to kodi
+  - send collected date from kodi to Trakt
+  - send watched date from kodi to Trakt
+  - send watched times and last watched date from Trakt to kodi
   - removed lists management and contextmenu (for now)
   - default rating is now a neutral 6 "Okay"
   - improved logging
@@ -50,9 +50,9 @@ version 2.1.0
 version 2.0.0
   - compatible with Frodo only, Eden support dropped
   - supports absolute and dvd ordering (mizaki)
-  - sync your TV episode and movie collections to trakt (N3MIS15)
-  - auto clean your trakt collection so that it matches up with XBMC (N3MIS15)
-  - keep watched statuses synced between XBMC and trakt (N3MIS15)
+  - sync your TV episode and movie collections to Trakt (N3MIS15)
+  - auto clean your Trakt collection so that it matches up with XBMC (N3MIS15)
+  - keep watched statuses synced between XBMC and Trakt (N3MIS15)
   - retry the telnet connection to prevent timeouts (sschocke)
   - fixed authentication issue for incorrect username/password
   - default to HTTPS on

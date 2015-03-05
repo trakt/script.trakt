@@ -53,9 +53,9 @@ class traktAPI(object):
 
 	def getToken(self):
 		if not self.__username and not self.__password:
-			notification('trakt', getString(32021)) #Username and password error
+			notification('Trakt', getString(32021)) #Username and password error
 		elif not self.__password:
-			notification('trakt', getString(32022)) #Password error
+			notification('Trakt', getString(32022)) #Password error
 		else:
 			# Attempt authentication (retrieve new token)
 			with Trakt.configuration.http(retry=True):
@@ -65,12 +65,12 @@ class traktAPI(object):
 						self.__token = auth
 					else:
 						logger.debug("Authentication Failure")
-						notification('trakt', getString(32025))
+						notification('Trakt', getString(32025))
 				except Exception as ex:
 					message = createError(ex)
 					logger.fatal(message)
 					logger.debug("Cannot connect to server")
-					notification('trakt', getString(32023))
+					notification('Trakt', getString(32023))
 
 
 
@@ -181,14 +181,14 @@ class traktAPI(object):
 				Trakt['sync/ratings'].movies(ratings)
 		return findMovieMatchInList(imdbId, ratings)
 
-	# Send a rating to trakt as mediaObject so we can add the rating
+	# Send a rating to Trakt as mediaObject so we can add the rating
 	def addRating(self, mediaObject):
 		with Trakt.configuration.auth(self.__username, self.__token):
 			with Trakt.configuration.http(retry=True):
 				result = Trakt['sync/ratings'].add(mediaObject)
 		return result
 
-	# Send a rating to trakt as mediaObject so we can remove the rating
+	# Send a rating to Trakt as mediaObject so we can remove the rating
 	def removeRating(self, mediaObject):
 		with Trakt.configuration.auth(self.__username, self.__token):
 			with Trakt.configuration.http(retry=True):

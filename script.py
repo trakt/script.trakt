@@ -224,7 +224,7 @@ def Main():
 					return
 
 			if len(data) > 1:
-				logger.debug("Marking '%s' with the following data '%s' as watched on trakt.tv" % (media_type, str(data)))
+				logger.debug("Marking '%s' with the following data '%s' as watched on Trakt.tv" % (media_type, str(data)))
 				data['action'] = 'markWatched'
 
 		# execute toggle watched action
