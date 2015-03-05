@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Module used to launch rating dialogues and send ratings to trakt"""
+"""Module used to launch rating dialogues and send ratings to Trakt"""
 
 import xbmc
 import xbmcaddon
@@ -108,7 +108,7 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 	del gui
 
 def __rateOnTrakt(rating, media_type, media, unrate=False):
-	logger.debug("Sending rating (%s) to trakt.tv" % rating)
+	logger.debug("Sending rating (%s) to Trakt.tv" % rating)
 
 	params = {}
 	

@@ -77,7 +77,7 @@ msgid "Show notification on scrobble"
 msgstr "Pokazuj powiadomienia o rejestrowaniu odtwarzania"
 
 msgctxt "#32015"
-msgid "trakt - Scrobbled successfully"
+msgid "Trakt - Scrobbled successfully"
 msgstr "Trakt - Rejestracja odtwarzania zakończona powodzeniem"
 
 msgctxt "#32016"
@@ -109,7 +109,7 @@ msgid "Enter your Password in settings"
 msgstr "Wprowadź hasło użytkownika w ustawieniach"
 
 msgctxt "#32023"
-msgid "Can not connect to trakt"
+msgid "Can not connect to Trakt"
 msgstr "Nieudane połączenie z serwisem Trakt"
 
 msgctxt "#32024"
@@ -177,23 +177,23 @@ msgid "Unrate this episode"
 msgstr "Wyczyść ocenę tego odcinka"
 
 msgctxt "#32040"
-msgid "trakt - Rating submitted successfully"
+msgid "Trakt - Rating submitted successfully"
 msgstr "Trakt - Przesyłanie oceny zakończone powodzeniem"
 
 msgctxt "#32041"
-msgid "trakt - Already rated"
+msgid "Trakt - Already rated"
 msgstr "Trakt - Wcześniej ocenione"
 
 msgctxt "#32042"
-msgid "trakt - Unrated successfully"
+msgid "Trakt - Unrated successfully"
 msgstr "Trakt - Czyszczenie oceny zakończone powodzeniem"
 
 msgctxt "#32043"
-msgid "trakt - Already has the same rating"
+msgid "Trakt - Already has the same rating"
 msgstr "Trakt - Poprzednia ocena jest identyczna"
 
 msgctxt "#32044"
-msgid "trakt - Problem submitting rating"
+msgid "Trakt - Problem submitting rating"
 msgstr "Trakt - Przesyłanie oceny zakończone niepowodzeniem"
 
 msgctxt "#32045"
@@ -205,15 +205,15 @@ msgid "Movies"
 msgstr "Filmy"
 
 msgctxt "#32047"
-msgid "Add new movies to trakt collection"
+msgid "Add new movies to Trakt collection"
 msgstr "Dodawaj nowe filmy do kolekcji Trakt"
 
 msgctxt "#32048"
-msgid "Add watched movies to trakt history"
+msgid "Add watched movies to Trakt history"
 msgstr "Dodawaj obejrzane filmy do kolekcji Trakt"
 
 msgctxt "#32049"
-msgid "Mark movies from trakt history as watched in Kodi"
+msgid "Mark movies from Trakt history as watched in Kodi"
 msgstr "Oznaczaj filmy z historii Trakt jako obejrzane w bibliotece Kodi"
 
 msgctxt "#32050"
@@ -221,15 +221,15 @@ msgid "TV Episodes"
 msgstr "Odcinki"
 
 msgctxt "#32051"
-msgid "Add new TV episodes to trakt collection"
+msgid "Add new TV episodes to Trakt collection"
 msgstr "Dodawaj nowe odcinki seriali do kolekcji Trakt"
 
 msgctxt "#32052"
-msgid "Add watched TV episodes to trakt history"
+msgid "Add watched TV episodes to Trakt history"
 msgstr "Dodawaj obejrzane odcinki seriali do kolekcji Trakt"
 
 msgctxt "#32053"
-msgid "Mark TV episodes from trakt history as watched in Kodi"
+msgid "Mark TV episodes from Trakt history as watched in Kodi"
 msgstr "Oznaczaj odcinki seriali z historii Trakt jako obejrzane w bibliotece Kodi"
 
 msgctxt "#32054"
@@ -245,11 +245,11 @@ msgid "Show notifications"
 msgstr "Pokazuj powiadomienia"
 
 msgctxt "#32057"
-msgid "Remove deleted movies from trakt collection"
+msgid "Remove deleted movies from Trakt collection"
 msgstr "Usuwaj skasowane filmy z kolekcji Trakt"
 
 msgctxt "#32058"
-msgid "Remove deleted TV episodes from trakt collection"
+msgid "Remove deleted TV episodes from Trakt collection"
 msgstr "Usuwaj skasowane odcinki z kolekcji Trakt"
 
 msgctxt "#32059"
@@ -269,11 +269,11 @@ msgid "Sync complete"
 msgstr "Synchronizacja zakończona"
 
 msgctxt "#32063"
-msgid "%i movie(s) will be added to trakt collection"
+msgid "%i movie(s) will be added to Trakt collection"
 msgstr "%i film(ów) zostanie dodanych do kolekcji Trakt"
 
 msgctxt "#32064"
-msgid "%i movie playcount(s) will be updated on trakt"
+msgid "%i movie playcount(s) will be updated on Trakt"
 msgstr "Liczba odtworzeń %i filmu(ów) zostanie zaktualizowana w kolekcji Trakt"
 
 msgctxt "#32065"
@@ -285,15 +285,15 @@ msgid "Movie Sync Complete"
 msgstr "Synchronizacja filmów zakończona"
 
 msgctxt "#32067"
-msgid "Going to add %i show(s) to trakt collection"
+msgid "Going to add %i show(s) to Trakt collection"
 msgstr "Przygotowanie do dodania %i serialu(i) do kolekcji Trakt"
 
 msgctxt "#32068"
-msgid "Checking for episodes missing from trakt collection"
+msgid "Checking for episodes missing from Trakt collection"
 msgstr "Sprawdzanie brakujących odcinków w kolekcji Trakt"
 
 msgctxt "#32069"
-msgid "%i of %i show(s) have episodes added to trakt collection"
+msgid "%i of %i show(s) have episodes added to Trakt collection"
 msgstr "Dodano odcinki %i / %i serialu(i) do kolekcji Trakt"
 
 msgctxt "#32070"
@@ -301,7 +301,7 @@ msgid "Going to update %i show(s) missing watched status"
 msgstr "Przygotowanie do aktualizacji brakujących stanów obejrzenia %i serialu(i)"
 
 msgctxt "#32071"
-msgid "Checking watched episodes on trakt"
+msgid "Checking watched episodes on Trakt"
 msgstr "Sprawdzanie stanu obejrzenia odcinków w kolekcji Trakt"
 
 msgctxt "#32072"
@@ -321,11 +321,11 @@ msgid "Episode Sync Complete"
 msgstr "Synchronizacja odcinków zakończona"
 
 msgctxt "#32076"
-msgid "%i movie(s) will be removed from trakt collection"
+msgid "%i movie(s) will be removed from Trakt collection"
 msgstr "%i film(ów) zostanie usuniętych z kolekcji Trakt"
 
 msgctxt "#32077"
-msgid "Cleaning trakt TV show collection"
+msgid "Cleaning Trakt TV show collection"
 msgstr "Czyszczenie kolekcji seriali Trakt"
 
 msgctxt "#32078"
@@ -341,31 +341,31 @@ msgid "Movies loaded from Kodi"
 msgstr "Wczytano filmy z biblioteki Kodi"
 
 msgctxt "#32081"
-msgid "Retrieving movie collection from trakt"
+msgid "Retrieving movie collection from Trakt"
 msgstr "Pobieranie kolekcji filmów z serwisu Trakt"
 
 msgctxt "#32082"
-msgid "Retrieving watched movies from trakt"
+msgid "Retrieving watched movies from Trakt"
 msgstr "Pobieranie obejrzanych filmów z serwisu Trakt"
 
 msgctxt "#32083"
-msgid "Retrieved movie data from trakt"
+msgid "Retrieved movie data from Trakt"
 msgstr "Pobieranie danych filmu z serwisu Trakt"
 
 msgctxt "#32084"
-msgid "trakt movie collection is up to date, no movies to add"
+msgid "Trakt movie collection is up to date, no movies to add"
 msgstr "Kolekcja filmów Trakt jest aktualna, brak filmów do dodania"
 
 msgctxt "#32085"
-msgid "%i movie(s) were added to your trakt collection"
+msgid "%i movie(s) were added to your Trakt collection"
 msgstr "Dodano %i film(ów) do Twojej kolekcji Trakt"
 
 msgctxt "#32086"
-msgid "trakt movie playcounts are up to date"
+msgid "Trakt movie playcounts are up to date"
 msgstr "Liczba odtworzeń filmów w serwisie Trakt jest aktualna"
 
 msgctxt "#32087"
-msgid "Playcounts updated for %i movie(s) on trakt"
+msgid "Playcounts updated for %i movie(s) on Trakt"
 msgstr "Zaktualizowano liczbę odtworzeń %i filmu(ów) w serwisie Trakt"
 
 msgctxt "#32088"
@@ -381,15 +381,15 @@ msgid "Playcounts updated for %i movie(s) in Kodi"
 msgstr "Zaktualizowano liczbę odtworzeń %i filmu(ów) w bibliotece Kodi"
 
 msgctxt "#32091"
-msgid "trakt movie collection is up to date, no movies removed"
+msgid "Trakt movie collection is up to date, no movies removed"
 msgstr "Kolekcja filmów w serwisie Trakt jest aktualna, brak odcinków do usunięcia"
 
 msgctxt "#32092"
-msgid "%i movie(s) were removed from your trakt collection"
+msgid "%i movie(s) were removed from your Trakt collection"
 msgstr "Usunięto %i film(ów) z Twojej kolekcji Trakt"
 
 msgctxt "#32093"
-msgid "Updating %i of %i movie playcount(s) on trakt"
+msgid "Updating %i of %i movie playcount(s) on Trakt"
 msgstr "Aktualizowanie liczby odtworzeń %i / %i filmu(ów) w serwisie Trakt"
 
 msgctxt "#32094"
@@ -413,35 +413,35 @@ msgid "Loaded episode data from Kodi"
 msgstr "Wczytano dane odcinka z biblioteki Kodi"
 
 msgctxt "#32099"
-msgid "Loading episode data from trakt"
+msgid "Loading episode data from Trakt"
 msgstr "Wczytywanie danych odcinka z serwisu Trakt"
 
 msgctxt "#32100"
-msgid "Retrieving episode collection from trakt"
+msgid "Retrieving episode collection from Trakt"
 msgstr "Pobieranie kolekcji odcinków z serwisu Trakt"
 
 msgctxt "#32101"
-msgid "Retrieving watched episodes from trakt"
+msgid "Retrieving watched episodes from Trakt"
 msgstr "Pobieranie obejrzanych odcinków z serwisu Trakt"
 
 msgctxt "#32102"
-msgid "Parsing episode data %i of %i from trakt"
+msgid "Parsing episode data %i of %i from Trakt"
 msgstr "Przetwarzanie danych odcinka %i / %i z serwisu Trakt"
 
 msgctxt "#32103"
-msgid "Retrieved episode data from trakt"
+msgid "Retrieved episode data from Trakt"
 msgstr "Pobrano dane odcinka z serwisu Trakt"
 
 msgctxt "#32104"
-msgid "trakt episode collection is up to date, no episodes to add"
+msgid "Trakt episode collection is up to date, no episodes to add"
 msgstr "Kolekcja odcinków w serwisie Trakt jest aktualna, brak odcinków do dodania"
 
 msgctxt "#32105"
-msgid "%i episode(s) were added to your trakt collection"
+msgid "%i episode(s) were added to your Trakt collection"
 msgstr "Dodano %i odcinek(ów) do Twojej kolekcji Trakt"
 
 msgctxt "#32106"
-msgid "trakt episode playcounts are up to date"
+msgid "Trakt episode playcounts are up to date"
 msgstr "Liczba odtworzeń odcinka w serwisie Trakt jest aktualna"
 
 msgctxt "#32107"
@@ -457,23 +457,23 @@ msgid "Playcounts updated for %i show(s) in Kodi"
 msgstr "Zaktualizowano liczbę odtworzeń dla %i serialu(i) w bibliotece Kodi"
 
 msgctxt "#32110"
-msgid "trakt episode collection is clean, no episodes to remove"
+msgid "Trakt episode collection is clean, no episodes to remove"
 msgstr "Kolekcja odcinków w serwisie Trakt jest oczyszczona, brak odcinków do usunięcia"
 
 msgctxt "#32111"
-msgid "%i episode(s) are being removed from your trakt collection"
+msgid "%i episode(s) are being removed from your Trakt collection"
 msgstr "Usuwanie %i odcinka(ów) z Twojej kolekcji Trakt"
 
 msgctxt "#32112"
-msgid "%i episode(s) were removed from your trakt collection"
+msgid "%i episode(s) were removed from your Trakt collection"
 msgstr "Usunięto %i odcinek(ów) z Twojej kolekcji Trakt"
 
 msgctxt "#32113"
-msgid "trakt - Marked as watched"
+msgid "Trakt - Marked as watched"
 msgstr "Trakt - Oznaczone jako obejrzane"
 
 msgctxt "#32114"
-msgid "trakt - Failed marking as watched"
+msgid "Trakt - Failed marking as watched"
 msgstr "Trakt - Nieudane oznaczenie jako obejrzane"
 
 msgctxt "#32115"
