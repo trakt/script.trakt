@@ -162,7 +162,7 @@ class traktService:
 				else:
 					rateMedia(media_type, summaryInfo, rating=data['rating'])
 		else:
-			logger.debug("doManualRating(): Summary info was empty, possible problem retrieving data from trakt.tv")
+			logger.debug("doManualRating(): Summary info was empty, possible problem retrieving data from Trakt.tv")
 
 	def doMarkWatched(self, data):
 
@@ -174,7 +174,7 @@ class traktService:
 			if summaryInfo:
 				if not summaryInfo['watched']:
 					s = utilities.getFormattedItemName(media_type, summaryInfo)
-					logger.debug("doMarkWatched(): '%s' is not watched on trakt, marking it as watched." % s)
+					logger.debug("doMarkWatched(): '%s' is not watched on Trakt, marking it as watched." % s)
 					movie = {'imdb_id': data['id'], 'title': summaryInfo['title'], 'year': summaryInfo['year'],
 					         'plays': 1, 'last_played': int(time())}
 					params = {'movies': [movie]}
@@ -194,7 +194,7 @@ class traktService:
 			if summaryInfo:
 				if not summaryInfo['episode']['watched']:
 					s = utilities.getFormattedItemName(media_type, summaryInfo)
-					logger.debug("doMarkWathced(): '%s' is not watched on trakt, marking it as watched." % s)
+					logger.debug("doMarkWathced(): '%s' is not watched on Trakt, marking it as watched." % s)
 					params = {'imdb_id': summaryInfo['ids']['imdb_id'], 'tvdb_id': summaryInfo['ids']['tvdb_id'],
 					          'title': summaryInfo['title'], 'year': summaryInfo['year'],
 					          'episodes': [{'season': data['season'], 'episode': data['episode']}]}
