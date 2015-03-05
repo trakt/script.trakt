@@ -3,8 +3,8 @@
 	<requires>
 		<import addon="xbmc.python" version="2.1.0"/>
 		<import addon="script.module.simplejson" version="3.3.0"/>
-		<import addon="script.module.requests" version="2.4.3"/>
-		<import addon="script.module.six" version="1.9.0"/>
+        <import addon="script.module.trakt" version="2.1.1-beta"/>
+        <import addon="script.module.datutil" version="2.4.0"/>
 	</requires>
 	<extension point="xbmc.python.script" library="script.py">
 		<provides>executable</provides>
