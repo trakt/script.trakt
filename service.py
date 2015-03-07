@@ -128,6 +128,7 @@ class traktService:
 		action = data['action']
 		media_type = data['media_type']
 		summaryInfo = None
+		episodeInfo = None
 
 		if not utilities.isValidMediaType(media_type):
 			logger.debug("doManualRating(): Invalid media type '%s' passed for manual %s." % (media_type, action))
@@ -139,23 +140,39 @@ class traktService:
 			
 		if 'dbid' in data:
 			logger.debug("Getting data for manual %s of library '%s' with ID of '%s'" % (action, media_type, data['dbid']))
-		elif 'remoteitd' in data:
+		elif 'remoteid' in data:
 			if 'season' in data:
 				logger.debug("Getting data for manual %s of non-library '%s' S%02dE%02d, with ID of '%s'." % (action, media_type, data['season'], data['episode'], data['remoteid']))
 			else:
 				logger.debug("Getting data for manual %s of non-library '%s' with ID of '%s'" % (action, media_type, data['remoteid']))
-
+				
 		if utilities.isEpisode(media_type):
-			summaryInfo = globals.traktapi.getEpisodeSummary(data['trakt'], data['season'], data['episode'])
+			#TODO: Add method
+			#episodeInfo = globals.traktapi.getEpisodeSummary(data['imdbnumber'], data['season'], data['episode'])
+			episodeInfo = {'ids': {'imdb': 'tt2161930'}}
+			summaryInfo = {'title': 'Show Title', 'year': 2015, 'season': data['season'], 'number': data['episode']}
+			userInfo = {'ratings' : globals.traktapi.getEpisodeRatingForUser(data['imdbnumber'], data['season'], data['episode'])}
 		elif utilities.isShow(media_type):
-			summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
+			#TODO: Add Method
+			#summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
+			summaryInfo = {'title': 'Show Title', 'year': 2015, 'ids': {'imdb': data['imdbnumber']}}
+			#TODO: Add Method
+			#userInfo = {'ratings': globals.traktapi.getShowRatingForUser(data['imdbnumber'])}
+			userInfo = {'ratings': {}}
 		elif utilities.isMovie(media_type):
-			summaryInfo = globals.traktapi.getMovieSummary(data['imdbnumber'])
+			#TODO: Add Method
+			#summaryInfo = globals.traktapi.getMovieSummary(data['imdbnumber'])
+			summaryInfo = {'title': 'Movie Title', 'year': 2015, 'ids': {'imdb': data['imdbnumber']}}
+			userInfo = {'ratings': globals.traktapi.getMovieRatingForUser(data['imdbnumber'])} 
 		
-		if not summaryInfo is None:
-			if utilities.isMovie(media_type) or utilities.isShow(media_type):
+		if summaryInfo is not None:
+			if 'dbid' in data and (utilities.isMovie(media_type) or utilities.isShow(media_type)):
 				summaryInfo['xbmc_id'] = data['dbid']
-
+			
+			summaryInfo['user'] = userInfo
+			if episodeInfo is not None:
+				summaryInfo['ids'] = episodeInfo['ids']
+				
 			if action == 'rate':
 				if not 'rating' in data:
 					rateMedia(media_type, summaryInfo)
