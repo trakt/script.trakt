@@ -284,26 +284,23 @@ def regex_year(title):
 	else:
 		return "", ""
 
+def findMovieMatchInList(id, list, idType='imdb'):
+	return next((item.to_dict() for key, item in list.items() if any(idType in key for key, value in item.keys if str(value) == str(id))), {})
 
+def findShowMatchInList(id, list, idType='tvdb'):
+	return next((item.to_dict()	 for key, item in list.items() if  any(idType in key for key, value in item.keys if str(value) == str(id))), {})
 
-def findMovieMatchInList(id, list):
-	return next((item.to_dict() for key, item in list.items() if key[1] == str(id)), {})  #key[1] should be the imdb id
-
-def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list):
-	show = next((item for key, item in list.items() if int(key[1]) == int(id)), {}) #key[1] should be the tvdb id
+def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list, idType='tvdb'):
+	show = findShowMatchInList(id, list, idType)
 	logger.debug("findEpisodeMatchInList %s" % show)
-	if not show:
-		return {}
-	else:
-		if not seasonNumber in show.seasons:
-			return {}
-		else:	
-			season = show.seasons[seasonNumber]
-			if not episodeNumber in season.episodes:
-				return {}
-			else:	
-				episode = season.episodes[episodeNumber]
-				return episode.to_dict()
+	if 'seasons' in show:
+		for season in show['seasons']:
+			if season['number'] == seasonNumber:
+				for episode in season['episodes']:
+					if episode['number'][1] == episodeNumber:
+						return episode
+
+	return {}
 
 def kodiRpcToTraktMediaObject(type, data, mode='collected'):
 	if type == 'tvshow':

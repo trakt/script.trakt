@@ -4,7 +4,7 @@ import xbmcaddon
 import logging
 from trakt import Trakt, ClientError, ServerError
 from trakt.objects import Movie, Show
-from utilities import getSetting, findMovieMatchInList, findEpisodeMatchInList, notification, getString, createError
+from utilities import getSetting, findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, notification, getString, createError
 
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')
@@ -136,7 +136,6 @@ class traktAPI(object):
 				Trakt['sync/collection'].movies(movies, exceptions=True)
 		return movies
 
-
 	def getShowsWatched(self, shows):
 		with Trakt.configuration.auth(self.__username, self.__token):
 			with Trakt.configuration.http(retry=True, timeout=90):
@@ -167,19 +166,26 @@ class traktAPI(object):
 			result = Trakt['sync/history'].add(mediaObject)
 		return result
 
-	def getEpisodeRatingForUser(self, tvdbId, season, episode):
+	def getShowRatingForUser(self, showId, idType='tvdb'):
+		ratings = {}
+		with Trakt.configuration.auth(self.__username, self.__token):
+			with Trakt.configuration.http(retry=True):
+				Trakt['sync/ratings'].shows(ratings)
+		return findShowMatchInList(showId, ratings, idType)
+
+	def getEpisodeRatingForUser(self, showId, season, episode, idType='tvdb'):
 		ratings = {}
 		with Trakt.configuration.auth(self.__username, self.__token):
 			with Trakt.configuration.http(retry=True):
 				Trakt['sync/ratings'].episodes(ratings)
-		return findEpisodeMatchInList(tvdbId, season, episode, ratings)
+		return findEpisodeMatchInList(showId, season, episode, ratings, idType)
 
-	def getMovieRatingForUser(self, imdbId):
+	def getMovieRatingForUser(self, movieId):
 		ratings = {}
 		with Trakt.configuration.auth(self.__username, self.__token):
 			with Trakt.configuration.http(retry=True):
 				Trakt['sync/ratings'].movies(ratings)
-		return findMovieMatchInList(imdbId, ratings)
+		return findMovieMatchInList(movieId, ratings)
 
 	# Send a rating to Trakt as mediaObject so we can add the rating
 	def addRating(self, mediaObject):
@@ -222,3 +228,15 @@ class traktAPI(object):
 						progressShows.append(item)
 
 		return progressShows
+
+	def getMovieSummary(self, movieId):
+		with Trakt.configuration.http(retry=True):
+			return Trakt['movies'].get(movieId)
+
+	def getShowSummary(self, showId):
+		with Trakt.configuration.http(retry=True):
+			show = Trakt['shows'].get(showId)
+
+	def getEpisodeSummary(self, showId, season, episode):
+		with Trakt.configuration.http(retry=True):
+			return Trakt['shows'].episode(showId, season, episode)
