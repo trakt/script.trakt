@@ -288,7 +288,7 @@ def findMovieMatchInList(id, list, idType='imdb'):
 	return next((item.to_dict() for key, item in list.items() if any(idType in key for key, value in item.keys if str(value) == str(id))), {})
 
 def findShowMatchInList(id, list, idType='tvdb'):
-	return next((item.to_dict()	 for key, item in list.items() if  any(idType in key for key, value in item.keys if str(value) == str(id))), {})
+	return next((item.to_dict() for key, item in list.items() if  any(idType in key for key, value in item.keys if str(value) == str(id))), {})
 
 def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list, idType='tvdb'):
 	show = findShowMatchInList(id, list, idType)
