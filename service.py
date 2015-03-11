@@ -148,20 +148,20 @@ class traktService:
 				
 		if utilities.isEpisode(media_type):
 			summaryInfo = globals.traktapi.getEpisodeSummary(data['imdbnumber'], data['season'], data['episode'])
-			userInfo = {'ratings': globals.traktapi.getEpisodeRatingForUser(data['imdbnumber'], data['season'], data['episode'], 'imdb')}
+			userInfo = globals.traktapi.getEpisodeRatingForUser(data['imdbnumber'], data['season'], data['episode'], 'imdb')
 		elif utilities.isShow(media_type):
 			summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
-			userInfo = {'ratings': globals.traktapi.getShowRatingForUser(data['imdbnumber'], 'imdb')}
+			userInfo = globals.traktapi.getShowRatingForUser(data['imdbnumber'], 'imdb')
 		elif utilities.isMovie(media_type):
 			summaryInfo = globals.traktapi.getMovieSummary(data['imdbnumber'])
-			userInfo = {'ratings': globals.traktapi.getMovieRatingForUser(data['imdbnumber'])}
+			userInfo = globals.traktapi.getMovieRatingForUser(data['imdbnumber'])
 		
 		if summaryInfo is not None:
 			summaryInfo = summaryInfo.to_dict()
 			if 'dbid' in data and (utilities.isMovie(media_type) or utilities.isShow(media_type)):
 				summaryInfo['xbmc_id'] = data['dbid']
 			
-			summaryInfo['user'] = userInfo
+			summaryInfo['user'] = {'ratings': userInfo}
 			if utilities.isEpisode(media_type):
 				summaryInfo['season'], summaryInfo['number'] = summaryInfo['number']
 				#TODO: hard code episode title and ids for testing until script.module.trakt is fixed
