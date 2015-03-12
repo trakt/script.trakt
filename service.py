@@ -128,7 +128,6 @@ class traktService:
 		action = data['action']
 		media_type = data['media_type']
 		summaryInfo = None
-		episodeInfo = None
 
 		if not utilities.isValidMediaType(media_type):
 			logger.debug("doManualRating(): Invalid media type '%s' passed for manual %s." % (media_type, action))
@@ -163,10 +162,8 @@ class traktService:
 			
 			summaryInfo['user'] = {'ratings': userInfo}
 			if utilities.isEpisode(media_type):
-				summaryInfo['season'], summaryInfo['number'] = summaryInfo['number']
-				#TODO: hard code episode title and ids for testing until script.module.trakt is fixed
-				summaryInfo['title'] = 'Episode Title'
-				summaryInfo['ids'] = {"imdb": "tt3297776"}
+				summaryInfo['season'] = data['season']
+				summaryInfo['number'] = data['episode']
 				
 			if action == 'rate':
 				if not 'rating' in data:

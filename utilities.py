@@ -284,20 +284,20 @@ def regex_year(title):
 	else:
 		return "", ""
 
-def findMovieMatchInList(id, list, idType='imdb'):
+def findMovieMatchInList(id, list, idType):
 	return next((item.to_dict() for key, item in list.items() if any(idType in key for key, value in item.keys if str(value) == str(id))), {})
 
-def findShowMatchInList(id, list, idType='tvdb'):
+def findShowMatchInList(id, list, idType):
 	return next((item.to_dict() for key, item in list.items() if  any(idType in key for key, value in item.keys if str(value) == str(id))), {})
 
-def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list, idType='tvdb'):
+def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list, idType):
 	show = findShowMatchInList(id, list, idType)
 	logger.debug("findEpisodeMatchInList %s" % show)
 	if 'seasons' in show:
 		for season in show['seasons']:
 			if season['number'] == seasonNumber:
 				for episode in season['episodes']:
-					if episode['number'][1] == episodeNumber:
+					if episode['number'] == episodeNumber:
 						return episode
 
 	return {}

@@ -180,12 +180,12 @@ class traktAPI(object):
 				Trakt['sync/ratings'].episodes(ratings)
 		return findEpisodeMatchInList(showId, season, episode, ratings, idType)
 
-	def getMovieRatingForUser(self, movieId):
+	def getMovieRatingForUser(self, movieId, idType='imdb'):
 		ratings = {}
 		with Trakt.configuration.auth(self.__username, self.__token):
 			with Trakt.configuration.http(retry=True):
 				Trakt['sync/ratings'].movies(ratings)
-		return findMovieMatchInList(movieId, ratings)
+		return findMovieMatchInList(movieId, ratings, idType)
 
 	# Send a rating to Trakt as mediaObject so we can add the rating
 	def addRating(self, mediaObject):
@@ -235,7 +235,7 @@ class traktAPI(object):
 
 	def getShowSummary(self, showId):
 		with Trakt.configuration.http(retry=True):
-			show = Trakt['shows'].get(showId)
+			return Trakt['shows'].get(showId)
 
 	def getEpisodeSummary(self, showId, season, episode):
 		with Trakt.configuration.http(retry=True):
