@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -28,9 +28,41 @@ msgctxt "#32002"
 msgid "Password"
 msgstr "Κωδικός πρόσβασης"
 
+msgctxt "#32003"
+msgid "Startup Delay"
+msgstr "Καθυστέρηση Έναρξης"
+
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Καταλληλότητα"
+
+msgctxt "#32005"
+msgid "Rate Movie after watching"
+msgstr "Αξιολόγηση Ταινίας αφού τη δείτε"
+
+msgctxt "#32006"
+msgid "Rate TV show Episode after watching"
+msgstr "Αξιολόγηση Επεισοδίου αφού το δείτε"
+
+msgctxt "#32007"
+msgid "Rate each playlist item"
+msgstr "Αξιολόγηση όλων των αντικειμένων της λίστας αναπ/γής"
+
+msgctxt "#32008"
+msgid "Minimum percent watched to display rating dialog"
+msgstr "Ελάχιστο ποσοστό που πρέπει να έχετε δει, για να βγει το παράθυρο αξιολόγησης"
+
+msgctxt "#32010"
+msgid "Default rating"
+msgstr "Προεπιλεγμένη αξιολόγηση"
+
+msgctxt "#32011"
+msgid "Scrobbling"
+msgstr "Γίνεται κοινοποίηση"
+
+msgctxt "#32012"
+msgid "Scrobble movies"
+msgstr "Κοινοποίηση ταινιών"
 
 msgctxt "#32024"
 msgid "Error"

@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -483,3 +483,63 @@ msgstr "'%s'의 %d 에피소드 "
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "디버그 모드 사용"
+
+msgctxt "#32117"
+msgid "Sync movie playback progress to Kodi"
+msgstr "영화 재생 진행 상태를 Kodi로 동기화"
+
+msgctxt "#32118"
+msgid "Sync episode playback progress to Kodi"
+msgstr "에피소드 재생 진행 상태를 Kodi로 싱크"
+
+msgctxt "#32119"
+msgid "Retrieving episode playback progress from Trakt"
+msgstr "trakt의 에피소드 재생 진행 상태 가져오는 중"
+
+msgctxt "#32120"
+msgid "Parsing episode playback progress %i of %i from Trakt"
+msgstr "trakt의 에피소드 재생 진생 상태 분석 중 (%i / %i)"
+
+msgctxt "#32121"
+msgid "Retrieved episode playback progress from Trakt"
+msgstr "trakt에서 에피소드 재생  진행 상태를 가져왔습니다"
+
+msgctxt "#32122"
+msgid "Retrieving movie playback progress from Trakt"
+msgstr "trakt에서 영화 재생 진행 상태를 가져오는 중"
+
+msgctxt "#32123"
+msgid "Parsing movie playback progress %i of %i from Trakt"
+msgstr "trakt의 영화 재생 진생 상태 분석 중 (%i / %i)"
+
+msgctxt "#32124"
+msgid "Retrieved movie playback progress from Trakt"
+msgstr "trakt에서 영화 재생  진행 상태를 가져왔습니다"
+
+msgctxt "#32125"
+msgid "Kodi movie playback progress is up to date"
+msgstr "Kodi의 영화 재생 정보가 최신 상태입니다"
+
+msgctxt "#32126"
+msgid "%i movie(s) playback progress will be updated in Kodi"
+msgstr "%i 영화의 재생 정보가 Kodi에 업데이트 됩니다"
+
+msgctxt "#32127"
+msgid "Updating %i of %i movie(s) playback progress in Kodi"
+msgstr "Kodi의 영화 재생 정보 업데이트 중 (%i / %i)"
+
+msgctxt "#32128"
+msgid "Playback progress updated for %i movie(s) in Kodi"
+msgstr "%i 영화의 재생 정보가 Kodi에 업데이트 되었습니다"
+
+msgctxt "#32129"
+msgid "Kodi episode playback progress is up to date"
+msgstr "Koid의 에피소드 재생 정보가 최신 상태입니다"
+
+msgctxt "#32130"
+msgid "Updating %i of %i episode(s) playback progress in Kodi"
+msgstr "Kodi의 에피소드 재생 정보 업데이트 중 (%i / %i)"
+
+msgctxt "#32131"
+msgid "Playback progress updated for %i episode(s) in Kodi"
+msgstr "%i 쇼의 재생 정보가 Kodi에 업데이트 되었습니다"

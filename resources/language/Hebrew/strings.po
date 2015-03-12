@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -278,7 +278,7 @@ msgstr "%i מספר(י) ניגון סרט יועדכנו ב-Trakt"
 
 msgctxt "#32065"
 msgid "%i movie(s) playcount will be updated in Kodi"
-msgstr "%i מספר ניגון סרט(ים) יועדכנו ב-Trakt"
+msgstr "%i מספר ניגון סרט(ים) יועדכנו ב-trakt"
 
 msgctxt "#32066"
 msgid "Movie Sync Complete"

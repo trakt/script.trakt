@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -446,7 +446,7 @@ msgstr "El contador de reproducciones de Episodios de Trakt está al día"
 
 msgctxt "#32107"
 msgid "Kodi episode playcounts are up to date"
-msgstr "El contador de reproducciones de Episodios de Trakt está al dia"
+msgstr "El contador de reproducciones de Episodios de trakt está al dia"
 
 msgctxt "#32108"
 msgid "Updating %i of %i episode playcount(s) in Kodi"
@@ -483,3 +483,63 @@ msgstr "%d Episodio(s) de '%s'"
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "Activar modo depuración"
+
+msgctxt "#32117"
+msgid "Sync movie playback progress to Kodi"
+msgstr "Sincronizando  el progreso de reproducción de Películas a Kodi"
+
+msgctxt "#32118"
+msgid "Sync episode playback progress to Kodi"
+msgstr "Sincronizando  el progreso de reproducción de Episodios a Kodi"
+
+msgctxt "#32119"
+msgid "Retrieving episode playback progress from Trakt"
+msgstr "Recuperando el progreso de reproducción desde Trakt"
+
+msgctxt "#32120"
+msgid "Parsing episode playback progress %i of %i from Trakt"
+msgstr "Emparejando el progreso de reproducción de %i of %i Episodios desde Trakt"
+
+msgctxt "#32121"
+msgid "Retrieved episode playback progress from Trakt"
+msgstr "Progreso de reproducción de Episodios desde Trakt Recuperado"
+
+msgctxt "#32122"
+msgid "Retrieving movie playback progress from Trakt"
+msgstr "Recuperando el progreso de reproducción de Películas desde Trakt"
+
+msgctxt "#32123"
+msgid "Parsing movie playback progress %i of %i from Trakt"
+msgstr "Emparejando el progreso de reproducción de %i of %i Películas desde Trakt"
+
+msgctxt "#32124"
+msgid "Retrieved movie playback progress from Trakt"
+msgstr "Progreso de reproducción de Películas desde Trakt Recuperado"
+
+msgctxt "#32125"
+msgid "Kodi movie playback progress is up to date"
+msgstr "El progreso de reproducción de Películas de Kodi está al día."
+
+msgctxt "#32126"
+msgid "%i movie(s) playback progress will be updated in Kodi"
+msgstr "Se actualizará el progreso de reproducción de %i Película(s) en Kodi"
+
+msgctxt "#32127"
+msgid "Updating %i of %i movie(s) playback progress in Kodi"
+msgstr "Actualizando el progreso de reproducción de %i of %i Película(s) en Kodi"
+
+msgctxt "#32128"
+msgid "Playback progress updated for %i movie(s) in Kodi"
+msgstr "Se actulizó el progreso de reproducción de %i Película(s) en Kodi"
+
+msgctxt "#32129"
+msgid "Kodi episode playback progress is up to date"
+msgstr "El progreso de reproducción de Episodios en Kodi está al día."
+
+msgctxt "#32130"
+msgid "Updating %i of %i episode(s) playback progress in Kodi"
+msgstr "Actualizando el progreso de reproducción de %i of %i Episodio(s) en Kodi"
+
+msgctxt "#32131"
+msgid "Playback progress updated for %i episode(s) in Kodi"
+msgstr "Se actualizó el progreso de reproducción de %i Episodio(s) en Kodi"

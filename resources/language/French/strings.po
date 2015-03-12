@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -150,7 +150,7 @@ msgstr "Mouais"
 
 msgctxt "#32033"
 msgid "Fair"
-msgstr "Beau"
+msgstr "Pas mal"
 
 msgctxt "#32034"
 msgid "Good"
@@ -483,3 +483,11 @@ msgstr "%d épisode(s) de '%s'"
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "Activer le mode débogage"
+
+msgctxt "#32117"
+msgid "Sync movie playback progress to Kodi"
+msgstr "Synchronisation de la progression de lecture des films vers Kodi"
+
+msgctxt "#32118"
+msgid "Sync episode playback progress to Kodi"
+msgstr "Synchronisation de la progression de lecture des épisodes vers Kodi"
