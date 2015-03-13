@@ -54,7 +54,7 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 		return
 
 	rerate = utils.getSettingAsBool('rate_rerate')
-	if not rating is None:
+	if rating is not None:
 		if summary_info['user']['ratings']['rating'] == 0:
 			logger.debug("Rating for '%s' is being set to '%d' manually." % (s, rating))
 			__rateOnTrakt(rating, media_type, summary_info)
@@ -124,10 +124,7 @@ def __rateOnTrakt(rating, media_type, media, unrate=False):
 		params['rating'] = rating
 		params['title'] = media['title']
 		params['year'] = media['year']
-		params['ids'] = {}
-		params['ids']['tmdb'] = media['ids']['tmdb']
-		params['ids']['imdb'] = media['ids']['imdb']
-		params['ids']['tvdb'] = media['ids']['tvdb']
+		params['ids'] = media['ids']
 
 		root = {}
 		listing = [params]

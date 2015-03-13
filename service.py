@@ -139,23 +139,32 @@ class traktService:
 			
 		if 'dbid' in data:
 			logger.debug("Getting data for manual %s of library '%s' with ID of '%s'" % (action, media_type, data['dbid']))
-		elif 'remoteitd' in data:
+		elif 'remoteid' in data:
 			if 'season' in data:
 				logger.debug("Getting data for manual %s of non-library '%s' S%02dE%02d, with ID of '%s'." % (action, media_type, data['season'], data['episode'], data['remoteid']))
 			else:
 				logger.debug("Getting data for manual %s of non-library '%s' with ID of '%s'" % (action, media_type, data['remoteid']))
-
+				
 		if utilities.isEpisode(media_type):
-			summaryInfo = globals.traktapi.getEpisodeSummary(data['trakt'], data['season'], data['episode'])
+			summaryInfo = globals.traktapi.getEpisodeSummary(data['imdbnumber'], data['season'], data['episode'])
+			userInfo = globals.traktapi.getEpisodeRatingForUser(data['imdbnumber'], data['season'], data['episode'], 'imdb')
 		elif utilities.isShow(media_type):
 			summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
+			userInfo = globals.traktapi.getShowRatingForUser(data['imdbnumber'], 'imdb')
 		elif utilities.isMovie(media_type):
 			summaryInfo = globals.traktapi.getMovieSummary(data['imdbnumber'])
+			userInfo = globals.traktapi.getMovieRatingForUser(data['imdbnumber'])
 		
-		if not summaryInfo is None:
-			if utilities.isMovie(media_type) or utilities.isShow(media_type):
+		if summaryInfo is not None:
+			summaryInfo = summaryInfo.to_dict()
+			if 'dbid' in data and (utilities.isMovie(media_type) or utilities.isShow(media_type)):
 				summaryInfo['xbmc_id'] = data['dbid']
-
+			
+			summaryInfo['user'] = {'ratings': userInfo}
+			if utilities.isEpisode(media_type):
+				summaryInfo['season'] = data['season']
+				summaryInfo['number'] = data['episode']
+				
 			if action == 'rate':
 				if not 'rating' in data:
 					rateMedia(media_type, summaryInfo)
