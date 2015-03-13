@@ -162,7 +162,7 @@ class traktAPI(object):
 
 	def addToHistory(self, mediaObject):
 		with Trakt.configuration.auth(self.__username, self.__token):
-			#don't rtry this call it may cause multiple watches
+			#don't try this call it may cause multiple watches
 			result = Trakt['sync/history'].add(mediaObject)
 		return result
 
