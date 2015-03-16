@@ -50,7 +50,7 @@ msgstr "Evaluer chaque élément de liste de lecture"
 
 msgctxt "#32008"
 msgid "Minimum percent watched to display rating dialog"
-msgstr "Pourcentage minimum de visionage requis pour attribuer une note au média"
+msgstr "Pourcentage minimum vu pour attribuer une note"
 
 msgctxt "#32009"
 msgid "Allow re-rating of media"
