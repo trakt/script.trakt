@@ -1,3 +1,9 @@
+version 3.0.1
+  - readded manual ratings for movies/shows/episodes (by tknorris)
+  - implemented manual ratings for seasons (by tknorris)
+  - readded manual ratings for movies/shows/seasons/episodes
+  - updated transifex translations
+
 version 3.0.0
   - new Trakt branded rating dialog (by Piers)
   - ported to Trakt.tv api v2 (using trakt.py by fuzeman)
