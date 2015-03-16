@@ -204,8 +204,7 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 					elif utils.isEpisode(self.media_type):
 						s = utils.getString(32039)
 					elif utils.isSeason(self.media_type):
-						#TODO: TRANSLATE!
-						s = 'Unrate this Season'
+						s = utils.getString(32132)
 					else:
 						pass
 
