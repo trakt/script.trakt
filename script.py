@@ -124,7 +124,6 @@ def Main():
 			logger.debug("Manual %s of '%s' is unsupported." % (args['action'], media_type))
 
 	elif args['action'] == 'togglewatched':
-		#todo fix this
 		media_type = __getMediaType()
 		if media_type in ['movie', 'show', 'season', 'episode']:
 			data = {'media_type': media_type}
@@ -145,7 +144,7 @@ def Main():
 				result = utils.getEpisodeDetailsFromKodi(dbid, ['showtitle', 'season', 'episode', 'tvshowid', 'playcount'])
 				if result:
 					if result['playcount'] == 0:
-						data['id'] = result['tvdb_id']
+						data['id'] = result['imdbnumber']
 						data['season'] = result['season']
 						data['episode'] = result['episode']
 					else:

@@ -174,18 +174,15 @@ class traktService:
 		markedNotification = utilities.getSettingAsBool('show_marked_notification')
 		
 		if utilities.isMovie(media_type):
-			summaryInfo = globals.traktapi.getMovieSummary(data['id'])
+			summaryInfo = globals.traktapi.getMovieSummary(data['id']).to_dict()
 			if summaryInfo:
 				if not summaryInfo['watched']:
 					s = utilities.getFormattedItemName(media_type, summaryInfo)
 					logger.debug("doMarkWatched(): '%s' is not watched on Trakt, marking it as watched." % s)
-					movie = {'imdb_id': data['id'], 'title': summaryInfo['title'], 'year': summaryInfo['year'],
-					         'plays': 1, 'last_played': int(time())}
-					params = {'movies': [movie]}
+					params = {'movies': [summaryInfo]}
 					logger.debug("doMarkWatched(): %s" % str(params))
-					
 
-					result = globals.traktapi.updateSeenMovie(params)
+					result = globals.traktapi.addToHistory(params)
 					if result:
 						if markedNotification:
 							utilities.notification(utilities.getString(32113), s)
@@ -194,18 +191,14 @@ class traktService:
 
 					
 		elif utilities.isEpisode(media_type):
-			summaryInfo = globals.traktapi.getEpisodeSummary(data['id'], data['season'], data['episode'])
+			summaryInfo = globals.traktapi.getEpisodeSummary(data['id'], data['season'], data['episode']).to_dict()
 			if summaryInfo:
 				if not summaryInfo['episode']['watched']:
 					s = utilities.getFormattedItemName(media_type, summaryInfo)
-					logger.debug("doMarkWathced(): '%s' is not watched on Trakt, marking it as watched." % s)
-					params = {'imdb_id': summaryInfo['ids']['imdb_id'], 'tvdb_id': summaryInfo['ids']['tvdb_id'],
-					          'title': summaryInfo['title'], 'year': summaryInfo['year'],
-					          'episodes': [{'season': data['season'], 'episode': data['episode']}]}
-					logger.debug("doMarkWatched(): %s" % str(params))
-					
+					logger.debug("doMarkWatched(): '%s' is not watched on Trakt, marking it as watched." % s)
+					logger.debug("doMarkWatched(): %s" % str(summaryInfo))
 
-					result = globals.traktapi.updateSeenEpisode(params)
+					result = globals.traktapi.addToHistory(summaryInfo)
 					if result:
 						if markedNotification:
 							utilities.notification(utilities.getString(32113), s)
@@ -213,56 +206,52 @@ class traktService:
 						utilities.notification(utilities.getString(32114), s)
 
 		elif utilities.isSeason(media_type):
-			showInfo = globals.traktapi.getShowSummary(data['id'])
+			showInfo = globals.traktapi.getShowSummary(data['id']).to_dict()
 			if not showInfo:
 				return
 			summaryInfo = globals.traktapi.getSeasonInfo(data['id'], data['season'])
 			if summaryInfo:
 				showInfo['season'] = data['season']
 				s = utilities.getFormattedItemName(media_type, showInfo)
-				params = {'imdb_id': summaryInfo['ids']['imdb'], 'tvdb_id': summaryInfo['ids']['tvdb'],
-				          'title': showInfo['title'], 'year': showInfo['year'], 'episodes': []}
 				for ep in summaryInfo:
 					if ep['episode'] in data['episodes']:
 						if not ep['watched']:
-							params['episodes'].append({'season': ep['season'], 'episode': ep['episode']})
+							summaryInfo['episodes'].append({'season': ep['season'], 'episode': ep['episode']})
 
-				logger.debug("doMarkWatched(): '%s - Season %d' has %d episode(s) that are going to be marked as watched." % (showInfo['title'], data['season'], len(params['episodes'])))
+				logger.debug("doMarkWatched(): '%s - Season %d' has %d episode(s) that are going to be marked as watched." % (showInfo['title'], data['season'], len(summaryInfo['episodes'])))
 				
-				if len(params['episodes']) > 0:
-					logger.debug("doMarkWatched(): %s" % str(params))
+				if len(summaryInfo['episodes']) > 0:
+					logger.debug("doMarkWatched(): %s" % str(summaryInfo))
 
-					result = globals.traktapi.updateSeenEpisode(params)
+					result = globals.traktapi.addToHistory(summaryInfo)
 					if result:
 						if markedNotification:
-							utilities.notification(utilities.getString(32113), utilities.getString(32115) % (len(params['episodes']), s))
+							utilities.notification(utilities.getString(32113), utilities.getString(32115) % (len(summaryInfo['episodes']), s))
 					else:
-						utilities.notification(utilities.getString(32114), utilities.getString(32115) % (len(params['episodes']), s))
+						utilities.notification(utilities.getString(32114), utilities.getString(32115) % (len(summaryInfo['episodes']), s))
 
 
 		elif utilities.isShow(media_type):
-			summaryInfo = globals.traktapi.getShowSummary(data['id'], extended=True)
+			summaryInfo = globals.traktapi.getShowSummary(data['id']).to_dict()
 			if summaryInfo:
 				s = utilities.getFormattedItemName(media_type, summaryInfo)
-				params = {'imdb_id': summaryInfo['ids']['imdb'], 'tvdb_id': summaryInfo['ids']['tvdb'],
-				          'title': summaryInfo['title'], 'year': summaryInfo['year'], 'episodes': []}
 				for season in summaryInfo['seasons']:
 					for ep in season['episodes']:
 						if str(season['season']) in data['seasons']:
 							if ep['episode'] in data['seasons'][str(season['season'])]:
 								if not ep['watched']:
-									params['episodes'].append({'season': ep['season'], 'episode': ep['episode']})
-				logger.debug("doMarkWatched(): '%s' has %d episode(s) that are going to be marked as watched." % (summaryInfo['title'], len(params['episodes'])))
+									summaryInfo['episodes'].append({'season': ep['season'], 'episode': ep['episode']})
+				logger.debug("doMarkWatched(): '%s' has %d episode(s) that are going to be marked as watched." % (summaryInfo['title'], len(summaryInfo['episodes'])))
 
-				if len(params['episodes']) > 0:
-					logger.debug("doMarkWatched(): %s" % str(params))
+				if len(summaryInfo['episodes']) > 0:
+					logger.debug("doMarkWatched(): %s" % str(summaryInfo))
 
-					result = globals.traktapi.updateSeenEpisode(params)
+					result = globals.traktapi.addToHistory(summaryInfo)
 					if result:
 						if markedNotification:
-							utilities.notification(utilities.getString(32113), utilities.getString(32115) % (len(params['episodes']), s))
+							utilities.notification(utilities.getString(32113), utilities.getString(32115) % (len(summaryInfo['episodes']), s))
 					else:
-						utilities.notification(utilities.getString(32114), utilities.getString(32115) % (len(params['episodes']), s))
+						utilities.notification(utilities.getString(32114), utilities.getString(32115) % (len(summaryInfo['episodes']), s))
 
 
 	def doSync(self, manual=False, silent=False, library="all"):
