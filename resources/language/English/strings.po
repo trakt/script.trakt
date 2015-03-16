@@ -547,3 +547,7 @@ msgstr ""
 msgctxt "#32131"
 msgid "Playback progress updated for %i episode(s) in Kodi"
 msgstr ""
+
+msgctxt "#32132"
+msgid "Unrate this season"
+msgstr "Unrate this season"

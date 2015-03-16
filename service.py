@@ -124,7 +124,6 @@ class traktService:
 			self.syncThread.join()
 
 	def doManualRating(self, data):
-
 		action = data['action']
 		media_type = data['media_type']
 		summaryInfo = None
@@ -137,17 +136,14 @@ class traktService:
 			logger.debug("doManualRating(): Unknown action passed.")
 			return
 			
-		if 'dbid' in data:
-			logger.debug("Getting data for manual %s of library '%s' with ID of '%s'" % (action, media_type, data['dbid']))
-		elif 'remoteid' in data:
-			if 'season' in data:
-				logger.debug("Getting data for manual %s of non-library '%s' S%02dE%02d, with ID of '%s'." % (action, media_type, data['season'], data['episode'], data['remoteid']))
-			else:
-				logger.debug("Getting data for manual %s of non-library '%s' with ID of '%s'" % (action, media_type, data['remoteid']))
+		logger.debug("Getting data for manual %s of %s: imdb: |%s| dbid: |%s|" % (action, media_type, data.get('remoteid'), data.get('dbid')))
 				
 		if utilities.isEpisode(media_type):
 			summaryInfo = globals.traktapi.getEpisodeSummary(data['imdbnumber'], data['season'], data['episode'])
 			userInfo = globals.traktapi.getEpisodeRatingForUser(data['imdbnumber'], data['season'], data['episode'], 'imdb')
+		elif utilities.isSeason(media_type):
+			summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
+			userInfo = globals.traktapi.getSeasonRatingForUser(data['imdbnumber'], data['season'], 'imdb')
 		elif utilities.isShow(media_type):
 			summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
 			userInfo = globals.traktapi.getShowRatingForUser(data['imdbnumber'], 'imdb')
@@ -157,13 +153,12 @@ class traktService:
 		
 		if summaryInfo is not None:
 			summaryInfo = summaryInfo.to_dict()
-			if 'dbid' in data and (utilities.isMovie(media_type) or utilities.isShow(media_type)):
-				summaryInfo['xbmc_id'] = data['dbid']
-			
 			summaryInfo['user'] = {'ratings': userInfo}
 			if utilities.isEpisode(media_type):
 				summaryInfo['season'] = data['season']
 				summaryInfo['number'] = data['episode']
+			elif utilities.isSeason(media_type):
+				summaryInfo['season'] = data['season']
 				
 			if action == 'rate':
 				if not 'rating' in data:

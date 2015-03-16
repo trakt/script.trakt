@@ -110,35 +110,22 @@ def rateMedia(media_type, summary_info, unrate=False, rating=None):
 def __rateOnTrakt(rating, media_type, media, unrate=False):
 	logger.debug("Sending rating (%s) to Trakt.tv" % rating)
 
-	params = {}
-	
-
+	params = media
 	if utils.isMovie(media_type):
-		params = media
+		key = 'movies'
 		params['rating'] = rating
-		root = {}
-		listing = [params]
-		root['movies'] = listing
-
 	elif utils.isShow(media_type):
+		key = 'shows'
 		params['rating'] = rating
-		params['title'] = media['title']
-		params['year'] = media['year']
-		params['ids'] = media['ids']
-
-		root = {}
-		listing = [params]
-		root['shows'] = listing
-
+	elif utils.isSeason(media_type):
+		key = 'shows'
+		params['seasons'] = [{'rating': rating, 'number': media['season']}]
 	elif utils.isEpisode(media_type):
-		params = media
+		key = 'episodes'
 		params['rating'] = rating
-		root = {}
-		listing = [params]
-		root['episodes'] = listing
-
 	else:
 		return
+	root = {key: [params]}
 
 	if not unrate:
 		data = globals.traktapi.addRating(root)
@@ -216,6 +203,8 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
 						s = utils.getString(32038)
 					elif utils.isEpisode(self.media_type):
 						s = utils.getString(32039)
+					elif utils.isSeason(self.media_type):
+						s = utils.getString(32132)
 					else:
 						pass
 
