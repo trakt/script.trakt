@@ -4,7 +4,7 @@ import xbmcaddon
 import logging
 from trakt import Trakt, ClientError, ServerError
 from trakt.objects import Movie, Show
-from utilities import getSetting, findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, notification, getString, createError
+from utilities import getSetting, findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, notification, getString, createError
 
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')
@@ -172,6 +172,13 @@ class traktAPI(object):
 			with Trakt.configuration.http(retry=True):
 				Trakt['sync/ratings'].shows(ratings)
 		return findShowMatchInList(showId, ratings, idType)
+
+	def getSeasonRatingForUser(self, showId, season, idType='tvdb'):
+		ratings = {}
+		with Trakt.configuration.auth(self.__username, self.__token):
+			with Trakt.configuration.http(retry=True):
+				Trakt['sync/ratings'].seasons(ratings)
+		return findSeasonMatchInList(showId, season, ratings, idType)
 
 	def getEpisodeRatingForUser(self, showId, season, episode, idType='tvdb'):
 		ratings = {}

@@ -83,7 +83,7 @@ def isSeason(type):
 	return type == 'season'
 
 def isValidMediaType(type):
-	return type in ['movie', 'show', 'episode']
+	return type in ['movie', 'show', 'season', 'episode']
 
 def kodiJsonRequest(params):
 	data = json.dumps(params)
@@ -290,15 +290,22 @@ def findMovieMatchInList(id, list, idType):
 def findShowMatchInList(id, list, idType):
 	return next((item.to_dict() for key, item in list.items() if  any(idType in key for key, value in item.keys if str(value) == str(id))), {})
 
-def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list, idType):
+def findSeasonMatchInList(id, seasonNumber, list, idType):
 	show = findShowMatchInList(id, list, idType)
-	logger.debug("findEpisodeMatchInList %s" % show)
+	logger.debug("findSeasonMatchInList %s" % show)
 	if 'seasons' in show:
 		for season in show['seasons']:
 			if season['number'] == seasonNumber:
-				for episode in season['episodes']:
-					if episode['number'] == episodeNumber:
-						return episode
+				return season
+
+	return {}
+
+def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list, idType):
+	season = findSeasonMatchInList(id, seasonNumber, list, idType)
+	if season:
+		for episode in season['episodes']:
+			if episode['number'] == episodeNumber:
+				return episode
 
 	return {}
 

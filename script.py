@@ -36,7 +36,6 @@ def __getArguments():
 	return data
 
 def Main():
-
 	args = __getArguments()
 	data = {}
 
@@ -62,16 +61,14 @@ def Main():
 		elif 'media_type' in args and 'remoteid' in args:
 			media_type = args['media_type']
 			data['remoteid'] = args['remoteid']
-			if 'season' in args:
-				if not 'episode' in args:
-					logger.debug("Manual %s triggered for non-library episode, but missing episode number." % args['action'])
-					return
-				try:
-					data['season'] = int(args['season'])
-					data['episode'] = int(args['episode'])
-				except ValueError:
-					logger.debug("Error parsing season or episode for manual %s" % args['action'])
-					return
+			try:
+				data['season'] = int(args['season'])
+				data['episode'] = int(args['episode'])
+			except ValueError:
+				logger.debug("Error parsing season or episode for manual %s" % args['action'])
+				return
+			except KeyError:
+				pass
 		else:
 			media_type = __getMediaType()
 			if not utils.isValidMediaType(media_type):
@@ -92,7 +89,7 @@ def Main():
 						return
 					data['imdbnumber'] = result['imdbnumber']
 
-				elif utils.isShow(media_type):
+				elif utils.isShow(media_type) or utils.isSeason(media_type):
 					result = utils.getShowDetailsFromKodi(data['dbid'], ['imdbnumber', 'tag'])
 					if not result:
 						logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
@@ -108,14 +105,14 @@ def Main():
 					data['imdbnumber'] = result['imdbnumber']
 					data['season'] = result['season']
 					data['episode'] = result['episode']
-
 			else:
-				if 'season' in data:
+				data['imdbnumber'] = data['remoteid']
+				if 'season' in data and 'episode' in data:
 					logger.debug("Manual %s of non-library '%s' S%02dE%02d, with an ID of '%s'." % (args['action'], media_type, data['season'], data['episode'], data['remoteid']))
-					data['imdbnumber'] = data['remoteid']
+				elif 'season' in data:
+					logger.debug("Manual %s of non-library '%s' S%02d, with an ID of '%s'." % (args['action'], media_type, data['season'], data['remoteid']))
 				else:
 					logger.debug("Manual %s of non-library '%s' with an ID of '%s'." % (args['action'], media_type, data['remoteid']))
-					data['imdbnumber'] = data['remoteid']
 
 			if args['action'] == 'rate' and 'rating' in args:
 				if args['rating'] in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']:
