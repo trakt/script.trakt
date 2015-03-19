@@ -98,11 +98,11 @@ def Main():
 					data['tag'] = result['tag']
 
 				elif utils.isEpisode(media_type):
-					result = utils.getEpisodeDetailsFromKodi(data['dbid'], ['showtitle', 'season', 'episode', 'imdbnumber'])
+					result = utils.getEpisodeDetailsFromKodi(data['dbid'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid', 'file', 'playcount'])
 					if not result:
 						logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
 						return
-					data['imdbnumber'] = result['imdbnumber']
+					data['imdbnumber'] = result['episodeid']
 					data['season'] = result['season']
 					data['episode'] = result['episode']
 			else:
@@ -146,7 +146,8 @@ def Main():
 					if result['playcount'] == 0:
 						data['id'] = result['imdbnumber']
 						data['season'] = result['season']
-						data['episode'] = result['episode']
+						data['number'] = result['episode']
+						data['title'] = result['showtitle']
 					else:
 						logger.debug("Episode already marked as watched in Kodi.")
 				else:
@@ -162,6 +163,7 @@ def Main():
 						if show['title'] == showTitle:
 							showID = show['tvshowid']
 							data['id'] = show['imdbnumber']
+							data['title'] = show['title']
 							break
 				else:
 					logger.debug("Error getting TV shows from Kodi.")
@@ -198,11 +200,12 @@ def Main():
 					return
 				showTitle = result['label']
 				data['id'] = result['imdbnumber']
-				result = utils.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': dbid, 'properties': ['season', 'episode', 'playcount']}, 'id': 0})
+				result = utils.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': dbid, 'properties': ['season', 'episode', 'playcount', 'showtitle']}, 'id': 0})
 				if result and 'episodes' in result:
 					i = 0
 					s = {}
 					for e in result['episodes']:
+						data['title'] = e['showtitle']
 						season = str(e['season'])
 						if not season in s:
 							s[season] = []
