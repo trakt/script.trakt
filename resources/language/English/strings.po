@@ -551,3 +551,47 @@ msgstr ""
 msgctxt "#32132"
 msgid "Unrate this season"
 msgstr "Unrate this season"
+
+msgctxt "#32133"
+msgid "Manage Movie's Lists"
+msgstr ""
+
+msgctxt "#32134"
+msgid "Manage Show's Lists"
+msgstr ""
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr ""
+
+msgctxt "#32136"
+msgid "Add to Watchlist"
+msgstr ""
+
+msgctxt "#32137"
+msgid "Rate this Movie"
+msgstr ""
+
+msgctxt "#32138"
+msgid "Rate this Show"
+msgstr ""
+
+msgctxt "#32139"
+msgid "Rate this Episode"
+msgstr ""
+
+msgctxt "#32140"
+msgid "Toggle Watched"
+msgstr ""
+
+msgctxt "#32141"
+msgid "Manage All Lists"
+msgstr ""
+
+msgctxt "#32142"
+msgid "Update All Tags"
+msgstr ""
+
+msgctxt "#32143"
+msgid "Synchronize Library"
+msgstr ""

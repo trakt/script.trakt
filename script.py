@@ -4,6 +4,7 @@ import xbmc
 import sqlitequeue
 import sys
 import logging
+from traktContextMenu import traktContextMenu
 
 logger = logging.getLogger(__name__)
 
@@ -38,6 +39,29 @@ def __getArguments():
 def Main():
 	args = __getArguments()
 	data = {}
+
+	if args['action'] == 'contextmenu':
+		buttons = []
+		media_type = utils.getMediaType()
+
+		if media_type in ['movie', 'show', 'season', 'episode']:
+			buttons.append("rate")
+
+		if media_type in ['movie', 'show', 'season', 'episode']:
+			buttons.append("togglewatched")
+
+		buttons.append("sync")
+
+		contextMenu = traktContextMenu(media_type=media_type, buttons=buttons)
+		contextMenu.doModal()
+		_action = contextMenu.action
+		del contextMenu
+
+		if _action is None:
+			return
+
+		utils.Debug("'%s' selected from trakt.tv action menu" % _action)
+		args['action'] = _action
 
 	if args['action'] == 'sync':
 		data = {'action': 'manualSync', 'silent': False}

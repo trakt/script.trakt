@@ -1,0 +1,85 @@
+<window>
+	<coordinates>
+		<system>1</system>
+		<posx>490</posx>
+		<posy>199</posy>
+	</coordinates>
+	<controls>
+		<control type="group">
+			<control type="image" id="2">
+				<description>background image</description>
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>340</width>
+				<height>132</height>
+				<texture border="20">ConfluenceDialogBack.png</texture>
+			</control>
+			<control type="list" id="111">
+				<posx>20</posx>
+				<posy>20</posy>
+				<width>300</width>
+				<height>322</height>
+				<onup>111</onup>
+				<ondown>111</ondown>
+				<onleft>111</onleft>
+				<onright>111</onright>
+				<scrolltime>200</scrolltime>
+				<itemlayout height="46" width="300">
+					<control type="image">
+						<posx>0</posx>
+						<posy>0</posy>
+						<width>300</width>
+						<height>40</height>
+						<texture border="5">button-nofocus.png</texture>
+					</control>
+					<control type="label">
+						<posx>150</posx>
+						<posy>0</posy>
+						<width>300</width>
+						<height>40</height>
+						<font>font13</font>
+						<textcolor>white</textcolor>
+						<selectedcolor>FFEB9E17</selectedcolor>
+						<align>center</align>
+						<aligny>center</aligny>
+						<info>ListItem.Label</info>
+					</control>
+				</itemlayout>
+				<focusedlayout height="46" width="300">
+					<control type="image">
+						<posx>0</posx>
+						<posy>0</posy>
+						<width>300</width>
+						<height>40</height>
+						<texture border="5">button-nofocus.png</texture>
+						<visible>!Control.HasFocus(111)</visible>
+						<animation effect="fade" time="300">Visible</animation>
+						<animation effect="fade" time="300">Hidden</animation>
+					</control>
+					<control type="image">
+						<posx>0</posx>
+						<posy>0</posy>
+						<width>300</width>
+						<height>40</height>
+						<texture border="5">button-focus2.png</texture>
+						<visible>Control.HasFocus(111)</visible>
+						<animation effect="fade" time="300">Visible</animation>
+						<animation effect="fade" time="300">Hidden</animation>
+					</control>
+					<control type="label">
+						<posx>150</posx>
+						<posy>0</posy>
+						<width>300</width>
+						<height>40</height>
+						<font>font13</font>
+						<textcolor>white</textcolor>
+						<selectedcolor>FFEB9E17</selectedcolor>
+						<align>center</align>
+						<aligny>center</aligny>
+						<info>ListItem.Label</info>
+					</control>
+				</focusedlayout>
+			</control>
+		</control>
+	</controls>
+</window>
