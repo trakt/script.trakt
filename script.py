@@ -42,7 +42,7 @@ def Main():
 
 	if args['action'] == 'contextmenu':
 		buttons = []
-		media_type = utils.getMediaType()
+		media_type = __getMediaType()
 
 		if media_type in ['movie', 'show', 'season', 'episode']:
 			buttons.append("rate")
@@ -60,7 +60,7 @@ def Main():
 		if _action is None:
 			return
 
-		utils.Debug("'%s' selected from trakt.tv action menu" % _action)
+		logger.debug("'%s' selected from trakt.tv action menu" % _action)
 		args['action'] = _action
 
 	if args['action'] == 'sync':
