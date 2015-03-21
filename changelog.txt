@@ -2,6 +2,7 @@ version 3.0.1
   - readded manual ratings for movies/shows/episodes (by tknorris)
   - implemented manual ratings for seasons (by tknorris)
   - readded manual ratings for movies/shows/seasons/episodes
+  - readded the Trakt contextmenu
   - updated transifex translations
 
 version 3.0.0
