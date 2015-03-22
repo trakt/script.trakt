@@ -16,474 +16,467 @@ import utilities
 logger = logging.getLogger(__name__)
 
 class traktService:
-	scrobbler = None
-	updateTagsThread = None
-	syncThread = None
-	dispatchQueue = sqlitequeue.SqliteQueue()
-	
-	def __init__(self):
-		threading.Thread.name = 'trakt'
+    scrobbler = None
+    updateTagsThread = None
+    syncThread = None
+    dispatchQueue = sqlitequeue.SqliteQueue()
 
-	def _dispatchQueue(self, data):
-		logger.debug("Queuing for dispatch: %s" % data)
-		self.dispatchQueue.append(data)
-	
-	def _dispatch(self, data):
-		try:
-			logger.debug("Dispatch: %s" % data)
-			action = data['action']
-			if action == 'started':
-				del data['action']
-				self.scrobbler.playbackStarted(data)
-			elif action == 'ended' or action == 'stopped':
-				self.scrobbler.playbackEnded()
-			elif action == 'paused':
-				self.scrobbler.playbackPaused()
-			elif action == 'resumed':
-				self.scrobbler.playbackResumed()
-			elif action == 'seek' or action == 'seekchapter':
-				self.scrobbler.playbackSeek()
-			elif action == 'databaseUpdated':
-				if utilities.getSettingAsBool('sync_on_update'):
-					logger.debug("Performing sync after library update.")
-					self.doSync()
-			elif action == 'databaseCleaned':
-				if utilities.getSettingAsBool('sync_on_update') and (utilities.getSettingAsBool('clean_trakt_movies') or utilities.getSettingAsBool('clean_trakt_episodes')):
-					logger.debug("Performing sync after library clean.")
-					self.doSync()
-			elif action == 'settingsChanged':
-				logger.debug("Settings changed, reloading.")
-				globals.traktapi.updateSettings()
-			elif action == 'markWatched':
-				del data['action']
-				self.doMarkWatched(data)
-			elif action == 'manualRating':
-				ratingData = data['ratingData']
-				self.doManualRating(ratingData)
-			elif action == 'manualSync':
-				if not self.syncThread.isAlive():
-					logger.debug("Performing a manual sync.")
-					self.doSync(manual=True, silent=data['silent'], library=data['library'])
-				else:
-					logger.debug("There already is a sync in progress.")
-			elif action == 'settings':
-				utilities.showSettings()
-			elif action == 'scanStarted':
-				pass
-			else:
-				logger.debug("Unknown dispatch action, '%s'." % action)
-		except Exception as ex:
-			message = utilities.createError(ex)
-			logger.fatal(message)
+    def __init__(self):
+        threading.Thread.name = 'trakt'
 
-	def run(self):
-		startup_delay = utilities.getSettingAsInt('startup_delay')
-		if startup_delay:
-			logger.debug("Delaying startup by %d seconds." % startup_delay)
-			xbmc.sleep(startup_delay * 1000)
+    def _dispatchQueue(self, data):
+        logger.debug("Queuing for dispatch: %s" % data)
+        self.dispatchQueue.append(data)
 
-		logger.debug("Service thread starting.")
+    def _dispatch(self, data):
+        try:
+            logger.debug("Dispatch: %s" % data)
+            action = data['action']
+            if action == 'started':
+                del data['action']
+                self.scrobbler.playbackStarted(data)
+            elif action == 'ended' or action == 'stopped':
+                self.scrobbler.playbackEnded()
+            elif action == 'paused':
+                self.scrobbler.playbackPaused()
+            elif action == 'resumed':
+                self.scrobbler.playbackResumed()
+            elif action == 'seek' or action == 'seekchapter':
+                self.scrobbler.playbackSeek()
+            elif action == 'databaseUpdated':
+                if utilities.getSettingAsBool('sync_on_update'):
+                    logger.debug("Performing sync after library update.")
+                    self.doSync()
+            elif action == 'databaseCleaned':
+                if utilities.getSettingAsBool('sync_on_update') and (utilities.getSettingAsBool('clean_trakt_movies') or utilities.getSettingAsBool('clean_trakt_episodes')):
+                    logger.debug("Performing sync after library clean.")
+                    self.doSync()
+            elif action == 'settingsChanged':
+                logger.debug("Settings changed, reloading.")
+                globals.traktapi.updateSettings()
+            elif action == 'markWatched':
+                del data['action']
+                self.doMarkWatched(data)
+            elif action == 'manualRating':
+                ratingData = data['ratingData']
+                self.doManualRating(ratingData)
+            elif action == 'manualSync':
+                if not self.syncThread.isAlive():
+                    logger.debug("Performing a manual sync.")
+                    self.doSync(manual=True, silent=data['silent'], library=data['library'])
+                else:
+                    logger.debug("There already is a sync in progress.")
+            elif action == 'settings':
+                utilities.showSettings()
+            elif action == 'scanStarted':
+                pass
+            else:
+                logger.debug("Unknown dispatch action, '%s'." % action)
+        except Exception as ex:
+            message = utilities.createError(ex)
+            logger.fatal(message)
 
-		# purge queue before doing anything
-		self.dispatchQueue.purge()
+    def run(self):
+        startup_delay = utilities.getSettingAsInt('startup_delay')
+        if startup_delay:
+            logger.debug("Delaying startup by %d seconds." % startup_delay)
+            xbmc.sleep(startup_delay * 1000)
 
-		# setup event driven classes
-		self.Player = traktPlayer(action = self._dispatchQueue)
-		self.Monitor = traktMonitor(action = self._dispatchQueue)
+        logger.debug("Service thread starting.")
 
-		# init traktapi class
-		globals.traktapi = traktAPI()
+        # purge queue before doing anything
+        self.dispatchQueue.purge()
 
-		# init sync thread
-		self.syncThread = syncThread()
+        # setup event driven classes
+        self.Player = traktPlayer(action=self._dispatchQueue)
+        self.Monitor = traktMonitor(action=self._dispatchQueue)
 
-		# init scrobbler class
-		self.scrobbler = Scrobbler(globals.traktapi)
+        # init traktapi class
+        globals.traktapi = traktAPI()
 
-		# start loop for events
-		while not xbmc.abortRequested:
-			while len(self.dispatchQueue) and (not xbmc.abortRequested):
-				data = self.dispatchQueue.get()
-				logger.debug("Queued dispatch: %s" % data)
-				self._dispatch(data)
+        # init sync thread
+        self.syncThread = syncThread()
 
-			if xbmc.Player().isPlayingVideo():
-				self.scrobbler.update()
+        # init scrobbler class
+        self.scrobbler = Scrobbler(globals.traktapi)
 
-			xbmc.sleep(500)
+        # start loop for events
+        while not xbmc.abortRequested:
+            while len(self.dispatchQueue) and (not xbmc.abortRequested):
+                data = self.dispatchQueue.get()
+                logger.debug("Queued dispatch: %s" % data)
+                self._dispatch(data)
 
-		# we are shutting down
-		logger.debug("Beginning shut down.")
+            if xbmc.Player().isPlayingVideo():
+                self.scrobbler.update()
 
-		# delete player/monitor
-		del self.Player
-		del self.Monitor
+            xbmc.sleep(500)
 
-		# check if sync thread is running, if so, join it.
-		if self.syncThread.isAlive():
-			self.syncThread.join()
+        # we are shutting down
+        logger.debug("Beginning shut down.")
 
-	def doManualRating(self, data):
-		action = data['action']
-		media_type = data['media_type']
-		summaryInfo = None
+        # delete player/monitor
+        del self.Player
+        del self.Monitor
 
-		if not utilities.isValidMediaType(media_type):
-			logger.debug("doManualRating(): Invalid media type '%s' passed for manual %s." % (media_type, action))
-			return
+        # check if sync thread is running, if so, join it.
+        if self.syncThread.isAlive():
+            self.syncThread.join()
 
-		if not data['action'] in ['rate', 'unrate']:
-			logger.debug("doManualRating(): Unknown action passed.")
-			return
-			
-		logger.debug("Getting data for manual %s of %s: imdb: |%s| dbid: |%s|" % (action, media_type, data.get('remoteid'), data.get('dbid')))
-				
-		if utilities.isEpisode(media_type):
-			summaryInfo = globals.traktapi.getEpisodeSummary(data['imdbnumber'], data['season'], data['episode'])
-			userInfo = globals.traktapi.getEpisodeRatingForUser(data['imdbnumber'], data['season'], data['episode'], 'imdb')
-		elif utilities.isSeason(media_type):
-			summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
-			userInfo = globals.traktapi.getSeasonRatingForUser(data['imdbnumber'], data['season'], 'imdb')
-		elif utilities.isShow(media_type):
-			summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
-			userInfo = globals.traktapi.getShowRatingForUser(data['imdbnumber'], 'imdb')
-		elif utilities.isMovie(media_type):
-			summaryInfo = globals.traktapi.getMovieSummary(data['imdbnumber'])
-			userInfo = globals.traktapi.getMovieRatingForUser(data['imdbnumber'])
-		
-		if summaryInfo is not None:
-			summaryInfo = summaryInfo.to_dict()
-			summaryInfo['user'] = {'ratings': userInfo}
-			if utilities.isEpisode(media_type):
-				summaryInfo['season'] = data['season']
-				summaryInfo['number'] = data['episode']
-			elif utilities.isSeason(media_type):
-				summaryInfo['season'] = data['season']
-				
-			if action == 'rate':
-				if not 'rating' in data:
-					rateMedia(media_type, summaryInfo)
-				else:
-					rateMedia(media_type, summaryInfo, rating=data['rating'])
-		else:
-			logger.debug("doManualRating(): Summary info was empty, possible problem retrieving data from Trakt.tv")
+    def doManualRating(self, data):
+        action = data['action']
+        media_type = data['media_type']
+        summaryInfo = None
 
-	def doMarkWatched(self, data):
+        if not utilities.isValidMediaType(media_type):
+            logger.debug("doManualRating(): Invalid media type '%s' passed for manual %s." % (media_type, action))
+            return
 
-		media_type = data['media_type']
-		markedNotification = utilities.getSettingAsBool('show_marked_notification')
-		
-		if utilities.isMovie(media_type):
-			summaryInfo = globals.traktapi.getMovieSummary(data['id']).to_dict()
-			if summaryInfo:
-				if not summaryInfo['watched']:
-					s = utilities.getFormattedItemName(media_type, summaryInfo)
-					logger.debug("doMarkWatched(): '%s' is not watched on Trakt, marking it as watched." % s)
-					params = {'movies': [summaryInfo]}
-					logger.debug("doMarkWatched(): %s" % str(params))
+        if not data['action'] in ['rate', 'unrate']:
+            logger.debug("doManualRating(): Unknown action passed.")
+            return
 
-					result = globals.traktapi.addToHistory(params)
-					if result:
-						if markedNotification:
-							utilities.notification(utilities.getString(32113), s)
-					else:
-						utilities.notification(utilities.getString(32114), s)
+        logger.debug("Getting data for manual %s of %s: imdb: |%s| dbid: |%s|" % (action, media_type, data.get('remoteid'), data.get('dbid')))
 
-					
-		elif utilities.isEpisode(media_type):
-			summaryInfo = {'shows':[{'ids':{'tvdb': data['id']}, 'seasons': [{'number': data['season'], 'episodes': [{'number':data['number']}]}]}]}
-			logger.debug("doMarkWatched(): %s" % str(summaryInfo))
-			s = utilities.getFormattedItemName(media_type, data)
+        if utilities.isEpisode(media_type):
+            summaryInfo = globals.traktapi.getEpisodeSummary(data['imdbnumber'], data['season'], data['episode'])
+            userInfo = globals.traktapi.getEpisodeRatingForUser(data['imdbnumber'], data['season'], data['episode'], 'imdb')
+        elif utilities.isSeason(media_type):
+            summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
+            userInfo = globals.traktapi.getSeasonRatingForUser(data['imdbnumber'], data['season'], 'imdb')
+        elif utilities.isShow(media_type):
+            summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
+            userInfo = globals.traktapi.getShowRatingForUser(data['imdbnumber'], 'imdb')
+        elif utilities.isMovie(media_type):
+            summaryInfo = globals.traktapi.getMovieSummary(data['imdbnumber'])
+            userInfo = globals.traktapi.getMovieRatingForUser(data['imdbnumber'])
 
-			result = globals.traktapi.addToHistory(summaryInfo)
-			if result:
-				if markedNotification:
-					utilities.notification(utilities.getString(32113), s)
-			else:
-				utilities.notification(utilities.getString(32114), s)
+        if summaryInfo is not None:
+            summaryInfo = summaryInfo.to_dict()
+            summaryInfo['user'] = {'ratings': userInfo}
+            if utilities.isEpisode(media_type):
+                summaryInfo['season'] = data['season']
+                summaryInfo['number'] = data['episode']
+            elif utilities.isSeason(media_type):
+                summaryInfo['season'] = data['season']
 
-		elif utilities.isSeason(media_type):
-			summaryInfo = {'shows':[{'ids':{'tvdb': data['id']}, 'seasons': [{'number': data['season'], 'episodes': []}]}]}
-			s = utilities.getFormattedItemName(media_type, data)
-			for ep in data['episodes']:
-				summaryInfo['shows'][0]['seasons'][0]['episodes'].append({'number': ep})
+            if action == 'rate':
+                if not 'rating' in data:
+                    rateMedia(media_type, summaryInfo)
+                else:
+                    rateMedia(media_type, summaryInfo, rating=data['rating'])
+        else:
+            logger.debug("doManualRating(): Summary info was empty, possible problem retrieving data from Trakt.tv")
 
-			logger.debug("doMarkWatched(): '%s - Season %d' has %d episode(s) that are going to be marked as watched." % (data['id'], data['season'], len(summaryInfo['shows'][0]['seasons'][0]['episodes'])))
+    def doMarkWatched(self, data):
 
-			if len(summaryInfo['shows'][0]['seasons'][0]['episodes']) > 0:
-				logger.debug("doMarkWatched(): %s" % str(summaryInfo))
+        media_type = data['media_type']
+        markedNotification = utilities.getSettingAsBool('show_marked_notification')
 
-				result = globals.traktapi.addToHistory(summaryInfo)
-				if result:
-					if markedNotification:
-						utilities.notification(utilities.getString(32113), utilities.getString(32115) % (result['added']['episodes'], s))
-				else:
-					utilities.notification(utilities.getString(32114))
+        if utilities.isMovie(media_type):
+            summaryInfo = globals.traktapi.getMovieSummary(data['id']).to_dict()
+            if summaryInfo:
+                if not summaryInfo['watched']:
+                    s = utilities.getFormattedItemName(media_type, summaryInfo)
+                    logger.debug("doMarkWatched(): '%s' is not watched on Trakt, marking it as watched." % s)
+                    params = {'movies': [summaryInfo]}
+                    logger.debug("doMarkWatched(): %s" % str(params))
 
+                    result = globals.traktapi.addToHistory(params)
+                    if result:
+                        if markedNotification:
+                            utilities.notification(utilities.getString(32113), s)
+                    else:
+                        utilities.notification(utilities.getString(32114), s)
+        elif utilities.isEpisode(media_type):
+            summaryInfo = {'shows': [{'ids':{'tvdb': data['id']}, 'seasons': [{'number': data['season'], 'episodes': [{'number':data['number']}]}]}]}
+            logger.debug("doMarkWatched(): %s" % str(summaryInfo))
+            s = utilities.getFormattedItemName(media_type, data)
 
-		elif utilities.isShow(media_type):
-			summaryInfo = {'shows':[{'ids':{'tvdb': data['id']}, 'seasons': []}]}
-			if summaryInfo:
-				s = utilities.getFormattedItemName(media_type, data)
-				logger.debug('data: %s' % data)
-				for season in data['seasons']:
-					episodeJson = []
-					for episode in data['seasons'][season]:
-						episodeJson.append({'number': episode})
-					summaryInfo['shows'][0]['seasons'].append({'number': season, 'episodes': episodeJson})
+            result = globals.traktapi.addToHistory(summaryInfo)
+            if result:
+                if markedNotification:
+                    utilities.notification(utilities.getString(32113), s)
+            else:
+                utilities.notification(utilities.getString(32114), s)
+        elif utilities.isSeason(media_type):
+            summaryInfo = {'shows': [{'ids':{'tvdb': data['id']}, 'seasons': [{'number': data['season'], 'episodes': []}]}]}
+            s = utilities.getFormattedItemName(media_type, data)
+            for ep in data['episodes']:
+                summaryInfo['shows'][0]['seasons'][0]['episodes'].append({'number': ep})
 
-				if len(summaryInfo['shows'][0]['seasons'][0]['episodes']) > 0:
-					logger.debug("doMarkWatched(): %s" % str(summaryInfo))
+            logger.debug("doMarkWatched(): '%s - Season %d' has %d episode(s) that are going to be marked as watched." % (data['id'], data['season'], len(summaryInfo['shows'][0]['seasons'][0]['episodes'])))
 
-					result = globals.traktapi.addToHistory(summaryInfo)
-					if result:
-						if markedNotification:
-							utilities.notification(utilities.getString(32113), utilities.getString(32115) % (result['added']['episodes'], s))
-					else:
-						utilities.notification(utilities.getString(32114))
+            if len(summaryInfo['shows'][0]['seasons'][0]['episodes']) > 0:
+                logger.debug("doMarkWatched(): %s" % str(summaryInfo))
 
+                result = globals.traktapi.addToHistory(summaryInfo)
+                if result:
+                    if markedNotification:
+                        utilities.notification(utilities.getString(32113), utilities.getString(32115) % (result['added']['episodes'], s))
+                else:
+                    utilities.notification(utilities.getString(32114))
+        elif utilities.isShow(media_type):
+            summaryInfo = {'shows': [{'ids':{'tvdb': data['id']}, 'seasons': []}]}
+            if summaryInfo:
+                s = utilities.getFormattedItemName(media_type, data)
+                logger.debug('data: %s' % data)
+                for season in data['seasons']:
+                    episodeJson = []
+                    for episode in data['seasons'][season]:
+                        episodeJson.append({'number': episode})
+                    summaryInfo['shows'][0]['seasons'].append({'number': season, 'episodes': episodeJson})
 
-	def doSync(self, manual=False, silent=False, library="all"):
-		self.syncThread = syncThread(manual, silent, library)
-		self.syncThread.start()
+                if len(summaryInfo['shows'][0]['seasons'][0]['episodes']) > 0:
+                    logger.debug("doMarkWatched(): %s" % str(summaryInfo))
+
+                    result = globals.traktapi.addToHistory(summaryInfo)
+                    if result:
+                        if markedNotification:
+                            utilities.notification(utilities.getString(32113), utilities.getString(32115) % (result['added']['episodes'], s))
+                    else:
+                        utilities.notification(utilities.getString(32114))
+
+    def doSync(self, manual=False, silent=False, library="all"):
+        self.syncThread = syncThread(manual, silent, library)
+        self.syncThread.start()
 
 class syncThread(threading.Thread):
 
-	_isManual = False
+    _isManual = False
 
-	def __init__(self, isManual=False, runSilent=False, library="all"):
-		threading.Thread.__init__(self)
-		self.name = "trakt-sync"
-		self._isManual = isManual
-		self._runSilent = runSilent
-		self._library = library
+    def __init__(self, isManual=False, runSilent=False, library="all"):
+        threading.Thread.__init__(self)
+        self.name = "trakt-sync"
+        self._isManual = isManual
+        self._runSilent = runSilent
+        self._library = library
 
-	def run(self):
-		sync = Sync(show_progress=self._isManual, run_silent=self._runSilent, library=self._library, api=globals.traktapi)
-		sync.sync()
-		
+    def run(self):
+        sync = Sync(show_progress=self._isManual, run_silent=self._runSilent, library=self._library, api=globals.traktapi)
+        sync.sync()
+
 
 class traktMonitor(xbmc.Monitor):
+    def __init__(self, *args, **kwargs):
+        xbmc.Monitor.__init__(self)
+        self.action = kwargs['action']
+        # xbmc.getCondVisibility('Library.IsScanningVideo') returns false when cleaning during update...
+        self.scanning_video = False
+        logger.debug("[traktMonitor] Initalized.")
 
-	def __init__(self, *args, **kwargs):
-		xbmc.Monitor.__init__(self)
-		self.action = kwargs['action']
-		# xbmc.getCondVisibility('Library.IsScanningVideo') returns false when cleaning during update...
-		self.scanning_video = False
-		logger.debug("[traktMonitor] Initalized.")
+    # called when database gets updated and return video or music to indicate which DB has been changed
+    def onDatabaseUpdated(self, database):
+        if database == 'video':
+            self.scanning_video = False
+            logger.debug("[traktMonitor] onDatabaseUpdated(database: %s)" % database)
+            data = {'action': 'databaseUpdated'}
+            self.action(data)
 
-	# called when database gets updated and return video or music to indicate which DB has been changed
-	def onDatabaseUpdated(self, database):
-		if database == 'video':
-			self.scanning_video = False
-			logger.debug("[traktMonitor] onDatabaseUpdated(database: %s)" % database)
-			data = {'action': 'databaseUpdated'}
-			self.action(data)
+    # called when database update starts and return video or music to indicate which DB is being updated
+    def onDatabaseScanStarted(self, database):
+        if database == "video":
+            self.scanning_video = True
+            logger.debug("[traktMonitor] onDatabaseScanStarted(database: %s)" % database)
+            data = {'action': 'scanStarted'}
+            self.action(data)
 
-	# called when database update starts and return video or music to indicate which DB is being updated
-	def onDatabaseScanStarted(self, database):
-		if database == "video":
-			self.scanning_video = True
-			logger.debug("[traktMonitor] onDatabaseScanStarted(database: %s)" % database)
-			data = {'action': 'scanStarted'}
-			self.action(data)
+    def onSettingsChanged(self):
+        data = {'action': 'settingsChanged'}
+        self.action(data)
 
-	def onSettingsChanged(self):
-		data = {'action': 'settingsChanged'}
-		self.action(data)
-
-	# Generic notification handler.  Only available in Gotham and later.
-	def onNotification(self, sender, method, data):
-		# onCleanFinished callback is only available in Helix and later.
-		if method == 'VideoLibrary.OnCleanFinished' and not self.scanning_video: # Ignore clean on update.
-			data = {'action': 'databaseCleaned'}
-			self.action(data)
+    # Generic notification handler.  Only available in Gotham and later.
+    def onNotification(self, sender, method, data):
+        # onCleanFinished callback is only available in Helix and later.
+        if method == 'VideoLibrary.OnCleanFinished' and not self.scanning_video:  # Ignore clean on update.
+            data = {'action': 'databaseCleaned'}
+            self.action(data)
 
 class traktPlayer(xbmc.Player):
 
-	_playing = False
-	plIndex = None
+    _playing = False
+    plIndex = None
 
-	def __init__(self, *args, **kwargs):
-		xbmc.Player.__init__(self)
-		self.action = kwargs['action']
-		logger.debug("[traktPlayer] Initalized.")
+    def __init__(self, *args, **kwargs):
+        xbmc.Player.__init__(self)
+        self.action = kwargs['action']
+        logger.debug("[traktPlayer] Initalized.")
 
-	# called when kodi starts playing a file
-	def onPlayBackStarted(self):
-		xbmc.sleep(1000)
-		self.type = None
-		self.id = None
+    # called when kodi starts playing a file
+    def onPlayBackStarted(self):
+        xbmc.sleep(1000)
+        self.type = None
+        self.id = None
 
-		# only do anything if we're playing a video
-		if self.isPlayingVideo():
-			# get item data from json rpc
-			result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'Player.GetItem', 'params': {'playerid': 1}, 'id': 1})
-			logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
+        # only do anything if we're playing a video
+        if self.isPlayingVideo():
+            # get item data from json rpc
+            result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'Player.GetItem', 'params': {'playerid': 1}, 'id': 1})
+            logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
 
-			# check for exclusion
-			_filename = None
-			try:
-				_filename = self.getPlayingFile()
-			except:
-				logger.debug("[traktPlayer] onPlayBackStarted() - Exception trying to get playing filename, player suddenly stopped.")
-				return
+            # check for exclusion
+            _filename = None
+            try:
+                _filename = self.getPlayingFile()
+            except:
+                logger.debug("[traktPlayer] onPlayBackStarted() - Exception trying to get playing filename, player suddenly stopped.")
+                return
 
-			if utilities.checkExclusion(_filename):
-				logger.debug("[traktPlayer] onPlayBackStarted() - '%s' is in exclusion settings, ignoring." % _filename)
-				return
+            if utilities.checkExclusion(_filename):
+                logger.debug("[traktPlayer] onPlayBackStarted() - '%s' is in exclusion settings, ignoring." % _filename)
+                return
 
-			self.type = result['item']['type']
+            self.type = result['item']['type']
 
-			data = {'action': 'started'}
+            data = {'action': 'started'}
 
-			# check type of item
-			if 'id' not in result['item']:
-				# do a deeper check to see if we have enough data to perform scrobbles
-				logger.debug("[traktPlayer] onPlayBackStarted() - Started playing a non-library file, checking available data.")
-				
-				season = xbmc.getInfoLabel('VideoPlayer.Season')
-				episode = xbmc.getInfoLabel('VideoPlayer.Episode')
-				showtitle = xbmc.getInfoLabel('VideoPlayer.TVShowTitle')
-				year = xbmc.getInfoLabel('VideoPlayer.Year')
-				
-				logger.debug("[traktPlayer] info - showtitle: %s, Year: %s, Season: %s, Episode: %s"  % (showtitle, year, season, episode))
+            # check type of item
+            if 'id' not in result['item']:
+                # do a deeper check to see if we have enough data to perform scrobbles
+                logger.debug("[traktPlayer] onPlayBackStarted() - Started playing a non-library file, checking available data.")
 
-				if season and episode and showtitle:
-					# we have season, episode and show title, can scrobble this as an episode
-					self.type = 'episode'
-					data['type'] = 'episode'
-					data['season'] = int(season)
-					data['episode'] = int(episode)
-					data['showtitle'] = showtitle
-					data['title'] = xbmc.getInfoLabel('VideoPlayer.Title')
-					if year.isdigit():
-						data['year'] = year
-					logger.debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'episode' - %s - S%02dE%02d - %s." % (data['showtitle'], data['season'], data['episode'], data['title']))
-				elif year and not season and not showtitle:
-					# we have a year and no season/showtitle info, enough for a movie
-					self.type = 'movie'
-					data['type'] = 'movie'
-					data['year'] = int(year)
-					data['title'] = xbmc.getInfoLabel('VideoPlayer.Title')
-					logger.debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'movie' - %s (%d)." % (data['title'], data['year']))
-				elif showtitle:
-					title, season, episode = utilities.regex_tvshow(False, showtitle)
-					data['type'] = 'episode'
-					data['season'] = int(season)
-					data['episode'] = int(episode)
-					data['showtitle'] = title
-					data['title'] = title
-					logger.debug("[traktPlayer] onPlayBackStarted() - Title: %s, showtitle: %s, season: %d, episode: %d" % (title, showtitle, season, episode))
-				else:
-					logger.debug("[traktPlayer] onPlayBackStarted() - Non-library file, not enough data for scrobbling, skipping.")
-					return
+                season = xbmc.getInfoLabel('VideoPlayer.Season')
+                episode = xbmc.getInfoLabel('VideoPlayer.Episode')
+                showtitle = xbmc.getInfoLabel('VideoPlayer.TVShowTitle')
+                year = xbmc.getInfoLabel('VideoPlayer.Year')
 
-			elif self.type == 'episode' or self.type == 'movie':
-				# get library id
-				self.id = result['item']['id']
-				data['id'] = self.id
-				data['type'] = self.type
+                logger.debug("[traktPlayer] info - showtitle: %s, Year: %s, Season: %s, Episode: %s" % (showtitle, year, season, episode))
 
-				if self.type == 'episode':
-					logger.debug("[traktPlayer] onPlayBackStarted() - Doing multi-part episode check.")
-					result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': self.id, 'properties': ['tvshowid', 'season', 'episode']}, 'id': 1})
-					if result:
-						logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
-						tvshowid = int(result['episodedetails']['tvshowid'])
-						season = int(result['episodedetails']['season'])
-						episode = int(result['episodedetails']['episode'])
-						episode_index = episode - 1
+                if season and episode and showtitle:
+                    # we have season, episode and show title, can scrobble this as an episode
+                    self.type = 'episode'
+                    data['type'] = 'episode'
+                    data['season'] = int(season)
+                    data['episode'] = int(episode)
+                    data['showtitle'] = showtitle
+                    data['title'] = xbmc.getInfoLabel('VideoPlayer.Title')
+                    if year.isdigit():
+                        data['year'] = year
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'episode' - %s - S%02dE%02d - %s." % (data['showtitle'], data['season'], data['episode'], data['title']))
+                elif year and not season and not showtitle:
+                    # we have a year and no season/showtitle info, enough for a movie
+                    self.type = 'movie'
+                    data['type'] = 'movie'
+                    data['year'] = int(year)
+                    data['title'] = xbmc.getInfoLabel('VideoPlayer.Title')
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'movie' - %s (%d)." % (data['title'], data['year']))
+                elif showtitle:
+                    title, season, episode = utilities.regex_tvshow(False, showtitle)
+                    data['type'] = 'episode'
+                    data['season'] = int(season)
+                    data['episode'] = int(episode)
+                    data['showtitle'] = title
+                    data['title'] = title
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Title: %s, showtitle: %s, season: %d, episode: %d" % (title, showtitle, season, episode))
+                else:
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Non-library file, not enough data for scrobbling, skipping.")
+                    return
 
-						result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': tvshowid, 'season': season, 'properties': ['episode', 'file'], 'sort': {'method': 'episode'}}, 'id': 1})
-						if result:
-							logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
-							# make sure episodes array exists in results
-							if 'episodes' in result:
-								multi = []
-								for i in range(episode_index, result['limits']['total']):
-									if result['episodes'][i]['file'] == result['episodes'][episode_index]['file']:
-										multi.append(result['episodes'][i]['episodeid'])
-									else:
-										break
-								if len(multi) > 1:
-									data['multi_episode_data'] = multi
-									data['multi_episode_count'] = len(multi)
-									logger.debug("[traktPlayer] onPlayBackStarted() - This episode is part of a multi-part episode.")
-								else:
-									logger.debug("[traktPlayer] onPlayBackStarted() - This is a single episode.")
+            elif self.type == 'episode' or self.type == 'movie':
+                # get library id
+                self.id = result['item']['id']
+                data['id'] = self.id
+                data['type'] = self.type
 
-			else:
-				logger.debug("[traktPlayer] onPlayBackStarted() - Video type '%s' unrecognized, skipping." % self.type)
-				return
+                if self.type == 'episode':
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Doing multi-part episode check.")
+                    result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': self.id, 'properties': ['tvshowid', 'season', 'episode']}, 'id': 1})
+                    if result:
+                        logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
+                        tvshowid = int(result['episodedetails']['tvshowid'])
+                        season = int(result['episodedetails']['season'])
+                        episode = int(result['episodedetails']['episode'])
+                        episode_index = episode - 1
 
-			pl = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
-			plSize = len(pl)
-			if plSize > 1:
-				pos = pl.getposition()
-				if not self.plIndex is None:
-					logger.debug("[traktPlayer] onPlayBackStarted() - User manually skipped to next (or previous) video, forcing playback ended event.")
-					self.onPlayBackEnded()
-				self.plIndex = pos
-				logger.debug("[traktPlayer] onPlayBackStarted() - Playlist contains %d item(s), and is currently on item %d" % (plSize, (pos + 1)))
+                        result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': tvshowid, 'season': season, 'properties': ['episode', 'file'], 'sort': {'method': 'episode'}}, 'id': 1})
+                        if result:
+                            logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
+                            # make sure episodes array exists in results
+                            if 'episodes' in result:
+                                multi = []
+                                for i in range(episode_index, result['limits']['total']):
+                                    if result['episodes'][i]['file'] == result['episodes'][episode_index]['file']:
+                                        multi.append(result['episodes'][i]['episodeid'])
+                                    else:
+                                        break
+                                if len(multi) > 1:
+                                    data['multi_episode_data'] = multi
+                                    data['multi_episode_count'] = len(multi)
+                                    logger.debug("[traktPlayer] onPlayBackStarted() - This episode is part of a multi-part episode.")
+                                else:
+                                    logger.debug("[traktPlayer] onPlayBackStarted() - This is a single episode.")
 
-			self._playing = True
+            else:
+                logger.debug("[traktPlayer] onPlayBackStarted() - Video type '%s' unrecognized, skipping." % self.type)
+                return
 
-			# send dispatch
-			self.action(data)
+            pl = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+            plSize = len(pl)
+            if plSize > 1:
+                pos = pl.getposition()
+                if not self.plIndex is None:
+                    logger.debug("[traktPlayer] onPlayBackStarted() - User manually skipped to next (or previous) video, forcing playback ended event.")
+                    self.onPlayBackEnded()
+                self.plIndex = pos
+                logger.debug("[traktPlayer] onPlayBackStarted() - Playlist contains %d item(s), and is currently on item %d" % (plSize, (pos + 1)))
 
-	# called when kodi stops playing a file
-	def onPlayBackEnded(self):
-		if self._playing:
-			logger.debug("[traktPlayer] onPlayBackEnded() - %s" % self.isPlayingVideo())
-			self._playing = False
-			self.plIndex = None
-			data = {'action': 'ended'}
-			self.action(data)
+            self._playing = True
 
-	# called when user stops kodi playing a file
-	def onPlayBackStopped(self):
-		if self._playing:
-			logger.debug("[traktPlayer] onPlayBackStopped() - %s" % self.isPlayingVideo())
-			self._playing = False
-			self.plIndex = None
-			data = {'action': 'stopped'}
-			self.action(data)
+            # send dispatch
+            self.action(data)
 
-	# called when user pauses a playing file
-	def onPlayBackPaused(self):
-		if self._playing:
-			logger.debug("[traktPlayer] onPlayBackPaused() - %s" % self.isPlayingVideo())
-			data = {'action': 'paused'}
-			self.action(data)
+    # called when kodi stops playing a file
+    def onPlayBackEnded(self):
+        if self._playing:
+            logger.debug("[traktPlayer] onPlayBackEnded() - %s" % self.isPlayingVideo())
+            self._playing = False
+            self.plIndex = None
+            data = {'action': 'ended'}
+            self.action(data)
 
-	# called when user resumes a paused file
-	def onPlayBackResumed(self):
-		if self._playing:
-			logger.debug("[traktPlayer] onPlayBackResumed() - %s" % self.isPlayingVideo())
-			data = {'action': 'resumed'}
-			self.action(data)
+    # called when user stops kodi playing a file
+    def onPlayBackStopped(self):
+        if self._playing:
+            logger.debug("[traktPlayer] onPlayBackStopped() - %s" % self.isPlayingVideo())
+            self._playing = False
+            self.plIndex = None
+            data = {'action': 'stopped'}
+            self.action(data)
 
-	# called when user queues the next item
-	def onQueueNextItem(self):
-		if self._playing:
-			logger.debug("[traktPlayer] onQueueNextItem() - %s" % self.isPlayingVideo())
+    # called when user pauses a playing file
+    def onPlayBackPaused(self):
+        if self._playing:
+            logger.debug("[traktPlayer] onPlayBackPaused() - %s" % self.isPlayingVideo())
+            data = {'action': 'paused'}
+            self.action(data)
 
-	# called when players speed changes. (eg. user FF/RW)
-	def onPlayBackSpeedChanged(self, speed):
-		if self._playing:
-			logger.debug("[traktPlayer] onPlayBackSpeedChanged(speed: %s) - %s" % (str(speed), self.isPlayingVideo()))
+    # called when user resumes a paused file
+    def onPlayBackResumed(self):
+        if self._playing:
+            logger.debug("[traktPlayer] onPlayBackResumed() - %s" % self.isPlayingVideo())
+            data = {'action': 'resumed'}
+            self.action(data)
 
-	# called when user seeks to a time
-	def onPlayBackSeek(self, time, offset):
-		if self._playing:
-			logger.debug("[traktPlayer] onPlayBackSeek(time: %s, offset: %s) - %s" % (str(time), str(offset), self.isPlayingVideo()))
-			data = {'action': 'seek', 'time': time, 'offset': offset}
-			self.action(data)
+    # called when user queues the next item
+    def onQueueNextItem(self):
+        if self._playing:
+            logger.debug("[traktPlayer] onQueueNextItem() - %s" % self.isPlayingVideo())
 
-	# called when user performs a chapter seek
-	def onPlayBackSeekChapter(self, chapter):
-		if self._playing:
-			logger.debug("[traktPlayer] onPlayBackSeekChapter(chapter: %s) - %s" % (str(chapter), self.isPlayingVideo()))
-			data = {'action': 'seekchapter', 'chapter': chapter}
-			self.action(data)
+    # called when players speed changes. (eg. user FF/RW)
+    def onPlayBackSpeedChanged(self, speed):
+        if self._playing:
+            logger.debug("[traktPlayer] onPlayBackSpeedChanged(speed: %s) - %s" % (str(speed), self.isPlayingVideo()))
+
+    # called when user seeks to a time
+    def onPlayBackSeek(self, time, offset):
+        if self._playing:
+            logger.debug("[traktPlayer] onPlayBackSeek(time: %s, offset: %s) - %s" % (str(time), str(offset), self.isPlayingVideo()))
+            data = {'action': 'seek', 'time': time, 'offset': offset}
+            self.action(data)
+
+    # called when user performs a chapter seek
+    def onPlayBackSeekChapter(self, chapter):
+        if self._playing:
+            logger.debug("[traktPlayer] onPlayBackSeekChapter(chapter: %s) - %s" % (str(chapter), self.isPlayingVideo()))
+            data = {'action': 'seekchapter', 'chapter': chapter}
+            self.action(data)
