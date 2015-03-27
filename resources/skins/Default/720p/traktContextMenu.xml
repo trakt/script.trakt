@@ -33,7 +33,7 @@
 						<texture border="5">button-nofocus.png</texture>
 					</control>
 					<control type="label">
-						<posx>150</posx>
+						<posx>0</posx>
 						<posy>0</posy>
 						<width>300</width>
 						<height>40</height>
@@ -67,7 +67,7 @@
 						<animation effect="fade" time="300">Hidden</animation>
 					</control>
 					<control type="label">
-						<posx>150</posx>
+						<posx>0</posx>
 						<posy>0</posy>
 						<width>300</width>
 						<height>40</height>

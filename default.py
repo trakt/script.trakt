@@ -15,9 +15,9 @@ logger = logging.getLogger(__name__)
 logger.debug("Loading '%s' version '%s'" % (__addonid__, __addonversion__))
 
 try:
-	traktService().run()
+    traktService().run()
 except Exception as ex:
-	message = createError(ex)
-	logger.fatal(message)
+    message = createError(ex)
+    logger.fatal(message)
 
 logger.debug("'%s' shutting down." % __addonid__)

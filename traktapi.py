@@ -13,237 +13,234 @@ __addonversion__ = __addon__.getAddonInfo('version')
 logger = logging.getLogger(__name__)
 
 class traktAPI(object):
-	__apikey = "d4161a7a106424551add171e5470112e4afdaf2438e6ef2fe0548edc75924868"
-	__token = ""
-	__username = ""
-	__password = ""
+    __apikey = "d4161a7a106424551add171e5470112e4afdaf2438e6ef2fe0548edc75924868"
+    __token = ""
+    __username = ""
+    __password = ""
 
-	def __init__(self):
-		logger.debug("Initializing.")
+    def __init__(self):
+        logger.debug("Initializing.")
 
-		# Get user login data
-		self.__username = getSetting('username')
-		self.__password = getSetting('password')
+        # Get user login data
+        self.__username = getSetting('username')
+        self.__password = getSetting('password')
 
-		# Configure
-		Trakt.configuration.defaults.client(
-			id=self.__apikey
-		)
+        # Configure
+        Trakt.configuration.defaults.client(
+            id=self.__apikey
+        )
 
-		if not self.__token:
-			self.getToken()
+        if not self.__token:
+            self.getToken()
 
-	# helper for onSettingsChanged
-	def updateSettings(self):
+    # helper for onSettingsChanged
+    def updateSettings(self):
 
-		_username = getSetting('username')
-		_password = getSetting('password')
+        _username = getSetting('username')
+        _password = getSetting('password')
 
-		updated = False
-		if self.__username != _username:
-			self.__username = _username
-			updated = True
+        updated = False
+        if self.__username != _username:
+            self.__username = _username
+            updated = True
 
-		if self.__password != _password:
-			self.__password = _password
-			updated = True
+        if self.__password != _password:
+            self.__password = _password
+            updated = True
 
-		if updated:
-			self.getToken()
+        if updated:
+            self.getToken()
 
-	def getToken(self):
-		if not self.__username and not self.__password:
-			notification('Trakt', getString(32021)) #Username and password error
-		elif not self.__password:
-			notification('Trakt', getString(32022)) #Password error
-		else:
-			# Attempt authentication (retrieve new token)
-			with Trakt.configuration.http(retry=True):
-				try:
-					auth = Trakt['auth'].login(getSetting('username'), getSetting('password'))
-					if auth:
-						self.__token = auth
-					else:
-						logger.debug("Authentication Failure")
-						notification('Trakt', getString(32025))
-				except Exception as ex:
-					message = createError(ex)
-					logger.fatal(message)
-					logger.debug("Cannot connect to server")
-					notification('Trakt', getString(32023))
+    def getToken(self):
+        if not self.__username and not self.__password:
+            notification('Trakt', getString(32021))  # Username and password error
+        elif not self.__password:
+            notification('Trakt', getString(32022))  # Password error
+        else:
+            # Attempt authentication (retrieve new token)
+            with Trakt.configuration.http(retry=True):
+                try:
+                    auth = Trakt['auth'].login(getSetting('username'), getSetting('password'))
+                    if auth:
+                        self.__token = auth
+                    else:
+                        logger.debug("Authentication Failure")
+                        notification('Trakt', getString(32025))
+                except Exception as ex:
+                    message = createError(ex)
+                    logger.fatal(message)
+                    logger.debug("Cannot connect to server")
+                    notification('Trakt', getString(32023))
 
+    def scrobbleEpisode(self, show, episode, percent, status):
+        result = None
 
+        with Trakt.configuration.auth(self.__username, self.__token):
+            if status == 'start':
+                with Trakt.configuration.http(retry=True):
+                    result = Trakt['scrobble'].start(
+                        show=show,
+                        episode=episode,
+                        progress=percent)
+            elif status == 'pause':
+                with Trakt.configuration.http(retry=True):
+                    result = Trakt['scrobble'].pause(
+                        show=show,
+                        episode=episode,
+                        progress=percent)
+            elif status == 'stop':
+                #don't retry on stop, this will cause multiple scrobbles
+                result = Trakt['scrobble'].stop(
+                    show=show,
+                    episode=episode,
+                    progress=percent)
+            else:
+                    logger.debug("scrobble() Bad scrobble status")
+        return result
 
-	def scrobbleEpisode(self, show, episode, percent, status):
-		result = None
+    def scrobbleMovie(self, movie, percent, status):
+        result = None
 
-		with Trakt.configuration.auth(self.__username, self.__token):
-			if status == 'start':
-				with Trakt.configuration.http(retry=True):
-					result =Trakt['scrobble'].start(
-						show=show,
-						episode=episode,
-						progress=percent)
-			elif status == 'pause':
-				with Trakt.configuration.http(retry=True):
-					result = Trakt['scrobble'].pause(
-						show=show,
-						episode=episode,
-						progress=percent)
-			elif status == 'stop':
-				#don't retry on stop, this will cause multiple scrobbles
-				result = Trakt['scrobble'].stop(
-					show=show,
-					episode=episode,
-					progress=percent)
-			else:
-					logger.debug("scrobble() Bad scrobble status")
-		return result
+        with Trakt.configuration.auth(self.__username, self.__token):
+            if status == 'start':
+                with Trakt.configuration.http(retry=True):
+                    result = Trakt['scrobble'].start(
+                        movie=movie,
+                        progress=percent)
+            elif status == 'pause':
+                with Trakt.configuration.http(retry=True):
+                    result = Trakt['scrobble'].pause(
+                        movie=movie,
+                        progress=percent)
+            elif status == 'stop':
+                #don't retry on stop, this will cause multiple scrobbles
+                result = Trakt['scrobble'].stop(
+                    movie=movie,
+                    progress=percent)
+            else:
+                logger.debug("scrobble() Bad scrobble status")
+        return result
 
+    def getShowsCollected(self, shows):
+        with Trakt.configuration.auth(self.__username, self.__token):
+            with Trakt.configuration.http(retry=True, timeout=90):
+                Trakt['sync/collection'].shows(shows, exceptions=True)
+        return shows
 
-	def scrobbleMovie(self, movie, percent, status):
-		result = None
+    def getMoviesCollected(self, movies):
+        with Trakt.configuration.auth(self.__username, self.__token):
+            with Trakt.configuration.http(retry=True, timeout=90):
+                Trakt['sync/collection'].movies(movies, exceptions=True)
+        return movies
 
-		with Trakt.configuration.auth(self.__username, self.__token):
-			if status == 'start':
-				with Trakt.configuration.http(retry=True):
-					result = Trakt['scrobble'].start(
-						movie=movie,
-						progress=percent)
-			elif status == 'pause':
-				with Trakt.configuration.http(retry=True):
-					result = Trakt['scrobble'].pause(
-						movie=movie,
-						progress=percent)
-			elif status == 'stop':
-				#don't retry on stop, this will cause multiple scrobbles
-				result = Trakt['scrobble'].stop(
-					movie=movie,
-					progress=percent)
-			else:
-				logger.debug("scrobble() Bad scrobble status")
-		return result
+    def getShowsWatched(self, shows):
+        with Trakt.configuration.auth(self.__username, self.__token):
+            with Trakt.configuration.http(retry=True, timeout=90):
+                Trakt['sync/watched'].shows(shows, exceptions=True)
+        return shows
 
-	def getShowsCollected(self, shows):
-		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True, timeout=90):
-				Trakt['sync/collection'].shows(shows, exceptions=True)
-		return shows
+    def getMoviesWatched(self, movies):
+        with Trakt.configuration.auth(self.__username, self.__token):
+            with Trakt.configuration.http(retry=True, timeout=90):
+                Trakt['sync/watched'].movies(movies, exceptions=True)
+        return movies
 
-	def getMoviesCollected(self, movies):
-		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True, timeout=90):
-				Trakt['sync/collection'].movies(movies, exceptions=True)
-		return movies
+    def addToCollection(self, mediaObject):
+        with Trakt.configuration.auth(self.__username, self.__token):
+            with Trakt.configuration.http(retry=True):
+                result = Trakt['sync/collection'].add(mediaObject)
+        return result
 
-	def getShowsWatched(self, shows):
-		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True, timeout=90):
-				Trakt['sync/watched'].shows(shows, exceptions=True)
-		return shows
+    def removeFromCollection(self, mediaObject):
+        with Trakt.configuration.auth(self.__username, self.__token):
+            with Trakt.configuration.http(retry=True):
+                result = Trakt['sync/collection'].remove(mediaObject)
+        return result
 
-	def getMoviesWatched(self, movies):
-		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True, timeout=90):
-				Trakt['sync/watched'].movies(movies, exceptions=True)
-		return movies
+    def addToHistory(self, mediaObject):
+        with Trakt.configuration.auth(self.__username, self.__token):
+            #don't try this call it may cause multiple watches
+            result = Trakt['sync/history'].add(mediaObject)
+        return result
 
-	def addToCollection(self, mediaObject):
-		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
-				result = Trakt['sync/collection'].add(mediaObject)
-		return result
+    def getShowRatingForUser(self, showId, idType='tvdb'):
+        ratings = {}
+        with Trakt.configuration.auth(self.__username, self.__token):
+            with Trakt.configuration.http(retry=True):
+                Trakt['sync/ratings'].shows(ratings)
+        return findShowMatchInList(showId, ratings, idType)
 
-	def removeFromCollection(self, mediaObject):
-		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
-				result = Trakt['sync/collection'].remove(mediaObject)
-		return result
+    def getSeasonRatingForUser(self, showId, season, idType='tvdb'):
+        ratings = {}
+        with Trakt.configuration.auth(self.__username, self.__token):
+            with Trakt.configuration.http(retry=True):
+                Trakt['sync/ratings'].seasons(ratings)
+        return findSeasonMatchInList(showId, season, ratings, idType)
 
-	def addToHistory(self, mediaObject):
-		with Trakt.configuration.auth(self.__username, self.__token):
-			#don't try this call it may cause multiple watches
-			result = Trakt['sync/history'].add(mediaObject)
-		return result
+    def getEpisodeRatingForUser(self, showId, season, episode, idType='tvdb'):
+        ratings = {}
+        with Trakt.configuration.auth(self.__username, self.__token):
+            with Trakt.configuration.http(retry=True):
+                Trakt['sync/ratings'].episodes(ratings)
+        return findEpisodeMatchInList(showId, season, episode, ratings, idType)
 
-	def getShowRatingForUser(self, showId, idType='tvdb'):
-		ratings = {}
-		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
-				Trakt['sync/ratings'].shows(ratings)
-		return findShowMatchInList(showId, ratings, idType)
+    def getMovieRatingForUser(self, movieId, idType='imdb'):
+        ratings = {}
+        with Trakt.configuration.auth(self.__username, self.__token):
+            with Trakt.configuration.http(retry=True):
+                Trakt['sync/ratings'].movies(ratings)
+        return findMovieMatchInList(movieId, ratings, idType)
 
-	def getSeasonRatingForUser(self, showId, season, idType='tvdb'):
-		ratings = {}
-		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
-				Trakt['sync/ratings'].seasons(ratings)
-		return findSeasonMatchInList(showId, season, ratings, idType)
+    # Send a rating to Trakt as mediaObject so we can add the rating
+    def addRating(self, mediaObject):
+        with Trakt.configuration.auth(self.__username, self.__token):
+            with Trakt.configuration.http(retry=True):
+                result = Trakt['sync/ratings'].add(mediaObject)
+        return result
 
-	def getEpisodeRatingForUser(self, showId, season, episode, idType='tvdb'):
-		ratings = {}
-		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
-				Trakt['sync/ratings'].episodes(ratings)
-		return findEpisodeMatchInList(showId, season, episode, ratings, idType)
+    # Send a rating to Trakt as mediaObject so we can remove the rating
+    def removeRating(self, mediaObject):
+        with Trakt.configuration.auth(self.__username, self.__token):
+            with Trakt.configuration.http(retry=True):
+                result = Trakt['sync/ratings'].remove(mediaObject)
+        return result
 
-	def getMovieRatingForUser(self, movieId, idType='imdb'):
-		ratings = {}
-		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
-				Trakt['sync/ratings'].movies(ratings)
-		return findMovieMatchInList(movieId, ratings, idType)
+    def getMoviePlaybackProgress(self):
+        progressMovies = []
 
-	# Send a rating to Trakt as mediaObject so we can add the rating
-	def addRating(self, mediaObject):
-		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
-				result = Trakt['sync/ratings'].add(mediaObject)
-		return result
+        # Fetch playback
+        with Trakt.configuration.auth(self.__username, self.__token):
+            with Trakt.configuration.http(retry=True):
+                playback = Trakt['sync/playback'].movie(exceptions=True)
 
-	# Send a rating to Trakt as mediaObject so we can remove the rating
-	def removeRating(self, mediaObject):
-		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
-				result = Trakt['sync/ratings'].remove(mediaObject)
-		return result
+                for _, item in playback.items():
+                    if type(item) is Movie:
+                        progressMovies.append(item)
 
-	def getMoviePlaybackProgress(self):
-		progressMovies = []
+        return progressMovies
 
-		# Fetch playback
-		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
-				playback = Trakt['sync/playback'].movie(exceptions=True)
+    def getEpisodePlaybackProgress(self):
+        progressShows = []
 
-				for key, item in playback.items():
-					if type(item) is Movie:
-						progressMovies.append(item)
+        # Fetch playback
+        with Trakt.configuration.auth(self.__username, self.__token):
+            with Trakt.configuration.http(retry=True):
+                playback = Trakt['sync/playback'].shows(exceptions=True)
 
-		return progressMovies
+                for _, item in playback.items():
+                    if type(item) is Show:
+                        progressShows.append(item)
 
-	def getEpisodePlaybackProgress(self):
-		progressShows = []
+        return progressShows
 
-		# Fetch playback
-		with Trakt.configuration.auth(self.__username, self.__token):
-			with Trakt.configuration.http(retry=True):
-				playback = Trakt['sync/playback'].shows(exceptions=True)
+    def getMovieSummary(self, movieId):
+        with Trakt.configuration.http(retry=True):
+            return Trakt['movies'].get(movieId)
 
-				for key, item in playback.items():
-					if type(item) is Show:
-						progressShows.append(item)
+    def getShowSummary(self, showId):
+        with Trakt.configuration.http(retry=True):
+            return Trakt['shows'].get(showId)
 
-		return progressShows
-
-	def getMovieSummary(self, movieId):
-		with Trakt.configuration.http(retry=True):
-			return Trakt['movies'].get(movieId)
-
-	def getShowSummary(self, showId):
-		with Trakt.configuration.http(retry=True):
-			return Trakt['shows'].get(showId)
-
-	def getEpisodeSummary(self, showId, season, episode):
-		with Trakt.configuration.http(retry=True):
-			return Trakt['shows'].episode(showId, season, episode)
+    def getEpisodeSummary(self, showId, season, episode):
+        with Trakt.configuration.http(retry=True):
+            return Trakt['shows'].episode(showId, season, episode)
