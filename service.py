@@ -153,7 +153,7 @@ class traktService:
 
         if summaryInfo is not None:
             summaryInfo = summaryInfo.to_dict()
-            summaryInfo['user'] = {'ratings': userInfo}
+            summaryInfo['user'] = {'ratings': {'rating':userInfo}}
             if utilities.isEpisode(media_type):
                 summaryInfo['season'] = data['season']
                 summaryInfo['number'] = data['episode']
