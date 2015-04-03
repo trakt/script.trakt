@@ -3,6 +3,7 @@ version 3.0.1
   - implemented manual ratings for seasons (by tknorris)
   - readded manual ratings for movies/shows/seasons/episodes
   - readded the Trakt contextmenu
+  - multipart episodes now show a rating dialog for each episode, when playback is finished
   - updated transifex translations
 
 version 3.0.0

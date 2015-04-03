@@ -54,11 +54,6 @@ class traktContextMenu(xbmcgui.WindowXMLDialog):
         d = self.getControl(DIALOG_IMAGE)
         d.setHeight(h + 40)
 
-        offset = (316 - h) / 2
-
-        d.setPosition(0, offset - 20)
-        l.setPosition(20, offset)
-
         self.setFocus(l)
 
     def newListItem(self, label, selected=False, *args, **kwargs):

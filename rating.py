@@ -18,7 +18,7 @@ def ratingCheck(media_type, summary_info, watched_time, total_time, playlist_len
     if not utils.getSettingAsBool("rate_%s" % media_type):
         logger.debug("'%s' is configured to not be rated." % media_type)
         return
-    if summary_info is None or 'user' not in summary_info:
+    if summary_info is None:
         logger.debug("Summary information is empty, aborting.")
         return
     watched = (watched_time / total_time) * 100
@@ -30,82 +30,87 @@ def ratingCheck(media_type, summary_info, watched_time, total_time, playlist_len
     else:
         logger.debug("'%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (media_type, watched, utils.getSettingAsFloat("rate_min_view_time")))
 
-def rateMedia(media_type, summary_info, unrate=False, rating=None):
+def rateMedia(media_type, itemsToRate, unrate=False, rating=None):
     """Launches the rating dialog"""
-    if not utils.isValidMediaType(media_type):
-        return
-
-    s = utils.getFormattedItemName(media_type, summary_info)
-
-    logger.debug("Summary Info %s" % summary_info)
-
-    if unrate:
-        rating = None
-
-        if summary_info['user']['ratings']['rating'] > 0:
-            rating = 0
-
-        if not rating is None:
-            logger.debug("'%s' is being unrated." % s)
-            __rateOnTrakt(rating, media_type, summary_info, unrate=True)
-        else:
-            logger.debug("'%s' has not been rated, so not unrating." % s)
-
-        return
-
-    rerate = utils.getSettingAsBool('rate_rerate')
-    if rating is not None:
-        if summary_info['user']['ratings']['rating'] == 0:
-            logger.debug("Rating for '%s' is being set to '%d' manually." % (s, rating))
-            __rateOnTrakt(rating, media_type, summary_info)
-        else:
-            if rerate:
-                if not summary_info['user']['ratings']['rating'] == rating:
-                    logger.debug("Rating for '%s' is being set to '%d' manually." % (s, rating))
-                    __rateOnTrakt(rating, media_type, summary_info)
-                else:
-                    utils.notification(utils.getString(32043), s)
-                    logger.debug("'%s' already has a rating of '%d'." % (s, rating))
-            else:
-                utils.notification(utils.getString(32041), s)
-                logger.debug("'%s' is already rated." % s)
-        return
-
-    if summary_info['user']['ratings'] and summary_info['user']['ratings']['rating']:
-        if not rerate:
-            logger.debug("'%s' has already been rated." % s)
-            utils.notification(utils.getString(32041), s)
+    for summary_info in itemsToRate:
+        if not utils.isValidMediaType(media_type):
+            logger.debug("Not a valid media type")
             return
-        else:
-            logger.debug("'%s' is being re-rated." % s)
-    
-    xbmc.executebuiltin('Dialog.Close(all, true)')
+        elif 'user' not in summary_info:
+            logger.debug("No user data")
+            return
 
-    gui = RatingDialog(
-        "RatingDialog.xml",
-        __addon__.getAddonInfo('path'),
-        media_type=media_type,
-        media=summary_info,
-        rerate=rerate
-    )
+        s = utils.getFormattedItemName(media_type, summary_info)
 
-    gui.doModal()
-    if gui.rating:
-        rating = gui.rating
-        if rerate:
-            rating = gui.rating
-            
-            if summary_info['user']['ratings'] and summary_info['user']['ratings']['rating'] > 0 and rating == summary_info['user']['ratings']['rating']:
+        logger.debug("Summary Info %s" % summary_info)
+
+        if unrate:
+            rating = None
+
+            if summary_info['user']['ratings']['rating'] > 0:
                 rating = 0
 
-        if rating == 0 or rating == "unrate":
-            __rateOnTrakt(rating, gui.media_type, gui.media, unrate=True)
-        else:
-            __rateOnTrakt(rating, gui.media_type, gui.media)
-    else:
-        logger.debug("Rating dialog was closed with no rating.")
+            if not rating is None:
+                logger.debug("'%s' is being unrated." % s)
+                __rateOnTrakt(rating, media_type, summary_info, unrate=True)
+            else:
+                logger.debug("'%s' has not been rated, so not unrating." % s)
 
-    del gui
+            return
+
+        rerate = utils.getSettingAsBool('rate_rerate')
+        if rating is not None:
+            if summary_info['user']['ratings']['rating'] == 0:
+                logger.debug("Rating for '%s' is being set to '%d' manually." % (s, rating))
+                __rateOnTrakt(rating, media_type, summary_info)
+            else:
+                if rerate:
+                    if not summary_info['user']['ratings']['rating'] == rating:
+                        logger.debug("Rating for '%s' is being set to '%d' manually." % (s, rating))
+                        __rateOnTrakt(rating, media_type, summary_info)
+                    else:
+                        utils.notification(utils.getString(32043), s)
+                        logger.debug("'%s' already has a rating of '%d'." % (s, rating))
+                else:
+                    utils.notification(utils.getString(32041), s)
+                    logger.debug("'%s' is already rated." % s)
+            return
+
+        if summary_info['user']['ratings'] and summary_info['user']['ratings']['rating']:
+            if not rerate:
+                logger.debug("'%s' has already been rated." % s)
+                utils.notification(utils.getString(32041), s)
+                return
+            else:
+                logger.debug("'%s' is being re-rated." % s)
+
+        xbmc.executebuiltin('Dialog.Close(all, true)')
+
+        gui = RatingDialog(
+            "RatingDialog.xml",
+            __addon__.getAddonInfo('path'),
+            media_type=media_type,
+            media=summary_info,
+            rerate=rerate
+        )
+
+        gui.doModal()
+        if gui.rating:
+            rating = gui.rating
+            if rerate:
+                rating = gui.rating
+
+                if summary_info['user']['ratings'] and summary_info['user']['ratings']['rating'] > 0 and rating == summary_info['user']['ratings']['rating']:
+                    rating = 0
+
+            if rating == 0 or rating == "unrate":
+                __rateOnTrakt(rating, gui.media_type, gui.media, unrate=True)
+            else:
+                __rateOnTrakt(rating, gui.media_type, gui.media)
+        else:
+            logger.debug("Rating dialog was closed with no rating.")
+
+        del gui
 
 def __rateOnTrakt(rating, media_type, media, unrate=False):
     logger.debug("Sending rating (%s) to Trakt.tv" % rating)

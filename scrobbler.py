@@ -25,6 +25,7 @@ class Scrobbler():
     playlistLength = 1
     playlistIndex = 0
     traktShowSummary = None
+    videosToRate = []
 
     def __init__(self, api):
         self.traktapi = api
@@ -55,25 +56,18 @@ class Scrobbler():
                     watchedPercent = self.__calculateWatchedPercent()
                     epIndex = self._currentEpisode(watchedPercent, self.curVideo['multi_episode_count'])
                     if self.curMPEpisode != epIndex:
-                        # current episode in multi-part episode has changed
-                        logger.debug("Attempting to stop scrobble episode part %d of %d." % (self.curMPEpisode + 1, self.curVideo['multi_episode_count']))
-
-                        # recalculate watchedPercent and duration for multi-part, and scrobble
-                        adjustedDuration = int(self.videoDuration / self.curVideo['multi_episode_count'])
-                        watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
-                        response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.curVideoInfo, watchedPercent, 'stop')
+                        response = self.__scrobble('stop')
                         if response is not None:
                             logger.debug("Scrobble response: %s" % str(response))
 
-                        # update current information
-                        self.curMPEpisode = epIndex
-                        self.curVideoInfo = utilities.kodiRpcToTraktMediaObject('episode', utilities.getEpisodeDetailsFromKodi(self.curVideo['multi_episode_data'][self.curMPEpisode], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid', 'file', 'playcount']))
-
                         if not forceCheck:
-                            logger.debug("Attempting to start scrobble episode part %d of %d." % (self.curMPEpisode + 1, self.curVideo['multi_episode_count']))
-                            response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.curVideoInfo, 0, 'start')
-                            if response is not None:
-                                logger.debug("Scrobble response: %s" % str(response))
+                            self.videosToRate.append(self.curVideoInfo)
+                            # update current information
+                            self.curMPEpisode = epIndex
+                            self.curVideoInfo = utilities.kodiRpcToTraktMediaObject('episode', utilities.getEpisodeDetailsFromKodi(self.curVideo['multi_episode_data'][self.curMPEpisode], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid', 'file', 'playcount']))
+
+                            response = self.__scrobble('start')
+                            self.__preFetchUserRatings(response)
 
     def playbackStarted(self, data):
         logger.debug("playbackStarted(data: %s)" % data)
@@ -81,6 +75,7 @@ class Scrobbler():
             return
         self.curVideo = data
         self.curVideoInfo = None
+        self.videosToRate = []
 
         if 'type' in self.curVideo:
             logger.debug("Watching: %s" % self.curVideo['type'])
@@ -148,30 +143,34 @@ class Scrobbler():
                     if 'year' in self.curVideo:
                         self.traktShowSummary['year'] = self.curVideo['year']
 
-                if 'multi_episode_count' in self.curVideo:
+                if 'multi_episode_count' in self.curVideo and self.curVideo['multi_episode_count'] > 1:
                     self.isMultiPartEpisode = True
 
             self.isPlaying = True
             self.isPaused = False
             result = self.__scrobble('start')
-            if result:
-                if utilities.isMovie(self.curVideo['type']) and utilities.getSettingAsBool('rate_movie'):
-                    # pre-get sumamry information, for faster rating dialog.
-                    logger.debug("Movie rating is enabled, pre-fetching summary information.")
-                    if result['movie']['ids']['imdb']:
-                        self.curVideoInfo['user'] = {'ratings': self.traktapi.getMovieRatingForUser(result['movie']['ids']['imdb'])}
-                        self.curVideoInfo['ids'] = result['movie']['ids']
-                    else:
-                        logger.debug("'%s (%d)' has no valid id, can't get rating." % (self.curVideoInfo['title'], self.curVideoInfo['year']))
-                elif utilities.isEpisode(self.curVideo['type']) and utilities.getSettingAsBool('rate_episode'):
-                    # pre-get sumamry information, for faster rating dialog.
-                    logger.debug("Episode rating is enabled, pre-fetching summary information.")
+            self.__preFetchUserRatings(result)
 
-                    if result['show']['ids']['tvdb']:
-                        self.curVideoInfo['user'] = {'ratings': self.traktapi.getEpisodeRatingForUser(result['show']['ids']['tvdb'], self.curVideoInfo['season'], self.curVideoInfo['number'])}
-                        self.curVideoInfo['ids'] = result['episode']['ids']
-                    else:
-                        logger.debug("'%s - S%02dE%02d' has no valid id, can't get rating." % (self.curVideoInfo['showtitle'], self.curVideoInfo['season'], self.curVideoInfo['episode']))
+    def __preFetchUserRatings(self, result):
+        if result:
+            if utilities.isMovie(self.curVideo['type']) and utilities.getSettingAsBool('rate_movie'):
+                # pre-get sumamry information, for faster rating dialog.
+                logger.debug("Movie rating is enabled, pre-fetching summary information.")
+                if result['movie']['ids']['imdb']:
+                    self.curVideoInfo['user'] = {'ratings': {'rating':self.traktapi.getMovieRatingForUser(result['movie']['ids']['imdb'])}}
+                    self.curVideoInfo['ids'] = result['movie']['ids']
+                else:
+                    logger.debug("'%s (%d)' has no valid id, can't get rating." % (self.curVideoInfo['title'], self.curVideoInfo['year']))
+            elif utilities.isEpisode(self.curVideo['type']) and utilities.getSettingAsBool('rate_episode'):
+                # pre-get sumamry information, for faster rating dialog.
+                logger.debug("Episode rating is enabled, pre-fetching summary information.")
+
+                if result['show']['ids']['tvdb']:
+                    self.curVideoInfo['user'] = {'ratings': {'rating': self.traktapi.getEpisodeRatingForUser(result['show']['ids']['tvdb'], self.curVideoInfo['season'], self.curVideoInfo['number'])}}
+                    self.curVideoInfo['ids'] = result['episode']['ids']
+                else:
+                    logger.debug("'%s - S%02dE%02d' has no valid id, can't get rating." % (self.curVideoInfo['showtitle'], self.curVideoInfo['season'], self.curVideoInfo['episode']))
+
 
     def playbackResumed(self):
         if not self.isPlaying:
@@ -206,20 +205,22 @@ class Scrobbler():
         self.__scrobble('start')
 
     def playbackEnded(self):
+        self.videosToRate.append(self.curVideoInfo)
         if not self.isPlaying:
             return
 
         logger.debug("playbackEnded()")
-        if self.curVideo is None:
+        if not self.videosToRate:
             logger.debug("Warning: Playback ended but video forgotten.")
             return
         self.isPlaying = False
         if self.watchedTime != 0:
             if 'type' in self.curVideo:
                 self.__scrobble('stop')
-                ratingCheck(self.curVideo['type'], self.curVideoInfo, self.watchedTime, self.videoDuration, self.playlistLength)
+                ratingCheck(self.curVideo['type'], self.videosToRate, self.watchedTime, self.videoDuration, self.playlistLength)
             self.watchedTime = 0
             self.isMultiPartEpisode = False
+        self.videosToRate = []
         self.curVideoInfo = None
         self.curVideo = None
         self.playlistLength = 0

@@ -36,6 +36,10 @@ msgctxt "#32024"
 msgid "Error"
 msgstr "Ralat"
 
+msgctxt "#32033"
+msgid "Fair"
+msgstr "Sederhana"
+
 msgctxt "#32046"
 msgid "Movies"
 msgstr "Cereka"

@@ -153,7 +153,7 @@ class traktService:
 
         if summaryInfo is not None:
             summaryInfo = summaryInfo.to_dict()
-            summaryInfo['user'] = {'ratings': userInfo}
+            summaryInfo['user'] = {'ratings': {'rating':userInfo}}
             if utilities.isEpisode(media_type):
                 summaryInfo['season'] = data['season']
                 summaryInfo['number'] = data['episode']
@@ -162,9 +162,9 @@ class traktService:
 
             if action == 'rate':
                 if not 'rating' in data:
-                    rateMedia(media_type, summaryInfo)
+                    rateMedia(media_type, [summaryInfo])
                 else:
-                    rateMedia(media_type, summaryInfo, rating=data['rating'])
+                    rateMedia(media_type, [summaryInfo], rating=data['rating'])
         else:
             logger.debug("doManualRating(): Summary info was empty, possible problem retrieving data from Trakt.tv")
 
