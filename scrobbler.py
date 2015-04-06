@@ -37,7 +37,7 @@ class Scrobbler():
                 return i
         return 0
 
-    def update(self, forceCheck=False):
+    def update(self, forceCheck=False, startScrobble=False):
         if not xbmc.Player().isPlayingVideo():
             return
 
@@ -59,15 +59,17 @@ class Scrobbler():
                         response = self.__scrobble('stop')
                         if response is not None:
                             logger.debug("Scrobble response: %s" % str(response))
-
-                        if not forceCheck:
                             self.videosToRate.append(self.curVideoInfo)
                             # update current information
                             self.curMPEpisode = epIndex
                             self.curVideoInfo = utilities.kodiRpcToTraktMediaObject('episode', utilities.getEpisodeDetailsFromKodi(self.curVideo['multi_episode_data'][self.curMPEpisode], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid', 'file', 'playcount']))
 
+                        if startScrobble:
+                            logger.debug("Multi episode transition - call start for next episode")
                             response = self.__scrobble('start')
                             self.__preFetchUserRatings(response)
+                    elif startScrobble:
+                        self.__scrobble('start')
 
     def playbackStarted(self, data):
         logger.debug("playbackStarted(data: %s)" % data)
@@ -182,15 +184,14 @@ class Scrobbler():
             logger.debug("Resumed after: %s" % str(p))
             self.pausedAt = 0
             self.isPaused = False
-            self.update(True)
-            self.__scrobble('start')
+            self.update(forceCheck=True, startScrobble=True)
 
     def playbackPaused(self):
         if not self.isPlaying:
             return
 
         logger.debug("playbackPaused()")
-        self.update(True)
+        self.update(forceCheck=True, startScrobble=False)
         logger.debug("Paused after: %s" % str(self.watchedTime))
         self.isPaused = True
         self.pausedAt = time.time()
@@ -201,8 +202,7 @@ class Scrobbler():
             return
 
         logger.debug("playbackSeek()")
-        self.update(True)
-        self.__scrobble('start')
+        self.update(forceCheck=True, startScrobble=True)
 
     def playbackEnded(self):
         self.videosToRate.append(self.curVideoInfo)

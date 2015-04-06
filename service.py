@@ -108,7 +108,7 @@ class traktService:
                 self._dispatch(data)
 
             if xbmc.Player().isPlayingVideo():
-                self.scrobbler.update()
+                self.scrobbler.update(startScrobble=True)
 
             xbmc.sleep(500)
 
