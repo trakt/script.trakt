@@ -157,7 +157,7 @@ class Scrobbler():
                 # pre-get sumamry information, for faster rating dialog.
                 logger.debug("Movie rating is enabled, pre-fetching summary information.")
                 if result['movie']['ids']['imdb']:
-                    self.curVideoInfo['user'] = {'ratings': {'rating':self.traktapi.getMovieRatingForUser(result['movie']['ids']['imdb'])}}
+                    self.curVideoInfo['user'] = {'ratings': self.traktapi.getMovieRatingForUser(result['movie']['ids']['imdb'])}
                     self.curVideoInfo['ids'] = result['movie']['ids']
                 else:
                     logger.debug("'%s (%d)' has no valid id, can't get rating." % (self.curVideoInfo['title'], self.curVideoInfo['year']))
@@ -166,7 +166,7 @@ class Scrobbler():
                 logger.debug("Episode rating is enabled, pre-fetching summary information.")
 
                 if result['show']['ids']['tvdb']:
-                    self.curVideoInfo['user'] = {'ratings': {'rating': self.traktapi.getEpisodeRatingForUser(result['show']['ids']['tvdb'], self.curVideoInfo['season'], self.curVideoInfo['number'])}}
+                    self.curVideoInfo['user'] = {'ratings': self.traktapi.getEpisodeRatingForUser(result['show']['ids']['tvdb'], self.curVideoInfo['season'], self.curVideoInfo['number'])}
                     self.curVideoInfo['ids'] = result['episode']['ids']
                 else:
                     logger.debug("'%s - S%02dE%02d' has no valid id, can't get rating." % (self.curVideoInfo['showtitle'], self.curVideoInfo['season'], self.curVideoInfo['episode']))
