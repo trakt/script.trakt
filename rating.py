@@ -111,6 +111,9 @@ def rateMedia(media_type, itemsToRate, unrate=False, rating=None):
             logger.debug("Rating dialog was closed with no rating.")
 
         del gui
+        #Reset rating and unrate for multi part episodes
+        unrate=False
+        rating=None
 
 def __rateOnTrakt(rating, media_type, media, unrate=False):
     logger.debug("Sending rating (%s) to Trakt.tv" % rating)
