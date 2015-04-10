@@ -68,8 +68,8 @@ class Scrobbler():
                             logger.debug("Multi episode transition - call start for next episode")
                             response = self.__scrobble('start')
                             self.__preFetchUserRatings(response)
-                    elif startScrobble:
-                        self.__scrobble('start')
+            elif startScrobble:
+                self.__scrobble('start')
 
     def playbackStarted(self, data):
         logger.debug("playbackStarted(data: %s)" % data)
