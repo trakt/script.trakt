@@ -52,6 +52,9 @@ def showSettings():
 def getSetting(setting):
     return __addon__.getSetting(setting).strip()
 
+def setSetting(setting, value):
+    __addon__.setSetting(setting, str(value))
+
 def getSettingAsBool(setting):
     return getSetting(setting).lower() == "true"
 

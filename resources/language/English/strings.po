@@ -23,11 +23,11 @@ msgid "General"
 msgstr ""
 
 msgctxt "#32001"
-msgid "Username"
+msgid "PIN help"
 msgstr ""
 
 msgctxt "#32002"
-msgid "Password"
+msgid "PIN"
 msgstr ""
 
 msgctxt "#32003"
@@ -104,12 +104,8 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr ""
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr ""
-
 msgctxt "#32022"
-msgid "Enter your Password in settings"
+msgid "Enter your PIN in settings"
 msgstr ""
 
 msgctxt "#32023"
@@ -121,7 +117,7 @@ msgid "Error"
 msgstr ""
 
 msgctxt "#32025"
-msgid "Incorrect username or password"
+msgid "Incorrect PIN"
 msgstr ""
 
 msgctxt "#32026"

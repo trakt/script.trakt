@@ -4,7 +4,7 @@ import xbmcaddon
 import logging
 from trakt import Trakt, ClientError, ServerError
 from trakt.objects import Movie, Show
-from utilities import getSetting, findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, notification, getString, createError
+from utilities import getSetting, setSetting, findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, notification, getString, createError
 
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')
@@ -13,69 +13,80 @@ __addonversion__ = __addon__.getAddonInfo('version')
 logger = logging.getLogger(__name__)
 
 class traktAPI(object):
-    __apikey = "d4161a7a106424551add171e5470112e4afdaf2438e6ef2fe0548edc75924868"
-    __token = ""
-    __username = ""
-    __password = ""
+    __client_id = "d4161a7a106424551add171e5470112e4afdaf2438e6ef2fe0548edc75924868"
+    __client_secret = "b5fcd7cb5d9bb963784d11bbf8535bc0d25d46225016191eb48e50792d2155c0"
 
     def __init__(self):
         logger.debug("Initializing.")
 
         # Get user login data
-        self.__username = getSetting('username')
-        self.__password = getSetting('password')
+        self.__pin = getSetting('PIN')
+        if getSetting('authorization'):
+            self.authorization = eval(getSetting('authorization'))
+
+        # Bind trakt events
+        Trakt.on('oauth.token_refreshed', self.on_token_refreshed)
+
+        Trakt.configuration.defaults.app(
+            id=999
+        )
 
         # Configure
         Trakt.configuration.defaults.client(
-            id=self.__apikey
+            id=self.__client_id,
+            secret=self.__client_secret
         )
 
-        if not self.__token:
-            self.getToken()
+        if not self.authorization:
+            self.authenticate()
 
-    # helper for onSettingsChanged
-    def updateSettings(self):
-
-        _username = getSetting('username')
-        _password = getSetting('password')
-
-        updated = False
-        if self.__username != _username:
-            self.__username = _username
-            updated = True
-
-        if self.__password != _password:
-            self.__password = _password
-            updated = True
-
-        if updated:
-            self.getToken()
-
-    def getToken(self):
-        if not self.__username and not self.__password:
-            notification('Trakt', getString(32021))  # Username and password error
-        elif not self.__password:
-            notification('Trakt', getString(32022))  # Password error
+    def authenticate(self):
+        if not self.__pin:
+            notification('Trakt', getString(32022))  #PIN error
         else:
             # Attempt authentication (retrieve new token)
             with Trakt.configuration.http(retry=True):
                 try:
-                    auth = Trakt['auth'].login(getSetting('username'), getSetting('password'))
-                    if auth:
-                        self.__token = auth
-                    else:
+                    # Exchange `code` for `access_token`
+                    self.authorization = Trakt['oauth'].token_exchange(self.__pin, 'urn:ietf:wg:oauth:2.0:oob')
+
+                    if not self.authorization:
                         logger.debug("Authentication Failure")
                         notification('Trakt', getString(32025))
+                    else:
+                        setSetting('authorization', self.authorization)
                 except Exception as ex:
                     message = createError(ex)
                     logger.fatal(message)
                     logger.debug("Cannot connect to server")
                     notification('Trakt', getString(32023))
 
+
+    def on_token_refreshed(self, response):
+        # OAuth token refreshed, save token for future calls
+        self.authorization = response
+        setSetting('authorization', self.authorization)
+
+        logger.debug('Token refreshed')
+
+
+    # helper for onSettingsChanged
+    def updateSettings(self):
+
+        _pin = getSetting('PIN')
+
+        updated = False
+        if self.__pin != _pin:
+            self.__pin = _pin
+            updated = True
+
+        if updated:
+            self.authenticate()
+
     def scrobbleEpisode(self, show, episode, percent, status):
         result = None
 
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             if status == 'start':
                 with Trakt.configuration.http(retry=True):
                     result = Trakt['scrobble'].start(
@@ -101,7 +112,7 @@ class traktAPI(object):
     def scrobbleMovie(self, movie, percent, status):
         result = None
 
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             if status == 'start':
                 with Trakt.configuration.http(retry=True):
                     result = Trakt['scrobble'].start(
@@ -122,85 +133,85 @@ class traktAPI(object):
         return result
 
     def getShowsCollected(self, shows):
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             with Trakt.configuration.http(retry=True, timeout=90):
                 Trakt['sync/collection'].shows(shows, exceptions=True)
         return shows
 
     def getMoviesCollected(self, movies):
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             with Trakt.configuration.http(retry=True, timeout=90):
                 Trakt['sync/collection'].movies(movies, exceptions=True)
         return movies
 
     def getShowsWatched(self, shows):
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             with Trakt.configuration.http(retry=True, timeout=90):
                 Trakt['sync/watched'].shows(shows, exceptions=True)
         return shows
 
     def getMoviesWatched(self, movies):
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             with Trakt.configuration.http(retry=True, timeout=90):
                 Trakt['sync/watched'].movies(movies, exceptions=True)
         return movies
 
     def addToCollection(self, mediaObject):
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             with Trakt.configuration.http(retry=True):
                 result = Trakt['sync/collection'].add(mediaObject)
         return result
 
     def removeFromCollection(self, mediaObject):
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             with Trakt.configuration.http(retry=True):
                 result = Trakt['sync/collection'].remove(mediaObject)
         return result
 
     def addToHistory(self, mediaObject):
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             #don't try this call it may cause multiple watches
             result = Trakt['sync/history'].add(mediaObject)
         return result
 
     def getShowRatingForUser(self, showId, idType='tvdb'):
         ratings = {}
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             with Trakt.configuration.http(retry=True):
                 Trakt['sync/ratings'].shows(ratings)
         return findShowMatchInList(showId, ratings, idType)
 
     def getSeasonRatingForUser(self, showId, season, idType='tvdb'):
         ratings = {}
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             with Trakt.configuration.http(retry=True):
                 Trakt['sync/ratings'].seasons(ratings)
         return findSeasonMatchInList(showId, season, ratings, idType)
 
     def getEpisodeRatingForUser(self, showId, season, episode, idType='tvdb'):
         ratings = {}
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             with Trakt.configuration.http(retry=True):
                 Trakt['sync/ratings'].episodes(ratings)
         return findEpisodeMatchInList(showId, season, episode, ratings, idType)
 
     def getMovieRatingForUser(self, movieId, idType='imdb'):
         ratings = {}
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             with Trakt.configuration.http(retry=True):
                 Trakt['sync/ratings'].movies(ratings)
         return findMovieMatchInList(movieId, ratings, idType)
 
     # Send a rating to Trakt as mediaObject so we can add the rating
     def addRating(self, mediaObject):
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             with Trakt.configuration.http(retry=True):
                 result = Trakt['sync/ratings'].add(mediaObject)
         return result
 
     # Send a rating to Trakt as mediaObject so we can remove the rating
     def removeRating(self, mediaObject):
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             with Trakt.configuration.http(retry=True):
                 result = Trakt['sync/ratings'].remove(mediaObject)
         return result
@@ -209,7 +220,7 @@ class traktAPI(object):
         progressMovies = []
 
         # Fetch playback
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             with Trakt.configuration.http(retry=True):
                 playback = Trakt['sync/playback'].movie(exceptions=True)
 
@@ -223,7 +234,7 @@ class traktAPI(object):
         progressShows = []
 
         # Fetch playback
-        with Trakt.configuration.auth(self.__username, self.__token):
+        with Trakt.configuration.oauth.from_response(self.authorization, refresh=True):
             with Trakt.configuration.http(retry=True):
                 playback = Trakt['sync/playback'].shows(exceptions=True)
 

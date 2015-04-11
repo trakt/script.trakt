@@ -4,9 +4,13 @@ import xbmc
 import sqlitequeue
 import sys
 import logging
+import xbmcgui
+import xbmcaddon
 from traktContextMenu import traktContextMenu
 
 logger = logging.getLogger(__name__)
+
+__addon__ = xbmcaddon.Addon("script.trakt")
 
 def __getMediaType():
     
@@ -40,6 +44,17 @@ def Main():
     args = __getArguments()
     data = {}
 
+    if args['action'] == 'pin_info':
+        xbmc.executebuiltin('Dialog.Close(all, true)')
+
+        pinInfo = xbmcgui.WindowXMLDialog(
+            "PinInfoWindow.xml",
+            __addon__.getAddonInfo('path')
+        )
+
+        pinInfo.doModal()
+        del pinInfo
+
     if args['action'] == 'contextmenu':
         buttons = []
         media_type = __getMediaType()
@@ -72,7 +87,6 @@ def Main():
             data['library'] = args['library']
 
     elif args['action'] in ['rate', 'unrate']:
-        #todo fix this
         data = {'action': args['action']}
         media_type = None
         if 'media_type' in args and 'dbid' in args:
