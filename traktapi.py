@@ -47,7 +47,7 @@ class traktAPI(object):
 
     def authenticate(self):
         if not self.__pin:
-            notification('Trakt', getString(32022))  #PIN error
+            notification('Trakt', getString(32146))  #PIN error
         else:
             # Attempt authentication (retrieve new token)
             with Trakt.configuration.http(retry=True):
@@ -57,7 +57,7 @@ class traktAPI(object):
 
                     if not self.authorization:
                         logger.debug("Authentication Failure")
-                        notification('Trakt', getString(32025))
+                        notification('Trakt', getString(32147))
                     else:
                         setSetting('authorization', self.authorization)
                 except Exception as ex:
