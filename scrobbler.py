@@ -37,7 +37,7 @@ class Scrobbler():
                 return i
         return 0
 
-    def update(self, forceCheck=False, startScrobble=False):
+    def transitionCheck(self, isSeek=False):
         if not xbmc.Player().isPlayingVideo():
             return
 
@@ -51,7 +51,7 @@ class Scrobbler():
 
             if 'id' in self.curVideo and self.isMultiPartEpisode:
                 # do transition check every minute
-                if (time.time() > (self.lastMPCheck + 60)) or forceCheck:
+                if (time.time() > (self.lastMPCheck + 60)) or isSeek:
                     self.lastMPCheck = time.time()
                     watchedPercent = self.__calculateWatchedPercent()
                     epIndex = self._currentEpisode(watchedPercent, self.curVideo['multi_episode_count'])
@@ -64,11 +64,10 @@ class Scrobbler():
                             self.curMPEpisode = epIndex
                             self.curVideoInfo = utilities.kodiRpcToTraktMediaObject('episode', utilities.getEpisodeDetailsFromKodi(self.curVideo['multi_episode_data'][self.curMPEpisode], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid', 'file', 'playcount']))
 
-                        if startScrobble:
                             logger.debug("Multi episode transition - call start for next episode")
                             response = self.__scrobble('start')
                             self.__preFetchUserRatings(response)
-            elif startScrobble:
+            elif isSeek:
                 self.__scrobble('start')
 
     def playbackStarted(self, data):
@@ -184,14 +183,13 @@ class Scrobbler():
             logger.debug("Resumed after: %s" % str(p))
             self.pausedAt = 0
             self.isPaused = False
-            self.update(forceCheck=True, startScrobble=True)
+            self.__scrobble('start')
 
     def playbackPaused(self):
         if not self.isPlaying:
             return
 
         logger.debug("playbackPaused()")
-        self.update(forceCheck=True, startScrobble=False)
         logger.debug("Paused after: %s" % str(self.watchedTime))
         self.isPaused = True
         self.pausedAt = time.time()
@@ -202,7 +200,7 @@ class Scrobbler():
             return
 
         logger.debug("playbackSeek()")
-        self.update(forceCheck=True, startScrobble=True)
+        self.transitionCheck(isSeek=True)
 
     def playbackEnded(self):
         self.videosToRate.append(self.curVideoInfo)
