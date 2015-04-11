@@ -1,4 +1,5 @@
 version 3.0.1
+  - moved to PIN login, you will need to reenter your credentials. It's more secure and users with social logins (e.g. g+ or fb) can now login too!
   - readded manual ratings for movies/shows/episodes (by tknorris)
   - implemented manual ratings for seasons (by tknorris)
   - readded manual ratings for movies/shows/seasons/episodes
