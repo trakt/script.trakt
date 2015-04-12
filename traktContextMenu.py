@@ -22,7 +22,7 @@ class traktContextMenu(xbmcgui.WindowXMLDialog):
     action = None
 
     def __new__(cls, media_type=None, buttons=None):
-        return super(traktContextMenu, cls).__new__(cls, "traktContextMenu.xml", __addon__.getAddonInfo('path'),
+        return super(traktContextMenu, cls).__new__(cls, "TraktContextMenu.xml", __addon__.getAddonInfo('path'),
                                                     media_type=media_type, buttons=None)
 
     def __init__(self, *args, **kwargs):
