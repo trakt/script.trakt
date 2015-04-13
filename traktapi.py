@@ -79,7 +79,7 @@ class traktAPI(object):
     def on_token_refreshed(self, response):
         # OAuth token refreshed, save token for future calls
         self.authorization = response
-        setSetting('authorization', self.authorization)
+        setSetting('authorization', dumps(self.authorization))
 
         logger.debug('Token refreshed')
 
