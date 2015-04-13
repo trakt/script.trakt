@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import threading
-from time import time
 import logging
 import xbmc
 

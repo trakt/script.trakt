@@ -3,7 +3,6 @@
 import os
 import sys
 import sqlite3
-import utilities as utils
 
 if sys.version_info >= (2, 7):
     from json import loads, dumps
