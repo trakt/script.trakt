@@ -2,10 +2,15 @@
 #
 import xbmcaddon
 import logging
-import json
 from trakt import Trakt, ClientError, ServerError
 from trakt.objects import Movie, Show
 from utilities import getSetting, setSetting, findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, notification, getString, createError
+from sys import version_info
+
+if version_info >= (2, 7):
+    from json import loads, dumps
+else:
+    from simplejson import loads, dumps
 
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')
@@ -23,7 +28,7 @@ class traktAPI(object):
         # Get user login data
         self.__pin = getSetting('PIN')
         if getSetting('authorization'):
-            self.authorization = json.loads(getSetting('authorization'))
+            self.authorization = loads(getSetting('authorization'))
         else:
             self.authorization = {}
 
@@ -56,13 +61,14 @@ class traktAPI(object):
             with Trakt.configuration.http(retry=True):
                 try:
                     # Exchange `code` for `access_token`
+                    logger.debug("Exchanging pin for access token")
                     self.authorization = Trakt['oauth'].token_exchange(self.__pin, 'urn:ietf:wg:oauth:2.0:oob')
 
                     if not self.authorization:
                         logger.debug("Authentication Failure")
                         notification('Trakt', getString(32147))
                     else:
-                        setSetting('authorization', self.authorization)
+                        setSetting('authorization', dumps(self.authorization))
                 except Exception as ex:
                     message = createError(ex)
                     logger.fatal(message)
