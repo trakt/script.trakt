@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
 	<category label="32000"><!-- General -->
-		<setting id="PIN" type="text" option="hidden" label="32145" default="" />
+		<setting id="PIN" type="text" label="32145" default="" />
 		<setting id="PIN_Info" type="action" label="32144" action="RunScript(script.trakt, action=pin_info)"/>
 		<setting id="authorization" type="text" label="authorization" visible="false" />
 		<setting id="startup_delay" type="slider" label="32003" range="0,30" default="0" option="int"/>

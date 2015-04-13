@@ -2,6 +2,7 @@
 #
 import xbmcaddon
 import logging
+import json
 from trakt import Trakt, ClientError, ServerError
 from trakt.objects import Movie, Show
 from utilities import getSetting, setSetting, findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, notification, getString, createError
@@ -22,7 +23,9 @@ class traktAPI(object):
         # Get user login data
         self.__pin = getSetting('PIN')
         if getSetting('authorization'):
-            self.authorization = eval(getSetting('authorization'))
+            self.authorization = json.loads(getSetting('authorization'))
+        else:
+            self.authorization = {}
 
         # Bind trakt events
         Trakt.on('oauth.token_refreshed', self.on_token_refreshed)
