@@ -35,7 +35,7 @@ class Sync():
     def __updateProgress(self, *args, **kwargs):
         if self.show_progress and not self.run_silent:
             kwargs['percent'] = args[0]
-            progress.transitionCheck(**kwargs)
+            progress.update(**kwargs)
 
     ''' begin code for episode sync '''
     def __kodiLoadShows(self):
