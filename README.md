@@ -75,7 +75,8 @@ or
 ###Contribute
 
 ####Pull requests
-* Please make your pull requests on the branch named "dev" only.
+* Please make your pull requests on the branch named "dev" only. 
+* Please don't add pull requests for translation updates these have to go work their way through the translation workflow (see [Translations](#translations))
 
 ####Translations
 * Translations are done via the Transifex project of Kodi. If you want to support translation efforts, read [this] (http://kodi.wiki/view/Translation_System) and look for script-trakt under the XBMC Addons project in Transifex.
