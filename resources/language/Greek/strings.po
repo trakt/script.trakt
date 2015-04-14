@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -28,22 +28,166 @@ msgctxt "#32002"
 msgid "Password"
 msgstr "Κωδικός πρόσβασης"
 
+msgctxt "#32003"
+msgid "Startup Delay"
+msgstr "Καθυστέρηση Έναρξης"
+
 msgctxt "#32004"
 msgid "Rating"
-msgstr "Καταλληλότητα"
+msgstr "Αξιολόγηση"
+
+msgctxt "#32005"
+msgid "Rate Movie after watching"
+msgstr "Αξιολόγηση Ταινίας αφού τη δείτε"
+
+msgctxt "#32006"
+msgid "Rate TV show Episode after watching"
+msgstr "Αξιολόγηση Επεισοδίου αφού το δείτε"
+
+msgctxt "#32007"
+msgid "Rate each playlist item"
+msgstr "Αξιολόγηση όλων των αντικειμένων της λίστας αναπ/γής"
+
+msgctxt "#32008"
+msgid "Minimum percent watched to display rating dialog"
+msgstr "Ελάχιστο ποσοστό που πρέπει να έχετε δει, για να βγει το παράθυρο αξιολόγησης"
+
+msgctxt "#32009"
+msgid "Allow re-rating of media"
+msgstr "Να επιτρέπεται η επαναξιολόγηση"
+
+msgctxt "#32010"
+msgid "Default rating"
+msgstr "Προεπιλεγμένη αξιολόγηση"
+
+msgctxt "#32011"
+msgid "Scrobbling"
+msgstr "Γίνεται κοινοποίηση"
+
+msgctxt "#32012"
+msgid "Scrobble movies"
+msgstr "Κοινοποίηση ταινιών"
+
+msgctxt "#32013"
+msgid "Scrobble TV show episodes"
+msgstr "Κοινοποίηση επεισοδίων"
+
+msgctxt "#32015"
+msgid "Trakt - Scrobbled successfully"
+msgstr "Trakt - Επιτυχής κοινοποίηση"
+
+msgctxt "#32016"
+msgid "Exclusions"
+msgstr "Εξαιρέσεις"
+
+msgctxt "#32017"
+msgid "Exclude Live TV"
+msgstr "Εξαίρεση Live TV"
+
+msgctxt "#32018"
+msgid "Exclude HTTP sources"
+msgstr "Εξαίρεση πηγών HTTP"
+
+msgctxt "#32019"
+msgid "Exclude path"
+msgstr "Εξαίρεση διαδρομής"
+
+msgctxt "#32023"
+msgid "Can not connect to Trakt"
+msgstr "Αδυναμία σύνδεσης στο Trakt"
 
 msgctxt "#32024"
 msgid "Error"
 msgstr "Σφάλμα"
 
+msgctxt "#32025"
+msgid "Incorrect username or password"
+msgstr "Εσφαλμένο όνομα χρήστη ή κωδικός"
+
+msgctxt "#32026"
+msgid "What Did You Think?"
+msgstr "Πως Σας Φάνηκε;"
+
+msgctxt "#32027"
+msgid "Totally Ninja!"
+msgstr "Γαμάτο!"
+
+msgctxt "#32028"
+msgid "Weak Sauce :("
+msgstr "Μούφα :("
+
+msgctxt "#32029"
+msgid "Terrible"
+msgstr "Άθλιο"
+
+msgctxt "#32030"
+msgid "Bad"
+msgstr "Κακό"
+
+msgctxt "#32031"
+msgid "Poor"
+msgstr "Όχι Τόσο Κακό"
+
+msgctxt "#32032"
+msgid "Meh"
+msgstr "Έτσι κι Έτσι"
+
 msgctxt "#32033"
 msgid "Fair"
-msgstr "Ήπιος"
+msgstr "Καλούτσικο"
+
+msgctxt "#32034"
+msgid "Good"
+msgstr "Καλό"
+
+msgctxt "#32035"
+msgid "Great"
+msgstr "Πολύ Καλό"
+
+msgctxt "#32036"
+msgid "Superb"
+msgstr "Καταπληκτικό"
+
+msgctxt "#32045"
+msgid "Synchronize"
+msgstr "Συγχρονισμός"
 
 msgctxt "#32046"
 msgid "Movies"
 msgstr "Ταινίες"
 
+msgctxt "#32050"
+msgid "TV Episodes"
+msgstr "Επεισόδια"
+
 msgctxt "#32054"
 msgid "Service"
 msgstr "Υπηρεσία"
+
+msgctxt "#32056"
+msgid "Show notifications"
+msgstr "Εμφάνιση ειδοποιήσεων"
+
+msgctxt "#32060"
+msgid "Hide notifications during playback"
+msgstr "Απόκρυψη ειδοποιήσεων κατά την αναπαραγωγή"
+
+msgctxt "#32061"
+msgid "Sync started"
+msgstr "Ξεκίνησε ο συγχρονισμός"
+
+msgctxt "#32062"
+msgid "Sync complete"
+msgstr "Ο συγχρονισμός ολοκληρώθηκε"
+
+msgctxt "#32066"
+msgid "Movie Sync Complete"
+msgstr "Ολοκληρώθηκε ο Συγχρονισμός Ταινιών"
+
+msgctxt "#32073"
+msgid "%i episodes are being updated"
+msgstr "%i επεισόδια ενημερώνονται"
+
+msgctxt "#32075"
+msgid "Episode Sync Complete"
+msgstr "Ολοκληρώθηκε ο Συγχρονισμός Επεισοδίων"

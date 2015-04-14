@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -78,7 +78,7 @@ msgstr "Afficher une notification lors du scrobble"
 
 msgctxt "#32015"
 msgid "Trakt - Scrobbled successfully"
-msgstr "Trakt - Scrobble réussi"
+msgstr "Trakt - Scrobblé avec succès"
 
 msgctxt "#32016"
 msgid "Exclusions"
@@ -178,7 +178,7 @@ msgstr "Ôter l'évaluation de cet épisode"
 
 msgctxt "#32040"
 msgid "Trakt - Rating submitted successfully"
-msgstr "Trakt - évaluation envoyée avec succès"
+msgstr "Trakt - Évaluation envoyée avec succès"
 
 msgctxt "#32041"
 msgid "Trakt - Already rated"
@@ -250,7 +250,7 @@ msgstr "Retirer de la collection Trakt les films supprimés"
 
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
-msgstr "Retirer de la collection Trakt les épisodes supprimés"
+msgstr "Retirer de la collection Trakt les émissions télé supprimées"
 
 msgctxt "#32059"
 msgid "Show marked as watched notification"
@@ -302,7 +302,7 @@ msgstr "L'état de visionnement manquant d'%i émission(s) va être mis à jour"
 
 msgctxt "#32071"
 msgid "Checking watched episodes on Trakt"
-msgstr "Vérification sur Trakt des épisodes regardés"
+msgstr "Vérification des épisodes regardés sur Trakt"
 
 msgctxt "#32072"
 msgid "%i show(s) had missing watched status"
@@ -334,19 +334,19 @@ msgstr "épisodes en cours de retrait"
 
 msgctxt "#32079"
 msgid "Loading movies from Kodi"
-msgstr "Chargement des films à partir de Kodi"
+msgstr "Chargement des films de Kodi"
 
 msgctxt "#32080"
 msgid "Movies loaded from Kodi"
-msgstr "Les films ont été chargés à partir de Kodi"
+msgstr "Les films ont été chargés de Kodi"
 
 msgctxt "#32081"
 msgid "Retrieving movie collection from Trakt"
-msgstr "Récupération de la collection de film à partir de Trakt"
+msgstr "Récupération de la collection de film de Trakt"
 
 msgctxt "#32082"
 msgid "Retrieving watched movies from Trakt"
-msgstr "Récupération des films regardés à partir de Trakt"
+msgstr "Récupération des films regardés de Trakt"
 
 msgctxt "#32083"
 msgid "Retrieved movie data from Trakt"
@@ -358,7 +358,7 @@ msgstr "La collection de films de Trakt est à jour, aucun film à ajouter"
 
 msgctxt "#32085"
 msgid "%i movie(s) were added to your Trakt collection"
-msgstr "%i film(s) a/ont été ajouté(s) à votre collection Trakt\n "
+msgstr "%i film(s) a/ont été ajouté(s) à votre collection Trakt"
 
 msgctxt "#32086"
 msgid "Trakt movie playcounts are up to date"
@@ -382,7 +382,7 @@ msgstr "Compteurs de lecture mis à jour dans Kodi pour %i film(s)"
 
 msgctxt "#32091"
 msgid "Trakt movie collection is up to date, no movies removed"
-msgstr "La collection de films de Trakt est à jour, aucune film n'a été retiré"
+msgstr "La collection de films de Trakt est à jour, aucun film n'a été retiré"
 
 msgctxt "#32092"
 msgid "%i movie(s) were removed from your Trakt collection"
@@ -394,11 +394,11 @@ msgstr "Mise à jour d'%i compteur(s) de lecture de film sur %i sur Trakt"
 
 msgctxt "#32094"
 msgid "Loading episode data from Kodi"
-msgstr "Chargement des données d'épisode à partir de Kodi"
+msgstr "Chargement des données d'épisode de Kodi"
 
 msgctxt "#32095"
 msgid "Loading shows from Kodi"
-msgstr "Chargement des émissions à partir de Kodi"
+msgstr "Chargement des émissions de Kodi"
 
 msgctxt "#32096"
 msgid "Shows loaded from Kodi"
@@ -406,31 +406,31 @@ msgstr "Émissions chargées à partir de Kodi"
 
 msgctxt "#32097"
 msgid "Parsing %i of %i episode data from Kodi"
-msgstr "Analyse des données d'%i épisode(s) sur %i à partir de Kodi"
+msgstr "Analyse des données d'%i épisode(s) sur %i de Kodi"
 
 msgctxt "#32098"
 msgid "Loaded episode data from Kodi"
-msgstr "Les données d'épisode ont été chargées à partir de Kodi"
+msgstr "Les données d'épisode ont été chargées de Kodi"
 
 msgctxt "#32099"
 msgid "Loading episode data from Trakt"
-msgstr "Chargement des données d'épisode à partir de Trakt"
+msgstr "Chargement des données d'épisode de Trakt"
 
 msgctxt "#32100"
 msgid "Retrieving episode collection from Trakt"
-msgstr "Obtention de la collection d'épisodes à partir de Trakt"
+msgstr "Obtention de la collection d'épisodes de Trakt"
 
 msgctxt "#32101"
 msgid "Retrieving watched episodes from Trakt"
-msgstr "Obtention des épisodes regardés à partir de Trakt"
+msgstr "Obtention des épisodes regardés de Trakt"
 
 msgctxt "#32102"
 msgid "Parsing episode data %i of %i from Trakt"
-msgstr "Analyse des données d'%i épisode(s) sur %i à partir de Trakt"
+msgstr "Analyse des données d'%i épisode(s) sur %i de Trakt"
 
 msgctxt "#32103"
 msgid "Retrieved episode data from Trakt"
-msgstr "Données d'épisode récupérées à partir de Trakt"
+msgstr "Données d'épisode récupérées sur Trakt"
 
 msgctxt "#32104"
 msgid "Trakt episode collection is up to date, no episodes to add"
@@ -483,3 +483,63 @@ msgstr "%d épisode(s) sur %s"
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "Activer le mode de débogage"
+
+msgctxt "#32117"
+msgid "Sync movie playback progress to Kodi"
+msgstr "Synchroniser la progression de lecture des films vers Kodi"
+
+msgctxt "#32118"
+msgid "Sync episode playback progress to Kodi"
+msgstr "Synchroniser la progression de lecture des épisodes vers Kodi"
+
+msgctxt "#32119"
+msgid "Retrieving episode playback progress from Trakt"
+msgstr "Obtention de la progression de lecture des épisodes de Trakt"
+
+msgctxt "#32120"
+msgid "Parsing episode playback progress %i of %i from Trakt"
+msgstr "Analyse de la progression de lecture de %i sur %i épisode(s) de Trakt"
+
+msgctxt "#32121"
+msgid "Retrieved episode playback progress from Trakt"
+msgstr "La progression de lecture des épisodes a été récupéré de Trakt"
+
+msgctxt "#32122"
+msgid "Retrieving movie playback progress from Trakt"
+msgstr "Obtention de la progression de lecture des films de Trakt"
+
+msgctxt "#32123"
+msgid "Parsing movie playback progress %i of %i from Trakt"
+msgstr "Analyse de la progression de lecture de %i sur %i films(s) de Trakt"
+
+msgctxt "#32124"
+msgid "Retrieved movie playback progress from Trakt"
+msgstr "La progression de lecture des films a été récupéré de Trakt"
+
+msgctxt "#32125"
+msgid "Kodi movie playback progress is up to date"
+msgstr "Les progressions de lecture des films de Kodi sont à jour"
+
+msgctxt "#32126"
+msgid "%i movie(s) playback progress will be updated in Kodi"
+msgstr "La progression de lecture de %i film(s) sera/seront mis à jour dans Kodi"
+
+msgctxt "#32127"
+msgid "Updating %i of %i movie(s) playback progress in Kodi"
+msgstr "Mise à jour de la progression de lecture de %i de %i film(s) dans Kodi"
+
+msgctxt "#32128"
+msgid "Playback progress updated for %i movie(s) in Kodi"
+msgstr "La progression de lecture de %i film(s) à été mis à jour dans Kodi"
+
+msgctxt "#32129"
+msgid "Kodi episode playback progress is up to date"
+msgstr "La progression de lecture des épisodes est à jour dans Kodi"
+
+msgctxt "#32130"
+msgid "Updating %i of %i episode(s) playback progress in Kodi"
+msgstr "Mise à jour de la progression de lecture pour %i de %i épisode(s) dans Kodi"
+
+msgctxt "#32131"
+msgid "Playback progress updated for %i episode(s) in Kodi"
+msgstr "La progression de lecture à été mise à jour pour %i épisodes(s) dans Kodi"

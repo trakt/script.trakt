@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -483,3 +483,63 @@ msgstr "%d epizodas(ai) iš '%s'"
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "Įjungti derinimo režimą"
+
+msgctxt "#32117"
+msgid "Sync movie playback progress to Kodi"
+msgstr "Sinchronizuoti filmų atkūrimo progresą su Kodi"
+
+msgctxt "#32118"
+msgid "Sync episode playback progress to Kodi"
+msgstr "Sinchronizuoti epizodų atkūrimo progresą su Kodi"
+
+msgctxt "#32119"
+msgid "Retrieving episode playback progress from Trakt"
+msgstr "Gaunamas epizodų atkūrimo progresas iš Trakt.tv"
+
+msgctxt "#32120"
+msgid "Parsing episode playback progress %i of %i from Trakt"
+msgstr "Analizuojami %i iš %i epizodų atkūrimo progresas iš Trakt.tv"
+
+msgctxt "#32121"
+msgid "Retrieved episode playback progress from Trakt"
+msgstr "Gautas epizodų atkūrimo progresas iš Trakt.tv"
+
+msgctxt "#32122"
+msgid "Retrieving movie playback progress from Trakt"
+msgstr "Gaunamas filmų atkūrimo progresas iš Trakt.tv"
+
+msgctxt "#32123"
+msgid "Parsing movie playback progress %i of %i from Trakt"
+msgstr "Analizuojami %i iš %i filmų atkūrimo progresas iš Trakt.tv"
+
+msgctxt "#32124"
+msgid "Retrieved movie playback progress from Trakt"
+msgstr "Gautas filmų atkūrimo progresas iš Trakt.tv"
+
+msgctxt "#32125"
+msgid "Kodi movie playback progress is up to date"
+msgstr "Kodi filmų atkūrimo progresas yra atnaujintas"
+
+msgctxt "#32126"
+msgid "%i movie(s) playback progress will be updated in Kodi"
+msgstr "Filmų, kurių atkūrimo progresas bus atnaujinta Kodi sistemoje: %i"
+
+msgctxt "#32127"
+msgid "Updating %i of %i movie(s) playback progress in Kodi"
+msgstr "Atnaujinamas atkūrimo progresas %i iš %i filmų Kodi bibliotekoje"
+
+msgctxt "#32128"
+msgid "Playback progress updated for %i movie(s) in Kodi"
+msgstr "Filmų, kuriems atnaujintas atkūrimo progresas Kodi bibliotekoje: %i"
+
+msgctxt "#32129"
+msgid "Kodi episode playback progress is up to date"
+msgstr "Kodi epizodų atkūrimo progresas yra atnaujintas"
+
+msgctxt "#32130"
+msgid "Updating %i of %i episode(s) playback progress in Kodi"
+msgstr "Atnaujinamas atkūrimo progresas %i iš %i epizodų Kodi bibliotekoje"
+
+msgctxt "#32131"
+msgid "Playback progress updated for %i episode(s) in Kodi"
+msgstr "Laidų, kurioms atnaujintas atkūrimo progresas Kodi bibliotekoje: %i"

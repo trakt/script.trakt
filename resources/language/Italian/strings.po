@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -130,7 +130,7 @@ msgstr "Fantastico!"
 
 msgctxt "#32028"
 msgid "Weak Sauce :("
-msgstr "Carino"
+msgstr "Orrendo :("
 
 msgctxt "#32029"
 msgid "Terrible"
@@ -142,15 +142,15 @@ msgstr "Brutto"
 
 msgctxt "#32031"
 msgid "Poor"
-msgstr "Povero"
+msgstr "Scarso"
 
 msgctxt "#32032"
 msgid "Meh"
-msgstr "Insomma"
+msgstr "Meh"
 
 msgctxt "#32033"
 msgid "Fair"
-msgstr "Giusto"
+msgstr "Sufficiente"
 
 msgctxt "#32034"
 msgid "Good"
@@ -158,7 +158,7 @@ msgstr "Buono"
 
 msgctxt "#32035"
 msgid "Great"
-msgstr "Grande"
+msgstr "Ottimo"
 
 msgctxt "#32036"
 msgid "Superb"
