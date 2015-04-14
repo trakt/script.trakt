@@ -585,7 +585,7 @@ msgid "PIN"
 msgstr ""
 
 msgctxt "#32146"
-msgid "Enter your PIN in settings"
+msgid "Please enter your PIN in settings"
 msgstr ""
 
 msgctxt "#32147"
