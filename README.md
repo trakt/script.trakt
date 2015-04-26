@@ -70,7 +70,7 @@ or
 * If not, create a new issue and provide as much data about your system as possible, a logfile will also be needed.
 
 ####Creating logfiles
-* To create a logfile, enable the debug setting in Kodi AND script.trakt, otherwise the logfile won't show any data from script.trakt. Check the Kodi documentation if you don't know where your logfile can be found.
+* To create a logfile, enable the debug setting in Kodi AND script.trakt, otherwise the logfile won't show any data from script.trakt. Check the [Kodi documentation] (http://kodi.wiki/view/Log_file) if you don't know where your logfile can be found.
 
 ###Contribute
 
