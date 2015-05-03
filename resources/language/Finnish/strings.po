@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Yleinen"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Käyttäjänimi"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Salasana"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Arvosana"
@@ -47,3 +39,7 @@ msgstr "Elokuvat"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Palvelu"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Väärä PIN"

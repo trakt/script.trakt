@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "ባጠቃላይ"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "የተጠቃሚ ስም "
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "የመግቢያ ቃል"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "ደረጃው"
@@ -43,3 +35,7 @@ msgstr "መጠነኛ "
 msgctxt "#32046"
 msgid "Movies"
 msgstr "ሙቪዎች"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "የተሳሳተ የመግቢያ ቃል"

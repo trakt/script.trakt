@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Γενικά"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Όνομα χρήστη"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Κωδικός πρόσβασης"
-
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "Καθυστέρηση Έναρξης"
@@ -99,10 +91,6 @@ msgstr "Αδυναμία σύνδεσης στο Trakt"
 msgctxt "#32024"
 msgid "Error"
 msgstr "Σφάλμα"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "Εσφαλμένο όνομα χρήστη ή κωδικός"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -191,3 +179,7 @@ msgstr "%i επεισόδια ενημερώνονται"
 msgctxt "#32075"
 msgid "Episode Sync Complete"
 msgstr "Ολοκληρώθηκε ο Συγχρονισμός Επεισοδίων"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Λανθασμένο PIN"

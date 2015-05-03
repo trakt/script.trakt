@@ -20,10 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "सामान्य"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "उपयोगकर्ता नाम"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "रेटिंग"

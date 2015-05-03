@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Cyffredinol"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Enw defnyddiwr"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Cyfrinair"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Graddio"
@@ -47,3 +39,7 @@ msgstr "Ffilmiau"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Gwasanaeth"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "PIN anghywir"

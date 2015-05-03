@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Allgemein"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Username"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Passwort"
-
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "Startverzögerung"
@@ -100,14 +92,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "Ordnerpfad (einschließlich Unterordner)"
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr "Überprüfe Benutzernamen und Passwort in den Einstellungen"
-
-msgctxt "#32022"
-msgid "Enter your Password in settings"
-msgstr "Passwort in Einstellungen eingeben"
-
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr "Verbindungsaufbau zu Trakt nicht möglich"
@@ -115,10 +99,6 @@ msgstr "Verbindungsaufbau zu Trakt nicht möglich"
 msgctxt "#32024"
 msgid "Error"
 msgstr "Fehler"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "Falscher Benutzername oder Passwort"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -543,3 +523,71 @@ msgstr "Aktualisiere %i von %i Episode(n) Wiedergabefortschritt in Kodi"
 msgctxt "#32131"
 msgid "Playback progress updated for %i episode(s) in Kodi"
 msgstr "Wiedergabefortschritt für %i Episode(n) in Kodi aktualisiert"
+
+msgctxt "#32132"
+msgid "Unrate this season"
+msgstr "Bewertung dieser Staffel entfernen"
+
+msgctxt "#32133"
+msgid "Manage Movie's Lists"
+msgstr "Filmlisten verwalten"
+
+msgctxt "#32134"
+msgid "Manage Show's Lists"
+msgstr "Serienliste verwalten"
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr "Von der Beobachtungsliste entfernen"
+
+msgctxt "#32136"
+msgid "Add to Watchlist"
+msgstr "Zur Beobachtungsliste hinzufügen"
+
+msgctxt "#32137"
+msgid "Rate this Movie"
+msgstr "Diesen Film bewerten"
+
+msgctxt "#32138"
+msgid "Rate this Show"
+msgstr "Diese Serie bewerten"
+
+msgctxt "#32139"
+msgid "Rate this Episode"
+msgstr "Diese Folge bewerten"
+
+msgctxt "#32140"
+msgid "Toggle Watched"
+msgstr "Gesehene umschalten"
+
+msgctxt "#32141"
+msgid "Manage All Lists"
+msgstr "Alle Listen verwalten"
+
+msgctxt "#32142"
+msgid "Update All Tags"
+msgstr "Alle Schlagwörter aktualisieren"
+
+msgctxt "#32143"
+msgid "Synchronize Library"
+msgstr "Bibliothek synchronisieren"
+
+msgctxt "#32144"
+msgid "Where can I find my PIN?"
+msgstr "Wo finde ich meine PIN?"
+
+msgctxt "#32145"
+msgid "PIN"
+msgstr "PIN"
+
+msgctxt "#32146"
+msgid "Please enter your PIN in settings"
+msgstr "Bitte geben Sie Ihre PIN in den Einstellungen ein"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Ungültiger PIN"
+
+msgctxt "#32148"
+msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
+msgstr "Scannen Sie den QR-Code oder besuchen Sie http://trakt.tv/pin/999 für Ihre persönliche PIN"

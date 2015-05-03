@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Obecné"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Uživatelské jméno"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Heslo"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Hodnocení"
@@ -47,3 +39,7 @@ msgstr "Filmy"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Služba"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Neplatný PIN"

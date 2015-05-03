@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Общи"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Потребител"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Парола"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Рейтинг"
@@ -63,3 +55,7 @@ msgstr "Синхронизирането на епизоди завърши"
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "Включи дебъг режима"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Неправилен код"

@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Allmänt"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Användarnamn"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Lösenord"
-
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "Uppstartsfördröjning"
@@ -100,14 +92,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "Sökväg till katalog (inklusive underkataloger)"
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr "Ange användarnamn och lösenord i inställningar"
-
-msgctxt "#32022"
-msgid "Enter your Password in settings"
-msgstr "Ange ditt lösenord i inställningar"
-
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr "Kan inte ansluta till Trakt"
@@ -115,10 +99,6 @@ msgstr "Kan inte ansluta till Trakt"
 msgctxt "#32024"
 msgid "Error"
 msgstr "Fel"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "Felaktigt användarnamn eller lösenord"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -543,3 +523,19 @@ msgstr "Uppdaterar uppspelningsförlopp för %i av %i avsnitt i Kodi"
 msgctxt "#32131"
 msgid "Playback progress updated for %i episode(s) in Kodi"
 msgstr "Uppspelningsförlopp för %i avsnitt uppdaterat i Kodi"
+
+msgctxt "#32143"
+msgid "Synchronize Library"
+msgstr "Synkronisera bibliotek"
+
+msgctxt "#32144"
+msgid "Where can I find my PIN?"
+msgstr "Var hittar jag min PIN?"
+
+msgctxt "#32145"
+msgid "PIN"
+msgstr "PIN"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Felaktig PIN"

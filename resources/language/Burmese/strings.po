@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "ယေဘုယျ"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "အသုံးပြုသူအမည်"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "စကားဝှက်"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "အဆင့်သတ်မှတ်မှု့"
@@ -39,3 +31,7 @@ msgstr "ချို့ယွင်းချက်"
 msgctxt "#32046"
 msgid "Movies"
 msgstr "ရုပ်ရှင်များ"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "PIN မမှန်ကန်ပါ"

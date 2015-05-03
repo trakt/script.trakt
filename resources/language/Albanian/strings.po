@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "I përgjithsëm"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Emër-kalues"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Fjalkalim"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Vlerësimi"
@@ -43,3 +35,7 @@ msgstr "Bukur"
 msgctxt "#32046"
 msgid "Movies"
 msgstr "Filma"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "PIN i pasaktë"

@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Umum"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Nama Pengguna"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Sandi"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Rating"
@@ -47,3 +39,7 @@ msgstr "Film"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Layanan"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "PIN salah"

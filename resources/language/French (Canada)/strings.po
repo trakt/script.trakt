@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Général"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Nom d'utilisateur"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Mot de passe"
-
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "Retard de démarrage"
@@ -100,14 +92,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "Chemin du dossier (incluant les sous-dossiers)"
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr "Saisissez votre nom d'utilisateur et votre mot de passe dans les paramètres"
-
-msgctxt "#32022"
-msgid "Enter your Password in settings"
-msgstr "Saisissez votre mot de passe dans les paramètres"
-
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr "Impossible de se connecter à Trakt"
@@ -115,10 +99,6 @@ msgstr "Impossible de se connecter à Trakt"
 msgctxt "#32024"
 msgid "Error"
 msgstr "Erreur"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "Nom d'utilisateur et/ou mot de passe erroné(s)"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -246,11 +226,11 @@ msgstr "Montrer les notifications"
 
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
-msgstr "Retirer de la collection Trakt les films supprimés"
+msgstr "Enlever les films supprimés de la collection Trakt"
 
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
-msgstr "Retirer de la collection Trakt les émissions télé supprimées"
+msgstr "Enlever les émissions télé supprimées de la collection Trakt"
 
 msgctxt "#32059"
 msgid "Show marked as watched notification"
@@ -382,7 +362,7 @@ msgstr "Compteurs de lecture mis à jour dans Kodi pour %i film(s)"
 
 msgctxt "#32091"
 msgid "Trakt movie collection is up to date, no movies removed"
-msgstr "La collection de films de Trakt est à jour, aucun film n'a été retiré"
+msgstr "La collection de films de Trakt est à jour, aucun film n'a été supprimé"
 
 msgctxt "#32092"
 msgid "%i movie(s) were removed from your Trakt collection"
@@ -458,7 +438,7 @@ msgstr "Compteurs de lecture mis à jour dans Kodi pour %i épisode(s)"
 
 msgctxt "#32110"
 msgid "Trakt episode collection is clean, no episodes to remove"
-msgstr "La collection d'épisodes de Trakt est propre, aucun épisode à retirer"
+msgstr "La collection d'épisodes de Trakt est propre, aucun épisode à supprimer"
 
 msgctxt "#32111"
 msgid "%i episode(s) are being removed from your Trakt collection"
@@ -543,3 +523,71 @@ msgstr "Mise à jour de la progression de lecture pour %i de %i épisode(s) dans
 msgctxt "#32131"
 msgid "Playback progress updated for %i episode(s) in Kodi"
 msgstr "La progression de lecture à été mise à jour pour %i épisodes(s) dans Kodi"
+
+msgctxt "#32132"
+msgid "Unrate this season"
+msgstr "Ôter l'évaluation de cette saison"
+
+msgctxt "#32133"
+msgid "Manage Movie's Lists"
+msgstr "Gérer la liste des films"
+
+msgctxt "#32134"
+msgid "Manage Show's Lists"
+msgstr "Gérer la liste des émissions"
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr "Supprimer de la liste de suivi"
+
+msgctxt "#32136"
+msgid "Add to Watchlist"
+msgstr "Ajouter à la liste de suivi"
+
+msgctxt "#32137"
+msgid "Rate this Movie"
+msgstr "Noter ce film"
+
+msgctxt "#32138"
+msgid "Rate this Show"
+msgstr "Noter cette émission"
+
+msgctxt "#32139"
+msgid "Rate this Episode"
+msgstr "Noter cet épisode"
+
+msgctxt "#32140"
+msgid "Toggle Watched"
+msgstr "Activer/désactiver les regardés"
+
+msgctxt "#32141"
+msgid "Manage All Lists"
+msgstr "Gérer toutes les listes"
+
+msgctxt "#32142"
+msgid "Update All Tags"
+msgstr "Mettre à jour toutes les balises"
+
+msgctxt "#32143"
+msgid "Synchronize Library"
+msgstr "Synchroniser la médiathèque"
+
+msgctxt "#32144"
+msgid "Where can I find my PIN?"
+msgstr "Où puis-je trouver mon NIP?"
+
+msgctxt "#32145"
+msgid "PIN"
+msgstr "NIP"
+
+msgctxt "#32146"
+msgid "Please enter your PIN in settings"
+msgstr "Veuillez saisir votre NIP dans les paramètres"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "NIP erroné"
+
+msgctxt "#32148"
+msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
+msgstr "Numérisez le code QR ou visitez http://trakt.tv/pin/999 pour obtenir votre propre NIP."

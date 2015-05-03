@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Umumiy"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Foydalanuvchi nomi"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Maxfiy so'z"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Reyting"
@@ -39,3 +31,7 @@ msgstr "Xato"
 msgctxt "#32046"
 msgid "Movies"
 msgstr "Filmlar"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Noto'g'ri PIN"

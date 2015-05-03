@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "عام"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "اسم المستخدم"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "كلمة المرور"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "التقييم"
@@ -43,3 +35,7 @@ msgstr ":عادل"
 msgctxt "#32046"
 msgid "Movies"
 msgstr "أفلام"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "PIN غير صحيح"
