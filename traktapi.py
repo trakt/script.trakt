@@ -2,9 +2,10 @@
 #
 import xbmcaddon
 import logging
+import os
 from trakt import Trakt, ClientError, ServerError
 from trakt.objects import Movie, Show
-from utilities import getSetting, setSetting, findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, notification, getString, createError
+from utilities import getSetting, setSetting, findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, notification, getString, createError, checkAndConfigureProxy
 from sys import version_info
 
 if version_info >= (2, 7):
@@ -24,6 +25,13 @@ class traktAPI(object):
 
     def __init__(self):
         logger.debug("Initializing.")
+
+        proxyURL = checkAndConfigureProxy()
+        if proxyURL:
+            if proxyURL.startswith('http://'):
+                os.environ['HTTP_PROXY'] = proxyURL
+            elif proxyURL.startswith('https://'):
+                os.environ['HTTPS_PROXY'] = proxyURL
 
         # Get user login data
         self.__pin = getSetting('PIN')
