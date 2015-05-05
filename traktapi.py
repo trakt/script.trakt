@@ -28,10 +28,10 @@ class traktAPI(object):
 
         proxyURL = checkAndConfigureProxy()
         if proxyURL:
-            if proxyURL.startswith('http://'):
-                os.environ['HTTP_PROXY'] = proxyURL
-            elif proxyURL.startswith('https://'):
-                os.environ['HTTPS_PROXY'] = proxyURL
+            Trakt.http.proxies = {
+                'http': proxyURL,
+                'https': proxyURL
+            }
 
         # Get user login data
         self.__pin = getSetting('PIN')
