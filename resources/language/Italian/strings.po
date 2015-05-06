@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -19,14 +19,6 @@ msgstr ""
 msgctxt "#32000"
 msgid "General"
 msgstr "Generali"
-
-msgctxt "#32001"
-msgid "Username"
-msgstr "Nome utente"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Password"
 
 msgctxt "#32003"
 msgid "Startup Delay"
@@ -100,14 +92,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "Percorso della cartella (incluse le sottocartelle)"
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr "Immetti il tuo nome utente e la password nelle impostazioni"
-
-msgctxt "#32022"
-msgid "Enter your Password in settings"
-msgstr "Immetti la tua password nelle impostazioni"
-
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr "Connessione a Trakt impossibile"
@@ -115,10 +99,6 @@ msgstr "Connessione a Trakt impossibile"
 msgctxt "#32024"
 msgid "Error"
 msgstr "Errore"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "Nome utente o password errati"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -130,7 +110,7 @@ msgstr "Fantastico!"
 
 msgctxt "#32028"
 msgid "Weak Sauce :("
-msgstr "Carino"
+msgstr "Orrendo :("
 
 msgctxt "#32029"
 msgid "Terrible"
@@ -142,15 +122,15 @@ msgstr "Brutto"
 
 msgctxt "#32031"
 msgid "Poor"
-msgstr "Povero"
+msgstr "Scarso"
 
 msgctxt "#32032"
 msgid "Meh"
-msgstr "Insomma"
+msgstr "Meh"
 
 msgctxt "#32033"
 msgid "Fair"
-msgstr "Giusto"
+msgstr "Sufficiente"
 
 msgctxt "#32034"
 msgid "Good"
@@ -158,7 +138,7 @@ msgstr "Buono"
 
 msgctxt "#32035"
 msgid "Great"
-msgstr "Grande"
+msgstr "Ottimo"
 
 msgctxt "#32036"
 msgid "Superb"
@@ -483,3 +463,19 @@ msgstr "%d episodi(o) di '%s'"
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "Abilita la modalità di debug"
+
+msgctxt "#32117"
+msgid "Sync movie playback progress to Kodi"
+msgstr "Sincronizza avanzamento riproduzione film su Kodi"
+
+msgctxt "#32118"
+msgid "Sync episode playback progress to Kodi"
+msgstr "Sincronizza avanzamento riproduzione episodi su Kodi"
+
+msgctxt "#32119"
+msgid "Retrieving episode playback progress from Trakt"
+msgstr "Recupero dell'avanzamento riproduzione degli episodi da Trakt"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Pin non corretto"

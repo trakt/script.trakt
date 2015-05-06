@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -19,14 +19,6 @@ msgstr ""
 msgctxt "#32000"
 msgid "General"
 msgstr "பொதுவானது"
-
-msgctxt "#32001"
-msgid "Username"
-msgstr "பயனர்பெயர்"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "அடையாளச் சொல்"
 
 msgctxt "#32004"
 msgid "Rating"
@@ -47,3 +39,7 @@ msgstr "திரைப்படங்கள்"
 msgctxt "#32054"
 msgid "Service"
 msgstr "சேவை"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "தவறான PIN"

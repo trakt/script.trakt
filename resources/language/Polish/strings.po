@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -20,17 +20,9 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Ogólne"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Użytkownik"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Hasło"
-
 msgctxt "#32003"
 msgid "Startup Delay"
-msgstr "Opóźnienie uruchomienia"
+msgstr "Opóźniaj uruchomienie (w sekundach)"
 
 msgctxt "#32004"
 msgid "Rating"
@@ -42,7 +34,7 @@ msgstr "Oceniaj film po obejrzeniu"
 
 msgctxt "#32006"
 msgid "Rate TV show Episode after watching"
-msgstr "Oceniaj odcinek serialu po obejrzeniu"
+msgstr "Oceniaj odcinek po obejrzeniu"
 
 msgctxt "#32007"
 msgid "Rate each playlist item"
@@ -70,7 +62,7 @@ msgstr "Rejestruj odtwarzanie filmów"
 
 msgctxt "#32013"
 msgid "Scrobble TV show episodes"
-msgstr "Rejestruj odtwarzanie odcinków serialu"
+msgstr "Rejestruj odtwarzanie odcinków"
 
 msgctxt "#32014"
 msgid "Show notification on scrobble"
@@ -82,7 +74,7 @@ msgstr "Trakt - Rejestracja odtwarzania zakończona powodzeniem"
 
 msgctxt "#32016"
 msgid "Exclusions"
-msgstr "Wykluczenia"
+msgstr "Ograniczenia"
 
 msgctxt "#32017"
 msgid "Exclude Live TV"
@@ -100,14 +92,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "Ścieżka folderu (z podfolderami)"
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr "Wprowadź nazwę użytkownika i hasło w ustawieniach"
-
-msgctxt "#32022"
-msgid "Enter your Password in settings"
-msgstr "Wprowadź hasło użytkownika w ustawieniach"
-
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr "Nieudane połączenie z serwisem Trakt"
@@ -115,10 +99,6 @@ msgstr "Nieudane połączenie z serwisem Trakt"
 msgctxt "#32024"
 msgid "Error"
 msgstr "Błąd"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "Niepoprawny użytkownik lub hasło"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -210,7 +190,7 @@ msgstr "Dodawaj nowe filmy do kolekcji Trakt"
 
 msgctxt "#32048"
 msgid "Add watched movies to Trakt history"
-msgstr "Dodawaj obejrzane filmy do kolekcji Trakt"
+msgstr "Dodawaj obejrzane filmy do historii Trakt"
 
 msgctxt "#32049"
 msgid "Mark movies from Trakt history as watched in Kodi"
@@ -222,15 +202,15 @@ msgstr "Odcinki"
 
 msgctxt "#32051"
 msgid "Add new TV episodes to Trakt collection"
-msgstr "Dodawaj nowe odcinki seriali do kolekcji Trakt"
+msgstr "Dodawaj nowe odcinki do kolekcji Trakt"
 
 msgctxt "#32052"
 msgid "Add watched TV episodes to Trakt history"
-msgstr "Dodawaj obejrzane odcinki seriali do kolekcji Trakt"
+msgstr "Dodawaj obejrzane odcinki do historii Trakt"
 
 msgctxt "#32053"
 msgid "Mark TV episodes from Trakt history as watched in Kodi"
-msgstr "Oznaczaj odcinki seriali z historii Trakt jako obejrzane w bibliotece Kodi"
+msgstr "Oznaczaj odcinki z historii Trakt jako obejrzane w bibliotece Kodi"
 
 msgctxt "#32054"
 msgid "Service"
@@ -350,7 +330,7 @@ msgstr "Pobieranie obejrzanych filmów z serwisu Trakt"
 
 msgctxt "#32083"
 msgid "Retrieved movie data from Trakt"
-msgstr "Pobieranie danych filmu z serwisu Trakt"
+msgstr "Pobierano dane filmu z serwisu Trakt"
 
 msgctxt "#32084"
 msgid "Trakt movie collection is up to date, no movies to add"
@@ -454,7 +434,7 @@ msgstr "Aktualizowanie liczb odtworzeń %i / %i odcinka(ów) w bibliotece Kodi"
 
 msgctxt "#32109"
 msgid "Playcounts updated for %i show(s) in Kodi"
-msgstr "Zaktualizowano liczbę odtworzeń dla %i serialu(i) w bibliotece Kodi"
+msgstr "Zaktualizowano liczbę odtworzeń dla %i odcinka(ów) w bibliotece Kodi"
 
 msgctxt "#32110"
 msgid "Trakt episode collection is clean, no episodes to remove"
@@ -478,8 +458,136 @@ msgstr "Trakt - Nieudane oznaczenie jako obejrzane"
 
 msgctxt "#32115"
 msgid "%d episode(s) of '%s'"
-msgstr "%d odcinek(ów) / '%s'"
+msgstr "%d odcinek(ów) z '%s'"
 
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "Uruchom tryb diagnostyki"
+
+msgctxt "#32117"
+msgid "Sync movie playback progress to Kodi"
+msgstr "Synchronizuj postęp odtwarzania filmu z Kodi"
+
+msgctxt "#32118"
+msgid "Sync episode playback progress to Kodi"
+msgstr "Synchronizuj postęp odtwarzania odcinka z Kodi"
+
+msgctxt "#32119"
+msgid "Retrieving episode playback progress from Trakt"
+msgstr "Pobieranie postępu odtwarzania odcinka z serwisu Trakt"
+
+msgctxt "#32120"
+msgid "Parsing episode playback progress %i of %i from Trakt"
+msgstr "Przetwarzanie postępu odtwarzania odcinka %i / %i z serwisu Trakt"
+
+msgctxt "#32121"
+msgid "Retrieved episode playback progress from Trakt"
+msgstr "Pobrano postęp odtwarzania odcinka z serwisu Trakt"
+
+msgctxt "#32122"
+msgid "Retrieving movie playback progress from Trakt"
+msgstr "Pobieranie postępu odtwarzania filmu z serwisu Trakt"
+
+msgctxt "#32123"
+msgid "Parsing movie playback progress %i of %i from Trakt"
+msgstr "Przetwarzanie postępu odtwarzania filmu %i / %i z serwisu Trakt"
+
+msgctxt "#32124"
+msgid "Retrieved movie playback progress from Trakt"
+msgstr "Pobrano postęp odtwarzania filmu z serwisu Trakt"
+
+msgctxt "#32125"
+msgid "Kodi movie playback progress is up to date"
+msgstr "Postęp odtwarzania filmu w bibliotece Kodi jest aktualny"
+
+msgctxt "#32126"
+msgid "%i movie(s) playback progress will be updated in Kodi"
+msgstr "Postęp odtwarzania %i filmu(ów) zostanie zaktualizowany w bibliotece Kodi"
+
+msgctxt "#32127"
+msgid "Updating %i of %i movie(s) playback progress in Kodi"
+msgstr "Aktualizowanie postępu odtwarzania %i / %i filmu(ów) w bibliotece Kodi"
+
+msgctxt "#32128"
+msgid "Playback progress updated for %i movie(s) in Kodi"
+msgstr "Zaktualizowano postęp odtwarzania dla %i filmu(ów) w bibliotece Kodi"
+
+msgctxt "#32129"
+msgid "Kodi episode playback progress is up to date"
+msgstr "Postęp odtwarzania odcinka w bibliotece Kodi jest aktualny"
+
+msgctxt "#32130"
+msgid "Updating %i of %i episode(s) playback progress in Kodi"
+msgstr "Aktualizowanie postępu odtwarzania %i / %i odcinka(ów) w bibliotece Kodi"
+
+msgctxt "#32131"
+msgid "Playback progress updated for %i episode(s) in Kodi"
+msgstr "Zaktualizowano postęp odtwarzania dla %i odcinka(ów) w bibliotece Kodi"
+
+msgctxt "#32132"
+msgid "Unrate this season"
+msgstr "Usuń ocenę tego sezonu"
+
+msgctxt "#32133"
+msgid "Manage Movie's Lists"
+msgstr "Zarządzaj listami filmów"
+
+msgctxt "#32134"
+msgid "Manage Show's Lists"
+msgstr "Zarządzaj listami seriali"
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr "Usuń z listy Do obejrzenia"
+
+msgctxt "#32136"
+msgid "Add to Watchlist"
+msgstr "Dodaj do listy Do obejrzenia"
+
+msgctxt "#32137"
+msgid "Rate this Movie"
+msgstr "Oceń ten film"
+
+msgctxt "#32138"
+msgid "Rate this Show"
+msgstr "Oceń ten serial"
+
+msgctxt "#32139"
+msgid "Rate this Episode"
+msgstr "Oceń ten odcinek"
+
+msgctxt "#32140"
+msgid "Toggle Watched"
+msgstr "Przełącz stan obejrzenia"
+
+msgctxt "#32141"
+msgid "Manage All Lists"
+msgstr "Zarządzaj wszystkimi listai"
+
+msgctxt "#32142"
+msgid "Update All Tags"
+msgstr "Aktualizuj wszystkie znaczniki"
+
+msgctxt "#32143"
+msgid "Synchronize Library"
+msgstr "Synchronizuj bibliotekę"
+
+msgctxt "#32144"
+msgid "Where can I find my PIN?"
+msgstr "Gdzie mogę znaleźć swój kod PIN?"
+
+msgctxt "#32145"
+msgid "PIN"
+msgstr "Kod PIN"
+
+msgctxt "#32146"
+msgid "Please enter your PIN in settings"
+msgstr "Wprowadź swój kod PIN w ustawieniach"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Niepoprawny PIN"
+
+msgctxt "#32148"
+msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
+msgstr "Zeskanuj kod QR lub odwiedź stronę http://trakt.tv/pin/999, aby uzyskać swój osobisty kod PIN"

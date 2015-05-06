@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -19,14 +19,6 @@ msgstr ""
 msgctxt "#32000"
 msgid "General"
 msgstr "일반"
-
-msgctxt "#32001"
-msgid "Username"
-msgstr "사용자명"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "비밀번호"
 
 msgctxt "#32003"
 msgid "Startup Delay"
@@ -100,14 +92,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "폴더 경로 (하위 폴더 포함됨)"
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr "설정에서 사용자 이름과 비밀번호를 입력하세요"
-
-msgctxt "#32022"
-msgid "Enter your Password in settings"
-msgstr "설정에서 비밀번호를 입력하세요"
-
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr "Trakt에 접속할 수 없음"
@@ -115,10 +99,6 @@ msgstr "Trakt에 접속할 수 없음"
 msgctxt "#32024"
 msgid "Error"
 msgstr "오류"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "사용자 이름 또는 비밀번호가 일치하지 않음"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -483,3 +463,127 @@ msgstr "'%s'의 %d 에피소드 "
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "디버그 모드 사용"
+
+msgctxt "#32117"
+msgid "Sync movie playback progress to Kodi"
+msgstr "영화 재생 진행 상태를 Kodi로 동기화"
+
+msgctxt "#32118"
+msgid "Sync episode playback progress to Kodi"
+msgstr "에피소드 재생 진행 상태를 Kodi로 싱크"
+
+msgctxt "#32119"
+msgid "Retrieving episode playback progress from Trakt"
+msgstr "trakt의 에피소드 재생 진행 상태 가져오는 중"
+
+msgctxt "#32120"
+msgid "Parsing episode playback progress %i of %i from Trakt"
+msgstr "trakt의 에피소드 재생 진생 상태 분석 중 (%i / %i)"
+
+msgctxt "#32121"
+msgid "Retrieved episode playback progress from Trakt"
+msgstr "trakt에서 에피소드 재생  진행 상태를 가져왔습니다"
+
+msgctxt "#32122"
+msgid "Retrieving movie playback progress from Trakt"
+msgstr "trakt에서 영화 재생 진행 상태를 가져오는 중"
+
+msgctxt "#32123"
+msgid "Parsing movie playback progress %i of %i from Trakt"
+msgstr "trakt의 영화 재생 진생 상태 분석 중 (%i / %i)"
+
+msgctxt "#32124"
+msgid "Retrieved movie playback progress from Trakt"
+msgstr "trakt에서 영화 재생  진행 상태를 가져왔습니다"
+
+msgctxt "#32125"
+msgid "Kodi movie playback progress is up to date"
+msgstr "Kodi의 영화 재생 정보가 최신 상태입니다"
+
+msgctxt "#32126"
+msgid "%i movie(s) playback progress will be updated in Kodi"
+msgstr "%i 영화의 재생 정보가 Kodi에 업데이트 됩니다"
+
+msgctxt "#32127"
+msgid "Updating %i of %i movie(s) playback progress in Kodi"
+msgstr "Kodi의 영화 재생 정보 업데이트 중 (%i / %i)"
+
+msgctxt "#32128"
+msgid "Playback progress updated for %i movie(s) in Kodi"
+msgstr "%i 영화의 재생 정보가 Kodi에 업데이트 되었습니다"
+
+msgctxt "#32129"
+msgid "Kodi episode playback progress is up to date"
+msgstr "Koid의 에피소드 재생 정보가 최신 상태입니다"
+
+msgctxt "#32130"
+msgid "Updating %i of %i episode(s) playback progress in Kodi"
+msgstr "Kodi의 에피소드 재생 정보 업데이트 중 (%i / %i)"
+
+msgctxt "#32131"
+msgid "Playback progress updated for %i episode(s) in Kodi"
+msgstr "%i 쇼의 재생 정보가 Kodi에 업데이트 되었습니다"
+
+msgctxt "#32132"
+msgid "Unrate this season"
+msgstr "이 시즌 평가 한 함"
+
+msgctxt "#32133"
+msgid "Manage Movie's Lists"
+msgstr "영화 목록 관리"
+
+msgctxt "#32134"
+msgid "Manage Show's Lists"
+msgstr "TV 쇼 목록 관리"
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr "Watchlist에서 제거"
+
+msgctxt "#32136"
+msgid "Add to Watchlist"
+msgstr "Watchlist에 추가"
+
+msgctxt "#32137"
+msgid "Rate this Movie"
+msgstr "이 영화 평가"
+
+msgctxt "#32138"
+msgid "Rate this Show"
+msgstr "이 TV 쇼 평가"
+
+msgctxt "#32139"
+msgid "Rate this Episode"
+msgstr "이 에피소드 평가"
+
+msgctxt "#32140"
+msgid "Toggle Watched"
+msgstr "시청/미시청 전환"
+
+msgctxt "#32141"
+msgid "Manage All Lists"
+msgstr "모든 목록 관리"
+
+msgctxt "#32142"
+msgid "Update All Tags"
+msgstr "모든 태그 업데이트"
+
+msgctxt "#32143"
+msgid "Synchronize Library"
+msgstr "라이브러리 동기화"
+
+msgctxt "#32144"
+msgid "Where can I find my PIN?"
+msgstr "PIN 확인 방법"
+
+msgctxt "#32145"
+msgid "PIN"
+msgstr "PIN"
+
+msgctxt "#32146"
+msgid "Please enter your PIN in settings"
+msgstr "설정에서 PIN을 입력하세요"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "비밀번호 틀림"

@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -19,14 +19,6 @@ msgstr ""
 msgctxt "#32000"
 msgid "General"
 msgstr "Generelt"
-
-msgctxt "#32001"
-msgid "Username"
-msgstr "Brukernavn"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Passord"
 
 msgctxt "#32003"
 msgid "Startup Delay"
@@ -100,14 +92,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "Mappens sti (inkludert undermapper)"
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr "Skriv inn brukernavn og Passord i innstillingene"
-
-msgctxt "#32022"
-msgid "Enter your Password in settings"
-msgstr "Skriv inn passord i innstillingene"
-
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr "Kunne ikke koble til Trakt"
@@ -115,10 +99,6 @@ msgstr "Kunne ikke koble til Trakt"
 msgctxt "#32024"
 msgid "Error"
 msgstr "Feil"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "Feil brukernavn eller passord"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -483,3 +463,7 @@ msgstr "%d episode(r) av '%s'"
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "Aktiver feilsøkingsmodus"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Feil PIN"

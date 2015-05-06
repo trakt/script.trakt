@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: trakt
+# Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: trakt.tv
+# Addon Provider: Trakt.tv
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -19,14 +19,6 @@ msgstr ""
 msgctxt "#32000"
 msgid "General"
 msgstr "General"
-
-msgctxt "#32001"
-msgid "Username"
-msgstr "Username"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Password"
 
 msgctxt "#32003"
 msgid "Startup Delay"
@@ -100,14 +92,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "Folder's path (including subfolders)"
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr "Enter your Username and Password in settings"
-
-msgctxt "#32022"
-msgid "Enter your Password in settings"
-msgstr "Enter your Password in settings"
-
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr "Can not connect to Trakt"
@@ -115,10 +99,6 @@ msgstr "Can not connect to Trakt"
 msgctxt "#32024"
 msgid "Error"
 msgstr "Error"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "Incorrect username or password"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -483,3 +463,131 @@ msgstr "%d episode(s) of '%s'"
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "Enable debug mode"
+
+msgctxt "#32117"
+msgid "Sync movie playback progress to Kodi"
+msgstr "Sync movie playback progress to Kodi"
+
+msgctxt "#32118"
+msgid "Sync episode playback progress to Kodi"
+msgstr "Sync episode playback progress to Kodi"
+
+msgctxt "#32119"
+msgid "Retrieving episode playback progress from Trakt"
+msgstr "Retrieving episode playback progress from Trakt"
+
+msgctxt "#32120"
+msgid "Parsing episode playback progress %i of %i from Trakt"
+msgstr "Parsing episode playback progress %i of %i from Trakt"
+
+msgctxt "#32121"
+msgid "Retrieved episode playback progress from Trakt"
+msgstr "Retrieved episode playback progress from Trakt"
+
+msgctxt "#32122"
+msgid "Retrieving movie playback progress from Trakt"
+msgstr "Retrieving movie playback progress from Trakt"
+
+msgctxt "#32123"
+msgid "Parsing movie playback progress %i of %i from Trakt"
+msgstr "Parsing movie playback progress %i of %i from Trakt"
+
+msgctxt "#32124"
+msgid "Retrieved movie playback progress from Trakt"
+msgstr "Retrieved movie playback progress from Trakt"
+
+msgctxt "#32125"
+msgid "Kodi movie playback progress is up to date"
+msgstr "Kodi movie playback progress is up to date"
+
+msgctxt "#32126"
+msgid "%i movie(s) playback progress will be updated in Kodi"
+msgstr "%i movie(s) playback progress will be updated in Kodi"
+
+msgctxt "#32127"
+msgid "Updating %i of %i movie(s) playback progress in Kodi"
+msgstr "Updating %i of %i movie(s) playback progress in Kodi"
+
+msgctxt "#32128"
+msgid "Playback progress updated for %i movie(s) in Kodi"
+msgstr "Playback progress updated for %i movie(s) in Kodi"
+
+msgctxt "#32129"
+msgid "Kodi episode playback progress is up to date"
+msgstr "Kodi episode playback progress is up to date"
+
+msgctxt "#32130"
+msgid "Updating %i of %i episode(s) playback progress in Kodi"
+msgstr "Updating %i of %i episode(s) playback progress in Kodi"
+
+msgctxt "#32131"
+msgid "Playback progress updated for %i episode(s) in Kodi"
+msgstr "Playback progress updated for %i episode(s) in Kodi"
+
+msgctxt "#32132"
+msgid "Unrate this season"
+msgstr "Unrate this season"
+
+msgctxt "#32133"
+msgid "Manage Movie's Lists"
+msgstr "Manage Movie's Lists"
+
+msgctxt "#32134"
+msgid "Manage Show's Lists"
+msgstr "Manage Show's Lists"
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr "Remove from Watchlist"
+
+msgctxt "#32136"
+msgid "Add to Watchlist"
+msgstr "Add to Watchlist"
+
+msgctxt "#32137"
+msgid "Rate this Movie"
+msgstr "Rate this Movie"
+
+msgctxt "#32138"
+msgid "Rate this Show"
+msgstr "Rate this Show"
+
+msgctxt "#32139"
+msgid "Rate this Episode"
+msgstr "Rate this Episode"
+
+msgctxt "#32140"
+msgid "Toggle Watched"
+msgstr "Toggle Watched"
+
+msgctxt "#32141"
+msgid "Manage All Lists"
+msgstr "Manage All Lists"
+
+msgctxt "#32142"
+msgid "Update All Tags"
+msgstr "Update All Tags"
+
+msgctxt "#32143"
+msgid "Synchronize Library"
+msgstr "Synchronize Library"
+
+msgctxt "#32144"
+msgid "Where can I find my PIN?"
+msgstr "Where can I find my PIN?"
+
+msgctxt "#32145"
+msgid "PIN"
+msgstr "PIN"
+
+msgctxt "#32146"
+msgid "Please enter your PIN in settings"
+msgstr "Please enter your PIN in settings"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Incorrect PIN"
+
+msgctxt "#32148"
+msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
+msgstr "Scan the QR code or visit http://trakt.tv/pin/999 for your own personal PIN"
