@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Pagrindinis"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Vartotojo vardas"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Slaptažodis"
-
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "Paleidimo uždelsimas"
@@ -100,14 +92,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "Aplanko kelias (įskaitant poaplankius)"
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr "Įveskite vartotojo vardą ir slaptažodį nustatymuose"
-
-msgctxt "#32022"
-msgid "Enter your Password in settings"
-msgstr "Įveskite slaptažodį nustatymuose"
-
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr "Neįmanoma prisijungti prie Trakt.tv"
@@ -115,10 +99,6 @@ msgstr "Neįmanoma prisijungti prie Trakt.tv"
 msgctxt "#32024"
 msgid "Error"
 msgstr "Klaida"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "Klaidingas vartotojo vardas arba slaptažodis"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -543,3 +523,71 @@ msgstr "Atnaujinamas atkūrimo progresas %i iš %i epizodų Kodi bibliotekoje"
 msgctxt "#32131"
 msgid "Playback progress updated for %i episode(s) in Kodi"
 msgstr "Laidų, kurioms atnaujintas atkūrimo progresas Kodi bibliotekoje: %i"
+
+msgctxt "#32132"
+msgid "Unrate this season"
+msgstr "Atšaukti šio sezono įvertinimą"
+
+msgctxt "#32133"
+msgid "Manage Movie's Lists"
+msgstr "Tvarkyti filmų sąrašus"
+
+msgctxt "#32134"
+msgid "Manage Show's Lists"
+msgstr "Tvarkyti TV laidų sąrašus"
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr "Pašalinti iš peržiūros sąrašo"
+
+msgctxt "#32136"
+msgid "Add to Watchlist"
+msgstr "Pridėti į peržiūros sąrašą"
+
+msgctxt "#32137"
+msgid "Rate this Movie"
+msgstr "Įvertinti šį filmą"
+
+msgctxt "#32138"
+msgid "Rate this Show"
+msgstr "Įvertinti šia laidą"
+
+msgctxt "#32139"
+msgid "Rate this Episode"
+msgstr "Įvertinti šį epizodą"
+
+msgctxt "#32140"
+msgid "Toggle Watched"
+msgstr "Perjungti peržiūrėjimo būseną"
+
+msgctxt "#32141"
+msgid "Manage All Lists"
+msgstr "Tvarkyti visus sąrašus"
+
+msgctxt "#32142"
+msgid "Update All Tags"
+msgstr "Atnaujinti visas žymas"
+
+msgctxt "#32143"
+msgid "Synchronize Library"
+msgstr "Sinchronizuoti biblioteką"
+
+msgctxt "#32144"
+msgid "Where can I find my PIN?"
+msgstr "Kur galiu rasti savo PIN kodą?"
+
+msgctxt "#32145"
+msgid "PIN"
+msgstr "PIN"
+
+msgctxt "#32146"
+msgid "Please enter your PIN in settings"
+msgstr "Įveskite savo PIN kodą nustatymuose"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Klaidingas PIN"
+
+msgctxt "#32148"
+msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
+msgstr "Nuskaityti QR kodą arba apsilankyti http://trakt.tv/pin/999, norėdami gauti asmeninį PIN kodą"

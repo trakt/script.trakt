@@ -22,6 +22,8 @@ msgctxt "#32000"
 msgid "General"
 msgstr ""
 
+#empty strings from id 32001 to 32002
+
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr ""
@@ -96,6 +98,8 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr ""
 
+#empty strings from id 32021 to 32022
+
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr ""
@@ -103,6 +107,8 @@ msgstr ""
 msgctxt "#32024"
 msgid "Error"
 msgstr ""
+
+#empty string with id 32025
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -530,7 +536,7 @@ msgstr ""
 
 msgctxt "#32132"
 msgid "Unrate this season"
-msgstr "Unrate this season"
+msgstr ""
 
 msgctxt "#32133"
 msgid "Manage Movie's Lists"

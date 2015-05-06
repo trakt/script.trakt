@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "ทั่วไป"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "ชื่อผู้ใช้"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "รหัสผ่าน"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "เรตติ้ง"
@@ -47,3 +39,7 @@ msgstr "ภาพยนตร์"
 msgctxt "#32054"
 msgid "Service"
 msgstr "บริการ"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "PIN ไม่ถูกต้อง"

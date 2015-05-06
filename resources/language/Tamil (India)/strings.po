@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "பொதுவானது"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "பயனர்பெயர்"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "அடையாளச் சொல்"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "மதிப்பீடு"
@@ -47,3 +39,7 @@ msgstr "திரைப்படங்கள்"
 msgctxt "#32054"
 msgid "Service"
 msgstr "சேவை"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "தவறான PIN"

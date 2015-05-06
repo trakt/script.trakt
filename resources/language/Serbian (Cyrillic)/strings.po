@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Опште"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Корисничко име"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Лозинка"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Оцена"

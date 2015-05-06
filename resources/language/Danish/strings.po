@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Generelt"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Brugernavn"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Adgangskode"
-
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "Forsinket start"
@@ -100,14 +92,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "Mappe-stier (inklusiv undermapper)"
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr "Indtast dit brugernavn og password under indstillinger"
-
-msgctxt "#32022"
-msgid "Enter your Password in settings"
-msgstr "Indtast password under indstillinger"
-
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr "Kan ikke forbinde til Trakt"
@@ -115,10 +99,6 @@ msgstr "Kan ikke forbinde til Trakt"
 msgctxt "#32024"
 msgid "Error"
 msgstr "Fejl"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "Forkert brugernavn eller password"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -483,3 +463,7 @@ msgstr "%d afsnit af '%s'"
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "Slå fejlfinding til"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Forkert PIN"

@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Allmänt"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Användarnamn"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Lösenord"
-
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "Uppstartsfördröjning"
@@ -100,14 +92,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "Sökväg till katalog (inklusive underkataloger)"
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr "Ange användarnamn och lösenord i inställningar"
-
-msgctxt "#32022"
-msgid "Enter your Password in settings"
-msgstr "Ange ditt lösenord i inställningar"
-
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr "Kan inte ansluta till Trakt"
@@ -115,10 +99,6 @@ msgstr "Kan inte ansluta till Trakt"
 msgctxt "#32024"
 msgid "Error"
 msgstr "Fel"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "Felaktigt användarnamn eller lösenord"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -543,3 +523,71 @@ msgstr "Uppdaterar uppspelningsförlopp för %i av %i avsnitt i Kodi"
 msgctxt "#32131"
 msgid "Playback progress updated for %i episode(s) in Kodi"
 msgstr "Uppspelningsförlopp för %i avsnitt uppdaterat i Kodi"
+
+msgctxt "#32132"
+msgid "Unrate this season"
+msgstr "Tag bort betyg för denna säsong"
+
+msgctxt "#32133"
+msgid "Manage Movie's Lists"
+msgstr "Hantera filmlistor"
+
+msgctxt "#32134"
+msgid "Manage Show's Lists"
+msgstr "Hantera serielistor"
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr "Tag bort från Watchlist"
+
+msgctxt "#32136"
+msgid "Add to Watchlist"
+msgstr "Lägg till Watchlist"
+
+msgctxt "#32137"
+msgid "Rate this Movie"
+msgstr "Betygsätt denna film"
+
+msgctxt "#32138"
+msgid "Rate this Show"
+msgstr "Betygsätt denna serie"
+
+msgctxt "#32139"
+msgid "Rate this Episode"
+msgstr "Betygsätt detta avsnitt"
+
+msgctxt "#32140"
+msgid "Toggle Watched"
+msgstr "Växla Watched status"
+
+msgctxt "#32141"
+msgid "Manage All Lists"
+msgstr "Hantera alla listor"
+
+msgctxt "#32142"
+msgid "Update All Tags"
+msgstr "Uppdatera alla taggar"
+
+msgctxt "#32143"
+msgid "Synchronize Library"
+msgstr "Synkronisera bibliotek"
+
+msgctxt "#32144"
+msgid "Where can I find my PIN?"
+msgstr "Var hittar jag min PIN?"
+
+msgctxt "#32145"
+msgid "PIN"
+msgstr "PIN"
+
+msgctxt "#32146"
+msgid "Please enter your PIN in settings"
+msgstr "Vänligen ange din PIN kod i inställningarna."
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Felaktig PIN"
+
+msgctxt "#32148"
+msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
+msgstr "Skanna QR koden eller besök http://trakt.tv/pin/999 för personlig PIN kod."

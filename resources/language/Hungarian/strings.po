@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Menük"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Felhasználónév"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Jelszó"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Korhatár"
@@ -47,3 +39,7 @@ msgstr "Filmek"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Szolgáltatás"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Hibás PIN kód"

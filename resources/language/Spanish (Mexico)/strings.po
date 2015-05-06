@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "General"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Usuario"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Contraseña"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Calificación"
@@ -47,3 +39,7 @@ msgstr "Películas"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Servicio"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "PIN Incorrecto"

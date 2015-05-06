@@ -20,10 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Գլխավոր"
 
-msgctxt "#32002"
-msgid "Password"
-msgstr "Գաղտնաբառ"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Գնահատական"

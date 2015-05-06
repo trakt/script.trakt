@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "כללי"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "שם משתמש"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "סיסמה"
-
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "השהיית הפעלה"
@@ -100,14 +92,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "נתיב תיקיה (כולל תת-תיקיות)"
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr "הזן את שם המשתמש וסיסמה שלך בהגדרות"
-
-msgctxt "#32022"
-msgid "Enter your Password in settings"
-msgstr "הזן את הסיסמה בהגדרות"
-
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr "אין אפשרות להתחבר אל Trakt"
@@ -115,10 +99,6 @@ msgstr "אין אפשרות להתחבר אל Trakt"
 msgctxt "#32024"
 msgid "Error"
 msgstr "שגיאה"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "שם משתמש או סיסמה שגויים"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -483,3 +463,7 @@ msgstr "%d פרק(ים) מתוך '%s'"
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "הפעל מצב ניפוי שגיאות"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "קוד שגוי"

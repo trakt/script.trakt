@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "常规"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "用户名"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "密码"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "评分"
@@ -47,3 +39,7 @@ msgstr "电影"
 msgctxt "#32054"
 msgid "Service"
 msgstr "服务"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "错误的 PIN"

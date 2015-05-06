@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Général"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Nom d'utilisateur"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Mot de passe"
-
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "Délai avant démarrage"
@@ -100,14 +92,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "Chemin de dossier (incluant les sous-dossiers)"
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr "Entrez votre Nom d'utilisateur et votre Mot de passe dans les paramètres"
-
-msgctxt "#32022"
-msgid "Enter your Password in settings"
-msgstr "Entrez votre Mot de passe dans les paramètres"
-
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr "Impossible de se connecter à Trakt"
@@ -115,10 +99,6 @@ msgstr "Impossible de se connecter à Trakt"
 msgctxt "#32024"
 msgid "Error"
 msgstr "Erreur"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "Nom d'utilisateur ou mot de passe incorrect"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -491,3 +471,123 @@ msgstr "Synchronisation de la progression de lecture des films vers Kodi"
 msgctxt "#32118"
 msgid "Sync episode playback progress to Kodi"
 msgstr "Synchronisation de la progression de lecture des épisodes vers Kodi"
+
+msgctxt "#32119"
+msgid "Retrieving episode playback progress from Trakt"
+msgstr "Obtention de la progression de lecture des épisodes de Trakt"
+
+msgctxt "#32120"
+msgid "Parsing episode playback progress %i of %i from Trakt"
+msgstr "Analyse de la progression de lecture de %i sur %i épisodes de Trakt"
+
+msgctxt "#32121"
+msgid "Retrieved episode playback progress from Trakt"
+msgstr "La progression de lecture des épisodes a été récupéré de Trakt"
+
+msgctxt "#32122"
+msgid "Retrieving movie playback progress from Trakt"
+msgstr "Obtention de la progression de lecture des films de Trakt"
+
+msgctxt "#32123"
+msgid "Parsing movie playback progress %i of %i from Trakt"
+msgstr "Analyse de la progression de lecture de %i sur %i films de Trakt"
+
+msgctxt "#32124"
+msgid "Retrieved movie playback progress from Trakt"
+msgstr "La progression de lecture des films a été récupéré de Trakt"
+
+msgctxt "#32125"
+msgid "Kodi movie playback progress is up to date"
+msgstr "Les progressions de lecture des films de Kodi sont à jour"
+
+msgctxt "#32126"
+msgid "%i movie(s) playback progress will be updated in Kodi"
+msgstr "La progression de lecture de %i film(s) sera mise à jour dans Kodi"
+
+msgctxt "#32127"
+msgid "Updating %i of %i movie(s) playback progress in Kodi"
+msgstr "Mise à jour de la progression de lecture de %i de %i film(s) dans Kodi"
+
+msgctxt "#32128"
+msgid "Playback progress updated for %i movie(s) in Kodi"
+msgstr "La progression de lecture de %i film(s) à été mis à jour dans Kodi"
+
+msgctxt "#32129"
+msgid "Kodi episode playback progress is up to date"
+msgstr "La progression de lecture des épisodes est à jour dans Kodi"
+
+msgctxt "#32130"
+msgid "Updating %i of %i episode(s) playback progress in Kodi"
+msgstr "Mise à jour de la progression de lecture pour %i de %i épisode(s) dans Kodi"
+
+msgctxt "#32131"
+msgid "Playback progress updated for %i episode(s) in Kodi"
+msgstr "La progression de lecture à été mise à jour pour %i épisodes(s) dans Kodi"
+
+msgctxt "#32132"
+msgid "Unrate this season"
+msgstr "Dénoter cette saison"
+
+msgctxt "#32133"
+msgid "Manage Movie's Lists"
+msgstr "Gérer les listes Films"
+
+msgctxt "#32134"
+msgid "Manage Show's Lists"
+msgstr "Gérer la liste des émissions"
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr "Retirer de la liste"
+
+msgctxt "#32136"
+msgid "Add to Watchlist"
+msgstr "Ajouter à la liste"
+
+msgctxt "#32137"
+msgid "Rate this Movie"
+msgstr "Noter ce film"
+
+msgctxt "#32138"
+msgid "Rate this Show"
+msgstr "Noter cette émission"
+
+msgctxt "#32139"
+msgid "Rate this Episode"
+msgstr "Noter cet épisode"
+
+msgctxt "#32140"
+msgid "Toggle Watched"
+msgstr "Inversé comme vu"
+
+msgctxt "#32141"
+msgid "Manage All Lists"
+msgstr "Gérer toutes les listes"
+
+msgctxt "#32142"
+msgid "Update All Tags"
+msgstr "Mettre à jour toutes mes étiquettes"
+
+msgctxt "#32143"
+msgid "Synchronize Library"
+msgstr "Synchroniser votre librairie"
+
+msgctxt "#32144"
+msgid "Where can I find my PIN?"
+msgstr "Où puis-je trouver mon PIN ?"
+
+msgctxt "#32145"
+msgid "PIN"
+msgstr "PIN"
+
+msgctxt "#32146"
+msgid "Please enter your PIN in settings"
+msgstr "Merci d'entrer votre PIN dans les réglages"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Code PIN Incorrect"
+
+msgctxt "#32148"
+msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
+msgstr "Scannez le code-barre ou visitez http://trakt.tv/pin/999 pour votre propre PIN"

@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "一般"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "ユーザー名"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "パスワード"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "評価"
@@ -47,3 +39,7 @@ msgstr "ムービー"
 msgctxt "#32054"
 msgid "Service"
 msgstr "サービス"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "暗証番号をエラー"

@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "一般設定"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "帳號"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "密碼"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "評分"
@@ -47,3 +39,7 @@ msgstr "影片"
 msgctxt "#32054"
 msgid "Service"
 msgstr "服務"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "錯誤的 PIN"

@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Algemeen"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Gebruikersnaam"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Wachtwoord"
-
 msgctxt "#32003"
 msgid "Startup Delay"
 msgstr "Startvertraging"
@@ -100,14 +92,6 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr "Maplocatie (inclusief onderliggende mappen)"
 
-msgctxt "#32021"
-msgid "Enter your Username and Password in settings"
-msgstr "Geef je gebruikersnaam en wachtwoord op bij de instellingen"
-
-msgctxt "#32022"
-msgid "Enter your Password in settings"
-msgstr "Voer je wachtwoord in bij de instellingen"
-
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
 msgstr "Kan geen verbinding maken met Trakt"
@@ -115,10 +99,6 @@ msgstr "Kan geen verbinding maken met Trakt"
 msgctxt "#32024"
 msgid "Error"
 msgstr "Fout"
-
-msgctxt "#32025"
-msgid "Incorrect username or password"
-msgstr "Verkeerde gebruikersnaam of wachtwoord"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -543,3 +523,7 @@ msgstr "Bijwerken %i van %i afleveringsvoortgang in Kodi"
 msgctxt "#32131"
 msgid "Playback progress updated for %i episode(s) in Kodi"
 msgstr "Afspeelvoortgang bijgewerkt voor %i aflevering(en) in Kodi"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Onjuiste PIN-code"

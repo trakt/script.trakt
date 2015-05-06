@@ -43,6 +43,8 @@ REGEX_EXPRESSIONS = ['[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
 
 REGEX_YEAR = '^(.+) \((\d{4})\)$'
 
+REGEX_URL = '(^https?://)(.+)'
+
 def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')):
     xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message, time, icon))
 
@@ -452,3 +454,25 @@ def createError(ex):
             "-->End of Python script error report<--"
             )
     return template.format(type(ex).__name__, ex.args, traceback.format_exc())
+
+def checkAndConfigureProxy():
+    proxyActive = kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.usehttpproxy"}, 'id': 1})['value']
+    proxyType = kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxytype"}, 'id': 1})['value']
+
+    if proxyActive and proxyType == 0: # PROXY_HTTP
+        proxyURL = kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxyserver"}, 'id': 1})['value']
+        proxyPort = unicode(kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxyport"}, 'id': 1})['value'])
+        proxyUsername = kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxyusername"}, 'id': 1})['value']
+        proxyPassword = kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxypassword"}, 'id': 1})['value']
+
+        if proxyUsername and proxyPassword and proxyURL and proxyPort:
+            regexUrl = re.compile(REGEX_URL)
+            matchURL = regexUrl.search(proxyURL)
+            if matchURL:
+                return matchURL.group(1) + proxyUsername + ':' + proxyPassword + '@' + matchURL.group(2) + ':' + proxyPort
+            else:
+                None
+        elif proxyURL and proxyPort:
+            return proxyURL + ':' + proxyPort
+    else:
+        return None

@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Splošno"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Uporabniško ime"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Geslo"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Ocena"
@@ -47,3 +39,7 @@ msgstr "Filmi"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Storitev"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Nepravilen PIN"

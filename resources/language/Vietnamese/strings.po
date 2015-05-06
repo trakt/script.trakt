@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Chung"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Tên truy nhập"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Mật khẩu"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Chấm điểm"
@@ -47,3 +39,7 @@ msgstr "Phim"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Dịch Vụ"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Sai mã PIN"

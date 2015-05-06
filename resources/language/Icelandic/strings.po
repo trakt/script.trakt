@@ -20,14 +20,6 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Almennt"
 
-msgctxt "#32001"
-msgid "Username"
-msgstr "Notandanafn"
-
-msgctxt "#32002"
-msgid "Password"
-msgstr "Lykilorð"
-
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Stjörnugjöf"
@@ -47,3 +39,7 @@ msgstr "Kvikmyndir"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Þjónusta"
+
+msgctxt "#32147"
+msgid "Incorrect PIN"
+msgstr "Rangt PIN"
