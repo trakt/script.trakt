@@ -218,7 +218,7 @@ class traktService:
                     if markedNotification:
                         utilities.notification(utilities.getString(32113), utilities.getString(32115) % (result['added']['episodes'], s))
                 else:
-                    utilities.notification(utilities.getString(32114))
+                    utilities.notification(utilities.getString(32114), s)
         elif utilities.isShow(media_type):
             summaryInfo = {'shows': [{'ids':utilities.parseIdToTraktIds(data['id'],media_type), 'seasons': []}]}
             if summaryInfo:
@@ -238,7 +238,7 @@ class traktService:
                         if markedNotification:
                             utilities.notification(utilities.getString(32113), utilities.getString(32115) % (result['added']['episodes'], s))
                     else:
-                        utilities.notification(utilities.getString(32114))
+                        utilities.notification(utilities.getString(32114), s)
 
     def doSync(self, manual=False, silent=False, library="all"):
         self.syncThread = syncThread(manual, silent, library)
