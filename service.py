@@ -137,15 +137,19 @@ class traktService:
 
         logger.debug("Getting data for manual %s of %s: imdb: |%s| dbid: |%s|" % (action, media_type, data.get('remoteid'), data.get('dbid')))
 
+        idDict, id_type = utilities.parseIdToTraktIds(str(data['imdbnumber']), media_type)
+
         if utilities.isEpisode(media_type):
             summaryInfo = globals.traktapi.getEpisodeSummary(data['imdbnumber'], data['season'], data['episode'])
-            userInfo = globals.traktapi.getEpisodeRatingForUser(data['imdbnumber'], data['season'], data['episode'], 'imdb')
+            userInfo = globals.traktapi.getEpisodeRatingForUser(data['imdbnumber'], data['season'], data['episode'], id_type)
         elif utilities.isSeason(media_type):
             summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
-            userInfo = globals.traktapi.getSeasonRatingForUser(data['imdbnumber'], data['season'], 'imdb')
+            userInfo = globals.traktapi.getSeasonRatingForUser(data['imdbnumber'], data['season'], id_type)
         elif utilities.isShow(media_type):
-            summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
-            userInfo = globals.traktapi.getShowRatingForUser(data['imdbnumber'], 'imdb')
+            imdb = dict(globals.traktapi.getIdLookup(data['imdbnumber'], id_type)[0].keys)['imdb']
+
+            summaryInfo = globals.traktapi.getShowSummary(imdb)
+            userInfo = globals.traktapi.getShowRatingForUser(data['imdbnumber'], id_type)
         elif utilities.isMovie(media_type):
             summaryInfo = globals.traktapi.getMovieSummary(data['imdbnumber'])
             userInfo = globals.traktapi.getMovieRatingForUser(data['imdbnumber'])
@@ -188,7 +192,7 @@ class traktService:
                     else:
                         utilities.notification(utilities.getString(32114), s)
         elif utilities.isEpisode(media_type):
-            summaryInfo = {'shows': [{'ids':{'tvdb': data['id']}, 'seasons': [{'number': data['season'], 'episodes': [{'number':data['number']}]}]}]}
+            summaryInfo = {'shows': [{'ids':utilities.parseIdToTraktIds(data['id'],media_type), 'seasons': [{'number': data['season'], 'episodes': [{'number':data['number']}]}]}]}
             logger.debug("doMarkWatched(): %s" % str(summaryInfo))
             s = utilities.getFormattedItemName(media_type, data)
 
@@ -199,7 +203,7 @@ class traktService:
             else:
                 utilities.notification(utilities.getString(32114), s)
         elif utilities.isSeason(media_type):
-            summaryInfo = {'shows': [{'ids':{'tvdb': data['id']}, 'seasons': [{'number': data['season'], 'episodes': []}]}]}
+            summaryInfo = {'shows': [{'ids':utilities.parseIdToTraktIds(data['id'],media_type), 'seasons': [{'number': data['season'], 'episodes': []}]}]}
             s = utilities.getFormattedItemName(media_type, data)
             for ep in data['episodes']:
                 summaryInfo['shows'][0]['seasons'][0]['episodes'].append({'number': ep})
@@ -216,7 +220,7 @@ class traktService:
                 else:
                     utilities.notification(utilities.getString(32114))
         elif utilities.isShow(media_type):
-            summaryInfo = {'shows': [{'ids':{'tvdb': data['id']}, 'seasons': []}]}
+            summaryInfo = {'shows': [{'ids':utilities.parseIdToTraktIds(data['id'],media_type), 'seasons': []}]}
             if summaryInfo:
                 s = utilities.getFormattedItemName(media_type, data)
                 logger.debug('data: %s' % data)

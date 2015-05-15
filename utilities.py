@@ -318,12 +318,8 @@ def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list, idType):
 
 def kodiRpcToTraktMediaObject(type, data, mode='collected'):
     if type == 'tvshow':
-        data['ids'] = {}
         id = data.pop('imdbnumber')
-        if id.startswith("tt"):
-            data['ids']['imdb'] = id
-        elif id.isdigit():
-            data['ids']['tvdb'] = id
+        data['ids'] = parseIdToTraktIds(id, type)
         del(data['label'])
         return data
     elif type == 'episode':
@@ -369,12 +365,8 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
             data['plays'] = data.pop('playcount')
         data['collected'] = 1  # this is in our kodi so it should be collected
         data['watched'] = 1 if data['plays'] > 0 else 0
-        data['ids'] = {}
         id = data.pop('imdbnumber')
-        if id.startswith("tt"):
-            data['ids']['imdb'] = id
-        elif id.isdigit():
-            data['ids']['tmdb'] = id
+        data['ids'] = parseIdToTraktIds(id, type)
         del(data['label'])
         return data
     else:
@@ -476,3 +468,17 @@ def checkAndConfigureProxy():
             return proxyURL + ':' + proxyPort
     else:
         return None
+
+def parseIdToTraktIds(id, type):
+    data = {}
+    id_type = ''
+    if id.startswith("tt"):
+        data['imdb'] = id
+        id_type = 'imdb'
+    elif id.isdigit() and isMovie(type):
+        data['tmdb'] = id
+        id_type = 'tmdb'
+    elif id.isdigit():
+        data['tvdb'] = id
+        id_type = 'tvdb'
+    return data, id_type
