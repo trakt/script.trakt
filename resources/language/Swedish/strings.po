@@ -524,6 +524,50 @@ msgctxt "#32131"
 msgid "Playback progress updated for %i episode(s) in Kodi"
 msgstr "Uppspelningsförlopp för %i avsnitt uppdaterat i Kodi"
 
+msgctxt "#32132"
+msgid "Unrate this season"
+msgstr "Tag bort betyg för denna säsong"
+
+msgctxt "#32133"
+msgid "Manage Movie's Lists"
+msgstr "Hantera filmlistor"
+
+msgctxt "#32134"
+msgid "Manage Show's Lists"
+msgstr "Hantera serielistor"
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr "Tag bort från Watchlist"
+
+msgctxt "#32136"
+msgid "Add to Watchlist"
+msgstr "Lägg till Watchlist"
+
+msgctxt "#32137"
+msgid "Rate this Movie"
+msgstr "Betygsätt denna film"
+
+msgctxt "#32138"
+msgid "Rate this Show"
+msgstr "Betygsätt denna serie"
+
+msgctxt "#32139"
+msgid "Rate this Episode"
+msgstr "Betygsätt detta avsnitt"
+
+msgctxt "#32140"
+msgid "Toggle Watched"
+msgstr "Växla Watched status"
+
+msgctxt "#32141"
+msgid "Manage All Lists"
+msgstr "Hantera alla listor"
+
+msgctxt "#32142"
+msgid "Update All Tags"
+msgstr "Uppdatera alla taggar"
+
 msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "Synkronisera bibliotek"
@@ -536,6 +580,14 @@ msgctxt "#32145"
 msgid "PIN"
 msgstr "PIN"
 
+msgctxt "#32146"
+msgid "Please enter your PIN in settings"
+msgstr "Vänligen ange din PIN kod i inställningarna."
+
 msgctxt "#32147"
 msgid "Incorrect PIN"
 msgstr "Felaktig PIN"
+
+msgctxt "#32148"
+msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
+msgstr "Skanna QR koden eller besök http://trakt.tv/pin/999 för personlig PIN kod."

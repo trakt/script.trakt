@@ -601,3 +601,7 @@ msgstr ""
 msgctxt "#32148"
 msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
 msgstr ""
+
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr ""
