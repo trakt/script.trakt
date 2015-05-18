@@ -482,3 +482,15 @@ def parseIdToTraktIds(id, type):
         data['tvdb'] = id
         id_type = 'tvdb'
     return data, id_type
+
+def getMediaType():
+    if xbmc.getCondVisibility('Container.Content(tvshows)'):
+        return "show"
+    elif xbmc.getCondVisibility('Container.Content(seasons)'):
+        return "season"
+    elif xbmc.getCondVisibility('Container.Content(episodes)'):
+        return "episode"
+    elif xbmc.getCondVisibility('Container.Content(movies)'):
+        return "movie"
+    else:
+        return None
