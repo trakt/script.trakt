@@ -2,7 +2,6 @@
 #
 import xbmcaddon
 import logging
-import os
 from trakt import Trakt, ClientError, ServerError
 from trakt.objects import Movie, Show
 from utilities import getSetting, setSetting, findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, notification, getString, createError, checkAndConfigureProxy
