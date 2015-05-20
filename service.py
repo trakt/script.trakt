@@ -137,7 +137,7 @@ class traktService:
 
         logger.debug("Getting data for manual %s of %s: imdb: |%s| dbid: |%s|" % (action, media_type, data.get('remoteid'), data.get('dbid')))
 
-        idDict, id_type = utilities.parseIdToTraktIds(str(data['imdbnumber']), media_type)
+        _, id_type = utilities.parseIdToTraktIds(str(data['imdbnumber']), media_type)
 
         if utilities.isEpisode(media_type):
             summaryInfo = globals.traktapi.getEpisodeSummary(data['imdbnumber'], data['season'], data['episode'])
@@ -147,7 +147,6 @@ class traktService:
             userInfo = globals.traktapi.getSeasonRatingForUser(data['imdbnumber'], data['season'], id_type)
         elif utilities.isShow(media_type):
             imdb = dict(globals.traktapi.getIdLookup(data['imdbnumber'], id_type)[0].keys)['imdb']
-
             summaryInfo = globals.traktapi.getShowSummary(imdb)
             userInfo = globals.traktapi.getShowRatingForUser(data['imdbnumber'], id_type)
         elif utilities.isMovie(media_type):
