@@ -6,24 +6,10 @@ import sys
 import logging
 import xbmcgui
 import xbmcaddon
-from traktContextMenu import traktContextMenu
 
 logger = logging.getLogger(__name__)
 
 __addon__ = xbmcaddon.Addon("script.trakt")
-
-def __getMediaType():
-    
-    if xbmc.getCondVisibility('Container.Content(tvshows)'):
-        return "show"
-    elif xbmc.getCondVisibility('Container.Content(seasons)'):
-        return "season"
-    elif xbmc.getCondVisibility('Container.Content(episodes)'):
-        return "episode"
-    elif xbmc.getCondVisibility('Container.Content(movies)'):
-        return "movie"
-    else:
-        return None
 
 def __getArguments():
     data = None
@@ -108,7 +94,7 @@ def Main():
             except KeyError:
                 pass
         else:
-            media_type = __getMediaType()
+            media_type = utils.getMediaType()
             if not utils.isValidMediaType(media_type):
                 logger.debug("Error, not in video library.")
                 return
@@ -162,7 +148,7 @@ def Main():
             logger.debug("Manual %s of '%s' is unsupported." % (args['action'], media_type))
 
     elif args['action'] == 'togglewatched':
-        media_type = __getMediaType()
+        media_type = utils.getMediaType()
         if media_type in ['movie', 'show', 'season', 'episode']:
             data = {'media_type': media_type}
             if utils.isMovie(media_type):
