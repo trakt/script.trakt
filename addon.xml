@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.trakt" name="Trakt" version="3.0.1" provider-name="Trakt.tv">
+<addon id="script.trakt" name="Trakt" version="3.0.2-beta1" provider-name="Trakt.tv">
 	<requires>
-		<import addon="xbmc.python" version="2.20.0"/>
+		<import addon="xbmc.python" version="2.14.0"/>
 		<import addon="script.module.simplejson" version="3.3.0"/>
         <import addon="script.module.trakt" version="2.3.1"/>
         <import addon="script.module.dateutil" version="2.4.2"/>
@@ -10,18 +10,6 @@
 		<provides>executable</provides>
 	</extension>
 	<extension point="xbmc.service" name="trakt.service" library="default.py" start="login" />
-	<extension point="kodi.context.item" library="rateContextMenu.py">
-	  <item>
-		<label>32150</label>
-		<visible>StringCompare(ListItem.dbtype,movie) | StringCompare(ListItem.dbtype,tvshow) | StringCompare(ListItem.dbtype,season) | StringCompare(ListItem.dbtype,episode)</visible>
-	  </item>
-	</extension>
-	<extension point="kodi.context.item" library="toggleWatchedContextMenu.py">
-	  <item>
-		<label>32151</label>
-		<visible>StringCompare(ListItem.dbtype,movie) | StringCompare(ListItem.dbtype,tvshow) | StringCompare(ListItem.dbtype,season) | StringCompare(ListItem.dbtype,episode)</visible>
-	  </item>
-	</extension>
 	<extension point="xbmc.addon.metadata" name="trakt.metadata">
 		<summary lang="da">TV og film program for Trakt.tv</summary>
 		<summary lang="de">TV und Film Scrobbler für Trakt.tv</summary>
