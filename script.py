@@ -43,7 +43,7 @@ def Main():
 
     if args['action'] == 'contextmenu':
         buttons = []
-        media_type = __getMediaType()
+        media_type = utils.getMediaType()
 
         if media_type in ['movie', 'show', 'season', 'episode']:
             buttons.append("rate")
