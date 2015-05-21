@@ -605,11 +605,3 @@ msgstr ""
 msgctxt "#32149"
 msgid "Rate this Season"
 msgstr ""
-
-msgctxt "#32150"
-msgid "Trakt - Toggle Watched"
-msgstr ""
-
-msgctxt "#32151"
-msgid "Trakt - Rate"
-msgstr ""
