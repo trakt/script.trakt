@@ -524,6 +524,70 @@ msgctxt "#32131"
 msgid "Playback progress updated for %i episode(s) in Kodi"
 msgstr "Afspeelvoortgang bijgewerkt voor %i aflevering(en) in Kodi"
 
+msgctxt "#32132"
+msgid "Unrate this season"
+msgstr "Dewaardeer dit seizoen"
+
+msgctxt "#32133"
+msgid "Manage Movie's Lists"
+msgstr "Beheer films lijsten"
+
+msgctxt "#32134"
+msgid "Manage Show's Lists"
+msgstr "Beheer series lijsten"
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr "Verwijder van bekijklijst"
+
+msgctxt "#32136"
+msgid "Add to Watchlist"
+msgstr "Voeg toe aan bekijklijst"
+
+msgctxt "#32137"
+msgid "Rate this Movie"
+msgstr "Waardeer deze film"
+
+msgctxt "#32138"
+msgid "Rate this Show"
+msgstr "Waardeer deze serie"
+
+msgctxt "#32139"
+msgid "Rate this Episode"
+msgstr "Waardeer deze aflevering"
+
+msgctxt "#32140"
+msgid "Toggle Watched"
+msgstr "Toggle bekeken"
+
+msgctxt "#32141"
+msgid "Manage All Lists"
+msgstr "Beheer alle lijsten"
+
+msgctxt "#32142"
+msgid "Update All Tags"
+msgstr "Update alle Tags"
+
+msgctxt "#32143"
+msgid "Synchronize Library"
+msgstr "Synchroniseer bibliotheek"
+
+msgctxt "#32144"
+msgid "Where can I find my PIN?"
+msgstr "Waar kan ik mijn PIN vinden?"
+
+msgctxt "#32145"
+msgid "PIN"
+msgstr "PIN"
+
+msgctxt "#32146"
+msgid "Please enter your PIN in settings"
+msgstr "Voer jouw PIN in in instellingen"
+
 msgctxt "#32147"
 msgid "Incorrect PIN"
 msgstr "Onjuiste PIN-code"
+
+msgctxt "#32148"
+msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
+msgstr "Scan de QR code of bezoek http://trakt.tv/pin/999 voor jouw eigen personlijke PIN"

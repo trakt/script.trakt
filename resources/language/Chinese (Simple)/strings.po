@@ -24,6 +24,10 @@ msgctxt "#32004"
 msgid "Rating"
 msgstr "评分"
 
+msgctxt "#32005"
+msgid "Rate Movie after watching"
+msgstr "观看电影后评分"
+
 msgctxt "#32024"
 msgid "Error"
 msgstr "错误"
@@ -31,6 +35,10 @@ msgstr "错误"
 msgctxt "#32033"
 msgid "Fair"
 msgstr "晴"
+
+msgctxt "#32045"
+msgid "Synchronize"
+msgstr "同步"
 
 msgctxt "#32046"
 msgid "Movies"
