@@ -173,6 +173,20 @@ def getShowDetailsFromKodi(showID, fields):
         logger.debug("getShowDetailsFromKodi(): KeyError: result['tvshowdetails']")
         return None
 
+def getSeasonDetailsFromKodi(seasonID, fields):
+    result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetSeasonDetails', 'params': {'seasonid': seasonID, 'properties': fields}, 'id': 1})
+    logger.debug("getSeasonDetailsFromKodi(): %s" % str(result))
+
+    if not result:
+        logger.debug("getSeasonDetailsFromKodi(): Result from Kodi was empty.")
+        return None
+
+    try:
+        return result['seasondetails']
+    except KeyError:
+        logger.debug("getSeasonDetailsFromKodi(): KeyError: result['seasondetails']")
+        return None
+
 # get a single episode from kodi given the id
 def getEpisodeDetailsFromKodi(libraryId, fields):
     result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': libraryId, 'properties': fields}, 'id': 1})

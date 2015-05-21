@@ -135,23 +135,33 @@ class traktService:
             logger.debug("doManualRating(): Unknown action passed.")
             return
 
-        logger.debug("Getting data for manual %s of %s: imdb: |%s| dbid: |%s|" % (action, media_type, data.get('remoteid'), data.get('dbid')))
+        logger.debug("Getting data for manual %s of %s: video_id: |%s| dbid: |%s|" % (action, media_type, data.get('video_id'), data.get('dbid')))
 
-        _, id_type = utilities.parseIdToTraktIds(str(data['imdbnumber']), media_type)
+        _, id_type = utilities.parseIdToTraktIds(str(data['video_id']), media_type)
 
+        if not id_type:
+            logger.debug("doManualRating(): Unrecognized id_type: |%s|-|%s|." % (media_type, data['video_id']))
+            return
+            
+        ids = globals.traktapi.getIdLookup(data['video_id'], id_type)
+        
+        if not ids:
+            logger.debug("doManualRating(): No Results for: |%s|-|%s|." % (media_type, data['video_id']))
+            return
+            
+        trakt_id = dict(ids[0].keys)['trakt']
         if utilities.isEpisode(media_type):
-            summaryInfo = globals.traktapi.getEpisodeSummary(data['imdbnumber'], data['season'], data['episode'])
-            userInfo = globals.traktapi.getEpisodeRatingForUser(data['imdbnumber'], data['season'], data['episode'], id_type)
+            summaryInfo = globals.traktapi.getEpisodeSummary(trakt_id, data['season'], data['episode'])
+            userInfo = globals.traktapi.getEpisodeRatingForUser(trakt_id, data['season'], data['episode'], 'trakt')
         elif utilities.isSeason(media_type):
-            summaryInfo = globals.traktapi.getShowSummary(data['imdbnumber'])
-            userInfo = globals.traktapi.getSeasonRatingForUser(data['imdbnumber'], data['season'], id_type)
+            summaryInfo = globals.traktapi.getShowSummary(trakt_id)
+            userInfo = globals.traktapi.getSeasonRatingForUser(trakt_id, data['season'], 'trakt')
         elif utilities.isShow(media_type):
-            imdb = dict(globals.traktapi.getIdLookup(data['imdbnumber'], id_type)[0].keys)['imdb']
-            summaryInfo = globals.traktapi.getShowSummary(imdb)
-            userInfo = globals.traktapi.getShowRatingForUser(data['imdbnumber'], id_type)
+            summaryInfo = globals.traktapi.getShowSummary(trakt_id)
+            userInfo = globals.traktapi.getShowRatingForUser(trakt_id, 'trakt')
         elif utilities.isMovie(media_type):
-            summaryInfo = globals.traktapi.getMovieSummary(data['imdbnumber'])
-            userInfo = globals.traktapi.getMovieRatingForUser(data['imdbnumber'])
+            summaryInfo = globals.traktapi.getMovieSummary(trakt_id)
+            userInfo = globals.traktapi.getMovieRatingForUser(trakt_id, 'trakt')
 
         if summaryInfo is not None:
             summaryInfo = summaryInfo.to_dict()
