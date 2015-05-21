@@ -111,26 +111,36 @@ def Main():
                     if not result:
                         logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
                         return
-                    data['imdbnumber'] = result['imdbnumber']
 
-                elif utils.isShow(media_type) or utils.isSeason(media_type):
-                    result = utils.getShowDetailsFromKodi(data['dbid'], ['imdbnumber', 'tag'])
+                elif utils.isShow(media_type):
+                    tvshow_id = data['dbid']
+
+                elif utils.isSeason(media_type):
+                    result = utils.getSeasonDetailsFromKodi(data['dbid'], ['tvshowid', 'season'])
                     if not result:
                         logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
                         return
-                    data['imdbnumber'] = result['imdbnumber']
-                    data['tag'] = result['tag']
+                    tvshow_id = result['tvshowid']
+                    data['season'] = result['season']
 
                 elif utils.isEpisode(media_type):
-                    result = utils.getEpisodeDetailsFromKodi(data['dbid'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid', 'file', 'playcount'])
+                    result = utils.getEpisodeDetailsFromKodi(data['dbid'], ['season', 'episode', 'tvshowid'])
                     if not result:
                         logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
                         return
-                    data['imdbnumber'] = result['episodeid']
+                    tvshow_id = result['tvshowid']
                     data['season'] = result['season']
                     data['episode'] = result['episode']
+
+                if utils.isShow(media_type) or utils.isSeason(media_type) or utils.isEpisode(media_type):
+                    result = utils.getShowDetailsFromKodi(tvshow_id, ['imdbnumber'])
+                    if not result:
+                        logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
+                        return
+                    
+                data['video_id'] = result['imdbnumber']
             else:
-                data['imdbnumber'] = data['remoteid']
+                data['video_id'] = data['remoteid']
                 if 'season' in data and 'episode' in data:
                     logger.debug("Manual %s of non-library '%s' S%02dE%02d, with an ID of '%s'." % (args['action'], media_type, data['season'], data['episode'], data['remoteid']))
                 elif 'season' in data:
