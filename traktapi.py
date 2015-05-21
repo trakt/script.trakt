@@ -280,6 +280,6 @@ class traktAPI(object):
     def getIdLookup(self, id, id_type):
         with Trakt.configuration.http(retry=True):
             result = Trakt['search'].lookup(id, id_type)
-            if not isinstance(result, list):
+            if result and not isinstance(result, list):
                 result = [result]
             return result
