@@ -6,6 +6,7 @@ import sys
 import logging
 import xbmcgui
 import xbmcaddon
+from traktContextMenu import traktContextMenu
 
 logger = logging.getLogger(__name__)
 
