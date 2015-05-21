@@ -149,7 +149,19 @@ class Scrobbler():
 
             self.isPlaying = True
             self.isPaused = False
-            result = self.__scrobble('start')
+
+            if utilities.getSettingAsBool('scrobble_movie') or utilities.getSettingAsBool('scrobble_episode'):
+                result = self.__scrobble('start')
+            elif utilities.getSettingAsBool('rate_movie') and utilities.isMovie(self.curVideo['type']):
+                result = {'movie':self.traktapi.getMovieSummary(self.curVideoInfo['ids']['imdb']).to_dict()}
+            elif utilities.getSettingAsBool('rate_episode') and utilities.isEpisode(self.curVideo['type']):
+                data, id_type = utilities.parseIdToTraktIds(str(self.traktShowSummary['ids']['tvdb']), self.curVideo['type'])
+                ids = self.traktapi.getIdLookup(data[id_type], id_type)
+                trakt_id = dict(ids[0].keys)['trakt']
+                result = {'show': self.traktapi.getShowSummary(trakt_id).to_dict(),
+                          'episode': self.traktapi.getEpisodeSummary(trakt_id, self.curVideoInfo['season'],
+                                                                     self.curVideoInfo['number']).to_dict()}
+
             self.__preFetchUserRatings(result)
 
     def __preFetchUserRatings(self, result):

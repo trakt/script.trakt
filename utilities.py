@@ -333,7 +333,7 @@ def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list, idType):
 def kodiRpcToTraktMediaObject(type, data, mode='collected'):
     if type == 'tvshow':
         id = data.pop('imdbnumber')
-        data['ids'] = parseIdToTraktIds(id, type)
+        data['ids'], _ = parseIdToTraktIds(id, type)
         del(data['label'])
         return data
     elif type == 'episode':
@@ -380,7 +380,7 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
         data['collected'] = 1  # this is in our kodi so it should be collected
         data['watched'] = 1 if data['plays'] > 0 else 0
         id = data.pop('imdbnumber')
-        data['ids'] = parseIdToTraktIds(id, type)
+        data['ids'], _ = parseIdToTraktIds(id, type)
         del(data['label'])
         return data
     else:
@@ -492,7 +492,7 @@ def parseIdToTraktIds(id, type):
     elif id.isdigit() and isMovie(type):
         data['tmdb'] = id
         id_type = 'tmdb'
-    elif id.isdigit():
+    elif id.isdigit() and isEpisode(type):
         data['tvdb'] = id
         id_type = 'tvdb'
     return data, id_type
