@@ -603,5 +603,37 @@ msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal P
 msgstr ""
 
 msgctxt "#32149"
-msgid "Rate this Season"
+msgid "Account Authorization"
+msgstr ""
+
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr ""
+
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr ""
+
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr ""
+
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr ""
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr ""
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr ""
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr ""
+
+msgctxt "#32157"
+msgid "To authorize the trakt addon to access your trakt.tv account:[CR]1) Visit [COLOR skyblue]http://trakt.tv/pin/999[/COLOR] or scan the QR Code below.[CR]2) Authorize the trakt addon to access your account.[CR]3) Enter the PIN provided in the box below.[CR][CR]The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
 msgstr ""

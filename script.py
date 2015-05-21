@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import utilities as utils
+import gui_utils
 import xbmc
 import sqlitequeue
 import sys
@@ -33,14 +34,7 @@ def Main():
 
     if args['action'] == 'pin_info':
         xbmc.executebuiltin('Dialog.Close(all, true)')
-
-        pinInfo = xbmcgui.WindowXMLDialog(
-            "PinInfoWindow.xml",
-            __addon__.getAddonInfo('path')
-        )
-
-        pinInfo.doModal()
-        del pinInfo
+        gui_utils.get_pin()
 
     if args['action'] == 'contextmenu':
         buttons = []
