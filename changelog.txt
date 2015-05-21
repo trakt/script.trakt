@@ -1,4 +1,7 @@
 version 3.0.2
+  - created context menu addons for Kodi 15 (Isengard)
+  - various fixes for manual rating and watched
+  - fixed some notifications not causing errors
   - updated language files from Transifex
 
 version 3.0.1
