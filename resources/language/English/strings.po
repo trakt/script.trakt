@@ -603,7 +603,7 @@ msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal P
 msgstr ""
 
 msgctxt "#32149"
-msgid "Account Authorization"
+msgid "Rate this Season"
 msgstr ""
 
 msgctxt "#32150"
@@ -637,3 +637,8 @@ msgstr ""
 msgctxt "#32157"
 msgid "To authorize the trakt addon to access your trakt.tv account:[CR]1) Visit [COLOR skyblue]http://trakt.tv/pin/999[/COLOR] or scan the QR Code below.[CR]2) Authorize the trakt addon to access your account.[CR]3) Enter the PIN provided in the box below.[CR][CR]The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
 msgstr ""
+
+msgctxt "#32158"
+msgid "Account Authorization"
+msgstr ""
+

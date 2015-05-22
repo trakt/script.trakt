@@ -50,16 +50,16 @@ def get_pin():
             #print 'onClick: %s' % (control)
             if control == AUTH_BUTTON:
                 if not self.__get_token():
-                    notification(getString(32149), getString(32147), 5000)
+                    notification(getString(32158), getString(32147), 5000)
                     return
                 self.auth = True
 
             if control == LATER_BUTTON:
-                notification(getString(32149), getString(32150), 5000)
+                notification(getString(32158), getString(32150), 5000)
                 setSetting('last_reminder', str(int(time.time())))
 
             if control == NEVER_BUTTON:
-                notification(getString(32149), getString(32151), 5000)
+                notification(getString(32158), getString(32151), 5000)
                 setSetting('last_reminder', '-1')
 
             if control in [AUTH_BUTTON, LATER_BUTTON, NEVER_BUTTON]:
@@ -89,5 +89,5 @@ def get_pin():
     dialog = PinAuthDialog('TraktPinAuthDialog.xml', __addon__.getAddonInfo('path'))
     dialog.doModal()
     if dialog.auth:
-        notification(getString(32149), getString(32152), 3000)
+        notification(getString(32158), getString(32152), 3000)
     del dialog
