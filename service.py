@@ -11,6 +11,8 @@ from scrobbler import Scrobbler
 import sqlitequeue
 from sync import Sync
 import utilities
+import time
+import gui_utils
 
 logger = logging.getLogger(__name__)
 
@@ -101,6 +103,12 @@ class traktService:
 
         # start loop for events
         while not xbmc.abortRequested:
+            if not utilities.getSetting('authorization'):
+                last_reminder = utilities.getSettingAsInt('last_reminder')
+                now = int(time.time())
+                if last_reminder >= 0 and last_reminder < now - (24 * 60 * 60):
+                    gui_utils.get_pin()
+                
             while len(self.dispatchQueue) and (not xbmc.abortRequested):
                 data = self.dispatchQueue.get()
                 logger.debug("Queued dispatch: %s" % data)

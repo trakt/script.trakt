@@ -31,9 +31,7 @@ class traktAPI(object):
                 'http': proxyURL,
                 'https': proxyURL
             }
-
-        # Get user login data
-        self.__pin = getSetting('PIN')
+        
         if getSetting('authorization'):
             self.authorization = loads(getSetting('authorization'))
         else:
@@ -57,31 +55,25 @@ class traktAPI(object):
             refresh=True
         )
 
-        if not self.authorization:
-            self.authenticate()
+    def authenticate(self, pin=None):
+        # Attempt authentication (retrieve new token)
+        with Trakt.configuration.http(retry=True):
+            try:
+                # Exchange `code` for `access_token`
+                logger.debug("Exchanging pin for access token")
+                self.authorization = Trakt['oauth'].token_exchange(pin, 'urn:ietf:wg:oauth:2.0:oob')
 
-    def authenticate(self):
-        if not self.__pin:
-            notification('Trakt', getString(32146))  #PIN error
-        else:
-            # Attempt authentication (retrieve new token)
-            with Trakt.configuration.http(retry=True):
-                try:
-                    # Exchange `code` for `access_token`
-                    logger.debug("Exchanging pin for access token")
-                    self.authorization = Trakt['oauth'].token_exchange(self.__pin, 'urn:ietf:wg:oauth:2.0:oob')
-
-                    if not self.authorization:
-                        logger.debug("Authentication Failure")
-                        notification('Trakt', getString(32147))
-                    else:
-                        setSetting('authorization', dumps(self.authorization))
-                except Exception as ex:
-                    message = createError(ex)
-                    logger.fatal(message)
-                    logger.debug("Cannot connect to server")
-                    notification('Trakt', getString(32023))
-
+                if not self.authorization:
+                    logger.debug("Authentication Failure")
+                    return False
+                else:
+                    setSetting('authorization', dumps(self.authorization))
+                    return True
+            except Exception as ex:
+                message = createError(ex)
+                logger.fatal(message)
+                logger.debug("Cannot connect to server")
+                notification('Trakt', getString(32023))
 
     def on_token_refreshed(self, response):
         # OAuth token refreshed, save token for future calls
@@ -90,19 +82,15 @@ class traktAPI(object):
 
         logger.debug('Token refreshed')
 
-
     # helper for onSettingsChanged
     def updateSettings(self):
+        if getSetting('authorization'):
+            _auth = loads(getSetting('authorization'))
+        else:
+            _auth = {}
 
-        _pin = getSetting('PIN')
-
-        updated = False
-        if self.__pin != _pin:
-            self.__pin = _pin
-            updated = True
-
-        if updated:
-            self.authenticate()
+        if self.authorization != _auth:
+            self.authorization = _auth
 
     def scrobbleEpisode(self, show, episode, percent, status):
         result = None
