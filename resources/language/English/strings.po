@@ -586,6 +586,10 @@ msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
 msgstr ""
 
+msgctxt "#32147"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr ""
+
 msgctxt "#32149"
 msgid "Rate this Season"
 msgstr ""
