@@ -91,7 +91,11 @@ class traktAPI(object):
 
         if self.authorization != _auth:
             self.authorization = _auth
-            setSetting('user', self.getUser()['user']['username'])
+            user = self.getUser()
+            if user and 'user' in user:
+                setSetting('user', user['user']['username'])
+            else:
+                setSetting('user', '')
 
     def scrobbleEpisode(self, show, episode, percent, status):
         result = None
