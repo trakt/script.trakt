@@ -4,6 +4,7 @@ import os
 import xbmcaddon
 from utilities import notification, setSetting, getString
 import traktapi
+import logging
 
 __addon__ = xbmcaddon.Addon("script.trakt")
 
@@ -15,6 +16,8 @@ def get_pin():
     ACTION_BACK = 92
     CENTER_Y = 6
     CENTER_X = 2
+
+    logger = logging.getLogger(__name__)
     
     class PinAuthDialog(xbmcgui.WindowXMLDialog):
         auth = False
@@ -48,8 +51,10 @@ def get_pin():
 
         def onClick(self, control):
             #print 'onClick: %s' % (control)
+            logger.debug('onClick: %s' % (control))
             if control == AUTH_BUTTON:
                 if not self.__get_token():
+                    logger.debug("Authentification error")
                     notification(getString(32157), getString(32147), 5000)
                     return
                 self.auth = True

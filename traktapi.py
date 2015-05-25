@@ -91,6 +91,7 @@ class traktAPI(object):
 
         if self.authorization != _auth:
             self.authorization = _auth
+            setSetting('user', self.getUser()['user']['username'])
 
     def scrobbleEpisode(self, show, episode, percent, status):
         result = None
@@ -271,3 +272,9 @@ class traktAPI(object):
             if result and not isinstance(result, list):
                 result = [result]
             return result
+
+    def getUser(self):
+        with Trakt.configuration.oauth.from_response(self.authorization):
+            with Trakt.configuration.http(retry=True):
+                result = Trakt['users/settings'].get()
+                return result
