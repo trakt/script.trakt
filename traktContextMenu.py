@@ -35,6 +35,8 @@ class traktContextMenu(xbmcgui.WindowXMLDialog):
         rate_string = lang(32137)
         if utils.isShow(self.media_type):
             rate_string = lang(32138)
+        elif utils.isSeason(self.media_type):
+            rate_string = lang(32149)
         elif utils.isEpisode(self.media_type):
             rate_string = lang(32139)
 

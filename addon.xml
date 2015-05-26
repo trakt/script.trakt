@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.trakt" name="Trakt" version="3.0.1" provider-name="Trakt.tv">
+<addon id="script.trakt" name="Trakt" version="3.0.2~beta1" provider-name="Trakt.tv">
 	<requires>
-		<import addon="xbmc.python" version="2.1.0"/>
+		<import addon="xbmc.python" version="2.14.0"/>
 		<import addon="script.module.simplejson" version="3.3.0"/>
         <import addon="script.module.trakt" version="2.3.1"/>
         <import addon="script.module.dateutil" version="2.4.2"/>
@@ -17,6 +17,7 @@
 		<summary lang="en">TV and movie scrobbler for Trakt.tv</summary>
 		<summary lang="en_US">TV and movie scrobbler for Trakt.tv</summary>
 		<summary lang="es">Scrobbler de Películas y Series para Trakt.tv</summary>
+		<summary lang="fi">TV-sarjojen ja elokuvien scrobbler Trakt.tv:lle</summary>
 		<summary lang="fr">Scrobbler TV et film pour Trakt.tv</summary>
 		<summary lang="fr_CA">Scobbler télé et films pour Trakt.tv</summary>
 		<summary lang="he">Scrobbler סדרות וסרטים עבור Trakt.tv</summary>

@@ -173,6 +173,20 @@ def getShowDetailsFromKodi(showID, fields):
         logger.debug("getShowDetailsFromKodi(): KeyError: result['tvshowdetails']")
         return None
 
+def getSeasonDetailsFromKodi(seasonID, fields):
+    result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetSeasonDetails', 'params': {'seasonid': seasonID, 'properties': fields}, 'id': 1})
+    logger.debug("getSeasonDetailsFromKodi(): %s" % str(result))
+
+    if not result:
+        logger.debug("getSeasonDetailsFromKodi(): Result from Kodi was empty.")
+        return None
+
+    try:
+        return result['seasondetails']
+    except KeyError:
+        logger.debug("getSeasonDetailsFromKodi(): KeyError: result['seasondetails']")
+        return None
+
 # get a single episode from kodi given the id
 def getEpisodeDetailsFromKodi(libraryId, fields):
     result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': libraryId, 'properties': fields}, 'id': 1})
@@ -318,12 +332,8 @@ def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list, idType):
 
 def kodiRpcToTraktMediaObject(type, data, mode='collected'):
     if type == 'tvshow':
-        data['ids'] = {}
         id = data.pop('imdbnumber')
-        if id.startswith("tt"):
-            data['ids']['imdb'] = id
-        elif id.isdigit():
-            data['ids']['tvdb'] = id
+        data['ids'], _ = parseIdToTraktIds(id, type)
         del(data['label'])
         return data
     elif type == 'episode':
@@ -369,12 +379,8 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
             data['plays'] = data.pop('playcount')
         data['collected'] = 1  # this is in our kodi so it should be collected
         data['watched'] = 1 if data['plays'] > 0 else 0
-        data['ids'] = {}
         id = data.pop('imdbnumber')
-        if id.startswith("tt"):
-            data['ids']['imdb'] = id
-        elif id.isdigit():
-            data['ids']['tmdb'] = id
+        data['ids'], _ = parseIdToTraktIds(id, type)
         del(data['label'])
         return data
     else:
@@ -474,5 +480,31 @@ def checkAndConfigureProxy():
                 None
         elif proxyURL and proxyPort:
             return proxyURL + ':' + proxyPort
+    else:
+        return None
+
+def parseIdToTraktIds(id, type):
+    data = {}
+    id_type = ''
+    if id.startswith("tt"):
+        data['imdb'] = id
+        id_type = 'imdb'
+    elif id.isdigit() and isMovie(type):
+        data['tmdb'] = id
+        id_type = 'tmdb'
+    elif id.isdigit() and isEpisode(type):
+        data['tvdb'] = id
+        id_type = 'tvdb'
+    return data, id_type
+
+def getMediaType():
+    if xbmc.getCondVisibility('Container.Content(tvshows)'):
+        return "show"
+    elif xbmc.getCondVisibility('Container.Content(seasons)'):
+        return "season"
+    elif xbmc.getCondVisibility('Container.Content(episodes)'):
+        return "episode"
+    elif xbmc.getCondVisibility('Container.Content(movies)'):
+        return "movie"
     else:
         return None

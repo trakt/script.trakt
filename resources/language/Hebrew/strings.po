@@ -54,7 +54,7 @@ msgstr "דירוג ברירת מחדל"
 
 msgctxt "#32011"
 msgid "Scrobbling"
-msgstr "מבצע Scrobble"
+msgstr "Scrobbling"
 
 msgctxt "#32012"
 msgid "Scrobble movies"
@@ -464,6 +464,130 @@ msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "הפעל מצב ניפוי שגיאות"
 
+msgctxt "#32117"
+msgid "Sync movie playback progress to Kodi"
+msgstr "סנכרון תהליך צפיית סרט אל Kodi"
+
+msgctxt "#32118"
+msgid "Sync episode playback progress to Kodi"
+msgstr "סנכרן תהליך צפיית פרק אל Kodi"
+
+msgctxt "#32119"
+msgid "Retrieving episode playback progress from Trakt"
+msgstr "מקבל תהליך צפיית פרק מ-Trakt"
+
+msgctxt "#32120"
+msgid "Parsing episode playback progress %i of %i from Trakt"
+msgstr "מנתח תהליך צפיית פרק %i מתוך %i מ-Trakt"
+
+msgctxt "#32121"
+msgid "Retrieved episode playback progress from Trakt"
+msgstr "התקבל תהליך צפיית פרק מ-Trakt"
+
+msgctxt "#32122"
+msgid "Retrieving movie playback progress from Trakt"
+msgstr "מקבל תהליך צפיית סרט מ-Trakt"
+
+msgctxt "#32123"
+msgid "Parsing movie playback progress %i of %i from Trakt"
+msgstr "מנתח תהליך צפיית סרט %i מתוך %i מ-Trakt"
+
+msgctxt "#32124"
+msgid "Retrieved movie playback progress from Trakt"
+msgstr "התקבל תהליך צפיית סרט מ-Trakt"
+
+msgctxt "#32125"
+msgid "Kodi movie playback progress is up to date"
+msgstr "תהליך צפיית סרט ב-Kodi מעודכן"
+
+msgctxt "#32126"
+msgid "%i movie(s) playback progress will be updated in Kodi"
+msgstr "ל-%i סרט(ים) יעודכנו תהלך הצפייה"
+
+msgctxt "#32127"
+msgid "Updating %i of %i movie(s) playback progress in Kodi"
+msgstr "מעדכן תהליך צפייה %i מתוך %i סרט(ים) "
+
+msgctxt "#32128"
+msgid "Playback progress updated for %i movie(s) in Kodi"
+msgstr "תהליך צפייה עודכן ל-%i סרט(ים) ב-Kodi"
+
+msgctxt "#32129"
+msgid "Kodi episode playback progress is up to date"
+msgstr "תהליך צפיית פרק ב-Kodi מעודכן"
+
+msgctxt "#32130"
+msgid "Updating %i of %i episode(s) playback progress in Kodi"
+msgstr "מעדכן תהליך צפייה %i מתוך %i פרק(ים) "
+
+msgctxt "#32131"
+msgid "Playback progress updated for %i episode(s) in Kodi"
+msgstr "תהליך צפייה עודכן ל-%i פרק(ים) ב-Kodi"
+
+msgctxt "#32132"
+msgid "Unrate this season"
+msgstr "הסר דירוג מעונה זו"
+
+msgctxt "#32133"
+msgid "Manage Movie's Lists"
+msgstr "ניהול רשימות סרט"
+
+msgctxt "#32134"
+msgid "Manage Show's Lists"
+msgstr "ניהול רשימות סדרה"
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr "הסר מרשימת צפייה"
+
+msgctxt "#32136"
+msgid "Add to Watchlist"
+msgstr "הוסף לרשימת צפייה"
+
+msgctxt "#32137"
+msgid "Rate this Movie"
+msgstr "דרג סרט זה"
+
+msgctxt "#32138"
+msgid "Rate this Show"
+msgstr "דרג סדרה זו"
+
+msgctxt "#32139"
+msgid "Rate this Episode"
+msgstr "דרג פרק זה"
+
+msgctxt "#32140"
+msgid "Toggle Watched"
+msgstr "סמן כנצפה"
+
+msgctxt "#32141"
+msgid "Manage All Lists"
+msgstr "ניהול כל הרשימות"
+
+msgctxt "#32142"
+msgid "Update All Tags"
+msgstr "עדכן את כל התגיות"
+
+msgctxt "#32143"
+msgid "Synchronize Library"
+msgstr "סנכרון ספריה"
+
+msgctxt "#32144"
+msgid "Where can I find my PIN?"
+msgstr "היכן למצוא את קוד ה-PIN שלי?"
+
+msgctxt "#32145"
+msgid "PIN"
+msgstr "PIN"
+
+msgctxt "#32146"
+msgid "Please enter your PIN in settings"
+msgstr "אנא הזן את קוד ה-PIN בהגדרות"
+
 msgctxt "#32147"
 msgid "Incorrect PIN"
 msgstr "קוד שגוי"
+
+msgctxt "#32148"
+msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
+msgstr "סרוק את קוד ה-QR או בקר ב-http://trakt.tv/pin/999 כדי לקבל קוד PIN אישי"

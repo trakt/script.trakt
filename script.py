@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import utilities as utils
+import gui_utils
 import xbmc
 import sqlitequeue
 import sys
@@ -11,19 +12,6 @@ from traktContextMenu import traktContextMenu
 logger = logging.getLogger(__name__)
 
 __addon__ = xbmcaddon.Addon("script.trakt")
-
-def __getMediaType():
-    
-    if xbmc.getCondVisibility('Container.Content(tvshows)'):
-        return "show"
-    elif xbmc.getCondVisibility('Container.Content(seasons)'):
-        return "season"
-    elif xbmc.getCondVisibility('Container.Content(episodes)'):
-        return "episode"
-    elif xbmc.getCondVisibility('Container.Content(movies)'):
-        return "movie"
-    else:
-        return None
 
 def __getArguments():
     data = None
@@ -46,18 +34,11 @@ def Main():
 
     if args['action'] == 'pin_info':
         xbmc.executebuiltin('Dialog.Close(all, true)')
-
-        pinInfo = xbmcgui.WindowXMLDialog(
-            "PinInfoWindow.xml",
-            __addon__.getAddonInfo('path')
-        )
-
-        pinInfo.doModal()
-        del pinInfo
+        gui_utils.get_pin()
 
     if args['action'] == 'contextmenu':
         buttons = []
-        media_type = __getMediaType()
+        media_type = utils.getMediaType()
 
         if media_type in ['movie', 'show', 'season', 'episode']:
             buttons.append("rate")
@@ -108,7 +89,7 @@ def Main():
             except KeyError:
                 pass
         else:
-            media_type = __getMediaType()
+            media_type = utils.getMediaType()
             if not utils.isValidMediaType(media_type):
                 logger.debug("Error, not in video library.")
                 return
@@ -125,26 +106,36 @@ def Main():
                     if not result:
                         logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
                         return
-                    data['imdbnumber'] = result['imdbnumber']
 
-                elif utils.isShow(media_type) or utils.isSeason(media_type):
-                    result = utils.getShowDetailsFromKodi(data['dbid'], ['imdbnumber', 'tag'])
+                elif utils.isShow(media_type):
+                    tvshow_id = data['dbid']
+
+                elif utils.isSeason(media_type):
+                    result = utils.getSeasonDetailsFromKodi(data['dbid'], ['tvshowid', 'season'])
                     if not result:
                         logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
                         return
-                    data['imdbnumber'] = result['imdbnumber']
-                    data['tag'] = result['tag']
+                    tvshow_id = result['tvshowid']
+                    data['season'] = result['season']
 
                 elif utils.isEpisode(media_type):
-                    result = utils.getEpisodeDetailsFromKodi(data['dbid'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid', 'file', 'playcount'])
+                    result = utils.getEpisodeDetailsFromKodi(data['dbid'], ['season', 'episode', 'tvshowid'])
                     if not result:
                         logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
                         return
-                    data['imdbnumber'] = result['episodeid']
+                    tvshow_id = result['tvshowid']
                     data['season'] = result['season']
                     data['episode'] = result['episode']
+
+                if utils.isShow(media_type) or utils.isSeason(media_type) or utils.isEpisode(media_type):
+                    result = utils.getShowDetailsFromKodi(tvshow_id, ['imdbnumber'])
+                    if not result:
+                        logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
+                        return
+                    
+                data['video_id'] = result['imdbnumber']
             else:
-                data['imdbnumber'] = data['remoteid']
+                data['video_id'] = data['remoteid']
                 if 'season' in data and 'episode' in data:
                     logger.debug("Manual %s of non-library '%s' S%02dE%02d, with an ID of '%s'." % (args['action'], media_type, data['season'], data['episode'], data['remoteid']))
                 elif 'season' in data:
@@ -162,7 +153,7 @@ def Main():
             logger.debug("Manual %s of '%s' is unsupported." % (args['action'], media_type))
 
     elif args['action'] == 'togglewatched':
-        media_type = __getMediaType()
+        media_type = utils.getMediaType()
         if media_type in ['movie', 'show', 'season', 'episode']:
             data = {'media_type': media_type}
             if utils.isMovie(media_type):

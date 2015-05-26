@@ -1,3 +1,11 @@
+version 3.0.2
+  - fancy PIN auth dialog (by tknorris)
+  - you no longer need to scrobble to get a rating dialog
+  - created context menu addons for Kodi 15 (Isengard)
+  - various fixes for manual rating and watched
+  - fixed some notifications not causing errors
+  - updated language files from Transifex
+
 version 3.0.1
   - moved to PIN login, you will need to reenter your credentials. It's more secure and users with social logins (e.g. g+ or fb) can now login too!
   - readded manual ratings for movies/shows/episodes (by tknorris)

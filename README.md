@@ -49,7 +49,7 @@ If your not a developer, you should only install this from the official Kodi rep
 2. Install script.trakt by zip. Go to *Settings* > *Add-ons* > *Install from zip file* > Choose the just downloaded zip
 3. Navigate to *Settings* > *Add-ons* > *Enabled add-ons* > *Services* > **Trakt**
 4. Select *Trakt* and go to **Configure**
-5. Enter your **username** and **password**, change any other settings as needed
+5. Get your **PIN** [here](http://www.trakt.tv/pin/999) and enter it, change any other settings as needed
 6. Select **OK** to save your settings
 7. Watch something and see it show up on Trakt.tv!
 
@@ -60,7 +60,7 @@ or
 3. Make sure you have the modules Trakt and dateutil installed. Check under *Settings* > *Add-ons* > *Get Add-ons* > *All Add-ons* > *Add-on libraries* (restart if you had to install these)
 4. Navigate to *Settings* > *Add-ons* > *Enabled add-ons* > *Services* > **Trakt**
 5. Select *Trakt* and go to **Configure**
-6. Enter your **username** and **password**, change any other settings as needed
+6. Get your **PIN** [here](http://www.trakt.tv/pin/999) and enter it, change any other settings as needed
 7. Select **OK** to save your settings
 8. Watch something and see it show up on Trakt.tv!
 
