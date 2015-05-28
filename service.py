@@ -13,6 +13,8 @@ from sync import Sync
 import utilities
 import time
 import gui_utils
+import xbmcgui
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -359,11 +361,14 @@ class traktPlayer(xbmc.Player):
                 episode = xbmc.getInfoLabel('VideoPlayer.Episode')
                 showtitle = xbmc.getInfoLabel('VideoPlayer.TVShowTitle')
                 year = xbmc.getInfoLabel('VideoPlayer.Year')
+                video_ids = xbmcgui.Window(10000).getProperty('script.trakt.ids')
+                if video_ids:
+                    data['video_ids'] = json.loads(video_ids)
 
-                logger.debug("[traktPlayer] info - showtitle: %s, Year: %s, Season: %s, Episode: %s" % (showtitle, year, season, episode))
+                logger.debug("[traktPlayer] info - ids: %s, showtitle: %s, Year: %s, Season: %s, Episode: %s" % (video_ids, showtitle, year, season, episode))
 
-                if season and episode and showtitle:
-                    # we have season, episode and show title, can scrobble this as an episode
+                if season and episode and (showtitle or video_ids):
+                    # we have season, episode and either a show title or video_ids, can scrobble this as an episode
                     self.type = 'episode'
                     data['type'] = 'episode'
                     data['season'] = int(season)
@@ -373,8 +378,8 @@ class traktPlayer(xbmc.Player):
                     if year.isdigit():
                         data['year'] = year
                     logger.debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'episode' - %s - S%02dE%02d - %s." % (data['showtitle'], data['season'], data['episode'], data['title']))
-                elif year and not season and not showtitle:
-                    # we have a year and no season/showtitle info, enough for a movie
+                elif (year or video_ids) and not season and not showtitle:
+                    # we have a year or video_id and no season/showtitle info, enough for a movie
                     self.type = 'movie'
                     data['type'] = 'movie'
                     data['year'] = int(year)
@@ -447,6 +452,7 @@ class traktPlayer(xbmc.Player):
 
     # called when kodi stops playing a file
     def onPlayBackEnded(self):
+        xbmcgui.Window(10000).clearProperty('script.trakt.ids')
         if self._playing:
             logger.debug("[traktPlayer] onPlayBackEnded() - %s" % self.isPlayingVideo())
             self._playing = False
@@ -456,6 +462,7 @@ class traktPlayer(xbmc.Player):
 
     # called when user stops kodi playing a file
     def onPlayBackStopped(self):
+        xbmcgui.Window(10000).clearProperty('script.trakt.ids')
         if self._playing:
             logger.debug("[traktPlayer] onPlayBackStopped() - %s" % self.isPlayingVideo())
             self._playing = False
