@@ -20,25 +20,341 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Yleinen"
 
+msgctxt "#32003"
+msgid "Startup Delay"
+msgstr "Käynnistysviive"
+
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Arvosana"
+
+msgctxt "#32005"
+msgid "Rate Movie after watching"
+msgstr "Arvostele elokuva katsomisen jälkeen"
+
+msgctxt "#32006"
+msgid "Rate TV show Episode after watching"
+msgstr "Arvostele tv-sarjan jakso katsomisen jälkeen"
+
+msgctxt "#32007"
+msgid "Rate each playlist item"
+msgstr "Arvostele soittolistan jokainen kohde"
+
+msgctxt "#32008"
+msgid "Minimum percent watched to display rating dialog"
+msgstr "Minimi prosenttimäärä katsottuna, jolloin arvostelu-ikkuna näytetään"
+
+msgctxt "#32009"
+msgid "Allow re-rating of media"
+msgstr "Salli median uudelleen arvostelu"
+
+msgctxt "#32010"
+msgid "Default rating"
+msgstr "Oletus arvosana"
+
+msgctxt "#32011"
+msgid "Scrobbling"
+msgstr "Scroblataan"
+
+msgctxt "#32012"
+msgid "Scrobble movies"
+msgstr "Scrobblaa elokuvat"
+
+msgctxt "#32013"
+msgid "Scrobble TV show episodes"
+msgstr "Scrobblaa TV-sarjan jaksot"
+
+msgctxt "#32014"
+msgid "Show notification on scrobble"
+msgstr "Näytä ilmoitus scrobblauksesta"
+
+msgctxt "#32015"
+msgid "Trakt - Scrobbled successfully"
+msgstr "Trakt - Scrobblaus onnistui"
+
+msgctxt "#32016"
+msgid "Exclusions"
+msgstr "Poikkeukset"
+
+msgctxt "#32017"
+msgid "Exclude Live TV"
+msgstr "Ei TV-lähetystä"
+
+msgctxt "#32018"
+msgid "Exclude HTTP sources"
+msgstr "Ei HTTP-lähteitä"
+
+msgctxt "#32019"
+msgid "Exclude path"
+msgstr "Ei polkua"
+
+msgctxt "#32020"
+msgid "Folder's path (including subfolders)"
+msgstr "Kansion polku (sisältäen alikansiot)"
+
+msgctxt "#32023"
+msgid "Can not connect to Trakt"
+msgstr "Trakt:iin ei saada yhteyttä"
 
 msgctxt "#32024"
 msgid "Error"
 msgstr "Virhe"
 
+msgctxt "#32026"
+msgid "What Did You Think?"
+msgstr "Mitä mieltä olet?"
+
+msgctxt "#32027"
+msgid "Totally Ninja!"
+msgstr "Ylivertainen!"
+
+msgctxt "#32028"
+msgid "Weak Sauce :("
+msgstr "Kammottava :("
+
+msgctxt "#32029"
+msgid "Terrible"
+msgstr "Surkea"
+
+msgctxt "#32030"
+msgid "Bad"
+msgstr "Huono"
+
+msgctxt "#32031"
+msgid "Poor"
+msgstr "Heikko"
+
+msgctxt "#32032"
+msgid "Meh"
+msgstr "Välttävä"
+
 msgctxt "#32033"
 msgid "Fair"
-msgstr "poutaa"
+msgstr "Kohtalainen"
+
+msgctxt "#32034"
+msgid "Good"
+msgstr "Hyvä"
+
+msgctxt "#32035"
+msgid "Great"
+msgstr "Mahtava"
+
+msgctxt "#32036"
+msgid "Superb"
+msgstr "Loistava"
+
+msgctxt "#32037"
+msgid "Unrate this movie"
+msgstr "Poista elokuvan arvostelu"
+
+msgctxt "#32038"
+msgid "Unrate this show"
+msgstr "Poista tämän sarjan arvostelu"
+
+msgctxt "#32039"
+msgid "Unrate this episode"
+msgstr "Poista tämän jakson arvostelu"
+
+msgctxt "#32040"
+msgid "Trakt - Rating submitted successfully"
+msgstr "Trakt - Arvostelu lähetty onnistuneesti"
+
+msgctxt "#32041"
+msgid "Trakt - Already rated"
+msgstr "Trakt - Arvosteltu aiemmin"
+
+msgctxt "#32042"
+msgid "Trakt - Unrated successfully"
+msgstr "Trakt - Arvostelu poistettu onnistuneesti"
+
+msgctxt "#32043"
+msgid "Trakt - Already has the same rating"
+msgstr "Trakt - Oli jo sama arvostelu"
+
+msgctxt "#32044"
+msgid "Trakt - Problem submitting rating"
+msgstr "Trakt - Ongelma arvostelun lähettämisessä"
+
+msgctxt "#32045"
+msgid "Synchronize"
+msgstr "Synkronoi"
 
 msgctxt "#32046"
 msgid "Movies"
 msgstr "Elokuvat"
 
+msgctxt "#32047"
+msgid "Add new movies to Trakt collection"
+msgstr "Lisää uudet elokuvat Trakt kokoelmaan"
+
+msgctxt "#32048"
+msgid "Add watched movies to Trakt history"
+msgstr "Lisää katsotut elokuvat Trakt:in historiaan"
+
+msgctxt "#32049"
+msgid "Mark movies from Trakt history as watched in Kodi"
+msgstr "Merkitse elokuvat Trakt:in historiasta katsotuksi Kodi:ssa"
+
+msgctxt "#32050"
+msgid "TV Episodes"
+msgstr "TV-sarjan jaksot"
+
+msgctxt "#32051"
+msgid "Add new TV episodes to Trakt collection"
+msgstr "Lisää uudet TV-sarjan jaksot Trakt kokoelmaan"
+
+msgctxt "#32052"
+msgid "Add watched TV episodes to Trakt history"
+msgstr "Lisää katsotut TV-sarjan jaksot Trakt:n historiaan"
+
+msgctxt "#32053"
+msgid "Mark TV episodes from Trakt history as watched in Kodi"
+msgstr "Merkitse TV-sarjan jaksot Trakt:in historiasta katsotuksi Kodissa"
+
 msgctxt "#32054"
 msgid "Service"
 msgstr "Palvelu"
+
+msgctxt "#32055"
+msgid "Sync collection on library update or cleaning"
+msgstr "Synkronoi kokoelma kirjaston päivityksessä tai siivouksessa"
+
+msgctxt "#32056"
+msgid "Show notifications"
+msgstr "Näytä ilmoitukset"
+
+msgctxt "#32057"
+msgid "Remove deleted movies from Trakt collection"
+msgstr "Poista poistetut elokuvat Trakt kokoelmasta"
+
+msgctxt "#32058"
+msgid "Remove deleted TV episodes from Trakt collection"
+msgstr "Poista poistetut TV-sarjan jaksot Trakt kokoelmasta"
+
+msgctxt "#32059"
+msgid "Show marked as watched notification"
+msgstr "Näytä merkitty katsotuksi ilmoitus"
+
+msgctxt "#32060"
+msgid "Hide notifications during playback"
+msgstr "Piilota ilmoitukset toiston ajaksi"
+
+msgctxt "#32061"
+msgid "Sync started"
+msgstr "Synkronointi aloitettu"
+
+msgctxt "#32062"
+msgid "Sync complete"
+msgstr "Synkronointi valmis"
+
+msgctxt "#32063"
+msgid "%i movie(s) will be added to Trakt collection"
+msgstr "%i elokuva(a) lisätään Trakt kokoelmaan"
+
+msgctxt "#32064"
+msgid "%i movie playcount(s) will be updated on Trakt"
+msgstr "%i elokuvan katselukerta(/kerrat) päivitetään Trakt:iin"
+
+msgctxt "#32066"
+msgid "Movie Sync Complete"
+msgstr "Elokuvien synkronointi valmis"
+
+msgctxt "#32073"
+msgid "%i episodes are being updated"
+msgstr "%i jaksoa päivitetään"
+
+msgctxt "#32074"
+msgid "Checking watched episodes on Kodi"
+msgstr "Tarkistetaan Kodissa katsotut jaksot"
+
+msgctxt "#32077"
+msgid "Cleaning Trakt TV show collection"
+msgstr "Siivotaan Trakt:in TV-sarja kokoelmaa"
+
+msgctxt "#32078"
+msgid "episodes are being removed"
+msgstr "jaksoja poistetaan"
+
+msgctxt "#32079"
+msgid "Loading movies from Kodi"
+msgstr "Ladataan elokuvat Kodista"
+
+msgctxt "#32080"
+msgid "Movies loaded from Kodi"
+msgstr "Elokuvat ladattu Kodista"
+
+msgctxt "#32086"
+msgid "Trakt movie playcounts are up to date"
+msgstr "Traktin elokuvien katselukerrat ovat ajantasalla"
+
+msgctxt "#32087"
+msgid "Playcounts updated for %i movie(s) on Trakt"
+msgstr "Katselukerrat päivitetty %i elokuvalle Trakt:issa"
+
+msgctxt "#32088"
+msgid "Kodi movie playcounts are up to date"
+msgstr "Kodin elokuvien katselukerrat ovat ajantasalla"
+
+msgctxt "#32094"
+msgid "Loading episode data from Kodi"
+msgstr "Ladataan jakson tietoja Kodista"
+
+msgctxt "#32096"
+msgid "Shows loaded from Kodi"
+msgstr "Sarjat ladattu Kodista"
+
+msgctxt "#32113"
+msgid "Trakt - Marked as watched"
+msgstr "Trakt - Merkitty katsotuksi"
+
+msgctxt "#32114"
+msgid "Trakt - Failed marking as watched"
+msgstr "Trakt - Katsotuksi merkitseminen epäonnistui"
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr "Poista katselulistasta"
+
+msgctxt "#32136"
+msgid "Add to Watchlist"
+msgstr "Lisää katselulistalle"
+
+msgctxt "#32137"
+msgid "Rate this Movie"
+msgstr "Arvostele tämä elokuva"
+
+msgctxt "#32138"
+msgid "Rate this Show"
+msgstr "Arvostele tämä sarja"
+
+msgctxt "#32139"
+msgid "Rate this Episode"
+msgstr "Arvostele tämä jakso"
+
+msgctxt "#32141"
+msgid "Manage All Lists"
+msgstr "Hallitse kaikkia listoja"
+
+msgctxt "#32142"
+msgid "Update All Tags"
+msgstr "Päivitä kaikki tagit"
+
+msgctxt "#32143"
+msgid "Synchronize Library"
+msgstr "Synkronoi kirjasto"
+
+msgctxt "#32144"
+msgid "Where can I find my PIN?"
+msgstr "Mistä löydän PIN-koodini?"
+
+msgctxt "#32145"
+msgid "PIN"
+msgstr "PIN"
+
+msgctxt "#32146"
+msgid "Please enter your PIN in settings"
+msgstr "Ole hyvä ja aseta PIN-koodisi asetuksissa"
 
 msgctxt "#32147"
 msgid "Incorrect PIN"

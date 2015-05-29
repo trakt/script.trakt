@@ -586,4 +586,4 @@ msgstr "설정에서 PIN을 입력하세요"
 
 msgctxt "#32147"
 msgid "Incorrect PIN"
-msgstr "비밀번호 틀림"
+msgstr "PIN 일치하지 않음"

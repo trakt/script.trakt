@@ -78,6 +78,10 @@ class Scrobbler():
         self.curVideoInfo = None
         self.videosToRate = []
 
+        if not utilities.getSettingAsBool('scrobble_fallback') and 'id' not in self.curVideo and 'video_ids' not in self.curVideo:
+            logger.debug('Aborting scrobble to avoid fallback: %s' % (self.curVideo))
+            return
+             
         if 'type' in self.curVideo:
             logger.debug("Watching: %s" % self.curVideo['type'])
             if not xbmc.Player().isPlayingVideo():
@@ -110,6 +114,8 @@ class Scrobbler():
             if utilities.isMovie(self.curVideo['type']):
                 if 'id' in self.curVideo:
                     self.curVideoInfo = utilities.kodiRpcToTraktMediaObject('movie', utilities.getMovieDetailsFromKodi(self.curVideo['id'], ['imdbnumber', 'title', 'year', 'file', 'lastplayed', 'playcount']))
+                elif 'video_ids' in self.curVideo:
+                    self.curVideoInfo = {'ids': self.curVideo['video_ids']}
                 elif 'title' in self.curVideo and 'year' in self.curVideo:
                     self.curVideoInfo = {'title': self.curVideo['title'], 'year': self.curVideo['year']}
 
@@ -131,6 +137,9 @@ class Scrobbler():
                         self.isPlaying = False
                         self.watchedTime = 0
                         return
+                elif 'video_ids' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
+                    self.curVideoInfo = {'season': self.curVideo['season'], 'number': self.curVideo['episode']}
+                    self.traktShowSummary = {'ids': self.curVideo['video_ids']}
                 elif 'title' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
                     self.curVideoInfo = {'title': self.curVideo['title'], 'season': self.curVideo['season'],
                                          'number': self.curVideo['episode']}
@@ -149,7 +158,19 @@ class Scrobbler():
 
             self.isPlaying = True
             self.isPaused = False
-            result = self.__scrobble('start')
+
+            if utilities.getSettingAsBool('scrobble_movie') or utilities.getSettingAsBool('scrobble_episode'):
+                result = self.__scrobble('start')
+            elif utilities.getSettingAsBool('rate_movie') and utilities.isMovie(self.curVideo['type']):
+                result = {'movie': self.traktapi.getMovieSummary(self.curVideoInfo['ids']['imdb']).to_dict()}
+            elif utilities.getSettingAsBool('rate_episode') and utilities.isEpisode(self.curVideo['type']):
+                data, id_type = utilities.parseIdToTraktIds(str(self.traktShowSummary['ids']['tvdb']), self.curVideo['type'])
+                ids = self.traktapi.getIdLookup(data[id_type], id_type)
+                trakt_id = dict(ids[0].keys)['trakt']
+                result = {'show': self.traktapi.getShowSummary(trakt_id).to_dict(),
+                          'episode': self.traktapi.getEpisodeSummary(trakt_id, self.curVideoInfo['season'],
+                                                                     self.curVideoInfo['number']).to_dict()}
+
             self.__preFetchUserRatings(result)
 
     def __preFetchUserRatings(self, result):

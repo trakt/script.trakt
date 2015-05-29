@@ -583,21 +583,73 @@ msgid "Synchronize Library"
 msgstr ""
 
 msgctxt "#32144"
-msgid "Where can I find my PIN?"
-msgstr ""
-
-msgctxt "#32145"
-msgid "PIN"
-msgstr ""
-
-msgctxt "#32146"
-msgid "Please enter your PIN in settings"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
 msgstr ""
 
 msgctxt "#32147"
-msgid "Incorrect PIN"
+msgid "Trakt.tv PIN Authorization Failed"
 msgstr ""
 
-msgctxt "#32148"
-msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr ""
+
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr ""
+
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr ""
+
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr ""
+
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr ""
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr ""
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr ""
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr ""
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr ""
+
+msgctxt "#32158"
+msgid "To authorize the trakt addon to access your trakt.tv account:"
+msgstr ""
+
+msgctxt "#32159"
+msgid "1) Visit [COLOR skyblue]http://trakt.tv/pin/999[/COLOR] or scan the QR Code below."
+msgstr ""
+
+msgctxt "#32160"
+msgid "2) Authorize the trakt addon to access your account."
+msgstr ""
+
+msgctxt "#32161"
+msgid "3) Enter the PIN provided in the box below."
+msgstr ""
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr ""
+
+msgctxt "#32163"
+msgid "User"
+msgstr ""
+
+msgctxt "#32164"
+msgid "Fallback to Title/Year matching if necessary"
 msgstr ""
