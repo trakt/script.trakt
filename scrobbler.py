@@ -138,16 +138,8 @@ class Scrobbler():
                         self.watchedTime = 0
                         return
                 elif 'video_ids' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
-                    self.curVideoInfo = {'season': self.curVideo['season'], 'number': self.curVideo['episode']}
+                    self.curVideoInfo = {'title': self.curVideo['title'], 'season': self.curVideo['season'], 'number': self.curVideo['episode']}
                     self.traktShowSummary = {'ids': self.curVideo['video_ids']}
-                    title, year = utilities.regex_year(self.curVideo['showtitle'])
-                    if not year:
-                        self.traktShowSummary['title'] = self.curVideo['showtitle']
-                    else:
-                        self.traktShowSummary.update({'title': title, 'year': year})
-
-                    if 'year' in self.curVideo:
-                        self.traktShowSummary['year'] = self.curVideo['year']
                 elif 'title' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
                     self.curVideoInfo = {'title': self.curVideo['title'], 'season': self.curVideo['season'],
                                          'number': self.curVideo['episode']}
