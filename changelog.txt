@@ -5,6 +5,7 @@ version 3.0.2
   - various fixes for manual rating and watched
   - fixed some notifications not causing errors
   - updated language files from Transifex
+  - Added id scrobbling via ids window property
 
 version 3.0.1
   - moved to PIN login, you will need to reenter your credentials. It's more secure and users with social logins (e.g. g+ or fb) can now login too!
