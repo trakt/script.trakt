@@ -571,19 +571,3 @@ msgstr "모든 태그 업데이트"
 msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "라이브러리 동기화"
-
-msgctxt "#32144"
-msgid "Where can I find my PIN?"
-msgstr "PIN 확인 방법"
-
-msgctxt "#32145"
-msgid "PIN"
-msgstr "PIN"
-
-msgctxt "#32146"
-msgid "Please enter your PIN in settings"
-msgstr "설정에서 PIN을 입력하세요"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "PIN 일치하지 않음"

@@ -35,7 +35,3 @@ msgstr "senin"
 msgctxt "#32046"
 msgid "Movies"
 msgstr "Filme"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "PIN incorect"

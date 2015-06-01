@@ -39,7 +39,3 @@ msgstr "Flieks"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Diens"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Verkeerde PIN"

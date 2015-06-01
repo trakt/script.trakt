@@ -39,7 +39,3 @@ msgstr "Filmes"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Servizo"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "PIN incorrecto"

@@ -39,7 +39,3 @@ msgstr "ภาพยนตร์"
 msgctxt "#32054"
 msgid "Service"
 msgstr "บริการ"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "PIN ไม่ถูกต้อง"

@@ -39,7 +39,3 @@ msgstr "Filmy"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Služba"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Neplatný PIN"

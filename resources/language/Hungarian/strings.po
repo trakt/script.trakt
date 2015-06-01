@@ -39,7 +39,3 @@ msgstr "Filmek"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Szolgáltatás"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Hibás PIN kód"

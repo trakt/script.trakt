@@ -31,7 +31,3 @@ msgstr "ချို့ယွင်းချက်"
 msgctxt "#32046"
 msgid "Movies"
 msgstr "ရုပ်ရှင်များ"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "PIN မမှန်ကန်ပါ"

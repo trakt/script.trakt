@@ -343,19 +343,3 @@ msgstr "Päivitä kaikki tagit"
 msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "Synkronoi kirjasto"
-
-msgctxt "#32144"
-msgid "Where can I find my PIN?"
-msgstr "Mistä löydän PIN-koodini?"
-
-msgctxt "#32145"
-msgid "PIN"
-msgstr "PIN"
-
-msgctxt "#32146"
-msgid "Please enter your PIN in settings"
-msgstr "Ole hyvä ja aseta PIN-koodisi asetuksissa"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Väärä PIN"

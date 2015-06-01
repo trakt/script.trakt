@@ -55,7 +55,3 @@ msgstr "Синхронизирането на епизоди завърши"
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "Включи дебъг режима"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Неправилен код"

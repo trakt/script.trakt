@@ -47,7 +47,3 @@ msgstr "电影"
 msgctxt "#32054"
 msgid "Service"
 msgstr "服务"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "错误的 PIN"

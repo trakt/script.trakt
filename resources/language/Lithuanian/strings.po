@@ -571,23 +571,3 @@ msgstr "Atnaujinti visas žymas"
 msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "Sinchronizuoti biblioteką"
-
-msgctxt "#32144"
-msgid "Where can I find my PIN?"
-msgstr "Kur galiu rasti savo PIN kodą?"
-
-msgctxt "#32145"
-msgid "PIN"
-msgstr "PIN"
-
-msgctxt "#32146"
-msgid "Please enter your PIN in settings"
-msgstr "Įveskite savo PIN kodą nustatymuose"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Klaidingas PIN"
-
-msgctxt "#32148"
-msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
-msgstr "Nuskaityti QR kodą arba apsilankyti http://trakt.tv/pin/999, norėdami gauti asmeninį PIN kodą"

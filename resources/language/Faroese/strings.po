@@ -35,7 +35,3 @@ msgstr "Lætt"
 msgctxt "#32046"
 msgid "Movies"
 msgstr "Filmar"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Skeiv PIN"

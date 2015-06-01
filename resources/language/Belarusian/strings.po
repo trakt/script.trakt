@@ -35,7 +35,3 @@ msgstr "Сонечна"
 msgctxt "#32046"
 msgid "Movies"
 msgstr "Фільмы"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Няправільны PIN"

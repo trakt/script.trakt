@@ -571,23 +571,3 @@ msgstr "Update alle Tags"
 msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "Synchroniseer bibliotheek"
-
-msgctxt "#32144"
-msgid "Where can I find my PIN?"
-msgstr "Waar kan ik mijn PIN vinden?"
-
-msgctxt "#32145"
-msgid "PIN"
-msgstr "PIN"
-
-msgctxt "#32146"
-msgid "Please enter your PIN in settings"
-msgstr "Voer jouw PIN in in instellingen"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Onjuiste PIN-code"
-
-msgctxt "#32148"
-msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
-msgstr "Scan de QR code of bezoek http://trakt.tv/pin/999 voor jouw eigen personlijke PIN"
