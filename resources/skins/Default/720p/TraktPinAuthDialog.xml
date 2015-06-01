@@ -61,7 +61,7 @@
 				<height>150</height>
 				<font>font12</font>
 				<wrapmultiline>true</wrapmultiline>
-				<label>$ADDON[script.trakt 32158][CR]$ADDON[script.trakt 32159][CR]$ADDON[script.trakt 32160][CR]$ADDON[script.trakt 32161][CR][CR]$ADDON[script.trakt 32162]</label>
+				<label>$ADDON[script.trakt 32158][CR]1) $ADDON[script.trakt 32159] [COLOR skyblue]http://trakt.tv/pin/999[/COLOR] $ADDON[script.trakt 32165][CR]2) $ADDON[script.trakt 32160][CR]3) $ADDON[script.trakt 32161][CR][CR]$ADDON[script.trakt 32162]</label>
 				<textcolor>white</textcolor>
 				<shadowcolor>black</shadowcolor>
 			</control>
