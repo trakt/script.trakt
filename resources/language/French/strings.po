@@ -571,3 +571,7 @@ msgstr "Mettre à jour toutes mes étiquettes"
 msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "Synchroniser votre librairie"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Utilisateur"

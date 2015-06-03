@@ -35,3 +35,7 @@ msgstr "Сонечна"
 msgctxt "#32046"
 msgid "Movies"
 msgstr "Фільмы"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "User"

@@ -39,3 +39,7 @@ msgstr "Filmek"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Szolgáltatás"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Felhasználó"

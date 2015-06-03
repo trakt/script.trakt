@@ -55,3 +55,7 @@ msgstr "Синхронизирането на епизоди завърши"
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "Включи дебъг режима"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Потребител"

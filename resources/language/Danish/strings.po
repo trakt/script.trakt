@@ -463,3 +463,7 @@ msgstr "%d afsnit af '%s'"
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "Slå fejlfinding til"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Bruger"

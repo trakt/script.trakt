@@ -571,3 +571,7 @@ msgstr "עדכן את כל התגיות"
 msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "סנכרון ספריה"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "משתמש"

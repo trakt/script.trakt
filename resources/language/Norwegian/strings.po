@@ -463,3 +463,7 @@ msgstr "%d episode(r) av '%s'"
 msgctxt "#32116"
 msgid "Enable debug mode"
 msgstr "Aktiver feilsøkingsmodus"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Bruker"

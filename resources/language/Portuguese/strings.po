@@ -571,3 +571,7 @@ msgstr "Actualizar Todas as Tags"
 msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "Sincronizar Biblioteca"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Utilizador"

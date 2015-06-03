@@ -43,3 +43,7 @@ msgstr "Pel·lícules"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Servei"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Usuari"

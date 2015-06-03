@@ -571,3 +571,7 @@ msgstr "Actualizar todas las etiquetas"
 msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "Sincronizar la Librería"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Usuario"

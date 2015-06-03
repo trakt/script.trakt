@@ -571,3 +571,43 @@ msgstr "Alle Schlagwörter aktualisieren"
 msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "Bibliothek synchronisieren"
+
+msgctxt "#32147"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr "Trakt.tv PIN-Autorisierung fehlgeschlagen"
+
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr "Diese Staffel bewerten"
+
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr "Sie werden in 24 Stunden erinnert"
+
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr "Trakt-Autorisierung abgeschlossen"
+
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr "Trakt-Kontoautorisierung"
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr "Autorisieren"
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr "Später erinnern"
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr "Nein, danke"
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr "Kontoautorisierung"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Benutzer"

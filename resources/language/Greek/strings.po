@@ -179,3 +179,7 @@ msgstr "%i επεισόδια ενημερώνονται"
 msgctxt "#32075"
 msgid "Episode Sync Complete"
 msgstr "Ολοκληρώθηκε ο Συγχρονισμός Επεισοδίων"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Χρήστης"

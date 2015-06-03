@@ -39,3 +39,7 @@ msgstr "Фильмы"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Служба"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Пользователь"

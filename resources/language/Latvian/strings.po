@@ -39,3 +39,7 @@ msgstr "Filmas"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Pakalpojums"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Lietotājs"

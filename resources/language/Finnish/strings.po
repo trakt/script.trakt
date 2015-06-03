@@ -343,3 +343,7 @@ msgstr "Päivitä kaikki tagit"
 msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "Synkronoi kirjasto"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Käyttäjä"

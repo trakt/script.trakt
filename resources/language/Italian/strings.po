@@ -571,3 +571,63 @@ msgstr "Aggiorna tutti i tag"
 msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "Sincronizza la libreria"
+
+msgctxt "#32144"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
+msgstr "Come autorizzo l'addon Trakt ad accedere al mio account Trakt.tv?"
+
+msgctxt "#32147"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr "Autorizzazione PIN Trakt.tv fallita"
+
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr "Vota questa stagione"
+
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr "Ti sarà ricordato fra 24 ore"
+
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr "Usa le impostazioni dell'addon se cambi idea"
+
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr "Autorizzazione Trakt completata"
+
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr "Autorizzazione Trakt account"
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr "Autorizza"
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr "Ricordamelo più tardi"
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr "No grazie"
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr "Autorizzazione account"
+
+msgctxt "#32158"
+msgid "To authorize the trakt addon to access your trakt.tv account:"
+msgstr "Per autorizzare l'addon Trakt ad accedere al tuo account Trakt.tv:"
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr "L'addon Trakt non può essere usato senza l'autorizzazione ad accedere al tuo account Trakt.tv."
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Utente"
+
+msgctxt "#32164"
+msgid "Fallback to Title/Year matching if necessary"
+msgstr "Utilizza la corrispondenza titolo/anno se necessario"

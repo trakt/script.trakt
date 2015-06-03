@@ -571,3 +571,63 @@ msgstr "Atnaujinti visas žymas"
 msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "Sinchronizuoti biblioteką"
+
+msgctxt "#32144"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
+msgstr "Kaip autorizuoti Trakt.tv priedą, kad pasiekti savo Trakt.tv paskyrą?"
+
+msgctxt "#32147"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr "Trakt.tv PIN autorizacija nepavyko"
+
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr "Įvertinti šį sezoną"
+
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr "Priminsime po 24 valandų"
+
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr "Naudokite priedo nustatymus, jei persigalvosite"
+
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr "Trakt.tv autorizacija baigta"
+
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr "Trakt.tv paskyros autorizacija"
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr "Autorizuoti"
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr "Priminti vėliau"
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr "Ne, ačiū"
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr "Paskyros autorizacija"
+
+msgctxt "#32158"
+msgid "To authorize the trakt addon to access your trakt.tv account:"
+msgstr "Norėdami autorizuoti Trakt.tv priedą, kad jis pasiektų jūsų Trakt.tv paskyrą:"
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr "Trakt.tv priedas NEGALI būti naudojamas be autorizacijos, kuri leidžia pasiekti jūsų Trakt.tv paskyrą."
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Vartotojas"
+
+msgctxt "#32164"
+msgid "Fallback to Title/Year matching if necessary"
+msgstr "Jei reikia, grįžti prie paieškos pagal pavadinimą/metus"
