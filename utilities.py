@@ -492,7 +492,7 @@ def parseIdToTraktIds(id, type):
     elif id.isdigit() and isMovie(type):
         data['tmdb'] = id
         id_type = 'tmdb'
-    elif id.isdigit() and isEpisode(type):
+    elif id.isdigit() and (isEpisode(type) or isShow(type)):
         data['tvdb'] = id
         id_type = 'tvdb'
     return data, id_type
