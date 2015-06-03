@@ -631,15 +631,15 @@ msgid "To authorize the trakt addon to access your trakt.tv account:"
 msgstr ""
 
 msgctxt "#32159"
-msgid "1) Visit [COLOR skyblue]http://trakt.tv/pin/999[/COLOR] or scan the QR Code below."
+msgid "Visit"
 msgstr ""
 
 msgctxt "#32160"
-msgid "2) Authorize the trakt addon to access your account."
+msgid "Authorize the trakt addon to access your account."
 msgstr ""
 
 msgctxt "#32161"
-msgid "3) Enter the PIN provided in the box below."
+msgid "Enter the PIN provided in the box below."
 msgstr ""
 
 msgctxt "#32162"
@@ -652,4 +652,8 @@ msgstr ""
 
 msgctxt "#32164"
 msgid "Fallback to Title/Year matching if necessary"
+msgstr ""
+
+msgctxt "#32165"
+msgid "or scan the QR Code below."
 msgstr ""
