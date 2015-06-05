@@ -635,7 +635,7 @@ msgid "To authorize the trakt addon to access your trakt.tv account:"
 msgstr ""
 
 msgctxt "#32159"
-msgid "Visit"
+msgid "Visit {0} or scan the QR Code below."
 msgstr ""
 
 msgctxt "#32160"
@@ -656,8 +656,4 @@ msgstr ""
 
 msgctxt "#32164"
 msgid "Fallback to Title/Year matching if necessary"
-msgstr ""
-
-msgctxt "#32165"
-msgid "or scan the QR Code below."
 msgstr ""
