@@ -572,22 +572,6 @@ msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "סנכרון ספריה"
 
-msgctxt "#32144"
-msgid "Where can I find my PIN?"
-msgstr "היכן למצוא את קוד ה-PIN שלי?"
-
-msgctxt "#32145"
-msgid "PIN"
-msgstr "PIN"
-
-msgctxt "#32146"
-msgid "Please enter your PIN in settings"
-msgstr "אנא הזן את קוד ה-PIN בהגדרות"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "קוד שגוי"
-
-msgctxt "#32148"
-msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
-msgstr "סרוק את קוד ה-QR או בקר ב-http://trakt.tv/pin/999 כדי לקבל קוד PIN אישי"
+msgctxt "#32163"
+msgid "User"
+msgstr "משתמש"

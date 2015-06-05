@@ -39,7 +39,3 @@ msgstr "ムービー"
 msgctxt "#32054"
 msgid "Service"
 msgstr "サービス"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "暗証番号をエラー"

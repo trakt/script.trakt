@@ -39,7 +39,3 @@ msgstr "திரைப்படங்கள்"
 msgctxt "#32054"
 msgid "Service"
 msgstr "சேவை"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "தவறான PIN"

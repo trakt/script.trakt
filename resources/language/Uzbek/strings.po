@@ -31,7 +31,3 @@ msgstr "Xato"
 msgctxt "#32046"
 msgid "Movies"
 msgstr "Filmlar"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Noto'g'ri PIN"

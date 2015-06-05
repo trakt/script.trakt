@@ -39,7 +39,3 @@ msgstr "Ffilmiau"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Gwasanaeth"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "PIN anghywir"
