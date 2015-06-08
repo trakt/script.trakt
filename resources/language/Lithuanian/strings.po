@@ -620,6 +620,14 @@ msgctxt "#32158"
 msgid "To authorize the trakt addon to access your trakt.tv account:"
 msgstr "Norėdami autorizuoti Trakt.tv priedą, kad jis pasiektų jūsų Trakt.tv paskyrą:"
 
+msgctxt "#32160"
+msgid "Authorize the trakt addon to access your account."
+msgstr "Autorizuoti Trakt.tv priedą, kad jis pasiektų jūsų Trakt.tv paskyrą."
+
+msgctxt "#32161"
+msgid "Enter the PIN provided in the box below."
+msgstr "Įveskite žemiau pateiktą PIN kodą."
+
 msgctxt "#32162"
 msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
 msgstr "Trakt.tv priedas NEGALI būti naudojamas be autorizacijos, kuri leidžia pasiekti jūsų Trakt.tv paskyrą."

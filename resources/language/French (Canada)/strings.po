@@ -620,6 +620,14 @@ msgctxt "#32158"
 msgid "To authorize the trakt addon to access your trakt.tv account:"
 msgstr "Pour autoriser l'addiciel trakt à accéder à votre compte trakt.tv :"
 
+msgctxt "#32160"
+msgid "Authorize the trakt addon to access your account."
+msgstr "Autorisez l'addiciel trakt à accéder à votre compte."
+
+msgctxt "#32161"
+msgid "Enter the PIN provided in the box below."
+msgstr "Saisissez le NIP fourni dans la boîte ci-dessous."
+
 msgctxt "#32162"
 msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
 msgstr "L'addiciel trakt NE PEUT PAS être utilisé sans qu'il ne soit autorisé à accéder à votre compte trakt.tv."

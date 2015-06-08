@@ -616,6 +616,14 @@ msgctxt "#32158"
 msgid "To authorize the trakt addon to access your trakt.tv account:"
 msgstr "trakt 애드온의 trakt.tv 계정 접속을 인증하려면:"
 
+msgctxt "#32160"
+msgid "Authorize the trakt addon to access your account."
+msgstr "trakt 애드온이 계정에 접속할 수 있게 인증하세요."
+
+msgctxt "#32161"
+msgid "Enter the PIN provided in the box below."
+msgstr "아래의 상자에서 제공되는 PIN 번호를 입력하세요."
+
 msgctxt "#32162"
 msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
 msgstr "trakt 애드은 trakt.tv 계정에 접속할 수 있는 인증없이 사용할 수 없습니다."
