@@ -39,3 +39,7 @@ msgstr "Cereka"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Perkhidmatan"
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Pengguna"

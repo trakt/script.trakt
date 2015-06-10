@@ -39,7 +39,3 @@ msgstr "Filmi"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Storitev"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Nepravilen PIN"

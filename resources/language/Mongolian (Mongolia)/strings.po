@@ -23,7 +23,3 @@ msgstr "Ерөнхий"
 msgctxt "#32024"
 msgid "Error"
 msgstr "Алдаа"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Буруу ПИН"

@@ -14,6 +14,7 @@ def get_pin():
     NEVER_BUTTON = 202
     ACTION_PREVIOUS_MENU = 10
     ACTION_BACK = 92
+    INSTRUCTION_LABEL = 203
     CENTER_Y = 6
     CENTER_X = 2
 
@@ -27,6 +28,8 @@ def get_pin():
             self.setFocus(self.pin_edit_control)
             auth = self.getControl(AUTH_BUTTON)
             never = self.getControl(NEVER_BUTTON)
+            instuction = self.getControl(INSTRUCTION_LABEL)
+            instuction.setLabel(getString(32158) + "\n1) " + getString(32159).format("[COLOR skyblue]http://trakt.tv/pin/999[/COLOR]") + "\n2) " + getString(32160) + "\n3) " + getString(32161) + "\n\n" + getString(32162))
             self.pin_edit_control.controlUp(never)
             self.pin_edit_control.controlLeft(never)
             self.pin_edit_control.controlDown(auth)

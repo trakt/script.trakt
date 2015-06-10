@@ -39,7 +39,3 @@ msgstr "Филмови"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Сервис"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Некоректен PIN"

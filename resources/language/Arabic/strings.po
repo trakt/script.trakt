@@ -35,7 +35,3 @@ msgstr ":عادل"
 msgctxt "#32046"
 msgid "Movies"
 msgstr "أفلام"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "PIN غير صحيح"
