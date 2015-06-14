@@ -573,21 +573,69 @@ msgid "Synchronize Library"
 msgstr "Synchronize Library"
 
 msgctxt "#32144"
-msgid "Where can I find my PIN?"
-msgstr "Where can I find my PIN?"
-
-msgctxt "#32145"
-msgid "PIN"
-msgstr "PIN"
-
-msgctxt "#32146"
-msgid "Please enter your PIN in settings"
-msgstr "Please enter your PIN in settings"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
+msgstr "How do I authorize the trakt addon to access my trakt.tv account?"
 
 msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Incorrect PIN"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr "Trakt.tv PIN Authorization Failed"
 
-msgctxt "#32148"
-msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
-msgstr "Scan the QR code or visit http://trakt.tv/pin/999 for your own personal PIN"
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr "Rate this Season"
+
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr "You will be reminded in 24 hours"
+
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr "Use Addon Settings later if you change your mind"
+
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr "Trakt Authorization Complete"
+
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr "Trakt Account Authorization"
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr "Authorize"
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr "Remind Me Later"
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr "No Thanks"
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr "Account Authorization"
+
+msgctxt "#32158"
+msgid "To authorize the trakt addon to access your trakt.tv account:"
+msgstr "To authorize the trakt addon to access your trakt.tv account:"
+
+msgctxt "#32160"
+msgid "Authorize the trakt addon to access your account."
+msgstr "Authorize the trakt addon to access your account."
+
+msgctxt "#32161"
+msgid "Enter the PIN provided in the box below."
+msgstr "Enter the PIN provided in the box below."
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+
+msgctxt "#32163"
+msgid "User"
+msgstr "User"
+
+msgctxt "#32164"
+msgid "Fallback to Title/Year matching if necessary"
+msgstr "Fallback to Title/Year matching if necessary"

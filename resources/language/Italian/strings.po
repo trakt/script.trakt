@@ -476,6 +476,166 @@ msgctxt "#32119"
 msgid "Retrieving episode playback progress from Trakt"
 msgstr "Recupero dell'avanzamento riproduzione degli episodi da Trakt"
 
+msgctxt "#32120"
+msgid "Parsing episode playback progress %i of %i from Trakt"
+msgstr "Analisi dell'avanzamento della riproduzione di %i episodi su %i da Trakt"
+
+msgctxt "#32121"
+msgid "Retrieved episode playback progress from Trakt"
+msgstr "Recuperato l'avanzamento della riproduzione degli episodi da Trakt"
+
+msgctxt "#32122"
+msgid "Retrieving movie playback progress from Trakt"
+msgstr "Recupero l'avanzamento della riproduzione dei film da Trakt"
+
+msgctxt "#32123"
+msgid "Parsing movie playback progress %i of %i from Trakt"
+msgstr "Analisi dell'avanzamento della riproduzione di %i film su %i da Trakt"
+
+msgctxt "#32124"
+msgid "Retrieved movie playback progress from Trakt"
+msgstr "Recuperato l'avanzamento della riproduzione dei film da Trakt"
+
+msgctxt "#32125"
+msgid "Kodi movie playback progress is up to date"
+msgstr "L'avanzamento della riproduzione dei film è aggiornato in Kodi"
+
+msgctxt "#32126"
+msgid "%i movie(s) playback progress will be updated in Kodi"
+msgstr "L'avanzamento della riproduzione di %i film sarà aggiornato in Kodi"
+
+msgctxt "#32127"
+msgid "Updating %i of %i movie(s) playback progress in Kodi"
+msgstr "Aggiorno l'avanzamento della riproduzione di %i film su %i in Kodi"
+
+msgctxt "#32128"
+msgid "Playback progress updated for %i movie(s) in Kodi"
+msgstr "L'avanzamento della riproduzione di %i film è stato aggiornato in Kodi"
+
+msgctxt "#32129"
+msgid "Kodi episode playback progress is up to date"
+msgstr "L'avanzamento della riproduzione degli episodi è aggiornato in Kodi"
+
+msgctxt "#32130"
+msgid "Updating %i of %i episode(s) playback progress in Kodi"
+msgstr "Aggiorno l'avanzamento della riproduzione di %i episodi su %i in Kodi"
+
+msgctxt "#32131"
+msgid "Playback progress updated for %i episode(s) in Kodi"
+msgstr "Avanzamento della riproduzione aggiornato per %i episodi in Kodi"
+
+msgctxt "#32132"
+msgid "Unrate this season"
+msgstr "Togli il voto alla stagione"
+
+msgctxt "#32133"
+msgid "Manage Movie's Lists"
+msgstr "Gestisci le liste dei film"
+
+msgctxt "#32134"
+msgid "Manage Show's Lists"
+msgstr "Gestisci le liste delle serie"
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr "Rimuovi dalla lista \"Da Guardare\""
+
+msgctxt "#32136"
+msgid "Add to Watchlist"
+msgstr "Aggiungi alla lista \"Da Guardare\""
+
+msgctxt "#32137"
+msgid "Rate this Movie"
+msgstr "Vota questo film"
+
+msgctxt "#32138"
+msgid "Rate this Show"
+msgstr "Vota questa serie"
+
+msgctxt "#32139"
+msgid "Rate this Episode"
+msgstr "Vota questo episodio"
+
+msgctxt "#32140"
+msgid "Toggle Watched"
+msgstr "Rimuovi dai Già Visti"
+
+msgctxt "#32141"
+msgid "Manage All Lists"
+msgstr "Gestisci tutte le liste"
+
+msgctxt "#32142"
+msgid "Update All Tags"
+msgstr "Aggiorna tutti i tag"
+
+msgctxt "#32143"
+msgid "Synchronize Library"
+msgstr "Sincronizza la libreria"
+
+msgctxt "#32144"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
+msgstr "Come autorizzo l'addon Trakt ad accedere al mio account Trakt.tv?"
+
 msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Pin non corretto"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr "Autorizzazione PIN Trakt.tv fallita"
+
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr "Vota questa stagione"
+
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr "Ti sarà ricordato fra 24 ore"
+
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr "Usa le impostazioni dell'addon se cambi idea"
+
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr "Autorizzazione Trakt completata"
+
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr "Autorizzazione Trakt account"
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr "Autorizza"
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr "Ricordamelo più tardi"
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr "No grazie"
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr "Autorizzazione account"
+
+msgctxt "#32158"
+msgid "To authorize the trakt addon to access your trakt.tv account:"
+msgstr "Per autorizzare l'addon Trakt ad accedere al tuo account Trakt.tv:"
+
+msgctxt "#32160"
+msgid "Authorize the trakt addon to access your account."
+msgstr "Autorizza l'addon trakt ad accedere al tuo account"
+
+msgctxt "#32161"
+msgid "Enter the PIN provided in the box below."
+msgstr "Inserisci il PIN fornito nello spazio sottostante"
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr "L'addon Trakt non può essere usato senza l'autorizzazione ad accedere al tuo account Trakt.tv."
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Utente"
+
+msgctxt "#32164"
+msgid "Fallback to Title/Year matching if necessary"
+msgstr "Utilizza la corrispondenza titolo/anno se necessario"

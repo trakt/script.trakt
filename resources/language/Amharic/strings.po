@@ -35,7 +35,3 @@ msgstr "መጠነኛ "
 msgctxt "#32046"
 msgid "Movies"
 msgstr "ሙቪዎች"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "የተሳሳተ የመግቢያ ቃል"

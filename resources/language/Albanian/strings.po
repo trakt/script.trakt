@@ -35,7 +35,3 @@ msgstr "Bukur"
 msgctxt "#32046"
 msgid "Movies"
 msgstr "Filma"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "PIN i pasaktë"

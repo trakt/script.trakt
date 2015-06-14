@@ -573,17 +573,61 @@ msgid "Synchronize Library"
 msgstr "라이브러리 동기화"
 
 msgctxt "#32144"
-msgid "Where can I find my PIN?"
-msgstr "PIN 확인 방법"
-
-msgctxt "#32145"
-msgid "PIN"
-msgstr "PIN"
-
-msgctxt "#32146"
-msgid "Please enter your PIN in settings"
-msgstr "설정에서 PIN을 입력하세요"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
+msgstr "trakt 애드온이 trakt.tv 계정에 접속할 수 있게 인증하는 방법은?"
 
 msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "PIN 일치하지 않음"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr "Trakt.tv PIN 인증 실패"
+
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr "이 시즌 평가"
+
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr "24시간 후에 알려줍니다"
+
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr "Trakt 인증 완료"
+
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr "Trakt 계정 인증"
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr "인증"
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr "나중에 알림"
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr "아니오, 괜찮습니다"
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr "계정 인증"
+
+msgctxt "#32158"
+msgid "To authorize the trakt addon to access your trakt.tv account:"
+msgstr "trakt 애드온의 trakt.tv 계정 접속을 인증하려면:"
+
+msgctxt "#32160"
+msgid "Authorize the trakt addon to access your account."
+msgstr "trakt 애드온이 계정에 접속할 수 있게 인증하세요."
+
+msgctxt "#32161"
+msgid "Enter the PIN provided in the box below."
+msgstr "아래의 상자에서 제공되는 PIN 번호를 입력하세요."
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr "trakt 애드은 trakt.tv 계정에 접속할 수 있는 인증없이 사용할 수 없습니다."
+
+msgctxt "#32163"
+msgid "User"
+msgstr "사용자"

@@ -562,7 +562,7 @@ msgstr "Przełącz stan obejrzenia"
 
 msgctxt "#32141"
 msgid "Manage All Lists"
-msgstr "Zarządzaj wszystkimi listai"
+msgstr "Zarządzaj wszystkimi listami"
 
 msgctxt "#32142"
 msgid "Update All Tags"
@@ -573,21 +573,69 @@ msgid "Synchronize Library"
 msgstr "Synchronizuj bibliotekę"
 
 msgctxt "#32144"
-msgid "Where can I find my PIN?"
-msgstr "Gdzie mogę znaleźć swój kod PIN?"
-
-msgctxt "#32145"
-msgid "PIN"
-msgstr "Kod PIN"
-
-msgctxt "#32146"
-msgid "Please enter your PIN in settings"
-msgstr "Wprowadź swój kod PIN w ustawieniach"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
+msgstr "Jak wykonać autoryzację dostępu dodatku do mojego konta w serwisie Trakt.tv?"
 
 msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Niepoprawny PIN"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr "Nieudana autoryzacja przy pomocy kodu PIN w serwisie Trakt"
 
-msgctxt "#32148"
-msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
-msgstr "Zeskanuj kod QR lub odwiedź stronę http://trakt.tv/pin/999, aby uzyskać swój osobisty kod PIN"
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr "Oceń ten sezon"
+
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr "Za 24 godziny zostanie wyświetlone przypomnienie"
+
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr "Użyj ustawień dodatku później, jeśli zmienisz zdanie"
+
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr "Autoryzacja w serwisie Trakt zakończona sukcesem"
+
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr "Autoryzacja konta w serwisie Trakt"
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr "Autoryzuj"
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr "Przypomnij później"
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr "Nie, dzięki"
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr "Autoryzacja konta"
+
+msgctxt "#32158"
+msgid "To authorize the trakt addon to access your trakt.tv account:"
+msgstr "Aby wykonać autoryzację dostępu dodatki do Twojego konta Trakt.tv"
+
+msgctxt "#32160"
+msgid "Authorize the trakt addon to access your account."
+msgstr "Umożliwia autoryzację dostępu dodatku do Twojego konta."
+
+msgctxt "#32161"
+msgid "Enter the PIN provided in the box below."
+msgstr "Wprowadź uzyskany kod PIN w polu poniżej."
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr "Dodatek Trakt wymaga do działania autoryzacji dostępu do Twojego konta w serwisie Trakt. "
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Użytkownik"
+
+msgctxt "#32164"
+msgid "Fallback to Title/Year matching if necessary"
+msgstr "Używaj awaryjnie dopasowania Tytuł/Rok"

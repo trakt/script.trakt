@@ -35,7 +35,3 @@ msgstr "Egokia"
 msgctxt "#32046"
 msgid "Movies"
 msgstr "Filmak"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "PIN okerra"

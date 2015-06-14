@@ -53,7 +53,7 @@
 			</control>
 		</control>
 		<control type="group">
-			<control type="label">
+			<control type="label" id="203">
 				<description>Instructions Label</description>
 				<posx>30</posx>
 				<posy>60</posy>
@@ -61,7 +61,7 @@
 				<height>150</height>
 				<font>font12</font>
 				<wrapmultiline>true</wrapmultiline>
-				<label>$ADDON[script.trakt 32158][CR]$ADDON[script.trakt 32159][CR]$ADDON[script.trakt 32160][CR]$ADDON[script.trakt 32161][CR][CR]$ADDON[script.trakt 32162]</label>
+				<label></label>
 				<textcolor>white</textcolor>
 				<shadowcolor>black</shadowcolor>
 			</control>
@@ -78,6 +78,7 @@
 		<control type="group" id="9001">
 			<control type="button" id="200">
 				<description>Authorize Button</description>
+				<textcolor>FFFFFFFF</textcolor>
 				<posx>30</posx>
 				<posy>460</posy>
 				<width>130</width>
@@ -92,6 +93,7 @@
 			</control>
 			<control type="button" id="201">
 				<description>Later Button</description>
+				<textcolor>FFFFFFFF</textcolor>
 				<posx>170</posx>
 				<posy>460</posy>
 				<width>170</width>
@@ -108,6 +110,7 @@
 			</control>
 			<control type="button" id="202">
 				<description>Never Button</description>
+				<textcolor>FFFFFFFF</textcolor>
 				<posx>350</posx>
 				<posy>460</posy>
 				<width>130</width>
