@@ -562,7 +562,7 @@ msgstr "Przełącz stan obejrzenia"
 
 msgctxt "#32141"
 msgid "Manage All Lists"
-msgstr "Zarządzaj wszystkimi listai"
+msgstr "Zarządzaj wszystkimi listami"
 
 msgctxt "#32142"
 msgid "Update All Tags"
@@ -574,7 +574,7 @@ msgstr "Synchronizuj bibliotekę"
 
 msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
-msgstr "Jak nadać dodatkowi uprawnienie dostępu do mojego konta w serwisie Trakt.tv?"
+msgstr "Jak wykonać autoryzację dostępu dodatku do mojego konta w serwisie Trakt.tv?"
 
 msgctxt "#32147"
 msgid "Trakt.tv PIN Authorization Failed"
@@ -618,11 +618,19 @@ msgstr "Autoryzacja konta"
 
 msgctxt "#32158"
 msgid "To authorize the trakt addon to access your trakt.tv account:"
-msgstr "Aby nadać dodatkowi uprawnienie dostępu do Twojego konta Trakt.tv"
+msgstr "Aby wykonać autoryzację dostępu dodatki do Twojego konta Trakt.tv"
+
+msgctxt "#32160"
+msgid "Authorize the trakt addon to access your account."
+msgstr "Umożliwia autoryzację dostępu dodatku do Twojego konta."
+
+msgctxt "#32161"
+msgid "Enter the PIN provided in the box below."
+msgstr "Wprowadź uzyskany kod PIN w polu poniżej."
 
 msgctxt "#32162"
 msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
-msgstr "Dodatek Trakt wymaga do działania nadania mu uprawnienia dostępu do Twojego konta w serwisie Trakt. "
+msgstr "Dodatek Trakt wymaga do działania autoryzacji dostępu do Twojego konta w serwisie Trakt. "
 
 msgctxt "#32163"
 msgid "User"
