@@ -630,10 +630,6 @@ msgctxt "#32157"
 msgid "Account Authorization"
 msgstr ""
 
-msgctxt "#32158"
-msgid "To authorize the trakt addon to access your trakt.tv account:"
-msgstr ""
-
 msgctxt "#32159"
 msgid "Visit {0} or scan the QR Code below."
 msgstr ""
