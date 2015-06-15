@@ -94,7 +94,7 @@ def get_pin():
             self.addControl(temp)
             return temp
         
-    dialog = PinAuthDialog('TraktPinAuthDialog.xml', __addon__.getAddonInfo('path'))
+    dialog = PinAuthDialog('script-trakt-PinAuthDialog.xml', __addon__.getAddonInfo('path'))
     dialog.doModal()
     if dialog.auth:
         notification(getString(32157), getString(32152), 3000)
