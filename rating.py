@@ -87,7 +87,7 @@ def rateMedia(media_type, itemsToRate, unrate=False, rating=None):
         xbmc.executebuiltin('Dialog.Close(all, true)')
 
         gui = RatingDialog(
-            "RatingDialog.xml",
+            "script-trakt-RatingDialog.xml",
             __addon__.getAddonInfo('path'),
             media_type=media_type,
             media=summary_info,

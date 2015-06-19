@@ -586,9 +586,13 @@ msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
 msgstr ""
 
+#empty strings from id 32145 to 32146
+
 msgctxt "#32147"
 msgid "Trakt.tv PIN Authorization Failed"
 msgstr ""
+
+#empty string with id 32148
 
 msgctxt "#32149"
 msgid "Rate this Season"
@@ -626,12 +630,8 @@ msgctxt "#32157"
 msgid "Account Authorization"
 msgstr ""
 
-msgctxt "#32158"
-msgid "To authorize the trakt addon to access your trakt.tv account:"
-msgstr ""
-
 msgctxt "#32159"
-msgid "Visit"
+msgid "Visit {0} or scan the QR Code below."
 msgstr ""
 
 msgctxt "#32160"
@@ -652,8 +652,4 @@ msgstr ""
 
 msgctxt "#32164"
 msgid "Fallback to Title/Year matching if necessary"
-msgstr ""
-
-msgctxt "#32165"
-msgid "or scan the QR Code below."
 msgstr ""

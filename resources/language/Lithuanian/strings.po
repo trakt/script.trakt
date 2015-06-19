@@ -573,21 +573,69 @@ msgid "Synchronize Library"
 msgstr "Sinchronizuoti biblioteką"
 
 msgctxt "#32144"
-msgid "Where can I find my PIN?"
-msgstr "Kur galiu rasti savo PIN kodą?"
-
-msgctxt "#32145"
-msgid "PIN"
-msgstr "PIN"
-
-msgctxt "#32146"
-msgid "Please enter your PIN in settings"
-msgstr "Įveskite savo PIN kodą nustatymuose"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
+msgstr "Kaip autorizuoti Trakt.tv priedą, kad pasiekti savo Trakt.tv paskyrą?"
 
 msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Klaidingas PIN"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr "Trakt.tv PIN autorizacija nepavyko"
 
-msgctxt "#32148"
-msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
-msgstr "Nuskaityti QR kodą arba apsilankyti http://trakt.tv/pin/999, norėdami gauti asmeninį PIN kodą"
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr "Įvertinti šį sezoną"
+
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr "Priminsime po 24 valandų"
+
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr "Naudokite priedo nustatymus, jei persigalvosite"
+
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr "Trakt.tv autorizacija baigta"
+
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr "Trakt.tv paskyros autorizacija"
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr "Autorizuoti"
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr "Priminti vėliau"
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr "Ne, ačiū"
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr "Paskyros autorizacija"
+
+msgctxt "#32158"
+msgid "To authorize the trakt addon to access your trakt.tv account:"
+msgstr "Norėdami autorizuoti Trakt.tv priedą, kad jis pasiektų jūsų Trakt.tv paskyrą:"
+
+msgctxt "#32160"
+msgid "Authorize the trakt addon to access your account."
+msgstr "Autorizuoti Trakt.tv priedą, kad jis pasiektų jūsų Trakt.tv paskyrą."
+
+msgctxt "#32161"
+msgid "Enter the PIN provided in the box below."
+msgstr "Įveskite žemiau pateiktą PIN kodą."
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr "Trakt.tv priedas NEGALI būti naudojamas be autorizacijos, kuri leidžia pasiekti jūsų Trakt.tv paskyrą."
+
+msgctxt "#32163"
+msgid "User"
+msgstr "Vartotojas"
+
+msgctxt "#32164"
+msgid "Fallback to Title/Year matching if necessary"
+msgstr "Jei reikia, grįžti prie paieškos pagal pavadinimą/metus"

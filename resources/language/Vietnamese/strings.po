@@ -39,7 +39,3 @@ msgstr "Phim"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Dịch Vụ"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Sai mã PIN"

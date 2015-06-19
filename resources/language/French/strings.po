@@ -572,22 +572,6 @@ msgctxt "#32143"
 msgid "Synchronize Library"
 msgstr "Synchroniser votre librairie"
 
-msgctxt "#32144"
-msgid "Where can I find my PIN?"
-msgstr "Où puis-je trouver mon PIN ?"
-
-msgctxt "#32145"
-msgid "PIN"
-msgstr "PIN"
-
-msgctxt "#32146"
-msgid "Please enter your PIN in settings"
-msgstr "Merci d'entrer votre PIN dans les réglages"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Code PIN Incorrect"
-
-msgctxt "#32148"
-msgid "Scan the qr code or visit http://trakt.tv/pin/999 for your own personal PIN"
-msgstr "Scannez le code-barre ou visitez http://trakt.tv/pin/999 pour votre propre PIN"
+msgctxt "#32163"
+msgid "User"
+msgstr "Utilisateur"

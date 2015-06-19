@@ -39,7 +39,3 @@ msgstr "Kvikmyndir"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Þjónusta"
-
-msgctxt "#32147"
-msgid "Incorrect PIN"
-msgstr "Rangt PIN"
