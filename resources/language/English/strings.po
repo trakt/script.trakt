@@ -231,7 +231,7 @@ msgid "Sync collection on library update or cleaning"
 msgstr ""
 
 msgctxt "#32056"
-msgid "Show notifications"
+msgid "Show sync notifications"
 msgstr ""
 
 msgctxt "#32057"
