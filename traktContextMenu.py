@@ -41,7 +41,7 @@ class traktContextMenu(xbmcgui.WindowXMLDialog):
             rate_string = lang(32139)
 
         actions = [mange_string, lang(32135), lang(32136), rate_string, lang(32140), lang(32141), lang(32142), lang(32143)]
-        keys = ["itemlists", "removefromlist", "addtolist", "rate", "togglewatched", "managelists", "updatetags",
+        keys = ["itemlists", "removefromlist", "addtowatchlist", "rate", "togglewatched", "managelists", "updatetags",
                 "sync"]
 
         l = self.getControl(ACTION_LIST)

@@ -11,14 +11,13 @@
 				<posx>0</posx>
 				<posy>0</posy>
 				<width>340</width>
-				<height>132</height>
+				<height>218</height>
 				<texture border="20">ConfluenceDialogBack.png</texture>
 			</control>
 			<control type="list" id="111">
 				<posx>20</posx>
 				<posy>20</posy>
 				<width>300</width>
-				<height>322</height>
 				<onup>111</onup>
 				<ondown>111</ondown>
 				<onleft>111</onleft>
