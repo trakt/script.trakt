@@ -49,12 +49,6 @@ class traktContextMenu(xbmcgui.WindowXMLDialog):
             if keys[i] in self.buttons:
                 l.addItem(self.newListItem(actions[i], id=keys[i]))
 
-        h = ((len(self.buttons)) * 46) - 6
-        l.setHeight(h)
-
-        d = self.getControl(DIALOG_IMAGE)
-        d.setHeight(h + 40)
-
         self.setFocus(l)
 
     def newListItem(self, label, selected=False, *args, **kwargs):
