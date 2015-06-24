@@ -1,6 +1,8 @@
 version 3.0.2
   - fancy PIN auth dialog (by tknorris) and design (by piers)
+  - new design for context menu (by piers)
   - skinners be aware, we renamed the dialogs, so you will need to rename yours too
+  - improved the dialogs so they are easier to skin
   - you no longer need to scrobble to get a rating dialog
   - created context menu addons for Kodi 15 (Isengard) - you need to install them on their own
   - added an 'add to watchlist' button
