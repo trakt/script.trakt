@@ -231,7 +231,7 @@ msgid "Sync collection on library update or cleaning"
 msgstr ""
 
 msgctxt "#32056"
-msgid "Show notifications"
+msgid "Show sync notifications"
 msgstr ""
 
 msgctxt "#32057"
@@ -240,10 +240,6 @@ msgstr ""
 
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
-msgstr ""
-
-msgctxt "#32059"
-msgid "Show marked as watched notification"
 msgstr ""
 
 msgctxt "#32060"
@@ -652,4 +648,12 @@ msgstr ""
 
 msgctxt "#32164"
 msgid "Fallback to Title/Year matching if necessary"
+msgstr ""
+
+msgctxt "#32165"
+msgid "Trakt - Added to watchlist"
+msgstr ""
+
+msgctxt "#32166"
+msgid "Trakt - Failed adding to watchlist"
 msgstr ""

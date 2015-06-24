@@ -188,6 +188,12 @@ class traktAPI(object):
             result = Trakt['sync/history'].add(mediaObject)
         return result
 
+    def addToWatchlist(self, mediaObject):
+        with Trakt.configuration.oauth.from_response(self.authorization):
+            with Trakt.configuration.http(retry=True):
+                result = Trakt['sync/watchlist'].add(mediaObject)
+        return result
+
     def getShowRatingForUser(self, showId, idType='tvdb'):
         ratings = {}
         with Trakt.configuration.oauth.from_response(self.authorization):
