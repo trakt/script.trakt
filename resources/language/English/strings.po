@@ -547,35 +547,35 @@ msgid "Remove from Watchlist"
 msgstr ""
 
 msgctxt "#32136"
-msgid "Add to Watchlist"
+msgid "Add to watchlist"
 msgstr ""
 
 msgctxt "#32137"
-msgid "Rate this Movie"
+msgid "Rate this movie"
 msgstr ""
 
 msgctxt "#32138"
-msgid "Rate this Show"
+msgid "Rate this show"
 msgstr ""
 
 msgctxt "#32139"
-msgid "Rate this Episode"
+msgid "Rate this episode"
 msgstr ""
 
 msgctxt "#32140"
-msgid "Toggle Watched"
+msgid "Toggle watched"
 msgstr ""
 
 msgctxt "#32141"
-msgid "Manage All Lists"
+msgid "Manage all lists"
 msgstr ""
 
 msgctxt "#32142"
-msgid "Update All Tags"
+msgid "Update all tags"
 msgstr ""
 
 msgctxt "#32143"
-msgid "Synchronize Library"
+msgid "Synchronize library"
 msgstr ""
 
 msgctxt "#32144"
