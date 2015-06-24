@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.trakt" name="Trakt" version="3.0.2~beta3" provider-name="Trakt.tv">
+<addon id="script.trakt" name="Trakt" version="3.0.2~beta3" provider-name="Trakt.tv, Razze">
 	<requires>
 		<import addon="xbmc.python" version="2.14.0"/>
 		<import addon="script.module.simplejson" version="3.3.0"/>
@@ -49,7 +49,7 @@
 		<description lang="sv">Skrobbla automatiskt alla TV-serie avsnitt och filmer du tittar på till Trakt.tv! Samla en innehållsrik historik om allt du tittar på och var en del av ett globalt kollektiv av TV och film entusiaster. Skapa ett gratis konto på http://trakt.tv och ta del av massor av funktioner.&#10;&#10;- Skrobbla automatiskt vad du tittar på&#10;- Appar för iPhone, iPad, Android och Windows Phone&#10;- Dela vad du tittar på (i realtid) samt dina betyg på Facebook och Twitter&#10;- Personlig kalender så du aldrig missar en TV serie&#10;- Följ dina vänner och andra intressanta personer&#10;- Använd "att se" listor så du inte glömmer vad du skall se&#10;- Spåra dina media samlingar och imponera på dina vänner&#10;- Skapa listor för olika ämnen som du väljer&#10;- Spåra lätt hur mycket av en TV serie du sett, över alla säsonger och avsnitt&#10;- Jämför hur mycket film du har sett mot flera viktiga listor inom industrin, t.ex. IMDb Top 250&#10;- Upptäck nya TV serier och filmer baserat på din historik&#10;- Widgets för din forum signatur&#10;&#10;Vad kan detta addon göra?&#10;&#10;- Skrobbla automatiskt alla TV-serie avsnitt och filmer du tittar på&#10;- Synkronisera dina samlingar av film och Tv-serier till Trakt (startas efter en uppdatering av ditt bibliotek i Kodi)&#10;- Städa automatiskt din Trakt samling så den stämmer med Kodi.&#10;- Synkronisera sedd/osedd status mellan Kodi och Trakt&#10;- Betygsätt filmer och TV-serier avsnitt efter du har sett dem&#10;&#10;Ett stort tack till alla som bidragit till detta plugin! Se loggen för tillägg och ändringar för att se vilka dessa talangfulla utvecklare är.</description>
 		<language></language>
 		<platform>all</platform>
-		<forum>http://forum.kodi.tv/showthread.php?tid=138745</forum>
+		<forum>http://forum.kodi.tv/showthread.php?tid=220547</forum>
 		<website>http://trakt.tv</website>
 		<email></email>
 		<source>https://github.com/trakt/script.trakt</source>
