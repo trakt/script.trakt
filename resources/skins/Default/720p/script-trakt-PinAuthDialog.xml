@@ -1,107 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <window id="9999">
 	<defaultcontrol always="false">200</defaultcontrol>
+	<zorder>2</zorder>
 	<coordinates>
 		<system>1</system>
-		<posx>385</posx>
-		<posy>95</posy>
+		<posx>240</posx>
+		<posy>170</posy>
 	</coordinates>
 	<include>dialogeffect</include>
 	<controls>
+		<control type="image">
+			<description>Fade</description>
+			<posx>-700</posx>
+			<posy>-500</posy>
+			<width>2200</width>
+			<height>2200</height>
+			<texture>trakt-bg-fade.png</texture>
+		</control>
 		<control type="group">
-			<include>VisibleFadeEffect</include>
 			<control type="image">
 				<description>Background Image</description>
 				<posx>0</posx>
 				<posy>0</posy>
-				<width>510</width>
-				<height>530</height>
-				<texture border="40">DialogBack2.png</texture>
-			</control>
-			<control type="image">
-				<description>Dialog Header image</description>
-				<posx>40</posx>
-				<posy>16</posy>
-				<width>450</width>
-				<height>40</height>
-				<texture>dialogheader.png</texture>
+				<width>800</width>
+				<height>340</height>
+				<texture>trakt-auth-bg.png</texture>
 			</control>
 			<control type="label" id="100">
 				<description>header label</description>
-				<posx>40</posx>
-				<posy>20</posy>
-				<width>450</width>
-				<height>30</height>
-				<font>font13_title</font>
+				<posx>780</posx>
+				<posy>15</posy>
+				<width>490</width>
+				<height>25</height>
 				<label>$ADDON[script.trakt 32153]</label>
-				<align>center</align>
+				<align>right</align>
 				<aligny>center</aligny>
-				<textcolor>darkorange</textcolor>
-				<shadowcolor>black</shadowcolor>
+				<font>font14</font>
+				<textcolor>FFEB1518</textcolor>
 			</control>
 			<control type="button">
 				<description>Close Window button</description>
-				<posx>420</posx>
-				<posy>15</posy>
+				<posx>736</posx>
+				<posy>-32</posy>
 				<width>64</width>
 				<height>32</height>
 				<label>-</label>
 				<font>-</font>
 				<onclick>PreviousMenu</onclick>
-				<texturefocus>DialogCloseButton-focus.png</texturefocus>
-				<texturenofocus>DialogCloseButton.png</texturenofocus>
+				<texturefocus>close-fo.png</texturefocus>
+				<texturenofocus>close-nofo.png</texturenofocus>
 				<visible>system.getbool(input.enablemouse)</visible>
 			</control>
 		</control>
 		<control type="group">
 			<control type="label" id="203">
 				<description>Instructions Label</description>
-				<posx>30</posx>
-				<posy>60</posy>
-				<width>450</width>
-				<height>150</height>
+				<posx>206</posx>
+				<posy>73</posy>
+				<width>360</width>
+				<height>200</height>
 				<font>font12</font>
 				<wrapmultiline>true</wrapmultiline>
-				<label></label>
-				<textcolor>white</textcolor>
-				<shadowcolor>black</shadowcolor>
+				<label></label><!-- this is set from the code -->
+				<textcolor>AA000000</textcolor>
+				<align>left</align>
+				<aligny>top</aligny>
 			</control>
 		</control>
-        <control type="image">
-            <description>QR Code</description>
-            <posx>191</posx>
-            <posy>306</posy>
-            <width>128</width>
-            <height>128</height>
-            <texture>qr_code.png</texture>
-            <aspectratio>keep</aspectratio>
-        </control>
+		<control type="image">
+			<description>QR Code</description>
+			<posx>574</posx>
+			<posy>60</posy>
+			<width>224</width>
+			<height>224</height>
+			<texture>qr_code.png</texture>
+			<aspectratio>keep</aspectratio>
+		</control>
 		<control type="group" id="9001">
 			<control type="button" id="200">
 				<description>Authorize Button</description>
-				<textcolor>FFFFFFFF</textcolor>
-				<posx>30</posx>
-				<posy>460</posy>
-				<width>130</width>
+				<posx>211</posx>
+				<posy>293</posy>
+				<width>170</width>
 				<height>40</height>
 				<align>center</align>
 				<aligny>center</aligny>
 				<label>$ADDON[script.trakt 32154]</label>
 				<font>font12_title</font>
+				<textcolor>AA000000</textcolor>
+				<texturenofocus>button-nofo.png</texturenofocus>
+				<texturefocus>button-fo.png</texturefocus>
 				<textoffsetx>10</textoffsetx>
 				<ondown>201</ondown>
 				<onright>201</onright>
 			</control>
 			<control type="button" id="201">
 				<description>Later Button</description>
-				<textcolor>FFFFFFFF</textcolor>
-				<posx>170</posx>
-				<posy>460</posy>
+				<posx>411</posx>
+				<posy>293</posy>
 				<width>170</width>
 				<height>40</height>
 				<align>center</align>
 				<aligny>center</aligny>
 				<label>$ADDON[script.trakt 32155]</label>
 				<font>font12_title</font>
+				<textcolor>AA000000</textcolor>
+				<texturenofocus>button-nofo.png</texturenofocus>
+				<texturefocus>button-fo.png</texturefocus>				
 				<textoffsetx>10</textoffsetx>
 				<onup>200</onup>
 				<onleft>200</onleft>
@@ -110,14 +115,16 @@
 			</control>
 			<control type="button" id="202">
 				<description>Never Button</description>
-				<textcolor>FFFFFFFF</textcolor>
-				<posx>350</posx>
-				<posy>460</posy>
-				<width>130</width>
+				<posx>611</posx>
+				<posy>293</posy>
+				<width>170</width>
 				<height>40</height>
 				<align>center</align>
 				<aligny>center</aligny>
 				<label>$ADDON[script.trakt 32156]</label>
+				<textcolor>AA000000</textcolor>
+				<texturenofocus>button-nofo.png</texturenofocus>
+				<texturefocus>button-fo.png</texturefocus>				
 				<font>font12_title</font>
 				<textoffsetx>10</textoffsetx>
 				<onup>201</onup>
