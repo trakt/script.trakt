@@ -1,7 +1,7 @@
 # Kodi Media Center language file
 # Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: Trakt.tv
+# Addon Provider: Trakt.tv, Razze
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -241,6 +241,8 @@ msgstr ""
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
 msgstr ""
+
+#empty string with id 32059
 
 msgctxt "#32060"
 msgid "Hide notifications during playback"
@@ -625,6 +627,8 @@ msgstr ""
 msgctxt "#32157"
 msgid "Account Authorization"
 msgstr ""
+
+#empty string with id 32158
 
 msgctxt "#32159"
 msgid "Visit {0} or scan the QR Code below."

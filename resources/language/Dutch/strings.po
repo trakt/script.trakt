@@ -1,7 +1,7 @@
 # Kodi Media Center language file
 # Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: Trakt.tv
+# Addon Provider: Trakt.tv, Razze
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -220,10 +220,6 @@ msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "Synchroniseer je collectie tijdens het bijwerken of opschonen van je bibliotheek"
 
-msgctxt "#32056"
-msgid "Show notifications"
-msgstr "Berichten weergeven"
-
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
 msgstr "Haal verwijderde films uit je Trakt-collectie"
@@ -231,10 +227,6 @@ msgstr "Haal verwijderde films uit je Trakt-collectie"
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
 msgstr "Haal verwijderde TV-afleveringen uit je Trakt-collectie"
-
-msgctxt "#32059"
-msgid "Show marked as watched notification"
-msgstr "Toon gemarkeerd als bekeken bericht"
 
 msgctxt "#32060"
 msgid "Hide notifications during playback"
@@ -540,38 +532,70 @@ msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "Verwijder van bekijklijst"
 
-msgctxt "#32136"
-msgid "Add to Watchlist"
-msgstr "Voeg toe aan bekijklijst"
+msgctxt "#32144"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
+msgstr "Hoe autoriseer ik de trakt add-on om in mijn trakt.tv account te komen?"
 
-msgctxt "#32137"
-msgid "Rate this Movie"
-msgstr "Waardeer deze film"
+msgctxt "#32147"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr "Trakt.tv Wachtwoord autorisatie mislukt"
 
-msgctxt "#32138"
-msgid "Rate this Show"
-msgstr "Waardeer deze serie"
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr "Waardeer dit seizoen"
 
-msgctxt "#32139"
-msgid "Rate this Episode"
-msgstr "Waardeer deze aflevering"
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr "U wordt herinnert binnen 24 uur"
 
-msgctxt "#32140"
-msgid "Toggle Watched"
-msgstr "Toggle bekeken"
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr "Gebruik add-on instellingen later al je van gedachten wisselt"
 
-msgctxt "#32141"
-msgid "Manage All Lists"
-msgstr "Beheer alle lijsten"
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr "Trakt autorisatie compleet"
 
-msgctxt "#32142"
-msgid "Update All Tags"
-msgstr "Update alle Tags"
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr "Trakt Account autorisatie"
 
-msgctxt "#32143"
-msgid "Synchronize Library"
-msgstr "Synchroniseer bibliotheek"
+msgctxt "#32154"
+msgid "Authorize"
+msgstr "Autoriseren"
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr "Herinner me later"
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr "Nee bedankt"
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr "Account autorisatie"
+
+msgctxt "#32159"
+msgid "Visit {0} or scan the QR Code below."
+msgstr "Bezoek {0} of scan de QR code beneden."
+
+msgctxt "#32160"
+msgid "Authorize the trakt addon to access your account."
+msgstr "Autoriseer de trakt add-on om toegang te krijgen tot jouw account."
+
+msgctxt "#32161"
+msgid "Enter the PIN provided in the box below."
+msgstr "Vul het wachtwoord in verkregen in de box beneden."
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr "De trakt add-on KAN NIET worden gebruikt zonder het te autoriseren naar jouw trakt.tv account.   "
 
 msgctxt "#32163"
 msgid "User"
 msgstr "Gebruiker"
+
+msgctxt "#32164"
+msgid "Fallback to Title/Year matching if necessary"
+msgstr "Terugvallen naar Titel/Jaar overeenkoming indien noodzakelijk"

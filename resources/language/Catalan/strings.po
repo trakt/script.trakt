@@ -1,7 +1,7 @@
 # Kodi Media Center language file
 # Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: Trakt.tv
+# Addon Provider: Trakt.tv, Razze
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -24,17 +24,33 @@ msgctxt "#32004"
 msgid "Rating"
 msgstr "Valoració"
 
+msgctxt "#32010"
+msgid "Default rating"
+msgstr "Valoració per defecte"
+
+msgctxt "#32016"
+msgid "Exclusions"
+msgstr "Exclusions"
+
 msgctxt "#32024"
 msgid "Error"
 msgstr "S'ha produït un error"
 
+msgctxt "#32030"
+msgid "Bad"
+msgstr "Dolent"
+
+msgctxt "#32031"
+msgid "Poor"
+msgstr "Pobre"
+
 msgctxt "#32033"
 msgid "Fair"
-msgstr "Serè"
+msgstr "Just"
 
 msgctxt "#32045"
 msgid "Synchronize"
-msgstr "Sincronitzar"
+msgstr "Sincronitza"
 
 msgctxt "#32046"
 msgid "Movies"
@@ -43,6 +59,18 @@ msgstr "Pel·lícules"
 msgctxt "#32054"
 msgid "Service"
 msgstr "Servei"
+
+msgctxt "#32060"
+msgid "Hide notifications during playback"
+msgstr "Amaga les notificacions durant la reproducció"
+
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr "Valora aquesta temporada"
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr "Autoritza"
 
 msgctxt "#32163"
 msgid "User"
