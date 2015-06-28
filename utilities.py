@@ -495,6 +495,9 @@ def parseIdToTraktIds(id, type):
     elif id.isdigit() and (isEpisode(type) or isSeason(type) or isShow(type)):
         data['tvdb'] = id
         id_type = 'tvdb'
+    else:
+        data['slug'] = id
+        id_type = 'slug'
     return data, id_type
 
 def getMediaType():
@@ -508,3 +511,17 @@ def getMediaType():
         return "movie"
     else:
         return None
+
+def best_id(ids):
+    if 'trakt' in ids:
+        return ids['trakt']
+    elif 'imdb' in ids:
+        return ids['imdb']
+    elif 'tmdb' in ids:
+        return ids['tmdb']
+    elif 'tvdb' in ids:
+        return ids['tvdb']
+    elif 'tvrage' in ids:
+        return ids['tvrage']
+    elif 'slug' in ids:
+        return ids['slug']
