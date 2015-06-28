@@ -1,7 +1,7 @@
 # Kodi Media Center language file
 # Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: Trakt.tv
+# Addon Provider: Trakt.tv, Razze
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -220,10 +220,6 @@ msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "Synchronizuj kolekcję po aktualizacji lub czyszczeniu biblioteki"
 
-msgctxt "#32056"
-msgid "Show notifications"
-msgstr "Pokazuj powiadomienia"
-
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
 msgstr "Usuwaj skasowane filmy z kolekcji Trakt"
@@ -231,10 +227,6 @@ msgstr "Usuwaj skasowane filmy z kolekcji Trakt"
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
 msgstr "Usuwaj skasowane odcinki z kolekcji Trakt"
-
-msgctxt "#32059"
-msgid "Show marked as watched notification"
-msgstr "Pokazuj powiadomienia o oznaczeniu jako obejrzane"
 
 msgctxt "#32060"
 msgid "Hide notifications during playback"
@@ -540,38 +532,6 @@ msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "Usuń z listy Do obejrzenia"
 
-msgctxt "#32136"
-msgid "Add to Watchlist"
-msgstr "Dodaj do listy Do obejrzenia"
-
-msgctxt "#32137"
-msgid "Rate this Movie"
-msgstr "Oceń ten film"
-
-msgctxt "#32138"
-msgid "Rate this Show"
-msgstr "Oceń ten serial"
-
-msgctxt "#32139"
-msgid "Rate this Episode"
-msgstr "Oceń ten odcinek"
-
-msgctxt "#32140"
-msgid "Toggle Watched"
-msgstr "Przełącz stan obejrzenia"
-
-msgctxt "#32141"
-msgid "Manage All Lists"
-msgstr "Zarządzaj wszystkimi listami"
-
-msgctxt "#32142"
-msgid "Update All Tags"
-msgstr "Aktualizuj wszystkie znaczniki"
-
-msgctxt "#32143"
-msgid "Synchronize Library"
-msgstr "Synchronizuj bibliotekę"
-
 msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
 msgstr "Jak wykonać autoryzację dostępu dodatku do mojego konta w serwisie Trakt.tv?"
@@ -616,9 +576,9 @@ msgctxt "#32157"
 msgid "Account Authorization"
 msgstr "Autoryzacja konta"
 
-msgctxt "#32158"
-msgid "To authorize the trakt addon to access your trakt.tv account:"
-msgstr "Aby wykonać autoryzację dostępu dodatki do Twojego konta Trakt.tv"
+msgctxt "#32159"
+msgid "Visit {0} or scan the QR Code below."
+msgstr "Odwiedź {0} lub zeskanuj kod QR poniżej."
 
 msgctxt "#32160"
 msgid "Authorize the trakt addon to access your account."

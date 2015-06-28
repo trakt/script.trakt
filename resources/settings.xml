@@ -29,7 +29,6 @@
 		<setting id="sync_on_update" type="bool" label="32055" default="false"/>
 		<setting id="show_sync_notifications" type="bool" label="32056" default="false"/>
 		<setting id="hide_notifications_playback" type="bool" label="32060" default="false"/>
-		<setting id="show_marked_notification" type="bool" label="32059" default="true"/>
 		<setting type="sep"/>
 		<setting label="32046" type="lsep"/><!-- Movies -->
 		<setting id="add_movies_to_trakt" type="bool" label="32047" default="true"/>

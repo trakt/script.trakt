@@ -1,7 +1,7 @@
 # Kodi Media Center language file
 # Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: Trakt.tv
+# Addon Provider: Trakt.tv, Razze
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -220,10 +220,6 @@ msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "Synchroniser la collection lors de la mise à jour ou du nettoyage de la médiathèque "
 
-msgctxt "#32056"
-msgid "Show notifications"
-msgstr "Afficher les notifications"
-
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
 msgstr "Retirer de la collection Trakt les films supprimés"
@@ -231,10 +227,6 @@ msgstr "Retirer de la collection Trakt les films supprimés"
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
 msgstr "Retirer de la collection Trakt les épisodes TV supprimés"
-
-msgctxt "#32059"
-msgid "Show marked as watched notification"
-msgstr "Afficher les notifications \"marqué comme vu\""
 
 msgctxt "#32060"
 msgid "Hide notifications during playback"
@@ -540,38 +532,70 @@ msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "Retirer de la liste"
 
-msgctxt "#32136"
-msgid "Add to Watchlist"
-msgstr "Ajouter à la liste"
+msgctxt "#32144"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
+msgstr "Comment dois-je autoriser l'extension trakt pour accéder à mon compte trakt.tv ?"
 
-msgctxt "#32137"
-msgid "Rate this Movie"
-msgstr "Noter ce film"
+msgctxt "#32147"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr "Erreur de code PIN Trakt.tv"
 
-msgctxt "#32138"
-msgid "Rate this Show"
-msgstr "Noter cette émission"
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr "Noter cette saison"
 
-msgctxt "#32139"
-msgid "Rate this Episode"
-msgstr "Noter cet épisode"
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr "Un rappel vous sera notifié dans 24 heures"
 
-msgctxt "#32140"
-msgid "Toggle Watched"
-msgstr "Inversé comme vu"
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr "Utiliser les réglages d'extensions plus tard si vous changez d'avis"
 
-msgctxt "#32141"
-msgid "Manage All Lists"
-msgstr "Gérer toutes les listes"
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr "Autorisation Trakt terminée"
 
-msgctxt "#32142"
-msgid "Update All Tags"
-msgstr "Mettre à jour toutes mes étiquettes"
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr "Autorisation de compte Trakt"
 
-msgctxt "#32143"
-msgid "Synchronize Library"
-msgstr "Synchroniser votre librairie"
+msgctxt "#32154"
+msgid "Authorize"
+msgstr "Autoriser"
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr "Me rappeler plus tard"
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr "Non merci"
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr "Autorisation de compte"
+
+msgctxt "#32159"
+msgid "Visit {0} or scan the QR Code below."
+msgstr "Suivez {0} or scannez le QR Code ci-dessous."
+
+msgctxt "#32160"
+msgid "Authorize the trakt addon to access your account."
+msgstr "Autorise l'extension trakt à accéder à votre compte."
+
+msgctxt "#32161"
+msgid "Enter the PIN provided in the box below."
+msgstr "Rentrer le code PIN fourni dans la boîte de dialogue ci-dessous."
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr "L'extension trakt NE PEUT PAS être utilisée sans l'avoir autorisée à accéder à votre compte trakt.tv"
 
 msgctxt "#32163"
 msgid "User"
 msgstr "Utilisateur"
+
+msgctxt "#32164"
+msgid "Fallback to Title/Year matching if necessary"
+msgstr "Revenir au Titre/Année par défaut correspondant si nécessaire"

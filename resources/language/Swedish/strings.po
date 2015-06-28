@@ -1,7 +1,7 @@
 # Kodi Media Center language file
 # Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: Trakt.tv
+# Addon Provider: Trakt.tv, Razze
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -220,10 +220,6 @@ msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "Synkronisera samlingar på trakt vid uppdatering eller städning av bibliotek"
 
-msgctxt "#32056"
-msgid "Show notifications"
-msgstr "Visa notifieringar"
-
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
 msgstr "Tag bort raderade filmer från samlingen på Trakt"
@@ -231,10 +227,6 @@ msgstr "Tag bort raderade filmer från samlingen på Trakt"
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
 msgstr "Tag bort raderade TV avsnitt från samlingen på Trakt"
-
-msgctxt "#32059"
-msgid "Show marked as watched notification"
-msgstr "Visa markerad som sedd notifiering"
 
 msgctxt "#32060"
 msgid "Hide notifications during playback"
@@ -539,38 +531,6 @@ msgstr "Hantera serielistor"
 msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "Tag bort från Watchlist"
-
-msgctxt "#32136"
-msgid "Add to Watchlist"
-msgstr "Lägg till Watchlist"
-
-msgctxt "#32137"
-msgid "Rate this Movie"
-msgstr "Betygsätt denna film"
-
-msgctxt "#32138"
-msgid "Rate this Show"
-msgstr "Betygsätt denna serie"
-
-msgctxt "#32139"
-msgid "Rate this Episode"
-msgstr "Betygsätt detta avsnitt"
-
-msgctxt "#32140"
-msgid "Toggle Watched"
-msgstr "Växla Watched status"
-
-msgctxt "#32141"
-msgid "Manage All Lists"
-msgstr "Hantera alla listor"
-
-msgctxt "#32142"
-msgid "Update All Tags"
-msgstr "Uppdatera alla taggar"
-
-msgctxt "#32143"
-msgid "Synchronize Library"
-msgstr "Synkronisera bibliotek"
 
 msgctxt "#32163"
 msgid "User"
