@@ -1,7 +1,7 @@
 # Kodi Media Center language file
 # Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: Trakt.tv
+# Addon Provider: Trakt.tv, Razze
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -42,7 +42,7 @@ msgstr "Įvertinti kiekvieną grojaraščio elementą"
 
 msgctxt "#32008"
 msgid "Minimum percent watched to display rating dialog"
-msgstr "Minimalus peržiūrėjimo procentas, kad būtų rodomas įvertinimo dialogas"
+msgstr "Minimalus peržiūrėjimo procentas įvertinimo dialogo rodymui"
 
 msgctxt "#32009"
 msgid "Allow re-rating of media"
@@ -220,10 +220,6 @@ msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "Sinchronizuoti kolekciją po bibliotekos atnaujino ar išvalymo"
 
-msgctxt "#32056"
-msgid "Show notifications"
-msgstr "Rodyti pranešimus"
-
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
 msgstr "Pašalinti ištrintus filmus iš Trakt.tv kolekcijos"
@@ -231,10 +227,6 @@ msgstr "Pašalinti ištrintus filmus iš Trakt.tv kolekcijos"
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
 msgstr "Pašalinti ištrintus TV epizodus iš Trakt.tv kolekcijos"
-
-msgctxt "#32059"
-msgid "Show marked as watched notification"
-msgstr "Rodyti pažymėta kaip peržiūrėta pranešimus"
 
 msgctxt "#32060"
 msgid "Hide notifications during playback"
@@ -540,38 +532,6 @@ msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "Pašalinti iš peržiūros sąrašo"
 
-msgctxt "#32136"
-msgid "Add to Watchlist"
-msgstr "Pridėti į peržiūros sąrašą"
-
-msgctxt "#32137"
-msgid "Rate this Movie"
-msgstr "Įvertinti šį filmą"
-
-msgctxt "#32138"
-msgid "Rate this Show"
-msgstr "Įvertinti šia laidą"
-
-msgctxt "#32139"
-msgid "Rate this Episode"
-msgstr "Įvertinti šį epizodą"
-
-msgctxt "#32140"
-msgid "Toggle Watched"
-msgstr "Perjungti peržiūrėjimo būseną"
-
-msgctxt "#32141"
-msgid "Manage All Lists"
-msgstr "Tvarkyti visus sąrašus"
-
-msgctxt "#32142"
-msgid "Update All Tags"
-msgstr "Atnaujinti visas žymas"
-
-msgctxt "#32143"
-msgid "Synchronize Library"
-msgstr "Sinchronizuoti biblioteką"
-
 msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
 msgstr "Kaip autorizuoti Trakt.tv priedą, kad pasiekti savo Trakt.tv paskyrą?"
@@ -616,9 +576,9 @@ msgctxt "#32157"
 msgid "Account Authorization"
 msgstr "Paskyros autorizacija"
 
-msgctxt "#32158"
-msgid "To authorize the trakt addon to access your trakt.tv account:"
-msgstr "Norėdami autorizuoti Trakt.tv priedą, kad jis pasiektų jūsų Trakt.tv paskyrą:"
+msgctxt "#32159"
+msgid "Visit {0} or scan the QR Code below."
+msgstr "Apsilankykite {0} arba nuskaitykite žemiau esantį QR kodą.."
 
 msgctxt "#32160"
 msgid "Authorize the trakt addon to access your account."

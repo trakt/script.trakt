@@ -1,7 +1,7 @@
 # Kodi Media Center language file
 # Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: Trakt.tv
+# Addon Provider: Trakt.tv, Razze
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -220,10 +220,6 @@ msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "סנכרן אוסף בעדכון ספריה או ניקוי"
 
-msgctxt "#32056"
-msgid "Show notifications"
-msgstr "הצג התראות"
-
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
 msgstr "הסר סרטים שנמחקו מהאוסף של Trakt"
@@ -231,10 +227,6 @@ msgstr "הסר סרטים שנמחקו מהאוסף של Trakt"
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
 msgstr "הסר פרקי סדרה שנמחקו מהאוסף של Trakt"
-
-msgctxt "#32059"
-msgid "Show marked as watched notification"
-msgstr "הצג התראת סומנו כנצפו"
 
 msgctxt "#32060"
 msgid "Hide notifications during playback"
@@ -539,38 +531,6 @@ msgstr "ניהול רשימות סדרה"
 msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "הסר מרשימת צפייה"
-
-msgctxt "#32136"
-msgid "Add to Watchlist"
-msgstr "הוסף לרשימת צפייה"
-
-msgctxt "#32137"
-msgid "Rate this Movie"
-msgstr "דרג סרט זה"
-
-msgctxt "#32138"
-msgid "Rate this Show"
-msgstr "דרג סדרה זו"
-
-msgctxt "#32139"
-msgid "Rate this Episode"
-msgstr "דרג פרק זה"
-
-msgctxt "#32140"
-msgid "Toggle Watched"
-msgstr "סמן כנצפה"
-
-msgctxt "#32141"
-msgid "Manage All Lists"
-msgstr "ניהול כל הרשימות"
-
-msgctxt "#32142"
-msgid "Update All Tags"
-msgstr "עדכן את כל התגיות"
-
-msgctxt "#32143"
-msgid "Synchronize Library"
-msgstr "סנכרון ספריה"
 
 msgctxt "#32163"
 msgid "User"

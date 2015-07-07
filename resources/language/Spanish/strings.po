@@ -1,7 +1,7 @@
 # Kodi Media Center language file
 # Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: Trakt.tv
+# Addon Provider: Trakt.tv, Razze
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -220,10 +220,6 @@ msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "Sincronizar la colección al actualizar o limpiar la libreria"
 
-msgctxt "#32056"
-msgid "Show notifications"
-msgstr "Mostrar notificaciones"
-
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
 msgstr "Eliminar de la colección de Trakt las Películas borradas."
@@ -231,10 +227,6 @@ msgstr "Eliminar de la colección de Trakt las Películas borradas."
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
 msgstr "Eliminar de la colección de Trakt los Episodios borrados."
-
-msgctxt "#32059"
-msgid "Show marked as watched notification"
-msgstr "Mostrar la notificación de marcado como visto"
 
 msgctxt "#32060"
 msgid "Hide notifications during playback"
@@ -540,38 +532,6 @@ msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "Eliminar de la lista de reproducción"
 
-msgctxt "#32136"
-msgid "Add to Watchlist"
-msgstr "Añadir a la lista de reproducción"
-
-msgctxt "#32137"
-msgid "Rate this Movie"
-msgstr "Valorar ésta Película"
-
-msgctxt "#32138"
-msgid "Rate this Show"
-msgstr "Valorar ésta Serie"
-
-msgctxt "#32139"
-msgid "Rate this Episode"
-msgstr "Valorar éste Episodio"
-
-msgctxt "#32140"
-msgid "Toggle Watched"
-msgstr "Cambiar a visto"
-
-msgctxt "#32141"
-msgid "Manage All Lists"
-msgstr "Gestionar todas las listas"
-
-msgctxt "#32142"
-msgid "Update All Tags"
-msgstr "Actualizar todas las etiquetas"
-
-msgctxt "#32143"
-msgid "Synchronize Library"
-msgstr "Sincronizar la Librería"
-
 msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
 msgstr "¿Cómo autorizo al addon de trakt a acceder a mi cuenta trakt?"
@@ -615,10 +575,6 @@ msgstr "No, Gracias."
 msgctxt "#32157"
 msgid "Account Authorization"
 msgstr "Autorización de cuenta."
-
-msgctxt "#32158"
-msgid "To authorize the trakt addon to access your trakt.tv account:"
-msgstr "Para autorizar el addon de trakt a acceder a tu cuenta trakt.tv"
 
 msgctxt "#32160"
 msgid "Authorize the trakt addon to access your account."

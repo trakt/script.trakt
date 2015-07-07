@@ -1,7 +1,7 @@
 # Kodi Media Center language file
 # Addon Name: Trakt
 # Addon id: script.trakt
-# Addon Provider: Trakt.tv
+# Addon Provider: Trakt.tv, Razze
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -220,10 +220,6 @@ msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "Sammlung nach Bibliotheksaktualisierung oder -säuberung synchronisieren"
 
-msgctxt "#32056"
-msgid "Show notifications"
-msgstr "Benachrichtigungen anzeigen"
-
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
 msgstr "Entferne gelöschte Filme aus der Trakt Sammlung"
@@ -231,10 +227,6 @@ msgstr "Entferne gelöschte Filme aus der Trakt Sammlung"
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
 msgstr "Entferne gelöschte Episoden aus der Trakt Sammlung"
-
-msgctxt "#32059"
-msgid "Show marked as watched notification"
-msgstr "Zeige \"als gesehen markiert\" Benachrichtigung"
 
 msgctxt "#32060"
 msgid "Hide notifications during playback"
@@ -540,37 +532,9 @@ msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "Von der Beobachtungsliste entfernen"
 
-msgctxt "#32136"
-msgid "Add to Watchlist"
-msgstr "Zur Beobachtungsliste hinzufügen"
-
-msgctxt "#32137"
-msgid "Rate this Movie"
-msgstr "Diesen Film bewerten"
-
-msgctxt "#32138"
-msgid "Rate this Show"
-msgstr "Diese Serie bewerten"
-
-msgctxt "#32139"
-msgid "Rate this Episode"
-msgstr "Diese Folge bewerten"
-
-msgctxt "#32140"
-msgid "Toggle Watched"
-msgstr "Gesehene umschalten"
-
-msgctxt "#32141"
-msgid "Manage All Lists"
-msgstr "Alle Listen verwalten"
-
-msgctxt "#32142"
-msgid "Update All Tags"
-msgstr "Alle Schlagwörter aktualisieren"
-
-msgctxt "#32143"
-msgid "Synchronize Library"
-msgstr "Bibliothek synchronisieren"
+msgctxt "#32144"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
+msgstr "Wie gestatte ich dem Trakt-Addon auf mein Trakt.tv-Konto zuzugreifen?"
 
 msgctxt "#32147"
 msgid "Trakt.tv PIN Authorization Failed"
@@ -583,6 +547,10 @@ msgstr "Diese Staffel bewerten"
 msgctxt "#32150"
 msgid "You will be reminded in 24 hours"
 msgstr "Sie werden in 24 Stunden erinnert"
+
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr "Verwenden Sie die Addon-Einstellungen, wenn Sie Ihre Meinung ändern"
 
 msgctxt "#32152"
 msgid "Trakt Authorization Complete"
@@ -608,6 +576,26 @@ msgctxt "#32157"
 msgid "Account Authorization"
 msgstr "Kontoautorisierung"
 
+msgctxt "#32159"
+msgid "Visit {0} or scan the QR Code below."
+msgstr "Rufen Sie {0} auf oder scannen Sie den QR-Code unten."
+
+msgctxt "#32160"
+msgid "Authorize the trakt addon to access your account."
+msgstr "Gestatten Sie dem Trakt-Addon Zugriff auf Ihr Konto."
+
+msgctxt "#32161"
+msgid "Enter the PIN provided in the box below."
+msgstr "Geben Sie die PIN in den Kasten unten ein."
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr "Das Trakt-Addon KANN NICHT verwenden werden ohne das Sie ihm Zugriff auf Ihr Trakt.tv-Konto geben."
+
 msgctxt "#32163"
 msgid "User"
 msgstr "Benutzer"
+
+msgctxt "#32164"
+msgid "Fallback to Title/Year matching if necessary"
+msgstr "Auf Titel-/Jahr-Abgleich zurückgreifen, wenn notwendig"
