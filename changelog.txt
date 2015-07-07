@@ -1,3 +1,6 @@
+version 3.0.3
+  - bugfix for keyboard not showing up when trying to type in the pin dialog
+
 version 3.0.2
   - fancy PIN auth dialog (by tknorris) and design (by piers)
   - new design for context menu (by piers)
