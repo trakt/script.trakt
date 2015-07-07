@@ -159,40 +159,32 @@ class Scrobbler():
             self.isPlaying = True
             self.isPaused = False
 
+            result = {}
             if utilities.getSettingAsBool('scrobble_movie') or utilities.getSettingAsBool('scrobble_episode'):
                 result = self.__scrobble('start')
-            elif utilities.getSettingAsBool('rate_movie') and utilities.isMovie(self.curVideo['type']):
-                result = {'movie': self.traktapi.getMovieSummary(self.curVideoInfo['ids']['imdb']).to_dict()}
-            elif utilities.getSettingAsBool('rate_episode') and utilities.isEpisode(self.curVideo['type']):
-                data, id_type = utilities.parseIdToTraktIds(str(self.traktShowSummary['ids']['tvdb']), self.curVideo['type'])
-                ids = self.traktapi.getIdLookup(data[id_type], id_type)
-                trakt_id = dict(ids[0].keys)['trakt']
-                result = {'show': self.traktapi.getShowSummary(trakt_id).to_dict(),
-                          'episode': self.traktapi.getEpisodeSummary(trakt_id, self.curVideoInfo['season'],
-                                                                     self.curVideoInfo['number']).to_dict()}
+            elif utilities.getSettingAsBool('rate_movie') and utilities.isMovie(self.curVideo['type']) and 'ids' in self.curVideoInfo:
+                result = {'movie': self.traktapi.getMovieSummary(utilities.best_id(self.curVideoInfo['ids'])).to_dict()}
+            elif utilities.getSettingAsBool('rate_episode') and utilities.isEpisode(self.curVideo['type']) and 'ids' in self.traktShowSummary:
+                best_id = utilities.best_id(self.traktShowSummary['ids'])
+                result = {'show': self.traktapi.getShowSummary(best_id).to_dict(),
+                          'episode': self.traktapi.getEpisodeSummary(best_id, self.curVideoInfo['season'], self.curVideoInfo['number']).to_dict()}
 
             self.__preFetchUserRatings(result)
 
     def __preFetchUserRatings(self, result):
         if result:
             if utilities.isMovie(self.curVideo['type']) and utilities.getSettingAsBool('rate_movie'):
-                # pre-get sumamry information, for faster rating dialog.
+                # pre-get summary information, for faster rating dialog.
                 logger.debug("Movie rating is enabled, pre-fetching summary information.")
-                if result['movie']['ids']['imdb']:
-                    self.curVideoInfo['user'] = {'ratings': self.traktapi.getMovieRatingForUser(result['movie']['ids']['imdb'])}
-                    self.curVideoInfo['ids'] = result['movie']['ids']
-                else:
-                    logger.debug("'%s (%d)' has no valid id, can't get rating." % (self.curVideoInfo['title'], self.curVideoInfo['year']))
+                self.curVideoInfo['user'] = {'ratings': self.traktapi.getMovieRatingForUser(result['movie']['ids']['trakt'], 'trakt')}
+                self.curVideoInfo['ids'] = result['movie']['ids']
             elif utilities.isEpisode(self.curVideo['type']) and utilities.getSettingAsBool('rate_episode'):
-                # pre-get sumamry information, for faster rating dialog.
+                # pre-get summary information, for faster rating dialog.
                 logger.debug("Episode rating is enabled, pre-fetching summary information.")
-
-                if result['show']['ids']['tvdb']:
-                    self.curVideoInfo['user'] = {'ratings': self.traktapi.getEpisodeRatingForUser(result['show']['ids']['tvdb'], self.curVideoInfo['season'], self.curVideoInfo['number'])}
-                    self.curVideoInfo['ids'] = result['episode']['ids']
-                else:
-                    logger.debug("'%s - S%02dE%02d' has no valid id, can't get rating." % (self.curVideoInfo['showtitle'], self.curVideoInfo['season'], self.curVideoInfo['episode']))
-
+                self.curVideoInfo['user'] = {'ratings': self.traktapi.getEpisodeRatingForUser(result['show']['ids']['trakt'],
+                                                                                              self.curVideoInfo['season'], self.curVideoInfo['number'], 'trakt')}
+                self.curVideoInfo['ids'] = result['episode']['ids']
+            logger.debug('Pre-Fetch result: %s; Info: %s' % (result, self.curVideoInfo))
 
     def playbackResumed(self):
         if not self.isPlaying:

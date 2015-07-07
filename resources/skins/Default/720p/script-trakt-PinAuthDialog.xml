@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window id="9999">
 	<defaultcontrol always="false">200</defaultcontrol>
-	<zorder>2</zorder>
 	<coordinates>
 		<system>1</system>
 		<posx>240</posx>
