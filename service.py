@@ -434,7 +434,7 @@ class traktPlayer(xbmc.Player):
                     if year:
                         data['year'] = int(year)
                     data['title'] = xbmc.getInfoLabel('VideoPlayer.Title')
-                    logger.debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'movie' - %s (%s)." % (data['title'], data['year']))
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'movie' - %s (%s)." % (data['title'], data['year'] if data['year'] else ''))
                 elif showtitle:
                     title, season, episode = utilities.regex_tvshow(False, showtitle)
                     data['type'] = 'episode'
