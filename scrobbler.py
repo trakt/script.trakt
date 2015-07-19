@@ -115,7 +115,7 @@ class Scrobbler():
                 if 'id' in self.curVideo:
                     self.curVideoInfo = utilities.kodiRpcToTraktMediaObject('movie', utilities.getMovieDetailsFromKodi(self.curVideo['id'], ['imdbnumber', 'title', 'year', 'file', 'lastplayed', 'playcount']))
                 elif 'video_ids' in self.curVideo:
-                    self.curVideoInfo = {'ids': self.curVideo['video_ids'], 'title': self.curVideo['title'], 'year': self.curVideo['year']}
+                    self.curVideoInfo = {'ids': self.curVideo['video_ids']}
                 elif 'title' in self.curVideo and 'year' in self.curVideo:
                     self.curVideoInfo = {'title': self.curVideo['title'], 'year': self.curVideo['year']}
 
