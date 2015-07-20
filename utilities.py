@@ -146,16 +146,16 @@ def checkExclusion(fullpath):
 
 def getFormattedItemName(type, info):
     s = None
-    if isShow(type):
+    if isShow(type) and 'title' in info:
         s = info['title']
-    elif isEpisode(type):
+    elif isEpisode(type) and 'title' in info and 'season' in info and 'number' in info:
             s = "S%02dE%02d - %s" % (info['season'], info['number'], info['title'])
-    elif isSeason(type):
+    elif isSeason(type) and 'title' in info:
         if info['season'] > 0:
             s = "%s - Season %d" % (info['title'], info['season'])
         else:
             s = "%s - Specials" % info['title']
-    elif isMovie(type):
+    elif isMovie(type and 'title' in info and 'year' in info):
         s = "%s (%s)" % (info['title'], info['year'])
     return s.encode('utf-8', 'ignore')
 
