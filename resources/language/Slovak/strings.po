@@ -20,26 +20,626 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Všeobecné"
 
+msgctxt "#32003"
+msgid "Startup Delay"
+msgstr "Odloženie štartu"
+
 msgctxt "#32004"
 msgid "Rating"
 msgstr "Hodnotenie"
+
+msgctxt "#32005"
+msgid "Rate Movie after watching"
+msgstr "Ohodnotiť film po pozretí"
+
+msgctxt "#32006"
+msgid "Rate TV show Episode after watching"
+msgstr "Ohodnotiť epizódu seriálu po pozretí"
+
+msgctxt "#32007"
+msgid "Rate each playlist item"
+msgstr "Ohodnotiť každú položku playlistu"
+
+msgctxt "#32008"
+msgid "Minimum percent watched to display rating dialog"
+msgstr "Hodnotiť po pozretí minimálne X percent"
+
+msgctxt "#32009"
+msgid "Allow re-rating of media"
+msgstr "Povoliť opätovné hodnotenie"
+
+msgctxt "#32010"
+msgid "Default rating"
+msgstr "Predvolené hodnotenie"
+
+msgctxt "#32011"
+msgid "Scrobbling"
+msgstr "Odosielať info"
+
+msgctxt "#32012"
+msgid "Scrobble movies"
+msgstr "Odosielať info o filmoch"
+
+msgctxt "#32013"
+msgid "Scrobble TV show episodes"
+msgstr "Odosielať info o seriáloch"
+
+msgctxt "#32014"
+msgid "Show notification on scrobble"
+msgstr "Zobraziť notifikáciu pri odosielaní"
+
+msgctxt "#32015"
+msgid "Trakt - Scrobbled successfully"
+msgstr "Trakt - Info odoslané"
+
+msgctxt "#32016"
+msgid "Exclusions"
+msgstr "Výnimky"
+
+msgctxt "#32017"
+msgid "Exclude Live TV"
+msgstr "Neposielať živú TV"
+
+msgctxt "#32018"
+msgid "Exclude HTTP sources"
+msgstr "Neposielať HTTP zdroje"
+
+msgctxt "#32019"
+msgid "Exclude path"
+msgstr "Neposielať z cesty"
+
+msgctxt "#32020"
+msgid "Folder's path (including subfolders)"
+msgstr "Cesta k priečinku (vrátane podpriečinkov)"
+
+msgctxt "#32023"
+msgid "Can not connect to Trakt"
+msgstr "Nie je možné pripojiť sa na Trakt"
 
 msgctxt "#32024"
 msgid "Error"
 msgstr "Chyba"
 
+msgctxt "#32026"
+msgid "What Did You Think?"
+msgstr "Aké je vaše hodnotenie?"
+
+msgctxt "#32027"
+msgid "Totally Ninja!"
+msgstr "Úplná bomba"
+
+msgctxt "#32028"
+msgid "Weak Sauce :("
+msgstr "Príšerné :("
+
+msgctxt "#32029"
+msgid "Terrible"
+msgstr "Veľmi zlé"
+
+msgctxt "#32030"
+msgid "Bad"
+msgstr "Zlé"
+
+msgctxt "#32031"
+msgid "Poor"
+msgstr "Podpriemerné"
+
+msgctxt "#32032"
+msgid "Meh"
+msgstr "Priemerné"
+
 msgctxt "#32033"
 msgid "Fair"
-msgstr "pekne"
+msgstr "Prijateľné"
+
+msgctxt "#32034"
+msgid "Good"
+msgstr "Dobré"
+
+msgctxt "#32035"
+msgid "Great"
+msgstr "Výborné"
+
+msgctxt "#32036"
+msgid "Superb"
+msgstr "Fantastické"
+
+msgctxt "#32037"
+msgid "Unrate this movie"
+msgstr "Zrušiť hodnotenie"
+
+msgctxt "#32038"
+msgid "Unrate this show"
+msgstr "Zrušiť hodnotenie seriálu"
+
+msgctxt "#32039"
+msgid "Unrate this episode"
+msgstr "Zrušiť hodnotenie epizódy"
+
+msgctxt "#32040"
+msgid "Trakt - Rating submitted successfully"
+msgstr "Trakt - Hodnotenie úspešne zaslané"
+
+msgctxt "#32041"
+msgid "Trakt - Already rated"
+msgstr "Trakt - Hodnotenie už raz bolo zaslané"
+
+msgctxt "#32042"
+msgid "Trakt - Unrated successfully"
+msgstr "Trakt - Hodnotenie úspešne zrušené"
+
+msgctxt "#32043"
+msgid "Trakt - Already has the same rating"
+msgstr "Trakt - Rovnaké hodnotenie už bolo zaslané"
+
+msgctxt "#32044"
+msgid "Trakt - Problem submitting rating"
+msgstr "Trakt - Problém s odosielaním hodnotenia"
+
+msgctxt "#32045"
+msgid "Synchronize"
+msgstr "Synchronizovať"
 
 msgctxt "#32046"
 msgid "Movies"
 msgstr "Filmy"
 
+msgctxt "#32047"
+msgid "Add new movies to Trakt collection"
+msgstr "Pridať nové filmy do Trakt zbierky"
+
+msgctxt "#32048"
+msgid "Add watched movies to Trakt history"
+msgstr "Pridať pozreté filmy do Trakt histórie"
+
+msgctxt "#32049"
+msgid "Mark movies from Trakt history as watched in Kodi"
+msgstr "Označiť filmy z Trakt histórie v Kodi ako pozreté"
+
+msgctxt "#32050"
+msgid "TV Episodes"
+msgstr "Seriály"
+
+msgctxt "#32051"
+msgid "Add new TV episodes to Trakt collection"
+msgstr "Pridať nové epizódy do Trakt zbierky"
+
+msgctxt "#32052"
+msgid "Add watched TV episodes to Trakt history"
+msgstr "Pridať pozreté epizódy do Trakt histórie"
+
+msgctxt "#32053"
+msgid "Mark TV episodes from Trakt history as watched in Kodi"
+msgstr "Označiť epizódy z Trakt histórie v Kodi ako pozreté"
+
 msgctxt "#32054"
 msgid "Service"
-msgstr "Služba"
+msgstr "Služby"
+
+msgctxt "#32055"
+msgid "Sync collection on library update or cleaning"
+msgstr "Synchronizovať zbierku pri aktualizácií/čistení knižnice"
+
+msgctxt "#32056"
+msgid "Show sync notifications"
+msgstr "Zobrazovať synchronizačné notifikácie"
+
+msgctxt "#32057"
+msgid "Remove deleted movies from Trakt collection"
+msgstr "Odstrániť vymazané filmy z Trakt zbierky"
+
+msgctxt "#32058"
+msgid "Remove deleted TV episodes from Trakt collection"
+msgstr "Odstrániť vymazané epizódy z Trakt zbierky"
+
+msgctxt "#32060"
+msgid "Hide notifications during playback"
+msgstr "Nezobrazovať notifikácie počas prehrávania"
+
+msgctxt "#32061"
+msgid "Sync started"
+msgstr "Synchronizácia sa začala"
+
+msgctxt "#32062"
+msgid "Sync complete"
+msgstr "Synchronizácia bola ukončená"
+
+msgctxt "#32063"
+msgid "%i movie(s) will be added to Trakt collection"
+msgstr "%i filmov bude pridaných do Trakt zbierky"
+
+msgctxt "#32064"
+msgid "%i movie playcount(s) will be updated on Trakt"
+msgstr "%i počítadiel prehratých filmov bude aktualizovaných na Trakt"
+
+msgctxt "#32065"
+msgid "%i movie(s) playcount will be updated in Kodi"
+msgstr "%i počítadiel prehratých filmov bude aktualizovaných v Kodi"
+
+msgctxt "#32066"
+msgid "Movie Sync Complete"
+msgstr "Synchronizácia filmov bola ukončená"
+
+msgctxt "#32067"
+msgid "Going to add %i show(s) to Trakt collection"
+msgstr "%i seriálov bude pridaných do Trakt zbierky"
+
+msgctxt "#32068"
+msgid "Checking for episodes missing from Trakt collection"
+msgstr "Kontrolujú sa epizódy chýbajúce v Trakt zbierke"
+
+msgctxt "#32069"
+msgid "%i of %i show(s) have episodes added to Trakt collection"
+msgstr "%i z %i seriálov malo epizódy pridané do Trakt zbierky"
+
+msgctxt "#32070"
+msgid "Going to update %i show(s) missing watched status"
+msgstr "Zaktualizuje sa %i seriálov s chýbajúcim označením pozretia"
+
+msgctxt "#32071"
+msgid "Checking watched episodes on Trakt"
+msgstr "Kontrolujú sa pozreté epizódy na Trakt"
+
+msgctxt "#32072"
+msgid "%i show(s) had missing watched status"
+msgstr "%i seriálov nemalo označené pozretie"
+
+msgctxt "#32073"
+msgid "%i episodes are being updated"
+msgstr "Aktualizuje sa %i epizód"
+
+msgctxt "#32074"
+msgid "Checking watched episodes on Kodi"
+msgstr "Kontrolujú sa pozreté epizódy v Kodi"
+
+msgctxt "#32075"
+msgid "Episode Sync Complete"
+msgstr "Synchronizácia epizód bola ukončená"
+
+msgctxt "#32076"
+msgid "%i movie(s) will be removed from Trakt collection"
+msgstr "%i filmov bude odstránených z Trakt zbierky"
+
+msgctxt "#32077"
+msgid "Cleaning Trakt TV show collection"
+msgstr "Čistí sa kolekcia seriálov na Trakt"
+
+msgctxt "#32078"
+msgid "episodes are being removed"
+msgstr "epizódy sú odstraňované"
+
+msgctxt "#32079"
+msgid "Loading movies from Kodi"
+msgstr "Načítavajú sa filmy z Kodi"
+
+msgctxt "#32080"
+msgid "Movies loaded from Kodi"
+msgstr "Filmy z Kodi boli načítané"
+
+msgctxt "#32081"
+msgid "Retrieving movie collection from Trakt"
+msgstr "Preberá sa zbierka filmov z Trakt"
+
+msgctxt "#32082"
+msgid "Retrieving watched movies from Trakt"
+msgstr "Preberá sa zoznam pozretých filmov z Trakt"
+
+msgctxt "#32083"
+msgid "Retrieved movie data from Trakt"
+msgstr "Preberajú sa dáta o filmoch z Trakt"
+
+msgctxt "#32084"
+msgid "Trakt movie collection is up to date, no movies to add"
+msgstr "Zbierka filmov na Trakt je aktuálna, všetky filmy sú pridané"
+
+msgctxt "#32085"
+msgid "%i movie(s) were added to your Trakt collection"
+msgstr "%i filmov bolo pridaných do vašej zbierky na Trakt"
+
+msgctxt "#32086"
+msgid "Trakt movie playcounts are up to date"
+msgstr "Počítadlá prehraných filmov na Trakt sú aktuálne"
+
+msgctxt "#32087"
+msgid "Playcounts updated for %i movie(s) on Trakt"
+msgstr "Počítadlá boli aktualizované pre %i filmov na Trakt"
+
+msgctxt "#32088"
+msgid "Kodi movie playcounts are up to date"
+msgstr "Počítadlá prehraných filmov v Kodi sú aktuálne"
+
+msgctxt "#32089"
+msgid "Updating %i of %i movie playcount(s) in Kodi"
+msgstr "Aktualizuje sa %i z %i počítadiel prehraných filmov v Kodi"
+
+msgctxt "#32090"
+msgid "Playcounts updated for %i movie(s) in Kodi"
+msgstr "Počítadlá boli aktualizované pre %i filmov v Kodi"
+
+msgctxt "#32091"
+msgid "Trakt movie collection is up to date, no movies removed"
+msgstr "Zbierka filmov na Trakt je aktuálna, žiadne filmy neboli zmazané"
+
+msgctxt "#32092"
+msgid "%i movie(s) were removed from your Trakt collection"
+msgstr "%i filmov bolo odstránených z vašej Trakt zbierky"
+
+msgctxt "#32093"
+msgid "Updating %i of %i movie playcount(s) on Trakt"
+msgstr "Aktualizuje sa %i z %i počítadiel prehraných filmov na Trakt"
+
+msgctxt "#32094"
+msgid "Loading episode data from Kodi"
+msgstr "Načítavajú sa dáta o epizódach z Kodi"
+
+msgctxt "#32095"
+msgid "Loading shows from Kodi"
+msgstr "Načítavajú sa seriály z Kodi"
+
+msgctxt "#32096"
+msgid "Shows loaded from Kodi"
+msgstr "Seriály z Kodi boli načítané"
+
+msgctxt "#32097"
+msgid "Parsing %i of %i episode data from Kodi"
+msgstr "Analyzuje sa %i z %i dát o epizódach z Kodi"
+
+msgctxt "#32098"
+msgid "Loaded episode data from Kodi"
+msgstr "Dáta o epizódach z Kodi boli načítané"
+
+msgctxt "#32099"
+msgid "Loading episode data from Trakt"
+msgstr "Načítavajú sa dáta o epizódach z Trakt"
+
+msgctxt "#32100"
+msgid "Retrieving episode collection from Trakt"
+msgstr "Preberá sa zbierka epizód z Trakt"
+
+msgctxt "#32101"
+msgid "Retrieving watched episodes from Trakt"
+msgstr "Preberá sa zoznam pozretých epizód z Trakt"
+
+msgctxt "#32102"
+msgid "Parsing episode data %i of %i from Trakt"
+msgstr "Analyzuje sa %i z %i dát o epizódach z Trakt"
+
+msgctxt "#32103"
+msgid "Retrieved episode data from Trakt"
+msgstr "Dáta o epizódach z Kodi boli prebraté"
+
+msgctxt "#32104"
+msgid "Trakt episode collection is up to date, no episodes to add"
+msgstr "Zbierka epizód na Trakt je aktuálna, všetky epizódy sú pridané"
+
+msgctxt "#32105"
+msgid "%i episode(s) were added to your Trakt collection"
+msgstr "%i epizód bolo pridaných do vašej zbierky na Trakt"
+
+msgctxt "#32106"
+msgid "Trakt episode playcounts are up to date"
+msgstr "Počítadlá prehraných epizód na Trakt sú aktuálne"
+
+msgctxt "#32107"
+msgid "Kodi episode playcounts are up to date"
+msgstr "Počítadlá prehraných epizód v Kodi sú aktuálne"
+
+msgctxt "#32108"
+msgid "Updating %i of %i episode playcount(s) in Kodi"
+msgstr "Aktualizuje sa %i z %i počítadiel prehraných epizód v Kodi"
+
+msgctxt "#32109"
+msgid "Playcounts updated for %i show(s) in Kodi"
+msgstr "Počítadlá boli aktualizované pre %i seriálov v Kodi"
+
+msgctxt "#32110"
+msgid "Trakt episode collection is clean, no episodes to remove"
+msgstr "Zbierka epizód na Trakt je prázdna, žiadne epizódy na odstránenie"
+
+msgctxt "#32111"
+msgid "%i episode(s) are being removed from your Trakt collection"
+msgstr "%i epizód sa odstraňuje z vašej Trakt zbierky"
+
+msgctxt "#32112"
+msgid "%i episode(s) were removed from your Trakt collection"
+msgstr "%i epizód bolo odstránených z vašej Trakt zbierky"
+
+msgctxt "#32113"
+msgid "Trakt - Marked as watched"
+msgstr "Trakt - Označené ako pozreté"
+
+msgctxt "#32114"
+msgid "Trakt - Failed marking as watched"
+msgstr "Trakt - Pri označovaní nastala chyba"
+
+msgctxt "#32115"
+msgid "%d episode(s) of '%s'"
+msgstr "%d epizód z '%s'"
+
+msgctxt "#32116"
+msgid "Enable debug mode"
+msgstr "Zapnúť debug mód"
+
+msgctxt "#32117"
+msgid "Sync movie playback progress to Kodi"
+msgstr "Synchronizovať priebeh prehrávania filmu s Kodi"
+
+msgctxt "#32118"
+msgid "Sync episode playback progress to Kodi"
+msgstr "Synchronizovať priebeh prehrávania epizódy s Kodi"
+
+msgctxt "#32119"
+msgid "Retrieving episode playback progress from Trakt"
+msgstr "Preberá sa priebeh prehrávania epizód z Trakt"
+
+msgctxt "#32120"
+msgid "Parsing episode playback progress %i of %i from Trakt"
+msgstr "Analyzuje sa %i of %i priebehov prehrávania epizód z Trakt"
+
+msgctxt "#32121"
+msgid "Retrieved episode playback progress from Trakt"
+msgstr "Dáta o priebehu prehrávania epizód boli prebraté"
+
+msgctxt "#32122"
+msgid "Retrieving movie playback progress from Trakt"
+msgstr "Preberá sa priebeh prehrávania filmov z Trakt"
+
+msgctxt "#32123"
+msgid "Parsing movie playback progress %i of %i from Trakt"
+msgstr "Analyzuje sa %i of %i priebehov prehrávania filmov z Trakt"
+
+msgctxt "#32124"
+msgid "Retrieved movie playback progress from Trakt"
+msgstr "Dáta o priebehu prehrávania filmov boli prebraté"
+
+msgctxt "#32125"
+msgid "Kodi movie playback progress is up to date"
+msgstr "Dáta o priebehu prehrávania filmov v Kodi sú aktuálne"
+
+msgctxt "#32126"
+msgid "%i movie(s) playback progress will be updated in Kodi"
+msgstr "%i priebehov prehrávania filmov v Kodi bude aktualizovaných v Kodi"
+
+msgctxt "#32127"
+msgid "Updating %i of %i movie(s) playback progress in Kodi"
+msgstr "Aktualizuje sa %i z %i priebehov prehrávania filmov v Kodi"
+
+msgctxt "#32128"
+msgid "Playback progress updated for %i movie(s) in Kodi"
+msgstr "Priebeh prehrávania bol aktualizovaný pre %i filmov v Kodi"
+
+msgctxt "#32129"
+msgid "Kodi episode playback progress is up to date"
+msgstr "Dáta o priebehu prehrávania epizód v Kodi sú aktuálne"
+
+msgctxt "#32130"
+msgid "Updating %i of %i episode(s) playback progress in Kodi"
+msgstr "Aktualizuje sa %i z %i priebehov prehrávania epizód v Kodi"
+
+msgctxt "#32131"
+msgid "Playback progress updated for %i episode(s) in Kodi"
+msgstr "Priebeh prehrávania bol aktualizovaný pre %i epizód v Kodi"
+
+msgctxt "#32132"
+msgid "Unrate this season"
+msgstr "Zrušiť hodnotenie tejto série"
+
+msgctxt "#32133"
+msgid "Manage Movie's Lists"
+msgstr "Spravovať zoznam filmov"
+
+msgctxt "#32134"
+msgid "Manage Show's Lists"
+msgstr "Spravovať zoznam seriálov"
+
+msgctxt "#32135"
+msgid "Remove from Watchlist"
+msgstr "Odstrániť zo zoznamu na pozretie"
+
+msgctxt "#32136"
+msgid "Add to watchlist"
+msgstr "Pridať do zoznamu na pozretie"
+
+msgctxt "#32137"
+msgid "Rate this movie"
+msgstr "Ohodnoťte tento film"
+
+msgctxt "#32138"
+msgid "Rate this show"
+msgstr "Ohodnoťte tento seriál"
+
+msgctxt "#32139"
+msgid "Rate this episode"
+msgstr "Ohodnoťte túto epizódu"
+
+msgctxt "#32140"
+msgid "Toggle watched"
+msgstr "Prepnúť stav pozretia"
+
+msgctxt "#32141"
+msgid "Manage all lists"
+msgstr "Spravovať všetky zoznamy"
+
+msgctxt "#32142"
+msgid "Update all tags"
+msgstr "Aktualizovať všetky štítky"
+
+msgctxt "#32143"
+msgid "Synchronize library"
+msgstr "Synchronizovať knižnicu"
+
+msgctxt "#32144"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
+msgstr "Ako autorizujem prístup Trakt doplnku k môjmu Trakt.tv účtu?"
+
+msgctxt "#32147"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr "Pri autorizácií Trakt.tv PIN kódu nastala chyba"
+
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr "Ohodnoťte túto sériu"
+
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr "Budete upozornený o 24 hodín"
+
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr "Použite nastavenia doplnku pre zmenu nastavení"
+
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr "Trakt autorizácia bola úspešná"
+
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr "Autorizácia Trakt účtu"
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr "Autorizovať"
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr "Pripomenúť neskôr"
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr "Nie, ďakujem"
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr "Autorizácia účtu"
+
+msgctxt "#32159"
+msgid "Visit {0} or scan the QR Code below."
+msgstr "Navštívte {0} alebo naskenujte QR kód"
+
+msgctxt "#32160"
+msgid "Authorize the trakt addon to access your account."
+msgstr "Autorizujte Trakt doplnok pre prístup k vášmu účtu"
+
+msgctxt "#32161"
+msgid "Enter the PIN provided in the box below."
+msgstr "Zadajte vygenerovaný PIN do poľa nižšie"
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr "Doplnok Trakt NEMÔŽE byt používaný bez autorizácie k vášmu Trakt.tv účtu"
 
 msgctxt "#32163"
 msgid "User"
 msgstr "Užívateľ"
+
+msgctxt "#32164"
+msgid "Fallback to Title/Year matching if necessary"
+msgstr "Detegovať podľa Názvu/Roku pokiaľ je to potrebné"
+
+msgctxt "#32165"
+msgid "Trakt - Added to watchlist"
+msgstr "Trakt - Pridané do zoznamu na pozretie"
+
+msgctxt "#32166"
+msgid "Trakt - Failed adding to watchlist"
+msgstr "Trakt - Pri pridávaní do zoznamu na pozretie nastala chyba"
