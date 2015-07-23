@@ -665,3 +665,24 @@ msgstr ""
 msgctxt "#32167"
 msgid "Offset scrobble start by X minutes"
 msgstr ""
+
+msgctxt "#32168"
+msgid "Sync ratings"
+msgstr ""
+
+msgctxt "#32169"
+msgid "Kodi movie ratings are up to date"
+msgstr ""
+
+msgctxt "#32170"
+msgid "%i movie(s) ratings will be updated in Kodi"
+msgstr ""
+
+msgctxt "#32171"
+msgid "Updating %i of %i movie(s) ratings in Kodi"
+msgstr ""
+
+msgctxt "#32172"
+msgid "Ratings updated for %i movie(s) in Kodi"
+msgstr ""
+

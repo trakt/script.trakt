@@ -164,11 +164,14 @@ class Scrobbler():
                 result = self.__scrobble('start')
             elif utilities.getSettingAsBool('rate_movie') and utilities.isMovie(self.curVideo['type']) and 'ids' in self.curVideoInfo:
                 result = {'movie': self.traktapi.getMovieSummary(utilities.best_id(self.curVideoInfo['ids'])).to_dict()}
+                result['movie']['movieid'] = self.curVideo['id']
             elif utilities.getSettingAsBool('rate_episode') and utilities.isEpisode(self.curVideo['type']) and 'ids' in self.traktShowSummary:
                 best_id = utilities.best_id(self.traktShowSummary['ids'])
                 result = {'show': self.traktapi.getShowSummary(best_id).to_dict(),
-                          'episode': self.traktapi.getEpisodeSummary(best_id, self.curVideoInfo['season'], self.curVideoInfo['number']).to_dict()}
+                          'episode': self.traktapi.getEpisodeSummary(best_id, self.curVideoInfo['season'],
+                                                                     self.curVideoInfo['number']).to_dict()}
                 result['episode']['season'] = self.curVideoInfo['season']
+                result['episode']['episodeid']= self.curVideo['id']
 
             self.__preFetchUserRatings(result)
 
@@ -253,6 +256,7 @@ class Scrobbler():
 
         if utilities.isMovie(self.curVideo['type']) and scrobbleMovieOption:
             response = self.traktapi.scrobbleMovie(self.curVideoInfo, watchedPercent, status)
+            response['movie']['movieid'] = self.curVideo['id']
             if not response is None:
                 self.__scrobbleNotification(response)
                 logger.debug("Scrobble response: %s" % str(response))
@@ -267,6 +271,7 @@ class Scrobbler():
                 watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
 
             response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.curVideoInfo, watchedPercent, status)
+            response['episode']['episodeid'] = self.curVideo['id']
 
             if response is not None:
                 self.__scrobbleNotification(response)

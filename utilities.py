@@ -382,6 +382,7 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
     if type == 'show':
         id = data.pop('imdbnumber')
         data['ids'] = parseIdToTraktIds(id, type)[0]
+        data['rating'] = data['userrating'] if 'userrating' in data and data['userrating'] > 0 else 0
         del(data['label'])
         return data
     elif type == 'episode':
@@ -407,6 +408,7 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
             episode['collected_at'] = convertDateTimeToUTC(data['dateadded'])
         if 'runtime' in data:
             episode['runtime'] = data['runtime']
+        episode['rating'] = episode['userrating'] if 'userrating' in episode and episode['userrating'] > 0 else 0
         if mode == 'watched' and episode['watched']:
             return episode
         elif mode == 'collected' and episode['collected']:
@@ -425,6 +427,7 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
             data['plays'] = 0
         else:
             data['plays'] = data.pop('playcount')
+        data['rating'] = data['userrating'] if 'userrating' in data and data['userrating'] > 0 else 0
         data['collected'] = 1  # this is in our kodi so it should be collected
         data['watched'] = 1 if data['plays'] > 0 else 0
         id = data.pop('imdbnumber')
@@ -565,14 +568,14 @@ def getMediaType():
 
 def best_id(ids):
     if 'trakt' in ids:
-        return ids['trakt']
+        return ids['trakt'], 'trakt'
     elif 'imdb' in ids:
-        return ids['imdb']
+        return ids['imdb'], 'imdb'
     elif 'tmdb' in ids:
-        return ids['tmdb']
+        return ids['tmdb'], 'tmdb'
     elif 'tvdb' in ids:
-        return ids['tvdb']
+        return ids['tvdb'], 'tvdb'
     elif 'tvrage' in ids:
-        return ids['tvrage']
+        return ids['tvrage'], 'tvrage'
     elif 'slug' in ids:
-        return ids['slug']
+        return ids['slug'], 'slug'
