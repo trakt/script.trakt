@@ -138,7 +138,7 @@ class Scrobbler():
                         self.watchedTime = 0
                         return
                 elif 'video_ids' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
-                    self.curVideoInfo = {'title': self.curVideo['title'], 'season': self.curVideo['season'], 'number': self.curVideo['episode']}
+                    self.curVideoInfo = {'season': self.curVideo['season'], 'number': self.curVideo['episode']}
                     self.traktShowSummary = {'ids': self.curVideo['video_ids']}
                 elif 'title' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
                     self.curVideoInfo = {'title': self.curVideo['title'], 'season': self.curVideo['season'],
@@ -176,14 +176,14 @@ class Scrobbler():
             if utilities.isMovie(self.curVideo['type']) and utilities.getSettingAsBool('rate_movie'):
                 # pre-get summary information, for faster rating dialog.
                 logger.debug("Movie rating is enabled, pre-fetching summary information.")
+                self.curVideoInfo = result['movie']
                 self.curVideoInfo['user'] = {'ratings': self.traktapi.getMovieRatingForUser(result['movie']['ids']['trakt'], 'trakt')}
-                self.curVideoInfo['ids'] = result['movie']['ids']
             elif utilities.isEpisode(self.curVideo['type']) and utilities.getSettingAsBool('rate_episode'):
                 # pre-get summary information, for faster rating dialog.
                 logger.debug("Episode rating is enabled, pre-fetching summary information.")
+                self.curVideoInfo = result['episode']
                 self.curVideoInfo['user'] = {'ratings': self.traktapi.getEpisodeRatingForUser(result['show']['ids']['trakt'],
                                                                                               self.curVideoInfo['season'], self.curVideoInfo['number'], 'trakt')}
-                self.curVideoInfo['ids'] = result['episode']['ids']
             logger.debug('Pre-Fetch result: %s; Info: %s' % (result, self.curVideoInfo))
 
     def playbackResumed(self):
@@ -265,7 +265,7 @@ class Scrobbler():
 
             response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.curVideoInfo, watchedPercent, status)
 
-            if not response is None:
+            if response is not None:
                 self.__scrobbleNotification(response)
                 logger.debug("Scrobble response: %s" % str(response))
                 return response
