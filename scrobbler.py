@@ -168,6 +168,7 @@ class Scrobbler():
                 best_id = utilities.best_id(self.traktShowSummary['ids'])
                 result = {'show': self.traktapi.getShowSummary(best_id).to_dict(),
                           'episode': self.traktapi.getEpisodeSummary(best_id, self.curVideoInfo['season'], self.curVideoInfo['number']).to_dict()}
+                result['episode']['season'] = self.curVideoInfo['season']
 
             self.__preFetchUserRatings(result)
 
