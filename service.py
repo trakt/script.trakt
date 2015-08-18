@@ -469,8 +469,8 @@ class traktPlayer(xbmc.Player):
                             # make sure episodes array exists in results
                             if 'episodes' in result:
                                 multi = []
-                                for i in range(episode_index, result['limits']['total']):
-                                    if result['episodes'][i]['file'] == result['episodes'][episode_index]['file']:
+                                for i in range(episode_index, result['episodes'][-1]['episode']):
+                                    if result['episodes'][episode_index]['file'] == result['episodes'][i]['file']:
                                         multi.append(result['episodes'][i]['episodeid'])
                                     else:
                                         break
