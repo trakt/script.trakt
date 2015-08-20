@@ -455,13 +455,12 @@ class traktPlayer(xbmc.Player):
 
                 if self.type == 'episode':
                     logger.debug("[traktPlayer] onPlayBackStarted() - Doing multi-part episode check.")
-                    result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': self.id, 'properties': ['tvshowid', 'season', 'episode']}, 'id': 1})
+                    result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': self.id, 'properties': ['tvshowid', 'season', 'episode', 'file']}, 'id': 1})
                     if result:
                         logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
                         tvshowid = int(result['episodedetails']['tvshowid'])
                         season = int(result['episodedetails']['season'])
-                        episode = int(result['episodedetails']['episode'])
-                        episode_index = episode - 1
+                        currentfile = result['episodedetails']['file']
 
                         result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': tvshowid, 'season': season, 'properties': ['episode', 'file'], 'sort': {'method': 'episode'}}, 'id': 1})
                         if result:
@@ -469,11 +468,9 @@ class traktPlayer(xbmc.Player):
                             # make sure episodes array exists in results
                             if 'episodes' in result:
                                 multi = []
-                                for i in range(episode_index, result['episodes'][-1]['episode']):
-                                    if result['episodes'][episode_index]['file'] == result['episodes'][i]['file']:
+                                for i in range(result['limits']['start'], result['limits']['total']):
+                                    if currentfile == result['episodes'][i]['file']:
                                         multi.append(result['episodes'][i]['episodeid'])
-                                    else:
-                                        break
                                 if len(multi) > 1:
                                     data['multi_episode_data'] = multi
                                     data['multi_episode_count'] = len(multi)
