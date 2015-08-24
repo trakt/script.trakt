@@ -220,6 +220,10 @@ msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "סנכרן אוסף בעדכון ספריה או ניקוי"
 
+msgctxt "#32056"
+msgid "Show sync notifications"
+msgstr "הצג התראות סנכרון"
+
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
 msgstr "הסר סרטים שנמחקו מהאוסף של Trakt"
@@ -532,6 +536,110 @@ msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "הסר מרשימת צפייה"
 
+msgctxt "#32136"
+msgid "Add to watchlist"
+msgstr "הוסף לרשימת צפייה"
+
+msgctxt "#32137"
+msgid "Rate this movie"
+msgstr "דרג סרט זה"
+
+msgctxt "#32138"
+msgid "Rate this show"
+msgstr "דרג סדרה זו"
+
+msgctxt "#32139"
+msgid "Rate this episode"
+msgstr "דרג פרק זה"
+
+msgctxt "#32140"
+msgid "Toggle watched"
+msgstr "סמן כנצפה"
+
+msgctxt "#32141"
+msgid "Manage all lists"
+msgstr "נהל את כל הרשימות"
+
+msgctxt "#32142"
+msgid "Update all tags"
+msgstr "עדכן את כל התגיות"
+
+msgctxt "#32143"
+msgid "Synchronize library"
+msgstr "סנכרן ספריה"
+
+msgctxt "#32144"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
+msgstr "איך אני מאשר גישה לתוסף Trakt לחשבון שלי ב-trakt.tv?"
+
+msgctxt "#32147"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr "אישור קוד PIN של Trakt.tv נכשל"
+
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr "דרג עונה זו"
+
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr "תקבל תזכורת בעוד 24 שעות"
+
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr "השתמש בהגדרות תוסף מאוחר יותר עם תשנה את דעתך"
+
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr "אישור Trakt הושלם"
+
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr "אישור חשבון Trakt"
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr "אישור"
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr "תזכיר לי מאוחר יותר"
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr "לא תודה"
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr "אישור חשבון"
+
+msgctxt "#32159"
+msgid "Visit {0} or scan the QR Code below."
+msgstr "בקר ב- {0} או סרוק את קוד ה-QR למטה."
+
+msgctxt "#32160"
+msgid "Authorize the trakt addon to access your account."
+msgstr "אשר את התוסף Trakt כדי לגשת אל החשבון שלך"
+
+msgctxt "#32161"
+msgid "Enter the PIN provided in the box below."
+msgstr "הזן את קוד ה-PIN שקיבלת בקופסא למטה."
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr "אין אפשרות להשתמש בתוסף Trakt ללא אישור גישה לחשבון שלך ב-trakt.tv."
+
 msgctxt "#32163"
 msgid "User"
 msgstr "משתמש"
+
+msgctxt "#32164"
+msgid "Fallback to Title/Year matching if necessary"
+msgstr "השתמש בהתאמה של כותרת/שנה אם יש צורך"
+
+msgctxt "#32165"
+msgid "Trakt - Added to watchlist"
+msgstr "Trakt - התווסף לרשימת צפייה"
+
+msgctxt "#32166"
+msgid "Trakt - Failed adding to watchlist"
+msgstr "Trakt - הוספה לרשימת צפייה נכשלה"

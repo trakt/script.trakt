@@ -145,18 +145,20 @@ def checkExclusion(fullpath):
     return False
 
 def getFormattedItemName(type, info):
-    s = None
-    if isShow(type):
-        s = info['title']
-    elif isEpisode(type):
-            s = "S%02dE%02d - %s" % (info['season'], info['number'], info['title'])
-    elif isSeason(type):
-        if info['season'] > 0:
-            s = "%s - Season %d" % (info['title'], info['season'])
-        else:
-            s = "%s - Specials" % info['title']
-    elif isMovie(type):
-        s = "%s (%s)" % (info['title'], info['year'])
+    try:
+        if isShow(type):
+            s = info['title']
+        elif isEpisode(type):
+                s = "S%02dE%02d - %s" % (info['season'], info['number'], info['title'])
+        elif isSeason(type):
+            if info['season'] > 0:
+                s = "%s - Season %d" % (info['title'], info['season'])
+            else:
+                s = "%s - Specials" % info['title']
+        elif isMovie(type):
+            s = "%s (%s)" % (info['title'], info['year'])
+    except KeyError:
+        s = ''
     return s.encode('utf-8', 'ignore')
 
 def getShowDetailsFromKodi(showID, fields):
@@ -433,20 +435,27 @@ def convertDateTimeToUTC(toConvert):
             naive = datetime.strptime(toConvert, dateFormat)
         except TypeError:
             naive = datetime(*(time.strptime(toConvert, dateFormat)[0:6]))
+        if 2038 < naive.year  or 1970 > naive.year:
+            logger.debug('convertDateTimeToUTC() Movie/show was collected/watched outside of the unix timespan. Fallback to datetime now')
+            naive = datetime.strptime(str(datetime.now()).split(".")[0], dateFormat)
         local = naive.replace(tzinfo=tzlocal())
         utc = local.astimezone(tzutc())
-
         return unicode(utc)
+
     else:
         return toConvert
 
 def convertUtcToDateTime(toConvert):
     if toConvert:
+        dateFormat = "%Y-%m-%d %H:%M:%S"
         naive = dateutil.parser.parse(toConvert)
+        if 2038 < naive.year  or 1970 > naive.year:
+            logger.debug('convertUtcToDateTime() Movie/show was collected/watched outside of the unix timespan. Fallback to datetime now')
+            naive = datetime.strptime(str(datetime.now()).split(".")[0], dateFormat)
         utc = naive.replace(tzinfo=tzutc())
         local = utc.astimezone(tzlocal())
 
-        return local.strftime("%Y-%m-%d %H:%M:%S")
+        return local.strftime(dateFormat)
     else:
         return toConvert
 

@@ -113,7 +113,7 @@ class Sync():
         showsCollected = {'shows': []}
         for _, show in traktShowsCollected:
             i += 1
-            y = ((i / x) * 20) + 6
+            y = ((i / x) * 13) + 6
             self.__updateProgress(int(y), line2=utilities.getString(32102) % (i, x))
 
             # will keep the data in python structures - just like the KODI response
@@ -126,7 +126,7 @@ class Sync():
         showsWatched = {'shows': []}
         for _, show in traktShowsWatched:
             i += 1
-            y = ((i / x) * 26) + 6
+            y = ((i / x) * 19) + 6
             self.__updateProgress(int(y), line2=utilities.getString(32102) % (i, x))
 
             # will keep the data in python structures - just like the KODI response
@@ -134,13 +134,13 @@ class Sync():
 
             showsWatched['shows'].append(show)
 
-        self.__updateProgress(32, line2=utilities.getString(32103))
+        self.__updateProgress(25, line2=utilities.getString(32103))
 
         return showsCollected, showsWatched
 
     def __traktLoadShowsPlaybackProgress(self):
         if utilities.getSettingAsBool('trakt_episode_playback') and not self.__isCanceled():
-            self.__updateProgress(10, line1=utilities.getString(1485), line2=utilities.getString(32119))
+            self.__updateProgress(25, line1=utilities.getString(1485), line2=utilities.getString(32119))
 
             logger.debug('[Playback Sync] Getting playback progress from Trakt.tv')
             try:
@@ -154,7 +154,7 @@ class Sync():
             showsProgress = {'shows': []}
             for show in traktProgressShows:
                 i += 1
-                y = ((i / x) * 20) + 6
+                y = ((i / x) * 25) + 11
                 self.__updateProgress(int(y), line2=utilities.getString(32120) % (i, x))
 
                 # will keep the data in python structures - just like the KODI response
@@ -162,7 +162,7 @@ class Sync():
 
                 showsProgress['shows'].append(show)
 
-            self.__updateProgress(32, line2=utilities.getString(32121))
+            self.__updateProgress(36, line2=utilities.getString(32121))
 
             return showsProgress
 
@@ -534,7 +534,7 @@ class Sync():
             return
 
         # we need a correct runtime for episodes until we have that this is commented out
-        # traktShowsProgress = self.__traktLoadShowsPlaybackProgress()
+        traktShowsProgress = self.__traktLoadShowsPlaybackProgress()
 
         self.__addEpisodesToTraktCollection(kodiShowsCollected, traktShowsCollected)
 
@@ -545,7 +545,7 @@ class Sync():
         self.__addEpisodesToKodiWatched(traktShowsWatched, kodiShowsWatched, kodiShowsCollected)
 
         # we need a correct runtime for episodes until we have that this is commented out
-        # self.__addEpisodeProgressToKodi(traktShowsProgress, kodiShowsCollected)
+        self.__addEpisodeProgressToKodi(traktShowsProgress, kodiShowsCollected)
 
         if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
             notification('%s %s' % (utilities.getString(32045), utilities.getString(32050)), utilities.getString(32062))  # Sync complete

@@ -220,6 +220,10 @@ msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "Sincronizar colecção ao actualizar ou limpar a biblioteca"
 
+msgctxt "#32056"
+msgid "Show sync notifications"
+msgstr "Mostrar notificações de sincronismo"
+
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
 msgstr "Remover filmes apagados da colecção do Trakt"
@@ -532,6 +536,66 @@ msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "Remover da Watchlist"
 
+msgctxt "#32136"
+msgid "Add to watchlist"
+msgstr "Adicionar à Lista de Reprodução"
+
+msgctxt "#32137"
+msgid "Rate this movie"
+msgstr "Classifique este Filme"
+
+msgctxt "#32138"
+msgid "Rate this show"
+msgstr "Classifique esta Série"
+
+msgctxt "#32139"
+msgid "Rate this episode"
+msgstr "Classifique este Episódio"
+
+msgctxt "#32140"
+msgid "Toggle watched"
+msgstr "Alternar visto/por ver"
+
+msgctxt "#32141"
+msgid "Manage all lists"
+msgstr "Gerir Todas as Listas"
+
+msgctxt "#32142"
+msgid "Update all tags"
+msgstr "Actualizar Todas as Etiquetas"
+
+msgctxt "#32143"
+msgid "Synchronize library"
+msgstr "Sincronizar Biblioteca"
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr "Autorizar"
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr "Lembrar Mais Tarde"
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr "Não Obrigado"
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr "Autorização de Conta"
+
+msgctxt "#32159"
+msgid "Visit {0} or scan the QR Code below."
+msgstr "Visitar {0} ou digitalizar código QR abaixo."
+
 msgctxt "#32163"
 msgid "User"
 msgstr "Utilizador"
+
+msgctxt "#32165"
+msgid "Trakt - Added to watchlist"
+msgstr "Trakt - Adicionado à Watchlist"
+
+msgctxt "#32166"
+msgid "Trakt - Failed adding to watchlist"
+msgstr "Trakt - Falhou a Adicionar à Watchlist"
