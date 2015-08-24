@@ -220,6 +220,10 @@ msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "Sync collection on library update or cleaning"
 
+msgctxt "#32056"
+msgid "Show sync notifications"
+msgstr "Show sync notifications"
+
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
 msgstr "Remove deleted movies from Trakt collection"
@@ -532,6 +536,38 @@ msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "Remove from Watchlist"
 
+msgctxt "#32136"
+msgid "Add to watchlist"
+msgstr "Add to watchlist"
+
+msgctxt "#32137"
+msgid "Rate this movie"
+msgstr "Rate this movie"
+
+msgctxt "#32138"
+msgid "Rate this show"
+msgstr "Rate this show"
+
+msgctxt "#32139"
+msgid "Rate this episode"
+msgstr "Rate this episode"
+
+msgctxt "#32140"
+msgid "Toggle watched"
+msgstr "Toggle watched"
+
+msgctxt "#32141"
+msgid "Manage all lists"
+msgstr "Manage all lists"
+
+msgctxt "#32142"
+msgid "Update all tags"
+msgstr "Update all tags"
+
+msgctxt "#32143"
+msgid "Synchronize library"
+msgstr "Synchronize library"
+
 msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
 msgstr "How do I authorize the trakt addon to access my trakt.tv account?"
@@ -599,3 +635,11 @@ msgstr "User"
 msgctxt "#32164"
 msgid "Fallback to Title/Year matching if necessary"
 msgstr "Fallback to Title/Year matching if necessary"
+
+msgctxt "#32165"
+msgid "Trakt - Added to watchlist"
+msgstr "Trakt - Added to watchlist"
+
+msgctxt "#32166"
+msgid "Trakt - Failed adding to watchlist"
+msgstr "Trakt - Failed adding to watchlist"

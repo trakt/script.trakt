@@ -114,7 +114,7 @@ msgstr "Rampzalig"
 
 msgctxt "#32029"
 msgid "Terrible"
-msgstr "Verschrikkelijk"
+msgstr "Vreselijk"
 
 msgctxt "#32030"
 msgid "Bad"
@@ -130,7 +130,7 @@ msgstr "Bah"
 
 msgctxt "#32033"
 msgid "Fair"
-msgstr "Mooi"
+msgstr "Redelijk"
 
 msgctxt "#32034"
 msgid "Good"
@@ -219,6 +219,10 @@ msgstr "Dienst"
 msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "Synchroniseer je collectie tijdens het bijwerken of opschonen van je bibliotheek"
+
+msgctxt "#32056"
+msgid "Show sync notifications"
+msgstr "Toon sync notificaties"
 
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
@@ -532,6 +536,38 @@ msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "Verwijder van bekijklijst"
 
+msgctxt "#32136"
+msgid "Add to watchlist"
+msgstr "Voeg toe aan bekekenlijst"
+
+msgctxt "#32137"
+msgid "Rate this movie"
+msgstr "Waardeer deze film"
+
+msgctxt "#32138"
+msgid "Rate this show"
+msgstr "Waardeer deze serie"
+
+msgctxt "#32139"
+msgid "Rate this episode"
+msgstr "Waardeer deze aflevering"
+
+msgctxt "#32140"
+msgid "Toggle watched"
+msgstr "Toggle bekeken"
+
+msgctxt "#32141"
+msgid "Manage all lists"
+msgstr "Beheer alle lijsten"
+
+msgctxt "#32142"
+msgid "Update all tags"
+msgstr "Update alle tags"
+
+msgctxt "#32143"
+msgid "Synchronize library"
+msgstr "Synchroniseer bibliotheek"
+
 msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
 msgstr "Hoe autoriseer ik de trakt add-on om in mijn trakt.tv account te komen?"
@@ -599,3 +635,11 @@ msgstr "Gebruiker"
 msgctxt "#32164"
 msgid "Fallback to Title/Year matching if necessary"
 msgstr "Terugvallen naar Titel/Jaar overeenkoming indien noodzakelijk"
+
+msgctxt "#32165"
+msgid "Trakt - Added to watchlist"
+msgstr "Trakt - Toegevoegd aan bekijklijst"
+
+msgctxt "#32166"
+msgid "Trakt - Failed adding to watchlist"
+msgstr "Trakt - Niet gelukt toe te voegen aan bekijklijst"

@@ -425,15 +425,16 @@ class traktPlayer(xbmc.Player):
                     data['showtitle'] = showtitle
                     data['title'] = xbmc.getInfoLabel('VideoPlayer.Title')
                     if year.isdigit():
-                        data['year'] = year
+                        data['year'] = int(year)
                     logger.debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'episode' - %s - S%02dE%02d - %s." % (data['showtitle'], data['season'], data['episode'], data['title']))
                 elif (year or video_ids) and not season and not showtitle:
                     # we have a year or video_id and no season/showtitle info, enough for a movie
                     self.type = 'movie'
                     data['type'] = 'movie'
-                    data['year'] = int(year)
+                    if year.isdigit():
+                        data['year'] = int(year)
                     data['title'] = xbmc.getInfoLabel('VideoPlayer.Title')
-                    logger.debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'movie' - %s (%d)." % (data['title'], data['year']))
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'movie' - %s (%s)." % (data['title'], data.get('year', 'NaN')))
                 elif showtitle:
                     title, season, episode = utilities.regex_tvshow(False, showtitle)
                     data['type'] = 'episode'
@@ -454,13 +455,12 @@ class traktPlayer(xbmc.Player):
 
                 if self.type == 'episode':
                     logger.debug("[traktPlayer] onPlayBackStarted() - Doing multi-part episode check.")
-                    result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': self.id, 'properties': ['tvshowid', 'season', 'episode']}, 'id': 1})
+                    result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': self.id, 'properties': ['tvshowid', 'season', 'episode', 'file']}, 'id': 1})
                     if result:
                         logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
                         tvshowid = int(result['episodedetails']['tvshowid'])
                         season = int(result['episodedetails']['season'])
-                        episode = int(result['episodedetails']['episode'])
-                        episode_index = episode - 1
+                        currentfile = result['episodedetails']['file']
 
                         result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': tvshowid, 'season': season, 'properties': ['episode', 'file'], 'sort': {'method': 'episode'}}, 'id': 1})
                         if result:
@@ -468,11 +468,9 @@ class traktPlayer(xbmc.Player):
                             # make sure episodes array exists in results
                             if 'episodes' in result:
                                 multi = []
-                                for i in range(episode_index, result['limits']['total']):
-                                    if result['episodes'][i]['file'] == result['episodes'][episode_index]['file']:
+                                for i in range(result['limits']['start'], result['limits']['total']):
+                                    if currentfile == result['episodes'][i]['file']:
                                         multi.append(result['episodes'][i]['episodeid'])
-                                    else:
-                                        break
                                 if len(multi) > 1:
                                     data['multi_episode_data'] = multi
                                     data['multi_episode_count'] = len(multi)
