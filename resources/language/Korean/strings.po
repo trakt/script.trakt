@@ -220,6 +220,10 @@ msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "라이브러리를 업데이트하거나 정리할 때 컬렉션 동기화"
 
+msgctxt "#32056"
+msgid "Show sync notifications"
+msgstr "동기화 알림 보기"
+
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
 msgstr "삭제한 영화를 Trakt 컬렉션에서 지우기"
@@ -532,6 +536,38 @@ msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "Watchlist에서 제거"
 
+msgctxt "#32136"
+msgid "Add to watchlist"
+msgstr "watchlist에 추가"
+
+msgctxt "#32137"
+msgid "Rate this movie"
+msgstr "이 영화 평가"
+
+msgctxt "#32138"
+msgid "Rate this show"
+msgstr "이 TV 쇼 평가"
+
+msgctxt "#32139"
+msgid "Rate this episode"
+msgstr "이 에피소드 평가"
+
+msgctxt "#32140"
+msgid "Toggle watched"
+msgstr "시청/미시청 전환"
+
+msgctxt "#32141"
+msgid "Manage all lists"
+msgstr "모든 목록 관리"
+
+msgctxt "#32142"
+msgid "Update all tags"
+msgstr "모든 태그 업데이트"
+
+msgctxt "#32143"
+msgid "Synchronize library"
+msgstr "라이브러리 동기화"
+
 msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
 msgstr "trakt 애드온이 trakt.tv 계정에 접속할 수 있게 인증하는 방법은?"
@@ -591,3 +627,11 @@ msgstr "trakt 애드은 trakt.tv 계정에 접속할 수 있는 인증없이 사
 msgctxt "#32163"
 msgid "User"
 msgstr "사용자"
+
+msgctxt "#32165"
+msgid "Trakt - Added to watchlist"
+msgstr "Trakt - watchlist에 추가됨"
+
+msgctxt "#32166"
+msgid "Trakt - Failed adding to watchlist"
+msgstr "Trakt - watchlist에 추가 실패"

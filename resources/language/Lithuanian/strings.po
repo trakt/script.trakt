@@ -70,7 +70,7 @@ msgstr "Rodyti pranešimą registruojant"
 
 msgctxt "#32015"
 msgid "Trakt - Scrobbled successfully"
-msgstr "Trakt.tv - registravimas sėkminga"
+msgstr "Trakt - registravimas sėkmingas"
 
 msgctxt "#32016"
 msgid "Exclusions"
@@ -94,7 +94,7 @@ msgstr "Aplanko kelias (įskaitant poaplankius)"
 
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
-msgstr "Neįmanoma prisijungti prie Trakt.tv"
+msgstr "Neįmanoma prisijungti prie Trakt"
 
 msgctxt "#32024"
 msgid "Error"
@@ -158,23 +158,23 @@ msgstr "Pašalinti šio epizodo įvertinimą"
 
 msgctxt "#32040"
 msgid "Trakt - Rating submitted successfully"
-msgstr "Trakt.tv - įvertinimas įkeltas sėkmingai"
+msgstr "Trakt - įvertinimas įkeltas sėkmingai"
 
 msgctxt "#32041"
 msgid "Trakt - Already rated"
-msgstr "Trakt.tv - jau įvertinta"
+msgstr "Trakt - jau įvertinta"
 
 msgctxt "#32042"
 msgid "Trakt - Unrated successfully"
-msgstr "Trakt.tv - įvertinimas pašalintas sėkmingai"
+msgstr "Trakt - įvertinimas pašalintas sėkmingai"
 
 msgctxt "#32043"
 msgid "Trakt - Already has the same rating"
-msgstr "Trakt.tv - jau yra toks pat įvertinimas"
+msgstr "Trakt - jau yra toks pat įvertinimas"
 
 msgctxt "#32044"
 msgid "Trakt - Problem submitting rating"
-msgstr "Trakt.tv - problema įkeliant įvertinimą"
+msgstr "Trakt - problema įkeliant įvertinimą"
 
 msgctxt "#32045"
 msgid "Synchronize"
@@ -186,15 +186,15 @@ msgstr "Filmai"
 
 msgctxt "#32047"
 msgid "Add new movies to Trakt collection"
-msgstr "Pridėti naujus filmus į Trakt.tv kolekciją"
+msgstr "Pridėti naujus filmus į Trakt kolekciją"
 
 msgctxt "#32048"
 msgid "Add watched movies to Trakt history"
-msgstr "Pridėti peržiūrėtus filmus į Trakt.tv istoriją"
+msgstr "Pridėti peržiūrėtus filmus į Trakt istoriją"
 
 msgctxt "#32049"
 msgid "Mark movies from Trakt history as watched in Kodi"
-msgstr "Pažymėti filmus iš Trakt.tv istorijos kaip peržiūrėtus Kodi bibliotekoje"
+msgstr "Pažymėti filmus iš Trakt istorijos kaip peržiūrėtus Kodi bibliotekoje"
 
 msgctxt "#32050"
 msgid "TV Episodes"
@@ -202,15 +202,15 @@ msgstr "TV epizodai"
 
 msgctxt "#32051"
 msgid "Add new TV episodes to Trakt collection"
-msgstr "Pridėti naujus TV epizodus į Trakt.tv kolekciją"
+msgstr "Pridėti naujus TV epizodus į Trakt kolekciją"
 
 msgctxt "#32052"
 msgid "Add watched TV episodes to Trakt history"
-msgstr "Pridėti peržiūrėtus TV epizodus į Trakt.tv kolekciją"
+msgstr "Pridėti peržiūrėtus TV epizodus į Trakt kolekciją"
 
 msgctxt "#32053"
 msgid "Mark TV episodes from Trakt history as watched in Kodi"
-msgstr "Pažymėti TV epizodus iš Trakt.tv istorijos kaip peržiūrėtus Kodi bibliotekoje"
+msgstr "Pažymėti TV epizodus iš Trakt istorijos kaip peržiūrėtus Kodi bibliotekoje"
 
 msgctxt "#32054"
 msgid "Service"
@@ -220,13 +220,17 @@ msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "Sinchronizuoti kolekciją po bibliotekos atnaujino ar išvalymo"
 
+msgctxt "#32056"
+msgid "Show sync notifications"
+msgstr "Rodyti sinchronizavimo pranešimus"
+
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
-msgstr "Pašalinti ištrintus filmus iš Trakt.tv kolekcijos"
+msgstr "Pašalinti ištrintus filmus iš Trakt kolekcijos"
 
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
-msgstr "Pašalinti ištrintus TV epizodus iš Trakt.tv kolekcijos"
+msgstr "Pašalinti ištrintus TV epizodus iš Trakt kolekcijos"
 
 msgctxt "#32060"
 msgid "Hide notifications during playback"
@@ -242,11 +246,11 @@ msgstr "Sinchronizavimas baigtas"
 
 msgctxt "#32063"
 msgid "%i movie(s) will be added to Trakt collection"
-msgstr "Filmų, kurie bus pridėti į Trakt.tv kolekciją: %i"
+msgstr "Filmų, kurie bus pridėti į Trakt kolekciją: %i"
 
 msgctxt "#32064"
 msgid "%i movie playcount(s) will be updated on Trakt"
-msgstr "Filmų, kurių atkūrimų skaičius bus atnaujintas Trakt.tv sistemoje: %i"
+msgstr "Filmų, kurių atkūrimų skaičius bus atnaujintas Trakt sistemoje: %i"
 
 msgctxt "#32065"
 msgid "%i movie(s) playcount will be updated in Kodi"
@@ -258,15 +262,15 @@ msgstr "Filmų sinchronizavimas baigtas"
 
 msgctxt "#32067"
 msgid "Going to add %i show(s) to Trakt collection"
-msgstr "Bus pridėta laidų į Trakt.tv kolekciją: %i"
+msgstr "Bus pridėta laidų į Trakt kolekciją: %i"
 
 msgctxt "#32068"
 msgid "Checking for episodes missing from Trakt collection"
-msgstr "Ieškomi epizodų, kurių trūksta Trakt.tv kolekcijoje"
+msgstr "Ieškoma epizodų, kurių trūksta Trakt kolekcijoje"
 
 msgctxt "#32069"
 msgid "%i of %i show(s) have episodes added to Trakt collection"
-msgstr "%i iš %i laidų(os) epizodai buvo pridėti į Trakt.tv kolekciją"
+msgstr "%i iš %i laidų(os) epizodai buvo pridėti į Trakt kolekciją"
 
 msgctxt "#32070"
 msgid "Going to update %i show(s) missing watched status"
@@ -274,7 +278,7 @@ msgstr "Laidų, kurioms bus atnaujintos trūkstamos peržiūros būsenos: %i"
 
 msgctxt "#32071"
 msgid "Checking watched episodes on Trakt"
-msgstr "Pažymimi peržiūrėti epizodai Trakt.tv kolekcijoje"
+msgstr "Pažymimi peržiūrėti epizodai Trakt kolekcijoje"
 
 msgctxt "#32072"
 msgid "%i show(s) had missing watched status"
@@ -294,11 +298,11 @@ msgstr "Epizodų sinchronizavimas baigtas"
 
 msgctxt "#32076"
 msgid "%i movie(s) will be removed from Trakt collection"
-msgstr "Filmų, kurie bus pašalinti iš Trakt.tv kolekcijos: %i"
+msgstr "Filmų, kurie bus pašalinti iš Trakt kolekcijos: %i"
 
 msgctxt "#32077"
 msgid "Cleaning Trakt TV show collection"
-msgstr "Valoma Trakt.tv laidų kolekcija"
+msgstr "Valoma Trakt laidų kolekcija"
 
 msgctxt "#32078"
 msgid "episodes are being removed"
@@ -314,31 +318,31 @@ msgstr "Filmai įkelti iš Kodi"
 
 msgctxt "#32081"
 msgid "Retrieving movie collection from Trakt"
-msgstr "Gaunama filmų kolekcija iš Trakt.tv"
+msgstr "Gaunama filmų kolekcija iš Trakt sistemos"
 
 msgctxt "#32082"
 msgid "Retrieving watched movies from Trakt"
-msgstr "Gaunami peržiūrėti filmai iš Trakt.tv"
+msgstr "Gaunami peržiūrėti filmai iš Trakt sistemos"
 
 msgctxt "#32083"
 msgid "Retrieved movie data from Trakt"
-msgstr "Gaunama filmų informacija iš Trakt.tv"
+msgstr "Gaunama filmų informacija iš Trakt sistemos"
 
 msgctxt "#32084"
 msgid "Trakt movie collection is up to date, no movies to add"
-msgstr "Trakt.tv filmų kolekcija yra atnaujinta, nėra filmų, kuriuos būtų galima pridėti"
+msgstr "Trakt filmų kolekcija yra atnaujinta. Nėra filmų, kuriuos būtų galima pridėti"
 
 msgctxt "#32085"
 msgid "%i movie(s) were added to your Trakt collection"
-msgstr "Pridėta filmų į Trakt.tv kolekciją: %i"
+msgstr "Pridėta filmų į Trakt kolekciją: %i"
 
 msgctxt "#32086"
 msgid "Trakt movie playcounts are up to date"
-msgstr "Trakt.tv filmų atkūrimų skaičiai yra atnaujinti"
+msgstr "Trakt filmų atkūrimų skaičiai yra atnaujinti"
 
 msgctxt "#32087"
 msgid "Playcounts updated for %i movie(s) on Trakt"
-msgstr "Filmų, kuriems atnaujintas atkūrimų skaičius Trakt.tv sistemoje: %i"
+msgstr "Filmų, kuriems atnaujintas atkūrimų skaičius Trakt sistemoje: %i"
 
 msgctxt "#32088"
 msgid "Kodi movie playcounts are up to date"
@@ -354,15 +358,15 @@ msgstr "Filmų, kuriems atnaujintas atkūrimų skaičius Kodi bibliotekoje: %i"
 
 msgctxt "#32091"
 msgid "Trakt movie collection is up to date, no movies removed"
-msgstr "Trakt.tv filmų kolekcija atnaujinta, nebuvo pašalinta jokių filmų"
+msgstr "Trakt filmų kolekcija atnaujinta, nebuvo pašalinta jokių filmų"
 
 msgctxt "#32092"
 msgid "%i movie(s) were removed from your Trakt collection"
-msgstr "Pašalinta filmų iš Trakt.tv kolekcijos: %i"
+msgstr "Pašalinta filmų iš Trakt kolekcijos: %i"
 
 msgctxt "#32093"
 msgid "Updating %i of %i movie playcount(s) on Trakt"
-msgstr "Atnaujinamas atkūrimų skaičius %i iš %i filmų Trakt.tv sistemoje"
+msgstr "Atnaujinamas atkūrimų skaičius %i iš %i filmų Trakt sistemoje"
 
 msgctxt "#32094"
 msgid "Loading episode data from Kodi"
@@ -386,35 +390,35 @@ msgstr "Įkelti epizodo duomenys iš Kodi"
 
 msgctxt "#32099"
 msgid "Loading episode data from Trakt"
-msgstr "Įkeliami epizodo duomenys iš Kodi"
+msgstr "Įkeliami epizodo duomenys iš Trakt sistemos"
 
 msgctxt "#32100"
 msgid "Retrieving episode collection from Trakt"
-msgstr "Gaunama epizodų kolekcija iš Trakt.tv"
+msgstr "Gaunama epizodų kolekcija iš Trakt sistemos"
 
 msgctxt "#32101"
 msgid "Retrieving watched episodes from Trakt"
-msgstr "Gaunami peržiūrėti epizodai iš Trakt.tv"
+msgstr "Gaunami peržiūrėti epizodai iš Trakt sistemos"
 
 msgctxt "#32102"
 msgid "Parsing episode data %i of %i from Trakt"
-msgstr "Analizuojami %i iš %i epizodų duomenys iš Trakt.tv"
+msgstr "Analizuojami %i iš %i epizodų duomenys iš Trakt sistemos"
 
 msgctxt "#32103"
 msgid "Retrieved episode data from Trakt"
-msgstr "Gauti epizodų duomenys iš Trakt.tv"
+msgstr "Gauti epizodų duomenys iš Trakt sistemos"
 
 msgctxt "#32104"
 msgid "Trakt episode collection is up to date, no episodes to add"
-msgstr "Trakt.tv epizodų kolekcija yra atnaujinta, nėra epizodų, kuriuos būtų galima pridėti"
+msgstr "Trakt epizodų kolekcija yra atnaujinta. Nėra epizodų, kuriuos būtų galima pridėti"
 
 msgctxt "#32105"
 msgid "%i episode(s) were added to your Trakt collection"
-msgstr "Pridėta epizodų į Trakt.tv kolekciją: %i"
+msgstr "Pridėta epizodų į Trakt kolekciją: %i"
 
 msgctxt "#32106"
 msgid "Trakt episode playcounts are up to date"
-msgstr "Trakt.tv epizodų atkūrimų skaičiai yra atnaujinti"
+msgstr "Trakt epizodų atkūrimų skaičiai yra atnaujinti"
 
 msgctxt "#32107"
 msgid "Kodi episode playcounts are up to date"
@@ -430,23 +434,23 @@ msgstr "Laidų, kurioms atnaujintas atkūrimų skaičius Kodi bibliotekoje: %i"
 
 msgctxt "#32110"
 msgid "Trakt episode collection is clean, no episodes to remove"
-msgstr "Trakt.tv epizodų kolekcija yra švari, nėra epizodų, kuriuos būtų galima pašalinti"
+msgstr "Trakt epizodų kolekcija yra švari, nėra epizodų, kuriuos būtų galima pašalinti"
 
 msgctxt "#32111"
 msgid "%i episode(s) are being removed from your Trakt collection"
-msgstr "Pašalinama epizodų iš Trakt.tv kolekcijos: %i"
+msgstr "Pašalinama epizodų iš Trakt kolekcijos: %i"
 
 msgctxt "#32112"
 msgid "%i episode(s) were removed from your Trakt collection"
-msgstr "Pašalinta epizodų iš Trakt.tv kolekcijos: %i"
+msgstr "Pašalinta epizodų iš Trakt kolekcijos: %i"
 
 msgctxt "#32113"
 msgid "Trakt - Marked as watched"
-msgstr "Trakt.tv - pažymėta kaip peržiūrėta"
+msgstr "Trakt - pažymėta kaip peržiūrėta"
 
 msgctxt "#32114"
 msgid "Trakt - Failed marking as watched"
-msgstr "Trakt.tv - nepavyko pažymėta kaip peržiūrėta"
+msgstr "Trakt - nepavyko pažymėti kaip peržiūrėta"
 
 msgctxt "#32115"
 msgid "%d episode(s) of '%s'"
@@ -466,27 +470,27 @@ msgstr "Sinchronizuoti epizodų atkūrimo progresą su Kodi"
 
 msgctxt "#32119"
 msgid "Retrieving episode playback progress from Trakt"
-msgstr "Gaunamas epizodų atkūrimo progresas iš Trakt.tv"
+msgstr "Gaunamas epizodų atkūrimo progresas iš Trakt sistemos"
 
 msgctxt "#32120"
 msgid "Parsing episode playback progress %i of %i from Trakt"
-msgstr "Analizuojami %i iš %i epizodų atkūrimo progresas iš Trakt.tv"
+msgstr "Analizuojami %i iš %i epizodų atkūrimo progresas iš Trakt sistemos"
 
 msgctxt "#32121"
 msgid "Retrieved episode playback progress from Trakt"
-msgstr "Gautas epizodų atkūrimo progresas iš Trakt.tv"
+msgstr "Gautas epizodų atkūrimo progresas iš Trakt sistemos"
 
 msgctxt "#32122"
 msgid "Retrieving movie playback progress from Trakt"
-msgstr "Gaunamas filmų atkūrimo progresas iš Trakt.tv"
+msgstr "Gaunamas filmų atkūrimo progresas iš Trakt sistemos"
 
 msgctxt "#32123"
 msgid "Parsing movie playback progress %i of %i from Trakt"
-msgstr "Analizuojami %i iš %i filmų atkūrimo progresas iš Trakt.tv"
+msgstr "Analizuojami %i iš %i filmų atkūrimo progresas iš Trakt sistemos"
 
 msgctxt "#32124"
 msgid "Retrieved movie playback progress from Trakt"
-msgstr "Gautas filmų atkūrimo progresas iš Trakt.tv"
+msgstr "Gautas filmų atkūrimo progresas iš Trakt sistemos"
 
 msgctxt "#32125"
 msgid "Kodi movie playback progress is up to date"
@@ -532,9 +536,41 @@ msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "Pašalinti iš peržiūros sąrašo"
 
+msgctxt "#32136"
+msgid "Add to watchlist"
+msgstr "Pridėti į peržiūros sąrašą"
+
+msgctxt "#32137"
+msgid "Rate this movie"
+msgstr "Įvertinti šį filmą"
+
+msgctxt "#32138"
+msgid "Rate this show"
+msgstr "Įvertinti šią laidą"
+
+msgctxt "#32139"
+msgid "Rate this episode"
+msgstr "Įvertinti šį epizodą"
+
+msgctxt "#32140"
+msgid "Toggle watched"
+msgstr "Perjungti peržiūrėjimo būseną"
+
+msgctxt "#32141"
+msgid "Manage all lists"
+msgstr "Tvarkyti visus sąrašus"
+
+msgctxt "#32142"
+msgid "Update all tags"
+msgstr "Atnaujinti visas žymas"
+
+msgctxt "#32143"
+msgid "Synchronize library"
+msgstr "Sinchronizuoti biblioteką"
+
 msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
-msgstr "Kaip autorizuoti Trakt.tv priedą, kad pasiekti savo Trakt.tv paskyrą?"
+msgstr "Kaip autorizuoti Trakt priedą, kad pasiekti savo Trakt.tv paskyrą?"
 
 msgctxt "#32147"
 msgid "Trakt.tv PIN Authorization Failed"
@@ -554,11 +590,11 @@ msgstr "Naudokite priedo nustatymus, jei persigalvosite"
 
 msgctxt "#32152"
 msgid "Trakt Authorization Complete"
-msgstr "Trakt.tv autorizacija baigta"
+msgstr "Trakt autorizacija baigta"
 
 msgctxt "#32153"
 msgid "Trakt Account Authorization"
-msgstr "Trakt.tv paskyros autorizacija"
+msgstr "Trakt paskyros autorizacija"
 
 msgctxt "#32154"
 msgid "Authorize"
@@ -582,7 +618,7 @@ msgstr "Apsilankykite {0} arba nuskaitykite žemiau esantį QR kodą.."
 
 msgctxt "#32160"
 msgid "Authorize the trakt addon to access your account."
-msgstr "Autorizuoti Trakt.tv priedą, kad jis pasiektų jūsų Trakt.tv paskyrą."
+msgstr "Autorizuoti Trakt priedą, kad jis galėtų pasiekti jūsų paskyrą."
 
 msgctxt "#32161"
 msgid "Enter the PIN provided in the box below."
@@ -590,7 +626,7 @@ msgstr "Įveskite žemiau pateiktą PIN kodą."
 
 msgctxt "#32162"
 msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
-msgstr "Trakt.tv priedas NEGALI būti naudojamas be autorizacijos, kuri leidžia pasiekti jūsų Trakt.tv paskyrą."
+msgstr "Trakt priedas NEGALI būti naudojamas be autorizacijos, kuri leidžia pasiekti jūsų Trakt.tv paskyrą."
 
 msgctxt "#32163"
 msgid "User"
@@ -599,3 +635,11 @@ msgstr "Vartotojas"
 msgctxt "#32164"
 msgid "Fallback to Title/Year matching if necessary"
 msgstr "Jei reikia, grįžti prie paieškos pagal pavadinimą/metus"
+
+msgctxt "#32165"
+msgid "Trakt - Added to watchlist"
+msgstr "Trakt - pridėta į peržiūros sąrašą"
+
+msgctxt "#32166"
+msgid "Trakt - Failed adding to watchlist"
+msgstr "Trakt - nepavyko pridėti į peržiūros sąrašą"
