@@ -64,7 +64,7 @@ or
 7. Select **OK** to save your settings
 8. Watch *something* and see it show up on Trakt.tv!
 
-Please note that *something* does not cover all Kodi possible streaming sources. Local files are OK, however addons like [1channel](http://addons.tvaddons.ag/show/plugin.video.1channel/) can fail. It is up to the developers of these addons to be supported by this plugin. Please take a look https://github.com/trakt/script.trakt/wiki/Providing-id's-to-facilitate-scrobbling
+Please note that *something* does not cover all Kodi possible streaming sources. Local files and strm files scrapped to your library should be OK, however generic third party streaming addons can fail. It is up to the developers of these addons to be supported by this plugin. Please take a look https://github.com/trakt/script.trakt/wiki/Providing-id's-to-facilitate-scrobbling
 
 ###Problems?
 ####"I found something that doesn't work"
