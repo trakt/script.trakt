@@ -383,8 +383,8 @@ class traktPlayer(xbmc.Player):
         if self.isPlayingVideo():
             # get item data from json rpc
             result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'Player.GetItem', 'params': {'playerid': 1}, 'id': 1})
-            logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
             if result:
+                logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
                 # check for exclusion
                 _filename = None
                 try:
