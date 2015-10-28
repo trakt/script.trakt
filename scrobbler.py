@@ -264,7 +264,27 @@ class Scrobbler():
                 adjustedDuration = int(self.videoDuration / self.curVideo['multi_episode_count'])
                 watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
 
+            logger.debug("scrobble sending show object: %s" % str(self.traktShowSummary))
             response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.curVideoInfo, watchedPercent, status)
+            
+            # If there is an empty response, the reason might be that the title we have isn't the actual show title,
+            # but rather an alternative title. To handle this case, call the Trakt search function.
+            if response is None:
+                logger.debug("Searching for show title: %s" % self.traktShowSummary['title'])
+                # This text query API is basically the same as searching on the website. Works with alternative 
+                # titles, unlike the scrobble function.
+                newResp = self.traktapi.getTextQuery(self.traktShowSummary['title'], "show", None)
+                if not newResp:
+                    logger.debug("Empty Response from getTextQuery, giving up")
+                else:
+                    logger.debug("Got Response from getTextQuery: %s" % str(newResp))
+                    # We got something back. Have to assume the first show found is the right one; if there's more than
+                    # one, there's no way to know which to use. Pull the primary title from the response (and the year,
+                    # just because it's there).
+                    showObj = {'title': newResp[0].title, 'year': newResp[0].year}
+                    logger.debug("scrobble sending getTextQuery first show object: %s" % str(showObj))
+                    # Now we can attempt the scrobble again, using the primary title this time.
+                    response = self.traktapi.scrobbleEpisode(showObj, self.curVideoInfo, watchedPercent, status)
 
             if response is not None:
                 self.__scrobbleNotification(response)
