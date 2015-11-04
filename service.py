@@ -478,6 +478,55 @@ class traktPlayer(xbmc.Player):
                                 else:
                                     logger.debug("[traktPlayer] onPlayBackStarted() - This is a single episode.")
 
+            elif (self.type == 'unknown' and result['item']['label']):
+                # If we have a label but no show type, then this might be a PVR recording. This code works with the MythTV
+                # PVR addon, which always creates a label of the form "Show Name - Episode Name". Other PVR addons might work too,
+                # if they do the same.
+                foundLabel = result['item']['label']
+                logger.debug("[traktPlayer] onPlayBackStarted() - Found unknown video type with label: %s. Might be a PVR episode, searching Trakt for it." % foundLabel)
+                if " - " not in foundLabel:
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Label doesn't have the ShowName - EpisodeName format that was expected. Giving up.")
+                    return
+                splitLabel = foundLabel.split(" - ", 1)
+                foundShowName = splitLabel[0]
+                logger.debug("[traktPlayer] onPlayBackStarted() - using show name: %s" % foundShowName)
+                foundEpisodeName = ''.join(['"',splitLabel[1],'"'])
+                logger.debug("[traktPlayer] onPlayBackStarted() - using episode name: %s" % foundEpisodeName)
+                # Do a text query to the Trakt DB looking for this episode. Note that we can't search for show and episode
+                # together, because the Trakt function gets confused and returns nothing.
+                newResp = globals.traktapi.getTextQuery(foundEpisodeName, "episode", None)
+                if not newResp:
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Empty Response from getTextQuery, giving up")
+                else:
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Got Response from getTextQuery: %s" % str(newResp))
+                    # We got something back. See if one of the returned values is for the show we're looking for.
+                    rightResp = None
+                    for thisResp in newResp:
+                        compareShowName = thisResp.show.title
+                        logger.debug("[traktPlayer] onPlayBackStarted() - comparing show name: %s" % compareShowName)
+                        if thisResp.show.title == foundShowName:
+                            logger.debug("[traktPlayer] onPlayBackStarted() - found the right show, using this response")
+                            rightResp = thisResp
+                            break
+                    if rightResp is None:
+                        logger.debug("[traktPlayer] onPlayBackStarted() - Failed to find matching episode/show via text search, skipping.")
+                        return
+                    # OK, now we have a episode object to work with.
+                    self.type = 'episode'
+                    data['type'] = 'episode'
+                    # You'd think we could just use the episode key that Trakt just returned to us, but the scrobbler
+                    # function (see scrobber.py) only understands the show key plus season/episode values.
+                    showKeys = { }
+                    for eachKey in rightResp.show.keys:
+                        showKeys[eachKey[0]] = eachKey[1]
+                    data['video_ids'] = showKeys
+                    # For some reason, the Trakt search call returns the season and episode as an array in the pk field.
+                    # You'd think individual episode and season fields would be better, but whatever.
+                    data['season'] = rightResp.pk[0];
+                    data['episode'] = rightResp.pk[1];
+                    # OK, that's everything. Data should be all set for scrobbling.
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'episode' : show trakt key %s, season: %d, episode: %d." % (data['video_ids'], data['season'], data['episode']))
+
             else:
                 logger.debug("[traktPlayer] onPlayBackStarted() - Video type '%s' unrecognized, skipping." % self.type)
                 return

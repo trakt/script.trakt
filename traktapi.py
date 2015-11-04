@@ -283,6 +283,13 @@ class traktAPI(object):
                 result = [result]
             return result
 
+    def getTextQuery(self, query, type, year):
+        with Trakt.configuration.http(retry=True):
+            result = Trakt['search'].query(query, type, year)
+            if result and not isinstance(result, list):
+                result = [result]
+            return result
+
     def getUser(self):
         with Trakt.configuration.oauth.from_response(self.authorization):
             with Trakt.configuration.http(retry=True):
