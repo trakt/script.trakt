@@ -119,6 +119,9 @@ class Scrobbler():
                     self.curVideoInfo = {'ids': self.curVideo['video_ids']}
                 elif 'title' in self.curVideo and 'year' in self.curVideo:
                     self.curVideoInfo = {'title': self.curVideo['title'], 'year': self.curVideo['year']}
+                else:
+                    logger.debug("Couldn't set curVideoInfo for movie type")
+                logger.debug("Movie type, curVideoInfo: %s" % self.curVideoInfo)
 
             elif utilities.isEpisode(self.curVideo['type']):
                 if 'id' in self.curVideo:
@@ -153,9 +156,15 @@ class Scrobbler():
 
                     if 'year' in self.curVideo:
                         self.traktShowSummary['year'] = self.curVideo['year']
+                else:
+                    logger.debug("Couldn't set curVideoInfo/traktShowSummary for episode type")
 
                 if 'multi_episode_count' in self.curVideo and self.curVideo['multi_episode_count'] > 1:
                     self.isMultiPartEpisode = True
+
+                logger.debug("Episode type, curVideoInfo: %s" % self.curVideoInfo)
+                logger.debug("Episode type, traktShowSummary: %s" % self.traktShowSummary)
+
 
             self.isPlaying = True
             self.isPaused = False
