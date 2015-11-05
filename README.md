@@ -51,7 +51,7 @@ If your not a developer, you should only install this from the official Kodi rep
 4. Select *Trakt* and go to **Configure**
 5. Get your **PIN** [here](http://www.trakt.tv/pin/999) and enter it, change any other settings as needed
 6. Select **OK** to save your settings
-7. Watch *something* and see it show up on Trakt.tv!
+7. Watch something and see it show up on Trakt.tv!
 
 or
 
@@ -62,9 +62,7 @@ or
 5. Select *Trakt* and go to **Configure**
 6. Get your **PIN** [here](http://www.trakt.tv/pin/999) and enter it, change any other settings as needed
 7. Select **OK** to save your settings
-8. Watch *something* and see it show up on Trakt.tv!
-
-Please note that *something* does not cover all Kodi possible streaming sources. Local files and strm files scrapped to your library should be OK, however generic third party streaming addons can fail. It is up to the developers of these addons to be supported by this plugin. Please take a look https://github.com/trakt/script.trakt/wiki/Providing-id's-to-facilitate-scrobbling
+8. Watch something and see it show up on Trakt.tv!
 
 ###Problems?
 ####"I found something that doesn't work"
