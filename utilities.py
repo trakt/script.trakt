@@ -116,30 +116,76 @@ def checkExclusion(fullpath):
     if not fullpath:
         return True
 
-    if (fullpath.find("pvr://") > -1) and getSettingAsBool('ExcludeLiveTV'):
+    # Live TV exclusion
+    if fullpath.startswith("pvr://") and getSettingAsBool('ExcludeLiveTV'):
         logger.debug("checkExclusion(): Video is playing via Live TV, which is currently set as excluded location.")
         return True
 
-    if (fullpath.find("http://") > -1) and getSettingAsBool('ExcludeHTTP'):
+    # HTTP exclusion
+    if (fullpath.startswith("http://") or fullpath.startswith("https://")) and getSettingAsBool('ExcludeHTTP'):
         logger.debug("checkExclusion(): Video is playing via HTTP source, which is currently set as excluded location.")
         return True
 
+    # Path exclusions
     ExcludePath = getSetting('ExcludePath')
     if ExcludePath != "" and getSettingAsBool('ExcludePathOption'):
-        if fullpath.find(ExcludePath) > -1:
+        if fullpath.startswith(ExcludePath):
             logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 1.")
             return True
-
     ExcludePath2 = getSetting('ExcludePath2')
     if ExcludePath2 != "" and getSettingAsBool('ExcludePathOption2'):
-        if fullpath.find(ExcludePath2) > -1:
+        if fullpath.startswith(ExcludePath2):
             logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 2.")
             return True
-
     ExcludePath3 = getSetting('ExcludePath3')
     if ExcludePath3 != "" and getSettingAsBool('ExcludePathOption3'):
-        if fullpath.find(ExcludePath3) > -1:
+        if fullpath.startswith(ExcludePath3):
             logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 3.")
+            return True
+    ExcludePath4 = getSetting('ExcludePath4')
+    if ExcludePath4 != "" and getSettingAsBool('ExcludePathOption4'):
+        if fullpath.startswith(ExcludePath4):
+            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 4.")
+            return True
+    ExcludePath5 = getSetting('ExcludePath5')
+    if ExcludePath5 != "" and getSettingAsBool('ExcludePathOption5'):
+        if fullpath.startswith(ExcludePath5):
+            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 5.")
+            return True
+    ExcludePath6 = getSetting('ExcludePath6')
+    if ExcludePath6 != "" and getSettingAsBool('ExcludePathOption6'):
+        if fullpath.startswith(ExcludePath6):
+            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 6.")
+            return True
+    ExcludePath7 = getSetting('ExcludePath7')
+    if ExcludePath7 != "" and getSettingAsBool('ExcludePathOption7'):
+        if fullpath.startswith(ExcludePath7):
+            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 7.")
+            return True
+    ExcludePath8 = getSetting('ExcludePath8')
+    if ExcludePath8 != "" and getSettingAsBool('ExcludePathOption8'):
+        if fullpath.startswith(ExcludePath8):
+            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 8.")
+            return True
+    ExcludePath9 = getSetting('ExcludePath9')
+    if ExcludePath9 != "" and getSettingAsBool('ExcludePathOption9'):
+        if fullpath.startswith(ExcludePath9):
+            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 9.")
+            return True
+    ExcludePath10 = getSetting('ExcludePath10')
+    if ExcludePath10 != "" and getSettingAsBool('ExcludePathOption10'):
+        if fullpath.startswith(ExcludePath10):
+            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 10.")
+            return True
+    ExcludePath11 = getSetting('ExcludePath11')
+    if ExcludePath11 != "" and getSettingAsBool('ExcludePathOption11'):
+        if fullpath.startswith(ExcludePath11):
+            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 11.")
+            return True
+    ExcludePath12 = getSetting('ExcludePath12')
+    if ExcludePath12 != "" and getSettingAsBool('ExcludePathOption12'):
+        if fullpath.startswith(ExcludePath12):
+            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 12.")
             return True
 
     return False
@@ -431,17 +477,14 @@ def kodiRpcToTraktMediaObjects(data, mode='collected'):
 def convertDateTimeToUTC(toConvert):
     if toConvert:
         dateFormat = "%Y-%m-%d %H:%M:%S"
-        try:
-            naive = datetime.strptime(toConvert, dateFormat)
-        except TypeError:
-            naive = datetime(*(time.strptime(toConvert, dateFormat)[0:6]))
-        if 2038 < naive.year  or 1970 > naive.year:
+        try: naive = datetime.strptime(toConvert, dateFormat)
+        except TypeError: naive = datetime(*(time.strptime(toConvert, dateFormat)[0:6]))
+        if naive.year < 1970 or naive.year > 2038:
             logger.debug('convertDateTimeToUTC() Movie/show was collected/watched outside of the unix timespan. Fallback to datetime now')
-            naive = datetime.strptime(str(datetime.now()).split(".")[0], dateFormat)
+            naive = datetime.now()
         local = naive.replace(tzinfo=tzlocal())
         utc = local.astimezone(tzutc())
         return unicode(utc)
-
     else:
         return toConvert
 
@@ -449,12 +492,11 @@ def convertUtcToDateTime(toConvert):
     if toConvert:
         dateFormat = "%Y-%m-%d %H:%M:%S"
         naive = dateutil.parser.parse(toConvert)
-        if 2038 < naive.year  or 1970 > naive.year:
+        if naive.year < 1970 or naive.year > 2038:
             logger.debug('convertUtcToDateTime() Movie/show was collected/watched outside of the unix timespan. Fallback to datetime now')
-            naive = datetime.strptime(str(datetime.now()).split(".")[0], dateFormat)
+            naive = datetime.now()
         utc = naive.replace(tzinfo=tzutc())
         local = utc.astimezone(tzlocal())
-
         return local.strftime(dateFormat)
     else:
         return toConvert
