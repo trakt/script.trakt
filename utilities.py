@@ -52,7 +52,7 @@ def showSettings():
     __addon__.openSettings()
 
 def getSetting(setting):
-    return __addon__.getSetting(setting).strip()
+    return __addon__.getSetting(setting).strip().decode('utf-8')
 
 def setSetting(setting, value):
     __addon__.setSetting(setting, str(value))
