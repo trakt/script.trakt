@@ -1,3 +1,6 @@
+version 3.0.6
+  - fix getting some user settings, like path excludes
+
 version 3.0.5
   - added scrobble start offset setting (default is 0)
   - changed up/down buttons in rating dialog to go to 10/1 instead of right/left
