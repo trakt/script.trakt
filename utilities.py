@@ -127,7 +127,7 @@ def checkExclusion(fullpath):
         return True
 
     # Path exclusions
-    ExcludePath = getSetting('ExcludePath')
+    ExcludePath = getSetting('ExcludePath').encode('utf-8') # Encode this as fullpath is already encoded
     if ExcludePath != "" and getSettingAsBool('ExcludePathOption'):
         if fullpath.startswith(ExcludePath):
             logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 1.")
