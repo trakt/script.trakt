@@ -79,7 +79,6 @@ Please note that *something* does not cover all Kodi possible streaming sources.
 ###Contribute
 
 ####Pull requests
-* Please make your pull requests on the branch named "dev" only. 
 * Please don't add pull requests for translation updates these have to go work their way through the translation workflow (see [Translations](#translations))
 
 ####Translations
