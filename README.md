@@ -3,7 +3,7 @@
 Trakt.tv scrobbler and library sync
 ==============================================
 
-###Table of Contents
+### Table of Contents
 * [What is Trakt?](#what-is-trakt)
 * [What can this addon do?](#what-can-this-addon-do)
 * [What can be scrobbled??](#what-can-be-scrobbled)
@@ -16,7 +16,7 @@ Trakt.tv scrobbler and library sync
   * [Translations](#translations)
 * [Thanks](#thanks)
 
-###What is Trakt?
+### What is Trakt?
 Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at [Trakt.tv](http://trakt.tv) and get a ton of features:
 
 * Automatically scrobble what you're watching
@@ -32,19 +32,19 @@ Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! 
 * Discover new shows and movies based on your viewing habits
 * Widgets for your forum signature
 
-###What can this addon do?
+### What can this addon do?
 * Automatically scrobble TV episodes and movies you are watching 
 * Sync your TV episode and movie collections to Trakt (manually or triggered by a library update)
 * Keep watched statuses synced between Kodi and Trakt
 * Rate movies and episodes after watching them
 * Custom skin/keymap actions for toggling watched status, and rating (tagging and listing disabled for now)
 
-###What can be scrobbled?
+### What can be scrobbled?
 This plugin will scrobble local media and most remote streaming content. Local media should be played in Kodi library mode and you should use [TVDb](http://thetvdb.com/) (for tv shows) and [TMDb](http://themoviedb.org) (for movies) as your scrapers. TV shows are identified using their TVDb ID. Movies are identified using the IMDb ID. This allows Trakt to match the correct show or movie more accurately, regardless of the title.
 
 Remote streaming content will scrobble assuming the metadata is correctly set in Kodi. Add-ons that stream content need to correctly identify TV episodes and movies with as much metadata as possible for Trakt to know what you're watching.
 
-###Installation
+### Installation
 If your not a developer, you should only install this from the official Kodi repo via Kodi itself. If you are a dev, here is how you install the dev version:
 
 1. Download the zip ([download it here](../../zipball/master))
@@ -68,22 +68,22 @@ or
 
 Please note that *something* does not cover all Kodi possible streaming sources. Local files and strm files scrapped to your library should be OK, however generic third party streaming addons can fail. It is up to the developers of these addons to be supported by this plugin. Please take a look https://github.com/trakt/script.trakt/wiki/Providing-id's-to-facilitate-scrobbling
 
-###Problems?
-####"I found something that doesn't work"
+### Problems?
+#### "I found something that doesn't work"
 * Search the issues on github to see if it has already been reported, if so add your information there.
 * If not, create a new issue and provide as much data about your system as possible, a logfile will also be needed.
 
-####Creating logfiles
+#### Creating logfiles
 * To create a logfile, enable the debug setting in Kodi AND script.trakt, otherwise the logfile won't show any data from script.trakt. Check the [Kodi documentation] (http://kodi.wiki/view/Log_file) if you don't know where your logfile can be found.
 
-###Contribute
+### Contribute
 
-####Pull requests
+#### Pull requests
 * Please don't add pull requests for translation updates these have to go work their way through the translation workflow (see [Translations](#translations))
 
-####Translations
+#### Translations
 * Translations are done via the Transifex project of Kodi. If you want to support translation efforts, read [this] (http://kodi.wiki/view/Translation_System) and look for script-trakt under the XBMC Addons project in Transifex.
 
-###Thanks
+### Thanks
 * Special thanks to all who contribute to this plugin! Check the commit history and changelog to see these talented developers.
 * Special thanks to fuzeman for [trakt.py] (https://github.com/fuzeman/trakt.py).
