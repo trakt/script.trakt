@@ -679,7 +679,7 @@ msgid "%i movie(s) ratings will be updated in Kodi"
 msgstr ""
 
 msgctxt "#32171"
-msgid "Updating %i of %i movie(s) ratings in Kodi"
+msgid "Updating %i of %i movie ratings in Kodi"
 msgstr ""
 
 msgctxt "#32172"
@@ -691,10 +691,21 @@ msgid "Kodi episode ratings are up to date"
 msgstr ""
 
 msgctxt "#32174"
-msgid "Updating %i of %i episode(s) ratings in Kodi"
+msgid "Updating %i of %i episode ratings in Kodi"
 msgstr ""
 
 msgctxt "#32175"
 msgid "Ratings updated for %i episode(s) in Kodi"
 msgstr ""
 
+msgctxt "#32176"
+msgid "Kodi show ratings are up to date"
+msgstr ""
+
+msgctxt "#32177"
+msgid "Updating %i of %i show ratings in Kodi"
+msgstr ""
+
+msgctxt "#32178"
+msgid "Ratings updated for %i show(s) in Kodi"
+msgstr ""
