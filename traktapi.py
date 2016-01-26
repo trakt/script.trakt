@@ -176,6 +176,12 @@ class traktAPI(object):
                 Trakt['sync/ratings'].shows(shows, exceptions=True)
         return shows
 
+    def getEpisodesRated(self, shows):
+        with Trakt.configuration.oauth.from_response(self.authorization):
+            with Trakt.configuration.http(retry=True, timeout=90):
+                Trakt['sync/ratings'].episodes(shows, exceptions=True)
+        return shows
+
     def getMoviesRated(self, movies):
         with Trakt.configuration.oauth.from_response(self.authorization):
             with Trakt.configuration.http(retry=True, timeout=90):

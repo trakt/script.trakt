@@ -400,15 +400,15 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
             watched = 0
 
         episode = {'season': data['season'], 'number': data['episode'], 'title': data['label'],
-                    'ids': {'tvdb': data['uniqueid']['unknown'], 'episodeid': data['episodeid']}, 'watched': watched, 'plays': plays}
-        episode['collected'] = 1  # this is in our kodi so it should be collected
+                   'ids': {'tvdb': data['uniqueid']['unknown'], 'episodeid': data['episodeid']}, 'watched': watched,
+                   'plays': plays, 'collected': 1}
         if 'lastplayed' in data:
             episode['watched_at'] = convertDateTimeToUTC(data['lastplayed'])
         if 'dateadded' in data:
             episode['collected_at'] = convertDateTimeToUTC(data['dateadded'])
         if 'runtime' in data:
             episode['runtime'] = data['runtime']
-        episode['rating'] = episode['userrating'] if 'userrating' in episode and episode['userrating'] > 0 else 0
+        episode['rating'] = data['userrating'] if 'userrating' in data and data['userrating'] > 0 else 0
         if mode == 'watched' and episode['watched']:
             return episode
         elif mode == 'collected' and episode['collected']:

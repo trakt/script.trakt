@@ -686,3 +686,15 @@ msgctxt "#32172"
 msgid "Ratings updated for %i movie(s) in Kodi"
 msgstr ""
 
+msgctxt "#32173"
+msgid "Kodi episode ratings are up to date"
+msgstr ""
+
+msgctxt "#32174"
+msgid "Updating %i of %i episode(s) ratings in Kodi"
+msgstr ""
+
+msgctxt "#32175"
+msgid "Ratings updated for %i episode(s) in Kodi"
+msgstr ""
+
