@@ -1,3 +1,7 @@
+version 3.1.0
+  - add ratings sync for movies, tvshows and episodes
+  - store ratings in kodi when rating on trakt
+
 version 3.0.7
   - fix for exclusions when using special characters
 
