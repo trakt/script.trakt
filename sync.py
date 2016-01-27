@@ -397,10 +397,22 @@ class Sync():
 
             self.__updateProgress(toPercent, line2=utilities.getString(32131) % len(episodes))
 
-    def __addShowsToKodiRatings(self, traktShows, kodiShows, fromPercent, toPercent):
+    def __syncShowsRatings(self, traktShows, kodiShows, fromPercent, toPercent):
         if utilities.getSettingAsBool('trakt_sync_ratings') and traktShows and not self.__isCanceled():
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
+
+            traktShowsToUpdate = self.__compareShows(updateKodiKodiShows, updateKodiTraktShows, rating=True)
+            if len(traktShowsToUpdate['shows']) == 0:
+                self.__updateProgress(toPercent, line1='', line2=utilities.getString(32181))
+                logger.debug("[Episodes Sync] Trakt show ratings are up to date.")
+            else:
+                logger.debug("[Episodes Sync] %i show(s) will have show ratings added on Trakt" % len(traktShowsToUpdate['shows']))
+
+                self.__updateProgress(fromPercent, line1='', line2=utilities.getString(32182) % len(traktShowsToUpdate))
+
+                self.traktapi.addRating(traktShowsToUpdate)
+
 
             kodiShowsUpadate = self.__compareShows(updateKodiTraktShows, updateKodiKodiShows, rating=True)
 
@@ -536,7 +548,20 @@ class Sync():
                     if 'tvshowid' in show_col2:
                         show['tvshowid'] = show_col2['tvshowid']
 
-                    if rating and 'rating' in show_col1 and show_col1['rating'] <> 0 and show_col2['rating'] == 0:
+                    if rating and 'rating' in show_col1 and show_col1['rating'] <> 0 and ('rating' not in show_col2 or show_col2['rating'] == 0):
+                        show['rating'] = show_col1['rating']
+                        shows.append(show)
+                    elif not rating:
+                        shows.append(show)
+                else:
+                    show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year']}
+                    if 'tvdb' in show_col1['ids']:
+                        show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
+
+                    if 'tvshowid' in show_col1:
+                        del(show_col1['tvshowid'])
+
+                    if rating and 'rating' in show_col1 and show_col1['rating'] <> 0:
                         show['rating'] = show_col1['rating']
                         shows.append(show)
                     elif not rating:
@@ -703,7 +728,7 @@ class Sync():
         # we need a correct runtime for episodes until we have that this is commented out
         self.__addEpisodeProgressToKodi(traktShowsProgress, kodiShowsCollected, 81, 91)
 
-        self.__addShowsToKodiRatings(traktShowsRated, kodiShowsCollected, 92, 95)
+        self.__syncShowsRatings(traktShowsRated, kodiShowsCollected, 92, 95)
         self.__addEpisodesToKodiRatings(traktEpisodesRated, kodiShowsCollected, 96, 99)
 
         if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
@@ -971,38 +996,53 @@ class Sync():
 
             self.__updateProgress(toPercent, line2=utilities.getString(32128) % len(kodiMoviesToUpdate))
 
-    def __addMoviesToKodiRatings(self, traktMovies, kodiMovies, fromPercent, toPercent):
+    def __syncMovieRatings(self, traktMovies, kodiMovies, fromPercent, toPercent):
 
         if utilities.getSettingAsBool('trakt_sync_ratings') and traktMovies and not self.__isCanceled():
             updateKodiTraktMovies = copy.deepcopy(traktMovies)
             updateKodiKodiMovies = copy.deepcopy(kodiMovies)
 
+            traktMoviesToUpdate = self.__compareMovies(updateKodiKodiMovies, updateKodiTraktMovies, rating=True)
+            if len(traktMoviesToUpdate) == 0:
+                self.__updateProgress(toPercent, line1='', line2=utilities.getString(32179))
+                logger.debug("[Movies Sync] Trakt movie ratings are up to date.")
+            else:
+                logger.debug("[Movies Sync] %i movie(s) ratings will be updated on Trakt" % len(traktMoviesToUpdate))
+
+                self.__updateProgress(fromPercent, line1='', line2=utilities.getString(32180) % len(traktMoviesToUpdate))
+
+                moviesRatings = {'movies': []}
+                for movie in traktMoviesToUpdate:
+                    moviesRatings['movies'].append(movie)
+
+                self.traktapi.addRating(moviesRatings)
+
+
             kodiMoviesToUpdate = self.__compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, rating=True)
             if len(kodiMoviesToUpdate) == 0:
                 self.__updateProgress(toPercent, line1='', line2=utilities.getString(32169))
                 logger.debug("[Movies Sync] Kodi movie ratings are up to date.")
-                return
+            else:
+                logger.debug("[Movies Sync] %i movie(s) ratings will be updated in Kodi" % len(kodiMoviesToUpdate))
 
-            logger.debug("[Movies Sync] %i movie(s) ratings will be updated in Kodi" % len(kodiMoviesToUpdate))
+                self.__updateProgress(fromPercent, line1='', line2=utilities.getString(32170) % len(kodiMoviesToUpdate))
+                # split movie list into chunks of 50
+                chunksize = 50
+                chunked_movies = utilities.chunks([{"jsonrpc": "2.0", "id": i, "method": "VideoLibrary.SetMovieDetails",
+                                                    "params": {"movieid": kodiMoviesToUpdate[i]['movieid'],
+                                                               "userrating": kodiMoviesToUpdate[i]['rating']}} for i in range(len(kodiMoviesToUpdate))],
+                                                  chunksize)
+                i = 0
+                x = float(len(kodiMoviesToUpdate))
+                for chunk in chunked_movies:
+                    if self.__isCanceled():
+                        return
+                    i += 1
+                    y = ((i / x) * (toPercent-fromPercent)) + fromPercent
+                    self.__updateProgress(int(y), line2=utilities.getString(32171) % ((i) * chunksize if (i) * chunksize < x else x, x))
+                    utilities.kodiJsonRequest(chunk)
 
-            self.__updateProgress(fromPercent, line1='', line2=utilities.getString(32170) % len(kodiMoviesToUpdate))
-            # split movie list into chunks of 50
-            chunksize = 50
-            chunked_movies = utilities.chunks([{"jsonrpc": "2.0", "id": i, "method": "VideoLibrary.SetMovieDetails",
-                                                "params": {"movieid": kodiMoviesToUpdate[i]['movieid'],
-                                                           "userrating": kodiMoviesToUpdate[i]['rating']}} for i in range(len(kodiMoviesToUpdate))],
-                                              chunksize)
-            i = 0
-            x = float(len(kodiMoviesToUpdate))
-            for chunk in chunked_movies:
-                if self.__isCanceled():
-                    return
-                i += 1
-                y = ((i / x) * (toPercent-fromPercent)) + fromPercent
-                self.__updateProgress(int(y), line2=utilities.getString(32171) % ((i) * chunksize if (i) * chunksize < x else x, x))
-                utilities.kodiJsonRequest(chunk)
-
-            self.__updateProgress(toPercent, line2=utilities.getString(32172) % len(kodiMoviesToUpdate))
+                self.__updateProgress(toPercent, line2=utilities.getString(32172) % len(kodiMoviesToUpdate))
 
 
     def __syncMovies(self):
@@ -1037,7 +1077,7 @@ class Sync():
 
         self.__addMovieProgressToKodi(traktMoviesProgress, kodiMovies, 81, 91)
 
-        self.__addMoviesToKodiRatings(traktMovies, kodiMovies, 92, 99)
+        self.__syncMovieRatings(traktMovies, kodiMovies, 92, 99)
 
         if self.show_progress and not self.run_silent:
             self.__updateProgress(100, line1=utilities.getString(32066), line2=" ", line3=" ")
@@ -1070,7 +1110,7 @@ class Sync():
                         movie_col1['runtime'] = movie_col2['runtime']
                         movies.append(movie_col1)
                     elif rating:
-                        if movie_col2['rating'] == 0 and 'rating' in movie_col1 and movie_col1['rating'] <> 0:
+                        if 'rating' in movie_col1 and movie_col1['rating'] <> 0 and ('rating' not in movie_col2 or movie_col2['rating'] == 0):
                             if 'movieid' not in movie_col1:
                                 movie_col1['movieid'] = movie_col2['movieid']
                             movies.append(movie_col1)
@@ -1099,6 +1139,8 @@ class Sync():
                 del movie['movieid']
             if 'plays' in movie:
                 del movie['plays']
+            if 'userrating' in movie:
+                del movie['userrating']
 
     def __syncCheck(self, media_type):
         return self.__syncCollectionCheck(media_type) or self.__syncWatchedCheck(media_type) or self.__syncPlaybackCheck(media_type) or self.__syncRatingsCheck()

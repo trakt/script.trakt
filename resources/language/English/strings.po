@@ -709,3 +709,19 @@ msgstr ""
 msgctxt "#32178"
 msgid "Ratings updated for %i show(s) in Kodi"
 msgstr ""
+
+msgctxt "#32179"
+msgid "Trakt movie ratings are up to date"
+msgstr ""
+
+msgctxt "#32180"
+msgid "%i movie ratings will be updated on Trakt"
+msgstr ""
+
+msgctxt "#32181"
+msgid "Trakt show ratings are up to date"
+msgstr ""
+
+msgctxt "#32182"
+msgid "%i show ratings will be updated on Trakt"
+msgstr ""
