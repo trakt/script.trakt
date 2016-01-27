@@ -409,7 +409,7 @@ class Sync():
             else:
                 logger.debug("[Episodes Sync] %i show(s) will have show ratings added on Trakt" % len(traktShowsToUpdate['shows']))
 
-                self.__updateProgress(fromPercent, line1='', line2=utilities.getString(32182) % len(traktShowsToUpdate))
+                self.__updateProgress(fromPercent, line1='', line2=utilities.getString(32182) % len(traktShowsToUpdate['shows']))
 
                 self.traktapi.addRating(traktShowsToUpdate)
 
@@ -419,74 +419,82 @@ class Sync():
             if len(kodiShowsUpadate['shows']) == 0:
                 self.__updateProgress(toPercent, line1='', line2=utilities.getString(32176))
                 logger.debug("[Episodes Sync] Kodi show ratings are up to date.")
-                return
+            else:
+                logger.debug("[Episodes Sync] %i show(s) will have show ratings added in Kodi" % len(kodiShowsUpadate['shows']))
 
-            logger.debug("[Episodes Sync] %i show(s) will have show ratings added in Kodi" % len(kodiShowsUpadate['shows']))
+                shows = []
+                for show in kodiShowsUpadate['shows']:
+                    shows.append({'tvshowid': show['tvshowid'], 'rating': show['rating']})
 
-            shows = []
-            for show in kodiShowsUpadate['shows']:
-                shows.append({'tvshowid': show['tvshowid'], 'rating': show['rating']})
+                # split episode list into chunks of 50
+                chunksize = 50
+                chunked_episodes = utilities.chunks([{"jsonrpc": "2.0", "id": i, "method": "VideoLibrary.SetTVShowDetails",
+                                        "params": {"tvshowid": shows[i]['tvshowid'],
+                                                   "userrating": shows[i]['rating']}} for i in range(len(shows))],
+                                        chunksize)
+                i = 0
+                x = float(len(shows))
+                for chunk in chunked_episodes:
+                    if self.__isCanceled():
+                        return
+                    i += 1
+                    y = ((i / x) * (toPercent-fromPercent)) + fromPercent
+                    self.__updateProgress(int(y), line1='', line2=utilities.getString(32177) % ((i) * chunksize if (i) * chunksize < x else x, x))
 
-            # split episode list into chunks of 50
-            chunksize = 50
-            chunked_episodes = utilities.chunks([{"jsonrpc": "2.0", "id": i, "method": "VideoLibrary.SetTVShowDetails",
-                                    "params": {"tvshowid": shows[i]['tvshowid'],
-                                               "userrating": shows[i]['rating']}} for i in range(len(shows))],
-                                    chunksize)
-            i = 0
-            x = float(len(shows))
-            for chunk in chunked_episodes:
-                if self.__isCanceled():
-                    return
-                i += 1
-                y = ((i / x) * (toPercent-fromPercent)) + fromPercent
-                self.__updateProgress(int(y), line1='', line2=utilities.getString(32177) % ((i) * chunksize if (i) * chunksize < x else x, x))
+                    utilities.kodiJsonRequest(chunk)
 
-                utilities.kodiJsonRequest(chunk)
-
-            self.__updateProgress(toPercent, line2=utilities.getString(32178) % len(shows))
+                self.__updateProgress(toPercent, line2=utilities.getString(32178) % len(shows))
 
 
-    def __addEpisodesToKodiRatings(self, traktShows, kodiShows, fromPercent, toPercent):
+    def __syncEpisodeRatings(self, traktShows, kodiShows, fromPercent, toPercent):
         if utilities.getSettingAsBool('trakt_sync_ratings') and traktShows and not self.__isCanceled():
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
 
-            kodiShowsUpadate = self.__compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, rating=True)
+            traktShowsToUpdate = self.__compareEpisodes(updateKodiKodiShows, updateKodiTraktShows, rating=True)
+            if len(traktShowsToUpdate['shows']) == 0:
+                self.__updateProgress(toPercent, line1='', line2=utilities.getString(32181))
+                logger.debug("[Episodes Sync] Trakt episode ratings are up to date.")
+            else:
+                logger.debug("[Episodes Sync] %i show(s) will have episode ratings added on Trakt" % len(traktShowsToUpdate['shows']))
 
+                self.__updateProgress(fromPercent, line1='', line2=utilities.getString(32182) % len(traktShowsToUpdate['shows']))
+                self.traktapi.addRating(traktShowsToUpdate)
+
+
+            kodiShowsUpadate = self.__compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, restrict=True, rating=True)
             if len(kodiShowsUpadate['shows']) == 0:
                 self.__updateProgress(toPercent, line1='', line2=utilities.getString(32173))
                 logger.debug("[Episodes Sync] Kodi episode ratings are up to date.")
-                return
+            else:
+                logger.debug("[Episodes Sync] %i show(s) will have episode ratings added in Kodi" % len(kodiShowsUpadate['shows']))
+                for s in ["%s" % self.__getShowAsString(s, short=True) for s in kodiShowsUpadate['shows']]:
+                    logger.debug("[Episodes Sync] Episodes updated: %s" % s)
 
-            logger.debug("[Episodes Sync] %i show(s) will have episode ratings added in Kodi" % len(kodiShowsUpadate['shows']))
-            for s in ["%s" % self.__getShowAsString(s, short=True) for s in kodiShowsUpadate['shows']]:
-                logger.debug("[Episodes Sync] Episodes updated: %s" % s)
+                episodes = []
+                for show in kodiShowsUpadate['shows']:
+                    for season in show['seasons']:
+                        for episode in season['episodes']:
+                            episodes.append({'episodeid': episode['ids']['episodeid'], 'rating': episode['rating']})
 
-            episodes = []
-            for show in kodiShowsUpadate['shows']:
-                for season in show['seasons']:
-                    for episode in season['episodes']:
-                        episodes.append({'episodeid': episode['ids']['episodeid'], 'rating': episode['rating']})
+                # split episode list into chunks of 50
+                chunksize = 50
+                chunked_episodes = utilities.chunks([{"jsonrpc": "2.0", "id": i, "method": "VideoLibrary.SetEpisodeDetails",
+                                        "params": {"episodeid": episodes[i]['episodeid'],
+                                                   "userrating": episodes[i]['rating']}} for i in range(len(episodes))],
+                                        chunksize)
+                i = 0
+                x = float(len(episodes))
+                for chunk in chunked_episodes:
+                    if self.__isCanceled():
+                        return
+                    i += 1
+                    y = ((i / x) * (toPercent-fromPercent)) + fromPercent
+                    self.__updateProgress(int(y), line1='', line2=utilities.getString(32174) % ((i) * chunksize if (i) * chunksize < x else x, x))
 
-            # split episode list into chunks of 50
-            chunksize = 50
-            chunked_episodes = utilities.chunks([{"jsonrpc": "2.0", "id": i, "method": "VideoLibrary.SetEpisodeDetails",
-                                    "params": {"episodeid": episodes[i]['episodeid'],
-                                               "userrating": episodes[i]['rating']}} for i in range(len(episodes))],
-                                    chunksize)
-            i = 0
-            x = float(len(episodes))
-            for chunk in chunked_episodes:
-                if self.__isCanceled():
-                    return
-                i += 1
-                y = ((i / x) * (toPercent-fromPercent)) + fromPercent
-                self.__updateProgress(int(y), line1='', line2=utilities.getString(32174) % ((i) * chunksize if (i) * chunksize < x else x, x))
+                    utilities.kodiJsonRequest(chunk)
 
-                utilities.kodiJsonRequest(chunk)
-
-            self.__updateProgress(toPercent, line2=utilities.getString(32175) % len(episodes))
+                self.__updateProgress(toPercent, line2=utilities.getString(32175) % len(episodes))
 
     def __countEpisodes(self, shows, collection=True):
         count = 0
@@ -641,7 +649,7 @@ class Sync():
                                     if len(eps) > 0:
                                         season_diff[season] = eps
                         else:
-                            if not restrict:
+                            if not restrict and not rating:
                                 if len(a) > 0:
                                     season_diff[season] = a
                     # logger.debug("season_diff %s" % season_diff)
@@ -672,7 +680,9 @@ class Sync():
                                 for episodeKey in seasonKey['episodes']:
                                     if watched and (episodeKey['watched'] == 1):
                                         episodes.append(episodeKey)
-                                    elif not watched:
+                                    elif rating and episodeKey['rating'] <> 0:
+                                        episodes.append(episodeKey)
+                                    elif not watched and not rating:
                                         episodes.append(episodeKey)
                                 if len(episodes) > 0:
                                     show['seasons'].append({'number': seasonKey['number'], 'episodes': episodes})
@@ -729,7 +739,7 @@ class Sync():
         self.__addEpisodeProgressToKodi(traktShowsProgress, kodiShowsCollected, 81, 91)
 
         self.__syncShowsRatings(traktShowsRated, kodiShowsCollected, 92, 95)
-        self.__addEpisodesToKodiRatings(traktEpisodesRated, kodiShowsCollected, 96, 99)
+        self.__syncEpisodeRatings(traktEpisodesRated, kodiShowsCollected, 96, 99)
 
         if not self.show_progress and self.sync_on_update and self.notify and self.notify_during_playback:
             notification('%s %s' % (utilities.getString(32045), utilities.getString(32050)), utilities.getString(32062))  # Sync complete
@@ -1018,7 +1028,7 @@ class Sync():
                 self.traktapi.addRating(moviesRatings)
 
 
-            kodiMoviesToUpdate = self.__compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, rating=True)
+            kodiMoviesToUpdate = self.__compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, restrict=True, rating=True)
             if len(kodiMoviesToUpdate) == 0:
                 self.__updateProgress(toPercent, line1='', line2=utilities.getString(32169))
                 logger.debug("[Movies Sync] Kodi movie ratings are up to date.")
