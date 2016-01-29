@@ -52,7 +52,7 @@ def showSettings():
     __addon__.openSettings()
 
 def getSetting(setting):
-    return __addon__.getSetting(setting).strip()
+    return __addon__.getSetting(setting).strip().decode('utf-8')
 
 def setSetting(setting, value):
     __addon__.setSetting(setting, str(value))
@@ -127,7 +127,7 @@ def checkExclusion(fullpath):
         return True
 
     # Path exclusions
-    ExcludePath = getSetting('ExcludePath')
+    ExcludePath = getSetting('ExcludePath').encode('utf-8') # Encode this as fullpath is already encoded
     if ExcludePath != "" and getSettingAsBool('ExcludePathOption'):
         if fullpath.startswith(ExcludePath):
             logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 1.")
