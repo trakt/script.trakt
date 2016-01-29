@@ -552,7 +552,8 @@ class traktPlayer(xbmc.Player):
                         logger.debug("[traktPlayer] onPlayBackStarted() - Empty Response from getTextQuery, giving up")
                     else:
                         logger.debug("[traktPlayer] onPlayBackStarted() - Got Response from getTextQuery: %s" % str(newResp))
-                        # We got something back. See if one of the returned values is for the show we're looking for.
+                        # We got something back. See if one of the returned values is for the show we're looking for. Often it's
+                        # not, but since there's no way to tell the search which show we want, this is all we can do.
                         rightResp = None
                         for thisResp in newResp:
                             compareShowName = thisResp.show.title
@@ -640,21 +641,25 @@ class traktPlayer(xbmc.Player):
                 else:
                     logger.debug("[traktPlayer] onPlayBackStarted() - Video type '%s' unrecognized, skipping." % self.type)
                     return
-    
-                pl = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
-                plSize = len(pl)
-                if plSize > 1:
-                    pos = pl.getposition()
-                    if not self.plIndex is None:
-                        logger.debug("[traktPlayer] onPlayBackStarted() - User manually skipped to next (or previous) video, forcing playback ended event.")
-                        self.onPlayBackEnded()
-                    self.plIndex = pos
-                    logger.debug("[traktPlayer] onPlayBackStarted() - Playlist contains %d item(s), and is currently on item %d" % (plSize, (pos + 1)))
-    
-                self._playing = True
-    
-                # send dispatch
-                self.action(data)
+
+            else:
+                logger.debug("[traktPlayer] onPlayBackStarted() - Video type '%s' unrecognized, skipping." % self.type)
+                return
+
+            pl = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+            plSize = len(pl)
+            if plSize > 1:
+                pos = pl.getposition()
+                if not self.plIndex is None:
+                    logger.debug("[traktPlayer] onPlayBackStarted() - User manually skipped to next (or previous) video, forcing playback ended event.")
+                    self.onPlayBackEnded()
+                self.plIndex = pos
+                logger.debug("[traktPlayer] onPlayBackStarted() - Playlist contains %d item(s), and is currently on item %d" % (plSize, (pos + 1)))
+
+            self._playing = True
+
+            # send dispatch
+            self.action(data)
 
     # called when kodi stops playing a file
     def onPlayBackEnded(self):
