@@ -122,15 +122,21 @@ def __rateOnTrakt(rating, media_type, media, unrate=False):
     if utils.isMovie(media_type):
         key = 'movies'
         params['rating'] = rating
+        if 'movieid' in media:
+            utils.kodiJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": media['movieid'], "userrating": rating}})
     elif utils.isShow(media_type):
         key = 'shows'
         params['rating'] = rating
+        if 'tvshowid' in media:
+            utils.kodiJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid": media['tvshowid'], "userrating": rating}})
     elif utils.isSeason(media_type):
         key = 'shows'
         params['seasons'] = [{'rating': rating, 'number': media['season']}]
     elif utils.isEpisode(media_type):
         key = 'episodes'
         params['rating'] = rating
+        if 'episodeid' in media:
+            utils.kodiJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetEpisodeDetails", "params": {"episodeid": media['episodeid'], "userrating": rating}})
     else:
         return
     root = {key: [params]}
