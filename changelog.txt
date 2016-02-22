@@ -1,3 +1,6 @@
+version 3.1.1
+  - bugfix for tv show rating sync
+
 version 3.1.0
   - add ratings sync for movies, tvshows and episodes
   - store ratings in kodi when rating on trakt
