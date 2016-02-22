@@ -444,8 +444,8 @@ class SyncEpisodes:
 
                 self.sync.traktapi.addRating(traktShowsToUpdate)
 
-
-            kodiShowsUpadate = self.__compareShows(updateKodiTraktShows, updateKodiKodiShows, rating=True)
+            # needs to be restricted, because we can't add a rating to an episode which is not in our Kodi collection
+            kodiShowsUpadate = self.__compareShows(updateKodiTraktShows, updateKodiKodiShows, rating=True, restrict = True)
 
             if len(kodiShowsUpadate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=utilities.getString(32176))
@@ -570,7 +570,7 @@ class SyncEpisodes:
 
         return data
 
-    def __compareShows(self, shows_col1, shows_col2, rating=False):
+    def __compareShows(self, shows_col1, shows_col2, rating=False, restrict=False):
         shows = []
         for show_col1 in shows_col1['shows']:
             if show_col1:
@@ -593,18 +593,16 @@ class SyncEpisodes:
                     elif not rating:
                         shows.append(show)
                 else:
-                    show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year']}
-                    if 'tvdb' in show_col1['ids']:
-                        show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
+                    if not restrict:
+                        show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year']}
+                        if 'tvdb' in show_col1['ids']:
+                            show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
 
-                    if 'tvshowid' in show_col1:
-                        del(show_col1['tvshowid'])
-
-                    if rating and 'rating' in show_col1 and show_col1['rating'] <> 0:
-                        show['rating'] = show_col1['rating']
-                        shows.append(show)
-                    elif not rating:
-                        shows.append(show)
+                        if rating and 'rating' in show_col1 and show_col1['rating'] <> 0:
+                            show['rating'] = show_col1['rating']
+                            shows.append(show)
+                        elif not rating:
+                            shows.append(show)
 
         result = {'shows': shows}
         return result
