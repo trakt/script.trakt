@@ -260,7 +260,7 @@ class traktAPI(object):
         # Fetch playback
         with Trakt.configuration.oauth.from_response(self.authorization):
             with Trakt.configuration.http(retry=True):
-                playback = Trakt['sync/playback'].movie(exceptions=True)
+                playback = Trakt['sync/playback'].movies(exceptions=True)
 
                 for _, item in playback.items():
                     if type(item) is Movie:
