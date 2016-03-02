@@ -1,3 +1,13 @@
+version 3.1.2
+  - bugfix for movie playback progress sync
+
+version 3.1.1
+  - bugfix for tv show rating sync
+
+version 3.1.0
+  - add ratings sync for movies, tvshows and episodes
+  - store ratings in kodi when rating on trakt
+
 version 3.0.7
   - fix for exclusions when using special characters
 

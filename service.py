@@ -183,8 +183,13 @@ class traktService:
             if utilities.isEpisode(media_type):
                 summaryInfo['season'] = data['season']
                 summaryInfo['number'] = data['episode']
+                summaryInfo['episodeid'] = data.get('dbid')
             elif utilities.isSeason(media_type):
                 summaryInfo['season'] = data['season']
+            elif utilities.isMovie(media_type):
+                summaryInfo['movieid'] = data.get('dbid')
+            elif utilities.isShow(media_type):
+                summaryInfo['tvshowid'] = data.get('dbid')
 
             if action == 'rate':
                 if not 'rating' in data:
