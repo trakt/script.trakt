@@ -501,8 +501,8 @@ def convertUtcToDateTime(toConvert):
             utc = naive.replace(tzinfo=tzutc())
             local = utc.astimezone(tzlocal())
         except ValueError:
-		    logger.debug('convertUtcToDateTime() ValueError: movie/show was collected/watched outside of the unix timespan. Fallback to datetime now')
-		    local = datetime.now()
+            logger.debug('convertUtcToDateTime() ValueError: movie/show was collected/watched outside of the unix timespan. Fallback to datetime now')
+            local = datetime.now()
         return local.strftime(dateFormat)    
     else:
         return toConvert
