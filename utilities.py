@@ -482,11 +482,13 @@ def convertDateTimeToUTC(toConvert):
         dateFormat = "%Y-%m-%d %H:%M:%S"
         try: naive = datetime.strptime(toConvert, dateFormat)
         except TypeError: naive = datetime(*(time.strptime(toConvert, dateFormat)[0:6]))
-        if naive.year < 1970 or naive.year > 2038:
-            logger.debug('convertDateTimeToUTC() Movie/show was collected/watched outside of the unix timespan. Fallback to datetime now')
-            naive = datetime.now()
-        local = naive.replace(tzinfo=tzlocal())
-        utc = local.astimezone(tzutc())
+		
+        try:
+            local = naive.replace(tzinfo=tzlocal())
+            utc = local.astimezone(tzutc())
+        except ValueError:
+            logger.debug('convertDateTimeToUTC() ValueError: movie/show was collected/watched outside of the unix timespan. Fallback to datetime utcnow')
+            utc = datetime.utcnow()
         return unicode(utc)
     else:
         return toConvert
@@ -494,13 +496,14 @@ def convertDateTimeToUTC(toConvert):
 def convertUtcToDateTime(toConvert):
     if toConvert:
         dateFormat = "%Y-%m-%d %H:%M:%S"
-        naive = dateutil.parser.parse(toConvert)
-        if naive.year < 1970 or naive.year > 2038:
-            logger.debug('convertUtcToDateTime() Movie/show was collected/watched outside of the unix timespan. Fallback to datetime now')
-            naive = datetime.now()
-        utc = naive.replace(tzinfo=tzutc())
-        local = utc.astimezone(tzlocal())
-        return local.strftime(dateFormat)
+        try:
+            naive = dateutil.parser.parse(toConvert)
+            utc = naive.replace(tzinfo=tzutc())
+            local = utc.astimezone(tzlocal())
+        except ValueError:
+            logger.debug('convertUtcToDateTime() ValueError: movie/show was collected/watched outside of the unix timespan. Fallback to datetime now')
+            local = datetime.now()
+        return local.strftime(dateFormat)    
     else:
         return toConvert
 
