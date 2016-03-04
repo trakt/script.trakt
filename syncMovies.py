@@ -86,9 +86,11 @@ class SyncMovies():
                         if 'collected' in movie_col1 and movie_col1['collected']:
                             if watched and (movie_col1['watched'] == 1):
                                 movies.append(movie_col1)
-                            elif not watched:
+                            elif rating and movie_col1['rating'] <> 0:
                                 movies.append(movie_col1)
+                            elif not watched and not rating:
 
+                                movies.append(movie_col1)
         return movies
 
 
@@ -343,9 +345,7 @@ class SyncMovies():
 
                 self.sync.UpdateProgress(fromPercent, line1='', line2=utilities.getString(32180) % len(traktMoviesToUpdate))
 
-                moviesRatings = {'movies': []}
-                for movie in traktMoviesToUpdate:
-                    moviesRatings['movies'].append(movie)
+                moviesRatings = {'movies': traktMoviesToUpdate}
 
                 self.sync.traktapi.addRating(moviesRatings)
 
