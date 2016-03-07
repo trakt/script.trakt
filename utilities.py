@@ -506,12 +506,10 @@ def checkAndConfigureProxy():
             matchURL = regexUrl.search(proxyURL)
             if matchURL:
                 return matchURL.group(1) + proxyUsername + ':' + proxyPassword + '@' + matchURL.group(2) + ':' + proxyPort
-            else:
-                None
         elif proxyURL and proxyPort:
             return proxyURL + ':' + proxyPort
-    else:
-        return None
+    
+    return None
 
 def parseIdToTraktIds(id, type):
     data = {}
