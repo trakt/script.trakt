@@ -39,7 +39,6 @@ class SyncEpisodes:
                 progress.close()
             return
 
-        # we need a correct runtime for episodes until we have that this is commented out
         traktShowsProgress = self.__traktLoadShowsPlaybackProgress(25, 36)
 
         self.__addEpisodesToTraktCollection(kodiShowsCollected, traktShowsCollected, 37, 47)
@@ -50,7 +49,6 @@ class SyncEpisodes:
 
         self.__addEpisodesToKodiWatched(traktShowsWatched, kodiShowsWatched, kodiShowsCollected, 70, 80)
 
-        # we need a correct runtime for episodes until we have that this is commented out
         self.__addEpisodeProgressToKodi(traktShowsProgress, kodiShowsCollected, 81, 91)
 
         self.__syncShowsRatings(traktShowsRated, kodiShowsCollected, 92, 95)
@@ -212,8 +210,8 @@ class SyncEpisodes:
             logger.debug('[Playback Sync] Getting playback progress from Trakt.tv')
             try:
                 traktProgressShows = self.sync.traktapi.getEpisodePlaybackProgress()
-            except Exception:
-                logger.debug("[Playback Sync] Invalid Trakt.tv progress list, possible error getting data from Trakt, aborting Trakt.tv playback update.")
+            except Exception as ex:
+                logger.debug("[Playback Sync] Invalid Trakt.tv progress list, possible error getting data from Trakt, aborting Trakt.tv playback update. Error: %s" % ex)
                 return False
 
             i = 0
@@ -414,7 +412,7 @@ class SyncEpisodes:
             # need to calculate the progress in int from progress in percent from Trakt
             # split episode list into chunks of 50
             chunksize = 50
-            chunked_episodes = utilities.chunks([{"jsonrpc": "2.0", "id": i, "method": "VideoLibrary.SetEpisodeDetails", "params": {"episodeid":episodes[i]['episodeid'], "resume": {"position": episodes[i]['runtime'] / 100.0 * episodes[i]['progress']}}} for i in range(len(episodes))], chunksize)
+            chunked_episodes = utilities.chunks([{"jsonrpc": "2.0", "id": i, "method": "VideoLibrary.SetEpisodeDetails", "params": {"episodeid":episodes[i]['episodeid'], "resume": {"position": episodes[i]['runtime'] / 100.0 * episodes[i]['progress'], "total": episodes[i]['runtime']}}} for i in range(len(episodes))], chunksize)
             i = 0
             x = float(len(episodes))
             for chunk in chunked_episodes:
