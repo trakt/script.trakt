@@ -3,7 +3,7 @@
 import xbmcaddon
 import logging
 from trakt import Trakt, ClientError, ServerError
-from trakt.objects import Movie, Episode
+from trakt.objects import Movie, Episode, Show
 from utilities import getSetting, setSetting, findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, notification, getString, createError, checkAndConfigureProxy
 from sys import version_info
 
@@ -277,7 +277,7 @@ class traktAPI(object):
                 playback = Trakt['sync/playback'].episodes(exceptions=True)
 
                 for _, item in playback.items():
-                    if type(item) is Episode:
+                    if type(item) is Show:
                         progressEpisodes.append(item)
 
         return progressEpisodes

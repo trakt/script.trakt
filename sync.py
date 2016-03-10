@@ -31,9 +31,7 @@ class Sync():
         if media_type == 'movies':
             return utilities.getSettingAsBool('trakt_movie_playback')
         else:
-            return False
-            # we need a correct runtime for episodes until we have that this is commented out
-            # return utilities.getSettingAsBool('trakt_episode_playback')
+            return utilities.getSettingAsBool('trakt_episode_playback')
 
     def __syncCollectionCheck(self, media_type):
         if media_type == 'movies':
