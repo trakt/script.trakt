@@ -151,7 +151,7 @@ class traktService:
 
         logger.debug("Getting data for manual %s of %s: video_id: |%s| dbid: |%s|" % (action, media_type, data.get('video_id'), data.get('dbid')))
 
-        id_type = kodiUtilities.parseIdToTraktIds(str(data['video_id']), media_type)[1]
+        id_type = utilities.parseIdToTraktIds(str(data['video_id']), media_type)[1]
 
         if not id_type:
             logger.debug("doManualRating(): Unrecognized id_type: |%s|-|%s|." % (media_type, data['video_id']))
