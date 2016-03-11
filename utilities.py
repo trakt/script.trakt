@@ -40,12 +40,12 @@ def getFormattedItemName(type, info):
         if isShow(type):
             s = info['title']
         elif isEpisode(type):
-                s = "S%02dE%02d - %s" % (info['season'], info['number'], info['title'])
+            s = "S%02dE%02d - %s" % (info['season'], info['number'], info['title'])
         elif isSeason(type):
-            if info['season'] > 0:
-                s = "%s - Season %d" % (info['title'], info['season'])
+            if info[0]['season'] > 0:
+                s = "%s - Season %d" % (info[0]['title'], info[0]['season'])
             else:
-                s = "%s - Specials" % info['title']
+                s = "%s - Specials" % info[0]['title']
         elif isMovie(type):
             s = "%s (%s)" % (info['title'], info['year'])
     except KeyError:
