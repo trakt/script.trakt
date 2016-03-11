@@ -1,0 +1,82 @@
+[
+  {
+    "rated_at": "2014-11-01T00:26:18.000Z",
+    "rating": 10,
+    "show": {
+      "title": "The Office",
+      "year": 2005,
+      "ids": {
+        "trakt": 2302,
+        "slug": "the-office",
+        "tvdb": 73244,
+        "imdb": "tt0386676",
+        "tmdb": 2316,
+        "tvrage": null
+      }
+    }
+  },
+  {
+    "rated_at": "2014-10-19T23:02:23.000Z",
+    "rating": 10,
+    "show": {
+      "title": "Chuck",
+      "year": 2007,
+      "ids": {
+        "trakt": 1395,
+        "slug": "chuck",
+        "tvdb": 80348,
+        "imdb": "tt0934814",
+        "tmdb": 1404,
+        "tvrage": 15614
+      }
+    }
+  },
+  {
+    "rated_at": "2014-10-19T23:02:23.000Z",
+    "rating": 8,
+    "show": {
+      "title": "30 Rock",
+      "year": 2006,
+      "ids": {
+        "trakt": 4584,
+        "slug": "30-rock",
+        "tvdb": 79488,
+        "imdb": "tt0496424",
+        "tmdb": 4608,
+        "tvrage": 11215
+      }
+    }
+  },
+  {
+    "rated_at": "2014-10-19T23:02:23.000Z",
+    "rating": 10,
+    "show": {
+      "title": "Parks and Recreation",
+      "year": 2009,
+      "ids": {
+        "trakt": 8546,
+        "slug": "parks-and-recreation",
+        "tvdb": 84912,
+        "imdb": "tt1266020",
+        "tmdb": 8592,
+        "tvrage": 21686
+      }
+    }
+  },
+  {
+    "rated_at": "2014-05-10T00:23:37.000Z",
+    "rating": 6,
+    "show": {
+      "title": "True Detective",
+      "year": 2014,
+      "ids": {
+        "trakt": 46375,
+        "slug": "true-detective",
+        "tvdb": 270633,
+        "imdb": "tt2356777",
+        "tmdb": 46648,
+        "tvrage": 31369
+      }
+    }
+  }
+]

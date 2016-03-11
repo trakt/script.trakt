@@ -1,0 +1,120 @@
+[{
+	"season": 1,
+	"ids": {
+		"tvdb": 3254641,
+		"tmdb": 63056,
+		"imdb": "tt1480055",
+		"tvrage": 1065008299,
+		"trakt": 73640
+	},
+	"number": 1,
+	"title": "Winter Is Coming"
+},
+{
+	"season": 1,
+	"ids": {
+		"tvdb": 3436411,
+		"tmdb": 63057,
+		"imdb": "tt1668746",
+		"tvrage": 1065023912,
+		"trakt": 73641
+	},
+	"number": 2,
+	"title": "The Kingsroad"
+},
+{
+	"season": 1,
+	"ids": {
+		"tvdb": 3436421,
+		"tmdb": 63058,
+		"imdb": "tt1829962",
+		"tvrage": 1065027990,
+		"trakt": 73642
+	},
+	"number": 3,
+	"title": "Lord Snow"
+},
+{
+	"season": 1,
+	"ids": {
+		"tvdb": 3436431,
+		"tmdb": 63059,
+		"imdb": "tt1829963",
+		"tvrage": 1065029350,
+		"trakt": 73643
+	},
+	"number": 4,
+	"title": "Cripples, Bastards, and Broken Things"
+},
+{
+	"season": 1,
+	"ids": {
+		"tvdb": 3436441,
+		"tmdb": 63060,
+		"imdb": "tt1829964",
+		"tvrage": 1065036402,
+		"trakt": 73644
+	},
+	"number": 5,
+	"title": "The Wolf and the Lion"
+},
+{
+	"season": 1,
+	"ids": {
+		"tvdb": 3436451,
+		"tmdb": 63061,
+		"imdb": "tt1837862",
+		"tvrage": 1065036403,
+		"trakt": 73645
+	},
+	"number": 6,
+	"title": "A Golden Crown"
+},
+{
+	"season": 1,
+	"ids": {
+		"tvdb": 3436461,
+		"tmdb": 63062,
+		"imdb": "tt1837863",
+		"tvrage": 1065036404,
+		"trakt": 73646
+	},
+	"number": 7,
+	"title": "You Win or You Die"
+},
+{
+	"season": 1,
+	"ids": {
+		"tvdb": 3360391,
+		"tmdb": 63063,
+		"imdb": "tt1837864",
+		"tvrage": 1065039305,
+		"trakt": 73647
+	},
+	"number": 8,
+	"title": "The Pointy End"
+},
+{
+	"season": 1,
+	"ids": {
+		"tvdb": 4063481,
+		"tmdb": 63064,
+		"imdb": "tt1851398",
+		"tvrage": 1065039306,
+		"trakt": 73648
+	},
+	"number": 9,
+	"title": "Baelor"
+},
+{
+	"season": 1,
+	"ids": {
+		"tvdb": 4063491,
+		"tmdb": 63065,
+		"imdb": "tt1851397",
+		"tvrage": 1065039307,
+		"trakt": 73649
+	},
+	"number": 10,
+	"title": "Fire and Blood"
+}]
