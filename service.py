@@ -16,6 +16,7 @@ import time
 import gui_utils
 import xbmcgui
 import json
+import AddonSignals
 
 logger = logging.getLogger(__name__)
 
@@ -104,6 +105,8 @@ class traktService:
 
         # init scrobbler class
         self.scrobbler = Scrobbler(globals.traktapi)
+
+        AddonSignals.registerSlot('service.nextup.notification', 'NEXTUPWATCHEDSIGNAL', self.callback)
 
         # start loop for events
         while not self.Monitor.abortRequested():
@@ -317,6 +320,10 @@ class traktService:
     def doSync(self, manual=False, silent=False, library="all"):
         self.syncThread = syncThread(manual, silent, library)
         self.syncThread.start()
+
+    def callback(self, data):
+        logger.debug('Callback received - Nextup skipped to the next episode')
+        self.scrobbler.playbackEnded()
 
 class syncThread(threading.Thread):
 
