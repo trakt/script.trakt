@@ -10,5 +10,5 @@ python:
 install: 
   - pip install python-dateutil pytest
 # command to run tests
-script: python -m unittest discover
+script: py.test -v
 

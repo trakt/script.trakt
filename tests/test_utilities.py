@@ -50,6 +50,57 @@ def test_getFormattedItemName_Movie():
     data = load_params_from_json('tests/fixtures/movie.json')
     assert utilities.getFormattedItemName('movie', data) == 'TRON: Legacy (2010)'
 
+#Testing the tilte
+def test_regex_tvshow_title_1():
+    assert utilities.regex_tvshow('ShowTitle.S01E09')[0] == 'ShowTitle'
+def test_regex_tvshow_title_2():
+    assert utilities.regex_tvshow('ShowTitle.1x09')[0] == 'ShowTitle'
+def test_regex_tvshow_title_3():
+    assert utilities.regex_tvshow('ShowTitle.109')[0] == 'ShowTitle'
+def test_regex_tvshow_title_4():
+    assert utilities.regex_tvshow('ShowTitle.Season 01 - Episode 02')[0] == 'ShowTitle'
+def test_regex_tvshow_title_5():
+    assert utilities.regex_tvshow('ShowTitle_[s01]_[e01]')[0] == 'ShowTitle'
+def test_regex_tvshow_title_6():
+    assert utilities.regex_tvshow('ShowTitle - s01ep03')[0] == 'ShowTitle'
+
+#Testing the season
+def test_regex_tvshow_season_1():
+    assert utilities.regex_tvshow('ShowTitle.S01E09')[1] == 1
+def test_regex_tvshow_season_2():
+    assert utilities.regex_tvshow('ShowTitle.1x09')[1] == 1
+def test_regex_tvshow_season_3():
+    assert utilities.regex_tvshow('ShowTitle.109')[1] == 1
+def test_regex_tvshow_season_4():
+    assert utilities.regex_tvshow('ShowTitle.Season 01 - Episode 02')[1] == 1
+def test_regex_tvshow_season_5():
+    assert utilities.regex_tvshow('ShowTitle_[s01]_[e01]')[1] == 1
+def test_regex_tvshow_season_6():
+    assert utilities.regex_tvshow('ShowTitle - s01ep03')[1] == 1
+
+#Testing the episode
+def test_regex_tvshow_episode_1():
+    assert utilities.regex_tvshow('ShowTitle.S01E09')[2] == 9
+def test_regex_tvshow_episode_2():
+    assert utilities.regex_tvshow('ShowTitle.1x09')[2] == 9
+def test_regex_tvshow_episode_3():
+    assert utilities.regex_tvshow('ShowTitle.109')[2] == 9
+def test_regex_tvshow_episode_4():
+    assert utilities.regex_tvshow('ShowTitle.Season 01 - Episode 09')[2] == 9
+def test_regex_tvshow_episode_5():
+    assert utilities.regex_tvshow('ShowTitle_[s01]_[e09]')[2] == 9
+def test_regex_tvshow_episode_6():
+    assert utilities.regex_tvshow('ShowTitle - s01ep09')[2] == 9
+
+def test_regex_year_title_1():
+    assert utilities.regex_year('ShowTitle (2014)')[0] == 'ShowTitle'
+def test_regex_year_title_2():
+    assert utilities.regex_year('ShowTitle')[0] == ''
+def test_regex_year_year_1():
+    assert utilities.regex_year('ShowTitle (2014)')[1] == '2014'
+def test_regex_year_year_2():
+    assert utilities.regex_year('ShowTitle')[1] == ''
+
 def test_parseIdToTraktIds_IMDB():
     assert utilities.parseIdToTraktIds('tt1431045', 'movie')[0] == {'imdb': 'tt1431045'}
 
