@@ -36,19 +36,19 @@ def test_chunks():
 
 def test_getFormattedItemName_Show():
     data = load_params_from_json('tests/fixtures/show.json')
-    assert utilities.getFormattedItemName('show', data) == 'Game of Thrones'
+    assert utilities.getFormattedItemName('show', data) == b'Game of Thrones'
 
 def test_getFormattedItemName_Season():
     data = load_params_from_json('tests/fixtures/season.json')
-    assert utilities.getFormattedItemName('season', data) == 'Winter Is Coming - Season 1'
+    assert utilities.getFormattedItemName('season', data) == b'Winter Is Coming - Season 1'
 
 def test_getFormattedItemName_Episode():
     data = load_params_from_json('tests/fixtures/episode.json')
-    assert utilities.getFormattedItemName('episode', data) == 'S01E01 - Winter Is Coming'
+    assert utilities.getFormattedItemName('episode', data) == b'S01E01 - Winter Is Coming'
 
 def test_getFormattedItemName_Movie():
     data = load_params_from_json('tests/fixtures/movie.json')
-    assert utilities.getFormattedItemName('movie', data) == 'TRON: Legacy (2010)'
+    assert utilities.getFormattedItemName('movie', data) == b'TRON: Legacy (2010)'
 
 #Testing the tilte
 def test_regex_tvshow_title_1():
