@@ -250,7 +250,7 @@ class SyncEpisodes:
             for show in traktShowsAdd['shows']:
                 logger.debug("[Episodes Sync] Episodes added: %s" % self.__getShowAsString(show, short=True))
 
-            self.sync.UpdateProgress(fromPercent, line1=kodiUtilities.getString(32068), line2=kodiUtilities.getString(32067) % (len(traktShowsAdd['shows'])), line3=" ")
+            self.sync.UpdateProgress(fromPercent, line1=kodiUtilities.getString(32068), line2=kodiUtilities.getString(32067) % (len(traktShowsAdd['shows'])))
 
             # split episode list into chunks of 50
             chunksize = 1
@@ -294,7 +294,7 @@ class SyncEpisodes:
             for show in traktShowsRemove['shows']:
                 logger.debug("[Episodes Sync] Episodes removed: %s" % self.__getShowAsString(show, short=True))
 
-            self.sync.UpdateProgress(fromPercent, line1=kodiUtilities.getString(32077), line2=kodiUtilities.getString(32111) % self.__countEpisodes(traktShowsRemove), line3=" ")
+            self.sync.UpdateProgress(fromPercent, line1=kodiUtilities.getString(32077), line2=kodiUtilities.getString(32111) % self.__countEpisodes(traktShowsRemove))
 
             logger.debug("[traktRemoveEpisodes] Shows to remove %s" % traktShowsRemove)
             try:
@@ -303,7 +303,7 @@ class SyncEpisodes:
                 message = utilities.createError(ex)
                 logging.fatal(message)
 
-            self.sync.UpdateProgress(toPercent, line2=kodiUtilities.getString(32112) % self.__countEpisodes(traktShowsRemove), line3=" ")
+            self.sync.UpdateProgress(toPercent, line2=kodiUtilities.getString(32112) % self.__countEpisodes(traktShowsRemove))
 
     def __addEpisodesToTraktWatched(self, kodiShows, traktShows, fromPercent, toPercent):
         if kodiUtilities.getSettingAsBool('trakt_episode_playcount') and not self.sync.IsCanceled():
@@ -323,7 +323,7 @@ class SyncEpisodes:
             for show in traktShowsUpdate['shows']:
                 logger.debug("[Episodes Sync] Episodes updated: %s" % self.__getShowAsString(show, short=True))
 
-            self.sync.UpdateProgress(fromPercent, line1=kodiUtilities.getString(32071), line2=kodiUtilities.getString(32070) % (len(traktShowsUpdate['shows'])), line3="")
+            self.sync.UpdateProgress(fromPercent, line1=kodiUtilities.getString(32071), line2=kodiUtilities.getString(32070) % (len(traktShowsUpdate['shows'])))
             errorcount = 0
             i = 0
             x = float(len(traktShowsUpdate['shows']))
@@ -346,7 +346,7 @@ class SyncEpisodes:
                     errorcount += 1
 
             logger.debug("[traktUpdateEpisodes] Finished with %d error(s)" % errorcount)
-            self.sync.UpdateProgress(toPercent, line2=kodiUtilities.getString(32072) % (len(traktShowsUpdate['shows'])), line3="")
+            self.sync.UpdateProgress(toPercent, line2=kodiUtilities.getString(32072) % (len(traktShowsUpdate['shows'])), line3=" ")
 
     def __addEpisodesToKodiWatched(self, traktShows, kodiShows, kodiShowsCollected, fromPercent, toPercent):
         if kodiUtilities.getSettingAsBool('kodi_episode_playcount') and not self.sync.IsCanceled():

@@ -14,8 +14,6 @@ time.strptime("1970-01-01 12:00:00", "%Y-%m-%d %H:%M:%S")
 
 logger = logging.getLogger(__name__)
 
-REGEX_YEAR = '^(.+) \((\d{4})\)$'
-
 
 def isMovie(type):
     return type == 'movie'
@@ -80,9 +78,9 @@ def findMediaObject(mediaObjectToMatch, listToSearch):
     if result is None and 'ids' in mediaObjectToMatch and 'imdb' in mediaObjectToMatch['ids'] and unicode(mediaObjectToMatch['ids']['imdb']).startswith("tt"):
         result = __findInList(listToSearch, imdb=mediaObjectToMatch['ids']['imdb'])
     # we don't want to give up if we don't find a match based on the first field so we use if instead of elif
-    if result is None and 'ids' in mediaObjectToMatch and 'tmdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tmdb'].isdigit():
+    if result is None and 'ids' in mediaObjectToMatch and 'tmdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tmdb']:
         result = __findInList(listToSearch, tmdb=mediaObjectToMatch['ids']['tmdb'])
-    if result is None and 'ids' in mediaObjectToMatch and 'tvdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tvdb'].isdigit():
+    if result is None and 'ids' in mediaObjectToMatch and 'tvdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tvdb']:
         result = __findInList(listToSearch, tvdb=mediaObjectToMatch['ids']['tvdb'])
     # match by title and year it will result in movies with the same title and year to mismatch - but what should we do instead?
     if result is None and 'title' in mediaObjectToMatch and 'year' in mediaObjectToMatch:
@@ -111,7 +109,7 @@ def regex_tvshow(label):
     return '', -1, -1
 
 def regex_year(title):
-    prog = re.compile(REGEX_YEAR)
+    prog = re.compile('^(.+) \((\d{4})\)$')
     result = prog.match(title)
 
     if result:
