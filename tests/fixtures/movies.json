@@ -1,0 +1,30 @@
+[
+  {
+    "rated_at": "2015-01-28T02:26:37.000Z",
+    "rating": 8,
+    "movie": {
+      "title": "100 Bloody Acres",
+      "year": 2012,
+      "ids": {
+        "trakt": 86920,
+        "slug": "100-bloody-acres-2012",
+        "imdb": "tt2290065",
+        "tmdb": 126757
+      }
+    }
+  },
+  {
+    "rated_at": "2014-11-01T00:24:54.000Z",
+    "rating": 10,
+    "movie": {
+      "title": "The Hobbit: The Desolation of Smaug",
+      "year": 2013,
+      "ids": {
+        "trakt": 40808,
+        "slug": "the-hobbit-the-desolation-of-smaug-2013",
+        "imdb": "tt1170358",
+        "tmdb": 57158
+      }
+    }
+  }
+]

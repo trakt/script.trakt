@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import utilities as utils
+import utilities
+import kodiUtilities
 import gui_utils
 import xbmc
 import sqlitequeue
@@ -38,7 +39,7 @@ def Main():
 
     if args['action'] == 'contextmenu':
         buttons = []
-        media_type = utils.getMediaType()
+        media_type = kodiUtilities.getMediaType()
 
         if media_type in ['movie', 'show', 'season', 'episode']:
             buttons.append("rate")
@@ -89,36 +90,36 @@ def Main():
                 pass
         else:
             media_type = utils.getMediaType()
-            if not utils.isValidMediaType(media_type):
+            if not utilities.isValidMediaType(media_type):
                 logger.debug("Error, not in video library.")
                 return
             data['dbid'] = int(xbmc.getInfoLabel('ListItem.DBID'))
 
         if media_type is None:
             logger.debug("Manual %s triggered on an unsupported content container." % args['action'])
-        elif utils.isValidMediaType(media_type):
+        elif utilities.isValidMediaType(media_type):
             data['media_type'] = media_type
             if 'dbid' in data:
                 logger.debug("Manual %s of library '%s' with an ID of '%s'." % (args['action'], media_type, data['dbid']))
-                if utils.isMovie(media_type):
-                    result = utils.getMovieDetailsFromKodi(data['dbid'], ['imdbnumber', 'title', 'year'])
+                if utilities.isMovie(media_type):
+                    result = kodiUtilities.getMovieDetailsFromKodi(data['dbid'], ['imdbnumber', 'title', 'year'])
                     if not result:
                         logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
                         return
 
-                elif utils.isShow(media_type):
+                elif utilities.isShow(media_type):
                     tvshow_id = data['dbid']
 
-                elif utils.isSeason(media_type):
-                    result = utils.getSeasonDetailsFromKodi(data['dbid'], ['tvshowid', 'season'])
+                elif utilities.isSeason(media_type):
+                    result = kodiUtilities.getSeasonDetailsFromKodi(data['dbid'], ['tvshowid', 'season'])
                     if not result:
                         logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
                         return
                     tvshow_id = result['tvshowid']
                     data['season'] = result['season']
 
-                elif utils.isEpisode(media_type):
-                    result = utils.getEpisodeDetailsFromKodi(data['dbid'], ['season', 'episode', 'tvshowid'])
+                elif utilities.isEpisode(media_type):
+                    result = kodiUtilities.getEpisodeDetailsFromKodi(data['dbid'], ['season', 'episode', 'tvshowid'])
                     if not result:
                         logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
                         return
@@ -126,8 +127,8 @@ def Main():
                     data['season'] = result['season']
                     data['episode'] = result['episode']
 
-                if utils.isShow(media_type) or utils.isSeason(media_type) or utils.isEpisode(media_type):
-                    result = utils.getShowDetailsFromKodi(tvshow_id, ['imdbnumber'])
+                if utilities.isShow(media_type) or utilities.isSeason(media_type) or utilities.isEpisode(media_type):
+                    result = kodiUtilities.getShowDetailsFromKodi(tvshow_id, ['imdbnumber'])
                     if not result:
                         logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
                         return
@@ -152,12 +153,12 @@ def Main():
             logger.debug("Manual %s of '%s' is unsupported." % (args['action'], media_type))
 
     elif args['action'] == 'togglewatched':
-        media_type = utils.getMediaType()
+        media_type = kodiUtilities.getMediaType()
         if media_type in ['movie', 'show', 'season', 'episode']:
             data = {'media_type': media_type}
-            if utils.isMovie(media_type):
+            if utilities.isMovie(media_type):
                 dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
-                result = utils.getMovieDetailsFromKodi(dbid, ['imdbnumber', 'title', 'year', 'playcount'])
+                result = kodiUtilities.getMovieDetailsFromKodi(dbid, ['imdbnumber', 'title', 'year', 'playcount'])
                 if result:
                     if result['playcount'] == 0:
                         data['id'] = result['imdbnumber']
@@ -167,9 +168,9 @@ def Main():
                     logger.debug("Error getting movie details from Kodi.")
                     return
 
-            elif utils.isEpisode(media_type):
+            elif utilities.isEpisode(media_type):
                 dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
-                result = utils.getEpisodeDetailsFromKodi(dbid, ['showtitle', 'season', 'episode', 'tvshowid', 'playcount'])
+                result = kodiUtilities.getEpisodeDetailsFromKodi(dbid, ['showtitle', 'season', 'episode', 'tvshowid', 'playcount'])
                 if result:
                     if result['playcount'] == 0:
                         data['id'] = result['imdbnumber']
@@ -182,10 +183,10 @@ def Main():
                     logger.debug("Error getting episode details from Kodi.")
                     return
 
-            elif utils.isSeason(media_type):
+            elif utilities.isSeason(media_type):
                 showID = None
                 showTitle = xbmc.getInfoLabel('ListItem.TVShowTitle')
-                result = utils.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
+                result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
                 if result and 'tvshows' in result:
                     for show in result['tvshows']:
                         if show['title'] == showTitle:
@@ -203,7 +204,7 @@ def Main():
                 else:
                     season = int(season)
 
-                result = utils.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': showID, 'season': season, 'properties': ['season', 'episode', 'playcount']}, 'id': 0})
+                result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': showID, 'season': season, 'properties': ['season', 'episode', 'playcount']}, 'id': 0})
                 if result and 'episodes' in result:
                     episodes = []
                     for episode in result['episodes']:
@@ -220,15 +221,15 @@ def Main():
                     logger.debug("Error getting episodes from '%s' for Season %d" % (showTitle, season))
                     return
 
-            elif utils.isShow(media_type):
+            elif utilities.isShow(media_type):
                 dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
-                result = utils.getShowDetailsFromKodi(dbid, ['year', 'imdbnumber'])
+                result = kodiUtilities.getShowDetailsFromKodi(dbid, ['year', 'imdbnumber'])
                 if not result:
                     logger.debug("Error getting show details from Kodi.")
                     return
                 showTitle = result['label']
                 data['id'] = result['imdbnumber']
-                result = utils.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': dbid, 'properties': ['season', 'episode', 'playcount', 'showtitle']}, 'id': 0})
+                result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': dbid, 'properties': ['season', 'episode', 'playcount', 'showtitle']}, 'id': 0})
                 if result and 'episodes' in result:
                     i = 0
                     s = {}
@@ -258,12 +259,12 @@ def Main():
         xbmc.executebuiltin("Action(ToggleWatched)")
 
     elif args['action'] == 'addtowatchlist':
-            media_type = utils.getMediaType()
+            media_type = kodiUtilities.getMediaType()
             if media_type in ['movie', 'show', 'season', 'episode']:
                 data = {'media_type': media_type}
-                if utils.isMovie(media_type):
+                if utilities.isMovie(media_type):
                     dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
-                    result = utils.getMovieDetailsFromKodi(dbid, ['imdbnumber', 'title', 'year', 'playcount'])
+                    result = kodiUtilities.getMovieDetailsFromKodi(dbid, ['imdbnumber', 'title', 'year', 'playcount'])
                     if result:
                         data['id'] = result['imdbnumber']
 
@@ -271,9 +272,9 @@ def Main():
                         logger.debug("Error getting movie details from Kodi.")
                         return
 
-                elif utils.isEpisode(media_type):
+                elif utilities.isEpisode(media_type):
                     dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
-                    result = utils.getEpisodeDetailsFromKodi(dbid, ['showtitle', 'season', 'episode', 'tvshowid', 'playcount'])
+                    result = kodiUtilities.getEpisodeDetailsFromKodi(dbid, ['showtitle', 'season', 'episode', 'tvshowid', 'playcount'])
                     if result:
                         data['id'] = result['imdbnumber']
                         data['season'] = result['season']
@@ -284,10 +285,10 @@ def Main():
                         logger.debug("Error getting episode details from Kodi.")
                         return
 
-                elif utils.isSeason(media_type):
+                elif utilities.isSeason(media_type):
                     showID = None
                     showTitle = xbmc.getInfoLabel('ListItem.TVShowTitle')
-                    result = utils.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
+                    result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year']}, 'id': 0})
                     if result and 'tvshows' in result:
                         for show in result['tvshows']:
                             if show['title'] == showTitle:
@@ -305,7 +306,7 @@ def Main():
                     else:
                         season = int(season)
 
-                    result = utils.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes',
+                    result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes',
                                                     'params': {'tvshowid': showID, 'season': season,
                                                                'properties': ['season', 'episode', 'playcount']},
                                                     'id': 0})
@@ -321,15 +322,15 @@ def Main():
                         logger.debug("Error getting episodes from '%s' for Season %d" % (showTitle, season))
                         return
 
-                elif utils.isShow(media_type):
+                elif utilities.isShow(media_type):
                     dbid = int(xbmc.getInfoLabel('ListItem.DBID'))
-                    result = utils.getShowDetailsFromKodi(dbid, ['year', 'imdbnumber'])
+                    result = kodiUtilities.getShowDetailsFromKodi(dbid, ['year', 'imdbnumber'])
                     if not result:
                         logger.debug("Error getting show details from Kodi.")
                         return
                     showTitle = result['label']
                     data['id'] = result['imdbnumber']
-                    result = utils.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes',
+                    result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes',
                                                     'params': {'tvshowid': dbid, 'properties':
                                                         ['season', 'episode', 'playcount', 'showtitle']}, 'id': 0})
                     if result and 'episodes' in result:

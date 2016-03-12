@@ -2,7 +2,8 @@
 
 import xbmcaddon
 import xbmcgui
-import utilities as utils
+from utilities import isMovie, isShow, isSeason, isEpisode
+from kodiUtilities import getString
 
 __addon__ = xbmcaddon.Addon("script.trakt")
 
@@ -30,17 +31,16 @@ class traktContextMenu(xbmcgui.WindowXMLDialog):
         super(traktContextMenu, self).__init__()
 
     def onInit(self):
-        lang = utils.getString
-        mange_string = lang(32133) if utils.isMovie(self.media_type) else lang(32134)
-        rate_string = lang(32137)
-        if utils.isShow(self.media_type):
-            rate_string = lang(32138)
-        elif utils.isSeason(self.media_type):
-            rate_string = lang(32149)
-        elif utils.isEpisode(self.media_type):
-            rate_string = lang(32139)
+        mange_string = getString(32133) if isMovie(self.media_type) else getString(32134)
+        rate_string = getString(32137)
+        if isShow(self.media_type):
+            rate_string = getString(32138)
+        elif isSeason(self.media_type):
+            rate_string = getString(32149)
+        elif isEpisode(self.media_type):
+            rate_string = getString(32139)
 
-        actions = [mange_string, lang(32135), lang(32136), rate_string, lang(32140), lang(32141), lang(32142), lang(32143)]
+        actions = [mange_string, getString(32135), getString(32136), rate_string, getString(32140), getString(32141), getString(32142), getString(32143)]
         keys = ["itemlists", "removefromlist", "addtowatchlist", "rate", "togglewatched", "managelists", "updatetags",
                 "sync"]
 
