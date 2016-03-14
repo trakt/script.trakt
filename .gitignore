@@ -8,3 +8,4 @@
 /.settings
 Thumbs.db
 *~
+.cache
