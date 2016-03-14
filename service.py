@@ -11,10 +11,12 @@ from scrobbler import Scrobbler
 import sqlitequeue
 from sync import Sync
 import utilities
+import kodiUtilities
 import time
 import gui_utils
 import xbmcgui
 import json
+import AddonSignals
 
 logger = logging.getLogger(__name__)
 
@@ -47,11 +49,11 @@ class traktService:
             elif action == 'seek' or action == 'seekchapter':
                 self.scrobbler.playbackSeek()
             elif action == 'scanFinished':
-                if utilities.getSettingAsBool('sync_on_update'):
+                if kodiUtilities.getSettingAsBool('sync_on_update'):
                     logger.debug("Performing sync after library update.")
                     self.doSync()
             elif action == 'databaseCleaned':
-                if utilities.getSettingAsBool('sync_on_update') and (utilities.getSettingAsBool('clean_trakt_movies') or utilities.getSettingAsBool('clean_trakt_episodes')):
+                if kodiUtilities.getSettingAsBool('sync_on_update') and (kodiUtilities.getSettingAsBool('clean_trakt_movies') or kodiUtilities.getSettingAsBool('clean_trakt_episodes')):
                     logger.debug("Performing sync after library clean.")
                     self.doSync()
             elif action == 'settingsChanged':
@@ -73,7 +75,7 @@ class traktService:
                 else:
                     logger.debug("There already is a sync in progress.")
             elif action == 'settings':
-                utilities.showSettings()
+                kodiUtilities.showSettings()
             else:
                 logger.debug("Unknown dispatch action, '%s'." % action)
         except Exception as ex:
@@ -81,7 +83,7 @@ class traktService:
             logger.fatal(message)
 
     def run(self):
-        startup_delay = utilities.getSettingAsInt('startup_delay')
+        startup_delay = kodiUtilities.getSettingAsInt('startup_delay')
         if startup_delay:
             logger.debug("Delaying startup by %d seconds." % startup_delay)
             xbmc.sleep(startup_delay * 1000)
@@ -104,10 +106,12 @@ class traktService:
         # init scrobbler class
         self.scrobbler = Scrobbler(globals.traktapi)
 
+        AddonSignals.registerSlot('service.nextup.notification', 'NEXTUPWATCHEDSIGNAL', self.callback)
+
         # start loop for events
         while not self.Monitor.abortRequested():
-            if not utilities.getSetting('authorization'):
-                last_reminder = utilities.getSettingAsInt('last_reminder')
+            if not kodiUtilities.getSetting('authorization'):
+                last_reminder = kodiUtilities.getSettingAsInt('last_reminder')
                 now = int(time.time())
                 if last_reminder >= 0 and last_reminder < now - (24 * 60 * 60):
                     gui_utils.get_pin()
@@ -211,9 +215,9 @@ class traktService:
 
                 result = globals.traktapi.addToWatchlist(params)
                 if result:
-                    utilities.notification(utilities.getString(32165), s)
+                    kodiUtilities.notification(kodiUtilities.getString(32165), s)
                 else:
-                    utilities.notification(utilities.getString(32166), s)
+                    kodiUtilities.notification(kodiUtilities.getString(32166), s)
         elif utilities.isEpisode(media_type):
             summaryInfo = {'shows': [{'ids': utilities.parseIdToTraktIds(data['id'], media_type)[0],
                                       'seasons': [{'number': data['season'], 'episodes': [{'number':data['number']}]}]}]}
@@ -222,9 +226,9 @@ class traktService:
 
             result = globals.traktapi.addToWatchlist(summaryInfo)
             if result:
-                utilities.notification(utilities.getString(32165), s)
+                kodiUtilities.notification(kodiUtilities.getString(32165), s)
             else:
-                utilities.notification(utilities.getString(32166), s)
+                kodiUtilities.notification(kodiUtilities.getString(32166), s)
         elif utilities.isSeason(media_type):
             summaryInfo = {'shows': [{'ids': utilities.parseIdToTraktIds(data['id'], media_type)[0],
                                       'seasons': [{'number': data['season']}]}]}
@@ -235,9 +239,9 @@ class traktService:
 
             result = globals.traktapi.addToWatchlist(summaryInfo)
             if result:
-                utilities.notification(utilities.getString(32165), s)
+                kodiUtilities.notification(kodiUtilities.getString(32165), s)
             else:
-                utilities.notification(utilities.getString(32166), s)
+                kodiUtilities.notification(kodiUtilities.getString(32166), s)
         elif utilities.isShow(media_type):
             summaryInfo = {'shows': [{'ids': utilities.parseIdToTraktIds(data['id'], media_type)[0]}]}
             s = utilities.getFormattedItemName(media_type, data)
@@ -245,9 +249,9 @@ class traktService:
 
             result = globals.traktapi.addToWatchlist(summaryInfo)
             if result:
-                utilities.notification(utilities.getString(32165), s)
+                kodiUtilities.notification(kodiUtilities.getString(32165), s)
             else:
-                utilities.notification(utilities.getString(32166), s)
+                kodiUtilities.notification(kodiUtilities.getString(32166), s)
 
     def doMarkWatched(self, data):
 
@@ -264,9 +268,9 @@ class traktService:
 
                     result = globals.traktapi.addToHistory(params)
                     if result:
-                        utilities.notification(utilities.getString(32113), s)
+                        kodiUtilities.notification(kodiUtilities.getString(32113), s)
                     else:
-                        utilities.notification(utilities.getString(32114), s)
+                        kodiUtilities.notification(kodiUtilities.getString(32114), s)
         elif utilities.isEpisode(media_type):
             summaryInfo = {'shows': [{'ids':utilities.parseIdToTraktIds(data['id'],media_type)[0], 'seasons': [{'number': data['season'], 'episodes': [{'number':data['number']}]}]}]}
             logger.debug("doMarkWatched(): %s" % str(summaryInfo))
@@ -274,9 +278,9 @@ class traktService:
 
             result = globals.traktapi.addToHistory(summaryInfo)
             if result:
-                utilities.notification(utilities.getString(32113), s)
+                kodiUtilities.notification(kodiUtilities.getString(32113), s)
             else:
-                utilities.notification(utilities.getString(32114), s)
+                kodiUtilities.notification(kodiUtilities.getString(32114), s)
         elif utilities.isSeason(media_type):
             summaryInfo = {'shows': [{'ids':utilities.parseIdToTraktIds(data['id'],media_type)[0], 'seasons': [{'number': data['season'], 'episodes': []}]}]}
             s = utilities.getFormattedItemName(media_type, data)
@@ -290,9 +294,9 @@ class traktService:
 
                 result = globals.traktapi.addToHistory(summaryInfo)
                 if result:
-                    utilities.notification(utilities.getString(32113), utilities.getString(32115) % (result['added']['episodes'], s))
+                    kodiUtilities.notification(kodiUtilities.getString(32113), kodiUtilities.getString(32115) % (result['added']['episodes'], s))
                 else:
-                    utilities.notification(utilities.getString(32114), s)
+                    kodiUtilities.notification(kodiUtilities.getString(32114), s)
         elif utilities.isShow(media_type):
             summaryInfo = {'shows': [{'ids':utilities.parseIdToTraktIds(data['id'],media_type)[0], 'seasons': []}]}
             if summaryInfo:
@@ -309,13 +313,17 @@ class traktService:
 
                     result = globals.traktapi.addToHistory(summaryInfo)
                     if result:
-                        utilities.notification(utilities.getString(32113), utilities.getString(32115) % (result['added']['episodes'], s))
+                        kodiUtilities.notification(kodiUtilities.getString(32113), kodiUtilities.getString(32115) % (result['added']['episodes'], s))
                     else:
-                        utilities.notification(utilities.getString(32114), s)
+                        kodiUtilities.notification(kodiUtilities.getString(32114), s)
 
     def doSync(self, manual=False, silent=False, library="all"):
         self.syncThread = syncThread(manual, silent, library)
         self.syncThread.start()
+
+    def callback(self, data):
+        logger.debug('Callback received - Nextup skipped to the next episode')
+        self.scrobbler.playbackEnded()
 
 class syncThread(threading.Thread):
 
@@ -379,7 +387,7 @@ class traktPlayer(xbmc.Player):
         self.id = None
 
         # take the user start scrobble offset into account
-        scrobbleStartOffset = utilities.getSettingAsInt('scrobble_start_offset')*60
+        scrobbleStartOffset = kodiUtilities.getSettingAsInt('scrobble_start_offset')*60
         if scrobbleStartOffset > 0:
             waitFor = 10
             waitedFor = 0
@@ -394,7 +402,7 @@ class traktPlayer(xbmc.Player):
         # only do anything if we're playing a video
         if self.isPlayingVideo():
             # get item data from json rpc
-            result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'Player.GetItem', 'params': {'playerid': 1}, 'id': 1})
+            result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'Player.GetItem', 'params': {'playerid': 1}, 'id': 1})
             if result:
                 logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
                 # check for exclusion
@@ -405,7 +413,7 @@ class traktPlayer(xbmc.Player):
                     logger.debug("[traktPlayer] onPlayBackStarted() - Exception trying to get playing filename, player suddenly stopped.")
                     return
     
-                if utilities.checkExclusion(_filename):
+                if kodiUtilities.checkExclusion(_filename):
                     logger.debug("[traktPlayer] onPlayBackStarted() - '%s' is in exclusion settings, ignoring." % _filename)
                     return
     
@@ -448,7 +456,7 @@ class traktPlayer(xbmc.Player):
                         data['title'] = xbmc.getInfoLabel('VideoPlayer.Title')
                         logger.debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'movie' - %s (%s)." % (data['title'], data.get('year', 'NaN')))
                     elif showtitle:
-                        title, season, episode = utilities.regex_tvshow(False, showtitle)
+                        title, season, episode = utilities.regex_tvshow(showtitle)
                         data['type'] = 'episode'
                         data['season'] = season
                         data['episode'] = episode
@@ -466,14 +474,14 @@ class traktPlayer(xbmc.Player):
     
                     if self.type == 'episode':
                         logger.debug("[traktPlayer] onPlayBackStarted() - Doing multi-part episode check.")
-                        result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': self.id, 'properties': ['tvshowid', 'season', 'episode', 'file']}, 'id': 1})
+                        result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': self.id, 'properties': ['tvshowid', 'season', 'episode', 'file']}, 'id': 1})
                         if result:
                             logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
                             tvshowid = int(result['episodedetails']['tvshowid'])
                             season = int(result['episodedetails']['season'])
                             currentfile = result['episodedetails']['file']
     
-                            result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': tvshowid, 'season': season, 'properties': ['episode', 'file'], 'sort': {'method': 'episode'}}, 'id': 1})
+                            result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': tvshowid, 'season': season, 'properties': ['episode', 'file'], 'sort': {'method': 'episode'}}, 'id': 1})
                             if result:
                                 logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
                                 # make sure episodes array exists in results
