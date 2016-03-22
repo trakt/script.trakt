@@ -239,7 +239,7 @@ class SyncEpisodes:
 
             tmpTraktShowsAdd = self.__compareEpisodes(addKodiShows, addTraktShows)
             traktShowsAdd = copy.deepcopy(tmpTraktShowsAdd)
-            self.sanitizeShows(traktShowsAdd)
+            utilities.sanitizeShows(traktShowsAdd)
             # logger.debug("traktShowsAdd %s" % traktShowsAdd)
 
             if len(traktShowsAdd['shows']) == 0:
@@ -283,7 +283,7 @@ class SyncEpisodes:
             removeKodiShows = copy.deepcopy(kodiShows)
 
             traktShowsRemove = self.__compareEpisodes(removeTraktShows, removeKodiShows)
-            self.sanitizeShows(traktShowsRemove)
+            utilities.sanitizeShows(traktShowsRemove)
 
             if len(traktShowsRemove['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1=kodiUtilities.getString(32077), line2=kodiUtilities.getString(32110))
@@ -311,7 +311,7 @@ class SyncEpisodes:
             updateTraktKodiShows = copy.deepcopy(kodiShows)
 
             traktShowsUpdate = self.__compareEpisodes(updateTraktKodiShows, updateTraktTraktShows, watched=True)
-            self.sanitizeShows(traktShowsUpdate)
+            utilities.sanitizeShows(traktShowsUpdate)
             # logger.debug("traktShowsUpdate %s" % traktShowsUpdate)
 
             if len(traktShowsUpdate['shows']) == 0:
@@ -586,7 +586,7 @@ class SyncEpisodes:
                     if 'tvshowid' in show_col2:
                         show['tvshowid'] = show_col2['tvshowid']
 
-                    if rating and 'rating' in show_col1 and show_col1['rating'] <> 0 and ('rating' not in show_col2 or show_col2['rating'] == 0):
+                    if rating and 'rating' in show_col1 and show_col1['rating'] != 0 and ('rating' not in show_col2 or show_col2['rating'] == 0):
                         show['rating'] = show_col1['rating']
                         shows.append(show)
                     elif not rating:
@@ -597,7 +597,7 @@ class SyncEpisodes:
                         if 'tvdb' in show_col1['ids']:
                             show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
 
-                        if rating and 'rating' in show_col1 and show_col1['rating'] <> 0:
+                        if rating and 'rating' in show_col1 and show_col1['rating'] != 0:
                             show['rating'] = show_col1['rating']
                             shows.append(show)
                         elif not rating:
@@ -644,7 +644,7 @@ class SyncEpisodes:
                                 if len(t) > 0:
                                     eps = {}
                                     for ep in t:
-                                        if 'rating' in a[ep] and a[ep]['rating'] <> 0 and season_col2[season][ep]['rating'] == 0:
+                                        if 'rating' in a[ep] and a[ep]['rating'] != 0 and season_col2[season][ep]['rating'] == 0:
                                             eps[ep] = a[ep]
                                             if 'episodeid' in season_col2[season][ep]['ids']:
                                                 if 'ids' in eps:
@@ -708,7 +708,7 @@ class SyncEpisodes:
                                 for episodeKey in seasonKey['episodes']:
                                     if watched and (episodeKey['watched'] == 1):
                                         episodes.append(episodeKey)
-                                    elif rating and episodeKey['rating'] <> 0:
+                                    elif rating and episodeKey['rating'] != 0:
                                         episodes.append(episodeKey)
                                     elif not watched and not rating:
                                         episodes.append(episodeKey)
@@ -721,21 +721,3 @@ class SyncEpisodes:
                                 shows.append(show)
         result = {'shows': shows}
         return result
-
-
-    @staticmethod
-    def sanitizeShows(shows):
-        # do not remove watched_at and collected_at may cause problems between the 4 sync types (would probably have to deepcopy etc)
-        for show in shows['shows']:
-            for season in show['seasons']:
-                for episode in season['episodes']:
-                    if 'collected' in episode:
-                        del episode['collected']
-                    if 'watched' in episode:
-                        del episode['watched']
-                    if 'season' in episode:
-                        del episode['season']
-                    if 'plays' in episode:
-                        del episode['plays']
-                    if 'ids' in episode and 'episodeid' in episode['ids']:
-                        del episode['ids']['episodeid']

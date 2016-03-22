@@ -89,7 +89,7 @@ def Main():
             except KeyError:
                 pass
         else:
-            media_type = utils.getMediaType()
+            media_type = kodiUtilities.getMediaType()
             if not utilities.isValidMediaType(media_type):
                 logger.debug("Error, not in video library.")
                 return
