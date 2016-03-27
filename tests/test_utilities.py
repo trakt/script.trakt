@@ -124,10 +124,10 @@ def test_checkExcludePath_Path_Excluded_Special_Chars():
     assert utilities.checkExcludePath('C:/öäüß%6/', True, 'C:/öäüß%6/video.mkv', 2)
 
 def test_checkExcludePath_Path_NotExcluded():
-    assert utilities.checkExcludePath('C:/excludes/', True, 'C:/notexcluded/video.mkv', 2) == None
+    assert utilities.checkExcludePath('C:/excludes/', True, 'C:/notexcluded/video.mkv', 2) == False
 
 def test_checkExcludePath_Path_Disabled():
-    assert utilities.checkExcludePath('C:/excludes/', False, 'C:/excludes/video.mkv', 2) == None
+    assert utilities.checkExcludePath('C:/excludes/', False, 'C:/excludes/video.mkv', 2) == False
 
 def test_sanitizeMovies_collected():
     data = load_params_from_json('tests/fixtures/movies_unsanatized.json')
