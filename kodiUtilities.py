@@ -91,7 +91,7 @@ def checkExclusion(fullpath):
             logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 1.")
             return True
 
-    for x in xrange(2,12):
+    for x in xrange(2,13):
         utilities.checkExcludePath(getSetting('ExcludePath%i' % x).encode('utf-8'), getSettingAsBool('ExcludePathOption%i' % x), fullpath, x)
 
     return False
