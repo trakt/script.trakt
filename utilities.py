@@ -256,6 +256,8 @@ def checkExcludePath(excludePath, excludePathEnabled, fullpath, x):
         logger.debug(
             "checkExclusion(): Video is from location, which is currently set as excluded path %i." % x)
         return True
+    else:
+        return False
 
 
 def sanitizeMovies(movies):

@@ -91,10 +91,11 @@ def checkExclusion(fullpath):
             logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 1.")
             return True
 
+    found = False
     for x in xrange(2,13):
-        utilities.checkExcludePath(getSetting('ExcludePath%i' % x).encode('utf-8'), getSettingAsBool('ExcludePathOption%i' % x), fullpath, x)
+        found |= utilities.checkExcludePath(getSetting('ExcludePath%i' % x).encode('utf-8'), getSettingAsBool('ExcludePathOption%i' % x), fullpath, x)
 
-    return False
+    return found
 
 def kodiRpcToTraktMediaObject(type, data, mode='collected'):
     if type == 'show':
