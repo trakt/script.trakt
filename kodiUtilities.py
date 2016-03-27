@@ -80,7 +80,7 @@ def checkExclusion(fullpath):
         return True
 
     # HTTP exclusion
-    if (fullpath.startswith("http://") or fullpath.startswith("https://")) and getSettingAsBool('ExcludeHTTP'):
+    if fullpath.startswith(("http://", "https://")) and getSettingAsBool('ExcludeHTTP'):
         logger.debug("checkExclusion(): Video is playing via HTTP source, which is currently set as excluded location.")
         return True
 
@@ -90,71 +90,18 @@ def checkExclusion(fullpath):
         if fullpath.startswith(ExcludePath):
             logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 1.")
             return True
-    ExcludePath2 = getSetting('ExcludePath2')
-    if ExcludePath2 != "" and getSettingAsBool('ExcludePathOption2'):
-        if fullpath.startswith(ExcludePath2):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 2.")
-            return True
-    ExcludePath3 = getSetting('ExcludePath3')
-    if ExcludePath3 != "" and getSettingAsBool('ExcludePathOption3'):
-        if fullpath.startswith(ExcludePath3):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 3.")
-            return True
-    ExcludePath4 = getSetting('ExcludePath4')
-    if ExcludePath4 != "" and getSettingAsBool('ExcludePathOption4'):
-        if fullpath.startswith(ExcludePath4):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 4.")
-            return True
-    ExcludePath5 = getSetting('ExcludePath5')
-    if ExcludePath5 != "" and getSettingAsBool('ExcludePathOption5'):
-        if fullpath.startswith(ExcludePath5):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 5.")
-            return True
-    ExcludePath6 = getSetting('ExcludePath6')
-    if ExcludePath6 != "" and getSettingAsBool('ExcludePathOption6'):
-        if fullpath.startswith(ExcludePath6):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 6.")
-            return True
-    ExcludePath7 = getSetting('ExcludePath7')
-    if ExcludePath7 != "" and getSettingAsBool('ExcludePathOption7'):
-        if fullpath.startswith(ExcludePath7):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 7.")
-            return True
-    ExcludePath8 = getSetting('ExcludePath8')
-    if ExcludePath8 != "" and getSettingAsBool('ExcludePathOption8'):
-        if fullpath.startswith(ExcludePath8):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 8.")
-            return True
-    ExcludePath9 = getSetting('ExcludePath9')
-    if ExcludePath9 != "" and getSettingAsBool('ExcludePathOption9'):
-        if fullpath.startswith(ExcludePath9):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 9.")
-            return True
-    ExcludePath10 = getSetting('ExcludePath10')
-    if ExcludePath10 != "" and getSettingAsBool('ExcludePathOption10'):
-        if fullpath.startswith(ExcludePath10):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 10.")
-            return True
-    ExcludePath11 = getSetting('ExcludePath11')
-    if ExcludePath11 != "" and getSettingAsBool('ExcludePathOption11'):
-        if fullpath.startswith(ExcludePath11):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 11.")
-            return True
-    ExcludePath12 = getSetting('ExcludePath12')
-    if ExcludePath12 != "" and getSettingAsBool('ExcludePathOption12'):
-        if fullpath.startswith(ExcludePath12):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 12.")
-            return True
+
+    for x in xrange(2,12):
+        utilities.checkExcludePath(getSetting('ExcludePath%i' % x).encode('utf-8'), getSettingAsBool('ExcludePathOption%i' % x), fullpath, x)
 
     return False
-
 
 def kodiRpcToTraktMediaObject(type, data, mode='collected'):
     if type == 'show':
         id = data.pop('imdbnumber')
         data['ids'] = utilities.parseIdToTraktIds(id, type)[0]
         data['rating'] = data['userrating'] if 'userrating' in data and data['userrating'] > 0 else 0
-        del(data['label'])
+        del data['label']
         return data
     elif type == 'episode':
         if checkExclusion(data['file']):
@@ -203,7 +150,7 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
         data['watched'] = 1 if data['plays'] > 0 else 0
         id = data.pop('imdbnumber')
         data['ids'] = utilities.parseIdToTraktIds(id, type)[0]
-        del(data['label'])
+        del data['label']
         return data
     else:
         logger.debug('kodiRpcToTraktMediaObject() No valid type')
@@ -247,23 +194,6 @@ def kodiRpcToTraktMediaObjects(data, mode='collected'):
     else:
         logger.debug('kodiRpcToTraktMediaObjects() No valid key found in rpc data')
         return
-
-def getFormattedItemName(type, info):
-    try:
-        if utilities.isShow(type):
-            s = info['title']
-        elif utilities.isEpisode(type):
-                s = "S%02dE%02d - %s" % (info['season'], info['number'], info['title'])
-        elif utilities.isSeason(type):
-            if info['season'] > 0:
-                s = "%s - Season %d" % (info['title'], info['season'])
-            else:
-                s = "%s - Specials" % info['title']
-        elif utilities.isMovie(type):
-            s = "%s (%s)" % (info['title'], info['year'])
-    except KeyError:
-        s = ''
-    return s.encode('utf-8', 'ignore')
 
 def getShowDetailsFromKodi(showID, fields):
     result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params': {'tvshowid': showID, 'properties': fields}, 'id': 1})

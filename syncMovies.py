@@ -54,48 +54,7 @@ class SyncMovies():
         logger.debug("[Movies Sync] Movies on Trakt.tv (%d), movies in Kodi (%d)." % (len(traktMovies), len(kodiMovies)))
         logger.debug("[Movies Sync] Complete.")
 
-    def __compareMovies(self, movies_col1, movies_col2, watched=False, restrict=False, playback=False, rating=False):
-        movies = []
 
-        for movie_col1 in movies_col1:
-            if movie_col1:
-                movie_col2 = utilities.findMediaObject(movie_col1, movies_col2)
-                # logger.debug("movie_col1 %s" % movie_col1)
-                # logger.debug("movie_col2 %s" % movie_col2)
-
-                if movie_col2:  # match found
-                    if watched:  # are we looking for watched items
-                        if movie_col2['watched'] == 0 and movie_col1['watched'] == 1:
-                            if 'movieid' not in movie_col1:
-                                movie_col1['movieid'] = movie_col2['movieid']
-                            movies.append(movie_col1)
-                    elif playback:
-                        if 'movieid' not in movie_col1:
-                                movie_col1['movieid'] = movie_col2['movieid']
-                        movie_col1['runtime'] = movie_col2['runtime']
-                        movies.append(movie_col1)
-                    elif rating:
-                        if 'rating' in movie_col1 and movie_col1['rating'] <> 0 and ('rating' not in movie_col2 or movie_col2['rating'] == 0):
-                            if 'movieid' not in movie_col1:
-                                movie_col1['movieid'] = movie_col2['movieid']
-                            movies.append(movie_col1)
-                    else:
-                        if 'collected' in movie_col2 and not movie_col2['collected']:
-                            movies.append(movie_col1)
-                else:  # no match found
-                    if not restrict:
-                        if 'collected' in movie_col1 and movie_col1['collected']:
-                            if watched and (movie_col1['watched'] == 1):
-                                movies.append(movie_col1)
-                            elif rating and movie_col1['rating'] <> 0:
-                                movies.append(movie_col1)
-                            elif not watched and not rating:
-
-                                movies.append(movie_col1)
-        return movies
-
-
-    ''' begin code for movie sync '''
     def __kodiLoadMovies(self):
         self.sync.UpdateProgress(1, line2=kodiUtilities.getString(32079))
 
@@ -166,8 +125,8 @@ class SyncMovies():
             addTraktMovies = copy.deepcopy(traktMovies)
             addKodiMovies = copy.deepcopy(kodiMovies)
 
-            traktMoviesToAdd = self.__compareMovies(addKodiMovies, addTraktMovies)
-            self.sanitizeMovies(traktMoviesToAdd)
+            traktMoviesToAdd = utilities.compareMovies(addKodiMovies, addTraktMovies)
+            utilities.sanitizeMovies(traktMoviesToAdd)
             logger.debug("[Movies Sync] Compared movies, found %s to add." % len(traktMoviesToAdd))
 
             if len(traktMoviesToAdd) == 0:
@@ -198,8 +157,8 @@ class SyncMovies():
             removeKodiMovies = copy.deepcopy(kodiMovies)
 
             logger.debug("[Movies Sync] Starting to remove.")
-            traktMoviesToRemove = self.__compareMovies(removeTraktMovies, removeKodiMovies)
-            self.sanitizeMovies(traktMoviesToRemove)
+            traktMoviesToRemove = utilities.compareMovies(removeTraktMovies, removeKodiMovies)
+            utilities.sanitizeMovies(traktMoviesToRemove)
             logger.debug("[Movies Sync] Compared movies, found %s to remove." % len(traktMoviesToRemove))
 
             if len(traktMoviesToRemove) == 0:
@@ -227,8 +186,8 @@ class SyncMovies():
             updateTraktTraktMovies = copy.deepcopy(traktMovies)
             updateTraktKodiMovies = copy.deepcopy(kodiMovies)
 
-            traktMoviesToUpdate = self.__compareMovies(updateTraktKodiMovies, updateTraktTraktMovies, watched=True)
-            self.sanitizeMovies(traktMoviesToUpdate)
+            traktMoviesToUpdate = utilities.compareMovies(updateTraktKodiMovies, updateTraktTraktMovies, watched=True)
+            utilities.sanitizeMovies(traktMoviesToUpdate)
 
             if len(traktMoviesToUpdate) == 0:
                 self.sync.UpdateProgress(toPercent, line2=kodiUtilities.getString(32086))
@@ -271,7 +230,7 @@ class SyncMovies():
             updateKodiTraktMovies = copy.deepcopy(traktMovies)
             updateKodiKodiMovies = copy.deepcopy(kodiMovies)
 
-            kodiMoviesToUpdate = self.__compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, watched=True, restrict=True)
+            kodiMoviesToUpdate = utilities.compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, watched=True, restrict=True)
 
             if len(kodiMoviesToUpdate) == 0:
                 self.sync.UpdateProgress(toPercent, line2=kodiUtilities.getString(32088))
@@ -306,7 +265,7 @@ class SyncMovies():
             updateKodiTraktMovies = copy.deepcopy(traktMovies)
             updateKodiKodiMovies = copy.deepcopy(kodiMovies)
 
-            kodiMoviesToUpdate = self.__compareMovies(updateKodiTraktMovies['movies'], updateKodiKodiMovies, restrict=True, playback=True)
+            kodiMoviesToUpdate = utilities.compareMovies(updateKodiTraktMovies['movies'], updateKodiKodiMovies, restrict=True, playback=True)
             if len(kodiMoviesToUpdate) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=kodiUtilities.getString(32125))
                 logger.debug("[Movies Sync] Kodi movie playbacks are up to date.")
@@ -337,7 +296,7 @@ class SyncMovies():
             updateKodiTraktMovies = copy.deepcopy(traktMovies)
             updateKodiKodiMovies = copy.deepcopy(kodiMovies)
 
-            traktMoviesToUpdate = self.__compareMovies(updateKodiKodiMovies, updateKodiTraktMovies, rating=True)
+            traktMoviesToUpdate = utilities.compareMovies(updateKodiKodiMovies, updateKodiTraktMovies, rating=True)
             if len(traktMoviesToUpdate) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=kodiUtilities.getString(32179))
                 logger.debug("[Movies Sync] Trakt movie ratings are up to date.")
@@ -351,7 +310,7 @@ class SyncMovies():
                 self.sync.traktapi.addRating(moviesRatings)
 
 
-            kodiMoviesToUpdate = self.__compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, restrict=True, rating=True)
+            kodiMoviesToUpdate = utilities.compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, restrict=True, rating=True)
             if len(kodiMoviesToUpdate) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=kodiUtilities.getString(32169))
                 logger.debug("[Movies Sync] Kodi movie ratings are up to date.")
@@ -377,18 +336,3 @@ class SyncMovies():
 
                 self.sync.UpdateProgress(toPercent, line2=kodiUtilities.getString(32172) % len(kodiMoviesToUpdate))
 
-
-    @staticmethod
-    def sanitizeMovies(movies):
-        # do not remove watched_at and collected_at may cause problems between the 4 sync types (would probably have to deepcopy etc)
-        for movie in movies:
-            if 'collected' in movie:
-                del movie['collected']
-            if 'watched' in movie:
-                del movie['watched']
-            if 'movieid' in movie:
-                del movie['movieid']
-            if 'plays' in movie:
-                del movie['plays']
-            if 'userrating' in movie:
-                del movie['userrating']

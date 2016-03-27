@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#
+
 import json
 import pytest
 import utilities
@@ -32,7 +35,7 @@ def test_isValidMediaType_Season():
 
 def test_chunks():
     movies = load_params_from_json('tests/fixtures/movies.json')
-    assert len(utilities.chunks(movies, 1)) == 2
+    assert len(utilities.chunks(movies, 1)) == 3
 
 def test_getFormattedItemName_Show():
     data = load_params_from_json('tests/fixtures/show.json')
@@ -113,3 +116,114 @@ def test_parseIdToTraktIds_Tvdb():
 def test_best_id_trakt():
     data = load_params_from_json('tests/fixtures/shows.json')
     assert utilities.best_id(data[1]['show']['ids']) == 1395
+
+def test_checkExcludePath_Path_Excluded():
+    assert utilities.checkExcludePath('C:/excludes/', True, 'C:/excludes/video.mkv', 2)
+
+def test_checkExcludePath_Path_Excluded_Special_Chars():
+    assert utilities.checkExcludePath('C:/öäüß%6/', True, 'C:/öäüß%6/video.mkv', 2)
+
+def test_checkExcludePath_Path_NotExcluded():
+    assert utilities.checkExcludePath('C:/excludes/', True, 'C:/notexcluded/video.mkv', 2) == None
+
+def test_checkExcludePath_Path_Disabled():
+    assert utilities.checkExcludePath('C:/excludes/', False, 'C:/excludes/video.mkv', 2) == None
+
+def test_sanitizeMovies_collected():
+    data = load_params_from_json('tests/fixtures/movies_unsanatized.json')
+    utilities.sanitizeMovies(data)
+    for movie in data:
+        result = 'collected' in movie
+        if result:
+            break
+
+    assert not result
+
+def test_sanitizeMovies_watched():
+    data = load_params_from_json('tests/fixtures/movies_unsanatized.json')
+    utilities.sanitizeMovies(data)
+    for movie in data:
+        result = 'watched' in movie
+        if result:
+            break
+
+    assert not result
+
+def test_sanitizeMovies_movieid():
+    data = load_params_from_json('tests/fixtures/movies_unsanatized.json')
+    utilities.sanitizeMovies(data)
+    for movie in data:
+        result = 'movieid' in movie
+        if result:
+            break
+
+    assert not result
+
+def test_sanitizeMovies_plays():
+    data = load_params_from_json('tests/fixtures/movies_unsanatized.json')
+    utilities.sanitizeMovies(data)
+    for movie in data:
+        result = 'plays' in movie
+        if result:
+            break
+
+    assert not result
+
+def test_sanitizeMovies_userrating():
+    data = load_params_from_json('tests/fixtures/movies_unsanatized.json')
+    utilities.sanitizeMovies(data)
+    for movie in data:
+        result = 'userrating' in movie
+        if result:
+            break
+
+    assert not result
+
+def test_compareMovies_collected_match():
+    data1 = load_params_from_json('tests/fixtures/movies_local.json')
+    data2 = load_params_from_json('tests/fixtures/movies_remote.json')
+    data3 = load_params_from_json('tests/fixtures/movies_watched.json')
+
+    assert utilities.compareMovies(data1, data2) == data3
+
+def test_compareMovies_watched_match():
+    data1 = load_params_from_json('tests/fixtures/movies_local.json')
+    data2 = load_params_from_json('tests/fixtures/movies_remote.json')
+    data3 = load_params_from_json('tests/fixtures/movies_watched.json')
+
+    assert utilities.compareMovies(data1, data2, watched=True) == data3
+
+def test_compareMovies_playback_match():
+    data1 = load_params_from_json('tests/fixtures/movies_local.json')
+    data2 = load_params_from_json('tests/fixtures/movies_remote.json')
+
+    assert utilities.compareMovies(data1, data2, playback=True) == data1
+
+def test_compareMovies_rating_match():
+    data1 = load_params_from_json('tests/fixtures/movies_local.json')
+    data2 = load_params_from_json('tests/fixtures/movies_remote.json')
+    data3 = load_params_from_json('tests/fixtures/movies_watched.json')
+
+    assert utilities.compareMovies(data1, data2, rating=True) == data3
+
+
+def test_compareMovies_collected_nomatch():
+    data1 = load_params_from_json('tests/fixtures/movies_local.json')
+
+    assert utilities.compareMovies(data1, "") == data1
+
+def test_compareMovies_watched_nomatch():
+    data1 = load_params_from_json('tests/fixtures/movies_local.json')
+    data3 = load_params_from_json('tests/fixtures/movies_watched.json')
+
+    assert utilities.compareMovies(data1, "", watched=True) == data3
+
+def test_compareMovies_playback_nomatch():
+    data1 = load_params_from_json('tests/fixtures/movies_local.json')
+
+    assert utilities.compareMovies(data1, "", playback=True) == data1
+
+def test_compareMovies_rating_nomatch():
+    data1 = load_params_from_json('tests/fixtures/movies_local.json')
+
+    assert utilities.compareMovies(data1, "", rating=True) == data1

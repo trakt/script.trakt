@@ -1,0 +1,20 @@
+[
+  {
+    "runtime": 300,
+    "collected": 1,
+    "watched": 1,
+    "movieid": 526,
+    "plays": 2,
+    "rating": 6,
+    "rated_at": "2014-11-01T00:24:54.000Z",
+    "rating": 6,
+    "title": "TRON: Legacy",
+    "year": 2010,
+    "ids": {
+      "trakt": 12601,
+      "slug": "tron-legacy-2010",
+      "imdb": "tt1104001",
+      "tmdb": 20526
+      }
+    }
+]

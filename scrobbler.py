@@ -290,5 +290,5 @@ class Scrobbler():
             return
 
         if kodiUtilities.getSettingAsBool("scrobble_notification"):
-            s = kodiUtilities.getFormattedItemName(self.curVideo['type'], info[self.curVideo['type']])
+            s = utilities.getFormattedItemName(self.curVideo['type'], info[self.curVideo['type']])
             kodiUtilities.notification(kodiUtilities.getString(32015), s)

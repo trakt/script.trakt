@@ -1,10 +1,15 @@
 language: python
-python:
-  - "2.7"
-  - "3.2"
-  - "3.3"
-  - "3.4"
-  - "3.5"
+matrix:
+  include:
+    - python: "2.6"
+    - python: "2.7"
+    - python: "2.7.10"
+  allow_failures:
+    - python: "3.2"
+    - python: "3.3"
+    - python: "3.4"
+    - python: "3.5"
+    - python: "nightly"
   
 # command to install dependencies
 install: 
