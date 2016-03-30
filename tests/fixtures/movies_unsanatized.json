@@ -1,0 +1,53 @@
+[
+  {
+    "collected": 1,
+    "watched": 0,
+    "movieid": 15151,
+    "plays": 3,
+    "userrating": 8,
+    "rated_at": "2015-01-28T02:26:37.000Z",
+    "rating": 8,
+    "title": "100 Bloody Acres",
+    "year": 2012,
+    "ids": {
+      "trakt": 86920,
+      "slug": "100-bloody-acres-2012",
+      "imdb": "tt2290065",
+      "tmdb": 126757
+    }
+  },
+  {
+    "collected": 1,
+    "watched": 0,
+    "movieid": 734,
+    "plays": 0,
+    "userrating": 10,
+    "rated_at": "2014-11-01T00:24:54.000Z",
+    "rating": 10,
+    "title": "The Hobbit: The Desolation of Smaug",
+    "year": 2013,
+    "ids": {
+      "trakt": 40808,
+      "slug": "the-hobbit-the-desolation-of-smaug-2013",
+      "imdb": "tt1170358",
+      "tmdb": 57158
+    }
+  },
+  {
+    "collected": 0,
+    "watched": 0,
+    "movieid": 526,
+    "plays": 2,
+    "userrating": 6,
+    "rated_at": "2014-11-01T00:24:54.000Z",
+    "rating": 6,
+    "title": "TRON: Legacy",
+    "year": 2010,
+    "ids": {
+      "trakt": 12601,
+      "slug": "tron-legacy-2010",
+      "imdb": "tt1104001",
+      "tmdb": 20526
+      }
+    }
+]

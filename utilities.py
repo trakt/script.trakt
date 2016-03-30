@@ -1,269 +1,71 @@
 # -*- coding: utf-8 -*-
 #
 
-import xbmc
-import xbmcaddon
 import time
 import re
-import sys
 import logging
 import traceback
 import dateutil.parser
 from datetime import datetime
 from dateutil.tz import tzutc, tzlocal
 
-
-if sys.version_info >= (2, 7):
-    import json as json
-else:
-    import simplejson as json
-
-# read settings
-__addon__ = xbmcaddon.Addon('script.trakt')
-
-# make strptime call prior to doing anything, to try and prevent threading errors
+# make strptime call prior to doing anything, to try and prevent threading
+# errors
 time.strptime("1970-01-01 12:00:00", "%Y-%m-%d %H:%M:%S")
 
 logger = logging.getLogger(__name__)
 
-REGEX_YEAR = '^(.+) \((\d{4})\)$'
-
-REGEX_URL = '(^https?://)(.+)'
-
-def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')):
-    xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message, time, icon))
-
-def showSettings():
-    __addon__.openSettings()
-
-def getSetting(setting):
-    return __addon__.getSetting(setting).strip().decode('utf-8')
-
-def setSetting(setting, value):
-    __addon__.setSetting(setting, str(value))
-
-def getSettingAsBool(setting):
-    return getSetting(setting).lower() == "true"
-
-def getSettingAsFloat(setting):
-    try:
-        return float(getSetting(setting))
-    except ValueError:
-        return 0
-
-def getSettingAsInt(setting):
-    try:
-        return int(getSettingAsFloat(setting))
-    except ValueError:
-        return 0
-
-def getString(string_id):
-    return __addon__.getLocalizedString(string_id).encode('utf-8', 'ignore')
 
 def isMovie(type):
     return type == 'movie'
 
+
 def isEpisode(type):
     return type == 'episode'
+
 
 def isShow(type):
     return type == 'show'
 
+
 def isSeason(type):
     return type == 'season'
+
 
 def isValidMediaType(type):
     return type in ['movie', 'show', 'season', 'episode']
 
-def kodiJsonRequest(params):
-    data = json.dumps(params)
-    request = xbmc.executeJSONRPC(data)
-
-    try:
-        response = json.loads(request)
-    except UnicodeDecodeError:
-        response = json.loads(request.decode('utf-8', 'ignore'))
-
-    try:
-        if 'result' in response:
-            return response['result']
-        return None
-    except KeyError:
-        logger.warn("[%s] %s" % (params['method'], response['error']['message']))
-        return None
 
 def chunks(l, n):
     return [l[i:i + n] for i in range(0, len(l), n)]
 
-# check exclusion settings for filename passed as argument
-def checkExclusion(fullpath):
-
-    if not fullpath:
-        return True
-
-    # Live TV exclusion
-    if fullpath.startswith("pvr://") and getSettingAsBool('ExcludeLiveTV'):
-        logger.debug("checkExclusion(): Video is playing via Live TV, which is currently set as excluded location.")
-        return True
-
-    # HTTP exclusion
-    if (fullpath.startswith("http://") or fullpath.startswith("https://")) and getSettingAsBool('ExcludeHTTP'):
-        logger.debug("checkExclusion(): Video is playing via HTTP source, which is currently set as excluded location.")
-        return True
-
-    # Path exclusions
-    ExcludePath = getSetting('ExcludePath').encode('utf-8') # Encode this as fullpath is already encoded
-    if ExcludePath != "" and getSettingAsBool('ExcludePathOption'):
-        if fullpath.startswith(ExcludePath):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 1.")
-            return True
-    ExcludePath2 = getSetting('ExcludePath2')
-    if ExcludePath2 != "" and getSettingAsBool('ExcludePathOption2'):
-        if fullpath.startswith(ExcludePath2):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 2.")
-            return True
-    ExcludePath3 = getSetting('ExcludePath3')
-    if ExcludePath3 != "" and getSettingAsBool('ExcludePathOption3'):
-        if fullpath.startswith(ExcludePath3):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 3.")
-            return True
-    ExcludePath4 = getSetting('ExcludePath4')
-    if ExcludePath4 != "" and getSettingAsBool('ExcludePathOption4'):
-        if fullpath.startswith(ExcludePath4):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 4.")
-            return True
-    ExcludePath5 = getSetting('ExcludePath5')
-    if ExcludePath5 != "" and getSettingAsBool('ExcludePathOption5'):
-        if fullpath.startswith(ExcludePath5):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 5.")
-            return True
-    ExcludePath6 = getSetting('ExcludePath6')
-    if ExcludePath6 != "" and getSettingAsBool('ExcludePathOption6'):
-        if fullpath.startswith(ExcludePath6):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 6.")
-            return True
-    ExcludePath7 = getSetting('ExcludePath7')
-    if ExcludePath7 != "" and getSettingAsBool('ExcludePathOption7'):
-        if fullpath.startswith(ExcludePath7):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 7.")
-            return True
-    ExcludePath8 = getSetting('ExcludePath8')
-    if ExcludePath8 != "" and getSettingAsBool('ExcludePathOption8'):
-        if fullpath.startswith(ExcludePath8):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 8.")
-            return True
-    ExcludePath9 = getSetting('ExcludePath9')
-    if ExcludePath9 != "" and getSettingAsBool('ExcludePathOption9'):
-        if fullpath.startswith(ExcludePath9):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 9.")
-            return True
-    ExcludePath10 = getSetting('ExcludePath10')
-    if ExcludePath10 != "" and getSettingAsBool('ExcludePathOption10'):
-        if fullpath.startswith(ExcludePath10):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 10.")
-            return True
-    ExcludePath11 = getSetting('ExcludePath11')
-    if ExcludePath11 != "" and getSettingAsBool('ExcludePathOption11'):
-        if fullpath.startswith(ExcludePath11):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 11.")
-            return True
-    ExcludePath12 = getSetting('ExcludePath12')
-    if ExcludePath12 != "" and getSettingAsBool('ExcludePathOption12'):
-        if fullpath.startswith(ExcludePath12):
-            logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 12.")
-            return True
-
-    return False
 
 def getFormattedItemName(type, info):
+    s = ''
     try:
         if isShow(type):
             s = info['title']
         elif isEpisode(type):
-                s = "S%02dE%02d - %s" % (info['season'], info['number'], info['title'])
+            s = "S%02dE%02d - %s" % (info['season'],
+                                     info['number'], info['title'])
         elif isSeason(type):
-            if info['season'] > 0:
-                s = "%s - Season %d" % (info['title'], info['season'])
+            if info[0]['season'] > 0:
+                s = "%s - Season %d" % (info[0]['title'], info[0]['season'])
             else:
-                s = "%s - Specials" % info['title']
+                s = "%s - Specials" % info[0]['title']
         elif isMovie(type):
             s = "%s (%s)" % (info['title'], info['year'])
     except KeyError:
         s = ''
     return s.encode('utf-8', 'ignore')
 
-def getShowDetailsFromKodi(showID, fields):
-    result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShowDetails', 'params': {'tvshowid': showID, 'properties': fields}, 'id': 1})
-    logger.debug("getShowDetailsFromKodi(): %s" % str(result))
-
-    if not result:
-        logger.debug("getShowDetailsFromKodi(): Result from Kodi was empty.")
-        return None
-
-    try:
-        return result['tvshowdetails']
-    except KeyError:
-        logger.debug("getShowDetailsFromKodi(): KeyError: result['tvshowdetails']")
-        return None
-
-def getSeasonDetailsFromKodi(seasonID, fields):
-    result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetSeasonDetails', 'params': {'seasonid': seasonID, 'properties': fields}, 'id': 1})
-    logger.debug("getSeasonDetailsFromKodi(): %s" % str(result))
-
-    if not result:
-        logger.debug("getSeasonDetailsFromKodi(): Result from Kodi was empty.")
-        return None
-
-    try:
-        return result['seasondetails']
-    except KeyError:
-        logger.debug("getSeasonDetailsFromKodi(): KeyError: result['seasondetails']")
-        return None
-
-# get a single episode from kodi given the id
-def getEpisodeDetailsFromKodi(libraryId, fields):
-    result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {'episodeid': libraryId, 'properties': fields}, 'id': 1})
-    logger.debug("getEpisodeDetailsFromKodi(): %s" % str(result))
-
-    if not result:
-        logger.debug("getEpisodeDetailsFromKodi(): Result from Kodi was empty.")
-        return None
-
-    show_data = getShowDetailsFromKodi(result['episodedetails']['tvshowid'], ['year', 'imdbnumber'])
-
-    if not show_data:
-        logger.debug("getEpisodeDetailsFromKodi(): Result from getShowDetailsFromKodi() was empty.")
-        return None
-
-    result['episodedetails']['imdbnumber'] = show_data['imdbnumber']
-    result['episodedetails']['year'] = show_data['year']
-
-    try:
-        return result['episodedetails']
-    except KeyError:
-        logger.debug("getEpisodeDetailsFromKodi(): KeyError: result['episodedetails']")
-        return None
-
-# get a single movie from kodi given the id
-def getMovieDetailsFromKodi(libraryId, fields):
-    result = kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetMovieDetails', 'params': {'movieid': libraryId, 'properties': fields}, 'id': 1})
-    logger.debug("getMovieDetailsFromKodi(): %s" % str(result))
-
-    if not result:
-        logger.debug("getMovieDetailsFromKodi(): Result from Kodi was empty.")
-        return None
-
-    try:
-        return result['moviedetails']
-    except KeyError:
-        logger.debug("getMovieDetailsFromKodi(): KeyError: result['moviedetails']")
-        return None
 
 def __findInList(list, case_sensitive=True, **kwargs):
     for item in list:
         i = 0
         for key in kwargs:
-            # becuause we can need to find at the root level and inside ids this is is required
+            # because we can need to find at the root level and inside ids this
+            # is is required
             if key in item:
                 key_val = item[key]
             else:
@@ -282,29 +84,40 @@ def __findInList(list, case_sensitive=True, **kwargs):
             return item
     return None
 
+
 def findMediaObject(mediaObjectToMatch, listToSearch):
     result = None
     if result is None and 'ids' in mediaObjectToMatch and 'imdb' in mediaObjectToMatch['ids'] and unicode(mediaObjectToMatch['ids']['imdb']).startswith("tt"):
-        result = __findInList(listToSearch, imdb=mediaObjectToMatch['ids']['imdb'])
-    # we don't want to give up if we don't find a match based on the first field so we use if instead of elif
-    if result is None and 'ids' in mediaObjectToMatch and 'tmdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tmdb'].isdigit():
-        result = __findInList(listToSearch, tmdb=mediaObjectToMatch['ids']['tmdb'])
-    if result is None and 'ids' in mediaObjectToMatch and 'tvdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tvdb'].isdigit():
-        result = __findInList(listToSearch, tvdb=mediaObjectToMatch['ids']['tvdb'])
-    # match by title and year it will result in movies with the same title and year to mismatch - but what should we do instead?
+        result = __findInList(
+            listToSearch, imdb=mediaObjectToMatch['ids']['imdb'])
+    # we don't want to give up if we don't find a match based on the first
+    # field so we use if instead of elif
+    if result is None and 'ids' in mediaObjectToMatch and 'tmdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tmdb']:
+        result = __findInList(
+            listToSearch, tmdb=mediaObjectToMatch['ids']['tmdb'])
+    if result is None and 'ids' in mediaObjectToMatch and 'tvdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tvdb']:
+        result = __findInList(
+            listToSearch, tvdb=mediaObjectToMatch['ids']['tvdb'])
+    # match by title and year it will result in movies with the same title and
+    # year to mismatch - but what should we do instead?
     if result is None and 'title' in mediaObjectToMatch and 'year' in mediaObjectToMatch:
-        result = __findInList(listToSearch, title=mediaObjectToMatch['title'], year=mediaObjectToMatch['year'])
+        result = __findInList(
+            listToSearch, title=mediaObjectToMatch['title'], year=mediaObjectToMatch['year'])
     return result
+
 
 def regex_tvshow(label):
     regexes = [
-        '(.*?)[._ -]s([0-9]+)[._ -]*e([0-9]+)',  # ShowTitle.S01E09; s01e09, s01.e09, s01-e09
+        # ShowTitle.S01E09; s01e09, s01.e09, s01-e09
+        '(.*?)[._ -]s([0-9]+)[._ -]*e([0-9]+)',
         '(.*?)[._ -]([0-9]+)x([0-9]+)',  # Showtitle.1x09
         '(.*?)[._ -]([0-9]+)([0-9][0-9])',  # ShowTitle.109
-        '(.*?)[._ -]?season[._ -]*([0-9]+)[._ -]*-?[._ -]*episode[._ -]*([0-9]+)',  # ShowTitle.Season 01 - Episode 02, Season 01 Episode 02
-        '(.*?)[._ -]\[s([0-9]+)\][._ -]*\[[e]([0-9]+)',  # ShowTitle_[s01]_[e01]
+        # ShowTitle.Season 01 - Episode 02, Season 01 Episode 02
+        '(.*?)[._ -]?season[._ -]*([0-9]+)[._ -]*-?[._ -]*episode[._ -]*([0-9]+)',
+        # ShowTitle_[s01]_[e01]
+        '(.*?)[._ -]\[s([0-9]+)\][._ -]*\[[e]([0-9]+)',
         '(.*?)[._ -]s([0-9]+)[._ -]*ep([0-9]+)']  # ShowTitle - s01ep03, ShowTitle - s1ep03
-    
+
     for regex in regexes:
         match = re.search(regex, label, re.I)
         if match:
@@ -314,11 +127,12 @@ def regex_tvshow(label):
                 show_title = re.sub('\s\s+', ' ', show_title)
                 show_title = show_title.strip()
             return show_title, int(season), int(episode)
-    
+
     return '', -1, -1
 
+
 def regex_year(title):
-    prog = re.compile(REGEX_YEAR)
+    prog = re.compile('^(.+) \((\d{4})\)$')
     result = prog.match(title)
 
     if result:
@@ -326,11 +140,14 @@ def regex_year(title):
     else:
         return "", ""
 
+
 def findMovieMatchInList(id, list, idType):
     return next((item.to_dict() for key, item in list.items() if any(idType in key for key, value in item.keys if str(value) == str(id))), {})
 
+
 def findShowMatchInList(id, list, idType):
-    return next((item.to_dict() for key, item in list.items() if  any(idType in key for key, value in item.keys if str(value) == str(id))), {})
+    return next((item.to_dict() for key, item in list.items() if any(idType in key for key, value in item.keys if str(value) == str(id))), {})
+
 
 def findSeasonMatchInList(id, seasonNumber, list, idType):
     show = findShowMatchInList(id, list, idType)
@@ -342,6 +159,7 @@ def findSeasonMatchInList(id, seasonNumber, list, idType):
 
     return {}
 
+
 def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list, idType):
     season = findSeasonMatchInList(id, seasonNumber, list, idType)
     if season:
@@ -351,120 +169,26 @@ def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list, idType):
 
     return {}
 
-def kodiRpcToTraktMediaObject(type, data, mode='collected'):
-    if type == 'show':
-        id = data.pop('imdbnumber')
-        data['ids'] = parseIdToTraktIds(id, type)[0]
-        data['rating'] = data['userrating'] if 'userrating' in data and data['userrating'] > 0 else 0
-        del(data['label'])
-        return data
-    elif type == 'episode':
-        if checkExclusion(data['file']):
-            return
-
-        if data['playcount'] is None:
-            plays = 0
-        else:
-            plays = data.pop('playcount')
-
-        if plays > 0:
-            watched = 1
-        else:
-            watched = 0
-
-        episode = {'season': data['season'], 'number': data['episode'], 'title': data['label'],
-                   'ids': {'tvdb': data['uniqueid']['unknown'], 'episodeid': data['episodeid']}, 'watched': watched,
-                   'plays': plays, 'collected': 1}
-        if 'lastplayed' in data:
-            episode['watched_at'] = convertDateTimeToUTC(data['lastplayed'])
-        if 'dateadded' in data:
-            episode['collected_at'] = convertDateTimeToUTC(data['dateadded'])
-        if 'runtime' in data:
-            episode['runtime'] = data['runtime']
-        episode['rating'] = data['userrating'] if 'userrating' in data and data['userrating'] > 0 else 0
-        if mode == 'watched' and episode['watched']:
-            return episode
-        elif mode == 'collected' and episode['collected']:
-            return episode
-        else:
-            return
-
-    elif type == 'movie':
-        if checkExclusion(data.pop('file')):
-            return
-        if 'lastplayed' in data:
-            data['watched_at'] = convertDateTimeToUTC(data.pop('lastplayed'))
-        if 'dateadded' in data:
-            data['collected_at'] = convertDateTimeToUTC(data.pop('dateadded'))
-        if data['playcount'] is None:
-            data['plays'] = 0
-        else:
-            data['plays'] = data.pop('playcount')
-        data['rating'] = data['userrating'] if 'userrating' in data and data['userrating'] > 0 else 0
-        data['collected'] = 1  # this is in our kodi so it should be collected
-        data['watched'] = 1 if data['plays'] > 0 else 0
-        id = data.pop('imdbnumber')
-        data['ids'] = parseIdToTraktIds(id, type)[0]
-        del(data['label'])
-        return data
-    else:
-        logger.debug('kodiRpcToTraktMediaObject() No valid type')
-        return
-
-def kodiRpcToTraktMediaObjects(data, mode='collected'):
-    if 'tvshows' in data:
-        shows = data['tvshows']
-
-        # reformat show array
-        for show in shows:
-            kodiRpcToTraktMediaObject('show', show, mode)
-        return shows
-
-    elif 'episodes' in data:
-        a_episodes = {}
-        seasons = []
-        for episode in data['episodes']:
-            while not episode['season'] in a_episodes:
-                s_no = episode['season']
-                a_episodes[s_no] = []
-            s_no = episode['season']
-            episodeObject = kodiRpcToTraktMediaObject('episode', episode, mode)
-            if episodeObject:
-                a_episodes[s_no].append(episodeObject)
-
-        for episode in a_episodes:
-            seasons.append({'number': episode, 'episodes': a_episodes[episode]})
-        return seasons
-
-    elif 'movies' in data:
-        movies = data['movies']
-        kodi_movies = []
-
-        # reformat movie array
-        for movie in movies:
-            movieObject = kodiRpcToTraktMediaObject('movie', movie, mode)
-            if movieObject:
-                kodi_movies.append(movieObject)
-        return kodi_movies
-    else:
-        logger.debug('kodiRpcToTraktMediaObjects() No valid key found in rpc data')
-        return
 
 def convertDateTimeToUTC(toConvert):
     if toConvert:
         dateFormat = "%Y-%m-%d %H:%M:%S"
-        try: naive = datetime.strptime(toConvert, dateFormat)
-        except TypeError: naive = datetime(*(time.strptime(toConvert, dateFormat)[0:6]))
-		
+        try:
+            naive = datetime.strptime(toConvert, dateFormat)
+        except TypeError:
+            naive = datetime(*(time.strptime(toConvert, dateFormat)[0:6]))
+
         try:
             local = naive.replace(tzinfo=tzlocal())
             utc = local.astimezone(tzutc())
         except ValueError:
-            logger.debug('convertDateTimeToUTC() ValueError: movie/show was collected/watched outside of the unix timespan. Fallback to datetime utcnow')
+            logger.debug(
+                'convertDateTimeToUTC() ValueError: movie/show was collected/watched outside of the unix timespan. Fallback to datetime utcnow')
             utc = datetime.utcnow()
         return unicode(utc)
     else:
         return toConvert
+
 
 def convertUtcToDateTime(toConvert):
     if toConvert:
@@ -474,44 +198,25 @@ def convertUtcToDateTime(toConvert):
             utc = naive.replace(tzinfo=tzutc())
             local = utc.astimezone(tzlocal())
         except ValueError:
-            logger.debug('convertUtcToDateTime() ValueError: movie/show was collected/watched outside of the unix timespan. Fallback to datetime now')
+            logger.debug(
+                'convertUtcToDateTime() ValueError: movie/show was collected/watched outside of the unix timespan. Fallback to datetime now')
             local = datetime.now()
-        return local.strftime(dateFormat)    
+        return local.strftime(dateFormat)
     else:
         return toConvert
 
+
 def createError(ex):
     template = (
-            "EXCEPTION Thrown (PythonToCppException) : -->Python callback/script returned the following error<--\n"
-            " - NOTE: IGNORING THIS CAN LEAD TO MEMORY LEAKS!\n"
-            "Error Type: <type '{0}'>\n"
-            "Error Contents: {1!r}\n"
-            "{2}"
-            "-->End of Python script error report<--"
-            )
+        "EXCEPTION Thrown (PythonToCppException) : -->Python callback/script returned the following error<--\n"
+        " - NOTE: IGNORING THIS CAN LEAD TO MEMORY LEAKS!\n"
+        "Error Type: <type '{0}'>\n"
+        "Error Contents: {1!r}\n"
+        "{2}"
+        "-->End of Python script error report<--"
+    )
     return template.format(type(ex).__name__, ex.args, traceback.format_exc())
 
-def checkAndConfigureProxy():
-    proxyActive = kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.usehttpproxy"}, 'id': 1})['value']
-    proxyType = kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxytype"}, 'id': 1})['value']
-
-    if proxyActive and proxyType == 0: # PROXY_HTTP
-        proxyURL = kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxyserver"}, 'id': 1})['value']
-        proxyPort = unicode(kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxyport"}, 'id': 1})['value'])
-        proxyUsername = kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxyusername"}, 'id': 1})['value']
-        proxyPassword = kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxypassword"}, 'id': 1})['value']
-
-        if proxyUsername and proxyPassword and proxyURL and proxyPort:
-            regexUrl = re.compile(REGEX_URL)
-            matchURL = regexUrl.search(proxyURL)
-            if matchURL:
-                return matchURL.group(1) + proxyUsername + ':' + proxyPassword + '@' + matchURL.group(2) + ':' + proxyPort
-            else:
-                None
-        elif proxyURL and proxyPort:
-            return proxyURL + ':' + proxyPort
-    else:
-        return None
 
 def parseIdToTraktIds(id, type):
     data = {}
@@ -530,17 +235,6 @@ def parseIdToTraktIds(id, type):
         id_type = 'slug'
     return data, id_type
 
-def getMediaType():
-    if xbmc.getCondVisibility('Container.Content(tvshows)'):
-        return "show"
-    elif xbmc.getCondVisibility('Container.Content(seasons)'):
-        return "season"
-    elif xbmc.getCondVisibility('Container.Content(episodes)'):
-        return "episode"
-    elif xbmc.getCondVisibility('Container.Content(movies)'):
-        return "movie"
-    else:
-        return None
 
 def best_id(ids):
     if 'trakt' in ids:
@@ -555,3 +249,87 @@ def best_id(ids):
         return ids['tvrage']
     elif 'slug' in ids:
         return ids['slug']
+
+
+def checkExcludePath(excludePath, excludePathEnabled, fullpath, x):
+    if excludePath != "" and excludePathEnabled and fullpath.startswith(excludePath):
+        logger.debug(
+            "checkExclusion(): Video is from location, which is currently set as excluded path %i." % x)
+        return True
+    else:
+        return False
+
+
+def sanitizeMovies(movies):
+    # do not remove watched_at and collected_at may cause problems between the
+    # 4 sync types (would probably have to deepcopy etc)
+    for movie in movies:
+        if 'collected' in movie:
+            del movie['collected']
+        if 'watched' in movie:
+            del movie['watched']
+        if 'movieid' in movie:
+            del movie['movieid']
+        if 'plays' in movie:
+            del movie['plays']
+        if 'userrating' in movie:
+            del movie['userrating']
+
+#todo add tests
+def sanitizeShows(shows):
+    # do not remove watched_at and collected_at may cause problems between the
+    # 4 sync types (would probably have to deepcopy etc)
+    for show in shows['shows']:
+        for season in show['seasons']:
+            for episode in season['episodes']:
+                if 'collected' in episode:
+                    del episode['collected']
+                if 'watched' in episode:
+                    del episode['watched']
+                if 'season' in episode:
+                    del episode['season']
+                if 'plays' in episode:
+                    del episode['plays']
+                if 'ids' in episode and 'episodeid' in episode['ids']:
+                    del episode['ids']['episodeid']
+
+
+def compareMovies(movies_col1, movies_col2, watched=False, restrict=False, playback=False, rating=False):
+    movies = []
+
+    for movie_col1 in movies_col1:
+        if movie_col1:
+            movie_col2 = findMediaObject(movie_col1, movies_col2)
+            # logger.debug("movie_col1 %s" % movie_col1)
+            # logger.debug("movie_col2 %s" % movie_col2)
+
+            if movie_col2:  # match found
+                if watched:  # are we looking for watched items
+                    if movie_col2['watched'] == 0 and movie_col1['watched'] == 1:
+                        if 'movieid' not in movie_col1:
+                            movie_col1['movieid'] = movie_col2['movieid']
+                        movies.append(movie_col1)
+                elif playback:
+                    if 'movieid' not in movie_col1:
+                            movie_col1['movieid'] = movie_col2['movieid']
+                    movie_col1['runtime'] = movie_col2['runtime']
+                    movies.append(movie_col1)
+                elif rating:
+                    if 'rating' in movie_col1 and movie_col1['rating'] != 0 and ('rating' not in movie_col2 or movie_col2['rating'] == 0):
+                        if 'movieid' not in movie_col1:
+                            movie_col1['movieid'] = movie_col2['movieid']
+                        movies.append(movie_col1)
+                else:
+                    if 'collected' in movie_col2 and not movie_col2['collected']:
+                        movies.append(movie_col1)
+            else:  # no match found
+                if not restrict:
+                    if 'collected' in movie_col1 and movie_col1['collected']:
+                        if watched and (movie_col1['watched'] == 1):
+                            movies.append(movie_col1)
+                        elif rating and movie_col1['rating'] != 0:
+                            movies.append(movie_col1)
+                        elif not watched and not rating:
+
+                            movies.append(movie_col1)
+    return movies
