@@ -285,6 +285,7 @@ class Scrobbler():
                 watchedPercent = ((self.watchedTime - (adjustedDuration * self.curMPEpisode)) / adjustedDuration) * 100
 
             logger.debug("scrobble sending show object: %s" % str(self.traktShowSummary))
+            logger.debug("scrobble sending episode object: %s" % str(self.curVideoInfo))
             response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.curVideoInfo, watchedPercent, status)
             
             # If there is an empty response, the reason might be that the title we have isn't the actual show title,
