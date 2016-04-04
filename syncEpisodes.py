@@ -125,7 +125,7 @@ class SyncEpisodes:
     def __traktLoadShows(self):
         self.sync.UpdateProgress(10, line1=kodiUtilities.getString(32099), line2=kodiUtilities.getString(32100))
 
-        logger.debug('[Episodes Sync] Getting episode collection from Trakt.tv')
+        logger.debug('[Episodes Sync] Getting episode collection/watched/rated from Trakt.tv')
         try:
             traktShowsCollected = {}
             traktShowsCollected = self.sync.traktapi.getShowsCollected(traktShowsCollected)
@@ -145,8 +145,8 @@ class SyncEpisodes:
             traktEpisodesRated = traktEpisodesRated.items()
 
         except Exception:
-            logger.debug("[Episodes Sync] Invalid Trakt.tv show list, possible error getting data from Trakt, aborting Trakt.tv collection update.")
-            return False, False
+            logger.debug("[Episodes Sync] Invalid Trakt.tv show list, possible error getting data from Trakt, aborting Trakt.tv collection/watched/rated update.")
+            return False, False, False, False
 
         i = 0
         x = float(len(traktShowsCollected))
