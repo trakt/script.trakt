@@ -571,21 +571,21 @@ class traktPlayer(xbmc.Player):
                                 rightResp = thisResp
                                 break
                         if rightResp is None:
-                            logger.debug("[traktPlayer] onPlayBackStarted() - Failed to find matching episode/show via text search, skipping.")
-                            return
-                        # OK, now we have a episode object to work with.
-                        self.type = 'episode'
-                        data['type'] = 'episode'
-                        # You'd think we could just use the episode key that Trakt just returned to us, but the scrobbler
-                        # function (see scrobber.py) only understands the show key plus season/episode values.
-                        showKeys = { }
-                        for eachKey in rightResp.show.keys:
-                            showKeys[eachKey[0]] = eachKey[1]
-                        data['video_ids'] = showKeys
-                        # For some reason, the Trakt search call returns the season and episode as an array in the pk field.
-                        # You'd think individual episode and season fields would be better, but whatever.
-                        data['season'] = rightResp.pk[0];
-                        data['episode'] = rightResp.pk[1];
+                            logger.debug("[traktPlayer] onPlayBackStarted() - Failed to find matching episode/show via text search.")
+                        else:
+                            # OK, now we have a episode object to work with.
+                            self.type = 'episode'
+                            data['type'] = 'episode'
+                            # You'd think we could just use the episode key that Trakt just returned to us, but the scrobbler
+                            # function (see scrobber.py) only understands the show key plus season/episode values.
+                            showKeys = { }
+                            for eachKey in rightResp.show.keys:
+                                showKeys[eachKey[0]] = eachKey[1]
+                            data['video_ids'] = showKeys
+                            # For some reason, the Trakt search call returns the season and episode as an array in the pk field.
+                            # You'd think individual episode and season fields would be better, but whatever.
+                            data['season'] = rightResp.pk[0];
+                            data['episode'] = rightResp.pk[1];
                     # At this point if we haven't found the episode data yet, the episode-title-text-search method
                     # didn't work. 
                     if (not data['season']):
@@ -606,38 +606,44 @@ class traktPlayer(xbmc.Player):
                             data['video_ids'] = showKeys
                             # Now to find the episode. There's no search function to look for an episode within a show, but
                             # we can get all the episodes and look for the title.
-                            seasonToTry = 1
-                            episodeToTry = 1
                             while (not data['season']):
-                                logger.debug("[traktPlayer] onPlayBackStarted() - Querying for season %d episode %d" % (seasonToTry, episodeToTry))
-                                epQueryResp = globals.traktapi.getEpisodeSummary(data['video_ids']['trakt'], seasonToTry, episodeToTry)
+                                logger.debug("[traktPlayer] onPlayBackStarted() - Querying for all seasons/episodes of this show")
+                                epQueryResp = globals.traktapi.getShowWithAllEpisodesList(data['video_ids']['trakt'])
                                 if not epQueryResp:
-                                    # Nothing returned. That show/ep doesn't exist.
+                                    # Nothing returned. Giving up.
                                     logger.debug("[traktPlayer] onPlayBackStarted() - No response received")
-                                    if episodeToTry == 1:
-                                        # No more to try.
-                                        break;
-                                    else:
-                                        # Try the next season.
-                                        episodeToTry = 1
-                                        seasonToTry += 1
+                                    break;
                                 else:
-                                    logger.debug("[traktPlayer] onPlayBackStarted() - Got Ep Response from getEpisodeSummary: %s" % str(epQueryResp))
-                                    logger.debug("[traktPlayer] onPlayBackStarted() - Checking ep title: %s" % epQueryResp.title)
-                                    if (epQueryResp.title == foundEpisodeName):
-                                        # Found it! Save the data. The scrobbler wants season and episode number.
-                                        data['season'] = seasonToTry
-                                        data['episode'] = episodeToTry
-                                        # Title too, just for the heck of it. Though it's not actually used.
-                                        data['episodeTitle'] = epQueryResp.title
-                                    else: 
-                                        # Nothing - try the next episode
-                                        episodeToTry += 1
+                                    # Got the list back. Go through each season.
+                                    logger.debug("[traktPlayer] onPlayBackStarted() - Got response with seasons: %s" % str(epQueryResp))
+                                    for eachSeason in epQueryResp:
+                                        # For each season, check each episode.
+                                        logger.debug("[traktPlayer] onPlayBackStarted() - Processing season: %s" % str(eachSeason))
+                                        for eachEpisodeNumber in eachSeason.episodes:
+                                            thisEpTitle = None
+                                            # Get the title. The try block is here in case the title doesn't exist for some entries.
+                                            try:
+                                                thisEpTitle = eachSeason.episodes[eachEpisodeNumber].title
+                                            except:
+                                                thisEpTitle = None
+                                            logger.debug("[traktPlayer] onPlayBackStarted() - Checking episode number %d with title %s" % (eachEpisodeNumber, thisEpTitle))
+                                            if (foundEpisodeName == thisEpTitle):
+                                                # Found it! Save the data. The scrobbler wants season and episode number. Which for some
+                                                # reason is stored as a pair in the first item in the keys array.
+                                                data['season'] = eachSeason.episodes[eachEpisodeNumber].keys[0][0]
+                                                data['episode'] = eachSeason.episodes[eachEpisodeNumber].keys[0][1]
+                                                # Title too, just for the heck of it. Though it's not actually used.
+                                                data['episodeTitle'] = thisEpTitle
+                                                break
+                                        # If we already found our data, no need to go through the rest of the seasons.
+                                        if (data['season']):
+                                            break;
                     # Now we've done all we can.
                     if (data['season']):
                         # OK, that's everything. Data should be all set for scrobbling.
                         logger.debug("[traktPlayer] onPlayBackStarted() - Playing a non-library 'episode' : show trakt key %s, season: %d, episode: %d" % (data['video_ids'], data['season'], data['episode']))
                     else:
+                        # Still no data? Too bad, have to give up.
                         logger.debug("[traktPlayer] onPlayBackStarted() - Did our best, but couldn't get info for this show and episode. Skipping.")
                         return;
                 else:
