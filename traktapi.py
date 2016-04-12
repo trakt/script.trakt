@@ -332,6 +332,10 @@ class traktAPI(object):
         with Trakt.configuration.http(retry=True):
             return Trakt['shows'].get(showId)
 
+    def getShowWithAllEpisodesList(self, showId):
+        with Trakt.configuration.http(retry=True):
+            return Trakt['shows'].seasons(showId, extended='episodes')
+
     def getEpisodeSummary(self, showId, season, episode):
         with Trakt.configuration.http(retry=True):
             return Trakt['shows'].episode(showId, season, episode)
