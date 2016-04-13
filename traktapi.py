@@ -2,9 +2,9 @@
 #
 import xbmcaddon
 import logging
-import gui_utils
-from trakt import Trakt, ClientError, ServerError
-from trakt.objects import Movie, Episode, Show
+import deviceAuthDialog
+from trakt import Trakt
+from trakt.objects import Movie, Show
 from utilities import findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, createError
 from kodiUtilities import getSetting, setSetting, notification, getString, checkAndConfigureProxy
 from sys import version_info
@@ -20,6 +20,7 @@ __addon__ = xbmcaddon.Addon('script.trakt')
 __addonversion__ = __addon__.getAddonInfo('version')
 
 logger = logging.getLogger(__name__)
+
 
 class traktAPI(object):
     __client_id = "d4161a7a106424551add171e5470112e4afdaf2438e6ef2fe0548edc75924868"
@@ -52,30 +53,36 @@ class traktAPI(object):
 
     def login(self):
         # Request new device code
-        code = Trakt['oauth/device'].code()
+        with Trakt.configuration.http(retry=True, timeout=90):
+            code = Trakt['oauth/device'].code()
 
-        # Construct device authentication poller
-        poller = Trakt['oauth/device'].poll(**code)\
-            .on('aborted', self.on_aborted)\
-            .on('authenticated', self.on_authenticated)\
-            .on('expired', self.on_expired)\
-            .on('poll', self.on_poll)
+            # Construct device authentication poller
+            poller = Trakt['oauth/device'].poll(**code)\
+                .on('aborted', self.on_aborted)\
+                .on('authenticated', self.on_authenticated)\
+                .on('expired', self.on_expired)\
+                .on('poll', self.on_poll)
 
-        # Start polling for authentication token
-        poller.start(daemon=False)
+            # Start polling for authentication token
+            poller.start(daemon=False)
 
-        logger.debug('Enter the code "%s" at %s to authenticate your account' % (
-            code.get('user_code'),
-            code.get('verification_url')
-        ))
+            logger.debug('Enter the code "%s" at %s to authenticate your account' % (
+                code.get('user_code'),
+                code.get('verification_url')
+            ))
 
-        gui_utils.get_auth(code.get('user_code'), code.get('verification_url'))
+            self.authDialog = deviceAuthDialog.DeviceAuthDialog('script-trakt-DeviceAuthDialog.xml', __addon__.getAddonInfo('path'),
+                                                                code=code.get('user_code'), url=code.get('verification_url'))
+            self.authDialog.doModal()
+
+            del self.authDialog
 
     def on_aborted(self):
         """Triggered when device authentication was aborted (either with `DeviceOAuthPoller.stop()`
            or via the "poll" event)"""
 
         logger.debug('Authentication aborted')
+        self.authDialog.close()
 
     def on_authenticated(self, token):
         """Triggered when device authentication has been completed
@@ -86,11 +93,14 @@ class traktAPI(object):
         self.authorization = token
         setSetting('authorization', dumps(self.authorization))
         logger.debug('Authentication complete: %r' % token)
+        self.authDialog.close()
+        notification(getString(32157), getString(32152), 3000)
 
     def on_expired(self):
         """Triggered when the device authentication code has expired"""
 
         logger.debug('Authentication expired')
+        self.authDialog.close()
 
     def on_poll(self, callback):
         """Triggered before each poll
@@ -134,13 +144,13 @@ class traktAPI(object):
                         episode=episode,
                         progress=percent)
             elif status == 'stop':
-                #don't retry on stop, this will cause multiple scrobbles
+                # don't retry on stop, this will cause multiple scrobbles
                 result = Trakt['scrobble'].stop(
                     show=show,
                     episode=episode,
                     progress=percent)
             else:
-                    logger.debug("scrobble() Bad scrobble status")
+                logger.debug("scrobble() Bad scrobble status")
         return result
 
     def scrobbleMovie(self, movie, percent, status):
@@ -158,7 +168,7 @@ class traktAPI(object):
                         movie=movie,
                         progress=percent)
             elif status == 'stop':
-                #don't retry on stop, this will cause multiple scrobbles
+                # don't retry on stop, this will cause multiple scrobbles
                 result = Trakt['scrobble'].stop(
                     movie=movie,
                     progress=percent)
@@ -222,7 +232,7 @@ class traktAPI(object):
 
     def addToHistory(self, mediaObject):
         with Trakt.configuration.oauth.from_response(self.authorization):
-            #don't try this call it may cause multiple watches
+            # don't try this call it may cause multiple watches
             result = Trakt['sync/history'].add(mediaObject)
         return result
 
