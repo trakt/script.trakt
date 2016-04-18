@@ -95,6 +95,7 @@ class traktAPI(object):
         logger.debug('Authentication complete: %r' % token)
         self.authDialog.close()
         notification(getString(32157), getString(32152), 3000)
+        self.updateUser()
 
     def on_expired(self):
         """Triggered when the device authentication code has expired"""
@@ -112,20 +113,12 @@ class traktAPI(object):
         # Continue polling
         callback(True)
 
-    # helper for onSettingsChanged
-    def updateSettings(self):
-        if getSetting('authorization'):
-            _auth = loads(getSetting('authorization'))
+    def updateUser(self):
+        user = self.getUser()
+        if user and 'user' in user:
+            setSetting('user', user['user']['username'])
         else:
-            _auth = {}
-
-        if self.authorization != _auth:
-            self.authorization = _auth
-            user = self.getUser()
-            if user and 'user' in user:
-                setSetting('user', user['user']['username'])
-            else:
-                setSetting('user', '')
+            setSetting('user', '')
 
     def scrobbleEpisode(self, show, episode, percent, status):
         result = None
