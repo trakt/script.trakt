@@ -2,20 +2,19 @@
 import threading
 import logging
 import xbmc
-
-from traktapi import traktAPI
-
 import globals
-from rating import rateMedia
-from scrobbler import Scrobbler
 import sqlitequeue
-from sync import Sync
 import utilities
 import kodiUtilities
 import time
 import xbmcgui
 import json
 import AddonSignals
+
+from rating import rateMedia
+from scrobbler import Scrobbler
+from sync import Sync
+from traktapi import traktAPI
 
 logger = logging.getLogger(__name__)
 
@@ -72,6 +71,10 @@ class traktService:
                     logger.debug("There already is a sync in progress.")
             elif action == 'settings':
                 kodiUtilities.showSettings()
+            elif action == 'auth_info':
+                xbmc.executebuiltin('Dialog.Close(all, true)')
+                # init traktapi class
+                globals.traktapi = traktAPI(True)
             else:
                 logger.debug("Unknown dispatch action, '%s'." % action)
         except Exception as ex:
@@ -106,12 +109,6 @@ class traktService:
 
         # start loop for events
         while not self.Monitor.abortRequested():
-            if not kodiUtilities.getSetting('authorization'):
-                last_reminder = kodiUtilities.getSettingAsInt('last_reminder')
-                now = int(time.time())
-                if last_reminder >= 0 and last_reminder < now - (24 * 60 * 60):
-                    traktapi.login()
-
             while len(self.dispatchQueue) and (not self.Monitor.abortRequested()):
                 data = self.dispatchQueue.get()
                 logger.debug("Queued dispatch: %s" % data)
