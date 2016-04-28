@@ -3,10 +3,12 @@
 import xbmcaddon
 import logging
 import deviceAuthDialog
+import time
+
 from trakt import Trakt
 from trakt.objects import Movie, Show
 from utilities import findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, createError
-from kodiUtilities import getSetting, setSetting, notification, getString, checkAndConfigureProxy
+from kodiUtilities import getSetting, setSetting, notification, getString, checkAndConfigureProxy, getSettingAsInt
 from sys import version_info
 
 
@@ -26,7 +28,7 @@ class traktAPI(object):
     __client_id = "d4161a7a106424551add171e5470112e4afdaf2438e6ef2fe0548edc75924868"
     __client_secret = "b5fcd7cb5d9bb963784d11bbf8535bc0d25d46225016191eb48e50792d2155c0"
 
-    def __init__(self):
+    def __init__(self, force=False):
         logger.debug("Initializing.")
 
         proxyURL = checkAndConfigureProxy()
@@ -46,10 +48,13 @@ class traktAPI(object):
             secret=self.__client_secret
         )
 
-        if getSetting('authorization'):
+        if getSetting('authorization') and not force:
             self.authorization = loads(getSetting('authorization'))
         else:
-            self.login()
+            last_reminder = getSettingAsInt('last_reminder')
+            now = int(time.time())
+            if last_reminder >= 0 and last_reminder < now - (24 * 60 * 60) or force:
+                self.login()
 
     def login(self):
         # Request new device code
