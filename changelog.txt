@@ -1,4 +1,7 @@
-version 3.1.4
+version 3.1.6
+  - fixed bug when trying to start authentication manually
+
+version 3.1.5
   - implemented device auth flow
 
 version 3.1.4
