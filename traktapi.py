@@ -48,6 +48,13 @@ class traktAPI(object):
             secret=self.__client_secret
         )
 
+        # Bind event
+        Trakt.on('oauth.token_refreshed', self.on_token_refreshed)
+
+        Trakt.configuration.defaults.oauth(
+            refresh=True
+        )
+
         if getSetting('authorization') and not force:
             self.authorization = loads(getSetting('authorization'))
         else:
@@ -117,6 +124,13 @@ class traktAPI(object):
 
         # Continue polling
         callback(True)
+
+    def on_token_refreshed(self, response):
+        # OAuth token refreshed, save token for future calls
+        self.authorization = response
+        setSetting('authorization', dumps(self.authorization))
+
+        logger.debug('Token refreshed')
 
     def updateUser(self):
         user = self.getUser()
