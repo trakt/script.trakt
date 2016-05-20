@@ -288,24 +288,31 @@ class Scrobbler():
             logger.debug("scrobble sending episode object: %s" % str(self.curVideoInfo))
             response = self.traktapi.scrobbleEpisode(self.traktShowSummary, self.curVideoInfo, watchedPercent, status)
             
-            # If there is an empty response, the reason might be that the title we have isn't the actual show title,
-            # but rather an alternative title. To handle this case, call the Trakt search function.
-            if response is None:
-                logger.debug("Searching for show title: %s" % self.traktShowSummary['title'])
-                # This text query API is basically the same as searching on the website. Works with alternative 
-                # titles, unlike the scrobble function.
-                newResp = self.traktapi.getTextQuery(self.traktShowSummary['title'], "show", None)
-                if not newResp:
-                    logger.debug("Empty Response from getTextQuery, giving up")
-                else:
-                    logger.debug("Got Response from getTextQuery: %s" % str(newResp))
-                    # We got something back. Have to assume the first show found is the right one; if there's more than
-                    # one, there's no way to know which to use. Pull the primary title from the response (and the year,
-                    # just because it's there).
-                    showObj = {'title': newResp[0].title, 'year': newResp[0].year}
-                    logger.debug("scrobble sending getTextQuery first show object: %s" % str(showObj))
-                    # Now we can attempt the scrobble again, using the primary title this time.
-                    response = self.traktapi.scrobbleEpisode(showObj, self.curVideoInfo, watchedPercent, status)
+            if (kodiUtilities.getSettingAsBool('scrobble_secondary_title')):
+                logger.debug('[traktPlayer] Setting is enabled to try secondary show title, if necessary.')
+                # If there is an empty response, the reason might be that the title we have isn't the actual show title,
+                # but rather an alternative title. To handle this case, call the Trakt search function.
+                if response is None:
+                    logger.debug("Searching for show title: %s" % self.traktShowSummary['title'])
+                    # This text query API is basically the same as searching on the website. Works with alternative 
+                    # titles, unlike the scrobble function.
+                    newResp = self.traktapi.getTextQuery(self.traktShowSummary['title'], "show", None)
+                    if not newResp:
+                        logger.debug("Empty Response from getTextQuery, giving up")
+                    else:
+                        logger.debug("Got Response from getTextQuery: %s" % str(newResp))
+                        # We got something back. Have to assume the first show found is the right one; if there's more than
+                        # one, there's no way to know which to use. Pull the primary title from the response (and the year,
+                        # just because it's there).
+                        showObj = {'title': newResp[0].title, 'year': newResp[0].year}
+                        logger.debug("scrobble sending getTextQuery first show object: %s" % str(showObj))
+                        # Now we can attempt the scrobble again, using the primary title this time.
+                        response = self.traktapi.scrobbleEpisode(showObj, self.curVideoInfo, watchedPercent, status)
+                    
+            try:
+                response['episode']['episodeid'] = self.curVideo['id']
+            except KeyError:
+                logger.debug("Failed to set response['episode']['episodeid'] due to KeyError when looking up self.curVideo['id']")
 
             if response is not None:
                 self.__scrobbleNotification(response)

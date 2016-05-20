@@ -717,3 +717,11 @@ msgstr ""
 msgctxt "#32182"
 msgid "%i show ratings will be updated on Trakt"
 msgstr ""
+
+msgctxt "#32183"
+msgid "Attempt to scrobble MythTV PVR recordings"
+msgstr ""
+
+msgctxt "#32184"
+msgid "Attempt secondary show title search"
+msgstr ""
