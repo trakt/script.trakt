@@ -412,6 +412,9 @@ class traktPlayer(xbmc.Player):
 
                 data = {'action': 'started'}
 
+                if (kodiUtilities.getSettingAsBool('scrobble_mythtv_pvr')):
+                    logger.debug('[traktPlayer] Setting is enabled to try scrobbling mythtv pvr recording, if necessary.')
+
                 # check type of item
                 if 'id' not in result['item']:
                     # do a deeper check to see if we have enough data to perform scrobbles
@@ -488,8 +491,7 @@ class traktPlayer(xbmc.Player):
                                         logger.debug("[traktPlayer] onPlayBackStarted() - This episode is part of a multi-part episode.")
                                     else:
                                         logger.debug("[traktPlayer] onPlayBackStarted() - This is a single episode.")
-    
-                elif (self.type == 'unknown' and result['item']['label']):
+                elif (kodiUtilities.getSettingAsBool('scrobble_mythtv_pvr') and self.type == 'unknown' and result['item']['label']):
                     # If we have label/id but no show type, then this might be a PVR recording.
                     
                     # DEBUG INFO: This code is useful when trying to figure out what info is available. Many of the fields
