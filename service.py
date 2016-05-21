@@ -640,19 +640,6 @@ class traktPlayer(xbmc.Player):
                 else:
                     logger.debug("[traktPlayer] onPlayBackStarted() - Video type '%s' unrecognized, skipping." % self.type)
                     return
-                splitLabel = foundLabel.split(" - ", 1)
-                foundShowName = splitLabel[0]
-                logger.debug("[traktPlayer] onPlayBackStarted() - using show name: %s" % foundShowName)
-                foundEpisodeName = ''.join(['"',splitLabel[1],'"'])
-                logger.debug("[traktPlayer] onPlayBackStarted() - using episode name: %s" % foundEpisodeName)
-                # Do a text query to the Trakt DB looking for this episode. Note that we can't search for show and episode
-                # together, because the Trakt function gets confused and returns nothing.
-                newResp = globals.traktapi.getTextQuery(foundEpisodeName, "episode", None)
-                if not newResp:
-                    logger.debug("[traktPlayer] onPlayBackStarted() - Empty Response from getTextQuery, giving up")
-                else:
-                    logger.debug("[traktPlayer] onPlayBackStarted() - Video type '%s' unrecognized, skipping." % self.type)
-                    return
 
             else:
                 logger.debug("[traktPlayer] onPlayBackStarted() - Video type '%s' unrecognized, skipping." % self.type)
