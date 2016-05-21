@@ -9,6 +9,7 @@ import kodiUtilities
 import time
 import xbmcgui
 import json
+import re
 import AddonSignals
 import re
 
@@ -393,7 +394,7 @@ class traktPlayer(xbmc.Player):
         if self.isPlayingVideo():
             # get item data from json rpc
             logger.debug("[traktPlayer] onPlayBackStarted() - Doing Player.GetItem kodiJsonRequest")
-            result = utilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'Player.GetItem', 'params': {'playerid': 1}, 'id': 1})
+            result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'Player.GetItem', 'params': {'playerid': 1}, 'id': 1})
             if result:
                 logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
                 # check for exclusion
@@ -551,7 +552,8 @@ class traktPlayer(xbmc.Player):
                         logger.debug("[traktPlayer] onPlayBackStarted() - Empty Response from getTextQuery, giving up")
                     else:
                         logger.debug("[traktPlayer] onPlayBackStarted() - Got Response from getTextQuery: %s" % str(newResp))
-                        # We got something back. See if one of the returned values is for the show we're looking for.
+                        # We got something back. See if one of the returned values is for the show we're looking for. Often it's
+                        # not, but since there's no way to tell the search which show we want, this is all we can do.
                         rightResp = None
                         for thisResp in newResp:
                             compareShowName = thisResp.show.title
