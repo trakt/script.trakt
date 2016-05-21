@@ -348,7 +348,7 @@ class traktAPI(object):
             return result
 
     def getTextQuery(self, query, type, year):
-        with Trakt.configuration.http(retry=True):
+        with Trakt.configuration.http(retry=True, timeout=90):
             result = Trakt['search'].query(query, type, year)
             if result and not isinstance(result, list):
                 result = [result]

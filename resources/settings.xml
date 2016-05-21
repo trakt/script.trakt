@@ -46,6 +46,7 @@
 		<setting id="scrobble_fallback" type="bool" label="32164" default="true"/>
 		<setting id="scrobble_start_offset" type="number" label="32167" default="0"/>
 		<setting id="scrobble_mythtv_pvr" type="bool" label="32183" default="false"/>
+		<setting id="scrobble_secondary_title" type="bool" label="32184" default="false"/>
 	</category>
 	<category label="32045"><!-- Synchronize -->
 		<setting label="32054" type="lsep"/><!-- Service -->
