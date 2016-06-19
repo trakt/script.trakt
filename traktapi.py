@@ -332,6 +332,10 @@ class traktAPI(object):
         with Trakt.configuration.http(retry=True):
             return Trakt['shows'].get(showId)
 
+    def getShowWithAllEpisodesList(self, showId):
+        with Trakt.configuration.http(retry=True, timeout=90):
+            return Trakt['shows'].seasons(showId, extended='episodes')
+
     def getEpisodeSummary(self, showId, season, episode):
         with Trakt.configuration.http(retry=True):
             return Trakt['shows'].episode(showId, season, episode)
@@ -339,6 +343,13 @@ class traktAPI(object):
     def getIdLookup(self, id, id_type):
         with Trakt.configuration.http(retry=True):
             result = Trakt['search'].lookup(id, id_type)
+            if result and not isinstance(result, list):
+                result = [result]
+            return result
+
+    def getTextQuery(self, query, type, year):
+        with Trakt.configuration.http(retry=True, timeout=90):
+            result = Trakt['search'].query(query, type, year)
             if result and not isinstance(result, list):
                 result = [result]
             return result
