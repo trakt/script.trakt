@@ -1,6 +1,7 @@
 version 3.1.8
   - added MythTV PVR recordings scrobbling, as an option (under Scrobbler in configuration)
   - added option to perform secondary search for show title by text, if initial scrobble fails
+  - small bugfix for the hungarian translations
 
 version 3.1.7
   - fixed expired auth tokens not getting refreshed correctly
