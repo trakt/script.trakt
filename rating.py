@@ -85,8 +85,6 @@ def rateMedia(media_type, itemsToRate, unrate=False, rating=None):
             else:
                 logger.debug("'%s' is being re-rated." % s)
 
-        xbmc.executebuiltin('Dialog.Close(all, true)')
-
         gui = RatingDialog(
             "script-trakt-RatingDialog.xml",
             __addon__.getAddonInfo('path'),
