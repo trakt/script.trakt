@@ -3,6 +3,7 @@ version 3.1.8
   - added option to perform secondary search for show title by text, if initial scrobble fails
   - small bugfix for the hungarian translations
   - don't close other windows after playback
+  - bugfix for sync crashing when using paths with special characters
 
 version 3.1.7
   - fixed expired auth tokens not getting refreshed correctly
