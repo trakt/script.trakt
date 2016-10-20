@@ -61,5 +61,10 @@
 		<website>http://trakt.tv</website>
 		<email></email>
 		<source>https://github.com/trakt/script.trakt</source>
+		<news>- added MythTV PVR recordings scrobbling, as an option (under Scrobbler in configuration)
+- added option to perform secondary search for show title by text, if initial scrobble fails
+- small bugfix for the hungarian translations
+- don't close other windows after playback
+- bugfix for sync crashing when using paths with special characters</news>
 	</extension>
 </addon>
