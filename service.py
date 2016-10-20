@@ -492,7 +492,7 @@ class traktPlayer(xbmc.Player):
                                         logger.debug("[traktPlayer] onPlayBackStarted() - This is a single episode.")
                 elif (kodiUtilities.getSettingAsBool('scrobble_mythtv_pvr') and self.type == 'unknown' and result['item']['label']):
                     # If we have label/id but no show type, then this might be a PVR recording.
-                    
+
                     # DEBUG INFO: This code is useful when trying to figure out what info is available. Many of the fields
                     # that you'd expect (TVShowTitle, episode, season, etc) are always blank. In Kodi v15, we got the show
                     # and episode name in the VideoPlayer label. In v16, that's gone, but the Player.Filename infolabel
@@ -505,7 +505,7 @@ class traktPlayer(xbmc.Player):
                     #    logger.debug("[traktPlayer] onPlayBackStarted() - result - %s : %s" % (k,v))
                     #for k,v in result['item'].iteritems():
                     #    logger.debug("[traktPlayer] onPlayBackStarted() - result.item - %s : %s" % (k,v))
-                    
+
                     # As of Kodi v16 with the MythTV PVR addon, the only way I could find to get the TV show and episode
                     # info is from the Player.Filename infolabel. It shows up like this:
                     # ShowName [sXXeYY ](year) EpisodeName, channel, PVRFileName
@@ -544,7 +544,7 @@ class traktPlayer(xbmc.Player):
                     data['season'] = None
                     data['episode'] = None
                     data['episodeTitle'] = None
-                    # First thing to try, a text query to the Trakt DB looking for this episode. Note 
+                    # First thing to try, a text query to the Trakt DB looking for this episode. Note
                     # that we can't search for show and episode together, because the Trakt function gets confused and returns nothing.
                     newResp = globals.traktapi.getTextQuery(foundEpisodeName, "episode", epYear)
                     if not newResp:
@@ -578,9 +578,9 @@ class traktPlayer(xbmc.Player):
                             data['season'] = rightResp.pk[0];
                             data['episode'] = rightResp.pk[1];
                     # At this point if we haven't found the episode data yet, the episode-title-text-search method
-                    # didn't work. 
+                    # didn't work.
                     if (not data['season']):
-                        # This text query API is basically the same as searching on the website. Works with alternative 
+                        # This text query API is basically the same as searching on the website. Works with alternative
                         # titles, unlike the scrobble function. Though we can't use the episode year since that would only
                         # match the show if we're dealing with season 1.
                         logger.debug("[traktPlayer] onPlayBackStarted() - Searching for show title via getTextQuery: %s" % foundShowName)
