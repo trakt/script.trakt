@@ -283,14 +283,8 @@ class traktService:
 
             logger.debug("doMarkWatched(): '%s - Season %d' has %d episode(s) that are going to be marked as watched." % (data['id'], data['season'], len(summaryInfo['shows'][0]['seasons'][0]['episodes'])))
 
-            if len(summaryInfo['shows'][0]['seasons'][0]['episodes']) > 0:
-                logger.debug("doMarkWatched(): %s" % str(summaryInfo))
+            self.addEpisodesToHistory(summaryInfo, s)
 
-                result = globals.traktapi.addToHistory(summaryInfo)
-                if result:
-                    kodiUtilities.notification(kodiUtilities.getString(32113), kodiUtilities.getString(32115) % (result['added']['episodes'], s))
-                else:
-                    kodiUtilities.notification(kodiUtilities.getString(32114), s)
         elif utilities.isShow(media_type):
             summaryInfo = {'shows': [{'ids':utilities.parseIdToTraktIds(data['id'],media_type)[0], 'seasons': []}]}
             if summaryInfo:
@@ -302,14 +296,17 @@ class traktService:
                         episodeJson.append({'number': episode})
                     summaryInfo['shows'][0]['seasons'].append({'number': season, 'episodes': episodeJson})
 
-                if len(summaryInfo['shows'][0]['seasons'][0]['episodes']) > 0:
-                    logger.debug("doMarkWatched(): %s" % str(summaryInfo))
+                self.addEpisodesToHistory(summaryInfo, s)
 
-                    result = globals.traktapi.addToHistory(summaryInfo)
-                    if result:
-                        kodiUtilities.notification(kodiUtilities.getString(32113), kodiUtilities.getString(32115) % (result['added']['episodes'], s))
-                    else:
-                        kodiUtilities.notification(kodiUtilities.getString(32114), s)
+    def addEpisodesToHistory(self, summaryInfo, s):
+        if len(summaryInfo['shows'][0]['seasons'][0]['episodes']) > 0:
+            logger.debug("doMarkWatched(): %s" % str(summaryInfo))
+
+            result = globals.traktapi.addToHistory(summaryInfo)
+            if result:
+                kodiUtilities.notification(kodiUtilities.getString(32113), kodiUtilities.getString(32115) % (result['added']['episodes'], s))
+            else:
+                kodiUtilities.notification(kodiUtilities.getString(32114), s)
 
     def doSync(self, manual=False, silent=False, library="all"):
         self.syncThread = syncThread(manual, silent, library)

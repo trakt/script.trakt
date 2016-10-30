@@ -45,6 +45,10 @@ def test_getFormattedItemName_Season():
     data = load_params_from_json('tests/fixtures/season.json')
     assert utilities.getFormattedItemName('season', data) == b'Winter Is Coming - Season 1'
 
+def test_getFormattedItemName_Season2():
+    data = load_params_from_json('tests/fixtures/season_no_list.json')
+    assert utilities.getFormattedItemName('season', data) == b'Regular Show - Season 8'
+
 def test_getFormattedItemName_Episode():
     data = load_params_from_json('tests/fixtures/episode.json')
     assert utilities.getFormattedItemName('episode', data) == b'S01E01 - Winter Is Coming'
