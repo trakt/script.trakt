@@ -66,5 +66,12 @@
 - small bugfix for the hungarian translations
 - don't close other windows after playback
 - bugfix for sync crashing when using paths with special characters</news>
+    <assets>
+        <icon>resources/icon.png</icon>
+        <fanart>resources/fanart.jpg</fanart>
+        <screenshot>resources/image-01.png</screenshot>
+        <screenshot>resources/image-02.png</screenshot>
+        <screenshot>resources/image-03.png</screenshot>
+    </assets>
 	</extension>
 </addon>
