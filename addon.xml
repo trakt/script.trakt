@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.trakt" name="Trakt" version="3.1.4" provider-name="Trakt.tv, Razzeee">
+<addon id="script.trakt" name="Trakt" version="3.1.8" provider-name="Trakt.tv, Razzeee">
 	<requires>
         <import addon="xbmc.python" version="2.24.0"/>
         <import addon="script.module.simplejson" version="3.3.0"/>
@@ -61,5 +61,17 @@
 		<website>http://trakt.tv</website>
 		<email></email>
 		<source>https://github.com/trakt/script.trakt</source>
+		<news>- added MythTV PVR recordings scrobbling, as an option (under Scrobbler in configuration)
+- added option to perform secondary search for show title by text, if initial scrobble fails
+- small bugfix for the hungarian translations
+- don't close other windows after playback
+- bugfix for sync crashing when using paths with special characters</news>
+    <assets>
+        <icon>resources/icon.png</icon>
+        <fanart>resources/fanart.jpg</fanart>
+        <screenshot>resources/image-01.png</screenshot>
+        <screenshot>resources/image-02.png</screenshot>
+        <screenshot>resources/image-03.png</screenshot>
+    </assets>
 	</extension>
 </addon>

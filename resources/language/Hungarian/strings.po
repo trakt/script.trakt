@@ -338,7 +338,7 @@ msgstr "(%i/%i) film lejátszási folyamatának frissítése"
 
 msgctxt "#32128"
 msgid "Playback progress updated for %i movie(s) in Kodi"
-msgstr "(%i/%i) film lejátszási folyamatának frissítése"
+msgstr "%i film lejátszási folyamata frissítve"
 
 msgctxt "#32129"
 msgid "Kodi episode playback progress is up to date"

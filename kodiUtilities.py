@@ -105,7 +105,7 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
         del data['label']
         return data
     elif type == 'episode':
-        if checkExclusion(data['file']):
+        if checkExclusion(data['file'].encode('utf-8')):
             return
 
         if data['playcount'] is None:
@@ -136,7 +136,7 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
             return
 
     elif type == 'movie':
-        if checkExclusion(data.pop('file')):
+        if checkExclusion(data.pop('file').encode('utf-8')):
             return
         if 'lastplayed' in data:
             data['watched_at'] = utilities.convertDateTimeToUTC(data.pop('lastplayed'))
@@ -280,7 +280,7 @@ def checkAndConfigureProxy():
                 return matchURL.group(1) + proxyUsername + ':' + proxyPassword + '@' + matchURL.group(2) + ':' + proxyPort
         elif proxyURL and proxyPort:
             return proxyURL + ':' + proxyPort
-    
+
     return None
 
 def getMediaType():

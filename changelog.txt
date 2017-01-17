@@ -1,3 +1,19 @@
+version 3.1.8
+  - added MythTV PVR recordings scrobbling, as an option (under Scrobbler in configuration)
+  - added option to perform secondary search for show title by text, if initial scrobble fails
+  - small bugfix for the hungarian translations
+  - don't close other windows after playback
+  - bugfix for sync crashing when using paths with special characters
+
+version 3.1.7
+  - fixed expired auth tokens not getting refreshed correctly
+
+version 3.1.6
+  - fixed bug when trying to start authentication manually
+
+version 3.1.5
+  - implemented device auth flow
+
 version 3.1.4
   - fix episode progress playback sync
   - improved movie progress playback sync
@@ -82,7 +98,7 @@ version 3.0.0
   - default rating is now a neutral 6 "Okay"
   - improved logging
   - various improvements and bugfixes
-  
+
 version 2.3.2
   - fixed update tags not running after sync, if the setting was enabled (nate1280)
   - fixed usage of sync after library update, was always syncing (nate1280)

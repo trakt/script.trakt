@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import utilities
 import kodiUtilities
-import gui_utils
 import xbmc
 import sqlitequeue
 import sys
@@ -33,9 +32,8 @@ def Main():
     args = __getArguments()
     data = {}
 
-    if args['action'] == 'pin_info':
-        xbmc.executebuiltin('Dialog.Close(all, true)')
-        gui_utils.get_pin()
+    if args['action'] == 'auth_info':
+        data['action'] = 'auth_info'
 
     if args['action'] == 'contextmenu':
         buttons = []
@@ -132,7 +130,7 @@ def Main():
                     if not result:
                         logger.debug("No data was returned from Kodi, aborting manual %s." % args['action'])
                         return
-                    
+
                 data['video_id'] = result['imdbnumber']
             else:
                 data['video_id'] = data['remoteid']
@@ -210,7 +208,7 @@ def Main():
                     for episode in result['episodes']:
                         if episode['playcount'] == 0:
                             episodes.append(episode['episode'])
-                    
+
                     if len(episodes) == 0:
                         logger.debug("'%s - Season %d' is already marked as watched." % (showTitle, season))
                         return
