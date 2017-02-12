@@ -2,8 +2,8 @@
 
 import xbmcaddon
 import xbmcgui
-from utilities import isMovie, isShow, isSeason, isEpisode
-from kodiUtilities import getString
+from resources.lib.utilities import isMovie, isShow, isSeason, isEpisode
+from resources.lib.kodiUtilities import getString
 
 __addon__ = xbmcaddon.Addon("script.trakt")
 

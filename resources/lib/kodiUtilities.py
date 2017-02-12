@@ -6,7 +6,7 @@ import xbmcaddon
 import re
 import sys
 import logging
-import utilities
+from resources.lib import utilities
 
 
 if sys.version_info >= (2, 7):

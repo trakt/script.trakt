@@ -4,9 +4,9 @@
 import xbmc
 import xbmcgui
 import logging
-import syncEpisodes
-import syncMovies
-from kodiUtilities import getSettingAsBool
+from resources.lib import syncEpisodes
+from resources.lib import syncMovies
+from resources.lib.kodiUtilities import getSettingAsBool
 
 progress = xbmcgui.DialogProgress()
 logger = logging.getLogger(__name__)

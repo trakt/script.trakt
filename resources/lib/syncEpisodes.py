@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import copy
-import utilities
-import kodiUtilities
+from resources.lib import utilities
+from resources.lib import kodiUtilities
 import logging
-from kodiUtilities import notification
+from resources.lib.kodiUtilities import notification
 
 logger = logging.getLogger(__name__)
 

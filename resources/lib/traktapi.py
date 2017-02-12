@@ -2,13 +2,13 @@
 #
 import xbmcaddon
 import logging
-import deviceAuthDialog
+from resources.lib import deviceAuthDialog
 import time
 
 from trakt import Trakt
 from trakt.objects import Movie, Show
-from utilities import findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, createError
-from kodiUtilities import getSetting, setSetting, notification, getString, checkAndConfigureProxy, getSettingAsInt
+from resources.lib.utilities import findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, createError
+from resources.lib.kodiUtilities import getSetting, setSetting, notification, getString, checkAndConfigureProxy, getSettingAsInt
 from sys import version_info
 
 

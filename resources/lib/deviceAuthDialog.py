@@ -1,7 +1,7 @@
 import xbmcgui
 import time
 import xbmcaddon
-from kodiUtilities import notification, setSetting, getString
+from resources.lib.kodiUtilities import notification, setSetting, getString
 import logging
 
 __addon__ = xbmcaddon.Addon("script.trakt")

@@ -2,20 +2,20 @@
 import threading
 import logging
 import xbmc
-import globals
-import sqlitequeue
-import utilities
-import kodiUtilities
+from resources.lib import globals
+from resources.lib import sqlitequeue
+from resources.lib import utilities
+from resources.lib import kodiUtilities
 import time
 import xbmcgui
 import json
 import re
 import AddonSignals
 
-from rating import rateMedia
-from scrobbler import Scrobbler
-from sync import Sync
-from traktapi import traktAPI
+from resources.lib.rating import rateMedia
+from resources.lib.scrobbler import Scrobbler
+from resources.lib.sync import Sync
+from resources.lib.traktapi import traktAPI
 
 logger = logging.getLogger(__name__)
 
