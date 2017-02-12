@@ -4,7 +4,6 @@ import copy
 from resources.lib import utilities
 from resources.lib import kodiUtilities
 import logging
-from resources.lib.kodiUtilities import notification
 
 logger = logging.getLogger(__name__)
 
@@ -12,7 +11,7 @@ class SyncMovies():
     def __init__(self, sync, progress):
         self.sync = sync
         if not self.sync.show_progress and sync.sync_on_update and sync.notify and self.sync.notify_during_playback:
-            notification('%s %s' % (kodiUtilities.getString(32045), kodiUtilities.getString(32046)), kodiUtilities.getString(32061))  # Sync started
+            kodiUtilities.notification('%s %s' % (kodiUtilities.getString(32045), kodiUtilities.getString(32046)), kodiUtilities.getString(32061))  # Sync started
         if sync.show_progress and not sync.run_silent:
             progress.create("%s %s" % (kodiUtilities.getString(32045), kodiUtilities.getString(32046)), line1=" ", line2=" ", line3=" ")
 
@@ -49,7 +48,7 @@ class SyncMovies():
             progress.close()
 
         if not sync.show_progress and sync.sync_on_update and sync.notify and sync.notify_during_playback:
-            notification('%s %s' % (kodiUtilities.getString(32045), kodiUtilities.getString(32046)), kodiUtilities.getString(32062))  # Sync complete
+            kodiUtilities.notification('%s %s' % (kodiUtilities.getString(32045), kodiUtilities.getString(32046)), kodiUtilities.getString(32062))  # Sync complete
 
         logger.debug("[Movies Sync] Movies on Trakt.tv (%d), movies in Kodi (%d)." % (len(traktMovies), len(kodiMovies)))
         logger.debug("[Movies Sync] Complete.")
