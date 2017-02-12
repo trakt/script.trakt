@@ -1,3 +1,7 @@
+version 3.1.9
+  - fallback to only title matching if all else fails
+  - updated dependencies
+
 version 3.1.8
   - added MythTV PVR recordings scrobbling, as an option (under Scrobbler in configuration)
   - added option to perform secondary search for show title by text, if initial scrobble fails
