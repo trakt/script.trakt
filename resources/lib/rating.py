@@ -4,9 +4,9 @@
 import xbmc
 import xbmcaddon
 import xbmcgui
-import utilities
-import kodiUtilities
-import globals
+from resources.lib import utilities
+from resources.lib import kodiUtilities
+from resources.lib import globals
 import logging
 
 logger = logging.getLogger(__name__)

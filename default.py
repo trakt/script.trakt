@@ -2,9 +2,9 @@
 #
 import xbmcaddon
 import logging
-import kodilogging
-from service import traktService
-from utilities import createError
+from resources.lib import kodilogging
+from resources.lib.service import traktService
+from resources.lib.utilities import createError
 
 __addon__ = xbmcaddon.Addon('script.trakt')
 __addonversion__ = __addon__.getAddonInfo('version')

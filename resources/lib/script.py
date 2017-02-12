@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
-import utilities
-import kodiUtilities
+from resources.lib import utilities
+from resources.lib import kodiUtilities
 import xbmc
-import sqlitequeue
+from resources.lib import sqlitequeue
 import sys
 import logging
-import xbmcgui
-import xbmcaddon
-from traktContextMenu import traktContextMenu
+from resources.lib.traktContextMenu import traktContextMenu
 
 logger = logging.getLogger(__name__)
 
-__addon__ = xbmcaddon.Addon("script.trakt")
 
 def __getArguments():
     data = None
@@ -28,7 +25,7 @@ def __getArguments():
 
     return data
 
-def Main():
+def run():
     args = __getArguments()
     data = {}
 
@@ -357,5 +354,3 @@ def Main():
         logger.debug("Queuing for dispatch: %s" % data)
         q.append(data)
 
-if __name__ == '__main__':
-    Main()

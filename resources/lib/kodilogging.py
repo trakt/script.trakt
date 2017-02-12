@@ -16,7 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import unicode_literals
-from kodiUtilities import getSettingAsBool
+from resources.lib.kodiUtilities import getSettingAsBool
 
 import logging
 import xbmc
