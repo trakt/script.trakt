@@ -389,8 +389,11 @@ class traktPlayer(xbmc.Player):
         # only do anything if we're playing a video
         if self.isPlayingVideo():
             # get item data from json rpc
+            activePlayers = kodiUtilities.kodiJsonRequest({"jsonrpc": "2.0", "method": "Player.GetActivePlayers", "id": 1})
+            logger.debug("[traktPlayer] onPlayBackStarted() - activePlayers: %s" % activePlayers)
+            playerId = int(activePlayers[0]['playerid'])
             logger.debug("[traktPlayer] onPlayBackStarted() - Doing Player.GetItem kodiJsonRequest")
-            result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'Player.GetItem', 'params': {'playerid': 1}, 'id': 1})
+            result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'Player.GetItem', 'params': {'playerid': playerId}, 'id': 1})
             if result:
                 logger.debug("[traktPlayer] onPlayBackStarted() - %s" % result)
                 # check for exclusion
