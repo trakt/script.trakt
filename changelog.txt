@@ -1,3 +1,6 @@
+version 3.1.10
+  - fix scrobling problem when using yatse to start playback
+
 version 3.1.9
   - fallback to only title matching if all else fails
   - updated dependencies
