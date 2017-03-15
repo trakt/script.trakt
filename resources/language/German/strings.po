@@ -122,7 +122,7 @@ msgstr "Schlecht"
 
 msgctxt "#32031"
 msgid "Poor"
-msgstr "Arm"
+msgstr "Armselig"
 
 msgctxt "#32032"
 msgid "Meh"
@@ -138,7 +138,7 @@ msgstr "Gut"
 
 msgctxt "#32035"
 msgid "Great"
-msgstr "Großartig"
+msgstr "Klasse"
 
 msgctxt "#32036"
 msgid "Superb"
@@ -174,7 +174,7 @@ msgstr "Trakt - Hat bereits die selbe Bewertung"
 
 msgctxt "#32044"
 msgid "Trakt - Problem submitting rating"
-msgstr "Trakt - Problem beim übermitteln der Bewertung"
+msgstr "Trakt - Problem beim Übermitteln der Bewertung"
 
 msgctxt "#32045"
 msgid "Synchronize"
@@ -330,7 +330,7 @@ msgstr "Filminformationen von Trakt empfangen"
 
 msgctxt "#32084"
 msgid "Trakt movie collection is up to date, no movies to add"
-msgstr "Trakt Film Sammlung is aktuell, keine Filme hinzugefügt"
+msgstr "Trakt Film Sammlung ist aktuell, keine Filme hinzugefügt"
 
 msgctxt "#32085"
 msgid "%i movie(s) were added to your Trakt collection"
@@ -358,7 +358,7 @@ msgstr "Wiedergabezähler für %i Film(e) in Kodi sind aktuell"
 
 msgctxt "#32091"
 msgid "Trakt movie collection is up to date, no movies removed"
-msgstr "Trakt Film Sammlung is aktuell, keine Filme entfernt"
+msgstr "Trakt Film Sammlung ist aktuell, keine Filme entfernt"
 
 msgctxt "#32092"
 msgid "%i movie(s) were removed from your Trakt collection"
@@ -434,7 +434,7 @@ msgstr "Wiedergabezähler für %i Serien in Kodi aktualisiert"
 
 msgctxt "#32110"
 msgid "Trakt episode collection is clean, no episodes to remove"
-msgstr "Trakt Episodensammlung is bereinigt, keine Episoden wurden entfernt"
+msgstr "Trakt Episodensammlung ist bereinigt, keine Episoden wurden entfernt"
 
 msgctxt "#32111"
 msgid "%i episode(s) are being removed from your Trakt collection"
@@ -474,7 +474,7 @@ msgstr "Empfange Wiedergabefortschritt der Episoden von Trakt"
 
 msgctxt "#32120"
 msgid "Parsing episode playback progress %i of %i from Trakt"
-msgstr "Verarbeite Wiedergabefortschritt der Episoden %i of %i von Trakt"
+msgstr "Verarbeite Wiedergabefortschritt der Episoden %i von %i von Trakt"
 
 msgctxt "#32121"
 msgid "Retrieved episode playback progress from Trakt"
@@ -486,7 +486,7 @@ msgstr "Wiedergabefortschritt der Filme von Trakt empfangen"
 
 msgctxt "#32123"
 msgid "Parsing movie playback progress %i of %i from Trakt"
-msgstr "Verarbeite Wiedergabefortschritt der Filme %i of %i von Trakt"
+msgstr "Verarbeite Wiedergabefortschritt der Filme %i von %i von Trakt"
 
 msgctxt "#32124"
 msgid "Retrieved movie playback progress from Trakt"
