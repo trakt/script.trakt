@@ -83,6 +83,16 @@ def checkExclusion(fullpath):
     if fullpath.startswith(("http://", "https://")) and getSettingAsBool('ExcludeHTTP'):
         logger.debug("checkExclusion(): Video is playing via HTTP source, which is currently set as excluded location.")
         return True
+        
+    # Plugin exclusion
+    if fullpath.startswith("plugin://") and getSettingAsBool('ExcludePlugin'):
+        logger.debug("checkExclusion(): Video is playing via Plugin source, which is currently set as excluded location.")
+        return True
+
+    # Script exclusion
+    if xbmcgui.Window(10000).getProperty('script.trakt.paused') == 'true' and getSettingAsBool('ExcludeScript'):
+        logger.debug("checkExclusion(): Video is playing via Script source, which is currently set as excluded location.")
+        return True
 
     # Path exclusions
     ExcludePath = getSetting('ExcludePath').encode('utf-8') # Encode this as fullpath is already encoded

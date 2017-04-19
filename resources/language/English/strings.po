@@ -725,3 +725,11 @@ msgstr ""
 msgctxt "#32184"
 msgid "Attempt secondary show title search"
 msgstr ""
+
+msgctxt "#32185"
+msgid "Exclude Plugins"
+msgstr ""
+
+msgctxt "#32186"
+msgid "Allow script exclusions"
+msgstr ""

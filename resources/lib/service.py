@@ -659,6 +659,7 @@ class traktPlayer(xbmc.Player):
     # called when kodi stops playing a file
     def onPlayBackEnded(self):
         xbmcgui.Window(10000).clearProperty('script.trakt.ids')
+        xbmcgui.Window(10000).clearProperty('script.trakt.paused')
         if self._playing:
             logger.debug("[traktPlayer] onPlayBackEnded() - %s" % self.isPlayingVideo())
             self._playing = False
@@ -669,6 +670,7 @@ class traktPlayer(xbmc.Player):
     # called when user stops kodi playing a file
     def onPlayBackStopped(self):
         xbmcgui.Window(10000).clearProperty('script.trakt.ids')
+        xbmcgui.Window(10000).clearProperty('script.trakt.paused')
         if self._playing:
             logger.debug("[traktPlayer] onPlayBackStopped() - %s" % self.isPlayingVideo())
             self._playing = False

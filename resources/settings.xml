@@ -13,6 +13,10 @@
 		<setting id="ExcludeLiveTV" type="bool" label="32017" default="false"/>
 		<!-- HTTP exclusion -->
 		<setting id="ExcludeHTTP" type="bool" label="32018" default="false"/>
+		<!-- Plugin exclusion -->
+		<setting id="ExcludePlugin" type="bool" label="32185" default="false"/>
+		<!-- Script exclusion -->
+		<setting id="ExcludeScript" type="bool" label="32186" default="false"/>
 		<!-- Folder exclusions -->
 		<setting id="ExcludePathOption" type="bool" label="32019" default="false" />
 		<setting id="ExcludePath" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
