@@ -2,6 +2,7 @@
 #
 
 import xbmc
+import xbmcgui
 import xbmcaddon
 import re
 import sys
