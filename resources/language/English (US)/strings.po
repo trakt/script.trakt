@@ -643,11 +643,3 @@ msgstr "Trakt - Added to watchlist"
 msgctxt "#32166"
 msgid "Trakt - Failed adding to watchlist"
 msgstr "Trakt - Failed adding to watchlist"
-
-msgctxt "#32185"
-msgid "Exclude Plugins"
-msgstr ""
-
-msgctxt "#32186"
-msgid "Allow Script exclusions"
-msgstr ""
