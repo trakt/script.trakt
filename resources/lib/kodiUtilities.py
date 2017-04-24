@@ -22,6 +22,9 @@ logger = logging.getLogger(__name__)
 
 REGEX_URL = '(^https?://)(.+)'
 
+def getProperty(setting):
+    return xbmcgui.Window(10000).getProperty(setting)
+    
 def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')):
     xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message, time, icon))
 
@@ -91,7 +94,7 @@ def checkExclusion(fullpath):
         return True
 
     # Script exclusion
-    if xbmcgui.Window(10000).getProperty('script.trakt.paused') == 'true' and getSettingAsBool('ExcludeScript'):
+    if getProperty('script.trakt.paused') == 'true' and getSettingAsBool('ExcludeScript'):
         logger.debug("checkExclusion(): Video is playing via Script source, which is currently set as excluded location.")
         return True
 
