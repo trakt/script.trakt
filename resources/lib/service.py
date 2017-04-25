@@ -11,6 +11,7 @@ import xbmcgui
 import json
 import re
 import AddonSignals
+import urllib
 
 from resources.lib.rating import rateMedia
 from resources.lib.scrobbler import Scrobbler
@@ -506,32 +507,57 @@ class traktPlayer(xbmc.Player):
                     #for k,v in result['item'].iteritems():
                     #    logger.debug("[traktPlayer] onPlayBackStarted() - result.item - %s : %s" % (k,v))
 
-                    # As of Kodi v16 with the MythTV PVR addon, the only way I could find to get the TV show and episode
-                    # info is from the Player.Filename infolabel. It shows up like this:
-                    # ShowName [sXXeYY ](year) EpisodeName, channel, PVRFileName
-                    # The season and episode info may or may not be present. For example:
-                    # Elementary s04e10 (2016) Alma Matters, TV (WWMT-HD), 20160129_030000.pvr
-                    # DC's Legends of Tomorrow (2016) Pilot, Part 2, TV (CW W MI), 20160129_010000.pvr
-                    foundLabel = xbmc.getInfoLabel('Player.Filename')
-                    logger.debug("[traktPlayer] onPlayBackStarted() - Found unknown video type with label: %s. Might be a PVR episode, searching Trakt for it." % foundLabel)
-                    splitLabel = foundLabel.rsplit(", ", 2)
-                    logger.debug("[traktPlayer] onPlayBackStarted() - Post-split of label: %s " % splitLabel)
-                    if len(splitLabel) != 3:
-                        logger.debug("[traktPlayer] onPlayBackStarted() - Label doesn't have the ShowName sXXeYY (year) EpisodeName, channel, PVRFileName format that was expected. Giving up.")
-                        return
-                    foundShowAndEpInfo = splitLabel[0]
-                    logger.debug("[traktPlayer] onPlayBackStarted() - show plus episode info: %s" % foundShowAndEpInfo)
-                    splitShowAndEpInfo = re.split(' (s\d\de\d\d)? ?\((\d\d\d\d)\) ',foundShowAndEpInfo, 1)
-                    logger.debug("[traktPlayer] onPlayBackStarted() - Post-split of show plus episode info: %s " % splitShowAndEpInfo)
-                    if len(splitShowAndEpInfo) != 4:
-                        logger.debug("[traktPlayer] onPlayBackStarted() - Show plus episode info doesn't have the ShowName sXXeYY (year) EpisodeName format that was expected. Giving up.")
-                        return
-                    foundShowName = splitShowAndEpInfo[0]
-                    logger.debug("[traktPlayer] onPlayBackStarted() - using show name: %s" % foundShowName)
-                    foundEpisodeName = splitShowAndEpInfo[3]
-                    logger.debug("[traktPlayer] onPlayBackStarted() - using episode name: %s" % foundEpisodeName)
-                    foundEpisodeYear = splitShowAndEpInfo[2]
-                    logger.debug("[traktPlayer] onPlayBackStarted() - using episode year: %s" % foundEpisodeYear)
+                    # As of Kodi v17, many of the VideoPlayer labels are populated by the MythTV PVR addon, though sadly this
+                    # does not include IMDB number. That means we're still stuck using the show title/episode name to look up
+                    # IDs to feed to the scrobbler. Still, much easier than previous versions!
+                    foundShowName = xbmc.getInfoLabel('VideoPlayer.Title')
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Found VideoPlayer.Title: %s" % foundShowName)
+                    foundEpisodeName = xbmc.getInfoLabel('VideoPlayer.EpisodeName')
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Found VideoPlayer.EpisodeName: %s" % foundEpisodeName)
+                    foundEpisodeYear = xbmc.getInfoLabel('VideoPlayer.Year')
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Found VideoPlayer.Year: %s" % foundEpisodeYear)
+                    foundSeason = xbmc.getInfoLabel('VideoPlayer.Season')
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Found VideoPlayer.Season: %s" % foundSeason)
+                    foundEpisode = xbmc.getInfoLabel('VideoPlayer.Episode')
+                    logger.debug("[traktPlayer] onPlayBackStarted() - Found VideoPlayer.Episode: %s" % foundEpisode)
+                    if (foundShowName and foundEpisodeName and foundEpisodeYear):
+                        # If the show/episode/year are populated, we can skip all the mess of trying to extract the info from the 
+                        # Player.Filename infolabel.
+                        logger.debug("[traktPlayer] onPlayBackStarted() - Got info from VideoPlayer labels")
+                    else:
+                        logger.debug("[traktPlayer] onPlayBackStarted() - No love from VideoPlayer labels, trying Player.Filename infolabel")
+                        # If that didn't work, we can fall back on the Player.Filename infolabel. It shows up like this:
+                        # (v16) ShowName [sXXeYY ](year) EpisodeName, channel, PVRFileName
+                        # (v17) ShowName [sXXeYY ](year) EpisodeName, channel, date, PVRFileName
+                        # The season and episode info may or may not be present. Also, sometimes there are some URL encodings
+                        # (i.e. %20 instead of space) so those need removing. For example:
+                        # Powerless s01e08 (2017)%20Green%20Furious, TV%20(WOOD%20TV), 20170414_003000, 1081_1492129800_4e1.pvr
+                        # DC's Legends of Tomorrow (2016) Pilot, Part 2, TV (CW W MI), 20160129_010000, 1081_1492129800_4e1.pvr
+                        foundLabel = urllib.unquote(xbmc.getInfoLabel('Player.Filename'))
+                        logger.debug("[traktPlayer] onPlayBackStarted() - Found unknown video type with label: %s. Might be a PVR episode, searching Trakt for it." % foundLabel)
+                        logger.debug("[traktPlayer] onPlayBackStarted() - After urllib.unquote: %s." % foundLabel)
+                        splitLabel = foundLabel.rsplit(", ", 3)
+                        logger.debug("[traktPlayer] onPlayBackStarted() - Post-split of label: %s " % splitLabel)
+                        if len(splitLabel) != 4:
+                            logger.debug("[traktPlayer] onPlayBackStarted() - Label doesn't have the ShowName sXXeYY (year) EpisodeName, channel, date, PVRFileName format that was expected. Might be the v16 version with no date instead.")
+                            splitLabel = foundLabel.rsplit(", ", 2)
+                            logger.debug("[traktPlayer] onPlayBackStarted() - Post-split of label: %s " % splitLabel)
+                            if len(splitLabel) != 3:
+                                logger.debug("[traktPlayer] onPlayBackStarted() - Label doesn't have the ShowName sXXeYY (year) EpisodeName, channel, PVRFileName format that was expected. Giving up.")
+                                return
+                        foundShowAndEpInfo = splitLabel[0]
+                        logger.debug("[traktPlayer] onPlayBackStarted() - show plus episode info: %s" % foundShowAndEpInfo)
+                        splitShowAndEpInfo = re.split(' (s\d\de\d\d)? ?\((\d\d\d\d)\) ',foundShowAndEpInfo, 1)
+                        logger.debug("[traktPlayer] onPlayBackStarted() - Post-split of show plus episode info: %s " % splitShowAndEpInfo)
+                        if len(splitShowAndEpInfo) != 4:
+                            logger.debug("[traktPlayer] onPlayBackStarted() - Show plus episode info doesn't have the ShowName sXXeYY (year) EpisodeName format that was expected. Giving up.")
+                            return
+                        foundShowName = splitShowAndEpInfo[0]
+                        logger.debug("[traktPlayer] onPlayBackStarted() - using show name: %s" % foundShowName)
+                        foundEpisodeName = splitShowAndEpInfo[3]
+                        logger.debug("[traktPlayer] onPlayBackStarted() - using episode name: %s" % foundEpisodeName)
+                        foundEpisodeYear = splitShowAndEpInfo[2]
+                        logger.debug("[traktPlayer] onPlayBackStarted() - using episode year: %s" % foundEpisodeYear)
                     epYear = None
                     try:
                         epYear = int(foundEpisodeYear)
