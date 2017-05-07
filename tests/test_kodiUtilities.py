@@ -7,6 +7,8 @@ import sys
 
 xbmc_mock = mock.Mock()
 sys.modules['xbmc'] = xbmc_mock
+xbmcgui_mock = mock.Mock()
+sys.modules['xbmcgui'] = xbmcgui_mock
 xbmcaddon_mock = mock.Mock()
 sys.modules['xbmcaddon'] = xbmcaddon_mock
 from resources.lib import kodiUtilities
