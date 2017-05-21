@@ -1,3 +1,9 @@
+version 3.1.11
+  - Allow exclusions of plugins or scripts
+  - Updates for MythTv integration
+  - Allow to unrate an item on Trakt (only via integration)
+  - Added some more tests
+
 version 3.1.10
   - fix scrobling problem when using yatse to start playback
   - internal refactoring
