@@ -38,10 +38,6 @@ class traktAPI(object):
                 'https': proxyURL
             }
 
-        Trakt.configuration.defaults.app(
-            id=999
-        )
-
         # Configure
         Trakt.configuration.defaults.client(
             id=self.__client_id,
