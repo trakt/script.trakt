@@ -84,7 +84,7 @@ def checkExclusion(fullpath):
     if fullpath.startswith(("http://", "https://")) and getSettingAsBool('ExcludeHTTP'):
         logger.debug("checkExclusion(): Video is playing via HTTP source, which is currently set as excluded location.")
         return True
-        
+
     # Plugin exclusion
     if fullpath.startswith("plugin://") and getSettingAsBool('ExcludePlugin'):
         logger.debug("checkExclusion(): Video is playing via Plugin source, which is currently set as excluded location.")
@@ -130,8 +130,16 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
             watched = 0
 
         episode = {'season': data['season'], 'number': data['episode'], 'title': data['label'],
-                   'ids': {'tvdb': data['uniqueid']['unknown'], 'episodeid': data['episodeid']}, 'watched': watched,
+                   'ids': {'episodeid': data['episodeid']}, 'watched': watched,
                    'plays': plays, 'collected': 1}
+        if 'tmdb' in data['uniqueid']:
+            episode['ids']['tmdb'] = data['uniqueid']['tmdb']
+        if 'imdb' in data['uniqueid']:
+            episode['ids']['imdb'] = data['uniqueid']['imdb']
+        if 'tvdb' in data['uniqueid']:
+            episode['ids']['tvdb'] = data['uniqueid']['tvdb']
+        elif 'unknown' in data['uniqueid']:
+            episode['ids']['tvdb'] = utilities.parseIdToTraktIds(data['uniqueid']['unknown'], type)[0]
         if 'lastplayed' in data:
             episode['watched_at'] = utilities.convertDateTimeToUTC(data['lastplayed'])
         if 'dateadded' in data:
