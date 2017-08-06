@@ -1,5 +1,6 @@
 version 3.1.12
   - Improved id matching for krypton+
+
 version 3.1.11
   - Allow exclusions of plugins or scripts
   - Updates for MythTv integration

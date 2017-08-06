@@ -63,8 +63,8 @@
 		<source>https://github.com/trakt/script.trakt</source>
 		<news>- Improved id matching for krypton+</news>
     <assets>
-        <icon>resources/icon.png</icon>
-        <fanart>resources/fanart.jpg</fanart>
+        <icon>icon.png</icon>
+        <fanart>fanart.jpg</fanart>
         <screenshot>resources/image-01.png</screenshot>
         <screenshot>resources/image-02.png</screenshot>
         <screenshot>resources/image-03.png</screenshot>
