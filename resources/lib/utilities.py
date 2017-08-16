@@ -343,18 +343,18 @@ def compareMovies(movies_col1, movies_col2, watched=False, restrict=False, playb
 
 def compareShows(shows_col1, shows_col2, rating=False, restrict=False):
     shows = []
-    logger.debug("shows_col1 %s" % shows_col1)
-    logger.debug("shows_col2 %s" % shows_col2)
+    # logger.debug("shows_col1 %s" % shows_col1)
+    # logger.debug("shows_col2 %s" % shows_col2)
     for show_col1 in shows_col1['shows']:
         if show_col1:
             show_col2 = findMediaObject(show_col1, shows_col2['shows'])
 
             if show_col2:
                 show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year']}
-                if 'tvdb' in show_col1['ids']:
-                    show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
-                if 'imdb' in show_col2 and show_col2['imdb']:
-                    show['ids']['imdb'] = show_col2['imdb']
+                if show_col1['ids']:
+                    show['ids'].update(show_col1['ids'])
+                if show_col2['ids']:
+                    show['ids'].update(show_col2['ids'])
                 if 'tvshowid' in show_col2:
                     show['tvshowid'] = show_col2['tvshowid']
 
@@ -366,8 +366,8 @@ def compareShows(shows_col1, shows_col2, rating=False, restrict=False):
             else:
                 if not restrict:
                     show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year']}
-                    if 'tvdb' in show_col1['ids']:
-                        show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
+                    if show_col1['ids']:
+                        show['ids'].update(show_col1['ids'])
 
                     if rating and 'rating' in show_col1 and show_col1['rating'] != 0:
                         show['rating'] = show_col1['rating']
@@ -382,8 +382,8 @@ def compareShows(shows_col1, shows_col2, rating=False, restrict=False):
 # always return shows_col1 if you have enrich it, but don't return shows_col2
 def compareEpisodes(shows_col1, shows_col2, watched=False, restrict=False, collected=False, playback=False, rating=False):
     shows = []
-    logger.debug("epi shows_col1 %s" % shows_col1)
-    logger.debug("epi shows_col2 %s" % shows_col2)
+    # logger.debug("epi shows_col1 %s" % shows_col1)
+    # logger.debug("epi shows_col2 %s" % shows_col2)
     for show_col1 in shows_col1['shows']:
         if show_col1:
             show_col2 = findMediaObject(show_col1, shows_col2['shows'])
@@ -456,15 +456,15 @@ def compareEpisodes(shows_col1, shows_col2, watched=False, restrict=False, colle
                 if len(season_diff) > 0:
                     # logger.debug("Season_diff")
                     show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
-                    if 'tvdb' in show_col1['ids']:
-                        show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
+                    if show_col1['ids']:
+                        show['ids'].update(show_col1['ids'])
+                    if show_col2['ids']:
+                        show['ids'].update(show_col2['ids'])
                     for seasonKey in season_diff:
                         episodes = []
                         for episodeKey in season_diff[seasonKey]:
                             episodes.append(season_diff[seasonKey][episodeKey])
                         show['seasons'].append({'number': seasonKey, 'episodes': episodes})
-                    if 'imdb' in show_col2 and show_col2['imdb']:
-                        show['ids']['imdb'] = show_col2['imdb']
                     if 'tvshowid' in show_col2:
                         show['tvshowid'] = show_col2['tvshowid']
                     # logger.debug("show %s" % show)
@@ -473,8 +473,8 @@ def compareEpisodes(shows_col1, shows_col2, watched=False, restrict=False, colle
                 if not restrict:
                     if __countEpisodes([show_col1]) > 0:
                         show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
-                        if 'tvdb' in show_col1['ids']:
-                            show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
+                        if show_col1['ids']:
+                            show['ids'].update(show_col1['ids'])
                         for seasonKey in show_col1['seasons']:
                             episodes = []
                             for episodeKey in seasonKey['episodes']:
