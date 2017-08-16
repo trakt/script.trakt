@@ -92,11 +92,8 @@ class SyncEpisodes:
             y = ((i / x) * 8) + 2
             self.sync.UpdateProgress(int(y), line2=kodiUtilities.getString(32097) % (i, x))
 
-            show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'rating': show_col1['rating'],
+            show = {'title': show_col1['title'], 'ids': show_col1['ids'], 'year': show_col1['year'], 'rating': show_col1['rating'],
                     'tvshowid': show_col1['tvshowid'], 'seasons': []}
-
-            if 'ids' in show_col1 and 'tvdb' in show_col1['ids']:
-                show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
 
             data = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show_col1['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid', 'lastplayed', 'file', 'dateadded', 'runtime', 'userrating']}, 'id': 0})
             if not data:
@@ -578,10 +575,10 @@ class SyncEpisodes:
 
                 if show_col2:
                     show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year']}
-                    if 'tvdb' in show_col1['ids']:
-                        show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
-                    if 'imdb' in show_col2 and show_col2['imdb']:
-                        show['ids']['imdb'] = show_col2['imdb']
+                    if show_col1['ids']:
+                        show['ids'].update(show_col1['ids'])
+                    if show_col2['ids']:
+                        show['ids'].update(show_col2['ids'])
                     if 'tvshowid' in show_col2:
                         show['tvshowid'] = show_col2['tvshowid']
 
@@ -593,8 +590,8 @@ class SyncEpisodes:
                 else:
                     if not restrict:
                         show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year']}
-                        if 'tvdb' in show_col1['ids']:
-                            show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
+                        if show_col1['ids']:
+                            show['ids'].update(show_col1['ids'])
 
                         if rating and 'rating' in show_col1 and show_col1['rating'] != 0:
                             show['rating'] = show_col1['rating']
@@ -683,15 +680,15 @@ class SyncEpisodes:
                     if len(season_diff) > 0:
                         # logger.debug("Season_diff")
                         show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
-                        if 'tvdb' in show_col1['ids']:
-                            show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
+                        if show_col1['ids']:
+                            show['ids'].update(show_col1['ids'])
+                        if show_col2['ids']:
+                            show['ids'].update(show_col2['ids'])
                         for seasonKey in season_diff:
                             episodes = []
                             for episodeKey in season_diff[seasonKey]:
                                 episodes.append(season_diff[seasonKey][episodeKey])
                             show['seasons'].append({'number': seasonKey, 'episodes': episodes})
-                        if 'imdb' in show_col2 and show_col2['imdb']:
-                            show['ids']['imdb'] = show_col2['imdb']
                         if 'tvshowid' in show_col2:
                             show['tvshowid'] = show_col2['tvshowid']
                         # logger.debug("show %s" % show)
@@ -700,8 +697,8 @@ class SyncEpisodes:
                     if not restrict:
                         if self.__countEpisodes([show_col1]) > 0:
                             show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
-                            if 'tvdb' in show_col1['ids']:
-                                show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
+                            if show_col1['ids']:
+                                show['ids'].update(show_col1['ids'])
                             for seasonKey in show_col1['seasons']:
                                 episodes = []
                                 for episodeKey in seasonKey['episodes']:
