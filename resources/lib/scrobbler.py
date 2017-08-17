@@ -126,14 +126,14 @@ class Scrobbler():
             elif utilities.isEpisode(self.curVideo['type']):
                 if 'id' in self.curVideo:
                     episodeDetailsKodi = kodiUtilities.getEpisodeDetailsFromKodi(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid', 'file', 'playcount'])
-                    tvdb = episodeDetailsKodi['imdbnumber']
+                    ids = utilities.parseIdToTraktIds(episodeDetailsKodi['imdbnumber'], self.curVideo['type'])[0]
                     title, year = utilities.regex_year(episodeDetailsKodi['showtitle'])
                     if not year:
                         self.traktShowSummary = {'title': episodeDetailsKodi['showtitle'], 'year': episodeDetailsKodi['year']}
                     else:
                         self.traktShowSummary = {'title': title, 'year': year}
-                    if tvdb:
-                        self.traktShowSummary['ids'] = {'tvdb': tvdb}
+                    if ids:
+                        self.traktShowSummary['ids'] = ids
                     self.curVideoInfo = kodiUtilities.kodiRpcToTraktMediaObject('episode', episodeDetailsKodi)
                     if not self.curVideoInfo:  # getEpisodeDetailsFromKodi was empty
                         logger.debug("Episode details from Kodi was empty, ID (%d) seems invalid, aborting further scrobbling of this episode." % self.curVideo['id'])
