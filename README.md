@@ -41,7 +41,7 @@ Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! 
 * Custom skin/keymap actions for toggling watched status, and rating (tagging and listing disabled for now)
 
 ### What can be scrobbled?
-This plugin will scrobble local media and most remote streaming content. Local media should be played in Kodi library mode and you should use [TVDb](http://thetvdb.com/) (for tv shows) and [TMDb](http://themoviedb.org) (for movies) as your scrapers. TV shows are identified using their TVDb ID. Movies are identified using the IMDb ID. This allows Trakt to match the correct show or movie more accurately, regardless of the title.
+This plugin will scrobble local media and most remote streaming content. Local media should be played in Kodi library mode. Trakt will attempt to identify the media through different third party IDs available from the metadata. TV shows are identified by TVDb ID or IMDb ID. Movies are identified by TMDb ID or IMDb ID. This allows Trakt to match the correct show or movie more accurately, regardless of the title. The best supported and recommended configuration is to use [TVDb](http://thetvdb.com/) (for tv shows) and [TMDb](http://themoviedb.org) (for movies) as your scrapers.
 
 Remote streaming content will scrobble assuming the metadata is correctly set in Kodi. Add-ons that stream content need to correctly identify TV episodes and movies with as much metadata as possible for Trakt to know what you're watching.
 
