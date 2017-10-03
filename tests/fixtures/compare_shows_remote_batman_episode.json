@@ -1,0 +1,71 @@
+{
+  "shows": [
+    {
+      "ids": {
+        "imdb": "tt0147746",
+        "slug": "batman-beyond",
+        "tmdb": "513",
+        "trakt": "512",
+        "tvdb": "75417",
+        "tvrage": "2722"
+      },
+      "in_watchlist": 0,
+      "seasons": [
+        {
+          "episodes": [
+            {
+              "collected": 1,
+              "collected_at": "2013-12-27T00:22:28.000-00:00",
+              "ids": {},
+              "in_watchlist": 0,
+              "number": 7,
+              "plays": 0,
+              "watched": 0
+            },
+            {
+              "collected": 1,
+              "collected_at": "2013-12-27T00:25:35.000-00:00",
+              "ids": {},
+              "in_watchlist": 0,
+              "number": 9,
+              "plays": 0,
+              "watched": 0
+            },
+            {
+              "collected": 1,
+              "collected_at": "2013-12-27T00:33:02.000-00:00",
+              "ids": {},
+              "in_watchlist": 0,
+              "number": 10,
+              "plays": 0,
+              "watched": 0
+            },
+            {
+              "collected": 1,
+              "collected_at": "2013-12-27T00:33:33.000-00:00",
+              "ids": {},
+              "in_watchlist": 0,
+              "number": 11,
+              "plays": 0,
+              "watched": 0
+            },
+            {
+              "collected": 1,
+              "collected_at": "2013-12-27T00:33:02.000-00:00",
+              "ids": {},
+              "in_watchlist": 0,
+              "number": 12,
+              "plays": 0,
+              "watched": 0
+            }
+          ],
+          "ids": {},
+          "in_watchlist": 0,
+          "number": 1
+        }
+      ],
+      "title": "Batman Beyond",
+      "year": 1999
+    }
+  ]
+}

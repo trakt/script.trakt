@@ -1,0 +1,36 @@
+{
+  "shows": [
+    {
+      "ids": {
+        "tvdb": "75417"
+      },
+      "seasons": [
+        {
+          "episodes": [
+            {
+              "collected": 1,
+              "collected_at": "2013-12-25 12:14:29+00:00",
+              "ids": {
+                "episodeid": 6,
+                "tvdb": {
+                  "tvdb": "170921"
+                }
+              },
+              "number": 13,
+              "plays": 1,
+              "rating": 0,
+              "runtime": 1500,
+              "season": 1,
+              "title": "1x13. Ascension",
+              "watched": 1,
+              "watched_at": "2015-03-19 23:13:48+00:00"
+            }
+          ],
+          "number": 1
+        }
+      ],
+      "title": "Batman Beyond",
+      "year": 1999
+    }
+  ]
+}

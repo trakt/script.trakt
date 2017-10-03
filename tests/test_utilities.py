@@ -353,3 +353,29 @@ def test_checkIfNewVersion_revision_old():
 
 def test_checkIfNewVersion_old_version_empty():
     assert utilities.checkIfNewVersion('', '1.1.5') == True
+
+def test_compareShows_no_rating():
+    data1 = load_params_from_json('tests/fixtures/compare_shows_local_batman.json')
+    data2 = load_params_from_json('tests/fixtures/compare_shows_remote_batman.json')
+
+    assert utilities.compareShows(data1, data2, rating=True) == {"shows": []}
+
+def test_compareShows_rating_changed():
+    data1 = load_params_from_json('tests/fixtures/compare_shows_local_batman_rating.json')
+    data2 = load_params_from_json('tests/fixtures/compare_shows_remote_batman.json')
+    fixture = load_params_from_json('tests/fixtures/compare_shows_compared_batman.json')
+
+    assert utilities.compareShows(data1, data2, rating=True) == fixture
+
+def test_compareEpisodes_no_matches():
+    data1 = load_params_from_json('tests/fixtures/compare_shows_local_batman.json')
+    data2 = load_params_from_json('tests/fixtures/compare_shows_remote_batman.json')
+
+    assert utilities.compareEpisodes(data1, data2) == {"shows": []}
+
+def test_compareEpisodes_local_episode_added():
+    data1 = load_params_from_json('tests/fixtures/compare_shows_local_batman.json')
+    data2 = load_params_from_json('tests/fixtures/compare_shows_remote_batman_episode.json')
+    fixture = load_params_from_json('tests/fixtures/compare_shows_batman_episode_to_add.json')
+
+    assert utilities.compareEpisodes(data1, data2) == fixture
