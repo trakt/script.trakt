@@ -87,7 +87,7 @@ def __findInList(list, case_sensitive=True, **kwargs):
     return None
 
 
-def findMediaObject(mediaObjectToMatch, listToSearch):
+def findMediaObject(mediaObjectToMatch, listToSearch, matchByTitleAndYear):
     result = None
     if result is None and 'ids' in mediaObjectToMatch and 'imdb' in mediaObjectToMatch['ids'] and unicode(mediaObjectToMatch['ids']['imdb']).startswith("tt"):
         result = __findInList(
@@ -100,15 +100,18 @@ def findMediaObject(mediaObjectToMatch, listToSearch):
     if result is None and 'ids' in mediaObjectToMatch and 'tvdb' in mediaObjectToMatch['ids'] and mediaObjectToMatch['ids']['tvdb']:
         result = __findInList(
             listToSearch, tvdb=mediaObjectToMatch['ids']['tvdb'])
-    # match by title and year it will result in movies with the same title and
-    # year to mismatch - but what should we do instead?
-    if result is None and 'title' in mediaObjectToMatch and 'year' in mediaObjectToMatch:
-        result = __findInList(
-            listToSearch, title=mediaObjectToMatch['title'], year=mediaObjectToMatch['year'])
-    # match only by title, as some items don't have a year on trakt
-    if result is None and 'title' in mediaObjectToMatch:
-        result = __findInList(
-            listToSearch, title=mediaObjectToMatch['title'])
+
+    if(matchByTitleAndYear):
+        # match by title and year it will result in movies with the same title and
+        # year to mismatch - but what should we do instead?
+        if result is None and 'title' in mediaObjectToMatch and 'year' in mediaObjectToMatch:
+            result = __findInList(
+                listToSearch, title=mediaObjectToMatch['title'], year=mediaObjectToMatch['year'])
+        # match only by title, as some items don't have a year on trakt
+        if result is None and 'title' in mediaObjectToMatch:
+            result = __findInList(
+                listToSearch, title=mediaObjectToMatch['title'])
+
     return result
 
 
@@ -300,12 +303,11 @@ def sanitizeShows(shows):
                     del episode['ids']['episodeid']
 
 
-def compareMovies(movies_col1, movies_col2, watched=False, restrict=False, playback=False, rating=False):
+def compareMovies(movies_col1, movies_col2, matchByTitleAndYear, watched=False, restrict=False, playback=False, rating=False):
     movies = []
-
     for movie_col1 in movies_col1:
         if movie_col1:
-            movie_col2 = findMediaObject(movie_col1, movies_col2)
+            movie_col2 = findMediaObject(movie_col1, movies_col2, matchByTitleAndYear)
             # logger.debug("movie_col1 %s" % movie_col1)
             # logger.debug("movie_col2 %s" % movie_col2)
 
@@ -336,18 +338,19 @@ def compareMovies(movies_col1, movies_col2, watched=False, restrict=False, playb
                         elif rating and movie_col1['rating'] != 0:
                             movies.append(movie_col1)
                         elif not watched and not rating:
-
                             movies.append(movie_col1)
     return movies
 
 
-def compareShows(shows_col1, shows_col2, rating=False, restrict=False):
+def compareShows(shows_col1, shows_col2, matchByTitleAndYear, rating=False, restrict=False):
     shows = []
     # logger.debug("shows_col1 %s" % shows_col1)
     # logger.debug("shows_col2 %s" % shows_col2)
     for show_col1 in shows_col1['shows']:
         if show_col1:
-            show_col2 = findMediaObject(show_col1, shows_col2['shows'])
+            show_col2 = findMediaObject(show_col1, shows_col2['shows'], matchByTitleAndYear)
+            # logger.debug("show_col1 %s" % show_col1)
+            # logger.debug("show_col2 %s" % show_col2)
 
             if show_col2:
                 show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year']}
@@ -380,13 +383,16 @@ def compareShows(shows_col1, shows_col2, rating=False, restrict=False):
 
 
 # always return shows_col1 if you have enrich it, but don't return shows_col2
-def compareEpisodes(shows_col1, shows_col2, watched=False, restrict=False, collected=False, playback=False, rating=False):
+def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, restrict=False, collected=False, playback=False, rating=False):
     shows = []
     # logger.debug("epi shows_col1 %s" % shows_col1)
     # logger.debug("epi shows_col2 %s" % shows_col2)
     for show_col1 in shows_col1['shows']:
         if show_col1:
-            show_col2 = findMediaObject(show_col1, shows_col2['shows'])
+            show_col2 = findMediaObject(
+                show_col1, shows_col2['shows'], matchByTitleAndYear)
+            # logger.debug("show_col1 %s" % show_col1)
+            # logger.debug("show_col2 %s" % show_col2)
 
             if show_col2:
                 season_diff = {}
@@ -428,7 +434,8 @@ def compareEpisodes(shows_col1, shows_col2, watched=False, restrict=False, colle
                         elif len(diff) > 0:
                             if restrict:
                                 # get all the episodes that we have in Kodi, watched or not - update kodi
-                                collectedShow = findMediaObject(show_col1, collected['shows'])
+                                collectedShow = findMediaObject(
+                                    show_col1, collected['shows'], matchByTitleAndYear)
                                 # logger.debug("collected %s" % collectedShow)
                                 collectedSeasons = __getEpisodes(collectedShow['seasons'])
                                 t = list(set(collectedSeasons[season]).intersection(set(diff)))

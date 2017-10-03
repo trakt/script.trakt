@@ -124,7 +124,8 @@ class SyncMovies():
             addTraktMovies = copy.deepcopy(traktMovies)
             addKodiMovies = copy.deepcopy(kodiMovies)
 
-            traktMoviesToAdd = utilities.compareMovies(addKodiMovies, addTraktMovies)
+            traktMoviesToAdd = utilities.compareMovies(
+                addKodiMovies, addTraktMovies, kodiUtilities.getSettingAsBool("scrobble_fallback"))
             utilities.sanitizeMovies(traktMoviesToAdd)
             logger.debug("[Movies Sync] Compared movies, found %s to add." % len(traktMoviesToAdd))
 
@@ -156,7 +157,8 @@ class SyncMovies():
             removeKodiMovies = copy.deepcopy(kodiMovies)
 
             logger.debug("[Movies Sync] Starting to remove.")
-            traktMoviesToRemove = utilities.compareMovies(removeTraktMovies, removeKodiMovies)
+            traktMoviesToRemove = utilities.compareMovies(
+                removeTraktMovies, removeKodiMovies, kodiUtilities.getSettingAsBool("scrobble_fallback"))
             utilities.sanitizeMovies(traktMoviesToRemove)
             logger.debug("[Movies Sync] Compared movies, found %s to remove." % len(traktMoviesToRemove))
 
@@ -185,7 +187,7 @@ class SyncMovies():
             updateTraktTraktMovies = copy.deepcopy(traktMovies)
             updateTraktKodiMovies = copy.deepcopy(kodiMovies)
 
-            traktMoviesToUpdate = utilities.compareMovies(updateTraktKodiMovies, updateTraktTraktMovies, watched=True)
+            traktMoviesToUpdate = utilities.compareMovies(updateTraktKodiMovies, updateTraktTraktMovies, kodiUtilities.getSettingAsBool("scrobble_fallback"), watched=True)
             utilities.sanitizeMovies(traktMoviesToUpdate)
 
             if len(traktMoviesToUpdate) == 0:
@@ -229,7 +231,8 @@ class SyncMovies():
             updateKodiTraktMovies = copy.deepcopy(traktMovies)
             updateKodiKodiMovies = copy.deepcopy(kodiMovies)
 
-            kodiMoviesToUpdate = utilities.compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, watched=True, restrict=True)
+            kodiMoviesToUpdate = utilities.compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, kodiUtilities.getSettingAsBool(
+                "scrobble_fallback"), watched=True, restrict=True)
 
             if len(kodiMoviesToUpdate) == 0:
                 self.sync.UpdateProgress(toPercent, line2=kodiUtilities.getString(32088))
@@ -264,7 +267,7 @@ class SyncMovies():
             updateKodiTraktMovies = copy.deepcopy(traktMovies)
             updateKodiKodiMovies = copy.deepcopy(kodiMovies)
 
-            kodiMoviesToUpdate = utilities.compareMovies(updateKodiTraktMovies['movies'], updateKodiKodiMovies, restrict=True, playback=True)
+            kodiMoviesToUpdate = utilities.compareMovies(updateKodiTraktMovies['movies'], updateKodiKodiMovies, kodiUtilities.getSettingAsBool("scrobble_fallback"), restrict=True, playback=True)
             if len(kodiMoviesToUpdate) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=kodiUtilities.getString(32125))
                 logger.debug("[Movies Sync] Kodi movie playbacks are up to date.")
@@ -295,7 +298,7 @@ class SyncMovies():
             updateKodiTraktMovies = copy.deepcopy(traktMovies)
             updateKodiKodiMovies = copy.deepcopy(kodiMovies)
 
-            traktMoviesToUpdate = utilities.compareMovies(updateKodiKodiMovies, updateKodiTraktMovies, rating=True)
+            traktMoviesToUpdate = utilities.compareMovies(updateKodiKodiMovies, updateKodiTraktMovies, kodiUtilities.getSettingAsBool("scrobble_fallback"), rating=True)
             if len(traktMoviesToUpdate) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=kodiUtilities.getString(32179))
                 logger.debug("[Movies Sync] Trakt movie ratings are up to date.")
@@ -308,8 +311,8 @@ class SyncMovies():
 
                 self.sync.traktapi.addRating(moviesRatings)
 
-
-            kodiMoviesToUpdate = utilities.compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, restrict=True, rating=True)
+            kodiMoviesToUpdate = utilities.compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, kodiUtilities.getSettingAsBool(
+                "scrobble_fallback"), restrict=True, rating=True)
             if len(kodiMoviesToUpdate) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=kodiUtilities.getString(32169))
                 logger.debug("[Movies Sync] Kodi movie ratings are up to date.")
