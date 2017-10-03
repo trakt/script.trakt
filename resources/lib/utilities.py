@@ -341,6 +341,186 @@ def compareMovies(movies_col1, movies_col2, watched=False, restrict=False, playb
     return movies
 
 
+def compareShows(shows_col1, shows_col2, rating=False, restrict=False):
+    shows = []
+    logger.debug("shows_col1 %s" % shows_col1)
+    logger.debug("shows_col2 %s" % shows_col2)
+    for show_col1 in shows_col1['shows']:
+        if show_col1:
+            show_col2 = findMediaObject(show_col1, shows_col2['shows'])
+
+            if show_col2:
+                show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year']}
+                if 'tvdb' in show_col1['ids']:
+                    show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
+                if 'imdb' in show_col2 and show_col2['imdb']:
+                    show['ids']['imdb'] = show_col2['imdb']
+                if 'tvshowid' in show_col2:
+                    show['tvshowid'] = show_col2['tvshowid']
+
+                if rating and 'rating' in show_col1 and show_col1['rating'] != 0 and ('rating' not in show_col2 or show_col2['rating'] == 0):
+                    show['rating'] = show_col1['rating']
+                    shows.append(show)
+                elif not rating:
+                    shows.append(show)
+            else:
+                if not restrict:
+                    show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year']}
+                    if 'tvdb' in show_col1['ids']:
+                        show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
+
+                    if rating and 'rating' in show_col1 and show_col1['rating'] != 0:
+                        show['rating'] = show_col1['rating']
+                        shows.append(show)
+                    elif not rating:
+                        shows.append(show)
+
+    result = {'shows': shows}
+    return result
+
+
+# always return shows_col1 if you have enrich it, but don't return shows_col2
+def compareEpisodes(shows_col1, shows_col2, watched=False, restrict=False, collected=False, playback=False, rating=False):
+    shows = []
+    logger.debug("epi shows_col1 %s" % shows_col1)
+    logger.debug("epi shows_col2 %s" % shows_col2)
+    for show_col1 in shows_col1['shows']:
+        if show_col1:
+            show_col2 = findMediaObject(show_col1, shows_col2['shows'])
+
+            if show_col2:
+                season_diff = {}
+                # format the data to be easy to compare Trakt and KODI data
+                season_col1 = __getEpisodes(show_col1['seasons'])
+                season_col2 = __getEpisodes(show_col2['seasons'])
+                for season in season_col1:
+                    a = season_col1[season]
+                    if season in season_col2:
+                        b = season_col2[season]
+                        diff = list(set(a).difference(set(b)))
+                        if playback:
+                            t = list(set(a).intersection(set(b)))
+                            if len(t) > 0:
+                                eps = {}
+                                for ep in t:
+                                    eps[ep] = a[ep]
+                                    if 'episodeid' in season_col2[season][ep]['ids']:
+                                        if 'ids' in eps:
+                                            eps[ep]['ids']['episodeid'] = season_col2[season][ep]['ids']['episodeid']
+                                        else:
+                                            eps[ep]['ids'] = {'episodeid': season_col2[season][ep]['ids']['episodeid']}
+                                    eps[ep]['runtime'] = season_col2[season][ep]['runtime']
+                                season_diff[season] = eps
+                        elif rating:
+                            t = list(set(a).intersection(set(b)))
+                            if len(t) > 0:
+                                eps = {}
+                                for ep in t:
+                                    if 'rating' in a[ep] and a[ep]['rating'] != 0 and season_col2[season][ep]['rating'] == 0:
+                                        eps[ep] = a[ep]
+                                        if 'episodeid' in season_col2[season][ep]['ids']:
+                                            if 'ids' in eps:
+                                                eps[ep]['ids']['episodeid'] = season_col2[season][ep]['ids']['episodeid']
+                                            else:
+                                                eps[ep]['ids'] = {'episodeid': season_col2[season][ep]['ids']['episodeid']}
+                                if len(eps) > 0:
+                                    season_diff[season] = eps
+                        elif len(diff) > 0:
+                            if restrict:
+                                # get all the episodes that we have in Kodi, watched or not - update kodi
+                                collectedShow = findMediaObject(show_col1, collected['shows'])
+                                # logger.debug("collected %s" % collectedShow)
+                                collectedSeasons = __getEpisodes(collectedShow['seasons'])
+                                t = list(set(collectedSeasons[season]).intersection(set(diff)))
+                                if len(t) > 0:
+                                    eps = {}
+                                    for ep in t:
+                                        eps[ep] = a[ep]
+                                        if 'episodeid' in collectedSeasons[season][ep]['ids']:
+                                            if 'ids' in eps:
+                                                eps[ep]['ids']['episodeid'] = collectedSeasons[season][ep]['ids']['episodeid']
+                                            else:
+                                                eps[ep]['ids'] = {'episodeid': collectedSeasons[season][ep]['ids']['episodeid']}
+                                    season_diff[season] = eps
+                            else:
+                                eps = {}
+                                for ep in diff:
+                                    eps[ep] = a[ep]
+                                if len(eps) > 0:
+                                    season_diff[season] = eps
+                    else:
+                        if not restrict and not rating:
+                            if len(a) > 0:
+                                season_diff[season] = a
+                # logger.debug("season_diff %s" % season_diff)
+                if len(season_diff) > 0:
+                    # logger.debug("Season_diff")
+                    show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
+                    if 'tvdb' in show_col1['ids']:
+                        show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
+                    for seasonKey in season_diff:
+                        episodes = []
+                        for episodeKey in season_diff[seasonKey]:
+                            episodes.append(season_diff[seasonKey][episodeKey])
+                        show['seasons'].append({'number': seasonKey, 'episodes': episodes})
+                    if 'imdb' in show_col2 and show_col2['imdb']:
+                        show['ids']['imdb'] = show_col2['imdb']
+                    if 'tvshowid' in show_col2:
+                        show['tvshowid'] = show_col2['tvshowid']
+                    # logger.debug("show %s" % show)
+                    shows.append(show)
+            else:
+                if not restrict:
+                    if __countEpisodes([show_col1]) > 0:
+                        show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
+                        if 'tvdb' in show_col1['ids']:
+                            show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
+                        for seasonKey in show_col1['seasons']:
+                            episodes = []
+                            for episodeKey in seasonKey['episodes']:
+                                if watched and (episodeKey['watched'] == 1):
+                                    episodes.append(episodeKey)
+                                elif rating and episodeKey['rating'] != 0:
+                                    episodes.append(episodeKey)
+                                elif not watched and not rating:
+                                    episodes.append(episodeKey)
+                            if len(episodes) > 0:
+                                show['seasons'].append({'number': seasonKey['number'], 'episodes': episodes})
+
+                        if 'tvshowid' in show_col1:
+                            del(show_col1['tvshowid'])
+                        if __countEpisodes([show]) > 0:
+                            shows.append(show)
+    result = {'shows': shows}
+    return result
+
+
+def __countEpisodes(shows, collection=True):
+    count = 0
+    if 'shows' in shows:
+        shows = shows['shows']
+    for show in shows:
+        for seasonKey in show['seasons']:
+            if seasonKey is not None and 'episodes' in seasonKey:
+                for episodeKey in seasonKey['episodes']:
+                    if episodeKey is not None:
+                        if 'collected' in episodeKey and not episodeKey['collected'] == collection:
+                            continue
+                        if 'number' in episodeKey and episodeKey['number']:
+                            count += 1
+    return count
+
+
+def __getEpisodes(seasons):
+    data = {}
+    for season in seasons:
+        episodes = {}
+        for episode in season['episodes']:
+            episodes[episode['number']] = episode
+        data[season['number']] = episodes
+
+    return data
+
 def checkIfNewVersion(old, new):
     explodedOld = old.split('.')
     explodedNew = new.split('.')

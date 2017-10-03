@@ -1,0 +1,128 @@
+{
+  "shows": [
+    {
+      "ids": {
+        "tvdb": "75417"
+      },
+      "rating": 0,
+      "seasons": [
+        {
+          "episodes": [
+            {
+              "collected": 1,
+              "collected_at": "2013-12-27 00:22:28+00:00",
+              "ids": {
+                "episodeid": 1,
+                "tvdb": {
+                  "tvdb": "170915"
+                }
+              },
+              "number": 7,
+              "plays": 1,
+              "rating": 8,
+              "runtime": 1500,
+              "season": 1,
+              "title": "1x07. Shriek",
+              "watched": 1,
+              "watched_at": "2016-03-01 09:01:18+00:00"
+            },
+            {
+              "collected": 1,
+              "collected_at": "2013-12-27 00:25:35+00:00",
+              "ids": {
+                "episodeid": 2,
+                "tvdb": {
+                  "tvdb": "170917"
+                }
+              },
+              "number": 9,
+              "plays": 1,
+              "rating": 0,
+              "runtime": 1500,
+              "season": 1,
+              "title": "1x09. The Winning Edge",
+              "watched": 1,
+              "watched_at": "2015-03-19 23:13:47+00:00"
+            },
+            {
+              "collected": 1,
+              "collected_at": "2013-12-27 00:33:02+00:00",
+              "ids": {
+                "episodeid": 3,
+                "tvdb": {
+                  "tvdb": "170918"
+                }
+              },
+              "number": 10,
+              "plays": 1,
+              "rating": 0,
+              "runtime": 1500,
+              "season": 1,
+              "title": "1x10. Spellbound",
+              "watched": 1,
+              "watched_at": "2015-03-19 23:13:47+00:00"
+            },
+            {
+              "collected": 1,
+              "collected_at": "2013-12-27 00:33:33+00:00",
+              "ids": {
+                "episodeid": 4,
+                "tvdb": {
+                  "tvdb": "170919"
+                }
+              },
+              "number": 11,
+              "plays": 1,
+              "rating": 0,
+              "runtime": 1500,
+              "season": 1,
+              "title": "1x11. Disappearing Inque",
+              "watched": 1,
+              "watched_at": "2015-03-19 23:13:48+00:00"
+            },
+            {
+              "collected": 1,
+              "collected_at": "2013-12-27 00:33:02+00:00",
+              "ids": {
+                "episodeid": 5,
+                "tvdb": {
+                  "tvdb": "170920"
+                }
+              },
+              "number": 12,
+              "plays": 1,
+              "rating": 0,
+              "runtime": 1500,
+              "season": 1,
+              "title": "1x12. A Touch of Curar",
+              "watched": 1,
+              "watched_at": "2015-03-19 23:13:48+00:00"
+            },
+            {
+              "collected": 1,
+              "collected_at": "2013-12-25 12:14:29+00:00",
+              "ids": {
+                "episodeid": 6,
+                "tvdb": {
+                  "tvdb": "170921"
+                }
+              },
+              "number": 13,
+              "plays": 1,
+              "rating": 0,
+              "runtime": 1500,
+              "season": 1,
+              "title": "1x13. Ascension",
+              "watched": 1,
+              "watched_at": "2015-03-19 23:13:48+00:00"
+            }
+          ],
+          "number": 1
+        }
+      ],
+      "title": "Batman Beyond",
+      "tvshowid": 1,
+      "year": 1999
+    }
+  ]
+}

@@ -63,7 +63,7 @@ class SyncEpisodes:
 
         logger.debug("[Episodes Sync] Shows on Trakt.tv (%d), shows in Kodi (%d)." % (len(traktShowsCollected['shows']), len(kodiShowsCollected['shows'])))
 
-        logger.debug("[Episodes Sync] Episodes on Trakt.tv (%d), episodes in Kodi (%d)." % (self.__countEpisodes(traktShowsCollected), self.__countEpisodes(kodiShowsCollected)))
+        logger.debug("[Episodes Sync] Episodes on Trakt.tv (%d), episodes in Kodi (%d)." % (utilities.countEpisodes(traktShowsCollected), utilities.countEpisodes(kodiShowsCollected)))
         logger.debug("[Episodes Sync] Complete.")
 
     ''' begin code for episode sync '''
@@ -236,7 +236,7 @@ class SyncEpisodes:
             addTraktShows = copy.deepcopy(traktShows)
             addKodiShows = copy.deepcopy(kodiShows)
 
-            tmpTraktShowsAdd = self.__compareEpisodes(addKodiShows, addTraktShows)
+            tmpTraktShowsAdd = utilities.compareEpisodes(addKodiShows, addTraktShows)
             traktShowsAdd = copy.deepcopy(tmpTraktShowsAdd)
             utilities.sanitizeShows(traktShowsAdd)
             # logger.debug("traktShowsAdd %s" % traktShowsAdd)
@@ -245,7 +245,7 @@ class SyncEpisodes:
                 self.sync.UpdateProgress(toPercent, line1=kodiUtilities.getString(32068), line2=kodiUtilities.getString(32104))
                 logger.debug("[Episodes Sync] Trakt.tv episode collection is up to date.")
                 return
-            logger.debug("[Episodes Sync] %i show(s) have episodes (%d) to be added to your Trakt.tv collection." % (len(traktShowsAdd['shows']), self.__countEpisodes(traktShowsAdd)))
+            logger.debug("[Episodes Sync] %i show(s) have episodes (%d) to be added to your Trakt.tv collection." % (len(traktShowsAdd['shows']), utilities.countEpisodes(traktShowsAdd)))
             for show in traktShowsAdd['shows']:
                 logger.debug("[Episodes Sync] Episodes added: %s" % self.__getShowAsString(show, short=True))
 
@@ -274,14 +274,14 @@ class SyncEpisodes:
                     errorcount += 1
 
             logger.debug("[traktAddEpisodes] Finished with %d error(s)" % errorcount)
-            self.sync.UpdateProgress(toPercent, line2=kodiUtilities.getString(32105) % self.__countEpisodes(traktShowsAdd))
+            self.sync.UpdateProgress(toPercent, line2=kodiUtilities.getString(32105) % utilities.countEpisodes(traktShowsAdd))
 
     def __deleteEpisodesFromTraktCollection(self, traktShows, kodiShows, fromPercent, toPercent):
         if kodiUtilities.getSettingAsBool('clean_trakt_episodes') and not self.sync.IsCanceled():
             removeTraktShows = copy.deepcopy(traktShows)
             removeKodiShows = copy.deepcopy(kodiShows)
 
-            traktShowsRemove = self.__compareEpisodes(removeTraktShows, removeKodiShows)
+            traktShowsRemove = utilities.compareEpisodes(removeTraktShows, removeKodiShows)
             utilities.sanitizeShows(traktShowsRemove)
 
             if len(traktShowsRemove['shows']) == 0:
@@ -293,7 +293,7 @@ class SyncEpisodes:
             for show in traktShowsRemove['shows']:
                 logger.debug("[Episodes Sync] Episodes removed: %s" % self.__getShowAsString(show, short=True))
 
-            self.sync.UpdateProgress(fromPercent, line1=kodiUtilities.getString(32077), line2=kodiUtilities.getString(32111) % self.__countEpisodes(traktShowsRemove))
+            self.sync.UpdateProgress(fromPercent, line1=kodiUtilities.getString(32077), line2=kodiUtilities.getString(32111) % utilities.countEpisodes(traktShowsRemove))
 
             logger.debug("[traktRemoveEpisodes] Shows to remove %s" % traktShowsRemove)
             try:
@@ -302,14 +302,14 @@ class SyncEpisodes:
                 message = utilities.createError(ex)
                 logging.fatal(message)
 
-            self.sync.UpdateProgress(toPercent, line2=kodiUtilities.getString(32112) % self.__countEpisodes(traktShowsRemove))
+            self.sync.UpdateProgress(toPercent, line2=kodiUtilities.getString(32112) % utilities.countEpisodes(traktShowsRemove))
 
     def __addEpisodesToTraktWatched(self, kodiShows, traktShows, fromPercent, toPercent):
         if kodiUtilities.getSettingAsBool('trakt_episode_playcount') and not self.sync.IsCanceled():
             updateTraktTraktShows = copy.deepcopy(traktShows)
             updateTraktKodiShows = copy.deepcopy(kodiShows)
 
-            traktShowsUpdate = self.__compareEpisodes(updateTraktKodiShows, updateTraktTraktShows, watched=True)
+            traktShowsUpdate = utilities.compareEpisodes(updateTraktKodiShows, updateTraktTraktShows, watched=True)
             utilities.sanitizeShows(traktShowsUpdate)
             # logger.debug("traktShowsUpdate %s" % traktShowsUpdate)
 
@@ -329,7 +329,7 @@ class SyncEpisodes:
             for show in traktShowsUpdate['shows']:
                 if self.sync.IsCanceled():
                     return
-                epCount = self.__countEpisodes([show])
+                epCount = utilities.countEpisodes([show])
                 title = show['title'].encode('utf-8', 'ignore')
                 i += 1
                 y = ((i / x) * (toPercent-fromPercent)) + fromPercent
@@ -352,7 +352,7 @@ class SyncEpisodes:
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
 
-            kodiShowsUpdate = self.__compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, watched=True, restrict=True, collected=kodiShowsCollected)
+            kodiShowsUpdate = utilities.compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, watched=True, restrict=True, collected=kodiShowsCollected)
 
             if len(kodiShowsUpdate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1=kodiUtilities.getString(32074), line2=kodiUtilities.getString(32107))
@@ -392,7 +392,7 @@ class SyncEpisodes:
         if kodiUtilities.getSettingAsBool('trakt_episode_playback') and traktShows and not self.sync.IsCanceled():
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
-            kodiShowsUpdate = self.__compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, restrict=True, playback=True)
+            kodiShowsUpdate = utilities.compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, restrict=True, playback=True)
 
             if len(kodiShowsUpdate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1=kodiUtilities.getString(1441), line2=kodiUtilities.getString(32129))
@@ -431,7 +431,7 @@ class SyncEpisodes:
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
 
-            traktShowsToUpdate = self.__compareShows(updateKodiKodiShows, updateKodiTraktShows, rating=True)
+            traktShowsToUpdate = utilities.compareShows(updateKodiKodiShows, updateKodiTraktShows, rating=True)
             if len(traktShowsToUpdate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=kodiUtilities.getString(32181))
                 logger.debug("[Episodes Sync] Trakt show ratings are up to date.")
@@ -443,7 +443,7 @@ class SyncEpisodes:
                 self.sync.traktapi.addRating(traktShowsToUpdate)
 
             # needs to be restricted, because we can't add a rating to an episode which is not in our Kodi collection
-            kodiShowsUpdate = self.__compareShows(updateKodiTraktShows, updateKodiKodiShows, rating=True, restrict = True)
+            kodiShowsUpdate = utilities.compareShows(updateKodiTraktShows, updateKodiKodiShows, rating=True, restrict = True)
 
             if len(kodiShowsUpdate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=kodiUtilities.getString(32176))
@@ -480,7 +480,7 @@ class SyncEpisodes:
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
 
-            traktShowsToUpdate = self.__compareEpisodes(updateKodiKodiShows, updateKodiTraktShows, rating=True)
+            traktShowsToUpdate = utilities.compareEpisodes(updateKodiKodiShows, updateKodiTraktShows, rating=True)
             if len(traktShowsToUpdate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=kodiUtilities.getString(32181))
                 logger.debug("[Episodes Sync] Trakt episode ratings are up to date.")
@@ -491,7 +491,7 @@ class SyncEpisodes:
                 self.sync.traktapi.addRating(traktShowsToUpdate)
 
 
-            kodiShowsUpdate = self.__compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, restrict=True, rating=True)
+            kodiShowsUpdate = utilities.compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, restrict=True, rating=True)
             if len(kodiShowsUpdate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=kodiUtilities.getString(32173))
                 logger.debug("[Episodes Sync] Kodi episode ratings are up to date.")
@@ -525,20 +525,6 @@ class SyncEpisodes:
 
                 self.sync.UpdateProgress(toPercent, line2=kodiUtilities.getString(32175) % len(episodes))
 
-    def __countEpisodes(self, shows, collection=True):
-        count = 0
-        if 'shows' in shows:
-            shows = shows['shows']
-        for show in shows:
-            for seasonKey in show['seasons']:
-                if seasonKey is not None and 'episodes' in seasonKey:
-                    for episodeKey in seasonKey['episodes']:
-                        if episodeKey is not None:
-                            if 'collected' in episodeKey and not episodeKey['collected'] == collection:
-                                continue
-                            if 'number' in episodeKey and episodeKey['number']:
-                                count += 1
-        return count
 
     def __getShowAsString(self, show, short=False):
         p = []
@@ -558,165 +544,3 @@ class SyncEpisodes:
         else:
             return "%s [tvdb: No id] - %s" % (show['title'], ", ".join(p))
 
-    def __getEpisodes(self, seasons):
-        data = {}
-        for season in seasons:
-            episodes = {}
-            for episode in season['episodes']:
-                episodes[episode['number']] = episode
-            data[season['number']] = episodes
-
-        return data
-
-    def __compareShows(self, shows_col1, shows_col2, rating=False, restrict=False):
-        shows = []
-        for show_col1 in shows_col1['shows']:
-            if show_col1:
-                show_col2 = utilities.findMediaObject(show_col1, shows_col2['shows'])
-                # logger.debug("show_col1 %s" % show_col1)
-                # logger.debug("show_col2 %s" % show_col2)
-
-                if show_col2:
-                    show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year']}
-                    if 'tvdb' in show_col1['ids']:
-                        show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
-                    if 'imdb' in show_col2 and show_col2['imdb']:
-                        show['ids']['imdb'] = show_col2['imdb']
-                    if 'tvshowid' in show_col2:
-                        show['tvshowid'] = show_col2['tvshowid']
-
-                    if rating and 'rating' in show_col1 and show_col1['rating'] != 0 and ('rating' not in show_col2 or show_col2['rating'] == 0):
-                        show['rating'] = show_col1['rating']
-                        shows.append(show)
-                    elif not rating:
-                        shows.append(show)
-                else:
-                    if not restrict:
-                        show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year']}
-                        if 'tvdb' in show_col1['ids']:
-                            show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
-
-                        if rating and 'rating' in show_col1 and show_col1['rating'] != 0:
-                            show['rating'] = show_col1['rating']
-                            shows.append(show)
-                        elif not rating:
-                            shows.append(show)
-
-        result = {'shows': shows}
-        return result
-
-
-    # always return shows_col1 if you have enrich it, but don't return shows_col2
-    def __compareEpisodes(self, shows_col1, shows_col2, watched=False, restrict=False, collected=False, playback=False, rating=False):
-        shows = []
-        for show_col1 in shows_col1['shows']:
-            if show_col1:
-                show_col2 = utilities.findMediaObject(show_col1, shows_col2['shows'])
-                # logger.debug("show_col1 %s" % show_col1)
-                # logger.debug("show_col2 %s" % show_col2)
-
-                if show_col2:
-                    season_diff = {}
-                    # format the data to be easy to compare Trakt and KODI data
-                    season_col1 = self.__getEpisodes(show_col1['seasons'])
-                    season_col2 = self.__getEpisodes(show_col2['seasons'])
-                    for season in season_col1:
-                        a = season_col1[season]
-                        if season in season_col2:
-                            b = season_col2[season]
-                            diff = list(set(a).difference(set(b)))
-                            if playback:
-                                t = list(set(a).intersection(set(b)))
-                                if len(t) > 0:
-                                    eps = {}
-                                    for ep in t:
-                                        eps[ep] = a[ep]
-                                        if 'episodeid' in season_col2[season][ep]['ids']:
-                                            if 'ids' in eps:
-                                                eps[ep]['ids']['episodeid'] = season_col2[season][ep]['ids']['episodeid']
-                                            else:
-                                                eps[ep]['ids'] = {'episodeid': season_col2[season][ep]['ids']['episodeid']}
-                                        eps[ep]['runtime'] = season_col2[season][ep]['runtime']
-                                    season_diff[season] = eps
-                            elif rating:
-                                t = list(set(a).intersection(set(b)))
-                                if len(t) > 0:
-                                    eps = {}
-                                    for ep in t:
-                                        if 'rating' in a[ep] and a[ep]['rating'] != 0 and season_col2[season][ep]['rating'] == 0:
-                                            eps[ep] = a[ep]
-                                            if 'episodeid' in season_col2[season][ep]['ids']:
-                                                if 'ids' in eps:
-                                                    eps[ep]['ids']['episodeid'] = season_col2[season][ep]['ids']['episodeid']
-                                                else:
-                                                    eps[ep]['ids'] = {'episodeid': season_col2[season][ep]['ids']['episodeid']}
-                                    if len(eps) > 0:
-                                        season_diff[season] = eps
-                            elif len(diff) > 0:
-                                if restrict:
-                                    # get all the episodes that we have in Kodi, watched or not - update kodi
-                                    collectedShow = utilities.findMediaObject(show_col1, collected['shows'])
-                                    # logger.debug("collected %s" % collectedShow)
-                                    collectedSeasons = self.__getEpisodes(collectedShow['seasons'])
-                                    t = list(set(collectedSeasons[season]).intersection(set(diff)))
-                                    if len(t) > 0:
-                                        eps = {}
-                                        for ep in t:
-                                            eps[ep] = a[ep]
-                                            if 'episodeid' in collectedSeasons[season][ep]['ids']:
-                                                if 'ids' in eps:
-                                                    eps[ep]['ids']['episodeid'] = collectedSeasons[season][ep]['ids']['episodeid']
-                                                else:
-                                                    eps[ep]['ids'] = {'episodeid': collectedSeasons[season][ep]['ids']['episodeid']}
-                                        season_diff[season] = eps
-                                else:
-                                    eps = {}
-                                    for ep in diff:
-                                        eps[ep] = a[ep]
-                                    if len(eps) > 0:
-                                        season_diff[season] = eps
-                        else:
-                            if not restrict and not rating:
-                                if len(a) > 0:
-                                    season_diff[season] = a
-                    # logger.debug("season_diff %s" % season_diff)
-                    if len(season_diff) > 0:
-                        # logger.debug("Season_diff")
-                        show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
-                        if 'tvdb' in show_col1['ids']:
-                            show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
-                        for seasonKey in season_diff:
-                            episodes = []
-                            for episodeKey in season_diff[seasonKey]:
-                                episodes.append(season_diff[seasonKey][episodeKey])
-                            show['seasons'].append({'number': seasonKey, 'episodes': episodes})
-                        if 'imdb' in show_col2 and show_col2['imdb']:
-                            show['ids']['imdb'] = show_col2['imdb']
-                        if 'tvshowid' in show_col2:
-                            show['tvshowid'] = show_col2['tvshowid']
-                        # logger.debug("show %s" % show)
-                        shows.append(show)
-                else:
-                    if not restrict:
-                        if self.__countEpisodes([show_col1]) > 0:
-                            show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
-                            if 'tvdb' in show_col1['ids']:
-                                show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
-                            for seasonKey in show_col1['seasons']:
-                                episodes = []
-                                for episodeKey in seasonKey['episodes']:
-                                    if watched and (episodeKey['watched'] == 1):
-                                        episodes.append(episodeKey)
-                                    elif rating and episodeKey['rating'] != 0:
-                                        episodes.append(episodeKey)
-                                    elif not watched and not rating:
-                                        episodes.append(episodeKey)
-                                if len(episodes) > 0:
-                                    show['seasons'].append({'number': seasonKey['number'], 'episodes': episodes})
-
-                            if 'tvshowid' in show_col1:
-                                del(show_col1['tvshowid'])
-                            if self.__countEpisodes([show]) > 0:
-                                shows.append(show)
-        result = {'shows': shows}
-        return result
