@@ -92,11 +92,8 @@ class SyncEpisodes:
             y = ((i / x) * 8) + 2
             self.sync.UpdateProgress(int(y), line2=kodiUtilities.getString(32097) % (i, x))
 
-            show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'rating': show_col1['rating'],
+            show = {'title': show_col1['title'], 'ids': show_col1['ids'], 'year': show_col1['year'], 'rating': show_col1['rating'],
                     'tvshowid': show_col1['tvshowid'], 'seasons': []}
-
-            if 'ids' in show_col1 and 'tvdb' in show_col1['ids']:
-                show['ids'] = {'tvdb': show_col1['ids']['tvdb']}
 
             data = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': show_col1['tvshowid'], 'properties': ['season', 'episode', 'playcount', 'uniqueid', 'lastplayed', 'file', 'dateadded', 'runtime', 'userrating']}, 'id': 0})
             if not data:

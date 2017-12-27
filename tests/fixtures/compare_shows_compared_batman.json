@@ -2,7 +2,12 @@
   "shows": [
     {
       "ids": {
-        "tvdb": "75417"
+        "imdb": "tt0147746",
+        "slug": "batman-beyond",
+        "tmdb": "513",
+        "trakt": "512",
+        "tvdb": "75417",
+        "tvrage": "2722"
       },
       "rating": 8,
       "title": "Batman Beyond",

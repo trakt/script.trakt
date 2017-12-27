@@ -2,7 +2,12 @@
   "shows": [
     {
       "ids": {
-        "tvdb": "75417"
+        "imdb": "tt0147746",
+        "slug": "batman-beyond",
+        "tmdb": "513",
+        "trakt": "512",
+        "tvdb": "75417",
+        "tvrage": "2722"
       },
       "seasons": [
         {
@@ -12,14 +17,13 @@
               "collected_at": "2013-12-25 12:14:29+00:00",
               "ids": {
                 "episodeid": 6,
-                "tvdb": {
-                  "tvdb": "170921"
-                }
+                "imdb": "tt0519397",
+                "tvdb": "170921"
               },
               "number": 13,
               "plays": 1,
               "rating": 0,
-              "runtime": 1500,
+              "runtime": 0,
               "season": 1,
               "title": "1x13. Ascension",
               "watched": 1,

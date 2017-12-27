@@ -13,14 +13,13 @@
               "collected_at": "2013-12-27 00:22:28+00:00",
               "ids": {
                 "episodeid": 1,
-                "tvdb": {
-                  "tvdb": "170915"
-                }
+                "imdb": "tt0519428",
+                "tvdb": "170915"
               },
               "number": 7,
               "plays": 1,
               "rating": 8,
-              "runtime": 1500,
+              "runtime": 1272,
               "season": 1,
               "title": "1x07. Shriek",
               "watched": 1,
@@ -31,14 +30,13 @@
               "collected_at": "2013-12-27 00:25:35+00:00",
               "ids": {
                 "episodeid": 2,
-                "tvdb": {
-                  "tvdb": "170917"
-                }
+                "imdb": "tt0519440",
+                "tvdb": "170917"
               },
               "number": 9,
               "plays": 1,
               "rating": 0,
-              "runtime": 1500,
+              "runtime": 0,
               "season": 1,
               "title": "1x09. The Winning Edge",
               "watched": 1,
@@ -49,14 +47,13 @@
               "collected_at": "2013-12-27 00:33:02+00:00",
               "ids": {
                 "episodeid": 3,
-                "tvdb": {
-                  "tvdb": "170918"
-                }
+                "imdb": "tt0519431",
+                "tvdb": "170918"
               },
               "number": 10,
               "plays": 1,
               "rating": 0,
-              "runtime": 1500,
+              "runtime": 0,
               "season": 1,
               "title": "1x10. Spellbound",
               "watched": 1,
@@ -67,14 +64,13 @@
               "collected_at": "2013-12-27 00:33:33+00:00",
               "ids": {
                 "episodeid": 4,
-                "tvdb": {
-                  "tvdb": "170919"
-                }
+                "imdb": "tt0519405",
+                "tvdb": "170919"
               },
               "number": 11,
               "plays": 1,
               "rating": 0,
-              "runtime": 1500,
+              "runtime": 0,
               "season": 1,
               "title": "1x11. Disappearing Inque",
               "watched": 1,
@@ -85,16 +81,15 @@
               "collected_at": "2013-12-27 00:33:02+00:00",
               "ids": {
                 "episodeid": 5,
-                "tvdb": {
-                  "tvdb": "170920"
-                }
+                "imdb": "tt0519393",
+                "tvdb": "170920"
               },
               "number": 12,
               "plays": 1,
               "rating": 0,
-              "runtime": 1500,
+              "runtime": 0,
               "season": 1,
-              "title": "1x12. A Touch of Curar",
+              "title": "1x12. A Touch of Curaré",
               "watched": 1,
               "watched_at": "2015-03-19 23:13:48+00:00"
             },
@@ -103,14 +98,13 @@
               "collected_at": "2013-12-25 12:14:29+00:00",
               "ids": {
                 "episodeid": 6,
-                "tvdb": {
-                  "tvdb": "170921"
-                }
+                "imdb": "tt0519397",
+                "tvdb": "170921"
               },
               "number": 13,
               "plays": 1,
               "rating": 0,
-              "runtime": 1500,
+              "runtime": 0,
               "season": 1,
               "title": "1x13. Ascension",
               "watched": 1,
