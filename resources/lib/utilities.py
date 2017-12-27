@@ -471,7 +471,7 @@ def compareEpisodes(shows_col1, shows_col2, watched=False, restrict=False, colle
                     shows.append(show)
             else:
                 if not restrict:
-                    if __countEpisodes([show_col1]) > 0:
+                    if countEpisodes([show_col1]) > 0:
                         show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
                         if show_col1['ids']:
                             show['ids'].update(show_col1['ids'])
@@ -489,13 +489,13 @@ def compareEpisodes(shows_col1, shows_col2, watched=False, restrict=False, colle
 
                         if 'tvshowid' in show_col1:
                             del(show_col1['tvshowid'])
-                        if __countEpisodes([show]) > 0:
+                        if countEpisodes([show]) > 0:
                             shows.append(show)
     result = {'shows': shows}
     return result
 
 
-def __countEpisodes(shows, collection=True):
+def countEpisodes(shows, collection=True):
     count = 0
     if 'shows' in shows:
         shows = shows['shows']
