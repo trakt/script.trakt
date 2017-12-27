@@ -1,5 +1,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/5302383dedf74b1fba592ba1d8f966f7)](https://www.codacy.com/app/razzeee/script-trakt)
 [![Build Status](https://travis-ci.org/trakt/script.trakt.svg?branch=master)](https://travis-ci.org/trakt/script.trakt)
+[![Coverage Status](https://coveralls.io/repos/github/trakt/script.trakt/badge.svg)](https://coveralls.io/github/trakt/script.trakt)
 
 Trakt.tv scrobbler and library sync
 ==============================================

@@ -16,7 +16,11 @@ matrix:
 
 # command to install dependencies
 install:
-  - pip install python-dateutil pytest mock
+  - pip install python-dateutil pytest mock python-coveralls pytest-cov
 # command to run tests
-script: py.test -v
+script:
+- py.test --cov coveralls --cov-report term-missing --cov=resources tests/
+
+after_success:
+  - coveralls
 
