@@ -204,12 +204,12 @@ def test_checkExcludePath_Path_Excluded_Special_Chars():
 
 def test_checkExcludePath_Path_NotExcluded():
     assert utilities.checkExcludePath(
-        'C:/excludes/', True, 'C:/notexcluded/video.mkv', 2) == False
+        'C:/excludes/', True, 'C:/notexcluded/video.mkv', 2) is False
 
 
 def test_checkExcludePath_Path_Disabled():
     assert utilities.checkExcludePath(
-        'C:/excludes/', False, 'C:/excludes/video.mkv', 2) == False
+        'C:/excludes/', False, 'C:/excludes/video.mkv', 2) is False
 
 
 def test_sanitizeMovies_collected():

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
-import xbmcaddon
 import logging
+import xbmcaddon
 from resources.lib import kodilogging
 from resources.lib.service import traktService
 from resources.lib.utilities import createError, checkIfNewVersion
