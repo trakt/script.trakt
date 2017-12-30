@@ -3,6 +3,7 @@
 .DS*
 .pylint_rc
 /.idea
+/.coverage
 /.project
 /.pydevproject
 /.settings

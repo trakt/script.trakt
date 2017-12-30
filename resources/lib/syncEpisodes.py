@@ -233,7 +233,8 @@ class SyncEpisodes:
             addTraktShows = copy.deepcopy(traktShows)
             addKodiShows = copy.deepcopy(kodiShows)
 
-            tmpTraktShowsAdd = utilities.compareEpisodes(addKodiShows, addTraktShows)
+            tmpTraktShowsAdd = utilities.compareEpisodes(
+                addKodiShows, addTraktShows, kodiUtilities.getSettingAsBool("scrobble_fallback"))
             traktShowsAdd = copy.deepcopy(tmpTraktShowsAdd)
             utilities.sanitizeShows(traktShowsAdd)
             # logger.debug("traktShowsAdd %s" % traktShowsAdd)
@@ -278,7 +279,8 @@ class SyncEpisodes:
             removeTraktShows = copy.deepcopy(traktShows)
             removeKodiShows = copy.deepcopy(kodiShows)
 
-            traktShowsRemove = utilities.compareEpisodes(removeTraktShows, removeKodiShows)
+            traktShowsRemove = utilities.compareEpisodes(
+                removeTraktShows, removeKodiShows, kodiUtilities.getSettingAsBool("scrobble_fallback"))
             utilities.sanitizeShows(traktShowsRemove)
 
             if len(traktShowsRemove['shows']) == 0:
@@ -306,7 +308,8 @@ class SyncEpisodes:
             updateTraktTraktShows = copy.deepcopy(traktShows)
             updateTraktKodiShows = copy.deepcopy(kodiShows)
 
-            traktShowsUpdate = utilities.compareEpisodes(updateTraktKodiShows, updateTraktTraktShows, watched=True)
+            traktShowsUpdate = utilities.compareEpisodes(
+                updateTraktKodiShows, updateTraktTraktShows, kodiUtilities.getSettingAsBool("scrobble_fallback"), watched=True)
             utilities.sanitizeShows(traktShowsUpdate)
             # logger.debug("traktShowsUpdate %s" % traktShowsUpdate)
 
@@ -349,7 +352,7 @@ class SyncEpisodes:
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
 
-            kodiShowsUpdate = utilities.compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, watched=True, restrict=True, collected=kodiShowsCollected)
+            kodiShowsUpdate = utilities.compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, kodiUtilities.getSettingAsBool("scrobble_fallback"), watched=True, restrict=True, collected=kodiShowsCollected)
 
             if len(kodiShowsUpdate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1=kodiUtilities.getString(32074), line2=kodiUtilities.getString(32107))
@@ -389,7 +392,8 @@ class SyncEpisodes:
         if kodiUtilities.getSettingAsBool('trakt_episode_playback') and traktShows and not self.sync.IsCanceled():
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
-            kodiShowsUpdate = utilities.compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, restrict=True, playback=True)
+            kodiShowsUpdate = utilities.compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, kodiUtilities.getSettingAsBool(
+                "scrobble_fallback"), restrict=True, playback=True)
 
             if len(kodiShowsUpdate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1=kodiUtilities.getString(1441), line2=kodiUtilities.getString(32129))
@@ -428,7 +432,7 @@ class SyncEpisodes:
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
 
-            traktShowsToUpdate = utilities.compareShows(updateKodiKodiShows, updateKodiTraktShows, rating=True)
+            traktShowsToUpdate = utilities.compareShows(updateKodiKodiShows, updateKodiTraktShows, kodiUtilities.getSettingAsBool("scrobble_fallback"), rating=True)
             if len(traktShowsToUpdate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=kodiUtilities.getString(32181))
                 logger.debug("[Episodes Sync] Trakt show ratings are up to date.")
@@ -440,7 +444,7 @@ class SyncEpisodes:
                 self.sync.traktapi.addRating(traktShowsToUpdate)
 
             # needs to be restricted, because we can't add a rating to an episode which is not in our Kodi collection
-            kodiShowsUpdate = utilities.compareShows(updateKodiTraktShows, updateKodiKodiShows, rating=True, restrict = True)
+            kodiShowsUpdate = utilities.compareShows(updateKodiTraktShows, updateKodiKodiShows, kodiUtilities.getSettingAsBool("scrobble_fallback"), rating=True, restrict=True)
 
             if len(kodiShowsUpdate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=kodiUtilities.getString(32176))
@@ -477,7 +481,8 @@ class SyncEpisodes:
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
 
-            traktShowsToUpdate = utilities.compareEpisodes(updateKodiKodiShows, updateKodiTraktShows, rating=True)
+            traktShowsToUpdate = utilities.compareEpisodes(
+                updateKodiKodiShows, updateKodiTraktShows, kodiUtilities.getSettingAsBool("scrobble_fallback"), rating=True)
             if len(traktShowsToUpdate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=kodiUtilities.getString(32181))
                 logger.debug("[Episodes Sync] Trakt episode ratings are up to date.")
@@ -487,8 +492,8 @@ class SyncEpisodes:
                 self.sync.UpdateProgress(fromPercent, line1='', line2=kodiUtilities.getString(32182) % len(traktShowsToUpdate['shows']))
                 self.sync.traktapi.addRating(traktShowsToUpdate)
 
-
-            kodiShowsUpdate = utilities.compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, restrict=True, rating=True)
+            kodiShowsUpdate = utilities.compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, kodiUtilities.getSettingAsBool(
+                "scrobble_fallback"), restrict=True, rating=True)
             if len(kodiShowsUpdate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1='', line2=kodiUtilities.getString(32173))
                 logger.debug("[Episodes Sync] Kodi episode ratings are up to date.")

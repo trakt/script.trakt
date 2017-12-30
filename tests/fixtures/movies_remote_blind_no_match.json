@@ -1,0 +1,20 @@
+[
+  {
+    "collected": 1,
+    "collected_at": "2014-09-06T23:34:07.000-00:00",
+    "ids": {
+      "imdb": "tt2616810",
+      "slug": "blind-2014",
+      "tmdb": "245844",
+      "trakt": "149618"
+    },
+    "in_watchlist": 0,
+    "last_watched_at": "2014-07-05T16:42:12.000-00:00",
+    "plays": 1,
+    "rated_at": "2014-07-20T14:39:17.000-00:00",
+    "rating": 7,
+    "title": "Blind",
+    "watched": 1,
+    "year": 2014
+  }
+]
