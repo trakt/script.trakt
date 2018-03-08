@@ -1,5 +1,8 @@
-version 3.1.13
+version 3.2.0
   - Improved id matching for different metadata providers
+  - Added various refactoring and testing
+  - Improve mathing for movies with the same name
+  - Moved to new language structure
 
 version 3.1.12
   - Improved id matching for krypton+
