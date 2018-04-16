@@ -4,16 +4,12 @@
 import xbmc
 import xbmcgui
 import xbmcaddon
+import json
 import re
 import sys
 import logging
 from resources.lib import utilities
 
-
-if sys.version_info >= (2, 7):
-    import json as json
-else:
-    import simplejson as json
 
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')

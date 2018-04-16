@@ -10,12 +10,7 @@ from trakt.objects import Movie, Show
 from resources.lib.utilities import findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, createError
 from resources.lib.kodiUtilities import getSetting, setSetting, notification, getString, checkAndConfigureProxy, getSettingAsInt
 from sys import version_info
-
-
-if version_info >= (2, 7):
-    from json import loads, dumps
-else:
-    from simplejson import loads, dumps
+from json import loads, dumps
 
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')

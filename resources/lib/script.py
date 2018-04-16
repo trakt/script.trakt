@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from resources.lib import utilities
-from resources.lib import kodiUtilities
 import xbmc
-from resources.lib import sqlitequeue
 import sys
 import logging
+from resources.lib import utilities
+from resources.lib import kodiUtilities
+from resources.lib import sqlitequeue
 from resources.lib.traktContextMenu import traktContextMenu
 
 logger = logging.getLogger(__name__)

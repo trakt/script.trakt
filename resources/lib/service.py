@@ -2,10 +2,6 @@
 import threading
 import logging
 import xbmc
-from resources.lib import globals
-from resources.lib import sqlitequeue
-from resources.lib import utilities
-from resources.lib import kodiUtilities
 import time
 import xbmcgui
 import json
@@ -13,6 +9,10 @@ import re
 import AddonSignals
 import urllib
 
+from resources.lib import globals
+from resources.lib import sqlitequeue
+from resources.lib import utilities
+from resources.lib import kodiUtilities
 from resources.lib.rating import rateMedia
 from resources.lib.scrobbler import Scrobbler
 from resources.lib.sync import Sync
@@ -549,7 +549,7 @@ class traktPlayer(xbmc.Player):
                                 return
                         foundShowAndEpInfo = splitLabel[0]
                         logger.debug("[traktPlayer] onPlayBackStarted() - show plus episode info: %s" % foundShowAndEpInfo)
-                        splitShowAndEpInfo = re.split(' (s\d\de\d\d)? ?\((\d\d\d\d)\) ',foundShowAndEpInfo, 1)
+                        splitShowAndEpInfo = re.split(r' (s\d\de\d\d)? ?\((\d\d\d\d)\) ', foundShowAndEpInfo, 1)
                         logger.debug("[traktPlayer] onPlayBackStarted() - Post-split of show plus episode info: %s " % splitShowAndEpInfo)
                         if len(splitShowAndEpInfo) != 4:
                             logger.debug("[traktPlayer] onPlayBackStarted() - Show plus episode info doesn't have the ShowName sXXeYY (year) EpisodeName format that was expected. Giving up.")
@@ -603,8 +603,8 @@ class traktPlayer(xbmc.Player):
                             data['video_ids'] = showKeys
                             # For some reason, the Trakt search call returns the season and episode as an array in the pk field.
                             # You'd think individual episode and season fields would be better, but whatever.
-                            data['season'] = rightResp.pk[0];
-                            data['episode'] = rightResp.pk[1];
+                            data['season'] = rightResp.pk[0]
+                            data['episode'] = rightResp.pk[1]
                     # At this point if we haven't found the episode data yet, the episode-title-text-search method
                     # didn't work.
                     if (not data['season']):
@@ -631,7 +631,7 @@ class traktPlayer(xbmc.Player):
                                 if not epQueryResp:
                                     # Nothing returned. Giving up.
                                     logger.debug("[traktPlayer] onPlayBackStarted() - No response received")
-                                    break;
+                                    break
                                 else:
                                     # Got the list back. Go through each season.
                                     logger.debug("[traktPlayer] onPlayBackStarted() - Got response with seasons: %s" % str(epQueryResp))
@@ -656,7 +656,7 @@ class traktPlayer(xbmc.Player):
                                                 break
                                         # If we already found our data, no need to go through the rest of the seasons.
                                         if (data['season']):
-                                            break;
+                                            break
                     # Now we've done all we can.
                     if (data['season']):
                         # OK, that's everything. Data should be all set for scrobbling.
@@ -664,7 +664,7 @@ class traktPlayer(xbmc.Player):
                     else:
                         # Still no data? Too bad, have to give up.
                         logger.debug("[traktPlayer] onPlayBackStarted() - Did our best, but couldn't get info for this show and episode. Skipping.")
-                        return;
+                        return
                 else:
                     logger.debug("[traktPlayer] onPlayBackStarted() - Video type '%s' unrecognized, skipping." % self.type)
                     return
