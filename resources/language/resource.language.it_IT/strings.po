@@ -36,10 +36,6 @@ msgctxt "#32006"
 msgid "Rate TV show Episode after watching"
 msgstr "Valuta gli episodi delle serie TV dopo la visione"
 
-msgctxt "#32007"
-msgid "Rate each playlist item"
-msgstr "Valuta ogni elemento della playlist"
-
 msgctxt "#32008"
 msgid "Minimum percent watched to display rating dialog"
 msgstr "Percentuale minima per visualizzare la votazione"
