@@ -382,7 +382,7 @@ class traktPlayer(xbmc.Player):
             waitFor = 10
             waitedFor = 0
             # check each 10 seconds if we can abort or proceed
-            while not xbmc.abortRequested and scrobbleStartOffset > waitedFor:
+            while scrobbleStartOffset > waitedFor:
                 waitedFor += waitFor
                 time.sleep(waitFor)
                 if not self.isPlayingVideo():

@@ -77,9 +77,6 @@ class Sync():
         if self.show_progress and not self.run_silent and progress.iscanceled():
             logger.debug("Sync was canceled by user.")
             return True
-        elif xbmc.abortRequested:
-            logger.debug('Kodi abort requested')
-            return True
         else:
             return False
 
