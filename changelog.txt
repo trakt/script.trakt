@@ -1,3 +1,6 @@
+version 3.2.1
+  - Use correct hook into kodi 18
+
 version 3.2.0
   - Improved id matching for different metadata providers
   - Added various refactoring and testing
