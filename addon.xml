@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.trakt" name="Trakt" version="3.2.0" provider-name="Trakt.tv, Razzeee">
+<addon id="script.trakt" name="Trakt" version="3.2.1" provider-name="Trakt.tv, Razzeee">
 	<requires>
         <import addon="xbmc.python" version="2.24.0"/>
         <import addon="script.module.trakt" version="2.12.0"/>
@@ -60,10 +60,7 @@
 		<website>http://trakt.tv</website>
 		<email></email>
 		<source>https://github.com/trakt/script.trakt</source>
-		<news>  - Improved id matching for different metadata providers
-  - Added various refactoring and testing
-  - Improve mathing for movies with the same name
-  - Moved to new language structure</news>
+		<news>  - Use correct hook into kodi 18</news>
     <assets>
         <icon>icon.png</icon>
         <fanart>fanart.jpg</fanart>
