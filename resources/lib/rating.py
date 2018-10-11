@@ -13,21 +13,18 @@ logger = logging.getLogger(__name__)
 
 __addon__ = xbmcaddon.Addon("script.trakt")
 
-def ratingCheck(media_type, summary_info, watched_time, total_time, playlist_length):
+def ratingCheck(media_type, items_to_rate, watched_time, total_time):
     """Check if a video should be rated and if so launches the rating dialog"""
     logger.debug("Rating Check called for '%s'" % media_type)
     if not kodiUtilities.getSettingAsBool("rate_%s" % media_type):
         logger.debug("'%s' is configured to not be rated." % media_type)
         return
-    if summary_info is None:
+    if items_to_rate is None:
         logger.debug("Summary information is empty, aborting.")
         return
     watched = (watched_time / total_time) * 100
     if watched >= kodiUtilities.getSettingAsFloat("rate_min_view_time"):
-        if (playlist_length <= 1) or kodiUtilities.getSettingAsBool("rate_each_playlist_item"):
-            rateMedia(media_type, summary_info)
-        else:
-            logger.debug("Rate each playlist item is disabled.")
+        rateMedia(media_type, items_to_rate)
     else:
         logger.debug("'%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (media_type, watched, kodiUtilities.getSettingAsFloat("rate_min_view_time")))
 
@@ -88,17 +85,15 @@ def rateMedia(media_type, itemsToRate, unrate=False, rating=None):
         gui = RatingDialog(
             "script-trakt-RatingDialog.xml",
             __addon__.getAddonInfo('path'),
-            media_type=media_type,
-            media=summary_info,
-            rerate=rerate
+            media_type,
+            summary_info,
+            rerate
         )
 
         gui.doModal()
         if gui.rating:
             rating = gui.rating
             if rerate:
-                rating = gui.rating
-
                 if summary_info['user']['ratings'] and summary_info['user']['ratings']['rating'] > 0 and rating == summary_info['user']['ratings']['rating']:
                     rating = 0
 
@@ -183,7 +178,7 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
         11039: 32027
     }
 
-    def __init__(self, xmlFile, resourcePath, forceFallback=False, media_type=None, media=None, rerate=False):
+    def __init__(self, xmlFile, resourcePath, media_type, media, rerate):
         self.media_type = media_type
         self.media = media
         self.rating = None

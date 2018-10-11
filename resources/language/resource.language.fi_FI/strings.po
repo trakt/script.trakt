@@ -36,10 +36,6 @@ msgctxt "#32006"
 msgid "Rate TV show Episode after watching"
 msgstr "Arvostele tv-sarjan jakso katsomisen jälkeen"
 
-msgctxt "#32007"
-msgid "Rate each playlist item"
-msgstr "Arvostele soittolistan jokainen kohde"
-
 msgctxt "#32008"
 msgid "Minimum percent watched to display rating dialog"
 msgstr "Minimi prosenttimäärä katsottuna, jolloin arvostelu-ikkuna näytetään"

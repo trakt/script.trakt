@@ -23,7 +23,6 @@ class Scrobbler():
     pausedAt = 0
     curVideo = None
     curVideoInfo = None
-    playlistLength = 1
     playlistIndex = 0
     traktShowSummary = None
     videosToRate = []
@@ -105,11 +104,7 @@ class Scrobbler():
                 else:
                     self.videoDuration = 1
 
-            self.playlistLength = len(xbmc.PlayList(xbmc.PLAYLIST_VIDEO))
             self.playlistIndex = xbmc.PlayList(xbmc.PLAYLIST_VIDEO).getposition()
-            if self.playlistLength == 0:
-                logger.debug("Warning: Cant find playlist length, assuming that this item is by itself")
-                self.playlistLength = 1
 
             self.isMultiPartEpisode = False
             if utilities.isMovie(self.curVideo['type']):
@@ -246,13 +241,12 @@ class Scrobbler():
         if self.watchedTime != 0:
             if 'type' in self.curVideo:
                 self.__scrobble('stop')
-                ratingCheck(self.curVideo['type'], self.videosToRate, self.watchedTime, self.videoDuration, self.playlistLength)
+                ratingCheck(self.curVideo['type'], self.videosToRate, self.watchedTime, self.videoDuration)
             self.watchedTime = 0
             self.isMultiPartEpisode = False
         self.videosToRate = []
         self.curVideoInfo = None
         self.curVideo = None
-        self.playlistLength = 0
         self.playlistIndex = 0
 
     def __calculateWatchedPercent(self):

@@ -78,7 +78,6 @@
 	<category label="32004"><!-- Rating -->
 		<setting id="rate_movie" type="bool" label="32005" default="true"/>
 		<setting id="rate_episode" type="bool" label="32006" default="true"/>
-		<setting id="rate_each_playlist_item" type="bool" label="32007" default="true"/>
 		<setting id="rate_min_view_time" type="slider" label="32008" range="0,5,100" default="75"/>
 		<setting id="rate_rerate" type="bool" label="32009" default="false"/>
 		<setting id="rating_default" type="slider" label="32010" range="1,10" default="6" option="int"/>

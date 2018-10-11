@@ -36,10 +36,6 @@ msgctxt "#32006"
 msgid "Rate TV show Episode after watching"
 msgstr "דרג פרק סדרה לאחר צפייה"
 
-msgctxt "#32007"
-msgid "Rate each playlist item"
-msgstr "דרג כל פריט רשימת נגינה"
-
 msgctxt "#32008"
 msgid "Minimum percent watched to display rating dialog"
 msgstr "מינימום אחוזי צפייה כדי להציג מסך דירוג"
