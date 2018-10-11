@@ -17,7 +17,7 @@ install:
 # command to run tests
 script:
 - py.test --cov coveralls --cov-report term-missing --cov=resources tests/
-- kodi-addon-checker .
+- kodi-addon-checker --branch=leia . 
 
 after_success:
   - coveralls
