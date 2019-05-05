@@ -78,6 +78,32 @@ Please note that *something* does not cover all Kodi possible streaming sources.
 #### Creating logfiles
 * To create a logfile, enable the debug setting in Kodi AND script.trakt, otherwise the logfile won't show any data from script.trakt. Check the [Kodi documentation] (http://kodi.wiki/view/Log_file) if you don't know where your logfile can be found.
 
+#### Invoke sync via jsonrpc
+
+Save this as `kodi-trakt-update.sh`
+```
+#!/bin/sh
+
+# url to kodi jsonrpc
+url=http://localhost:8080/jsonrpc
+
+# https://github.com/trakt/script.trakt/issues/192#issuecomment-70359374
+request='{
+        "jsonrpc":"2.0",
+        "method":"Addons.ExecuteAddon",
+        "params":{
+                "addonid":"script.trakt",
+                "params":{
+                        "action":"sync",
+                        "silent":"False"
+                }
+        },
+        "id":1
+}'
+
+exec curl -sSLf --include --header 'content-type: application/json;' --request POST --data-binary "$request" "$url"
+```
+
 ### Contribute
 
 #### Pull requests
