@@ -13,6 +13,7 @@ Trakt.tv scrobbler and library sync
 * [Problems?](#problems)
   * ["I found something that doesn't work"](#i-found-something-that-doesnt-work)
   * [Creating logfiles](#creating-logfiles)
+  * [Invoke sync via JSON-RPC](#invoke-sync-via-jsonrpc)
 * [Contribute](#contribute)
   * [Pull requests](#pull-requests)
   * [Translations](#translations)
