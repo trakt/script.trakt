@@ -13,6 +13,7 @@ Trakt.tv scrobbler and library sync
 * [Problems?](#problems)
   * ["I found something that doesn't work"](#i-found-something-that-doesnt-work)
   * [Creating logfiles](#creating-logfiles)
+  * [Invoke sync via JSON-RPC](#invoke-sync-via-jsonrpc)
 * [Contribute](#contribute)
   * [Pull requests](#pull-requests)
   * [Translations](#translations)
@@ -71,12 +72,42 @@ or
 Please note that *something* does not cover all Kodi possible streaming sources. Local files and strm files scrapped to your library should be OK, however generic third party streaming addons can fail. It is up to the developers of these addons to be supported by this plugin. Please take a look https://github.com/trakt/script.trakt/wiki/Providing-id's-to-facilitate-scrobbling
 
 ### Problems?
+
 #### "I found something that doesn't work"
+
 * Search the issues on github to see if it has already been reported, if so add your information there.
 * If not, create a new issue and provide as much data about your system as possible, a logfile will also be needed.
 
 #### Creating logfiles
-* To create a logfile, enable the debug setting in Kodi AND script.trakt, otherwise the logfile won't show any data from script.trakt. Check the [Kodi documentation] (http://kodi.wiki/view/Log_file) if you don't know where your logfile can be found.
+
+* To create a logfile, enable the debug setting in Kodi AND script.trakt, otherwise the logfile won't show any data from script.trakt. Check the [Kodi documentation](http://kodi.wiki/view/Log_file) if you don't know where your logfile can be found.
+
+#### Invoke sync via jsonrpc
+
+Save this as `kodi-trakt-update.sh`
+
+```bash
+#!/bin/sh
+
+# url to kodi jsonrpc
+url=http://localhost:8080/jsonrpc
+
+# https://github.com/trakt/script.trakt/issues/192#issuecomment-70359374
+request='{
+        "jsonrpc":"2.0",
+        "method":"Addons.ExecuteAddon",
+        "params":{
+                "addonid":"script.trakt",
+                "params":{
+                        "action":"sync",
+                        "silent":"False"
+                }
+        },
+        "id":1
+}'
+
+exec curl -sSLf --include --header 'content-type: application/json;' --request POST --data-binary "$request" "$url"
+```
 
 ### Contribute
 
@@ -84,8 +115,8 @@ Please note that *something* does not cover all Kodi possible streaming sources.
 * Please don't add pull requests for translation updates these have to go work their way through the translation workflow (see [Translations](#translations))
 
 #### Translations
-* Translations are done via the Transifex project of Kodi. If you want to support translation efforts, read [this] (http://kodi.wiki/view/Translation_System) and look for script-trakt under the XBMC Addons project in Transifex.
+* Translations are done via the Transifex project of Kodi. If you want to support translation efforts, read [this](http://kodi.wiki/view/Translation_System) and look for script-trakt under the XBMC Addons project in Transifex.
 
 ### Thanks
 * Special thanks to all who contribute to this plugin! Check the commit history and changelog to see these talented developers.
-* Special thanks to fuzeman for [trakt.py] (https://github.com/fuzeman/trakt.py).
+* Special thanks to fuzeman for [trakt.py](https://github.com/fuzeman/trakt.py).
