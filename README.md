@@ -86,7 +86,7 @@ Please note that *something* does not cover all Kodi possible streaming sources.
 
 Save this as `kodi-trakt-update.sh`
 
-```
+```bash
 #!/bin/sh
 
 # url to kodi jsonrpc
