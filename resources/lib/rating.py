@@ -185,6 +185,9 @@ class RatingDialog(xbmcgui.WindowXMLDialog):
         self.rerate = rerate
         self.default_rating = kodiUtilities.getSettingAsInt('rating_default')
 
+    def __new__(cls, xmlFile, resourcePath, media_type, media, rerate):
+        return super(RatingDialog, cls).__new__(cls, xmlFile, resourcePath)
+
     def onInit(self):
         s = utilities.getFormattedItemName(self.media_type, self.media)
         self.getControl(10012).setLabel(s)

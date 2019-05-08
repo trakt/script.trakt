@@ -6,7 +6,6 @@ import time
 import xbmcgui
 import json
 import re
-import AddonSignals
 import urllib
 
 from resources.lib import globals
@@ -106,8 +105,6 @@ class traktService:
 
         # init scrobbler class
         self.scrobbler = Scrobbler(globals.traktapi)
-
-        AddonSignals.registerSlot('service.nextup.notification', 'NEXTUPWATCHEDSIGNAL', self.callback)
 
         # start loop for events
         while not self.Monitor.abortRequested():
@@ -315,10 +312,6 @@ class traktService:
         self.syncThread = syncThread(manual, silent, library)
         self.syncThread.start()
 
-    def callback(self, data):
-        logger.debug('Callback received - Nextup skipped to the next episode')
-        self.scrobbler.playbackEnded()
-
 class syncThread(threading.Thread):
 
     _isManual = False
@@ -341,6 +334,14 @@ class traktMonitor(xbmc.Monitor):
         # xbmc.getCondVisibility('Library.IsScanningVideo') returns false when cleaning during update...
         self.scanning_video = False
         logger.debug("[traktMonitor] Initalized.")
+
+    def onNotification(self, sender, method, data):
+        if method.split('.')[1].upper() != 'NEXTUPWATCHEDSIGNAL': # method looks like Other.NEXTUPWATCHEDSIGNAL
+            return
+
+        logger.debug('Callback received - Upnext skipped to the next episode')
+        data = {'action': 'ended'}
+        self.action(data)
 
     # called when database gets updated and return video or music to indicate which DB has been changed
     def onScanFinished(self, database):
