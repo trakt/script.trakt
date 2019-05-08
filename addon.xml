@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.trakt" name="Trakt" version="3.2.1" provider-name="Trakt.tv, Razzeee">
+<addon id="script.trakt" name="Trakt" version="3.2.2" provider-name="Trakt.tv, Razzeee">
 	<requires>
         <import addon="xbmc.python" version="2.24.0"/>
         <import addon="script.module.trakt" version="2.12.0"/>
         <import addon="script.module.dateutil" version="2.4.2"/>
-        <import addon="script.module.addon.signals" version="0.0.1"/>
 	</requires>
 	<extension point="xbmc.python.script" library="defaultscript.py">
 		<provides>executable</provides>
@@ -60,7 +59,7 @@
 		<website>http://trakt.tv</website>
 		<email></email>
 		<source>https://github.com/trakt/script.trakt</source>
-		<news>  - Use correct hook into kodi 18</news>
+		<news>  - Fix communication with nextup addon</news>
     <assets>
         <icon>icon.png</icon>
         <fanart>fanart.jpg</fanart>
