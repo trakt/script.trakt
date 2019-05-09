@@ -8,7 +8,7 @@
 	<extension point="xbmc.python.script" library="defaultscript.py">
 		<provides>executable</provides>
 	</extension>
-	<extension point="xbmc.service" name="trakt.service" library="default.py" start="login" />
+	<extension point="xbmc.service" name="trakt.service" library="default.py" />
 	<extension point="xbmc.addon.metadata" name="trakt.metadata">
 		<summary lang="da_DK">TV og film program for Trakt.tv</summary>
 		<summary lang="de_DE">TV und Film Scrobbler für Trakt.tv</summary>
