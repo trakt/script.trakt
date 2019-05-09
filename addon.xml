@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="script.trakt" name="Trakt" version="3.2.2" provider-name="Trakt.tv, Razzeee">
 	<requires>
-        <import addon="xbmc.python" version="2.24.0"/>
+        <import addon="xbmc.python" version="2.26.0"/>
         <import addon="script.module.trakt" version="2.12.0"/>
         <import addon="script.module.dateutil" version="2.4.2"/>
 	</requires>
@@ -55,8 +55,8 @@
 		<language></language>
 		<platform>all</platform>
 		<license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-		<forum>http://forum.kodi.tv/showthread.php?tid=220547</forum>
-		<website>http://trakt.tv</website>
+		<forum>https://forum.kodi.tv/showthread.php?tid=220547</forum>
+		<website>https://trakt.tv</website>
 		<email></email>
 		<source>https://github.com/trakt/script.trakt</source>
 		<news>  - Fix communication with nextup addon</news>

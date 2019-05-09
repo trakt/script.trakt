@@ -16,13 +16,13 @@ msgstr ""
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#General Settings
+# General Settings
 
 msgctxt "#32000"
 msgid "General"
 msgstr ""
 
-#empty strings from id 32001 to 32002
+# empty strings from id 32001 to 32002
 
 msgctxt "#32003"
 msgid "Startup Delay"
@@ -52,7 +52,7 @@ msgctxt "#32010"
 msgid "Default rating"
 msgstr ""
 
-#Scrobbling Settings
+# Scrobbling Settings
 
 msgctxt "#32011"
 msgid "Scrobbling"
@@ -94,7 +94,7 @@ msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
 msgstr ""
 
-#empty strings from id 32021 to 32022
+# empty strings from id 32021 to 32022
 
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
@@ -104,7 +104,7 @@ msgctxt "#32024"
 msgid "Error"
 msgstr ""
 
-#empty string with id 32025
+# empty string with id 32025
 
 msgctxt "#32026"
 msgid "What Did You Think?"
@@ -238,7 +238,7 @@ msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
 msgstr ""
 
-#empty string with id 32059
+# empty string with id 32059
 
 msgctxt "#32060"
 msgid "Hide notifications during playback"
@@ -580,13 +580,13 @@ msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
 msgstr ""
 
-#empty strings from id 32145 to 32146
+# empty strings from id 32145 to 32146
 
 msgctxt "#32147"
 msgid "Trakt.tv PIN Authorization Failed"
 msgstr ""
 
-#empty string with id 32148
+# empty string with id 32148
 
 msgctxt "#32149"
 msgid "Rate this Season"
@@ -624,7 +624,7 @@ msgctxt "#32157"
 msgid "Account Authorization"
 msgstr ""
 
-#empty string with id 32158
+# empty string with id 32158
 
 msgctxt "#32159"
 msgid "Visit {0} or scan the QR code."
