@@ -151,11 +151,11 @@ def regex_year(title):
 
 
 def findMovieMatchInList(id, list, idType):
-    return next((item.to_dict() for key, item in list.items() if any(idType in key for key, value in item.keys if str(value) == str(id))), {})
+    return next((item.to_dict() for key, item in list(list.items()) if any(idType in key for key, value in item.keys if str(value) == str(id))), {})
 
 
 def findShowMatchInList(id, list, idType):
-    return next((item.to_dict() for key, item in list.items() if any(idType in key for key, value in item.keys if str(value) == str(id))), {})
+    return next((item.to_dict() for key, item in list(list.items()) if any(idType in key for key, value in item.keys if str(value) == str(id))), {})
 
 
 def findSeasonMatchInList(id, seasonNumber, list, idType):

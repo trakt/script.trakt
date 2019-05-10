@@ -299,7 +299,7 @@ class traktAPI(object):
             with Trakt.configuration.http(retry=True):
                 playback = Trakt['sync/playback'].movies(exceptions=True)
 
-                for _, item in playback.items():
+                for _, item in list(playback.items()):
                     if type(item) is Movie:
                         progressMovies.append(item)
 
@@ -313,7 +313,7 @@ class traktAPI(object):
             with Trakt.configuration.http(retry=True):
                 playback = Trakt['sync/playback'].episodes(exceptions=True)
 
-                for _, item in playback.items():
+                for _, item in list(playback.items()):
                     if type(item) is Show:
                         progressEpisodes.append(item)
 
