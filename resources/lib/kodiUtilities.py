@@ -99,7 +99,7 @@ def checkExclusion(fullpath):
             return True
 
     found = False
-    for x in xrange(2,13):
+    for x in range(2,13):
         found |= utilities.checkExcludePath(getSetting('ExcludePath%i' % x).encode('utf-8'), getSettingAsBool('ExcludePathOption%i' % x), fullpath, x)
 
     return found
