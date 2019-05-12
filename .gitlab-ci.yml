@@ -1,6 +1,6 @@
 test:
   script:
     - apt-get update -qy
-    - apt-get install -y python-dev python-pip
+    - apt-get install -y python2 python2-pip
     - pip install python-dateutil pytest mock python-coveralls pytest-cov coverage
     - py.test -v
