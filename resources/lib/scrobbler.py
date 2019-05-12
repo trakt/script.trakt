@@ -109,7 +109,7 @@ class Scrobbler():
             self.isMultiPartEpisode = False
             if utilities.isMovie(self.curVideo['type']):
                 if 'id' in self.curVideo:
-                    self.curVideoInfo = kodiUtilities.kodiRpcToTraktMediaObject('movie', kodiUtilities.getMovieDetailsFromKodi(self.curVideo['id'], ['imdbnumber', 'title', 'year', 'file', 'lastplayed', 'playcount']))
+                    self.curVideoInfo = kodiUtilities.kodiRpcToTraktMediaObject('movie', kodiUtilities.getMovieDetailsFromKodi(self.curVideo['id'], ['uniqueid', 'title', 'year', 'file', 'lastplayed', 'playcount']))
                 elif 'video_ids' in self.curVideo:
                     self.curVideoInfo = {'ids': self.curVideo['video_ids']}
                 elif 'title' in self.curVideo and 'year' in self.curVideo:
@@ -121,14 +121,13 @@ class Scrobbler():
             elif utilities.isEpisode(self.curVideo['type']):
                 if 'id' in self.curVideo:
                     episodeDetailsKodi = kodiUtilities.getEpisodeDetailsFromKodi(self.curVideo['id'], ['showtitle', 'season', 'episode', 'tvshowid', 'uniqueid', 'file', 'playcount'])
-                    ids = utilities.parseIdToTraktIds(episodeDetailsKodi['imdbnumber'], self.curVideo['type'])[0]
                     title, year = utilities.regex_year(episodeDetailsKodi['showtitle'])
                     if not year:
                         self.traktShowSummary = {'title': episodeDetailsKodi['showtitle'], 'year': episodeDetailsKodi['year']}
                     else:
                         self.traktShowSummary = {'title': title, 'year': year}
-                    if ids:
-                        self.traktShowSummary['ids'] = ids
+                    if 'show_ids' in episodeDetailsKodi:
+                        self.traktShowSummary['ids'] = episodeDetailsKodi['show_ids']
                     self.curVideoInfo = kodiUtilities.kodiRpcToTraktMediaObject('episode', episodeDetailsKodi)
                     if not self.curVideoInfo:  # getEpisodeDetailsFromKodi was empty
                         logger.debug("Episode details from Kodi was empty, ID (%d) seems invalid, aborting further scrobbling of this episode." % self.curVideo['id'])

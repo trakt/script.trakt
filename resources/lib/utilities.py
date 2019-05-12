@@ -150,16 +150,16 @@ def regex_year(title):
         return "", ""
 
 
-def findMovieMatchInList(id, list, idType):
-    return next((item.to_dict() for key, item in list(list.items()) if any(idType in key for key, value in item.keys if str(value) == str(id))), {})
+def findMovieMatchInList(id, listToMatch, idType):
+    return next((item.to_dict() for key, item in list(listToMatch.items()) if any(idType in key for key, value in item.keys if str(value) == str(id))), {})
 
 
-def findShowMatchInList(id, list, idType):
-    return next((item.to_dict() for key, item in list(list.items()) if any(idType in key for key, value in item.keys if str(value) == str(id))), {})
+def findShowMatchInList(id, listToMatch, idType):
+    return next((item.to_dict() for key, item in list(listToMatch.items()) if any(idType in key for key, value in item.keys if str(value) == str(id))), {})
 
 
-def findSeasonMatchInList(id, seasonNumber, list, idType):
-    show = findShowMatchInList(id, list, idType)
+def findSeasonMatchInList(id, seasonNumber, listToMatch, idType):
+    show = findShowMatchInList(id, listToMatch, idType)
     logger.debug("findSeasonMatchInList %s" % show)
     if 'seasons' in show:
         for season in show['seasons']:
