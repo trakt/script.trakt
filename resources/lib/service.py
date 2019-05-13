@@ -497,19 +497,6 @@ class traktPlayer(xbmc.Player):
                 elif (kodiUtilities.getSettingAsBool('scrobble_mythtv_pvr') and self.type == 'unknown' and result['item']['label']):
                     # If we have label/id but no show type, then this might be a PVR recording.
 
-                    # DEBUG INFO: This code is useful when trying to figure out what info is available. Many of the fields
-                    # that you'd expect (TVShowTitle, episode, season, etc) are always blank. In Kodi v15, we got the show
-                    # and episode name in the VideoPlayer label. In v16, that's gone, but the Player.Filename infolabel
-                    # is populated with several interesting things. If these things change in future versions, uncommenting
-                    # this code will hopefully provide some useful info in the debug log.
-                    #logger.debug("[traktPlayer] onAVStarted() - TEMP Checking all videoplayer infolabels.")
-                    #for il in ['VideoPlayer.Time','VideoPlayer.TimeRemaining','VideoPlayer.TimeSpeed','VideoPlayer.Duration','VideoPlayer.Title','VideoPlayer.TVShowTitle','VideoPlayer.Season','VideoPlayer.Episode','VideoPlayer.Genre','VideoPlayer.Director','VideoPlayer.Country','VideoPlayer.Year','VideoPlayer.Rating','VideoPlayer.UserRating','VideoPlayer.Votes','VideoPlayer.RatingAndVotes','VideoPlayer.mpaa',VideoPlayer.EpisodeName','VideoPlayer.PlaylistPosition','VideoPlayer.PlaylistLength','VideoPlayer.Cast','VideoPlayer.CastAndRole','VideoPlayer.Album','VideoPlayer.Artist','VideoPlayer.Studio','VideoPlayer.Writer','VideoPlayer.Tagline','VideoPlayer.PlotOutline','VideoPlayer.Plot','VideoPlayer.LastPlayed','VideoPlayer.PlayCount','VideoPlayer.VideoCodec','VideoPlayer.VideoResolution','VideoPlayer.VideoAspect','VideoPlayer.AudioCodec','VideoPlayer.AudioChannels','VideoPlayer.AudioLanguage','VideoPlayer.SubtitlesLanguage','VideoPlayer.StereoscopicMode','VideoPlayer.EndTime','VideoPlayer.NextTitle','VideoPlayer.NextGenre','VideoPlayer.NextPlot','VideoPlayer.NextPlotOutline','VideoPlayer.NextStartTime','VideoPlayer.NextEndTime','VideoPlayer.NextDuration','VideoPlayer.ChannelName','VideoPlayer.ChannelNumber','VideoPlayer.SubChannelNumber','VideoPlayer.ChannelNumberLabel','VideoPlayer.ChannelGroup','VideoPlayer.ParentalRating','Player.FinishTime','Player.FinishTime(format)','Player.Chapter','Player.ChapterCount','Player.Time','Player.Time(format)','Player.TimeRemaining','Player.TimeRemaining(format)','Player.Duration','Player.Duration(format)','Player.SeekTime','Player.SeekOffset','Player.SeekOffset(format)','Player.SeekStepSize','Player.ProgressCache','Player.Folderpath','Player.Filenameandpath','Player.StartTime','Player.StartTime(format)','Player.Title','Player.Filename']:
-                    #    logger.debug("[traktPlayer] TEMP %s : %s" % (il, xbmc.getInfoLabel(il)))
-                    #for k,v in result.items():
-                    #    logger.debug("[traktPlayer] onAVStarted() - result - %s : %s" % (k,v))
-                    #for k,v in result['item'].items():
-                    #    logger.debug("[traktPlayer] onAVStarted() - result.item - %s : %s" % (k,v))
-
                     # As of Kodi v17, many of the VideoPlayer labels are populated by the MythTV PVR addon, though sadly this
                     # does not include IMDB number. That means we're still stuck using the show title/episode name to look up
                     # IDs to feed to the scrobbler. Still, much easier than previous versions!
