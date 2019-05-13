@@ -106,8 +106,7 @@ def checkExclusion(fullpath):
 
 def kodiRpcToTraktMediaObject(type, data, mode='collected'):
     if type == 'show':
-        id = data.pop('imdbnumber')
-        data['ids'] = utilities.parseIdToTraktIds(id, type)[0]
+        data['ids'] = data.pop('uniqueid')
         data['rating'] = data['userrating'] if 'userrating' in data and data['userrating'] > 0 else 0
         del data['label']
         return data
@@ -164,8 +163,7 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
         data['rating'] = data['userrating'] if 'userrating' in data and data['userrating'] > 0 else 0
         data['collected'] = 1  # this is in our kodi so it should be collected
         data['watched'] = 1 if data['plays'] > 0 else 0
-        id = data.pop('imdbnumber')
-        data['ids'] = utilities.parseIdToTraktIds(id, type)[0]
+        data['ids'] = data.pop('uniqueid')
         del data['label']
         return data
     else:
@@ -248,13 +246,13 @@ def getEpisodeDetailsFromKodi(libraryId, fields):
         logger.debug("getEpisodeDetailsFromKodi(): Result from Kodi was empty.")
         return None
 
-    show_data = getShowDetailsFromKodi(result['episodedetails']['tvshowid'], ['year', 'imdbnumber'])
+    show_data = getShowDetailsFromKodi(result['episodedetails']['tvshowid'], ['year', 'uniqueid'])
 
     if not show_data:
         logger.debug("getEpisodeDetailsFromKodi(): Result from getShowDetailsFromKodi() was empty.")
         return None
 
-    result['episodedetails']['imdbnumber'] = show_data['imdbnumber']
+    result['episodedetails']['show_ids'] = show_data['uniqueid']
     result['episodedetails']['year'] = show_data['year']
 
     try:

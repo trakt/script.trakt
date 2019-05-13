@@ -71,7 +71,7 @@ class SyncEpisodes:
         self.sync.UpdateProgress(1, line1=kodiUtilities.getString(32094), line2=kodiUtilities.getString(32095))
 
         logger.debug("[Episodes Sync] Getting show data from Kodi")
-        data = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'imdbnumber', 'year', 'userrating']}, 'id': 0})
+        data = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetTVShows', 'params': {'properties': ['title', 'uniqueid', 'year', 'userrating']}, 'id': 0})
         if data['limits']['total'] == 0:
             logger.debug("[Episodes Sync] Kodi json request was empty.")
             return None, None
