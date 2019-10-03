@@ -308,3 +308,52 @@ def getMediaType():
     else:
         return None
 
+def getInfoLabelDetails(result):
+    type = result['item']['type']
+    data = {'action': 'started'}
+    # check type of item
+    if 'id' not in result['item'] or type == 'channel':
+        # do a deeper check to see if we have enough data to perform scrobbles
+        logger.debug("getInfoLabelDetails - Started playing a non-library file, checking available data.")
+        season = int(xbmc.getInfoLabel('VideoPlayer.Season') or '-1')
+        episode = int(xbmc.getInfoLabel('VideoPlayer.Episode') or '-1')
+        showtitle = (xbmc.getInfoLabel('VideoPlayer.TVShowTitle') or xbmc.getInfoLabel('VideoPlayer.Title'))
+        title = xbmc.getInfoLabel('VideoPlayer.EpisodeName')
+        year = (xbmc.getInfoLabel('VideoPlayer.Year') or utilities.regex_year(showtitle)[1])
+        video_ids = xbmcgui.Window(10000).getProperty('script.trakt.ids')
+        if video_ids:
+            data['video_ids'] = json.loads(video_ids)
+        logger.debug("getInfoLabelDetails info - ids: %s, showtitle: %s, Year: %s, Season: %s, Episode: %s" % (video_ids, showtitle, year, season, episode))
+
+        if season >= 0 and episode > 0 and (showtitle or video_ids):
+            # we have season, episode and either a show title or video_ids, can scrobble this as an episode
+            type = 'episode'
+            data['type'] = 'episode'
+            data['season'] = season
+            data['episode'] = episode
+            data['showtitle'] = showtitle
+            data['title'] = (title or showtitle)
+            if year.isdigit():
+                data['year'] = int(year)
+            logger.debug("getInfoLabelDetails - Playing a non-library 'episode' - %s - S%02dE%02d - %s." % (data['showtitle'], data['season'], data['episode'], data['title']))
+        elif (year or video_ids) and season < 0 and not title:
+            # we have a year or video_id and no season/showtitle info, enough for a movie
+            type = 'movie'
+            data['type'] = 'movie'
+            if year.isdigit():
+                data['year'] = int(year)
+            data['title'] = utilities.regex_year(showtitle)[0]
+            logger.debug("getInfoLabelDetails - Playing a non-library 'movie' - %s (%s)." % (data['title'], data.get('year', 'NaN')))
+        elif (showtitle or title):
+            title, season, episode = utilities.regex_tvshow(title)
+            if season < 0 and episode < 0:
+                title, season, episode = utilities.regex_tvshow(showtitle)
+            data['type'] = 'episode'
+            data['season'] = season
+            data['episode'] = episode
+            data['title'] = data['showtitle'] = (title or showtitle)
+            logger.debug("getInfoLabelDetails - Title: %s, showtitle: %s, season: %d, episode: %d" % (title, showtitle, season, episode))
+        else:
+            logger.debug("getInfoLabelDetails - Non-library file, not enough data for scrobbling, skipping.")
+            return {}, {}
+    return type, data

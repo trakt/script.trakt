@@ -15,6 +15,8 @@ class Scrobbler():
     traktapi = None
     isPlaying = False
     isPaused = False
+    stopScrobbler = False
+    isPVR = False
     isMultiPartEpisode = False
     lastMPCheck = 0
     curMPEpisode = 0
@@ -44,16 +46,24 @@ class Scrobbler():
         if self.isPlaying:
             t = xbmc.Player().getTime()
             l = xbmc.PlayList(xbmc.PLAYLIST_VIDEO).getposition()
-            if self.playlistIndex == l:
+            if self.isPVR:
+                if self.stopScrobbler:
+                    self.stopScrobbler = False
+                    self.lastMPCheck = time.time() + 600 #10min transition sleep
+                    self.__scrobble('stop')
+                    return
+                self.watchedTime = (utilities._to_sec(xbmc.getInfoLabel('PVR.EpgEventElapsedTime(hh:mm:ss)')))
+            elif self.playlistIndex == l:
                 self.watchedTime = t
             else:
                 logger.debug("Current playlist item changed! Not updating time! (%d -> %d)" % (self.playlistIndex, l))
 
-            if 'id' in self.curVideo and self.isMultiPartEpisode:
-                # do transition check every minute
-                if (time.time() > (self.lastMPCheck + 60)) or isSeek:
-                    self.lastMPCheck = time.time()
-                    watchedPercent = self.__calculateWatchedPercent()
+            # do transition check every minute
+            if (time.time() > (self.lastMPCheck + 60)) or isSeek:
+                self.lastMPCheck = time.time()
+                watchedPercent = self.__calculateWatchedPercent()
+                
+                if 'id' in self.curVideo and self.isMultiPartEpisode:
                     epIndex = self._currentEpisode(watchedPercent, self.curVideo['multi_episode_count'])
                     if self.curMPEpisode != epIndex:
                         response = self.__scrobble('stop')
@@ -67,9 +77,52 @@ class Scrobbler():
                             logger.debug("Multi episode transition - call start for next episode")
                             response = self.__scrobble('start')
                             self.__preFetchUserRatings(response)
-            elif isSeek:
-                self.__scrobble('start')
+                            
+                elif self.isPVR:
+                    activePlayers = kodiUtilities.kodiJsonRequest({"jsonrpc": "2.0", "method": "Player.GetActivePlayers", "id": 1})
+                    logger.debug("Scrobble - activePlayers: %s" % activePlayers)
+                    playerId = int(activePlayers[0]['playerid'])
+                    logger.debug("Scrobble - Doing Player.GetItem kodiJsonRequest")
+                    result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'Player.GetItem', 'params': {'playerid': playerId}, 'id': 1})
+                    if result:
+                        logger.debug("Scrobble - %s" % result)
+                        type, curVideo = kodiUtilities.getInfoLabelDetails(result)
+                        if curVideo != self.curVideo:
+                            response = self.__scrobble('stop')
+                            if response is not None:
+                                logger.debug("Scrobble response: %s" % str(response))
+                                logger.debug("Scrobble PVR transition")
+                                # update current information
+                                self.curVideo = curVideo
+                                if utilities.isMovie(self.curVideo['type']):
+                                    if 'title' in self.curVideo and 'year' in self.curVideo:
+                                        self.curVideoInfo = {'title': self.curVideo['title'], 'year': self.curVideo['year']}
+                                    else:
+                                        logger.debug("Scrobble Couldn't set curVideoInfo for movie type")
+                                    logger.debug("Scrobble Movie type, curVideoInfo: %s" % self.curVideoInfo)
+                                
+                                elif utilities.isEpisode(self.curVideo['type']):
+                                    if 'title' in self.curVideo and 'season' in self.curVideo and 'episode' in self.curVideo:
+                                        self.curVideoInfo = {'title': self.curVideo['title'], 'season': self.curVideo['season'],
+                                                             'number': self.curVideo['episode']}
 
+                                        title, year = utilities.regex_year(self.curVideo['showtitle'])
+                                        if not year:
+                                            self.traktShowSummary = {'title': self.curVideo['showtitle']}
+                                        else:
+                                            self.traktShowSummary = {'title': title, 'year': year}
+
+                                        if 'year' in self.curVideo:
+                                            self.traktShowSummary['year'] = self.curVideo['year']
+                                else:
+                                    logger.debug("Scrobble Couldn't set curVideoInfo/traktShowSummary for episode type")
+                                logger.debug("Scrobble Episode type, curVideoInfo: %s" % self.curVideoInfo)
+                                logger.debug("Scrobble Episode type, traktShowSummary: %s" % self.traktShowSummary)
+                                response = self.__scrobble('start')
+                                
+                elif isSeek:
+                    self.__scrobble('start')
+                    
     def playbackStarted(self, data):
         logger.debug("playbackStarted(data: %s)" % data)
         if not data:
@@ -89,8 +142,15 @@ class Scrobbler():
                 return
             xbmc.sleep(1000)  # Wait for possible silent seek (caused by resuming)
             try:
+                self.isPVR = False
                 self.watchedTime = xbmc.Player().getTime()
-                self.videoDuration = xbmc.Player().getTotalTime()
+                self.videoDuration = 0
+                if xbmc.Player().getPlayingFile().startswith('pvr://'):
+                    self.isPVR = True
+                    self.watchedTime = (utilities._to_sec(xbmc.getInfoLabel('PVR.EpgEventElapsedTime(hh:mm:ss)')))
+                    self.videoDuration = int(utilities._to_sec(xbmc.getInfoLabel('PVR.EpgEventDuration(hh:mm:ss)')))
+                else:
+                    self.videoDuration = xbmc.Player().getTotalTime()
             except Exception as e:
                 logger.debug("Suddenly stopped watching item: %s" % e.message)
                 self.curVideo = None
@@ -199,7 +259,7 @@ class Scrobbler():
             logger.debug('Pre-Fetch result: %s; Info: %s' % (result, self.curVideoInfo))
 
     def playbackResumed(self):
-        if not self.isPlaying:
+        if not self.isPlaying or self.isPVR:
             return
 
         logger.debug("playbackResumed()")
@@ -211,7 +271,7 @@ class Scrobbler():
             self.__scrobble('start')
 
     def playbackPaused(self):
-        if not self.isPlaying:
+        if not self.isPlaying or self.isPVR:
             return
 
         logger.debug("playbackPaused()")
@@ -228,20 +288,23 @@ class Scrobbler():
         self.transitionCheck(isSeek=True)
 
     def playbackEnded(self):
-        self.videosToRate.append(self.curVideoInfo)
+        if not self.isPVR:
+            self.videosToRate.append(self.curVideoInfo)
         if not self.isPlaying:
             return
 
         logger.debug("playbackEnded()")
-        if not self.videosToRate:
+        if not self.videosToRate and not self.isPVR:
             logger.debug("Warning: Playback ended but video forgotten.")
             return
         self.isPlaying = False
+        self.stopScrobbler = False
         if self.watchedTime != 0:
             if 'type' in self.curVideo:
                 self.__scrobble('stop')
                 ratingCheck(self.curVideo['type'], self.videosToRate, self.watchedTime, self.videoDuration)
             self.watchedTime = 0
+            self.isPVR = False
             self.isMultiPartEpisode = False
         self.videosToRate = []
         self.curVideoInfo = None
@@ -260,7 +323,6 @@ class Scrobbler():
         scrobbleEpisodeOption = kodiUtilities.getSettingAsBool('scrobble_episode')
 
         watchedPercent = self.__calculateWatchedPercent()
-
         if utilities.isMovie(self.curVideo['type']) and scrobbleMovieOption:
             response = self.traktapi.scrobbleMovie(self.curVideoInfo, watchedPercent, status)
             if response is not None:
@@ -302,6 +364,11 @@ class Scrobbler():
                         response = self.traktapi.scrobbleEpisode(showObj, self.curVideoInfo, watchedPercent, status)
 
             if response is not None:
+                # Don't scrobble incorrect episode, episode numbers can differ from database. ie Aired vs. DVD order. Use fuzzy logic to match episode title.
+                if self.isPVR and not utilities._fuzzyMatch(self.curVideoInfo['title'], response['episode']['title'], 60.0):
+                    logger.debug("scrobble sending incorrect scrobbleEpisode stopping: %sx%s - %s != %s" % (self.curVideoInfo['season'],self.curVideoInfo['number'],self.curVideoInfo['title'],response['episode']['title']))
+                    self.stopScrobbler = True
+                        
                 self.__scrobbleNotification(response)
                 logger.debug("Scrobble response: %s" % str(response))
                 return response
@@ -309,7 +376,8 @@ class Scrobbler():
                 logger.debug("Failed to scrobble episode: %s | %s | %s | %s" % (self.traktShowSummary,
                                                                                 self.curVideoInfo, watchedPercent,
                                                                                 status))
-
+                
+                
     def __scrobbleNotification(self, info):
         if not self.curVideoInfo:
             return

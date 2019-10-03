@@ -59,7 +59,7 @@
 		<website>https://trakt.tv</website>
 		<email></email>
 		<source>https://github.com/trakt/script.trakt</source>
-		<news>  - Improve id matching for non-tvdb ids</news>
+		<news>  - Improve PVR Scrobbler</news>
     <assets>
         <icon>icon.png</icon>
         <fanart>fanart.jpg</fanart>
