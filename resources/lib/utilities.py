@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 
+import difflib
 import time
 import re
 import logging
@@ -542,3 +543,12 @@ def checkIfNewVersion(old, new):
     if old[2] < new[2]:
         return True
     return False
+
+def _to_sec(timedelta_string, factors=(1, 60, 3600, 86400)):
+    """[[[days:]hours:]minutes:]seconds -> seconds"""
+    return sum(x*y for x, y in zip(map(float, timedelta_string.split(':')[::-1]), factors))
+    
+def _fuzzyMatch(string1, string2, match_percent=55.0):
+    s = difflib.SequenceMatcher(None, string1, string2)
+    s.find_longest_match(0,len(string1),0,len(string2))
+    return (difflib.SequenceMatcher(None, string1, string2).ratio() * 100) >= match_percent 
