@@ -53,6 +53,7 @@ class Scrobbler():
                     self.__scrobble('stop')
                     return
                 self.watchedTime = (utilities._to_sec(xbmc.getInfoLabel('PVR.EpgEventElapsedTime(hh:mm:ss)')))
+                self.videoDuration = int(utilities._to_sec(xbmc.getInfoLabel('PVR.EpgEventDuration(hh:mm:ss)')))
             elif self.playlistIndex == l:
                 self.watchedTime = t
             else:
