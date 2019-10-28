@@ -408,6 +408,10 @@ class SyncEpisodes:
             for show in kodiShowsUpdate['shows']:
                 for season in show['seasons']:
                     for episode in season['episodes']:
+                        # If library item doesn't have a runtime set get it from
+                        # Trakt to avoid later using 0 in runtime * progress_pct.
+                        if not episode['runtime']:
+                            episode['runtime'] = self.sync.traktapi.getEpisodeSummary(show['ids']['trakt'], season['number'], episode['number'], extended='full').runtime
                         episodes.append({'episodeid': episode['ids']['episodeid'], 'progress': episode['progress'], 'runtime': episode['runtime']})
 
             # need to calculate the progress in int from progress in percent from Trakt
