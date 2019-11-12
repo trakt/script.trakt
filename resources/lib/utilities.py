@@ -76,12 +76,12 @@ def __findInList(list, case_sensitive=True, **kwargs):
                     key_val = item['ids'][key]
                 else:
                     continue
-            if not case_sensitive and isinstance(key_val, basestring):
+            if not case_sensitive and isinstance(key_val, str):
                 if key_val.lower() == kwargs[key].lower():
                     i = i + 1
             else:
                 # forcing the compare to be done at the string level
-                if unicode(key_val) == unicode(kwargs[key]):
+                if str(key_val) == str(kwargs[key]):
                     i = i + 1
         if i == len(kwargs):
             return item
@@ -90,7 +90,7 @@ def __findInList(list, case_sensitive=True, **kwargs):
 
 def findMediaObject(mediaObjectToMatch, listToSearch, matchByTitleAndYear):
     result = None
-    if result is None and 'ids' in mediaObjectToMatch and 'imdb' in mediaObjectToMatch['ids'] and unicode(mediaObjectToMatch['ids']['imdb']).startswith("tt"):
+    if result is None and 'ids' in mediaObjectToMatch and 'imdb' in mediaObjectToMatch['ids'] and str(mediaObjectToMatch['ids']['imdb']).startswith("tt"):
         result = __findInList(
             listToSearch, imdb=mediaObjectToMatch['ids']['imdb'])
     # we don't want to give up if we don't find a match based on the first
@@ -195,7 +195,7 @@ def convertDateTimeToUTC(toConvert):
             logger.debug(
                 'convertDateTimeToUTC() ValueError: movie/show was collected/watched outside of the unix timespan. Fallback to datetime utcnow')
             utc = datetime.utcnow()
-        return unicode(utc)
+        return str(utc)
     else:
         return toConvert
 
@@ -546,7 +546,7 @@ def checkIfNewVersion(old, new):
 
 def _to_sec(timedelta_string, factors=(1, 60, 3600, 86400)):
     """[[[days:]hours:]minutes:]seconds -> seconds"""
-    return sum(x*y for x, y in zip(map(float, timedelta_string.split(':')[::-1]), factors))
+    return sum(x*y for x, y in zip(list(map(float, timedelta_string.split(':')[::-1])), factors))
     
 def _fuzzyMatch(string1, string2, match_percent=55.0):
     s = difflib.SequenceMatcher(None, string1, string2)

@@ -18,14 +18,14 @@ logger = logging.getLogger(__name__)
 
 REGEX_URL = '(^https?://)(.+)'
 
-def notification(header, message, time=5000, icon=__addon__.getAddonInfo('icon')):
+def notification(header: str, message: str, time=5000, icon=__addon__.getAddonInfo('icon')):
     xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message, time, icon))
 
 def showSettings():
     __addon__.openSettings()
 
 def getSetting(setting):
-    return __addon__.getSetting(setting).strip().decode('utf-8')
+    return __addon__.getSetting(setting).strip()
 
 def setSetting(setting, value):
     __addon__.setSetting(setting, str(value))
@@ -46,16 +46,13 @@ def getSettingAsInt(setting):
         return 0
 
 def getString(string_id):
-    return __addon__.getLocalizedString(string_id).encode('utf-8', 'ignore')
+    return __addon__.getLocalizedString(string_id)
 
 def kodiJsonRequest(params):
     data = json.dumps(params)
     request = xbmc.executeJSONRPC(data)
 
-    try:
-        response = json.loads(request)
-    except UnicodeDecodeError:
-        response = json.loads(request.decode('utf-8', 'ignore'))
+    response = json.loads(request)
 
     try:
         if 'result' in response:
@@ -66,7 +63,7 @@ def kodiJsonRequest(params):
         return None
 
 # check exclusion settings for filename passed as argument
-def checkExclusion(fullpath):
+def checkExclusion(fullpath: str) -> bool:
 
     if not fullpath:
         return True
@@ -92,7 +89,7 @@ def checkExclusion(fullpath):
         return True
 
     # Path exclusions
-    ExcludePath = getSetting('ExcludePath').encode('utf-8') # Encode this as fullpath is already encoded
+    ExcludePath = getSetting('ExcludePath')
     if ExcludePath != "" and getSettingAsBool('ExcludePathOption'):
         if fullpath.startswith(ExcludePath):
             logger.debug("checkExclusion(): Video is from location, which is currently set as excluded path 1.")
@@ -100,7 +97,7 @@ def checkExclusion(fullpath):
 
     found = False
     for x in range(2,13):
-        found |= utilities.checkExcludePath(getSetting('ExcludePath%i' % x).encode('utf-8'), getSettingAsBool('ExcludePathOption%i' % x), fullpath, x)
+        found |= utilities.checkExcludePath(getSetting('ExcludePath%i' % x), getSettingAsBool('ExcludePathOption%i' % x), fullpath, x)
 
     return found
 
@@ -111,7 +108,7 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
         del data['label']
         return data
     elif type == 'episode':
-        if checkExclusion(data['file'].encode('utf-8')):
+        if checkExclusion(data['file']):
             return
 
         if data['playcount'] is None:
@@ -150,7 +147,7 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
             return
 
     elif type == 'movie':
-        if checkExclusion(data.pop('file').encode('utf-8')):
+        if checkExclusion(data.pop('file')):
             return
         if 'lastplayed' in data:
             data['watched_at'] = utilities.convertDateTimeToUTC(data.pop('lastplayed'))
@@ -282,7 +279,7 @@ def checkAndConfigureProxy():
 
     if proxyActive and proxyType == 0: # PROXY_HTTP
         proxyURL = kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxyserver"}, 'id': 1})['value']
-        proxyPort = unicode(kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxyport"}, 'id': 1})['value'])
+        proxyPort = str(kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxyport"}, 'id': 1})['value'])
         proxyUsername = kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxyusername"}, 'id': 1})['value']
         proxyPassword = kodiJsonRequest({'jsonrpc': '2.0', "method":"Settings.GetSettingValue", "params":{"setting":"network.httpproxypassword"}, 'id': 1})['value']
 
