@@ -60,7 +60,7 @@ def getFormattedItemName(type, info):
             s = "%s (%s)" % (info['title'], info['year'])
     except KeyError:
         s = ''
-    return s.encode('utf-8', 'ignore')
+    return s
 
 
 def __findInList(list, case_sensitive=True, **kwargs):
