@@ -16,7 +16,7 @@ install:
 # command to run tests
 script:
   - if [[ "$TRAVIS_PYTHON_VERSION" == "3.7.0" ]]; then
-    kodi-addon-checker $TRAVIS_BUILD_DIR --branch=leia;
+    kodi-addon-checker $TRAVIS_BUILD_DIR --branch=matrix;
     fi
   - py.test --cov coveralls --cov-report term-missing --cov=resources tests/
 
