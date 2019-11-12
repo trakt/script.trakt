@@ -313,7 +313,11 @@ class Scrobbler():
         self.playlistIndex = 0
 
     def __calculateWatchedPercent(self):
-        return (self.watchedTime / math.floor(self.videoDuration)) * 100  # we need to floor this, so this calculation yields the same result as the playback progress calculation
+        floored = math.floor(self.videoDuration) # we need to floor this, so this calculation yields the same result as the playback progress calculation
+        if floored != 0:
+            return (self.watchedTime / floored) * 100
+        else:
+            return 0
 
     def __scrobble(self, status):
         if not self.curVideoInfo:
