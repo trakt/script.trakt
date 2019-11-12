@@ -331,9 +331,10 @@ class traktAPI(object):
         with Trakt.configuration.http(retry=True, timeout=90):
             return Trakt['shows'].seasons(showId, extended='episodes')
 
-    def getEpisodeSummary(self, showId, season, episode):
+    def getEpisodeSummary(self, showId, season, episode, extended=None):
         with Trakt.configuration.http(retry=True):
-            return Trakt['shows'].episode(showId, season, episode)
+            return Trakt['shows'].episode(showId, season, episode,
+                                          extended=extended)
 
     def getIdLookup(self, id, id_type):
         with Trakt.configuration.http(retry=True):
