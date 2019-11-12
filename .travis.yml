@@ -1,25 +1,21 @@
 language: python
 matrix:
   include:
-    - python: "2.7"
-    - python: "2.7.13"
-    - python: "3.6.3"
+    - python: "3.7.0"
     - python: "nightly"
   allow_failures:
-    - python: "2.7"
-    - python: "3.6.3"
     - python: "nightly"
 
 # command to install dependencies
 install:
   - pip install python-dateutil pytest mock python-coveralls pytest-cov coverage
-  - if [[ "$TRAVIS_PYTHON_VERSION" == "3.6.3" ]]; then
+  - if [[ "$TRAVIS_PYTHON_VERSION" == "3.7.0" ]]; then
     pip install git+https://github.com/xbmc/addon-check.git;
     fi
 
 # command to run tests
 script:
-  - if [[ "$TRAVIS_PYTHON_VERSION" == "3.6.3" ]]; then
+  - if [[ "$TRAVIS_PYTHON_VERSION" == "3.7.0" ]]; then
     kodi-addon-checker $TRAVIS_BUILD_DIR --branch=leia;
     fi
   - py.test --cov coveralls --cov-report term-missing --cov=resources tests/
