@@ -330,7 +330,7 @@ class SyncEpisodes:
                 if self.sync.IsCanceled():
                     return
                 epCount = utilities.countEpisodes([show])
-                title = show['title'].encode('utf-8', 'ignore')
+                title = show['title']
                 i += 1
                 y = ((i / x) * (toPercent-fromPercent)) + fromPercent
                 self.sync.UpdateProgress(int(y), line2=title, line3=kodiUtilities.getString(32073) % epCount)

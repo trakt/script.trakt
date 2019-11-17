@@ -6,7 +6,7 @@ import time
 import xbmcgui
 import json
 import re
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from resources.lib import globals
 from resources.lib import sqlitequeue
@@ -493,7 +493,7 @@ class traktPlayer(xbmc.Player):
                         # (i.e. %20 instead of space) so those need removing. For example:
                         # Powerless s01e08 (2017)%20Green%20Furious, TV%20(WOOD%20TV), 20170414_003000, 1081_1492129800_4e1.pvr
                         # DC's Legends of Tomorrow (2016) Pilot, Part 2, TV (CW W MI), 20160129_010000, 1081_1492129800_4e1.pvr
-                        foundLabel = urllib.unquote(xbmc.getInfoLabel('Player.Filename'))
+                        foundLabel = urllib.parse.unquote(xbmc.getInfoLabel('Player.Filename'))
                         logger.debug("[traktPlayer] onAVStarted() - Found unknown video type with label: %s. Might be a PVR episode, searching Trakt for it." % foundLabel)
                         logger.debug("[traktPlayer] onAVStarted() - After urllib.unquote: %s." % foundLabel)
                         splitLabel = foundLabel.rsplit(", ", 3)
