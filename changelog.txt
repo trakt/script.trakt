@@ -1,3 +1,8 @@
+version 3.3.0
+  - Ported to Python 3
+  - PVR channels with proper tags were not scrobbling, corrected infolabels
+and added pvr progress tracking
+
 version 3.2.4
   - Improve id matching for non-tvdb ids
 
