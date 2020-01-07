@@ -286,8 +286,13 @@ class traktService:
         media_type = data['media_type']
 
         if utilities.isMovie(media_type):
+            temp_ids, id_type = utilities.parseIdToTraktIds(
+                str(utilities.best_id(data['ids'], media_type)), media_type)
+
+            best_id = temp_ids[id_type]
+
             summaryInfo = globals.traktapi.getMovieSummary(
-                data['id']).to_dict()
+                best_id).to_dict()
             if summaryInfo:
                 if not summaryInfo['watched']:
                     s = utilities.getFormattedItemName(media_type, summaryInfo)
@@ -304,8 +309,8 @@ class traktService:
                         kodiUtilities.notification(
                             kodiUtilities.getString(32114), s)
         elif utilities.isEpisode(media_type):
-            summaryInfo = {'shows': [{'ids': utilities.parseIdToTraktIds(data['id'], media_type)[
-                0], 'seasons': [{'number': data['season'], 'episodes': [{'number': data['number']}]}]}]}
+            summaryInfo = {'shows': [{'ids': data['ids'], 'seasons': [
+                {'number': data['season'], 'episodes': [{'number': data['number']}]}]}]}
             logger.debug("doMarkWatched(): %s" % str(summaryInfo))
             s = utilities.getFormattedItemName(media_type, data)
 
@@ -315,8 +320,8 @@ class traktService:
             else:
                 kodiUtilities.notification(kodiUtilities.getString(32114), s)
         elif utilities.isSeason(media_type):
-            summaryInfo = {'shows': [{'ids': utilities.parseIdToTraktIds(
-                data['id'], media_type)[0], 'seasons': [{'number': data['season'], 'episodes': []}]}]}
+            summaryInfo = {'shows': [{'ids': data['ids'], 'seasons': [
+                {'number': data['season'], 'episodes': []}]}]}
             s = utilities.getFormattedItemName(media_type, data)
             for ep in data['episodes']:
                 summaryInfo['shows'][0]['seasons'][0]['episodes'].append({
@@ -328,8 +333,7 @@ class traktService:
             self.addEpisodesToHistory(summaryInfo, s)
 
         elif utilities.isShow(media_type):
-            summaryInfo = {'shows': [{'ids': utilities.parseIdToTraktIds(
-                data['id'], media_type)[0], 'seasons': []}]}
+            summaryInfo = {'shows': [{'ids': data['ids'], 'seasons': []}]}
             if summaryInfo:
                 s = utilities.getFormattedItemName(media_type, data)
                 logger.debug('data: %s' % data)
@@ -529,7 +533,7 @@ class traktPlayer(xbmc.Player):
                     # and episode name in the VideoPlayer label. In v16, that's gone, but the Player.Filename infolabel
                     # is populated with several interesting things. If these things change in future versions, uncommenting
                     # this code will hopefully provide some useful info in the debug log.
-                    #logger.debug("[traktPlayer] onAVStarted() - TEMP Checking all videoplayer infolabels.")
+                    # logger.debug("[traktPlayer] onAVStarted() - TEMP Checking all videoplayer infolabels.")
                     # for il in ['VideoPlayer.Time','VideoPlayer.TimeRemaining','VideoPlayer.TimeSpeed','VideoPlayer.Duration','VideoPlayer.Title','VideoPlayer.TVShowTitle','VideoPlayer.Season','VideoPlayer.Episode','VideoPlayer.Genre','VideoPlayer.Director','VideoPlayer.Country','VideoPlayer.Year','VideoPlayer.Rating','VideoPlayer.UserRating','VideoPlayer.Votes','VideoPlayer.RatingAndVotes','VideoPlayer.mpaa',VideoPlayer.EpisodeName','VideoPlayer.PlaylistPosition','VideoPlayer.PlaylistLength','VideoPlayer.Cast','VideoPlayer.CastAndRole','VideoPlayer.Album','VideoPlayer.Artist','VideoPlayer.Studio','VideoPlayer.Writer','VideoPlayer.Tagline','VideoPlayer.PlotOutline','VideoPlayer.Plot','VideoPlayer.LastPlayed','VideoPlayer.PlayCount','VideoPlayer.VideoCodec','VideoPlayer.VideoResolution','VideoPlayer.VideoAspect','VideoPlayer.AudioCodec','VideoPlayer.AudioChannels','VideoPlayer.AudioLanguage','VideoPlayer.SubtitlesLanguage','VideoPlayer.StereoscopicMode','VideoPlayer.EndTime','VideoPlayer.NextTitle','VideoPlayer.NextGenre','VideoPlayer.NextPlot','VideoPlayer.NextPlotOutline','VideoPlayer.NextStartTime','VideoPlayer.NextEndTime','VideoPlayer.NextDuration','VideoPlayer.ChannelName','VideoPlayer.ChannelNumber','VideoPlayer.SubChannelNumber','VideoPlayer.ChannelNumberLabel','VideoPlayer.ChannelGroup','VideoPlayer.ParentalRating','Player.FinishTime','Player.FinishTime(format)','Player.Chapter','Player.ChapterCount','Player.Time','Player.Time(format)','Player.TimeRemaining','Player.TimeRemaining(format)','Player.Duration','Player.Duration(format)','Player.SeekTime','Player.SeekOffset','Player.SeekOffset(format)','Player.SeekStepSize','Player.ProgressCache','Player.Folderpath','Player.Filenameandpath','Player.StartTime','Player.StartTime(format)','Player.Title','Player.Filename']:
                     #    logger.debug("[traktPlayer] TEMP %s : %s" % (il, xbmc.getInfoLabel(il)))
                     # for k,v in result.items():

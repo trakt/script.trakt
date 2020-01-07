@@ -187,7 +187,7 @@ def run():
                     dbid, ['showtitle', 'season', 'episode', 'tvshowid', 'playcount'])
                 if result:
                     if result['playcount'] == 0:
-                        data['ids'] = result['uniqueid']
+                        data['ids'] = result['show_ids']
                         data['season'] = result['season']
                         data['number'] = result['episode']
                         data['title'] = result['showtitle']
@@ -207,7 +207,7 @@ def run():
                     for show in result['tvshows']:
                         if show['title'] == showTitle:
                             showID = show['tvshowid']
-                            data['id'] = show['imdbnumber']
+                            data['ids'] = show['uniqueid']
                             data['title'] = show['title']
                             break
                 else:
