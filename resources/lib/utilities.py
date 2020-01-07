@@ -246,10 +246,10 @@ def parseIdToTraktIds(id, type):
     return data, id_type
 
 
-def best_id(ids):
+def best_id(ids, type):
     if 'trakt' in ids:
         return ids['trakt']
-    elif 'imdb' in ids:
+    elif 'imdb' in ids and isMovie(type):
         return ids['imdb']
     elif 'tmdb' in ids:
         return ids['tmdb']
@@ -286,6 +286,8 @@ def sanitizeMovies(movies):
             del movie['userrating']
 
 # todo add tests
+
+
 def sanitizeShows(shows):
     # do not remove watched_at and collected_at may cause problems between the
     # 4 sync types (would probably have to deepcopy etc)
@@ -308,7 +310,8 @@ def compareMovies(movies_col1, movies_col2, matchByTitleAndYear, watched=False, 
     movies = []
     for movie_col1 in movies_col1:
         if movie_col1:
-            movie_col2 = findMediaObject(movie_col1, movies_col2, matchByTitleAndYear)
+            movie_col2 = findMediaObject(
+                movie_col1, movies_col2, matchByTitleAndYear)
             # logger.debug("movie_col1 %s" % movie_col1)
             # logger.debug("movie_col2 %s" % movie_col2)
 
@@ -349,12 +352,14 @@ def compareShows(shows_col1, shows_col2, matchByTitleAndYear, rating=False, rest
     # logger.debug("shows_col2 %s" % shows_col2)
     for show_col1 in shows_col1['shows']:
         if show_col1:
-            show_col2 = findMediaObject(show_col1, shows_col2['shows'], matchByTitleAndYear)
+            show_col2 = findMediaObject(
+                show_col1, shows_col2['shows'], matchByTitleAndYear)
             # logger.debug("show_col1 %s" % show_col1)
             # logger.debug("show_col2 %s" % show_col2)
 
             if show_col2:
-                show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year']}
+                show = {'title': show_col1['title'],
+                        'ids': {}, 'year': show_col1['year']}
                 if show_col1['ids']:
                     show['ids'].update(show_col1['ids'])
                 if show_col2['ids']:
@@ -369,7 +374,8 @@ def compareShows(shows_col1, shows_col2, matchByTitleAndYear, rating=False, rest
                     shows.append(show)
             else:
                 if not restrict:
-                    show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year']}
+                    show = {'title': show_col1['title'],
+                            'ids': {}, 'year': show_col1['year']}
                     if show_col1['ids']:
                         show['ids'].update(show_col1['ids'])
 
@@ -415,7 +421,8 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                                         if 'ids' in eps:
                                             eps[ep]['ids']['episodeid'] = season_col2[season][ep]['ids']['episodeid']
                                         else:
-                                            eps[ep]['ids'] = {'episodeid': season_col2[season][ep]['ids']['episodeid']}
+                                            eps[ep]['ids'] = {
+                                                'episodeid': season_col2[season][ep]['ids']['episodeid']}
                                     eps[ep]['runtime'] = season_col2[season][ep]['runtime']
                                 season_diff[season] = eps
                         elif rating:
@@ -429,7 +436,8 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                                             if 'ids' in eps:
                                                 eps[ep]['ids']['episodeid'] = season_col2[season][ep]['ids']['episodeid']
                                             else:
-                                                eps[ep]['ids'] = {'episodeid': season_col2[season][ep]['ids']['episodeid']}
+                                                eps[ep]['ids'] = {
+                                                    'episodeid': season_col2[season][ep]['ids']['episodeid']}
                                 if len(eps) > 0:
                                     season_diff[season] = eps
                         elif len(diff) > 0:
@@ -438,8 +446,10 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                                 collectedShow = findMediaObject(
                                     show_col1, collected['shows'], matchByTitleAndYear)
                                 # logger.debug("collected %s" % collectedShow)
-                                collectedSeasons = __getEpisodes(collectedShow['seasons'])
-                                t = list(set(collectedSeasons[season]).intersection(set(diff)))
+                                collectedSeasons = __getEpisodes(
+                                    collectedShow['seasons'])
+                                t = list(
+                                    set(collectedSeasons[season]).intersection(set(diff)))
                                 if len(t) > 0:
                                     eps = {}
                                     for ep in t:
@@ -448,7 +458,8 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                                             if 'ids' in eps:
                                                 eps[ep]['ids']['episodeid'] = collectedSeasons[season][ep]['ids']['episodeid']
                                             else:
-                                                eps[ep]['ids'] = {'episodeid': collectedSeasons[season][ep]['ids']['episodeid']}
+                                                eps[ep]['ids'] = {
+                                                    'episodeid': collectedSeasons[season][ep]['ids']['episodeid']}
                                     season_diff[season] = eps
                             else:
                                 eps = {}
@@ -463,7 +474,8 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                 # logger.debug("season_diff %s" % season_diff)
                 if len(season_diff) > 0:
                     # logger.debug("Season_diff")
-                    show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
+                    show = {'title': show_col1['title'], 'ids': {
+                    }, 'year': show_col1['year'], 'seasons': []}
                     if show_col1['ids']:
                         show['ids'].update(show_col1['ids'])
                     if show_col2['ids']:
@@ -472,7 +484,8 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                         episodes = []
                         for episodeKey in season_diff[seasonKey]:
                             episodes.append(season_diff[seasonKey][episodeKey])
-                        show['seasons'].append({'number': seasonKey, 'episodes': episodes})
+                        show['seasons'].append(
+                            {'number': seasonKey, 'episodes': episodes})
                     if 'tvshowid' in show_col2:
                         show['tvshowid'] = show_col2['tvshowid']
                     # logger.debug("show %s" % show)
@@ -480,7 +493,8 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
             else:
                 if not restrict:
                     if countEpisodes([show_col1]) > 0:
-                        show = {'title': show_col1['title'], 'ids': {}, 'year': show_col1['year'], 'seasons': []}
+                        show = {'title': show_col1['title'], 'ids': {
+                        }, 'year': show_col1['year'], 'seasons': []}
                         if show_col1['ids']:
                             show['ids'].update(show_col1['ids'])
                         for seasonKey in show_col1['seasons']:
@@ -493,7 +507,8 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                                 elif not watched and not rating:
                                     episodes.append(episodeKey)
                             if len(episodes) > 0:
-                                show['seasons'].append({'number': seasonKey['number'], 'episodes': episodes})
+                                show['seasons'].append(
+                                    {'number': seasonKey['number'], 'episodes': episodes})
 
                         if 'tvshowid' in show_col1:
                             del(show_col1['tvshowid'])
@@ -529,6 +544,7 @@ def __getEpisodes(seasons):
 
     return data
 
+
 def checkIfNewVersion(old, new):
     # Check if old is empty, it might be the first time we check
     if old == '':
@@ -544,11 +560,13 @@ def checkIfNewVersion(old, new):
         return True
     return False
 
+
 def _to_sec(timedelta_string, factors=(1, 60, 3600, 86400)):
     """[[[days:]hours:]minutes:]seconds -> seconds"""
     return sum(x*y for x, y in zip(list(map(float, timedelta_string.split(':')[::-1])), factors))
-    
+
+
 def _fuzzyMatch(string1, string2, match_percent=55.0):
     s = difflib.SequenceMatcher(None, string1, string2)
-    s.find_longest_match(0,len(string1),0,len(string2))
-    return (difflib.SequenceMatcher(None, string1, string2).ratio() * 100) >= match_percent 
+    s.find_longest_match(0, len(string1), 0, len(string2))
+    return (difflib.SequenceMatcher(None, string1, string2).ratio() * 100) >= match_percent

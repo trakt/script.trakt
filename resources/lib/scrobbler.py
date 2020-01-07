@@ -227,10 +227,11 @@ class Scrobbler():
             if kodiUtilities.getSettingAsBool('scrobble_movie') or kodiUtilities.getSettingAsBool('scrobble_episode'):
                 result = self.__scrobble('start')
             elif kodiUtilities.getSettingAsBool('rate_movie') and utilities.isMovie(self.curVideo['type']) and 'ids' in self.curVideoInfo:
-                best_id = utilities.best_id(self.curVideoInfo['ids'])
+                best_id = utilities.best_id(
+                    self.curVideoInfo['ids'], self.curVideo['type'])
                 result = {'movie': self.traktapi.getMovieSummary(best_id).to_dict()}
             elif kodiUtilities.getSettingAsBool('rate_episode') and utilities.isEpisode(self.curVideo['type']) and 'ids' in self.traktShowSummary:
-                best_id = utilities.best_id(self.traktShowSummary['ids'])
+                best_id = utilities.best_id(self.traktShowSummary['ids'], self.curVideo['type'])
                 result = {'show': self.traktapi.getShowSummary(best_id).to_dict(),
                           'episode': self.traktapi.getEpisodeSummary(best_id, self.curVideoInfo['season'],
                                                                      self.curVideoInfo['number']).to_dict()}
