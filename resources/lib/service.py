@@ -224,8 +224,13 @@ class traktService:
         media_type = data['media_type']
 
         if utilities.isMovie(media_type):
+            temp_ids, id_type = utilities.parseIdToTraktIds(
+                str(utilities.best_id(data['ids'], media_type)), media_type)
+
+            best_id = temp_ids[id_type]
+
             summaryInfo = globals.traktapi.getMovieSummary(
-                data['id']).to_dict()
+                best_id).to_dict()
             if summaryInfo:
                 s = utilities.getFormattedItemName(media_type, summaryInfo)
                 logger.debug(
@@ -241,7 +246,7 @@ class traktService:
                     kodiUtilities.notification(
                         kodiUtilities.getString(32166), s)
         elif utilities.isEpisode(media_type):
-            summaryInfo = {'shows': [{'ids': utilities.parseIdToTraktIds(data['id'], media_type)[0],
+            summaryInfo = {'shows': [{'ids': data['ids'],
                                       'seasons': [{'number': data['season'], 'episodes': [{'number': data['number']}]}]}]}
             logger.debug("doAddToWatchlist(): %s" % str(summaryInfo))
             s = utilities.getFormattedItemName(media_type, data)
@@ -252,12 +257,12 @@ class traktService:
             else:
                 kodiUtilities.notification(kodiUtilities.getString(32166), s)
         elif utilities.isSeason(media_type):
-            summaryInfo = {'shows': [{'ids': utilities.parseIdToTraktIds(data['id'], media_type)[0],
+            summaryInfo = {'shows': [{'ids': data['ids'],
                                       'seasons': [{'number': data['season']}]}]}
             s = utilities.getFormattedItemName(media_type, data)
 
             logger.debug("doAddToWatchlist(): '%s - Season %d' trying to add to users watchlist."
-                         % (data['id'], data['season']))
+                         % (ids, data['season']))
 
             result = globals.traktapi.addToWatchlist(summaryInfo)
             if result:
@@ -266,7 +271,7 @@ class traktService:
                 kodiUtilities.notification(kodiUtilities.getString(32166), s)
         elif utilities.isShow(media_type):
             summaryInfo = {
-                'shows': [{'ids': utilities.parseIdToTraktIds(data['id'], media_type)[0]}]}
+                'shows': [{'ids': data['ids']}]}
             s = utilities.getFormattedItemName(media_type, data)
             logger.debug("doAddToWatchlist(): %s" % str(summaryInfo))
 

@@ -174,7 +174,7 @@ def run():
                     dbid, ['imdbnumber', 'uniqueid', 'title', 'year', 'playcount'])
                 if result:
                     if result['playcount'] == 0:
-                        data['id'] = result['imdbnumber']
+                        data['ids'] = result['uniqueid']
                     else:
                         logger.debug("Movie alread marked as watched in Kodi.")
                 else:
@@ -187,7 +187,7 @@ def run():
                     dbid, ['showtitle', 'season', 'episode', 'tvshowid', 'playcount'])
                 if result:
                     if result['playcount'] == 0:
-                        data['id'] = result['imdbnumber']
+                        data['ids'] = result['uniqueid']
                         data['season'] = result['season']
                         data['number'] = result['episode']
                         data['title'] = result['showtitle']
@@ -248,7 +248,7 @@ def run():
                     logger.debug("Error getting show details from Kodi.")
                     return
                 showTitle = result['label']
-                data['id'] = result['imdbnumber']
+                data['ids'] = result['uniqueid']
                 result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {
                                                        'tvshowid': dbid, 'properties': ['season', 'episode', 'playcount', 'showtitle']}, 'id': 0})
                 if result and 'episodes' in result:
@@ -292,7 +292,7 @@ def run():
                 result = kodiUtilities.getMovieDetailsFromKodi(
                     dbid, ['imdbnumber', 'uniqueid', 'title', 'year', 'playcount'])
                 if result:
-                    data['id'] = result['imdbnumber']
+                    data['ids'] = result['uniqueid']
 
                 else:
                     logger.debug("Error getting movie details from Kodi.")
@@ -303,7 +303,7 @@ def run():
                 result = kodiUtilities.getEpisodeDetailsFromKodi(
                     dbid, ['showtitle', 'season', 'episode', 'tvshowid', 'playcount'])
                 if result:
-                    data['id'] = result['imdbnumber']
+                    data['ids'] = result['show_ids']
                     data['season'] = result['season']
                     data['number'] = result['episode']
                     data['title'] = result['showtitle']
@@ -359,7 +359,7 @@ def run():
                     logger.debug("Error getting show details from Kodi.")
                     return
                 showTitle = result['label']
-                data['id'] = result['imdbnumber']
+                data['ids'] = result['uniqueid']
                 result = kodiUtilities.kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes',
                                                         'params': {'tvshowid': dbid, 'properties':
                                                                    ['season', 'episode', 'playcount', 'showtitle']}, 'id': 0})
