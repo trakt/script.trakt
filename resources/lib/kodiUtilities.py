@@ -124,6 +124,8 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
         episode = {'season': data['season'], 'number': data['episode'], 'title': data['label'],
                    'ids': {'episodeid': data['episodeid']}, 'watched': watched,
                    'plays': plays, 'collected': 1}
+
+        if 'uniqueid' in data:
         if 'tmdb' in data['uniqueid']:
             episode['ids']['tmdb'] = data['uniqueid']['tmdb']
         if 'imdb' in data['uniqueid']:
