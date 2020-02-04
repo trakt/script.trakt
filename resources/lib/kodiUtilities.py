@@ -132,8 +132,8 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
             episode['ids']['imdb'] = data['uniqueid']['imdb']
         if 'tvdb' in data['uniqueid']:
             episode['ids']['tvdb'] = data['uniqueid']['tvdb']
-        elif 'unknown' in data['uniqueid']:
-            episode['ids']['tvdb'] = utilities.parseIdToTraktIds(data['uniqueid']['unknown'], type)[0]
+                episode['ids'].update(utilities.parseIdToTraktIds(data['uniqueid']['unknown'], type)[0])
+
         if 'lastplayed' in data:
             episode['watched_at'] = utilities.convertDateTimeToUTC(data['lastplayed'])
         if 'dateadded' in data:
