@@ -124,14 +124,17 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
         episode = {'season': data['season'], 'number': data['episode'], 'title': data['label'],
                    'ids': {'episodeid': data['episodeid']}, 'watched': watched,
                    'plays': plays, 'collected': 1}
-        if 'tmdb' in data['uniqueid']:
-            episode['ids']['tmdb'] = data['uniqueid']['tmdb']
-        if 'imdb' in data['uniqueid']:
-            episode['ids']['imdb'] = data['uniqueid']['imdb']
-        if 'tvdb' in data['uniqueid']:
-            episode['ids']['tvdb'] = data['uniqueid']['tvdb']
-        elif 'unknown' in data['uniqueid']:
-            episode['ids']['tvdb'] = utilities.parseIdToTraktIds(data['uniqueid']['unknown'], type)[0]
+
+        if 'uniqueid' in data:
+            if 'tmdb' in data['uniqueid']:
+                episode['ids']['tmdb'] = data['uniqueid']['tmdb']
+            if 'imdb' in data['uniqueid']:
+                episode['ids']['imdb'] = data['uniqueid']['imdb']
+            if 'tvdb' in data['uniqueid']:
+                episode['ids']['tvdb'] = data['uniqueid']['tvdb']
+            elif 'unknown' in data['uniqueid'] and data['uniqueid']['unknown'] != '':
+                episode['ids'].update(utilities.parseIdToTraktIds(data['uniqueid']['unknown'], type)[0])
+
         if 'lastplayed' in data:
             episode['watched_at'] = utilities.convertDateTimeToUTC(data['lastplayed'])
         if 'dateadded' in data:
