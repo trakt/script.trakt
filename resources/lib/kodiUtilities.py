@@ -128,9 +128,9 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
         if 'uniqueid' in data:
             if 'tmdb' in data['uniqueid']:
                 episode['ids']['tmdb'] = data['uniqueid']['tmdb']
-            if 'imdb' in data['uniqueid']:
+            elif 'imdb' in data['uniqueid']:
                 episode['ids']['imdb'] = data['uniqueid']['imdb']
-            if 'tvdb' in data['uniqueid']:
+            elif 'tvdb' in data['uniqueid']:
                 episode['ids']['tvdb'] = data['uniqueid']['tvdb']
             elif 'unknown' in data['uniqueid'] and data['uniqueid']['unknown'] != '':
                 episode['ids'].update(utilities.parseIdToTraktIds(data['uniqueid']['unknown'], type)[0])
