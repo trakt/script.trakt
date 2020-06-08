@@ -1,3 +1,7 @@
+version 3.2.5
+  - Fix problem due to new trakt dependency
+  - Improve PVR Scrobbler
+
 version 3.2.4
   - Improve id matching for non-tvdb ids
 
