@@ -1,3 +1,7 @@
+version 3.3.1
+  - Update to lastest trakt dependency
+  - Improved no runtime handling
+
 version 3.3.0
   - Ported to Python 3
   - PVR channels with proper tags were not scrobbling, corrected infolabels

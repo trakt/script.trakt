@@ -57,9 +57,8 @@
         <forum>https://forum.kodi.tv/showthread.php?tid=220547</forum>
         <website>https://trakt.tv</website>
         <source>https://github.com/trakt/script.trakt</source>
-        <news>  - Ported to Python 3
-  - PVR channels with proper tags were not scrobbling, corrected infolabels
-and added pvr progress tracking</news>
+        <news>- Update to lastest trakt dependency
+- Improved no runtime handling</news>
     <assets>
         <icon>icon.png</icon>
         <fanart>fanart.jpg</fanart>
