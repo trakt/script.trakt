@@ -57,8 +57,11 @@
         <forum>https://forum.kodi.tv/showthread.php?tid=220547</forum>
         <website>https://trakt.tv</website>
         <source>https://github.com/trakt/script.trakt</source>
-        <news>- Update to lastest trakt dependency
-- Improved no runtime handling</news>
+        <news>  - Update to lastest trakt dependency
+  - Improved no runtime handling
+  - Fix manual set watched
+  - Fix manual watchlisting
+  - Improve manual rating matches</news>
     <assets>
         <icon>icon.png</icon>
         <fanart>fanart.jpg</fanart>
