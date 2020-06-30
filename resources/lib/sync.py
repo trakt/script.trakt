@@ -85,6 +85,20 @@ class Sync():
 
     def UpdateProgress(self, *args, **kwargs):
         if self.show_progress and not self.run_silent:
+
+            line1 = ""
+            line2 = ""
+            line3 = ""
+
+            if 'line1' in kwargs:
+                line1 = kwargs["line1"]
+
+            if 'line2' in kwargs:
+                line2 = kwargs["line2"]
+
+            if 'line3' in kwargs:
+                line3 = kwargs["line3"]
+
             kwargs['percent'] = args[0]
-            kwargs['message'] = f'{kwargs["line1"]}\n{kwargs["line2"]}\n{kwargs["line3"]}'
+            kwargs['message'] = f'{line1}\n{line2}\n{line3}'
             progress.update(**kwargs)
