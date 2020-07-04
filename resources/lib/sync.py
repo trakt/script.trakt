@@ -99,6 +99,6 @@ class Sync():
             if 'line3' in kwargs:
                 line3 = kwargs["line3"]
 
-            kwargs['percent'] = args[0]
-            kwargs['message'] = f'{line1}\n{line2}\n{line3}'
-            progress.update(**kwargs)
+            percent = args[0]
+            message = f'{line1}\n{line2}\n{line3}'
+            progress.update(percent, message)
