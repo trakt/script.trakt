@@ -143,49 +143,45 @@ class traktAPI(object):
         result = None
 
         with Trakt.configuration.oauth.from_response(self.authorization):
-            if status == 'start':
-                with Trakt.configuration.http(retry=True):
+            with Trakt.configuration.http(retry=True):
+                if status == 'start':
                     result = Trakt['scrobble'].start(
                         show=show,
                         episode=episode,
                         progress=percent)
-            elif status == 'pause':
-                with Trakt.configuration.http(retry=True):
+                elif status == 'pause':
                     result = Trakt['scrobble'].pause(
                         show=show,
                         episode=episode,
                         progress=percent)
-            elif status == 'stop':
-                # don't retry on stop, this will cause multiple scrobbles
-                result = Trakt['scrobble'].stop(
-                    show=show,
-                    episode=episode,
-                    progress=percent)
-            else:
-                logger.debug("scrobble() Bad scrobble status")
+                elif status == 'stop':
+                    result = Trakt['scrobble'].stop(
+                        show=show,
+                        episode=episode,
+                        progress=percent)
+                else:
+                    logger.debug("scrobble() Bad scrobble status")
         return result
 
     def scrobbleMovie(self, movie, percent, status):
         result = None
 
         with Trakt.configuration.oauth.from_response(self.authorization):
-            if status == 'start':
-                with Trakt.configuration.http(retry=True):
+            with Trakt.configuration.http(retry=True):
+                if status == 'start':
                     result = Trakt['scrobble'].start(
                         movie=movie,
                         progress=percent)
-            elif status == 'pause':
-                with Trakt.configuration.http(retry=True):
+                elif status == 'pause':
                     result = Trakt['scrobble'].pause(
                         movie=movie,
                         progress=percent)
-            elif status == 'stop':
-                # don't retry on stop, this will cause multiple scrobbles
-                result = Trakt['scrobble'].stop(
-                    movie=movie,
-                    progress=percent)
-            else:
-                logger.debug("scrobble() Bad scrobble status")
+                elif status == 'stop':
+                    result = Trakt['scrobble'].stop(
+                        movie=movie,
+                        progress=percent)
+                else:
+                    logger.debug("scrobble() Bad scrobble status")
         return result
 
     def getShowsCollected(self, shows):
