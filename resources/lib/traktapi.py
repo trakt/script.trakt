@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
 #
-import logging
-import time
-from json import dumps, loads
-from sys import version_info
-
 import xbmcaddon
+import logging
 from resources.lib import deviceAuthDialog
-from resources.lib.kodiUtilities import (checkAndConfigureProxy, getSetting,
-                                         getSettingAsInt, getString,
-                                         notification, setSetting)
-from resources.lib.utilities import (createError, findEpisodeMatchInList,
-                                     findMovieMatchInList,
-                                     findSeasonMatchInList,
-                                     findShowMatchInList)
+import time
+
 from trakt import Trakt
 from trakt.objects import Movie, Show
+from resources.lib.utilities import findMovieMatchInList, findShowMatchInList, findEpisodeMatchInList, findSeasonMatchInList, createError
+from resources.lib.kodiUtilities import getSetting, setSetting, notification, getString, checkAndConfigureProxy, getSettingAsInt
+from sys import version_info
+
+
+if version_info >= (2, 7):
+    from json import loads, dumps
+else:
+    from simplejson import loads, dumps
 
 # read settings
 __addon__ = xbmcaddon.Addon('script.trakt')
@@ -143,45 +143,49 @@ class traktAPI(object):
         result = None
 
         with Trakt.configuration.oauth.from_response(self.authorization):
-            with Trakt.configuration.http(retry=True):
-                if status == 'start':
+            if status == 'start':
+                with Trakt.configuration.http(retry=True):
                     result = Trakt['scrobble'].start(
                         show=show,
                         episode=episode,
                         progress=percent)
-                elif status == 'pause':
+            elif status == 'pause':
+                with Trakt.configuration.http(retry=True):
                     result = Trakt['scrobble'].pause(
                         show=show,
                         episode=episode,
                         progress=percent)
-                elif status == 'stop':
-                    result = Trakt['scrobble'].stop(
-                        show=show,
-                        episode=episode,
-                        progress=percent)
-                else:
-                    logger.debug("scrobble() Bad scrobble status")
+            elif status == 'stop':
+                # don't retry on stop, this will cause multiple scrobbles
+                result = Trakt['scrobble'].stop(
+                    show=show,
+                    episode=episode,
+                    progress=percent)
+            else:
+                logger.debug("scrobble() Bad scrobble status")
         return result
 
     def scrobbleMovie(self, movie, percent, status):
         result = None
 
         with Trakt.configuration.oauth.from_response(self.authorization):
-            with Trakt.configuration.http(retry=True):
-                if status == 'start':
+            if status == 'start':
+                with Trakt.configuration.http(retry=True):
                     result = Trakt['scrobble'].start(
                         movie=movie,
                         progress=percent)
-                elif status == 'pause':
+            elif status == 'pause':
+                with Trakt.configuration.http(retry=True):
                     result = Trakt['scrobble'].pause(
                         movie=movie,
                         progress=percent)
-                elif status == 'stop':
-                    result = Trakt['scrobble'].stop(
-                        movie=movie,
-                        progress=percent)
-                else:
-                    logger.debug("scrobble() Bad scrobble status")
+            elif status == 'stop':
+                # don't retry on stop, this will cause multiple scrobbles
+                result = Trakt['scrobble'].stop(
+                    movie=movie,
+                    progress=percent)
+            else:
+                logger.debug("scrobble() Bad scrobble status")
         return result
 
     def getShowsCollected(self, shows):
@@ -300,7 +304,7 @@ class traktAPI(object):
             with Trakt.configuration.http(retry=True):
                 playback = Trakt['sync/playback'].movies(exceptions=True)
 
-                for _, item in list(playback.items()):
+                for _, item in playback.items():
                     if type(item) is Movie:
                         progressMovies.append(item)
 
@@ -314,7 +318,7 @@ class traktAPI(object):
             with Trakt.configuration.http(retry=True):
                 playback = Trakt['sync/playback'].episodes(exceptions=True)
 
-                for _, item in list(playback.items()):
+                for _, item in playback.items():
                     if type(item) is Show:
                         progressEpisodes.append(item)
 
@@ -332,10 +336,9 @@ class traktAPI(object):
         with Trakt.configuration.http(retry=True, timeout=90):
             return Trakt['shows'].seasons(showId, extended='episodes')
 
-    def getEpisodeSummary(self, showId, season, episode, extended=None):
+    def getEpisodeSummary(self, showId, season, episode):
         with Trakt.configuration.http(retry=True):
-            return Trakt['shows'].episode(showId, season, episode,
-                                          extended=extended)
+            return Trakt['shows'].episode(showId, season, episode)
 
     def getIdLookup(self, id, id_type):
         with Trakt.configuration.http(retry=True):
