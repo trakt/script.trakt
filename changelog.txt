@@ -1,3 +1,6 @@
+version 3.2.6
+  - Fix crash
+
 version 3.2.5
   - Fix problem due to new trakt dependency
   - Improve PVR Scrobbler
