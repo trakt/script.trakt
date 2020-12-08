@@ -318,10 +318,10 @@ class SyncMovies():
                 self.sync.UpdateProgress(
                     toPercent, line1='', line2=kodiUtilities.getString(32125))
                 logger.debug(
-                    "[Movies Sync] Kodi movie playbacks are up to date.")
+                    "[Movies Sync] Kodi movie progress is up to date.")
                 return
 
-            logger.debug("[Movies Sync] %i movie(s) playbacks will be updated in Kodi" % len(
+            logger.debug("[Movies Sync] %i movie(s) progress will be updated in Kodi" % len(
                 kodiMoviesToUpdate))
 
             self.sync.UpdateProgress(fromPercent, line1='', line2=kodiUtilities.getString(

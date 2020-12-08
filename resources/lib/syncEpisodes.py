@@ -472,10 +472,10 @@ class SyncEpisodes:
                 self.sync.UpdateProgress(toPercent, line1=kodiUtilities.getString(
                     1441), line2=kodiUtilities.getString(32129))
                 logger.debug(
-                    "[Episodes Sync] Kodi episode playbacks are up to date.")
+                    "[Episodes Sync] Kodi episode progress is up to date.")
                 return
 
-            logger.debug("[Episodes Sync] %i show(s) shows are missing playbacks on Kodi" % len(
+            logger.debug("[Episodes Sync] %i show(s) shows are missing progress in Kodi" % len(
                 kodiShowsUpdate['shows']))
             for s in ["%s" % self.__getShowAsString(s, short=True) for s in kodiShowsUpdate['shows']]:
                 logger.debug("[Episodes Sync] Episodes updated: %s" % s)
