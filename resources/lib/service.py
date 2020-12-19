@@ -68,7 +68,7 @@ class traktService:
                 del data['action']
                 self.doAddToWatchlist(data)
             elif action == 'manualSync':
-                if not self.syncThread.isAlive():
+                if not self.syncThread.is_alive():
                     logger.debug("Performing a manual sync.")
                     self.doSync(
                         manual=True, silent=data['silent'], library=data['library'])
@@ -132,7 +132,7 @@ class traktService:
         del self.Monitor
 
         # check if sync thread is running, if so, join it.
-        if self.syncThread.isAlive():
+        if self.syncThread.is_alive():
             self.syncThread.join()
 
     def doManualRating(self, data):
