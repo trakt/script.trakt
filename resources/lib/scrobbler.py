@@ -143,11 +143,10 @@ class Scrobbler():
                 return
             xbmc.sleep(1000)  # Wait for possible silent seek (caused by resuming)
             try:
-                self.isPVR = False
+                self.isPVR = xbmc.getCondVisibility('Pvr.IsPlayingTv') | xbmc.Player().getPlayingFile().startswith('pvr://')
                 self.watchedTime = xbmc.Player().getTime()
                 self.videoDuration = 0
-                if xbmc.Player().getPlayingFile().startswith('pvr://'):
-                    self.isPVR = True
+                if self.isPVR:
                     self.watchedTime = (utilities._to_sec(xbmc.getInfoLabel('PVR.EpgEventElapsedTime(hh:mm:ss)')))
                     self.videoDuration = int(utilities._to_sec(xbmc.getInfoLabel('PVR.EpgEventDuration(hh:mm:ss)')))
                 else:
