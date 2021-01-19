@@ -143,11 +143,10 @@ class Scrobbler():
                 return
             xbmc.sleep(1000)  # Wait for possible silent seek (caused by resuming)
             try:
-                self.isPVR = False
+                self.isPVR = xbmc.getCondVisibility('Pvr.IsPlayingTv') | xbmc.Player().getPlayingFile().startswith('pvr://')
                 self.watchedTime = xbmc.Player().getTime()
                 self.videoDuration = 0
-                if xbmc.Player().getPlayingFile().startswith('pvr://'):
-                    self.isPVR = True
+                if self.isPVR:
                     self.watchedTime = (utilities._to_sec(xbmc.getInfoLabel('PVR.EpgEventElapsedTime(hh:mm:ss)')))
                     self.videoDuration = int(utilities._to_sec(xbmc.getInfoLabel('PVR.EpgEventDuration(hh:mm:ss)')))
                 else:
@@ -371,7 +370,7 @@ class Scrobbler():
 
             if response is not None:
                 # Don't scrobble incorrect episode, episode numbers can differ from database. ie Aired vs. DVD order. Use fuzzy logic to match episode title.
-                if self.isPVR and not utilities._fuzzyMatch(self.curVideoInfo['title'], response['episode']['title'], 60.0):
+                if self.isPVR and not utilities._fuzzyMatch(self.curVideoInfo['title'], response['episode']['title'], 50.0):
                     logger.debug("scrobble sending incorrect scrobbleEpisode stopping: %sx%s - %s != %s" % (self.curVideoInfo['season'],self.curVideoInfo['number'],self.curVideoInfo['title'],response['episode']['title']))
                     self.stopScrobbler = True
                         
