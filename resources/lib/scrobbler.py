@@ -370,7 +370,7 @@ class Scrobbler():
 
             if response is not None:
                 # Don't scrobble incorrect episode, episode numbers can differ from database. ie Aired vs. DVD order. Use fuzzy logic to match episode title.
-                if self.isPVR and not utilities._fuzzyMatch(self.curVideoInfo['title'], response['episode']['title'], 60.0):
+                if self.isPVR and not utilities._fuzzyMatch(self.curVideoInfo['title'], response['episode']['title'], 50.0):
                     logger.debug("scrobble sending incorrect scrobbleEpisode stopping: %sx%s - %s != %s" % (self.curVideoInfo['season'],self.curVideoInfo['number'],self.curVideoInfo['title'],response['episode']['title']))
                     self.stopScrobbler = True
                         
