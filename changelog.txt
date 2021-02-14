@@ -1,3 +1,10 @@
+version 3.3.3
+  - Improve PVR detection
+  - Updated for python 3.9
+  - Fix bug that reset watched state
+  - Don't fail on missing uniqueid
+  - Improved logging
+
 version 3.3.2
   - Fixes for matrix changed apis
 
