@@ -103,7 +103,10 @@ def checkExclusion(fullpath: str) -> bool:
 
 def kodiRpcToTraktMediaObject(type, data, mode='collected'):
     if type == 'show':
-        data['ids'] = data.pop('uniqueid')
+        if 'uniqueid' in data:
+            data['ids'] = data.pop('uniqueid')
+        else:
+            logger.debug('kodiRpcToTraktMediaObject(): No uniqueid found')
         data['rating'] = data['userrating'] if 'userrating' in data and data['userrating'] > 0 else 0
         del data['label']
         return data
@@ -163,7 +166,10 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
         data['rating'] = data['userrating'] if 'userrating' in data and data['userrating'] > 0 else 0
         data['collected'] = 1  # this is in our kodi so it should be collected
         data['watched'] = 1 if data['plays'] > 0 else 0
-        data['ids'] = data.pop('uniqueid')
+        if 'uniqueid' in data:
+            data['ids'] = data.pop('uniqueid')
+        else:
+            logger.debug('kodiRpcToTraktMediaObject(): No uniqueid found')
         del data['label']
         return data
     else:
