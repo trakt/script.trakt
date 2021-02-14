@@ -1,7 +1,7 @@
 name: Kodi Addon-Submitter
 
 on:
-  create:
+  push:
     tags:
       - v*
 
