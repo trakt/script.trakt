@@ -1,3 +1,6 @@
+version 3.3.4
+  - Fix variable reference error
+
 version 3.3.3
   - Improve PVR detection
   - Updated for python 3.9
