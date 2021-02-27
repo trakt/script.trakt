@@ -329,8 +329,8 @@ class SyncMovies():
             # need to calculate the progress in int from progress in percent from Trakt
             # split movie list into chunks of 50
             chunksize = 50
-            chunked_movies = utilities.chunks([{"jsonrpc": "2.0", "id": i, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": movie['movieid'], "resume": {
-                                              "position": movie['runtime'] / 100.0 * movie['progress'], "total": movie['runtime']}}} for movie in kodiMoviesToUpdate if movie['runtime'] > 0], chunksize)
+            chunked_movies = utilities.chunks([{"jsonrpc": "2.0", "id": i, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": movies[i]['movieid'], "resume": {
+                                              "position": movies[i]['runtime'] / 100.0 * movies[i]['progress'], "total": movies[i]['runtime']}}} for i in range(len(kodiMoviesToUpdate)) if movies[i]['runtime'] > 0], chunksize)
             i = 0
             x = float(len(kodiMoviesToUpdate))
             for chunk in chunked_movies:
