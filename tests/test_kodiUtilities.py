@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 #
 
-from resources.lib import kodiUtilities
 import pytest
 import mock
 import sys
@@ -12,6 +11,7 @@ xbmcgui_mock = mock.Mock()
 sys.modules['xbmcgui'] = xbmcgui_mock
 xbmcaddon_mock = mock.Mock()
 sys.modules['xbmcaddon'] = xbmcaddon_mock
+from resources.lib import kodiUtilities
 
 
 def test_notification():
