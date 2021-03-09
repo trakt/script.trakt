@@ -153,17 +153,15 @@ class traktService:
             logger.debug("Getting data for manual %s of %s: video_ids: |%s| dbid: |%s|" % (
                 action, media_type, data.get('video_ids'), data.get('dbid')))
 
-            temp_ids, id_type = utilities.parseIdToTraktIds(
-                str(utilities.best_id(data['video_ids'], media_type)), media_type)
+            best_id, id_type = utilities.best_id(data['video_ids'], media_type)
 
         else:
             logger.debug("Getting data for manual %s of %s: video_id: |%s| dbid: |%s|" % (
                 action, media_type, data.get('video_id'), data.get('dbid')))
 
-            temp_ids, id_type = utilities.parseIdToTraktIds(
+            temp_ids, id_type = utilities.guessBestTraktId(
                 str(data['video_id']), media_type)
-
-        best_id = temp_ids[id_type]
+            best_id = temp_ids[id_type]
 
         if not id_type:
             logger.debug("doManualRating(): Unrecognized id_type: |%s|-|%s|." %
@@ -224,10 +222,7 @@ class traktService:
         media_type = data['media_type']
 
         if utilities.isMovie(media_type):
-            temp_ids, id_type = utilities.parseIdToTraktIds(
-                str(utilities.best_id(data['ids'], media_type)), media_type)
-
-            best_id = temp_ids[id_type]
+            best_id, id_type = utilities.best_id(data['ids'], media_type)
 
             summaryInfo = globals.traktapi.getMovieSummary(
                 best_id).to_dict()
@@ -262,7 +257,7 @@ class traktService:
             s = utilities.getFormattedItemName(media_type, data)
 
             logger.debug("doAddToWatchlist(): '%s - Season %d' trying to add to users watchlist."
-                         % (ids, data['season']))
+                         % (data['ids'], data['season']))
 
             result = globals.traktapi.addToWatchlist(summaryInfo)
             if result:
@@ -286,10 +281,7 @@ class traktService:
         media_type = data['media_type']
 
         if utilities.isMovie(media_type):
-            temp_ids, id_type = utilities.parseIdToTraktIds(
-                str(utilities.best_id(data['ids'], media_type)), media_type)
-
-            best_id = temp_ids[id_type]
+            best_id, id_type = utilities.best_id(data['ids'], media_type)
 
             summaryInfo = globals.traktapi.getMovieSummary(
                 best_id).to_dict()
