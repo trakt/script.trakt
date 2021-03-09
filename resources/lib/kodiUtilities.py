@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 REGEX_URL = '(^https?://)(.+)'
 
 def notification(header: str, message: str, time=5000, icon=__addon__.getAddonInfo('icon')):
-    xbmc.executebuiltin("XBMC.Notification(%s,%s,%i,%s)" % (header, message, time, icon))
+    xbmcgui.Dialog().notification(header, message, icon, time)
 
 def showSettings():
     __addon__.openSettings()
