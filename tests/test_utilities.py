@@ -2,6 +2,7 @@
 #
 
 import json
+from typing import Tuple
 import pytest
 from resources.lib import utilities
 
@@ -172,24 +173,25 @@ def test_regex_year_year_2():
     assert utilities.regex_year('ShowTitle')[1] == ''
 
 
-def test_parseIdToTraktIds_IMDB():
-    assert utilities.parseIdToTraktIds('tt1431045', 'movie')[
+def test_guessBestTraktId_IMDB():
+    assert utilities.guessBestTraktId('tt1431045', 'movie')[
         0] == {'imdb': 'tt1431045'}
 
 
-def test_parseIdToTraktIds_TMDB():
-    assert utilities.parseIdToTraktIds('20077', 'movie')[
+def test_guessBestTraktId_TMDB():
+    assert utilities.guessBestTraktId('20077', 'movie')[
         0] == {'tmdb': '20077'}
 
 
-def test_parseIdToTraktIds_Tvdb():
-    assert utilities.parseIdToTraktIds('4346770', 'show')[
+def test_guessBestTraktId_Tvdb():
+    assert utilities.guessBestTraktId('4346770', 'show')[
         0] == {'tvdb': '4346770'}
 
 
 def test_best_id_trakt():
     data = load_params_from_json('tests/fixtures/shows.json')
-    assert utilities.best_id(data[1]['show']['ids'], 'show') == 1395
+    assert utilities.best_id(
+        data[1]['show']['ids'], 'show') == (1395, 'trakt')
 
 
 def test_checkExcludePath_Path_Excluded():
@@ -322,6 +324,7 @@ def test_compareMovies_matchByTitleAndYear_rating_nomatch():
 
     assert utilities.compareMovies(data1, "", True, rating=True) == data1
 
+
 def test_compareMovies_not_matchByTitleAndYear_collected_match():
     data1 = load_params_from_json('tests/fixtures/movies_local.json')
     data2 = load_params_from_json('tests/fixtures/movies_remote.json')
@@ -411,15 +414,22 @@ def test_checkIfNewVersion_old_version_empty():
 
 
 def test_compareShows_matchByTitleAndYear_no_rating():
-    data1 = load_params_from_json('tests/fixtures/compare_shows_local_batman.json')
-    data2 = load_params_from_json('tests/fixtures/compare_shows_remote_batman.json')
+    data1 = load_params_from_json(
+        'tests/fixtures/compare_shows_local_batman.json')
+    data2 = load_params_from_json(
+        'tests/fixtures/compare_shows_remote_batman.json')
 
-    assert utilities.compareShows(data1, data2, True, rating=True) == {"shows": []}
+    assert utilities.compareShows(
+        data1, data2, True, rating=True) == {"shows": []}
+
 
 def test_compareShows_matchByTitleAndYear_rating_changed():
-    data1 = load_params_from_json('tests/fixtures/compare_shows_local_batman_rating.json')
-    data2 = load_params_from_json('tests/fixtures/compare_shows_remote_batman.json')
-    fixture = load_params_from_json('tests/fixtures/compare_shows_compared_batman.json')
+    data1 = load_params_from_json(
+        'tests/fixtures/compare_shows_local_batman_rating.json')
+    data2 = load_params_from_json(
+        'tests/fixtures/compare_shows_remote_batman.json')
+    fixture = load_params_from_json(
+        'tests/fixtures/compare_shows_compared_batman.json')
 
     assert utilities.compareShows(data1, data2, True, rating=True) == fixture
 
@@ -430,7 +440,8 @@ def test_compareShows_not_matchByTitleAndYear_no_rating():
     data2 = load_params_from_json(
         'tests/fixtures/compare_shows_remote_batman.json')
 
-    assert utilities.compareShows(data1, data2, False, rating=True) == {"shows": []}
+    assert utilities.compareShows(
+        data1, data2, False, rating=True) == {"shows": []}
 
 
 def test_compareShows_not_matchByTitleAndYear_rating_changed():
@@ -445,16 +456,21 @@ def test_compareShows_not_matchByTitleAndYear_rating_changed():
 
 
 def test_compareEpisodes_matchByTitleAndYear_no_matches():
-    data1 = load_params_from_json('tests/fixtures/compare_shows_local_batman.json')
-    data2 = load_params_from_json('tests/fixtures/compare_shows_remote_batman.json')
+    data1 = load_params_from_json(
+        'tests/fixtures/compare_shows_local_batman.json')
+    data2 = load_params_from_json(
+        'tests/fixtures/compare_shows_remote_batman.json')
 
     assert utilities.compareEpisodes(data1, data2, True) == {"shows": []}
 
 
 def test_compareEpisodes_matchByTitleAndYear_local_episode_added():
-    data1 = load_params_from_json('tests/fixtures/compare_shows_local_batman.json')
-    data2 = load_params_from_json('tests/fixtures/compare_shows_remote_batman_episode.json')
-    fixture = load_params_from_json('tests/fixtures/compare_shows_batman_episode_to_add.json')
+    data1 = load_params_from_json(
+        'tests/fixtures/compare_shows_local_batman.json')
+    data2 = load_params_from_json(
+        'tests/fixtures/compare_shows_remote_batman_episode.json')
+    fixture = load_params_from_json(
+        'tests/fixtures/compare_shows_batman_episode_to_add.json')
 
     assert utilities.compareEpisodes(data1, data2, True) == fixture
 
@@ -478,16 +494,19 @@ def test_compareEpisodes_not_matchByTitleAndYear_local_episode_added():
 
     assert utilities.compareEpisodes(data1, data2, False) == fixture
 
+
 def test_findMediaObject_not_matchByTitleAndYear_should_not_match():
     data1 = load_params_from_json('tests/fixtures/movies_local_blind.json')
-    data2 = load_params_from_json('tests/fixtures/movies_remote_blind_no_match.json')
+    data2 = load_params_from_json(
+        'tests/fixtures/movies_remote_blind_no_match.json')
 
     assert utilities.findMediaObject(data1, data2, False) == None
 
 
 def test_findMediaObject_not_matchByTitleAndYear_should_match():
     data1 = load_params_from_json('tests/fixtures/movies_local_blind.json')
-    data2 = load_params_from_json('tests/fixtures/movies_remote_blind_match.json')
+    data2 = load_params_from_json(
+        'tests/fixtures/movies_remote_blind_match.json')
 
     assert utilities.findMediaObject(data1, data2, False) == data1
 
@@ -501,21 +520,24 @@ def test_findMediaObject_not_matchByTitleAndYear_add_collection():
 
 def test_findMediaObject_not_matchByTitleAndYear_add_collection_same_year_title_movie_in_collection():
     data1 = load_params_from_json('tests/fixtures/movies_local_chaos.json')
-    data2 = load_params_from_json('tests/fixtures/movies_remote_chaos_match.json')
+    data2 = load_params_from_json(
+        'tests/fixtures/movies_remote_chaos_match.json')
 
     assert utilities.findMediaObject(data1, data2, False) == None
 
 
 def test_findMediaObject_match_by_title_should_match():
     data1 = load_params_from_json('tests/fixtures/movies_local_blind.json')
-    data2 = load_params_from_json('tests/fixtures/movies_remote_blind_no_match.json')
+    data2 = load_params_from_json(
+        'tests/fixtures/movies_remote_blind_no_match.json')
 
     assert utilities.findMediaObject(data1, data2, True) == data2[0]
 
 
 def test_findMediaObject_matchByTitleAndYear_should_match():
     data1 = load_params_from_json('tests/fixtures/movies_local_blind.json')
-    data2 = load_params_from_json('tests/fixtures/movies_remote_blind_match.json')
+    data2 = load_params_from_json(
+        'tests/fixtures/movies_remote_blind_match.json')
 
     assert utilities.findMediaObject(data1, data2, True) == data1
 
@@ -529,18 +551,21 @@ def test_findMediaObject_matchByTitleAndYear_add_collection():
 
 def test_findMediaObject_matchByTitleAndYear_add_collection_same_year_title_movie_in_collection():
     data1 = load_params_from_json('tests/fixtures/movies_local_chaos.json')
-    data2 = load_params_from_json('tests/fixtures/movies_remote_chaos_match.json')
+    data2 = load_params_from_json(
+        'tests/fixtures/movies_remote_chaos_match.json')
 
     assert utilities.findMediaObject(data1, data2, True) == data2[0]
 
 
 def test_countEpisodes1():
-    data1 = load_params_from_json('tests/fixtures/compare_shows_local_batman.json')
+    data1 = load_params_from_json(
+        'tests/fixtures/compare_shows_local_batman.json')
 
     assert utilities.countEpisodes(data1) == 6
 
 
 def test_countEpisodes2():
-    data1 = load_params_from_json('tests/fixtures/compare_shows_remote_batman_episode.json')
+    data1 = load_params_from_json(
+        'tests/fixtures/compare_shows_remote_batman_episode.json')
 
     assert utilities.countEpisodes(data1) == 5

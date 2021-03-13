@@ -6,6 +6,7 @@ import time
 import re
 import logging
 import traceback
+from typing import Tuple
 import dateutil.parser
 from datetime import datetime
 from dateutil.tz import tzutc, tzlocal
@@ -228,7 +229,7 @@ def createError(ex):
     return template.format(type(ex).__name__, ex.args, traceback.format_exc())
 
 
-def parseIdToTraktIds(id, type):
+def guessBestTraktId(id, type) -> Tuple[dict, str]:
     data = {}
     id_type = ''
     if id.startswith("tt"):
@@ -246,19 +247,19 @@ def parseIdToTraktIds(id, type):
     return data, id_type
 
 
-def best_id(ids, type):
+def best_id(ids, type) -> Tuple[str, str]:
     if 'trakt' in ids:
-        return ids['trakt']
+        return ids['trakt'], 'trakt'
     elif 'imdb' in ids and isMovie(type):
-        return ids['imdb']
+        return ids['imdb'], 'imdb'
     elif 'tmdb' in ids:
-        return ids['tmdb']
+        return ids['tmdb'], 'tmdb'
     elif 'tvdb' in ids:
-        return ids['tvdb']
+        return ids['tvdb'], 'tvdb'
     elif 'tvrage' in ids:
-        return ids['tvrage']
+        return ids['tvrage'], 'tvrage'
     elif 'slug' in ids:
-        return ids['slug']
+        return ids['slug'], 'slug'
 
 
 def checkExcludePath(excludePath, excludePathEnabled, fullpath, x):
