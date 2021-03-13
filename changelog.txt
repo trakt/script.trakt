@@ -1,3 +1,10 @@
+version 3.4.0
+  - Fallback to pre-matrix imdbnumber behavior again
+  - Fix notifications not showing
+  - Fix id handling for manual actions, fixes tmdb for e.g.
+  - Fix episode collection chunksize
+  - Fix show rating not working
+
 version 3.3.5
   - Fix variable reference error
 
