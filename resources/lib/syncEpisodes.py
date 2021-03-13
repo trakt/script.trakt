@@ -296,7 +296,7 @@ class SyncEpisodes:
                 32068), line2=kodiUtilities.getString(32067) % (len(traktShowsAdd['shows'])))
 
             # split episode list into chunks of 50
-            chunksize = 1
+            chunksize = 50
             chunked_episodes = utilities.chunks(
                 traktShowsAdd['shows'], chunksize)
             errorcount = 0
