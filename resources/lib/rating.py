@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 __addon__ = xbmcaddon.Addon("script.trakt")
 
+
 def ratingCheck(media_type, items_to_rate, watched_time, total_time):
     """Check if a video should be rated and if so launches the rating dialog"""
     logger.debug("Rating Check called for '%s'" % media_type)
@@ -26,7 +27,9 @@ def ratingCheck(media_type, items_to_rate, watched_time, total_time):
     if watched >= kodiUtilities.getSettingAsFloat("rate_min_view_time"):
         rateMedia(media_type, items_to_rate)
     else:
-        logger.debug("'%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (media_type, watched, kodiUtilities.getSettingAsFloat("rate_min_view_time")))
+        logger.debug("'%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (
+            media_type, watched, kodiUtilities.getSettingAsFloat("rate_min_view_time")))
+
 
 def rateMedia(media_type, itemsToRate, unrate=False, rating=None):
     """Launches the rating dialog"""
@@ -59,18 +62,23 @@ def rateMedia(media_type, itemsToRate, unrate=False, rating=None):
         rerate = kodiUtilities.getSettingAsBool('rate_rerate')
         if rating is not None:
             if summary_info['user']['ratings']['rating'] == 0:
-                logger.debug("Rating for '%s' is being set to '%d' manually." % (s, rating))
+                logger.debug(
+                    "Rating for '%s' is being set to '%d' manually." % (s, rating))
                 __rateOnTrakt(rating, media_type, summary_info)
             else:
                 if rerate:
                     if not summary_info['user']['ratings']['rating'] == rating:
-                        logger.debug("Rating for '%s' is being set to '%d' manually." % (s, rating))
+                        logger.debug(
+                            "Rating for '%s' is being set to '%d' manually." % (s, rating))
                         __rateOnTrakt(rating, media_type, summary_info)
                     else:
-                        kodiUtilities.notification(kodiUtilities.getString(32043), s)
-                        logger.debug("'%s' already has a rating of '%d'." % (s, rating))
+                        kodiUtilities.notification(
+                            kodiUtilities.getString(32043), s)
+                        logger.debug(
+                            "'%s' already has a rating of '%d'." % (s, rating))
                 else:
-                    kodiUtilities.notification(kodiUtilities.getString(32041), s)
+                    kodiUtilities.notification(
+                        kodiUtilities.getString(32041), s)
                     logger.debug("'%s' is already rated." % s)
             return
 
@@ -105,9 +113,10 @@ def rateMedia(media_type, itemsToRate, unrate=False, rating=None):
             logger.debug("Rating dialog was closed with no rating.")
 
         del gui
-        #Reset rating and unrate for multi part episodes
-        unrate=False
-        rating=None
+        # Reset rating and unrate for multi part episodes
+        unrate = False
+        rating = None
+
 
 def __rateOnTrakt(rating, media_type, media, unrate=False):
     logger.debug("Sending rating (%s) to Trakt.tv" % rating)
@@ -117,12 +126,16 @@ def __rateOnTrakt(rating, media_type, media, unrate=False):
         key = 'movies'
         params['rating'] = rating
         if 'movieid' in media:
-            kodiUtilities.kodiJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": media['movieid'], "userrating": rating}})
+            kodiUtilities.kodiJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetMovieDetails", "params": {
+                                          "movieid": media['movieid'], "userrating": rating}})
     elif utilities.isShow(media_type):
         key = 'shows'
+        # we need to remove this key or trakt will be confused
+        del(params["seasons"])
         params['rating'] = rating
         if 'tvshowid' in media:
-            kodiUtilities.kodiJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {"tvshowid": media['tvshowid'], "userrating": rating}})
+            kodiUtilities.kodiJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetTVShowDetails", "params": {
+                                          "tvshowid": media['tvshowid'], "userrating": rating}})
     elif utilities.isSeason(media_type):
         key = 'shows'
         params['seasons'] = [{'rating': rating, 'number': media['season']}]
@@ -130,7 +143,8 @@ def __rateOnTrakt(rating, media_type, media, unrate=False):
         key = 'episodes'
         params['rating'] = rating
         if 'episodeid' in media:
-            kodiUtilities.kodiJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetEpisodeDetails", "params": {"episodeid": media['episodeid'], "userrating": rating}})
+            kodiUtilities.kodiJsonRequest({"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetEpisodeDetails", "params": {
+                                          "episodeid": media['episodeid'], "userrating": rating}})
     else:
         return
     root = {key: [params]}
@@ -150,6 +164,7 @@ def __rateOnTrakt(rating, media_type, media, unrate=False):
                 kodiUtilities.notification(kodiUtilities.getString(32042), s)
         else:
             kodiUtilities.notification(kodiUtilities.getString(32044), s)
+
 
 class RatingDialog(xbmcgui.WindowXMLDialog):
     buttons = {
