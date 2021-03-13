@@ -124,6 +124,9 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
     if type == 'show':
         if 'uniqueid' in data:
             data['ids'] = data.pop('uniqueid')
+        elif 'imdbnumber' in data:
+            id = data.pop('imdbnumber')
+            data['ids'] = utilities.guessBestTraktId(id, type)[0]
         else:
             logger.debug('kodiRpcToTraktMediaObject(): No uniqueid found')
         data['rating'] = data['userrating'] if 'userrating' in data and data['userrating'] > 0 else 0
@@ -157,6 +160,9 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
             elif 'unknown' in data['uniqueid'] and data['uniqueid']['unknown'] != '':
                 episode['ids'].update(utilities.guessBestTraktId(
                     data['uniqueid']['unknown'], type)[0])
+        elif 'imdbnumber' in data:
+            id = data.pop('imdbnumber')
+            data['ids'] = utilities.guessBestTraktId(id, type)[0]
 
         if 'lastplayed' in data:
             episode['watched_at'] = utilities.convertDateTimeToUTC(
@@ -192,6 +198,9 @@ def kodiRpcToTraktMediaObject(type, data, mode='collected'):
         data['watched'] = 1 if data['plays'] > 0 else 0
         if 'uniqueid' in data:
             data['ids'] = data.pop('uniqueid')
+        elif 'imdbnumber' in data:
+            id = data.pop('imdbnumber')
+            data['ids'] = utilities.guessBestTraktId(id, type)[0]
         else:
             logger.debug('kodiRpcToTraktMediaObject(): No uniqueid found')
         del data['label']
@@ -290,14 +299,17 @@ def getEpisodeDetailsFromKodi(libraryId, fields):
         return None
 
     show_data = getShowDetailsFromKodi(
-        result['episodedetails']['tvshowid'], ['year', 'uniqueid'])
+        result['episodedetails']['tvshowid'], ['year', 'uniqueid', 'imdbnumber'])
 
     if not show_data:
         logger.debug(
             "getEpisodeDetailsFromKodi(): Result from getShowDetailsFromKodi() was empty.")
         return None
 
-    result['episodedetails']['show_ids'] = show_data['uniqueid']
+    if 'uniqueid' in show_data:
+        result['episodedetails']['show_ids'] = show_data['uniqueid']
+    elif 'imdbnumber' in show_data:
+        result['episodedetails']['show_ids'] = show_data['imdbnumber']
     result['episodedetails']['year'] = show_data['year']
 
     try:
@@ -329,19 +341,19 @@ def getMovieDetailsFromKodi(libraryId, fields):
 
 def checkAndConfigureProxy():
     proxyActive = kodiJsonRequest({'jsonrpc': '2.0', "method": "Settings.GetSettingValue", "params": {
-                                  "setting": "network.usehttpproxy"}, 'id': 1})['value']
+        "setting": "network.usehttpproxy"}, 'id': 1})['value']
     proxyType = kodiJsonRequest({'jsonrpc': '2.0', "method": "Settings.GetSettingValue", "params": {
-                                "setting": "network.httpproxytype"}, 'id': 1})['value']
+        "setting": "network.httpproxytype"}, 'id': 1})['value']
 
     if proxyActive and proxyType == 0:  # PROXY_HTTP
         proxyURL = kodiJsonRequest({'jsonrpc': '2.0', "method": "Settings.GetSettingValue", "params": {
-                                   "setting": "network.httpproxyserver"}, 'id': 1})['value']
+            "setting": "network.httpproxyserver"}, 'id': 1})['value']
         proxyPort = str(kodiJsonRequest({'jsonrpc': '2.0', "method": "Settings.GetSettingValue", "params": {
-                        "setting": "network.httpproxyport"}, 'id': 1})['value'])
+            "setting": "network.httpproxyport"}, 'id': 1})['value'])
         proxyUsername = kodiJsonRequest({'jsonrpc': '2.0', "method": "Settings.GetSettingValue", "params": {
-                                        "setting": "network.httpproxyusername"}, 'id': 1})['value']
+            "setting": "network.httpproxyusername"}, 'id': 1})['value']
         proxyPassword = kodiJsonRequest({'jsonrpc': '2.0', "method": "Settings.GetSettingValue", "params": {
-                                        "setting": "network.httpproxypassword"}, 'id': 1})['value']
+            "setting": "network.httpproxypassword"}, 'id': 1})['value']
 
         if proxyUsername and proxyPassword and proxyURL and proxyPort:
             regexUrl = re.compile(REGEX_URL)
