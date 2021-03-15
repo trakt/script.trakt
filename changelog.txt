@@ -1,3 +1,6 @@
+version 3.4.1
+- Fix wrong kodi query breaking episode sync
+
 version 3.4.0
   - Fallback to pre-matrix imdbnumber behavior again
   - Fix notifications not showing
