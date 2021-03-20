@@ -7,14 +7,15 @@ msgstr ""
 "Project-Id-Version: XBMC Addons\n"
 "Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: Portuguese (http://www.transifex.com/projects/p/xbmc-addons/language/pt/)\n"
+"PO-Revision-Date: 2021-03-20 15:56+0000\n"
+"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"Language-Team: Portuguese (Portugal) <https://kodi.weblate.cloud/projects/kodi-add-ons-scripts/script-trakt/pt_pt/>\n"
+"Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 4.5.1\n"
 
 msgctxt "#32000"
 msgid "General"
@@ -514,7 +515,7 @@ msgstr "A actualizar progresso de reprodução das séries (%i de %i) no Kodi"
 
 msgctxt "#32131"
 msgid "Playback progress updated for %i episode(s) in Kodi"
-msgstr "Progresso da reprodução actualizado para %i  episódio(s) no Kodi"
+msgstr "Progresso da reprodução actualizado para %i episódio(s) no Kodi"
 
 msgctxt "#32132"
 msgid "Unrate this season"
@@ -564,6 +565,36 @@ msgctxt "#32143"
 msgid "Synchronize library"
 msgstr "Sincronizar Biblioteca"
 
+msgctxt "#32144"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
+msgstr ""
+
+# empty strings from id 32145 to 32146
+msgctxt "#32147"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr ""
+
+# empty string with id 32148
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr ""
+
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr ""
+
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr ""
+
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr ""
+
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr ""
+
 msgctxt "#32154"
 msgid "Authorize"
 msgstr "Autorizar"
@@ -580,13 +611,22 @@ msgctxt "#32157"
 msgid "Account Authorization"
 msgstr "Autorização de Conta"
 
+# empty string with id 32158
 msgctxt "#32159"
-msgid "Visit {0} or scan the QR Code below."
-msgstr "Visitar {0} ou digitalizar código QR abaixo."
+msgid "Visit {0} or scan the QR code."
+msgstr ""
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr ""
 
 msgctxt "#32163"
 msgid "User"
 msgstr "Utilizador"
+
+msgctxt "#32164"
+msgid "Fallback to Title/Year matching if necessary"
+msgstr ""
 
 msgctxt "#32165"
 msgid "Trakt - Added to watchlist"
@@ -595,3 +635,87 @@ msgstr "Trakt - Adicionado à Watchlist"
 msgctxt "#32166"
 msgid "Trakt - Failed adding to watchlist"
 msgstr "Trakt - Falhou a Adicionar à Watchlist"
+
+msgctxt "#32167"
+msgid "Offset scrobble start by X minutes"
+msgstr ""
+
+msgctxt "#32168"
+msgid "Sync ratings"
+msgstr ""
+
+msgctxt "#32169"
+msgid "Kodi movie ratings are up to date"
+msgstr ""
+
+msgctxt "#32170"
+msgid "%i movie(s) ratings will be updated in Kodi"
+msgstr ""
+
+msgctxt "#32171"
+msgid "Updating %i of %i movie ratings in Kodi"
+msgstr ""
+
+msgctxt "#32172"
+msgid "Ratings updated for %i movie(s) in Kodi"
+msgstr ""
+
+msgctxt "#32173"
+msgid "Kodi episode ratings are up to date"
+msgstr ""
+
+msgctxt "#32174"
+msgid "Updating %i of %i episode ratings in Kodi"
+msgstr ""
+
+msgctxt "#32175"
+msgid "Ratings updated for %i episode(s) in Kodi"
+msgstr ""
+
+msgctxt "#32176"
+msgid "Kodi show ratings are up to date"
+msgstr ""
+
+msgctxt "#32177"
+msgid "Updating %i of %i show ratings in Kodi"
+msgstr ""
+
+msgctxt "#32178"
+msgid "Ratings updated for %i show(s) in Kodi"
+msgstr ""
+
+msgctxt "#32179"
+msgid "Trakt movie ratings are up to date"
+msgstr ""
+
+msgctxt "#32180"
+msgid "%i movie ratings will be updated on Trakt"
+msgstr ""
+
+msgctxt "#32181"
+msgid "Trakt show ratings are up to date"
+msgstr ""
+
+msgctxt "#32182"
+msgid "%i show ratings will be updated on Trakt"
+msgstr ""
+
+msgctxt "#32183"
+msgid "Attempt to scrobble MythTV PVR recordings"
+msgstr ""
+
+msgctxt "#32184"
+msgid "Attempt secondary show title search"
+msgstr ""
+
+msgctxt "#32185"
+msgid "Exclude Plugins"
+msgstr ""
+
+msgctxt "#32186"
+msgid "Allow script exclusions"
+msgstr ""
+
+#~ msgctxt "#32159"
+#~ msgid "Visit {0} or scan the QR Code below."
+#~ msgstr "Visitar {0} ou digitalizar código QR abaixo."
