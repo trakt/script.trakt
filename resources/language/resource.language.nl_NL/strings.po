@@ -7,14 +7,15 @@ msgstr ""
 "Project-Id-Version: XBMC Addons\n"
 "Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: Dutch (http://www.transifex.com/projects/p/xbmc-addons/language/nl/)\n"
+"PO-Revision-Date: 2021-03-20 15:56+0000\n"
+"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"Language-Team: Dutch <https://kodi.weblate.cloud/projects/kodi-add-ons-scripts/script-trakt/nl_nl/>\n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nl\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.5.1\n"
 
 msgctxt "#32000"
 msgid "General"
@@ -270,7 +271,7 @@ msgstr "%i van %i aflevering(en) zijn toegevoegd aan je Trakt-collectie"
 
 msgctxt "#32070"
 msgid "Going to update %i show(s) missing watched status"
-msgstr "%i  afleveringen zonder de status Bekeken gaan worden bijgewerkt"
+msgstr "%i afleveringen zonder de status Bekeken gaan worden bijgewerkt"
 
 msgctxt "#32071"
 msgid "Checking watched episodes on Trakt"
@@ -608,21 +609,14 @@ msgctxt "#32157"
 msgid "Account Authorization"
 msgstr "Account autorisatie"
 
+# empty string with id 32158
 msgctxt "#32159"
-msgid "Visit {0} or scan the QR Code below."
-msgstr "Bezoek {0} of scan de QR code beneden."
-
-msgctxt "#32160"
-msgid "Authorize the trakt addon to access your account."
-msgstr "Autoriseer de trakt add-on om toegang te krijgen tot jouw account."
-
-msgctxt "#32161"
-msgid "Enter the PIN provided in the box below."
-msgstr "Vul het wachtwoord in verkregen in de box beneden."
+msgid "Visit {0} or scan the QR code."
+msgstr ""
 
 msgctxt "#32162"
 msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
-msgstr "De trakt add-on KAN NIET worden gebruikt zonder het te autoriseren naar jouw trakt.tv account.   "
+msgstr "De trakt add-on KAN NIET worden gebruikt zonder het te autoriseren naar jouw trakt.tv account."
 
 msgctxt "#32163"
 msgid "User"
@@ -639,3 +633,95 @@ msgstr "Trakt - Toegevoegd aan bekijklijst"
 msgctxt "#32166"
 msgid "Trakt - Failed adding to watchlist"
 msgstr "Trakt - Niet gelukt toe te voegen aan bekijklijst"
+
+msgctxt "#32167"
+msgid "Offset scrobble start by X minutes"
+msgstr ""
+
+msgctxt "#32168"
+msgid "Sync ratings"
+msgstr ""
+
+msgctxt "#32169"
+msgid "Kodi movie ratings are up to date"
+msgstr ""
+
+msgctxt "#32170"
+msgid "%i movie(s) ratings will be updated in Kodi"
+msgstr ""
+
+msgctxt "#32171"
+msgid "Updating %i of %i movie ratings in Kodi"
+msgstr ""
+
+msgctxt "#32172"
+msgid "Ratings updated for %i movie(s) in Kodi"
+msgstr ""
+
+msgctxt "#32173"
+msgid "Kodi episode ratings are up to date"
+msgstr ""
+
+msgctxt "#32174"
+msgid "Updating %i of %i episode ratings in Kodi"
+msgstr ""
+
+msgctxt "#32175"
+msgid "Ratings updated for %i episode(s) in Kodi"
+msgstr ""
+
+msgctxt "#32176"
+msgid "Kodi show ratings are up to date"
+msgstr ""
+
+msgctxt "#32177"
+msgid "Updating %i of %i show ratings in Kodi"
+msgstr ""
+
+msgctxt "#32178"
+msgid "Ratings updated for %i show(s) in Kodi"
+msgstr ""
+
+msgctxt "#32179"
+msgid "Trakt movie ratings are up to date"
+msgstr ""
+
+msgctxt "#32180"
+msgid "%i movie ratings will be updated on Trakt"
+msgstr ""
+
+msgctxt "#32181"
+msgid "Trakt show ratings are up to date"
+msgstr ""
+
+msgctxt "#32182"
+msgid "%i show ratings will be updated on Trakt"
+msgstr ""
+
+msgctxt "#32183"
+msgid "Attempt to scrobble MythTV PVR recordings"
+msgstr ""
+
+msgctxt "#32184"
+msgid "Attempt secondary show title search"
+msgstr ""
+
+msgctxt "#32185"
+msgid "Exclude Plugins"
+msgstr ""
+
+msgctxt "#32186"
+msgid "Allow script exclusions"
+msgstr ""
+
+#~ msgctxt "#32159"
+#~ msgid "Visit {0} or scan the QR Code below."
+#~ msgstr "Bezoek {0} of scan de QR code beneden."
+
+#~ msgctxt "#32160"
+#~ msgid "Authorize the trakt addon to access your account."
+#~ msgstr "Autoriseer de trakt add-on om toegang te krijgen tot jouw account."
+
+#~ msgctxt "#32161"
+#~ msgid "Enter the PIN provided in the box below."
+#~ msgstr "Vul het wachtwoord in verkregen in de box beneden."

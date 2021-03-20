@@ -7,14 +7,15 @@ msgstr ""
 "Project-Id-Version: XBMC Addons\n"
 "Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: Swedish (http://www.transifex.com/projects/p/xbmc-addons/language/sv/)\n"
+"PO-Revision-Date: 2021-03-20 15:56+0000\n"
+"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"Language-Team: Swedish <https://kodi.weblate.cloud/projects/kodi-add-ons-scripts/script-trakt/sv_se/>\n"
+"Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sv\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.5.1\n"
 
 msgctxt "#32000"
 msgid "General"
@@ -215,6 +216,10 @@ msgstr "Tjänst"
 msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
 msgstr "Synkronisera samlingar på trakt vid uppdatering eller städning av bibliotek"
+
+msgctxt "#32056"
+msgid "Show sync notifications"
+msgstr ""
 
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
@@ -486,7 +491,7 @@ msgstr "Hämtade uppspelningsförlopp för film från Trakt"
 
 msgctxt "#32125"
 msgid "Kodi movie playback progress is up to date"
-msgstr "Uppspelningsförlopp för film i Kodi är av senaste versionen."
+msgstr "Uppspelningsförlopp för film i Kodi är av senaste versionen"
 
 msgctxt "#32126"
 msgid "%i movie(s) playback progress will be updated in Kodi"
@@ -502,7 +507,7 @@ msgstr "Uppspelningsförlopp för %i film(er) uppdaterat i Kodi"
 
 msgctxt "#32129"
 msgid "Kodi episode playback progress is up to date"
-msgstr "Uppspelningsförlopp för avsnitt i Kodi är av senaste versionen."
+msgstr "Uppspelningsförlopp för avsnitt i Kodi är av senaste versionen"
 
 msgctxt "#32130"
 msgid "Updating %i of %i episode(s) playback progress in Kodi"
@@ -528,6 +533,185 @@ msgctxt "#32135"
 msgid "Remove from Watchlist"
 msgstr "Tag bort från Watchlist"
 
+msgctxt "#32136"
+msgid "Add to watchlist"
+msgstr ""
+
+msgctxt "#32137"
+msgid "Rate this movie"
+msgstr ""
+
+msgctxt "#32138"
+msgid "Rate this show"
+msgstr ""
+
+msgctxt "#32139"
+msgid "Rate this episode"
+msgstr ""
+
+msgctxt "#32140"
+msgid "Toggle watched"
+msgstr ""
+
+msgctxt "#32141"
+msgid "Manage all lists"
+msgstr ""
+
+msgctxt "#32142"
+msgid "Update all tags"
+msgstr ""
+
+msgctxt "#32143"
+msgid "Synchronize library"
+msgstr ""
+
+msgctxt "#32144"
+msgid "How do I authorize the trakt addon to access my trakt.tv account?"
+msgstr ""
+
+# empty strings from id 32145 to 32146
+msgctxt "#32147"
+msgid "Trakt.tv PIN Authorization Failed"
+msgstr ""
+
+# empty string with id 32148
+msgctxt "#32149"
+msgid "Rate this Season"
+msgstr ""
+
+msgctxt "#32150"
+msgid "You will be reminded in 24 hours"
+msgstr ""
+
+msgctxt "#32151"
+msgid "Use Addon Settings later if you change your mind"
+msgstr ""
+
+msgctxt "#32152"
+msgid "Trakt Authorization Complete"
+msgstr ""
+
+msgctxt "#32153"
+msgid "Trakt Account Authorization"
+msgstr ""
+
+msgctxt "#32154"
+msgid "Authorize"
+msgstr ""
+
+msgctxt "#32155"
+msgid "Remind Me Later"
+msgstr ""
+
+msgctxt "#32156"
+msgid "No Thanks"
+msgstr ""
+
+msgctxt "#32157"
+msgid "Account Authorization"
+msgstr ""
+
+# empty string with id 32158
+msgctxt "#32159"
+msgid "Visit {0} or scan the QR code."
+msgstr ""
+
+msgctxt "#32162"
+msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
+msgstr ""
+
 msgctxt "#32163"
 msgid "User"
 msgstr "Användare"
+
+msgctxt "#32164"
+msgid "Fallback to Title/Year matching if necessary"
+msgstr ""
+
+msgctxt "#32165"
+msgid "Trakt - Added to watchlist"
+msgstr ""
+
+msgctxt "#32166"
+msgid "Trakt - Failed adding to watchlist"
+msgstr ""
+
+msgctxt "#32167"
+msgid "Offset scrobble start by X minutes"
+msgstr ""
+
+msgctxt "#32168"
+msgid "Sync ratings"
+msgstr ""
+
+msgctxt "#32169"
+msgid "Kodi movie ratings are up to date"
+msgstr ""
+
+msgctxt "#32170"
+msgid "%i movie(s) ratings will be updated in Kodi"
+msgstr ""
+
+msgctxt "#32171"
+msgid "Updating %i of %i movie ratings in Kodi"
+msgstr ""
+
+msgctxt "#32172"
+msgid "Ratings updated for %i movie(s) in Kodi"
+msgstr ""
+
+msgctxt "#32173"
+msgid "Kodi episode ratings are up to date"
+msgstr ""
+
+msgctxt "#32174"
+msgid "Updating %i of %i episode ratings in Kodi"
+msgstr ""
+
+msgctxt "#32175"
+msgid "Ratings updated for %i episode(s) in Kodi"
+msgstr ""
+
+msgctxt "#32176"
+msgid "Kodi show ratings are up to date"
+msgstr ""
+
+msgctxt "#32177"
+msgid "Updating %i of %i show ratings in Kodi"
+msgstr ""
+
+msgctxt "#32178"
+msgid "Ratings updated for %i show(s) in Kodi"
+msgstr ""
+
+msgctxt "#32179"
+msgid "Trakt movie ratings are up to date"
+msgstr ""
+
+msgctxt "#32180"
+msgid "%i movie ratings will be updated on Trakt"
+msgstr ""
+
+msgctxt "#32181"
+msgid "Trakt show ratings are up to date"
+msgstr ""
+
+msgctxt "#32182"
+msgid "%i show ratings will be updated on Trakt"
+msgstr ""
+
+msgctxt "#32183"
+msgid "Attempt to scrobble MythTV PVR recordings"
+msgstr ""
+
+msgctxt "#32184"
+msgid "Attempt secondary show title search"
+msgstr ""
+
+msgctxt "#32185"
+msgid "Exclude Plugins"
+msgstr ""
+
+msgctxt "#32186"
+msgid "Allow script exclusions"
+msgstr ""
