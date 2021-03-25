@@ -7,14 +7,15 @@ msgstr ""
 "Project-Id-Version: XBMC Addons\n"
 "Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: Spanish (Mexico) (http://www.transifex.com/projects/p/xbmc-addons/language/es_MX/)\n"
+"PO-Revision-Date: 2021-03-25 13:52+0000\n"
+"Last-Translator: Edson Armando <edsonarmando78@outlook.com>\n"
+"Language-Team: Spanish (Mexico) <https://kodi.weblate.cloud/projects/kodi-add-ons-scripts/script-trakt/es_mx/>\n"
 "Language: es_MX\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.5.1\n"
 
 msgctxt "#32000"
 msgid "General"
@@ -23,7 +24,7 @@ msgstr "General"
 # empty strings from id 32001 to 32002
 msgctxt "#32003"
 msgid "Startup Delay"
-msgstr ""
+msgstr "Retraso de inicio"
 
 msgctxt "#32004"
 msgid "Rating"
@@ -31,23 +32,23 @@ msgstr "Calificación"
 
 msgctxt "#32005"
 msgid "Rate Movie after watching"
-msgstr ""
+msgstr "Calificar película después de ver"
 
 msgctxt "#32006"
 msgid "Rate TV show Episode after watching"
-msgstr ""
+msgstr "Calificar serie después de ver"
 
 msgctxt "#32008"
 msgid "Minimum percent watched to display rating dialog"
-msgstr ""
+msgstr "Porcentaje mínimo visto para mostrar diálogo de calificación"
 
 msgctxt "#32009"
 msgid "Allow re-rating of media"
-msgstr ""
+msgstr "Permitir calificar nuevamente"
 
 msgctxt "#32010"
 msgid "Default rating"
-msgstr ""
+msgstr "Calificación por defecto"
 
 # Scrobbling Settings
 msgctxt "#32011"
@@ -72,28 +73,28 @@ msgstr ""
 
 msgctxt "#32016"
 msgid "Exclusions"
-msgstr ""
+msgstr "Exclusiones"
 
 msgctxt "#32017"
 msgid "Exclude Live TV"
-msgstr ""
+msgstr "Excluir TV en vivo"
 
 msgctxt "#32018"
 msgid "Exclude HTTP sources"
-msgstr ""
+msgstr "Excluir fuentes HTTP"
 
 msgctxt "#32019"
 msgid "Exclude path"
-msgstr ""
+msgstr "Excluir ruta"
 
 msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
-msgstr ""
+msgstr "Ruta a la carpeta (incluyendo subcarpetas)"
 
 # empty strings from id 32021 to 32022
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
-msgstr ""
+msgstr "No se puede conectar con Trakt"
 
 msgctxt "#32024"
 msgid "Error"
@@ -102,31 +103,31 @@ msgstr "Error"
 # empty string with id 32025
 msgctxt "#32026"
 msgid "What Did You Think?"
-msgstr ""
+msgstr "¿Qué te pareció?"
 
 msgctxt "#32027"
 msgid "Totally Ninja!"
-msgstr ""
+msgstr "¡Súper chido!"
 
 msgctxt "#32028"
 msgid "Weak Sauce :("
-msgstr ""
+msgstr "Peor que chile que no pica"
 
 msgctxt "#32029"
 msgid "Terrible"
-msgstr ""
+msgstr "Muy malo"
 
 msgctxt "#32030"
 msgid "Bad"
-msgstr ""
+msgstr "Malo"
 
 msgctxt "#32031"
 msgid "Poor"
-msgstr ""
+msgstr "Medio malo"
 
 msgctxt "#32032"
 msgid "Meh"
-msgstr ""
+msgstr "Término medio"
 
 msgctxt "#32033"
 msgid "Fair"
@@ -134,51 +135,51 @@ msgstr "Bueno"
 
 msgctxt "#32034"
 msgid "Good"
-msgstr ""
+msgstr "Bueno"
 
 msgctxt "#32035"
 msgid "Great"
-msgstr ""
+msgstr "Muy bueno"
 
 msgctxt "#32036"
 msgid "Superb"
-msgstr ""
+msgstr "Buenísimo"
 
 msgctxt "#32037"
 msgid "Unrate this movie"
-msgstr ""
+msgstr "Des-calificar esta película"
 
 msgctxt "#32038"
 msgid "Unrate this show"
-msgstr ""
+msgstr "Des-calificar esta serie"
 
 msgctxt "#32039"
 msgid "Unrate this episode"
-msgstr ""
+msgstr "Des-calificar este episodio"
 
 msgctxt "#32040"
 msgid "Trakt - Rating submitted successfully"
-msgstr ""
+msgstr "Trakt - Calificación enviada con éxito"
 
 msgctxt "#32041"
 msgid "Trakt - Already rated"
-msgstr ""
+msgstr "Trakt - Ya se ha calificado"
 
 msgctxt "#32042"
 msgid "Trakt - Unrated successfully"
-msgstr ""
+msgstr "Trakt - Des-calificado con éxito"
 
 msgctxt "#32043"
 msgid "Trakt - Already has the same rating"
-msgstr ""
+msgstr "Trakt - Misma calificación"
 
 msgctxt "#32044"
 msgid "Trakt - Problem submitting rating"
-msgstr ""
+msgstr "Trakt - Problemas al enviar la calificación"
 
 msgctxt "#32045"
 msgid "Synchronize"
-msgstr ""
+msgstr "Sincronizar"
 
 msgctxt "#32046"
 msgid "Movies"
@@ -186,31 +187,31 @@ msgstr "Películas"
 
 msgctxt "#32047"
 msgid "Add new movies to Trakt collection"
-msgstr ""
+msgstr "Agregar nuevas películas a la colección de Trakt"
 
 msgctxt "#32048"
 msgid "Add watched movies to Trakt history"
-msgstr ""
+msgstr "Agregar películas vistas al historial de Trakt"
 
 msgctxt "#32049"
 msgid "Mark movies from Trakt history as watched in Kodi"
-msgstr ""
+msgstr "Marcar películas del historial de Trakt como vistas en Kodi"
 
 msgctxt "#32050"
 msgid "TV Episodes"
-msgstr ""
+msgstr "Episodios"
 
 msgctxt "#32051"
 msgid "Add new TV episodes to Trakt collection"
-msgstr ""
+msgstr "Agrergar nuevos episodios a la colección de Trakt"
 
 msgctxt "#32052"
 msgid "Add watched TV episodes to Trakt history"
-msgstr ""
+msgstr "Agregar episodios vistos al historial de Trakt"
 
 msgctxt "#32053"
 msgid "Mark TV episodes from Trakt history as watched in Kodi"
-msgstr ""
+msgstr "Marcar episodios del historial de Trakt como vistos en Kodi"
 
 msgctxt "#32054"
 msgid "Service"
@@ -218,52 +219,52 @@ msgstr "Servicio"
 
 msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
-msgstr ""
+msgstr "Sincronizar colección al limpiar o actualizar la biblioteca"
 
 msgctxt "#32056"
 msgid "Show sync notifications"
-msgstr ""
+msgstr "Mostrar notificaciones de sincronización"
 
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
-msgstr ""
+msgstr "Quitar películas eliminadas de la colección de Trakt"
 
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
-msgstr ""
+msgstr "Quitar episodios eliminados de la colección de Trakt"
 
 # empty string with id 32059
 msgctxt "#32060"
 msgid "Hide notifications during playback"
-msgstr ""
+msgstr "Ocultar notificaciones durante la reproducción"
 
 msgctxt "#32061"
 msgid "Sync started"
-msgstr ""
+msgstr "Sincronización iniciada"
 
 msgctxt "#32062"
 msgid "Sync complete"
-msgstr ""
+msgstr "Sincronización completada"
 
 msgctxt "#32063"
 msgid "%i movie(s) will be added to Trakt collection"
-msgstr ""
+msgstr "%i película(s) se agregará(n) a la colección de Trakt"
 
 msgctxt "#32064"
 msgid "%i movie playcount(s) will be updated on Trakt"
-msgstr ""
+msgstr "%i reproducción(es) de película se actualizará(n) en Trakt"
 
 msgctxt "#32065"
 msgid "%i movie(s) playcount will be updated in Kodi"
-msgstr ""
+msgstr "%i reproducciones de película(s) se actualizará(n) en Kodi"
 
 msgctxt "#32066"
 msgid "Movie Sync Complete"
-msgstr ""
+msgstr "Sincronización de películas completada"
 
 msgctxt "#32067"
 msgid "Going to add %i show(s) to Trakt collection"
-msgstr ""
+msgstr "Se agregará(n) %i serie(s) a la colección de Trakt"
 
 msgctxt "#32068"
 msgid "Checking for episodes missing from Trakt collection"
