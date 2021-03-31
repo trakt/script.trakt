@@ -113,6 +113,10 @@ class SyncEpisodes:
             y = ((i / x) * 8) + 2
             self.sync.UpdateProgress(
                 int(y), line2=kodiUtilities.getString(32097) % (i, x))
+            
+            if 'ids' not in show_col1:
+                logger.debug("[Episodes Sync] Tvshow %s has no imdbnumber or uniqueid" % show_col1['tvshowid'])
+                continue
 
             show = {'title': show_col1['title'], 'ids': show_col1['ids'], 'year': show_col1['year'], 'rating': show_col1['rating'],
                     'tvshowid': show_col1['tvshowid'], 'seasons': []}
