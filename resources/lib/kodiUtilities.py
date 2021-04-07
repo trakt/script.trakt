@@ -367,14 +367,28 @@ def checkAndConfigureProxy():
 
 
 def getMediaType():
-    if xbmc.getCondVisibility('Container.Content(tvshows)'):
-        return "show"
-    elif xbmc.getCondVisibility('Container.Content(seasons)'):
-        return "season"
-    elif xbmc.getCondVisibility('Container.Content(episodes)'):
-        return "episode"
-    elif xbmc.getCondVisibility('Container.Content(movies)'):
+    # if xbmc.getCondVisibility('Container.Content(tvshows)'):
+    #     return "show"
+    # elif xbmc.getCondVisibility('Container.Content(seasons)'):
+    #     return "season"
+    # elif xbmc.getCondVisibility('Container.Content(episodes)'):
+    #     return "episode"
+    # elif xbmc.getCondVisibility('Container.Content(movies)'):
+    #     return "movie"
+    # , set, genre, actor, tvshow, season, episode
+
+    listType = xbmc.getInfoLabel('ListItem.DBTYPE')
+
+    xbmc.log("list item type: %s" % listType, xbmc.LOGINFO)
+
+    if listType == "movie":
         return "movie"
+    if listType == "tvshow":
+        return "show"
+    if listType == "season":
+        return "season"
+    if listType == "episode":
+        return "episode"
     else:
         return None
 
