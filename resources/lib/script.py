@@ -30,6 +30,8 @@ def run():
     args = __getArguments()
     data = {}
 
+    xbmc.log("start trakt with arguments: %s" % args, xbmc.LOGINFO)
+
     if args['action'] == 'auth_info':
         data['action'] = 'auth_info'
 
@@ -92,6 +94,11 @@ def run():
                 logger.debug("Error, not in video library.")
                 return
             data['dbid'] = int(xbmc.getInfoLabel('ListItem.DBID'))
+
+
+        if media_type is None or media_type == 'None':
+            media_type = kodiUtilities.getMediaType()
+            xbmc.log("Got the mediatype from selected item: %s" % media_type, xbmc.LOGINFO)
 
         if media_type is None:
             logger.debug(
