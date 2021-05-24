@@ -355,13 +355,22 @@ def checkAndConfigureProxy():
         proxyPassword = kodiJsonRequest({'jsonrpc': '2.0', "method": "Settings.GetSettingValue", "params": {
             "setting": "network.httpproxypassword"}, 'id': 1})['value']
 
+
         if proxyUsername and proxyPassword and proxyURL and proxyPort:
             regexUrl = re.compile(REGEX_URL)
             matchURL = regexUrl.search(proxyURL)
             if matchURL:
                 return matchURL.group(1) + proxyUsername + ':' + proxyPassword + '@' + matchURL.group(2) + ':' + proxyPort
+            else:
+                return 'http://' + proxyUsername + ':' + proxyPassword + '@' + proxyURL + ':' + proxyPort
         elif proxyURL and proxyPort:
-            return proxyURL + ':' + proxyPort
+            regexUrl = re.compile(REGEX_URL)
+            hasScheme = regexUrl.search(proxyURL)
+            if hasScheme:
+                return proxyURL + ':' + proxyPort
+            else:
+                return 'http://' + proxyURL + ':' + proxyPort
+
 
     return None
 
