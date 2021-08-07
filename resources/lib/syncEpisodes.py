@@ -113,9 +113,10 @@ class SyncEpisodes:
             y = ((i / x) * 8) + 2
             self.sync.UpdateProgress(
                 int(y), line2=kodiUtilities.getString(32097) % (i, x))
-            
+
             if 'ids' not in show_col1:
-                logger.debug("[Episodes Sync] Tvshow %s has no imdbnumber or uniqueid" % show_col1['tvshowid'])
+                logger.debug(
+                    "[Episodes Sync] Tvshow %s has no imdbnumber or uniqueid" % show_col1['tvshowid'])
                 continue
 
             show = {'title': show_col1['title'], 'ids': show_col1['ids'], 'year': show_col1['year'], 'rating': show_col1['rating'],
@@ -167,13 +168,16 @@ class SyncEpisodes:
             traktShowsWatched = list(traktShowsWatched.items())
 
             traktShowsRated = {}
-            traktShowsRated = self.sync.traktapi.getShowsRated(traktShowsRated)
-            traktShowsRated = list(traktShowsRated.items())
-
             traktEpisodesRated = {}
-            traktEpisodesRated = self.sync.traktapi.getEpisodesRated(
-                traktEpisodesRated)
-            traktEpisodesRated = list(traktEpisodesRated.items())
+
+            if kodiUtilities.getSettingAsBool('trakt_sync_ratings'):
+                traktShowsRated = self.sync.traktapi.getShowsRated(
+                    traktShowsRated)
+                traktShowsRated = list(traktShowsRated.items())
+
+                traktEpisodesRated = self.sync.traktapi.getEpisodesRated(
+                    traktEpisodesRated)
+                traktEpisodesRated = list(traktEpisodesRated.items())
 
         except Exception:
             logger.debug(

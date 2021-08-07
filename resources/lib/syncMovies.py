@@ -88,7 +88,10 @@ class SyncMovies():
 
         self.sync.UpdateProgress(17, line2=kodiUtilities.getString(32082))
         traktMovies = self.sync.traktapi.getMoviesWatched(traktMovies)
-        traktMovies = self.sync.traktapi.getMoviesRated(traktMovies)
+
+        if kodiUtilities.getSettingAsBool('trakt_sync_ratings'):
+            traktMovies = self.sync.traktapi.getMoviesRated(traktMovies)
+
         traktMovies = list(traktMovies.items())
 
         self.sync.UpdateProgress(24, line2=kodiUtilities.getString(32083))
