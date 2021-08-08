@@ -1,0 +1,26 @@
+name: Kodi Addon-Checker
+
+on: [pull_request]
+
+jobs:
+  kodi-addon-checker:
+    runs-on: ubuntu-latest
+    name: Kodi Addon-Checker
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip3 install --user kodi-addon-checker
+
+      - name: Addon-Check
+        run: $HOME/.local/bin/kodi-addon-checker --branch=matrix
