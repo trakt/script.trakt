@@ -1,3 +1,9 @@
+version 3.5.0
+- Fix problems with skins based on skin-shortcuts
+- Improve proxy URL configuration
+- Don't ask trakt for ratings, if the user doesn't need them
+- Translations
+
 version 3.4.2
 - Handle cases of missing ids for tvshows
 - Update translations
