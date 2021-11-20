@@ -1,85 +1,579 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<settings>
-	<category label="32000"><!-- General -->
-		<setting id="user" type="text" label="32163" visible="true" enable="false"/>
-		<setting id="Auth_Info" type="action" label="32144" action="RunScript(script.trakt, action=auth_info)"/>
-		<setting id="authorization" type="text" label="authorization" visible="false" />
-		<setting id="version" type="text" label="version" visible="false" />
-		<setting id="last_reminder" type="number" default="0" visible="false"/>
-		<setting id="startup_delay" type="slider" label="32003" range="0,30" default="0" option="int"/>
-		<setting id="debug" type="bool" label="32116" default="false"/>
-	</category>
-	<category label="32016"><!-- Exclusions -->
-		<!-- Live TV exclusion -->
-		<setting id="ExcludeLiveTV" type="bool" label="32017" default="false"/>
-		<!-- HTTP exclusion -->
-		<setting id="ExcludeHTTP" type="bool" label="32018" default="false"/>
-		<!-- Plugin exclusion -->
-		<setting id="ExcludePlugin" type="bool" label="32185" default="false"/>
-		<!-- Script exclusion -->
-		<setting id="ExcludeScript" type="bool" label="32186" default="false"/>
-		<!-- Folder exclusions -->
-		<setting id="ExcludePathOption" type="bool" label="32019" default="false" />
-		<setting id="ExcludePath" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
-		<setting id="ExcludePathOption2" type="bool" label="32019" default="false" visible= "eq(-2,true)|eq(0,true)" enable="eq(-2,true)|eq(0,true)" />
-		<setting id="ExcludePath2" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
-		<setting id="ExcludePathOption3" type="bool" label="32019" default="false" visible= "eq(-2,true)|eq(0,true)" enable="eq(-2,true)|eq(0,true)" />
-		<setting id="ExcludePath3" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
-		<setting id="ExcludePathOption4" type="bool" label="32019" default="false" visible= "eq(-2,true)|eq(0,true)" enable="eq(-2,true)|eq(0,true)" />
-		<setting id="ExcludePath4" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
-		<setting id="ExcludePathOption5" type="bool" label="32019" default="false" visible= "eq(-2,true)|eq(0,true)" enable="eq(-2,true)|eq(0,true)" />
-		<setting id="ExcludePath5" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
-		<setting id="ExcludePathOption6" type="bool" label="32019" default="false" visible= "eq(-2,true)|eq(0,true)" enable="eq(-2,true)|eq(0,true)" />
-		<setting id="ExcludePath6" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
-		<setting id="ExcludePathOption7" type="bool" label="32019" default="false" visible= "eq(-2,true)|eq(0,true)" enable="eq(-2,true)|eq(0,true)" />
-		<setting id="ExcludePath7" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
-		<setting id="ExcludePathOption8" type="bool" label="32019" default="false" visible= "eq(-2,true)|eq(0,true)" enable="eq(-2,true)|eq(0,true)" />
-		<setting id="ExcludePath8" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
-		<setting id="ExcludePathOption9" type="bool" label="32019" default="false" visible= "eq(-2,true)|eq(0,true)" enable="eq(-2,true)|eq(0,true)" />
-		<setting id="ExcludePath9" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
-		<setting id="ExcludePathOption10" type="bool" label="32019" default="false" visible= "eq(-2,true)|eq(0,true)" enable="eq(-2,true)|eq(0,true)" />
-		<setting id="ExcludePath10" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
-		<setting id="ExcludePathOption11" type="bool" label="32019" default="false" visible= "eq(-2,true)|eq(0,true)" enable="eq(-2,true)|eq(0,true)" />
-		<setting id="ExcludePath11" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
-		<setting id="ExcludePathOption12" type="bool" label="32019" default="false" visible= "eq(-2,true)|eq(0,true)" enable="eq(-2,true)|eq(0,true)" />
-		<setting id="ExcludePath12" type="folder" source="video" label="32020" default="" visible= "eq(-1,true)" enable="eq(-1,true)" />
-	</category>
-	<category label="32011"><!-- Scrobbling -->
-		<setting id="scrobble_movie" type="bool" label="32012" default="true"/>
-		<setting id="scrobble_episode" type="bool" label="32013" default="true"/>
-		<setting id="scrobble_notification" type="bool" label="32014" default="false"/>
-		<setting id="scrobble_fallback" type="bool" label="32164" default="true"/>
-		<setting id="scrobble_start_offset" type="number" label="32167" default="0"/>
-		<setting id="scrobble_mythtv_pvr" type="bool" label="32183" default="false"/>
-		<setting id="scrobble_secondary_title" type="bool" label="32184" default="false"/>
-	</category>
-	<category label="32045"><!-- Synchronize -->
-		<setting label="32054" type="lsep"/><!-- Service -->
-		<setting id="sync_on_update" type="bool" label="32055" default="false"/>
-		<setting id="show_sync_notifications" type="bool" label="32056" default="false"/>
-		<setting id="hide_notifications_playback" type="bool" label="32060" default="false"/>
-		<setting id="trakt_sync_ratings" type="bool" label="32168" default="true"/>
-		<setting type="sep"/>
-		<setting label="32046" type="lsep"/><!-- Movies -->
-		<setting id="add_movies_to_trakt" type="bool" label="32047" default="true"/>
-		<setting id="clean_trakt_movies" type="bool" label="32057" default="false"/>
-		<setting id="trakt_movie_playcount" type="bool" label="32048" default="true"/>
-		<setting id="kodi_movie_playcount" type="bool" label="32049" default="true"/>
-		<setting id="trakt_movie_playback" type="bool" label="32117" default="false"/>
-		<setting type="sep"/>
-		<setting label="32050" type="lsep"/><!-- Episodes -->
-		<setting id="add_episodes_to_trakt" type="bool" label="32051" default="true"/>
-		<setting id="clean_trakt_episodes" type="bool" label="32058" default="false"/>
-		<setting id="trakt_episode_playcount" type="bool" label="32052" default="true"/>
-		<setting id="kodi_episode_playcount" type="bool" label="32053" default="true"/>
-        <setting id="trakt_episode_playback" type="bool" label="32118" default="false"/>
-		<setting type="sep"/>
-	</category>
-	<category label="32004"><!-- Rating -->
-		<setting id="rate_movie" type="bool" label="32005" default="true"/>
-		<setting id="rate_episode" type="bool" label="32006" default="true"/>
-		<setting id="rate_min_view_time" type="slider" label="32008" range="0,5,100" default="75"/>
-		<setting id="rate_rerate" type="bool" label="32009" default="false"/>
-		<setting id="rating_default" type="slider" label="32010" range="1,10" default="6" option="int"/>
-	</category>
+<?xml version="1.0" encoding="utf-8" ?>
+<settings version="1">
+	<section id="script.trakt">
+		<category id="general" label="32000" help="">
+			<group id="1" label="">
+				<setting id="user" type="string" label="32163" help="">
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control type="edit" format="string" />
+					<default />
+					<enable>false</enable>
+					<level>0</level>
+				</setting>
+				<setting id="Auth_Info" type="action" label="32153" help="32144">
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control type="button" format="action">
+						<close>true</close>
+					</control>
+					<data>RunScript(script.trakt, action=auth_info)</data>
+					<level>0</level>
+				</setting>
+				<setting id="authorization" type="string" label="authorization">
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control type="edit" format="string" />
+					<level>4</level>
+					<visible>false</visible>
+				</setting>
+			</group>
+			<group id="2" label="">
+				<setting id="startup_delay" type="integer" label="32003" help="">
+					<constraints>
+						<minimum>0</minimum>
+						<step>1</step>
+						<maximum>30</maximum>
+					</constraints>
+					<control type="slider" format="integer">
+						<popup>false</popup>
+					</control>
+					<default>0</default>
+					<level>2</level>
+				</setting>
+				<setting id="debug" type="boolean" label="32116" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>3</level>
+				</setting>
+			</group>
+			<group id="3" label="">
+				<setting id="version" type="string" label="version">
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control type="edit" format="string" />
+					<enable>false</enable>
+					<level>3</level>
+					<visible>false</visible>
+				</setting>
+				<setting id="last_reminder" type="integer" label="last_reminder">
+					<control type="edit" format="integer" />
+					<default>0</default>
+					<enable>false</enable>
+					<level>3</level>
+					<visible>false</visible>
+				</setting>
+			</group>
+		</category>
+		<category id="exclusions" label="32016" help="">
+			<group id="1" label="32016">
+				<setting id="ExcludeLiveTV" type="boolean" label="32017" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludeHTTP" type="boolean" label="32018" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePlugin" type="boolean" label="32185" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludeScript" type="boolean" label="32186" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePathOption" type="boolean" label="32019" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePath" type="path" label="32020" help="" parent="ExcludePathOption">
+					<constraints>
+						<allowempty>true</allowempty>
+						<sources>
+							<source>videos</source>
+						</sources>
+						<writable>false</writable>
+					</constraints>
+					<control type="button" format="path">
+						<heading>32020</heading>
+					</control>
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePathOption2" type="boolean" label="32019" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePath2" type="path" label="32020" help="" parent="ExcludePathOption2">
+					<constraints>
+						<allowempty>true</allowempty>
+						<sources>
+							<source>videos</source>
+						</sources>
+						<writable>false</writable>
+					</constraints>
+					<control type="button" format="path">
+						<heading>32020</heading>
+					</control>
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption2">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption2">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePathOption3" type="boolean" label="32019" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption2">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption2">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePath3" type="path" label="32020" help="" parent="ExcludePathOption3">
+					<constraints>
+						<allowempty>true</allowempty>
+						<sources>
+							<source>videos</source>
+						</sources>
+						<writable>false</writable>
+					</constraints>
+					<control type="button" format="path">
+						<heading>32020</heading>
+					</control>
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption3">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption3">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePathOption4" type="boolean" label="32019" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption3">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption3">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePath4" type="path" label="32020" help="" parent="ExcludePathOption4">
+					<constraints>
+						<allowempty>true</allowempty>
+						<sources>
+							<source>videos</source>
+						</sources>
+						<writable>false</writable>
+					</constraints>
+					<control type="button" format="path">
+						<heading>32020</heading>
+					</control>
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption4">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption4">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePathOption5" type="boolean" label="32019" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption4">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption4">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePath5" type="path" label="32020" help="" parent="ExcludePathOption5">
+					<constraints>
+						<allowempty>true</allowempty>
+						<sources>
+							<source>videos</source>
+						</sources>
+						<writable>false</writable>
+					</constraints>
+					<control type="button" format="path">
+						<heading>32020</heading>
+					</control>
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption5">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption5">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePathOption6" type="boolean" label="32019" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption5">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption5">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePath6" type="path" label="32020" help="" parent="ExcludePathOption6">
+					<constraints>
+						<allowempty>true</allowempty>
+						<sources>
+							<source>videos</source>
+						</sources>
+						<writable>false</writable>
+					</constraints>
+					<control type="button" format="path">
+						<heading>32020</heading>
+					</control>
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption6">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption6">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePathOption7" type="boolean" label="32019" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption6">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption6">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePath7" type="path" label="32020" help="" parent="ExcludePathOption7">
+					<constraints>
+						<allowempty>true</allowempty>
+						<sources>
+							<source>videos</source>
+						</sources>
+						<writable>false</writable>
+					</constraints>
+					<control type="button" format="path">
+						<heading>32020</heading>
+					</control>
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption7">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption7">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePathOption8" type="boolean" label="32019" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption7">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption7">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePath8" type="path" label="32020" help="" parent="ExcludePathOption8">
+					<constraints>
+						<allowempty>true</allowempty>
+						<sources>
+							<source>videos</source>
+						</sources>
+						<writable>false</writable>
+					</constraints>
+					<control type="button" format="path">
+						<heading>32020</heading>
+					</control>
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption8">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption8">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePathOption9" type="boolean" label="32019" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption8">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption8">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePath9" type="path" label="32020" help="" parent="ExcludePathOption9">
+					<constraints>
+						<allowempty>true</allowempty>
+						<sources>
+							<source>videos</source>
+						</sources>
+						<writable>false</writable>
+					</constraints>
+					<control type="button" format="path">
+						<heading>32020</heading>
+					</control>
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption9">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption9">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePathOption10" type="boolean" label="32019" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption9">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption9">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePath10" type="path" label="32020" help="" parent="ExcludePathOption10">
+					<constraints>
+						<allowempty>true</allowempty>
+						<sources>
+							<source>videos</source>
+						</sources>
+						<writable>false</writable>
+					</constraints>
+					<control type="button" format="path">
+						<heading>32020</heading>
+					</control>
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption10">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption10">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePathOption11" type="boolean" label="32019" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption10">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption10">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePath11" type="path" label="32020" help="" parent="ExcludePathOption11">
+					<constraints>
+						<allowempty>true</allowempty>
+						<sources>
+							<source>videos</source>
+						</sources>
+						<writable>false</writable>
+					</constraints>
+					<control type="button" format="path">
+						<heading>32020</heading>
+					</control>
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption11">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption11">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePathOption12" type="boolean" label="32019" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption11">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption11">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+				<setting id="ExcludePath12" type="path" label="32020" help="" parent="ExcludePathOption12">
+					<constraints>
+						<allowempty>true</allowempty>
+						<sources>
+							<source>videos</source>
+						</sources>
+						<writable>false</writable>
+					</constraints>
+					<control type="button" format="path">
+						<heading>32020</heading>
+					</control>
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="ExcludePathOption12">true</dependency>
+						<dependency type="visible" setting="ExcludePathOption12">true</dependency>
+					</dependencies>
+					<level>1</level>
+				</setting>
+			</group>
+		</category>
+		<category id="scrobbling" label="32011" help="">
+			<group id="1" label="">
+				<setting id="scrobble_movie" type="boolean" label="32012" help="">
+					<control type="toggle" />
+					<default>true</default>
+					<level>1</level>
+				</setting>
+				<setting id="scrobble_episode" type="boolean" label="32013" help="">
+					<control type="toggle" />
+					<default>true</default>
+					<level>1</level>
+				</setting>
+				<setting id="scrobble_notification" type="boolean" label="32014" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+				<setting id="scrobble_fallback" type="boolean" label="32164" help="">
+					<control type="toggle" />
+					<default>true</default>
+					<level>1</level>
+				</setting>
+				<setting id="scrobble_start_offset" type="integer" label="32167" help="">
+					<control type="edit" format="integer">
+						<popup>false</popup>
+					</control>
+					<default>0</default>
+					<level>2</level>
+				</setting>
+				<setting id="scrobble_mythtv_pvr" type="boolean" label="32183" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+				<setting id="scrobble_secondary_title" type="boolean" label="32184" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+			</group>
+		</category>
+		<category id="synchronize" label="32045" help="">
+			<group id="1" label="32054">
+				<setting id="sync_on_update" type="boolean" label="32055" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+				<setting id="show_sync_notifications" type="boolean" label="32056" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+				<setting id="hide_notifications_playback" type="boolean" label="32060" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+				<setting id="trakt_sync_ratings" type="boolean" label="32168" help="">
+					<control type="toggle" />
+					<default>true</default>
+					<level>1</level>
+				</setting>
+			</group>
+			<group id="2" label="32046">
+				<setting id="add_movies_to_trakt" type="boolean" label="32047" help="">
+					<control type="toggle" />
+					<default>true</default>
+					<level>1</level>
+				</setting>
+				<setting id="clean_trakt_movies" type="boolean" label="32057" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+				<setting id="trakt_movie_playcount" type="boolean" label="32048" help="">
+					<control type="toggle" />
+					<default>true</default>
+					<level>1</level>
+				</setting>
+				<setting id="kodi_movie_playcount" type="boolean" label="32049" help="">
+					<control type="toggle" />
+					<default>true</default>
+					<level>1</level>
+				</setting>
+				<setting id="trakt_movie_playback" type="boolean" label="32117" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+			</group>
+			<group id="3" label="32050">
+				<setting id="add_episodes_to_trakt" type="boolean" label="32051" help="">
+					<control type="toggle" />
+					<default>true</default>
+					<level>1</level>
+				</setting>
+				<setting id="clean_trakt_episodes" type="boolean" label="32058" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+				<setting id="trakt_episode_playcount" type="boolean" label="32052" help="">
+					<control type="toggle" />
+					<default>true</default>
+					<level>1</level>
+				</setting>
+				<setting id="kodi_episode_playcount" type="boolean" label="32053" help="">
+					<control type="toggle" />
+					<default>true</default>
+					<level>1</level>
+				</setting>
+				<setting id="trakt_episode_playback" type="boolean" label="32118" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+			</group>
+		</category>
+		<category id="rating" label="32004" help="">
+			<group id="1" label="">
+				<setting id="rate_movie" type="boolean" label="32005" help="">
+					<control type="toggle" />
+					<default>true</default>
+					<level>1</level>
+				</setting>
+				<setting id="rate_episode" type="boolean" label="32006" help="">
+					<control type="toggle" />
+					<default>true</default>
+					<level>1</level>
+				</setting>
+				<setting id="rate_min_view_time" type="integer" label="32008" help="">
+					<constraints>
+						<minimum>0</minimum>
+						<step>5</step>
+						<maximum>100</maximum>
+					</constraints>
+					<control type="slider" format="integer">
+						<popup>false</popup>
+					</control>
+					<default>75</default>
+					<level>1</level>
+				</setting>
+				<setting id="rate_rerate" type="boolean" label="32009" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
+				<setting id="rating_default" type="integer" label="32010" help="">
+					<constraints>
+						<minimum>1</minimum>
+						<step>1</step>
+						<maximum>10</maximum>
+					</constraints>
+					<control type="slider" format="integer">
+						<popup>false</popup>
+					</control>
+					<default>6</default>
+					<level>1</level>
+				</setting>
+			</group>
+		</category>
+	</section>
 </settings>
