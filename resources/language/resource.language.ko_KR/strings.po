@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
-"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2021-08-28 10:29+0000\n"
 "Last-Translator: Minho Park <parkmino@gmail.com>\n"
@@ -29,9 +29,10 @@ msgctxt "#32000"
 msgid "General"
 msgstr "일반"
 
+# empty strings from id 32001 to 32002
 msgctxt "#32003"
-msgid "Startup Delay"
-msgstr "시작 지연"
+msgid "Startup Delay (seconds)"
+msgstr ""
 
 msgctxt "#32004"
 msgid "Rating"
@@ -721,6 +722,10 @@ msgstr "플러그인 제외"
 msgctxt "#32186"
 msgid "Allow script exclusions"
 msgstr "스크립트 제외 허용"
+
+#~ msgctxt "#32003"
+#~ msgid "Startup Delay"
+#~ msgstr "시작 지연"
 
 #~ msgctxt "#32159"
 #~ msgid "Visit {0} or scan the QR Code below."

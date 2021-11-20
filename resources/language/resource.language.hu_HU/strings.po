@@ -28,9 +28,10 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Általános"
 
+# empty strings from id 32001 to 32002
 msgctxt "#32003"
-msgid "Startup Delay"
-msgstr "Indítás késleltetése másodpercben"
+msgid "Startup Delay (seconds)"
+msgstr ""
 
 msgctxt "#32004"
 msgid "Rating"
@@ -720,6 +721,10 @@ msgstr ""
 msgctxt "#32186"
 msgid "Allow script exclusions"
 msgstr ""
+
+#~ msgctxt "#32003"
+#~ msgid "Startup Delay"
+#~ msgstr "Indítás késleltetése másodpercben"
 
 #~ msgctxt "#32159"
 #~ msgid "Visit {0} or scan the QR Code below."
