@@ -22,8 +22,7 @@ class Sync():
             logger.debug("Sync is being run silently.")
         self.sync_on_update = getSettingAsBool('sync_on_update')
         self.notify = getSettingAsBool('show_sync_notifications')
-        self.notify_during_playback = not (xbmc.Player().isPlayingVideo(
-        ) and getSettingAsBool("hide_notifications_playback"))
+        self.notify_during_playback = not getSettingAsBool("hide_notifications_playback")
 
     def __syncCheck(self, media_type):
         return self.__syncCollectionCheck(media_type) or self.__syncWatchedCheck(media_type) or self.__syncPlaybackCheck(media_type) or self.__syncRatingsCheck()
@@ -48,6 +47,10 @@ class Sync():
             return getSettingAsBool('trakt_movie_playcount') or getSettingAsBool('kodi_movie_playcount')
         else:
             return getSettingAsBool('trakt_episode_playcount') or getSettingAsBool('kodi_episode_playcount')
+
+    @property
+    def show_notification(self):
+        return not self.show_progress and self.sync_on_update and self.notify and (self.notify_during_playback or not xbmc.Player().isPlayingVideo())
 
     def sync(self):
         logger.debug("Starting synchronization with Trakt.tv")

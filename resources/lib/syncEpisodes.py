@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 class SyncEpisodes:
     def __init__(self, sync, progress):
         self.sync = sync
-        if not self.sync.show_progress and self.sync.sync_on_update and self.sync.notify and self.sync.notify_during_playback:
+        if self.sync.show_notification:
             kodiUtilities.notification('%s %s' % (kodiUtilities.getString(
                 32045), kodiUtilities.getString(32050)), kodiUtilities.getString(32061))  # Sync started
         if self.sync.show_progress and not self.sync.run_silent:
@@ -67,7 +67,7 @@ class SyncEpisodes:
         self.__syncEpisodeRatings(
             traktEpisodesRated, kodiShowsCollected, 96, 99)
 
-        if not self.sync.show_progress and self.sync.sync_on_update and self.sync.notify and self.sync.notify_during_playback:
+        if self.sync.show_notification:
             kodiUtilities.notification('%s %s' % (kodiUtilities.getString(
                 32045), kodiUtilities.getString(32050)), kodiUtilities.getString(32062))  # Sync complete
 
