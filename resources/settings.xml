@@ -32,6 +32,61 @@
 				</setting>
 			</group>
 			<group id="2" label="">
+				<setting id="proxy_override" type="boolean" label="32187" help="42187">
+					<control type="toggle" />
+					<default>false</default>
+					<level>3</level>
+				</setting>
+				<setting id="proxy_uri" type="string" label="32188" help="42188" parent="proxy_override">
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control type="edit" format="string" />
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="proxy_override">true</dependency>
+					</dependencies>
+					<level>3</level>
+				</setting>
+				<setting id="proxy_port" type="integer" label="32189" help="42189" parent="proxy_override">
+					<constraints>
+						<minimum>0</minimum>
+						<step>1</step>
+						<maximum>65536</maximum>
+					</constraints>
+					<control type="edit" format="integer" />
+					<default>0</default>
+					<dependencies>
+						<dependency type="enable" setting="proxy_override">true</dependency>
+					</dependencies>
+					<level>3</level>
+				</setting>
+				<setting id="proxy_user" type="string" label="32190" help="42190" parent="proxy_override">
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control type="edit" format="string" />
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="proxy_override">true</dependency>
+					</dependencies>
+					<level>3</level>
+				</setting>
+				<setting id="proxy_passwd" type="string" label="32191" help="42191" parent="proxy_override">
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control type="edit" format="string">
+						<hidden>true</hidden>
+					</control>
+					<default />
+					<dependencies>
+						<dependency type="enable" setting="proxy_override">true</dependency>
+					</dependencies>
+					<level>3</level>
+				</setting>
+			</group>
+			<group id="3" label="">
 				<setting id="startup_delay" type="integer" label="32003" help="">
 					<constraints>
 						<minimum>0</minimum>

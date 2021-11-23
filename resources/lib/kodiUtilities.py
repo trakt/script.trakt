@@ -344,8 +344,14 @@ def checkAndConfigureProxy():
         "setting": "network.usehttpproxy"}, 'id': 1})['value']
     proxyType = kodiJsonRequest({'jsonrpc': '2.0', "method": "Settings.GetSettingValue", "params": {
         "setting": "network.httpproxytype"}, 'id': 1})['value']
+    proxyOverride = getSettingAsBool('proxy_override')
 
-    if proxyActive and proxyType == 0:  # PROXY_HTTP
+    if proxyOverride:
+        proxyURL = getSetting('proxy_uri')
+        proxyPort = getSetting('proxy_port')
+        proxyUsername = getSetting('proxy_username')
+        proxyPassword = getSetting('proxy_password')
+    elif proxyActive and (proxyType == 0):
         proxyURL = kodiJsonRequest({'jsonrpc': '2.0', "method": "Settings.GetSettingValue", "params": {
             "setting": "network.httpproxyserver"}, 'id': 1})['value']
         proxyPort = str(kodiJsonRequest({'jsonrpc': '2.0', "method": "Settings.GetSettingValue", "params": {
@@ -354,22 +360,26 @@ def checkAndConfigureProxy():
             "setting": "network.httpproxyusername"}, 'id': 1})['value']
         proxyPassword = kodiJsonRequest({'jsonrpc': '2.0', "method": "Settings.GetSettingValue", "params": {
             "setting": "network.httpproxypassword"}, 'id': 1})['value']
+    else:
+        return None
 
 
-        if proxyUsername and proxyPassword and proxyURL and proxyPort:
-            regexUrl = re.compile(REGEX_URL)
-            matchURL = regexUrl.search(proxyURL)
-            if matchURL:
-                return matchURL.group(1) + proxyUsername + ':' + proxyPassword + '@' + matchURL.group(2) + ':' + proxyPort
-            else:
-                return 'http://' + proxyUsername + ':' + proxyPassword + '@' + proxyURL + ':' + proxyPort
-        elif proxyURL and proxyPort:
-            regexUrl = re.compile(REGEX_URL)
-            hasScheme = regexUrl.search(proxyURL)
-            if hasScheme:
-                return proxyURL + ':' + proxyPort
-            else:
-                return 'http://' + proxyURL + ':' + proxyPort
+    if proxyUsername and proxyPassword and proxyURL and proxyPort:
+        regexUrl = re.compile(REGEX_URL)
+        matchURL = regexUrl.search(proxyURL)
+        if matchURL:
+            return matchURL.group(1) + proxyUsername + ':' + proxyPassword + '@' + matchURL.group(2) + ':' + proxyPort
+        else:
+            return 'http://' + proxyUsername + ':' + proxyPassword + '@' + proxyURL + ':' + proxyPort
+    elif proxyURL and proxyPort:
+        regexUrl = re.compile(REGEX_URL)
+        hasScheme = regexUrl.search(proxyURL)
+        if hasScheme:
+            return proxyURL + ':' + proxyPort
+        else:
+            return 'http://' + proxyURL + ':' + proxyPort
+    else:
+        return None
 
 
     return None
