@@ -32,8 +32,8 @@ msgstr "General"
 
 # empty strings from id 32001 to 32002
 msgctxt "#32003"
-msgid "Startup Delay"
-msgstr "Relambi d’aviada"
+msgid "Startup Delay (seconds)"
+msgstr ""
 
 msgctxt "#32004"
 msgid "Rating"
@@ -729,3 +729,8 @@ msgstr ""
 msgctxt "#32186"
 msgid "Allow script exclusions"
 msgstr ""
+
+# empty strings from id 32001 to 32002
+#~ msgctxt "#32003"
+#~ msgid "Startup Delay"
+#~ msgstr "Relambi d’aviada"

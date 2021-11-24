@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
-"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-11-11 06:30+0000\n"
+"PO-Revision-Date: 2021-11-14 13:05+0000\n"
 "Last-Translator: Christian Gade <gade@kodi.tv>\n"
 "Language-Team: Danish <https://kodi.weblate.cloud/projects/kodi-add-ons-scripts/script-trakt/da_dk/>\n"
 "Language: da_DK\n"
@@ -29,9 +29,10 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Generelt"
 
+# empty strings from id 32001 to 32002
 msgctxt "#32003"
-msgid "Startup Delay"
-msgstr "Forsinket start"
+msgid "Startup Delay (seconds)"
+msgstr ""
 
 msgctxt "#32004"
 msgid "Rating"
@@ -475,158 +476,158 @@ msgstr "Synkroniser afspilning af afsnit med Kodi"
 
 msgctxt "#32119"
 msgid "Retrieving episode playback progress from Trakt"
-msgstr ""
+msgstr "Henter afsnittets afspilningsfremskridt fra Trakt"
 
 msgctxt "#32120"
 msgid "Parsing episode playback progress %i of %i from Trakt"
-msgstr ""
+msgstr "Behandler afsnittets afspilningsfremskridt %i af %i fra Trakt"
 
 msgctxt "#32121"
 msgid "Retrieved episode playback progress from Trakt"
-msgstr ""
+msgstr "Hentede afsnittets afspilningsfremskridt fra Trakt"
 
 msgctxt "#32122"
 msgid "Retrieving movie playback progress from Trakt"
-msgstr ""
+msgstr "Henter filmens afspilningsfremskridt fra Trakt"
 
 msgctxt "#32123"
 msgid "Parsing movie playback progress %i of %i from Trakt"
-msgstr ""
+msgstr "Behandler filmens afspilningsfremskridt %i af %i fra Trakt"
 
 msgctxt "#32124"
 msgid "Retrieved movie playback progress from Trakt"
-msgstr ""
+msgstr "Hentede filmens afspilningsfremskridt fra Trakt"
 
 msgctxt "#32125"
 msgid "Kodi movie playback progress is up to date"
-msgstr ""
+msgstr "Filmens afspilningsfremskridt i Kodi er opdateret"
 
 msgctxt "#32126"
 msgid "%i movie(s) playback progress will be updated in Kodi"
-msgstr ""
+msgstr "%i filmens afspilningsfremskridt vil blive opdateret i Kodi"
 
 msgctxt "#32127"
 msgid "Updating %i of %i movie(s) playback progress in Kodi"
-msgstr ""
+msgstr "Opdaterer %i af %i filmens afspilningsfremskridt i Kodi"
 
 msgctxt "#32128"
 msgid "Playback progress updated for %i movie(s) in Kodi"
-msgstr ""
+msgstr "Afspilningsfremskridt for %i film opdateret i Kodi"
 
 msgctxt "#32129"
 msgid "Kodi episode playback progress is up to date"
-msgstr ""
+msgstr "Afsnittets afspilningsfremskridt i Kodi er opdateret"
 
 msgctxt "#32130"
 msgid "Updating %i of %i episode(s) playback progress in Kodi"
-msgstr ""
+msgstr "Opdaterer %i af %i afsnittets afspilningsfremskridt i Kodi"
 
 msgctxt "#32131"
 msgid "Playback progress updated for %i episode(s) in Kodi"
-msgstr ""
+msgstr "Afspilningsfremskridt for %i afsnit opdateret i Kodi"
 
 msgctxt "#32132"
 msgid "Unrate this season"
-msgstr ""
+msgstr "Fjern bedømmelse af denne sæson"
 
 msgctxt "#32133"
 msgid "Manage Movie's Lists"
-msgstr ""
+msgstr "Håndter filmens lister"
 
 msgctxt "#32134"
 msgid "Manage Show's Lists"
-msgstr ""
+msgstr "Håndter seriens lister"
 
 msgctxt "#32135"
 msgid "Remove from Watchlist"
-msgstr ""
+msgstr "Fjern fra Watchlist"
 
 msgctxt "#32136"
 msgid "Add to watchlist"
-msgstr ""
+msgstr "Tilføj til overvågningsliste"
 
 msgctxt "#32137"
 msgid "Rate this movie"
-msgstr ""
+msgstr "Bedøm denne film"
 
 msgctxt "#32138"
 msgid "Rate this show"
-msgstr ""
+msgstr "Bedøm denne serie"
 
 msgctxt "#32139"
 msgid "Rate this episode"
-msgstr ""
+msgstr "Bedøm dette afsnit"
 
 msgctxt "#32140"
 msgid "Toggle watched"
-msgstr ""
+msgstr "Skift tilstand for set"
 
 msgctxt "#32141"
 msgid "Manage all lists"
-msgstr ""
+msgstr "Håndter alle lister"
 
 msgctxt "#32142"
 msgid "Update all tags"
-msgstr ""
+msgstr "Opdater alle mærkater"
 
 msgctxt "#32143"
 msgid "Synchronize library"
-msgstr ""
+msgstr "Synkroniser bibliotek"
 
 msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
-msgstr ""
+msgstr "Hvordan autoriserer jeg trakt-add-on til at få adgang til min trakt.tv-konto?"
 
 # empty strings from id 32145 to 32146
 msgctxt "#32147"
 msgid "Trakt.tv PIN Authorization Failed"
-msgstr ""
+msgstr "Trakt.tv PIN-godkendelse mislykkedes"
 
 # empty string with id 32148
 msgctxt "#32149"
 msgid "Rate this Season"
-msgstr ""
+msgstr "Bedøm denne sæson"
 
 msgctxt "#32150"
 msgid "You will be reminded in 24 hours"
-msgstr ""
+msgstr "Du vil blive påmindet om 24 timer"
 
 msgctxt "#32151"
 msgid "Use Addon Settings later if you change your mind"
-msgstr ""
+msgstr "Brug indstillinger for add-on senere, hvis du ombestemmer dig"
 
 msgctxt "#32152"
 msgid "Trakt Authorization Complete"
-msgstr ""
+msgstr "Godkendelse af Trakt fuldført"
 
 msgctxt "#32153"
 msgid "Trakt Account Authorization"
-msgstr ""
+msgstr "Godkendelse af Trakt-konto"
 
 msgctxt "#32154"
 msgid "Authorize"
-msgstr ""
+msgstr "Godkend"
 
 msgctxt "#32155"
 msgid "Remind Me Later"
-msgstr ""
+msgstr "Påmind mig senere"
 
 msgctxt "#32156"
 msgid "No Thanks"
-msgstr ""
+msgstr "Nej tak"
 
 msgctxt "#32157"
 msgid "Account Authorization"
-msgstr ""
+msgstr "Godkendelse af konto"
 
 # empty string with id 32158
 msgctxt "#32159"
 msgid "Visit {0} or scan the QR code."
-msgstr ""
+msgstr "Besøg {0} eller scan QR-koden."
 
 msgctxt "#32162"
 msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
-msgstr ""
+msgstr "Trakt-add-on KAN IKKE bruges uden at godkende adgang til din trakt.tv-konto."
 
 msgctxt "#32163"
 msgid "User"
@@ -723,3 +724,7 @@ msgstr ""
 msgctxt "#32186"
 msgid "Allow script exclusions"
 msgstr ""
+
+#~ msgctxt "#32003"
+#~ msgid "Startup Delay"
+#~ msgstr "Forsinket start"

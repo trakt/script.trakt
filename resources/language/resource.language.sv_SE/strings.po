@@ -29,9 +29,10 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Allmänt"
 
+# empty strings from id 32001 to 32002
 msgctxt "#32003"
-msgid "Startup Delay"
-msgstr "Uppstartsfördröjning"
+msgid "Startup Delay (seconds)"
+msgstr ""
 
 msgctxt "#32004"
 msgid "Rating"
@@ -723,3 +724,7 @@ msgstr ""
 msgctxt "#32186"
 msgid "Allow script exclusions"
 msgstr ""
+
+#~ msgctxt "#32003"
+#~ msgid "Startup Delay"
+#~ msgstr "Uppstartsfördröjning"

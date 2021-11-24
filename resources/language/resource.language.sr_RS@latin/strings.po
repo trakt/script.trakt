@@ -30,7 +30,7 @@ msgstr "Opšte"
 
 # empty strings from id 32001 to 32002
 msgctxt "#32003"
-msgid "Startup Delay"
+msgid "Startup Delay (seconds)"
 msgstr ""
 
 msgctxt "#32004"

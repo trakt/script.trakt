@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
-"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2021-07-16 12:29+0000\n"
 "Last-Translator: Christian Gade <gade@kodi.tv>\n"
@@ -29,9 +29,10 @@ msgctxt "#32000"
 msgid "General"
 msgstr "Algemeen"
 
+# empty strings from id 32001 to 32002
 msgctxt "#32003"
-msgid "Startup Delay"
-msgstr "Startvertraging"
+msgid "Startup Delay (seconds)"
+msgstr ""
 
 msgctxt "#32004"
 msgid "Rating"
@@ -721,6 +722,10 @@ msgstr ""
 msgctxt "#32186"
 msgid "Allow script exclusions"
 msgstr ""
+
+#~ msgctxt "#32003"
+#~ msgid "Startup Delay"
+#~ msgstr "Startvertraging"
 
 #~ msgctxt "#32159"
 #~ msgid "Visit {0} or scan the QR Code below."
