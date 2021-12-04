@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
-"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-11-14 13:05+0000\n"
+"PO-Revision-Date: 2021-12-02 18:13+0000\n"
 "Last-Translator: Christian Gade <gade@kodi.tv>\n"
 "Language-Team: Danish <https://kodi.weblate.cloud/projects/kodi-add-ons-scripts/script-trakt/da_dk/>\n"
 "Language: da_DK\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 msgctxt "Addon Summary"
 msgid "TV and movie scrobbler for Trakt.tv"
@@ -32,7 +32,7 @@ msgstr "Generelt"
 # empty strings from id 32001 to 32002
 msgctxt "#32003"
 msgid "Startup Delay (seconds)"
-msgstr ""
+msgstr "Forsinkelse af start (sekunder)"
 
 msgctxt "#32004"
 msgid "Rating"
@@ -280,7 +280,7 @@ msgstr "%i af %i serie(r) har fået tilføjet afsnit til Trakt-samling"
 
 msgctxt "#32070"
 msgid "Going to update %i show(s) missing watched status"
-msgstr "Opdaterer %i serie(r)'s set status"
+msgstr "Opdaterer %i serie(r)s manglende set status"
 
 msgctxt "#32071"
 msgid "Checking watched episodes on Trakt"
@@ -288,7 +288,7 @@ msgstr "Undersøger sete afsnit på Trakt"
 
 msgctxt "#32072"
 msgid "%i show(s) had missing watched status"
-msgstr "%i serier() mangler set status"
+msgstr "%i serie(r) mangler set status"
 
 msgctxt "#32073"
 msgid "%i episodes are being updated"
@@ -300,7 +300,7 @@ msgstr "Undersøger sete afsnit i Kodi"
 
 msgctxt "#32075"
 msgid "Episode Sync Complete"
-msgstr "Afsnit synkronisering afsluttet"
+msgstr "Synkronisering af afsnit afsluttet"
 
 msgctxt "#32076"
 msgid "%i movie(s) will be removed from Trakt collection"
@@ -308,7 +308,7 @@ msgstr "%i film vil blive fjernet fra Trakt-samling"
 
 msgctxt "#32077"
 msgid "Cleaning Trakt TV show collection"
-msgstr "Ryder op i TV-serie samling"
+msgstr "Rydder op i Trakt tv-serie samling"
 
 msgctxt "#32078"
 msgid "episodes are being removed"
@@ -332,35 +332,35 @@ msgstr "Henter sete film fra Trakt"
 
 msgctxt "#32083"
 msgid "Retrieved movie data from Trakt"
-msgstr "Film data hentet fra Trakt"
+msgstr "Filmdata hentet fra Trakt"
 
 msgctxt "#32084"
 msgid "Trakt movie collection is up to date, no movies to add"
-msgstr "Trakt film-samling er opdateret. Ingen film tilføjes"
+msgstr "Trakt filmsamling er opdateret. Ingen film tilføjes"
 
 msgctxt "#32085"
 msgid "%i movie(s) were added to your Trakt collection"
-msgstr "%i film blev tilføjet til din Trakt-samling"
+msgstr "%i film blev tilføjet din Trakt-samling"
 
 msgctxt "#32086"
 msgid "Trakt movie playcounts are up to date"
-msgstr "Trakt filmafspilnings antal er opdateret"
+msgstr "Afspilningstal for Trakt-film er opdateret"
 
 msgctxt "#32087"
 msgid "Playcounts updated for %i movie(s) on Trakt"
-msgstr "Afspilnings antal opdateret for %i film på Trakt"
+msgstr "Afspilningstal opdateret for %i film på Trakt"
 
 msgctxt "#32088"
 msgid "Kodi movie playcounts are up to date"
-msgstr "Kodi filmafspilnings antal opdateret"
+msgstr "Kodi afspilningstal for film er opdateret"
 
 msgctxt "#32089"
 msgid "Updating %i of %i movie playcount(s) in Kodi"
-msgstr "Opdaterer %i af %i filmafspilnings antal i Kodi"
+msgstr "Opdaterer %i af %i afspilningstal for film i Kodi"
 
 msgctxt "#32090"
 msgid "Playcounts updated for %i movie(s) in Kodi"
-msgstr "Filmafspilnings antal opdateret for %i film i Kodi"
+msgstr "Afspilningstal opdateret for %i film i Kodi"
 
 msgctxt "#32091"
 msgid "Trakt movie collection is up to date, no movies removed"
@@ -372,11 +372,11 @@ msgstr "%i film blev fjernet fra din Trakt-samling"
 
 msgctxt "#32093"
 msgid "Updating %i of %i movie playcount(s) on Trakt"
-msgstr "Opdaterer %i af %i filmafspilnings antal på Kodi"
+msgstr "Opdaterer %i af %i afspilningstal for film på Trakt"
 
 msgctxt "#32094"
 msgid "Loading episode data from Kodi"
-msgstr "Indlæser afsnit data fra Kodi"
+msgstr "Indlæser afsnit-data fra Kodi"
 
 msgctxt "#32095"
 msgid "Loading shows from Kodi"
@@ -388,19 +388,19 @@ msgstr "Serier indlæst fra Kodi"
 
 msgctxt "#32097"
 msgid "Parsing %i of %i episode data from Kodi"
-msgstr "Indlæser %i af %i afsnit data fra Kodi"
+msgstr "Indlæser %i af %i afsnit-data fra Kodi"
 
 msgctxt "#32098"
 msgid "Loaded episode data from Kodi"
-msgstr "Indlæser afsnit data fra Kodi"
+msgstr "Indlæser afsnit-data fra Kodi"
 
 msgctxt "#32099"
 msgid "Loading episode data from Trakt"
-msgstr "Indlæser afsnit data fra Trakt"
+msgstr "Indlæser afsnit-data fra Trakt"
 
 msgctxt "#32100"
 msgid "Retrieving episode collection from Trakt"
-msgstr "Henter afsnit-samling fra Trakt"
+msgstr "Henter afsnitsamling fra Trakt"
 
 msgctxt "#32101"
 msgid "Retrieving watched episodes from Trakt"
@@ -408,15 +408,15 @@ msgstr "Henter sete afsnit fra Trakt"
 
 msgctxt "#32102"
 msgid "Parsing episode data %i of %i from Trakt"
-msgstr "Indlæser afsnit data %i af %i fra Trakt"
+msgstr "Behandler afsnit-data %i af %i fra Trakt"
 
 msgctxt "#32103"
 msgid "Retrieved episode data from Trakt"
-msgstr "Afsnit data hentet fra Trakt"
+msgstr "Afsnit-data hentet fra Trakt"
 
 msgctxt "#32104"
 msgid "Trakt episode collection is up to date, no episodes to add"
-msgstr "Trakt afsnit-samling er opdateret. Ingen afsnit at tilføje"
+msgstr "Trakt afsnitsamling er opdateret. Ingen afsnit at tilføje"
 
 msgctxt "#32105"
 msgid "%i episode(s) were added to your Trakt collection"
@@ -424,23 +424,23 @@ msgstr "%i afsnit blev tilføjet til din Trakt-samling"
 
 msgctxt "#32106"
 msgid "Trakt episode playcounts are up to date"
-msgstr "Trakt afsnit afspilnings antal opdateret"
+msgstr "Trakt afspilningstal for afsnit opdateret"
 
 msgctxt "#32107"
 msgid "Kodi episode playcounts are up to date"
-msgstr "Kodi afsnit afspilnings antal opdateret"
+msgstr "Kodi afspilningstal for afsnit opdateret"
 
 msgctxt "#32108"
 msgid "Updating %i of %i episode playcount(s) in Kodi"
-msgstr "Opdaterer %i af %i afsnit afspilningsantal i Kodi"
+msgstr "Opdaterer %i af %i afspilningstal for afsnit i Kodi"
 
 msgctxt "#32109"
 msgid "Playcounts updated for %i show(s) in Kodi"
-msgstr "Afspilningsantal for %i serie(r) opdateret i Kodi"
+msgstr "Afspilningstal for %i serie(r) opdateret i Kodi"
 
 msgctxt "#32110"
 msgid "Trakt episode collection is clean, no episodes to remove"
-msgstr "Trakt afsnit-samling er ryddet op. Ingen afsnit fjernes"
+msgstr "Trakt afsnitsamling er ryddet op. Ingen afsnit fjernes"
 
 msgctxt "#32111"
 msgid "%i episode(s) are being removed from your Trakt collection"
@@ -464,7 +464,7 @@ msgstr "%d afsnit af '%s'"
 
 msgctxt "#32116"
 msgid "Enable debug mode"
-msgstr "Slå fejlfinding til"
+msgstr "Aktiver fejlfindingstilstand"
 
 msgctxt "#32117"
 msgid "Sync movie playback progress to Kodi"
@@ -540,7 +540,7 @@ msgstr "Håndter seriens lister"
 
 msgctxt "#32135"
 msgid "Remove from Watchlist"
-msgstr "Fjern fra Watchlist"
+msgstr "Fjern fra overvågningsliste"
 
 msgctxt "#32136"
 msgid "Add to watchlist"
@@ -635,95 +635,95 @@ msgstr "Bruger"
 
 msgctxt "#32164"
 msgid "Fallback to Title/Year matching if necessary"
-msgstr ""
+msgstr "Fald tilbage til matchning af titel/år, hvis det er nødvendigt"
 
 msgctxt "#32165"
 msgid "Trakt - Added to watchlist"
-msgstr ""
+msgstr "Trakt - Tilføjet til overvågningsliste"
 
 msgctxt "#32166"
 msgid "Trakt - Failed adding to watchlist"
-msgstr ""
+msgstr "Trakt - Kunne ikke føjes til overvågningslisten"
 
 msgctxt "#32167"
 msgid "Offset scrobble start by X minutes"
-msgstr ""
+msgstr "Forskudt scrobble start med x minutter"
 
 msgctxt "#32168"
 msgid "Sync ratings"
-msgstr ""
+msgstr "Synkroniser bedømmelser"
 
 msgctxt "#32169"
 msgid "Kodi movie ratings are up to date"
-msgstr ""
+msgstr "Kodi-filmbedømmelser er opdaterede"
 
 msgctxt "#32170"
 msgid "%i movie(s) ratings will be updated in Kodi"
-msgstr ""
+msgstr "%i film-bedømmelse(r) vil blive opdateret i Kodi"
 
 msgctxt "#32171"
 msgid "Updating %i of %i movie ratings in Kodi"
-msgstr ""
+msgstr "Opdaterer %i af %i filmbedømmelser i Kodi"
 
 msgctxt "#32172"
 msgid "Ratings updated for %i movie(s) in Kodi"
-msgstr ""
+msgstr "Filmbedømmelser opdateret for %i film i Kodi"
 
 msgctxt "#32173"
 msgid "Kodi episode ratings are up to date"
-msgstr ""
+msgstr "Kodi-afsnitsbedømmelser er opdaterede"
 
 msgctxt "#32174"
 msgid "Updating %i of %i episode ratings in Kodi"
-msgstr ""
+msgstr "Opdaterer %i af %i afsnitsbedømmelser i Kodi"
 
 msgctxt "#32175"
 msgid "Ratings updated for %i episode(s) in Kodi"
-msgstr ""
+msgstr "Bedømmelser opdateret for %i afsnit i Kodi"
 
 msgctxt "#32176"
 msgid "Kodi show ratings are up to date"
-msgstr ""
+msgstr "Kodi tv-seriebedømmelser er opdaterede"
 
 msgctxt "#32177"
 msgid "Updating %i of %i show ratings in Kodi"
-msgstr ""
+msgstr "Opdaterer %i af %i tv-seriebedømmelser i Kodi"
 
 msgctxt "#32178"
 msgid "Ratings updated for %i show(s) in Kodi"
-msgstr ""
+msgstr "Bedømmelser opdateret for %i tv-serie(r) i Kodi"
 
 msgctxt "#32179"
 msgid "Trakt movie ratings are up to date"
-msgstr ""
+msgstr "Trakt filmbedømmelser er opdaterede"
 
 msgctxt "#32180"
 msgid "%i movie ratings will be updated on Trakt"
-msgstr ""
+msgstr "%i filmbedømmelser vil blive opdateret på Trakt"
 
 msgctxt "#32181"
 msgid "Trakt show ratings are up to date"
-msgstr ""
+msgstr "Trakt tv-seriebedømmelser er opdaterede"
 
 msgctxt "#32182"
 msgid "%i show ratings will be updated on Trakt"
-msgstr ""
+msgstr "%i tv-seriebedømmelser vil blive opdateret på Trakt"
 
 msgctxt "#32183"
 msgid "Attempt to scrobble MythTV PVR recordings"
-msgstr ""
+msgstr "Forsøg på at scrobble MythTV PVR-optagelser"
 
 msgctxt "#32184"
 msgid "Attempt secondary show title search"
-msgstr ""
+msgstr "Forsøg sekundær søgning efter titel på tv-serie"
 
 msgctxt "#32185"
 msgid "Exclude Plugins"
-msgstr ""
+msgstr "Udelad plugins"
 
 msgctxt "#32186"
 msgid "Allow script exclusions"
-msgstr ""
+msgstr "Tillad ekskluderinger af scripts"
 
 #~ msgctxt "#32003"
 #~ msgid "Startup Delay"
