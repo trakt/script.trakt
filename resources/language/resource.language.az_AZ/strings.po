@@ -5,16 +5,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
-"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: Azerbaijani (http://www.transifex.com/projects/p/xbmc-addons/language/az/)\n"
-"Language: az\n"
+"PO-Revision-Date: 2022-02-25 18:13+0000\n"
+"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"Language-Team: Azerbaijani <https://kodi.weblate.cloud/projects/kodi-add-ons-scripts/script-trakt/az_az/>\n"
+"Language: az_AZ\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.11\n"
 
 msgctxt "Addon Summary"
 msgid "TV and movie scrobbler for Trakt.tv"
@@ -27,7 +28,7 @@ msgstr ""
 # General Settings
 msgctxt "#32000"
 msgid "General"
-msgstr ""
+msgstr "Ümumi"
 
 # empty strings from id 32001 to 32002
 msgctxt "#32003"
@@ -727,4 +728,44 @@ msgstr ""
 
 msgctxt "#32186"
 msgid "Allow script exclusions"
+msgstr ""
+
+msgctxt "#32187"
+msgid "Override proxy"
+msgstr ""
+
+msgctxt "#42187"
+msgid "Always enable a proxy, regardless of the kodi configuration. The default value is from the kodi configuration, but can be overriden below. The trakt plugin currently only supports HTTP or HTTPS proxies where kodi also supports SOCKS proxies."
+msgstr ""
+
+msgctxt "#32188"
+msgid "Proxy URI"
+msgstr ""
+
+msgctxt "#42188"
+msgid "Location of the proxy server."
+msgstr ""
+
+msgctxt "#32189"
+msgid "Proxy port"
+msgstr ""
+
+msgctxt "#42189"
+msgid "Port of the proxy server."
+msgstr ""
+
+msgctxt "#32190"
+msgid "Username"
+msgstr ""
+
+msgctxt "#42190"
+msgid "Optional user name needed to authenticate with the proxy."
+msgstr ""
+
+msgctxt "#32191"
+msgid "Password"
+msgstr ""
+
+msgctxt "#42191"
+msgid "Optional password needed to authenticate with the proxy."
 msgstr ""
