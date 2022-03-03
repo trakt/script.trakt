@@ -22,8 +22,54 @@ msgid "TV and movie scrobbler for Trakt.tv"
 msgstr "Trakt.tv에 TV와 영화 시청 상태를 전송합니다"
 
 msgctxt "Addon Description"
-msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:&#10;&#10;- Automatically scrobble what you're watching&#10;- Mobile apps for iPhone, iPad, Android, and Windows Phone&#10;- Share what you're watching (in real time) and rating to facebook and twitter&#10;- Personalized calendar so you never miss a TV show&#10;- Follow your friends and people you're interesed in&#10;- Use watchlists so you don't forget to what to watch&#10;- Track your media collections and impress your friends&#10;- Create custom lists around any topics you choose&#10;- Easily track your TV show progress across all seasons and episodes&#10;- Track your progress against industry lists such as the IMDb Top 250&#10;- Discover new shows and movies based on your viewing habits&#10;- Widgets for your forum signature&#10;&#10;What can this addon do?&#10;&#10;- Automatically scrobble all TV episodes and movies you are watching&#10;- Sync your TV episode and movie collections to Trakt (triggered after a library update)&#10;- Auto clean your Trakt collection so that it matches up with Kodi&#10;- Keep watched statuses synced between Kodi and Trakt&#10;- Rate movies and episode after watching them&#10;&#10;Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
-msgstr "시청 중인 모든 TV 쇼 에피소드와 영화 정보를 자동으로 Trakt.tv에 전송합니다! 사용자가 시청한 모든 이력을 자세히 보관하고 전세계의 TV, 영화 커뮤니티의 일원으로 참여하세요. http://Trakt.tv에서 무료 회원으로 가입하고 다양한 기능을 활용하세요:&#10;&#10;- 시청 중인 영화와 에피소드 정보를 자동으로 전송&#10;- iPhone, iPad, Android, Windows Phone 앱 지원&#10;- 시청 중 정보를 (실시간)으로 Facebook과 twitter로 공유하고 평가&#10;- 개인 캘린더로 TV 쇼 본방송을 놓치지 마세요&#10;- 친구와 관심있는 사람을 팔로우 하세요&#10;- 꼭 봐야 할 것들을 잊지 않기 위해 Watclist를 사용하세요&#10;- 여러분의 컬렉션을 관리하고 친구들을 감동 시키세요&#10;- 여러분이 선택한 모든 주제의 목록을 만드세요&#10;- 여러분의 TV 쇼 시청 진행 상태를 시즌별 에피소드별로 쉽게 기록하고 관리하세요&#10;- 여러분의 시청 상태를 IMDb Top 250 같은 목록과 비교해 보세요&#10;- 여러분이 시청한 자료를 토대로 새로운 영화와 TV쇼를 찾아보세요&#10;- 커뮤니티 포럼의 Widgets 으로 활용하세요&#10;&#10;이 애든온이 할 수 있는 것은?&#10;&#10;- 시청 중인 영화와 에피소드 정보를 자동으로 전송&#10;- 여러분의 TV 에피소드와 영화 컬렉션을 Trakt와 동기화 (라이브러리를 업데이트할 때 작동)&#10;- Kodi 라이브러리와 일치하도록 Trakt 컬렉션 자동 정리&#10;- Kodi와 Trakt 사이의 시청 정보 동기화&#10;- 영화와 에피소드를 시청한 후 평가하기&#10;&#10;이 플러그인에 공헌한 모든 이에게 감사드립니다! 재능있는 이 개발자들을 확인하려면 커밋 이력과 변경사항을 확인하기 바랍니다."
+msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:
+
+- Automatically scrobble what you're watching
+- Mobile apps for iPhone, iPad, Android, and Windows Phone
+- Share what you're watching (in real time) and rating to facebook and twitter
+- Personalized calendar so you never miss a TV show
+- Follow your friends and people you're interesed in
+- Use watchlists so you don't forget to what to watch
+- Track your media collections and impress your friends
+- Create custom lists around any topics you choose
+- Easily track your TV show progress across all seasons and episodes
+- Track your progress against industry lists such as the IMDb Top 250
+- Discover new shows and movies based on your viewing habits
+- Widgets for your forum signature
+
+What can this addon do?
+
+- Automatically scrobble all TV episodes and movies you are watching
+- Sync your TV episode and movie collections to Trakt (triggered after a library update)
+- Auto clean your Trakt collection so that it matches up with Kodi
+- Keep watched statuses synced between Kodi and Trakt
+- Rate movies and episode after watching them
+
+Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
+msgstr "시청 중인 모든 TV 쇼 에피소드와 영화 정보를 자동으로 Trakt.tv에 전송합니다! 사용자가 시청한 모든 이력을 자세히 보관하고 전세계의 TV, 영화 커뮤니티의 일원으로 참여하세요. http://Trakt.tv에서 무료 회원으로 가입하고 다양한 기능을 활용하세요:
+
+- 시청 중인 영화와 에피소드 정보를 자동으로 전송
+- iPhone, iPad, Android, Windows Phone 앱 지원
+- 시청 중 정보를 (실시간)으로 Facebook과 twitter로 공유하고 평가
+- 개인 캘린더로 TV 쇼 본방송을 놓치지 마세요
+- 친구와 관심있는 사람을 팔로우 하세요
+- 꼭 봐야 할 것들을 잊지 않기 위해 Watclist를 사용하세요
+- 여러분의 컬렉션을 관리하고 친구들을 감동 시키세요
+- 여러분이 선택한 모든 주제의 목록을 만드세요
+- 여러분의 TV 쇼 시청 진행 상태를 시즌별 에피소드별로 쉽게 기록하고 관리하세요
+- 여러분의 시청 상태를 IMDb Top 250 같은 목록과 비교해 보세요
+- 여러분이 시청한 자료를 토대로 새로운 영화와 TV쇼를 찾아보세요
+- 커뮤니티 포럼의 Widgets 으로 활용하세요
+
+이 애든온이 할 수 있는 것은?
+
+- 시청 중인 영화와 에피소드 정보를 자동으로 전송
+- 여러분의 TV 에피소드와 영화 컬렉션을 Trakt와 동기화 (라이브러리를 업데이트할 때 작동)
+- Kodi 라이브러리와 일치하도록 Trakt 컬렉션 자동 정리
+- Kodi와 Trakt 사이의 시청 정보 동기화
+- 영화와 에피소드를 시청한 후 평가하기
+
+이 플러그인에 공헌한 모든 이에게 감사드립니다! 재능있는 이 개발자들을 확인하려면 커밋 이력과 변경사항을 확인하기 바랍니다."
 
 msgctxt "#32000"
 msgid "General"

@@ -22,8 +22,54 @@ msgid "TV and movie scrobbler for Trakt.tv"
 msgstr "Scrobbler de Películas y Series para Trakt.tv"
 
 msgctxt "Addon Description"
-msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:&#10;&#10;- Automatically scrobble what you're watching&#10;- Mobile apps for iPhone, iPad, Android, and Windows Phone&#10;- Share what you're watching (in real time) and rating to facebook and twitter&#10;- Personalized calendar so you never miss a TV show&#10;- Follow your friends and people you're interesed in&#10;- Use watchlists so you don't forget to what to watch&#10;- Track your media collections and impress your friends&#10;- Create custom lists around any topics you choose&#10;- Easily track your TV show progress across all seasons and episodes&#10;- Track your progress against industry lists such as the IMDb Top 250&#10;- Discover new shows and movies based on your viewing habits&#10;- Widgets for your forum signature&#10;&#10;What can this addon do?&#10;&#10;- Automatically scrobble all TV episodes and movies you are watching&#10;- Sync your TV episode and movie collections to Trakt (triggered after a library update)&#10;- Auto clean your Trakt collection so that it matches up with Kodi&#10;- Keep watched statuses synced between Kodi and Trakt&#10;- Rate movies and episode after watching them&#10;&#10;Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
-msgstr "Haz scrobble automáticamente de todas tus Series de TV y Películas que estés viendo en Trakt.tv! Mantén un historial de todo lo que has visto y se parte de una comunidad global de entusiastas por las Series y Películas. Regístrate gratis en http://trakt.tv y consigue una tonelada de características:&#10;&#10;- Scrobble automático de lo que estás viendo&#10;- Aplicaciones móviles para iPhone, iPad, Android y Windows Phone&#10;- Comparte lo que estás viendo (en tiempo real) y tu valoración en Facebook y Twitter&#10;- Calendario personalizado para que no te pierdas ninguna serie&#10;- Sigue tus amigos y personas de interés&#10;- Usa las watchlists para no olvidarte de lo que quieres ver&#10;- Controla tus colecciones multimedia e impresiona a tus amigos&#10;- Crea listas personalizadas sobre los temas de tu elección&#10;- Controla fácilmente el progreso de los episodios y temporadas de tus Series&#10;- Controla tu progreso en comparación con listas industriales como IMDb TOP 250&#10;- Descubre nuevas Series y Películas basadas en tus hábitos&#10;- Widgets para tu firma en foros&#10;&#10;¿Qué puede hacer este add-on?&#10;&#10;- Scrobble automático de las Episodios y Películas que estás viendo&#10;- Sincronizar tus colecciones Series y Películas con Trakt.tv (después de la actualización de la biblioteca)&#10;- Limpiar automáticamente tu colección de Trakt.tv para que sea idéntica a la de Kodi&#10;- Mantener el mismo estado de visionado entre Kodi y Trakt.tv&#10;- Valorar Películas y Episodios después de verlos&#10;&#10;¡Un agradecimiento especial a todos los que han contribuido en este plugin! Revisa el histórico de commits y el histórico de cambios para ver todos esos desarrolladores con talento."
+msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:
+
+- Automatically scrobble what you're watching
+- Mobile apps for iPhone, iPad, Android, and Windows Phone
+- Share what you're watching (in real time) and rating to facebook and twitter
+- Personalized calendar so you never miss a TV show
+- Follow your friends and people you're interesed in
+- Use watchlists so you don't forget to what to watch
+- Track your media collections and impress your friends
+- Create custom lists around any topics you choose
+- Easily track your TV show progress across all seasons and episodes
+- Track your progress against industry lists such as the IMDb Top 250
+- Discover new shows and movies based on your viewing habits
+- Widgets for your forum signature
+
+What can this addon do?
+
+- Automatically scrobble all TV episodes and movies you are watching
+- Sync your TV episode and movie collections to Trakt (triggered after a library update)
+- Auto clean your Trakt collection so that it matches up with Kodi
+- Keep watched statuses synced between Kodi and Trakt
+- Rate movies and episode after watching them
+
+Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
+msgstr "Haz scrobble automáticamente de todas tus Series de TV y Películas que estés viendo en Trakt.tv! Mantén un historial de todo lo que has visto y se parte de una comunidad global de entusiastas por las Series y Películas. Regístrate gratis en http://trakt.tv y consigue una tonelada de características:
+
+- Scrobble automático de lo que estás viendo
+- Aplicaciones móviles para iPhone, iPad, Android y Windows Phone
+- Comparte lo que estás viendo (en tiempo real) y tu valoración en Facebook y Twitter
+- Calendario personalizado para que no te pierdas ninguna serie
+- Sigue tus amigos y personas de interés
+- Usa las watchlists para no olvidarte de lo que quieres ver
+- Controla tus colecciones multimedia e impresiona a tus amigos
+- Crea listas personalizadas sobre los temas de tu elección
+- Controla fácilmente el progreso de los episodios y temporadas de tus Series
+- Controla tu progreso en comparación con listas industriales como IMDb TOP 250
+- Descubre nuevas Series y Películas basadas en tus hábitos
+- Widgets para tu firma en foros
+
+¿Qué puede hacer este add-on?
+
+- Scrobble automático de las Episodios y Películas que estás viendo
+- Sincronizar tus colecciones Series y Películas con Trakt.tv (después de la actualización de la biblioteca)
+- Limpiar automáticamente tu colección de Trakt.tv para que sea idéntica a la de Kodi
+- Mantener el mismo estado de visionado entre Kodi y Trakt.tv
+- Valorar Películas y Episodios después de verlos
+
+¡Un agradecimiento especial a todos los que han contribuido en este plugin! Revisa el histórico de commits y el histórico de cambios para ver todos esos desarrolladores con talento."
 
 msgctxt "#32000"
 msgid "General"
