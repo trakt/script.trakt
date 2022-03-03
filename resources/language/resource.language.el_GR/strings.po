@@ -21,8 +21,54 @@ msgid "TV and movie scrobbler for Trakt.tv"
 msgstr "Υπηρεσία κοινοποίησης ταινιών και τηλ. σειρών (scrobbler) στο Trakt.tv"
 
 msgctxt "Addon Description"
-msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:&#10;&#10;- Automatically scrobble what you're watching&#10;- Mobile apps for iPhone, iPad, Android, and Windows Phone&#10;- Share what you're watching (in real time) and rating to facebook and twitter&#10;- Personalized calendar so you never miss a TV show&#10;- Follow your friends and people you're interesed in&#10;- Use watchlists so you don't forget to what to watch&#10;- Track your media collections and impress your friends&#10;- Create custom lists around any topics you choose&#10;- Easily track your TV show progress across all seasons and episodes&#10;- Track your progress against industry lists such as the IMDb Top 250&#10;- Discover new shows and movies based on your viewing habits&#10;- Widgets for your forum signature&#10;&#10;What can this addon do?&#10;&#10;- Automatically scrobble all TV episodes and movies you are watching&#10;- Sync your TV episode and movie collections to Trakt (triggered after a library update)&#10;- Auto clean your Trakt collection so that it matches up with Kodi&#10;- Keep watched statuses synced between Kodi and Trakt&#10;- Rate movies and episode after watching them&#10;&#10;Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
-msgstr "Αυτόματη κοινοποίηση στο Trakt.tv όλων των επεισοδίων και ταινιών που παρακολουθείτε! Μπορείτε να διατηρείτε αναλυτικό ιστορικό από ο,τιδήποτε είδατε, και να γίνετε μέρος μιας παγκόσμιας κοινότητας σινεφίλ και φαν της τηλεόρασης. Εγγραφείτε δωρεάν στο http://trakt.tv για ένα πλήθος παροχών:&#10;&#10;- Αυτόματη κοινοποίηση όσων παρακολουθείτε&#10;- Εφαρμογές για κινητά iPhone, Android, Windows Phone και iPad&#10;- Μοιραστείτε ό,τι παρακολουθείτε (σε πραγματικό χρόνο), μαζί με τη βαθμολογία σας, στο facebook και το twitter&#10;- Προσωπικό ημερολόγιο, για να μη χάνετε ποτέ επεισόδιο&#10;- Ακολουθήστε τους φίλους σας, και άτομα για τα οποία ενδιαφέρεστε&#10;- Χρήση λιστών προβολής, για να μην ξεχνάτε τι θέλετε να δείτε&#10;- Εντυπωσιάστε τους φίλους σας με τις συλλογές σας&#10;- Δημιουργήστε προσωπικές λίστες με ό,τι θέμα επιθυμείτε&#10;- Δείτε την πρόοδό σας όσον αφορά τις τηλεοπτικές σειρές, με πολύ εύκολο τρόπο&#10;- Συγκρίνετε την πρόοδό σας με επίσημες λίστες, όπως των 250 Κορυφαίων του IMDb&#10;- Ανακαλύψτε νέες σειρές και ταινίες με βάση όσα έχετε ήδη παρακολουθήσει&#10;- Widget για την υπογραφή σας σε διάφορα forum&#10;&#10;Τι μπορεί να κάνει αυτό το πρόσθετο;&#10;&#10;- Αυτόματη κοινοποίηση όλων των επεισοδίων και ταινιών που παρακολουθείτε&#10;- Συγχρονισμός όλων των επεισοδίων και συλλογών ταινιών στο Trakt (αυτόματα μετά από κάθε ενημέρωση της συλλογής)&#10;- Αυτόματη εκκαθάριση της συλλογής σας στο Trakt ούτως ώστε να ταυτίζεται με αυτή στο Kodi&#10;- Συγχρονισμός όσων παρακολουθήσατε ήδη μεταξύ του Kodi και του Trakt&#10;- Βαθμολογήστε τις ταινίες και τα επεισόδια αφού τα παρακολουθήσετε&#10;&#10;Ευχαριστούμε ιδιαιτέρως όλους όσους συνεισέφεραν σε αυτήν την εφαρμογή! Ελέγξτε το ιστορικό των προσθηκών και αλλαγών για να βρείτε αυτούς τους ταλαντούχους προγραμματιστές."
+msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:
+
+- Automatically scrobble what you're watching
+- Mobile apps for iPhone, iPad, Android, and Windows Phone
+- Share what you're watching (in real time) and rating to facebook and twitter
+- Personalized calendar so you never miss a TV show
+- Follow your friends and people you're interesed in
+- Use watchlists so you don't forget to what to watch
+- Track your media collections and impress your friends
+- Create custom lists around any topics you choose
+- Easily track your TV show progress across all seasons and episodes
+- Track your progress against industry lists such as the IMDb Top 250
+- Discover new shows and movies based on your viewing habits
+- Widgets for your forum signature
+
+What can this addon do?
+
+- Automatically scrobble all TV episodes and movies you are watching
+- Sync your TV episode and movie collections to Trakt (triggered after a library update)
+- Auto clean your Trakt collection so that it matches up with Kodi
+- Keep watched statuses synced between Kodi and Trakt
+- Rate movies and episode after watching them
+
+Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
+msgstr "Αυτόματη κοινοποίηση στο Trakt.tv όλων των επεισοδίων και ταινιών που παρακολουθείτε! Μπορείτε να διατηρείτε αναλυτικό ιστορικό από ο,τιδήποτε είδατε, και να γίνετε μέρος μιας παγκόσμιας κοινότητας σινεφίλ και φαν της τηλεόρασης. Εγγραφείτε δωρεάν στο http://trakt.tv για ένα πλήθος παροχών:
+
+- Αυτόματη κοινοποίηση όσων παρακολουθείτε
+- Εφαρμογές για κινητά iPhone, Android, Windows Phone και iPad
+- Μοιραστείτε ό,τι παρακολουθείτε (σε πραγματικό χρόνο), μαζί με τη βαθμολογία σας, στο facebook και το twitter
+- Προσωπικό ημερολόγιο, για να μη χάνετε ποτέ επεισόδιο
+- Ακολουθήστε τους φίλους σας, και άτομα για τα οποία ενδιαφέρεστε
+- Χρήση λιστών προβολής, για να μην ξεχνάτε τι θέλετε να δείτε
+- Εντυπωσιάστε τους φίλους σας με τις συλλογές σας
+- Δημιουργήστε προσωπικές λίστες με ό,τι θέμα επιθυμείτε
+- Δείτε την πρόοδό σας όσον αφορά τις τηλεοπτικές σειρές, με πολύ εύκολο τρόπο
+- Συγκρίνετε την πρόοδό σας με επίσημες λίστες, όπως των 250 Κορυφαίων του IMDb
+- Ανακαλύψτε νέες σειρές και ταινίες με βάση όσα έχετε ήδη παρακολουθήσει
+- Widget για την υπογραφή σας σε διάφορα forum
+
+Τι μπορεί να κάνει αυτό το πρόσθετο;
+
+- Αυτόματη κοινοποίηση όλων των επεισοδίων και ταινιών που παρακολουθείτε
+- Συγχρονισμός όλων των επεισοδίων και συλλογών ταινιών στο Trakt (αυτόματα μετά από κάθε ενημέρωση της συλλογής)
+- Αυτόματη εκκαθάριση της συλλογής σας στο Trakt ούτως ώστε να ταυτίζεται με αυτή στο Kodi
+- Συγχρονισμός όσων παρακολουθήσατε ήδη μεταξύ του Kodi και του Trakt
+- Βαθμολογήστε τις ταινίες και τα επεισόδια αφού τα παρακολουθήσετε
+
+Ευχαριστούμε ιδιαιτέρως όλους όσους συνεισέφεραν σε αυτήν την εφαρμογή! Ελέγξτε το ιστορικό των προσθηκών και αλλαγών για να βρείτε αυτούς τους ταλαντούχους προγραμματιστές."
 
 msgctxt "#32000"
 msgid "General"
