@@ -724,6 +724,46 @@ msgctxt "#32186"
 msgid "Allow script exclusions"
 msgstr ""
 
+msgctxt "#32187"
+msgid "Override proxy"
+msgstr ""
+
+msgctxt "#42187"
+msgid "Always enable a proxy, regardless of the kodi configuration. The default value is from the kodi configuration, but can be overriden below. The trakt plugin currently only supports HTTP or HTTPS proxies where kodi also supports SOCKS proxies."
+msgstr ""
+
+msgctxt "#32188"
+msgid "Proxy URI"
+msgstr ""
+
+msgctxt "#42188"
+msgid "Location of the proxy server."
+msgstr ""
+
+msgctxt "#32189"
+msgid "Proxy port"
+msgstr ""
+
+msgctxt "#42189"
+msgid "Port of the proxy server."
+msgstr ""
+
+msgctxt "#32190"
+msgid "Username"
+msgstr ""
+
+msgctxt "#42190"
+msgid "Optional user name needed to authenticate with the proxy."
+msgstr ""
+
+msgctxt "#32191"
+msgid "Password"
+msgstr ""
+
+msgctxt "#42191"
+msgid "Optional password needed to authenticate with the proxy."
+msgstr ""
+
 #~ msgctxt "#32003"
 #~ msgid "Startup Delay"
 #~ msgstr "Forsinkelse av oppstart"

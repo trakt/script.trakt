@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: XBMC Addons\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-12-02 18:13+0000\n"
+"PO-Revision-Date: 2021-12-11 02:53+0000\n"
 "Last-Translator: Minho Park <parkmino@gmail.com>\n"
 "Language-Team: Korean <https://kodi.weblate.cloud/projects/kodi-add-ons-scripts/script-trakt/ko_kr/>\n"
 "Language: ko_KR\n"
@@ -722,6 +722,46 @@ msgstr "플러그인 제외"
 msgctxt "#32186"
 msgid "Allow script exclusions"
 msgstr "스크립트 제외 허용"
+
+msgctxt "#32187"
+msgid "Override proxy"
+msgstr "프록시 재정의"
+
+msgctxt "#42187"
+msgid "Always enable a proxy, regardless of the kodi configuration. The default value is from the kodi configuration, but can be overriden below. The trakt plugin currently only supports HTTP or HTTPS proxies where kodi also supports SOCKS proxies."
+msgstr "kodi 구성에 관계없이 항상 프록시를 활성화하십시오. 기본값은 kodi 구성에서 가져온 것이지만 아래에서 재정의할 수 있습니다. trakt 플러그인은 현재 kodi가 SOCKS 프록시도 지원하는 HTTP 또는 HTTPS 프록시만 지원합니다."
+
+msgctxt "#32188"
+msgid "Proxy URI"
+msgstr "프록시 URI"
+
+msgctxt "#42188"
+msgid "Location of the proxy server."
+msgstr "프록시 서버의 위치입니다."
+
+msgctxt "#32189"
+msgid "Proxy port"
+msgstr "프록시 포트"
+
+msgctxt "#42189"
+msgid "Port of the proxy server."
+msgstr "프록시 서버의 포트입니다."
+
+msgctxt "#32190"
+msgid "Username"
+msgstr "사용자 이름"
+
+msgctxt "#42190"
+msgid "Optional user name needed to authenticate with the proxy."
+msgstr "프록시로 인증하는 데 필요한 선택적 사용자 이름입니다."
+
+msgctxt "#32191"
+msgid "Password"
+msgstr "비밀번호"
+
+msgctxt "#42191"
+msgid "Optional password needed to authenticate with the proxy."
+msgstr "프록시로 인증하는 데 필요한 선택적 비밀번호입니다."
 
 #~ msgctxt "#32003"
 #~ msgid "Startup Delay"
