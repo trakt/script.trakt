@@ -22,54 +22,8 @@ msgid "TV and movie scrobbler for Trakt.tv"
 msgstr "TV ir filmų registratorius, skirtas Trakt.tv"
 
 msgctxt "Addon Description"
-msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:
-
-- Automatically scrobble what you're watching
-- Mobile apps for iPhone, iPad, Android, and Windows Phone
-- Share what you're watching (in real time) and rating to facebook and twitter
-- Personalized calendar so you never miss a TV show
-- Follow your friends and people you're interesed in
-- Use watchlists so you don't forget to what to watch
-- Track your media collections and impress your friends
-- Create custom lists around any topics you choose
-- Easily track your TV show progress across all seasons and episodes
-- Track your progress against industry lists such as the IMDb Top 250
-- Discover new shows and movies based on your viewing habits
-- Widgets for your forum signature
-
-What can this addon do?
-
-- Automatically scrobble all TV episodes and movies you are watching
-- Sync your TV episode and movie collections to Trakt (triggered after a library update)
-- Auto clean your Trakt collection so that it matches up with Kodi
-- Keep watched statuses synced between Kodi and Trakt
-- Rate movies and episode after watching them
-
-Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
-msgstr "Automatiškai užregistruoti visus TV epizodus ir filmus, kuriuos žiūrite, Trakt.tv sistemoje! Laikykite išsamią istoriją visko, ką peržiūrėjote ir būkite globalios TV ir filmų entuziastų bendruomenės dalimi. Susikurkite nemokamą paskyrą http://trakt.tv puslapyje ir gaukite daugybę funkcionalumų:
-
-- Automatiškai užregistruokite tai, ką žiūrite
-- Mobilios programelės, skirtos iPhone, iPad, Android ir Windows Phone
-- Dalinkitės tuo, ką žiūrite (realiuoju laiku) ir įvertinimais facebook ir twitter sistemose
-- Suasmenintas kalendorius, kad niekada nepraleistumėte TV laidos
-- Sekite savo draugus ir žmones, kuriais domitės
-- Naudokite peržiūros sąrašą, kad nepamirštumėte ką norite peržiūrėti
-- Sekite savo media kolekciją ir padarykite įspūdį savo draugams
-- Sukurkite savus sąrašus bet kokia pasirinkta tema
-- Lengvai sekite TV laidos progresą tarp visų sezonų ir epizodų
-- Sekite savo progresą tarp industrinių sąrašų, tokių kaip IMDb Top 250
-- Atraskite naujas laidas ir filmus pagal savo žiūrėjimo įpročius
-- Valdiklis jūsų forumo paskyros parašui
-
-Ką gali šis priedas?
-
-- Automatiškai registruoti visus TV epizodus ir filmus, kuriuos žiūrite
-- Sinchronizuoti jūsų TV epizodų ir filmų kolekciją su Trakt.tv (vykdoma po bibliotekos atnaujinimo)
-- Automatiškai išvalyti jūsų Trakt.tv kolekciją, kad ji sutaptų su Kodi
-- Išlaikyti peržiūrėjimo būsenas sinchronizuotas tarp Kodi ir Trakt.tv
-- Įvertinti filmus ir epizodus juos peržiūrėjus
-
-Specialus ačiū visiems, kurie prisidėjo prie šio įskiepio! Patikrinkite kodo istoriją ir pakeitimų sąrašą, kad pamatytumėte šiuos talentingus kūrėjus."
+msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:[CR][CR]- Automatically scrobble what you're watching[CR]- Mobile apps for iPhone, iPad, Android, and Windows Phone[CR]- Share what you're watching (in real time) and rating to facebook and twitter[CR]- Personalized calendar so you never miss a TV show[CR]- Follow your friends and people you're interesed in[CR]- Use watchlists so you don't forget to what to watch[CR]- Track your media collections and impress your friends[CR]- Create custom lists around any topics you choose[CR]- Easily track your TV show progress across all seasons and episodes[CR]- Track your progress against industry lists such as the IMDb Top 250[CR]- Discover new shows and movies based on your viewing habits[CR]- Widgets for your forum signature[CR][CR]What can this addon do?[CR][CR]- Automatically scrobble all TV episodes and movies you are watching[CR]- Sync your TV episode and movie collections to Trakt (triggered after a library update)[CR]- Auto clean your Trakt collection so that it matches up with Kodi[CR]- Keep watched statuses synced between Kodi and Trakt[CR]- Rate movies and episode after watching them[CR][CR]Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
+msgstr "Automatiškai užregistruoti visus TV epizodus ir filmus, kuriuos žiūrite, Trakt.tv sistemoje! Laikykite išsamią istoriją visko, ką peržiūrėjote ir būkite globalios TV ir filmų entuziastų bendruomenės dalimi. Susikurkite nemokamą paskyrą http://trakt.tv puslapyje ir gaukite daugybę funkcionalumų:[CR][CR]- Automatiškai užregistruokite tai, ką žiūrite[CR]- Mobilios programelės, skirtos iPhone, iPad, Android ir Windows Phone[CR]- Dalinkitės tuo, ką žiūrite (realiuoju laiku) ir įvertinimais facebook ir twitter sistemose[CR]- Suasmenintas kalendorius, kad niekada nepraleistumėte TV laidos[CR]- Sekite savo draugus ir žmones, kuriais domitės[CR]- Naudokite peržiūros sąrašą, kad nepamirštumėte ką norite peržiūrėti[CR]- Sekite savo media kolekciją ir padarykite įspūdį savo draugams[CR]- Sukurkite savus sąrašus bet kokia pasirinkta tema[CR]- Lengvai sekite TV laidos progresą tarp visų sezonų ir epizodų[CR]- Sekite savo progresą tarp industrinių sąrašų, tokių kaip IMDb Top 250[CR]- Atraskite naujas laidas ir filmus pagal savo žiūrėjimo įpročius[CR]- Valdiklis jūsų forumo paskyros parašui[CR][CR]Ką gali šis priedas?[CR][CR]- Automatiškai registruoti visus TV epizodus ir filmus, kuriuos žiūrite[CR]- Sinchronizuoti jūsų TV epizodų ir filmų kolekciją su Trakt.tv (vykdoma po bibliotekos atnaujinimo)[CR]- Automatiškai išvalyti jūsų Trakt.tv kolekciją, kad ji sutaptų su Kodi[CR]- Išlaikyti peržiūrėjimo būsenas sinchronizuotas tarp Kodi ir Trakt.tv[CR]- Įvertinti filmus ir epizodus juos peržiūrėjus[CR][CR]Specialus ačiū visiems, kurie prisidėjo prie šio įskiepio! Patikrinkite kodo istoriją ir pakeitimų sąrašą, kad pamatytumėte šiuos talentingus kūrėjus."
 
 msgctxt "#32000"
 msgid "General"
