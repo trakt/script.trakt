@@ -22,53 +22,8 @@ msgid "TV and movie scrobbler for Trakt.tv"
 msgstr "Scrobbler de episódios e filmes para o Trakt.tv"
 
 msgctxt "Addon Description"
-msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:
-
-- Automatically scrobble what you're watching
-- Mobile apps for iPhone, iPad, Android, and Windows Phone
-- Share what you're watching (in real time) and rating to facebook and twitter
-- Personalized calendar so you never miss a TV show
-- Follow your friends and people you're interesed in
-- Use watchlists so you don't forget to what to watch
-- Track your media collections and impress your friends
-- Create custom lists around any topics you choose
-- Easily track your TV show progress across all seasons and episodes
-- Track your progress against industry lists such as the IMDb Top 250
-- Discover new shows and movies based on your viewing habits
-- Widgets for your forum signature
-
-What can this addon do?
-
-- Automatically scrobble all TV episodes and movies you are watching
-- Sync your TV episode and movie collections to Trakt (triggered after a library update)
-- Auto clean your Trakt collection so that it matches up with Kodi
-- Keep watched statuses synced between Kodi and Trakt
-- Rate movies and episode after watching them
-
-Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
-msgstr "Automaticamente faça scrobble de filmes e seriados que está a assistir para o Trakt.tv! Mantenha um histórico de tudo o que assistiu e faça parte de uma comunidade de entusiastas de filmes e seriados. Inscreva-se gratuitamente para uma conta em http://trakt.tv e receba uma tonelada de funcionalidades:
-
-- Scrobble automático quando está a assistir
-- Aplicações moveis para iPhone, iPad, Android, Windows Phone e Blackberry
-- Partilhe o que está a assistir (em tempo real) e as suas classificações no facebook e twitter
-- Calendário personalizado de forma a nunca perder um seriado
-- Siga os seus amigos e pessoas de interesse
-- Use listas para não esquecer o que ver
-- Mostre as suas bibliotecas de filmes e seriados aos seus amigos
-- Crie listas personalizadas sobre os assuntos que desejar
-- Verifique que espisódios já assistiu e quais faltam assistir
-- Veja que filmes tem do IMDB TOP 250
-- Descubra novos filmes e seriados com base nos que já assistiu
-- Widgets para usar na assinatura de fóruns
-
-O que pode este addon fazer?
-- Scrobble automático de todos os filmes e episódios de TV que está a assistir
-- Sincronização dos filmes e episódios de TV assistidos com o Trakt (após um update da biblioteca)
-- Limpeza automática do Trakt de forma a ficar igual ao Kodi
-- Manter as visualizações sincronizadas entre o Trakt e o Kodi
-- Classifique filmes e episódios após visualização
-
-Um obrigado especial a todos os que contribuíram para este plugin! Veja o github e o changelog para ver quem são estes programadores talentosos."
+msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:[CR][CR]- Automatically scrobble what you're watching[CR]- Mobile apps for iPhone, iPad, Android, and Windows Phone[CR]- Share what you're watching (in real time) and rating to facebook and twitter[CR]- Personalized calendar so you never miss a TV show[CR]- Follow your friends and people you're interesed in[CR]- Use watchlists so you don't forget to what to watch[CR]- Track your media collections and impress your friends[CR]- Create custom lists around any topics you choose[CR]- Easily track your TV show progress across all seasons and episodes[CR]- Track your progress against industry lists such as the IMDb Top 250[CR]- Discover new shows and movies based on your viewing habits[CR]- Widgets for your forum signature[CR][CR]What can this addon do?[CR][CR]- Automatically scrobble all TV episodes and movies you are watching[CR]- Sync your TV episode and movie collections to Trakt (triggered after a library update)[CR]- Auto clean your Trakt collection so that it matches up with Kodi[CR]- Keep watched statuses synced between Kodi and Trakt[CR]- Rate movies and episode after watching them[CR][CR]Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
+msgstr "Automaticamente faça scrobble de filmes e seriados que está a assistir para o Trakt.tv! Mantenha um histórico de tudo o que assistiu e faça parte de uma comunidade de entusiastas de filmes e seriados. Inscreva-se gratuitamente para uma conta em http://trakt.tv e receba uma tonelada de funcionalidades:[CR][CR]- Scrobble automático quando está a assistir[CR]- Aplicações moveis para iPhone, iPad, Android, Windows Phone e Blackberry[CR]- Partilhe o que está a assistir (em tempo real) e as suas classificações no facebook e twitter[CR]- Calendário personalizado de forma a nunca perder um seriado[CR]- Siga os seus amigos e pessoas de interesse[CR]- Use listas para não esquecer o que ver[CR]- Mostre as suas bibliotecas de filmes e seriados aos seus amigos[CR]- Crie listas personalizadas sobre os assuntos que desejar[CR]- Verifique que espisódios já assistiu e quais faltam assistir[CR]- Veja que filmes tem do IMDB TOP 250[CR]- Descubra novos filmes e seriados com base nos que já assistiu[CR]- Widgets para usar na assinatura de fóruns[CR][CR]O que pode este addon fazer?[CR]- Scrobble automático de todos os filmes e episódios de TV que está a assistir[CR]- Sincronização dos filmes e episódios de TV assistidos com o Trakt (após um update da biblioteca)[CR]- Limpeza automática do Trakt de forma a ficar igual ao Kodi[CR]- Manter as visualizações sincronizadas entre o Trakt e o Kodi[CR]- Classifique filmes e episódios após visualização[CR][CR]Um obrigado especial a todos os que contribuíram para este plugin! Veja o github e o changelog para ver quem são estes programadores talentosos."
 
 msgctxt "#32000"
 msgid "General"

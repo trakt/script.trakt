@@ -22,52 +22,8 @@ msgid "TV and movie scrobbler for Trakt.tv"
 msgstr "Dodatek umożliwiający rejestrację odtwarzanych i obejrzanych seriali i filmów w serwisie Trakt.tv"
 
 msgctxt "Addon Description"
-msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:
-
-- Automatically scrobble what you're watching
-- Mobile apps for iPhone, iPad, Android, and Windows Phone
-- Share what you're watching (in real time) and rating to facebook and twitter
-- Personalized calendar so you never miss a TV show
-- Follow your friends and people you're interesed in
-- Use watchlists so you don't forget to what to watch
-- Track your media collections and impress your friends
-- Create custom lists around any topics you choose
-- Easily track your TV show progress across all seasons and episodes
-- Track your progress against industry lists such as the IMDb Top 250
-- Discover new shows and movies based on your viewing habits
-- Widgets for your forum signature
-
-What can this addon do?
-
-- Automatically scrobble all TV episodes and movies you are watching
-- Sync your TV episode and movie collections to Trakt (triggered after a library update)
-- Auto clean your Trakt collection so that it matches up with Kodi
-- Keep watched statuses synced between Kodi and Trakt
-- Rate movies and episode after watching them
-
-Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
-msgstr "Automatyczna rejestracja obejrzanych odcinków serialów i film w serwisie Trakt.tv! Przechowuj pełną historię wszystkich obejrzanych mediów i bądź częścią globalnej społeczności entuzjastów multimediów. Zarejestruj swoje konto za darmo na http://trakt.tv i uzyskaj dostęp do mnóstwa funkcji:
-- automatycznej rejestracji obejrzanych mediów
-- mobilnych aplikacji na iPhone'a, iPada, Androida i Windows Phone
-- publikacji obejrzanych mediów i ich oceny (w czasie rzeczywistym) w serwisach Facebook i Twitter
-- osobistego kalendarza, żebyś nigdy nie przegapił emisji serialu
-- śledzenia aktywności znajomych i osób, którymi się interesujesz
-- listy pozycji do obejrzenia, żebyś nigdy nie zapomniał tego, co chcesz obejrzeć
-- udostępniania swojej kolekcji mediów, którą możesz zaimponować swoim znajomym
-- tworzenia niestandardowych list skupionych na wybranym temacie
-- łatwego śledzenia postępów oglądania sezonów i odcinków serialu
-- porównywania własnych postępów oglądania z publicznymi listami takimi jak lista Top 250 serwisu IMDb
-- odkrywanie nowych seriali i filmów na podstawie preferencji
-
-Co potrafi ten dodatek?
-
-- rejestrować automatycznie odtwarzania wszystkich odcinków seriali i filmów
-- synchronizację biblioteki filmów i odcinków seriali z kolekcją Trakt (uruchamianą po aktualizacji biblioteki)
-- czyszczenie kolekcji Trakt w celu pełnego dopasowania z biblioteką Kodi
-- utrzymywanie synchronizacji stanów obejrzenia między biblioteką Kodi a kolekcją Trakt
-- możliwość oceny filmów i odcinków seriali zaraz po obejrzeniu
-
-Specjalne podziękowania dla wszystkich, którzy wnieśli swój wkład w tworzenie tego dodatku! Przejrzyj historię i dziennik zmian, aby poznać tych utalentowanych programistów."
+msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:[CR][CR]- Automatically scrobble what you're watching[CR]- Mobile apps for iPhone, iPad, Android, and Windows Phone[CR]- Share what you're watching (in real time) and rating to facebook and twitter[CR]- Personalized calendar so you never miss a TV show[CR]- Follow your friends and people you're interesed in[CR]- Use watchlists so you don't forget to what to watch[CR]- Track your media collections and impress your friends[CR]- Create custom lists around any topics you choose[CR]- Easily track your TV show progress across all seasons and episodes[CR]- Track your progress against industry lists such as the IMDb Top 250[CR]- Discover new shows and movies based on your viewing habits[CR]- Widgets for your forum signature[CR][CR]What can this addon do?[CR][CR]- Automatically scrobble all TV episodes and movies you are watching[CR]- Sync your TV episode and movie collections to Trakt (triggered after a library update)[CR]- Auto clean your Trakt collection so that it matches up with Kodi[CR]- Keep watched statuses synced between Kodi and Trakt[CR]- Rate movies and episode after watching them[CR][CR]Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
+msgstr "Automatyczna rejestracja obejrzanych odcinków serialów i film w serwisie Trakt.tv! Przechowuj pełną historię wszystkich obejrzanych mediów i bądź częścią globalnej społeczności entuzjastów multimediów. Zarejestruj swoje konto za darmo na http://trakt.tv i uzyskaj dostęp do mnóstwa funkcji:[CR]- automatycznej rejestracji obejrzanych mediów[CR]- mobilnych aplikacji na iPhone'a, iPada, Androida i Windows Phone[CR]- publikacji obejrzanych mediów i ich oceny (w czasie rzeczywistym) w serwisach Facebook i Twitter[CR]- osobistego kalendarza, żebyś nigdy nie przegapił emisji serialu[CR]- śledzenia aktywności znajomych i osób, którymi się interesujesz[CR]- listy pozycji do obejrzenia, żebyś nigdy nie zapomniał tego, co chcesz obejrzeć[CR]- udostępniania swojej kolekcji mediów, którą możesz zaimponować swoim znajomym[CR]- tworzenia niestandardowych list skupionych na wybranym temacie[CR]- łatwego śledzenia postępów oglądania sezonów i odcinków serialu[CR]- porównywania własnych postępów oglądania z publicznymi listami takimi jak lista Top 250 serwisu IMDb[CR]- odkrywanie nowych seriali i filmów na podstawie preferencji[CR][CR]Co potrafi ten dodatek?[CR][CR]- rejestrować automatycznie odtwarzania wszystkich odcinków seriali i filmów[CR]- synchronizację biblioteki filmów i odcinków seriali z kolekcją Trakt (uruchamianą po aktualizacji biblioteki)[CR]- czyszczenie kolekcji Trakt w celu pełnego dopasowania z biblioteką Kodi[CR]- utrzymywanie synchronizacji stanów obejrzenia między biblioteką Kodi a kolekcją Trakt[CR]- możliwość oceny filmów i odcinków seriali zaraz po obejrzeniu[CR][CR]Specjalne podziękowania dla wszystkich, którzy wnieśli swój wkład w tworzenie tego dodatku! Przejrzyj historię i dziennik zmian, aby poznać tych utalentowanych programistów."
 
 msgctxt "#32000"
 msgid "General"
