@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: XBMC Addons\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-03-13 18:13+0000\n"
+"PO-Revision-Date: 2022-03-19 03:13+0000\n"
 "Last-Translator: Oskari Lavinto <olavinto@protonmail.com>\n"
 "Language-Team: Finnish <https://kodi.weblate.cloud/projects/kodi-add-ons-scripts/script-trakt/fi_fi/>\n"
 "Language: fi_FI\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 msgctxt "Addon Summary"
 msgid "TV and movie scrobbler for Trakt.tv"
-msgstr "TV-sarjojen ja elokuvien scrobbler Trakt.tv:lle"
+msgstr "Sarjojen ja elokuvien katselutilanteen Trakt.tv-kirjaus"
 
 msgctxt "Addon Description"
 msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:[CR][CR]- Automatically scrobble what you're watching[CR]- Mobile apps for iPhone, iPad, Android, and Windows Phone[CR]- Share what you're watching (in real time) and rating to facebook and twitter[CR]- Personalized calendar so you never miss a TV show[CR]- Follow your friends and people you're interesed in[CR]- Use watchlists so you don't forget to what to watch[CR]- Track your media collections and impress your friends[CR]- Create custom lists around any topics you choose[CR]- Easily track your TV show progress across all seasons and episodes[CR]- Track your progress against industry lists such as the IMDb Top 250[CR]- Discover new shows and movies based on your viewing habits[CR]- Widgets for your forum signature[CR][CR]What can this addon do?[CR][CR]- Automatically scrobble all TV episodes and movies you are watching[CR]- Sync your TV episode and movie collections to Trakt (triggered after a library update)[CR]- Auto clean your Trakt collection so that it matches up with Kodi[CR]- Keep watched statuses synced between Kodi and Trakt[CR]- Rate movies and episode after watching them[CR][CR]Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
-msgstr ""
+msgstr "Kirjaa kaikki katsomasi sarjojen jaksot ja elokuvat Trakt.tv-kokoelmaasi automaattisesti! Säilytä kattava historia kaikesta katsomastasi ja osallistu maailmanlaajuiseen sarja- ja elokuvaharrastajien yhteisöön. Luo ilmainen tili osoitteessa http://trakt.tv ja hanki useita lisäominaisuuksia:[CR][CR]- Kirjaa automaattisesti mitä katsot[CR]- Mobiilisovellukset iPhone-, iPad-, Android- ja Windows Phone -alustoille[CR]- Jaa mitä katselet ja arvioit reaaliaikaisesti Facebookissa ja Twitterissä[CR]- Henkilökohtainen kalenteri, jotteivat sarjojen jaksot jää koskaan katsomatta[CR]- Seuraa kavereita ja kiinnostavia henkilöitä[CR]- Katselulistojen avulla et unohda mitä olit katsomassa[CR]- Seuraa mediakokoelmiasi ja tee vaikutus kavereihisi[CR]- Luo omia listoja mistä tahansa valitsemistasi aiheista[CR]- Pidä kirjaa sarjojen jokaisen kauden ja jakson katselutilanteesta[CR]- Pidä kirjaa katselutilanteestasi alan listoilla, kuten IMDb 250 parasta[CR]- Löydä uusia sarjoja ja elokuvia katselutottumustesi perusteella[CR]- Widgettejä, joita voit käyttää allekirjoituksissasi keskustelupalstoilla[CR][CR]Mitä tämä lisäosa tekee?[CR][CR]- Kirjaa automaattisesti kaikki sarja- ja elokuvakatselusi[CR]- Synkronoi sarja- ja elokuvakokoelmasi Trakt-kokoelmaasi (käynnistyy kirjastopäivityksen jälkeen)[CR] - Siivoaa Trakt-kokoelmasi automaattisesti vastaamaan Kodin kirjastoa[CR]- Synkronoi katselutilanteet Kodin ja Traktin välillä[CR] - Arvioi elokuvat ja jaksot niiden katselun päätyttyä helposti[CR][CR]Erityiskiitos lisäosan kehitykseen osallistuneille! Näet nämä lahjakkaat kehittäjät muutoshistoriasta."
 
 msgctxt "#32000"
 msgid "General"
@@ -32,51 +32,51 @@ msgstr "Yleiset"
 # empty strings from id 32001 to 32002
 msgctxt "#32003"
 msgid "Startup Delay (seconds)"
-msgstr ""
+msgstr "Käynnistysviive (sekuntia)"
 
 msgctxt "#32004"
 msgid "Rating"
-msgstr "Arvosana"
+msgstr "Arviointi"
 
 msgctxt "#32005"
 msgid "Rate Movie after watching"
-msgstr "Arvostele elokuva katsomisen jälkeen"
+msgstr "Arvioi elokuva katselun jälkeen"
 
 msgctxt "#32006"
 msgid "Rate TV show Episode after watching"
-msgstr "Arvostele tv-sarjan jakso katsomisen jälkeen"
+msgstr "Arvioi sarjan jakso katselun jälkeen"
 
 msgctxt "#32008"
 msgid "Minimum percent watched to display rating dialog"
-msgstr "Minimi prosenttimäärä katsottuna, jolloin arvostelu-ikkuna näytetään"
+msgstr "Arvioinnin vähimmäiskatseluvaihe (prosenttia)"
 
 msgctxt "#32009"
 msgid "Allow re-rating of media"
-msgstr "Salli median uudelleen arvostelu"
+msgstr "Mahdollista median uudelleenarviointi"
 
 msgctxt "#32010"
 msgid "Default rating"
-msgstr "Oletus arvosana"
+msgstr "Oletusarvio"
 
 msgctxt "#32011"
 msgid "Scrobbling"
-msgstr "Scroblataan"
+msgstr "Kirjataan"
 
 msgctxt "#32012"
 msgid "Scrobble movies"
-msgstr "Scrobblaa elokuvat"
+msgstr "Kirjaa elokuvat"
 
 msgctxt "#32013"
 msgid "Scrobble TV show episodes"
-msgstr "Scrobblaa TV-sarjan jaksot"
+msgstr "Kirjaa sarjojen jaksot"
 
 msgctxt "#32014"
 msgid "Show notification on scrobble"
-msgstr "Näytä ilmoitus scrobblauksesta"
+msgstr "Ilmoita kirjauksesta"
 
 msgctxt "#32015"
 msgid "Trakt - Scrobbled successfully"
-msgstr "Trakt - Scrobblaus onnistui"
+msgstr "Trakt - Kirjaus suoritettiin"
 
 msgctxt "#32016"
 msgid "Exclusions"
@@ -84,23 +84,23 @@ msgstr "Poikkeukset"
 
 msgctxt "#32017"
 msgid "Exclude Live TV"
-msgstr "Ei TV-lähetystä"
+msgstr "Älä kirjaa televisiolähetyksiä"
 
 msgctxt "#32018"
 msgid "Exclude HTTP sources"
-msgstr "Ei HTTP-lähteitä"
+msgstr "Älä kirjaa HTTP-lähteitä"
 
 msgctxt "#32019"
 msgid "Exclude path"
-msgstr "Ei polkua"
+msgstr "Älä kirjaa sijaintia"
 
 msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
-msgstr "Kansion polku (sisältäen alikansiot)"
+msgstr "Kansion sijainti (sisältäen alikansiot)"
 
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
-msgstr "Trakt:iin ei saada yhteyttä"
+msgstr "Trakt ei ole tavoitettavissa"
 
 msgctxt "#32024"
 msgid "Error"
@@ -108,7 +108,7 @@ msgstr "Virhe"
 
 msgctxt "#32026"
 msgid "What Did You Think?"
-msgstr "Mitä mieltä olet?"
+msgstr "Mitä mieltä olit?"
 
 msgctxt "#32027"
 msgid "Totally Ninja!"
@@ -144,47 +144,47 @@ msgstr "Hyvä"
 
 msgctxt "#32035"
 msgid "Great"
-msgstr "Mahtava"
+msgstr "Parempi"
 
 msgctxt "#32036"
 msgid "Superb"
-msgstr "Loistava"
+msgstr "Paras"
 
 msgctxt "#32037"
 msgid "Unrate this movie"
-msgstr "Poista elokuvan arvostelu"
+msgstr "Poista elokuvan arvio"
 
 msgctxt "#32038"
 msgid "Unrate this show"
-msgstr "Poista tämän sarjan arvostelu"
+msgstr "Poista sarjan arvio"
 
 msgctxt "#32039"
 msgid "Unrate this episode"
-msgstr "Poista tämän jakson arvostelu"
+msgstr "Poista jakson arvio"
 
 msgctxt "#32040"
 msgid "Trakt - Rating submitted successfully"
-msgstr "Trakt - Arvostelu lähetty onnistuneesti"
+msgstr "Trakt - Arvion lähetys onnistui"
 
 msgctxt "#32041"
 msgid "Trakt - Already rated"
-msgstr "Trakt - Arvosteltu aiemmin"
+msgstr "Trakt - Arvioitu aiemmin"
 
 msgctxt "#32042"
 msgid "Trakt - Unrated successfully"
-msgstr "Trakt - Arvostelu poistettu onnistuneesti"
+msgstr "Trakt - Arvion poisto onnistui"
 
 msgctxt "#32043"
 msgid "Trakt - Already has the same rating"
-msgstr "Trakt - Oli jo sama arvostelu"
+msgstr "Trakt - On jo sama arvio"
 
 msgctxt "#32044"
 msgid "Trakt - Problem submitting rating"
-msgstr "Trakt - Ongelma arvostelun lähettämisessä"
+msgstr "Trakt - Ongelma lähetettäessä arviota"
 
 msgctxt "#32045"
 msgid "Synchronize"
-msgstr "Synkronoi"
+msgstr "Synkronointi"
 
 msgctxt "#32046"
 msgid "Movies"
@@ -192,31 +192,31 @@ msgstr "Elokuvat"
 
 msgctxt "#32047"
 msgid "Add new movies to Trakt collection"
-msgstr "Lisää uudet elokuvat Trakt kokoelmaan"
+msgstr "Lisää uudet elokuvat Trakt-kokoelmaan"
 
 msgctxt "#32048"
 msgid "Add watched movies to Trakt history"
-msgstr "Lisää katsotut elokuvat Trakt:in historiaan"
+msgstr "Lisää katsotut elokuvat Trakt-historiaan"
 
 msgctxt "#32049"
 msgid "Mark movies from Trakt history as watched in Kodi"
-msgstr "Merkitse elokuvat Trakt:in historiasta katsotuksi Kodi:ssa"
+msgstr "Merkitse Trakt-historian elokuvat katsotuiksi Kodissa"
 
 msgctxt "#32050"
 msgid "TV Episodes"
-msgstr "TV-sarjan jaksot"
+msgstr "Sarjojen jaksot"
 
 msgctxt "#32051"
 msgid "Add new TV episodes to Trakt collection"
-msgstr "Lisää uudet TV-sarjan jaksot Trakt kokoelmaan"
+msgstr "Lisää uudet jaksot Trakt-kokoelmaan"
 
 msgctxt "#32052"
 msgid "Add watched TV episodes to Trakt history"
-msgstr "Lisää katsotut TV-sarjan jaksot Trakt:n historiaan"
+msgstr "Lisää katsotut jaksot Trakt-historiaan"
 
 msgctxt "#32053"
 msgid "Mark TV episodes from Trakt history as watched in Kodi"
-msgstr "Merkitse TV-sarjan jaksot Trakt:in historiasta katsotuksi Kodissa"
+msgstr "Merkitse Trakt-historian jaksot Kodissa katsotuiksi"
 
 msgctxt "#32054"
 msgid "Service"
@@ -224,19 +224,19 @@ msgstr "Palvelu"
 
 msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
-msgstr "Synkronoi kokoelma kirjaston päivityksessä tai siivouksessa"
+msgstr "Synkronoi kirjaston päivityksen tai siivouksen yhteydessä"
 
 msgctxt "#32056"
 msgid "Show sync notifications"
-msgstr ""
+msgstr "Ilmoita synkronoinnista"
 
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
-msgstr "Poista poistetut elokuvat Trakt kokoelmasta"
+msgstr "Poista poistetut elokuvat Trakt-kokoelmasta"
 
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
-msgstr "Poista poistetut TV-sarjan jaksot Trakt kokoelmasta"
+msgstr "Poista poistetut jaksot Trakt-kokoelmasta"
 
 msgctxt "#32060"
 msgid "Hide notifications during playback"
@@ -244,51 +244,51 @@ msgstr "Piilota ilmoitukset toiston ajaksi"
 
 msgctxt "#32061"
 msgid "Sync started"
-msgstr "Synkronointi aloitettu"
+msgstr "Synkronointi on aloitettu"
 
 msgctxt "#32062"
 msgid "Sync complete"
-msgstr "Synkronointi valmis"
+msgstr "Synkronointi on valmis"
 
 msgctxt "#32063"
 msgid "%i movie(s) will be added to Trakt collection"
-msgstr "%i elokuva(a) lisätään Trakt kokoelmaan"
+msgstr "Trakt-kokoelmaan lisätään %i elokuvaa"
 
 msgctxt "#32064"
 msgid "%i movie playcount(s) will be updated on Trakt"
-msgstr "%i elokuvan katselukerta(/kerrat) päivitetään Trakt:iin"
+msgstr "%i elokuvan katselukerrat päivitetään Traktiin"
 
 msgctxt "#32065"
 msgid "%i movie(s) playcount will be updated in Kodi"
-msgstr ""
+msgstr "%i elokuvan katselukerrat päivitetään Kodiin"
 
 msgctxt "#32066"
 msgid "Movie Sync Complete"
-msgstr "Elokuvien synkronointi valmis"
+msgstr "Elokuvien synkronointi on valmis"
 
 msgctxt "#32067"
 msgid "Going to add %i show(s) to Trakt collection"
-msgstr ""
+msgstr "%i sarjaa lisätään Trakt-kokoelmaan"
 
 msgctxt "#32068"
 msgid "Checking for episodes missing from Trakt collection"
-msgstr ""
+msgstr "Tarkistetaan Trakt-kokoelmasta puuttuvia jaksoja"
 
 msgctxt "#32069"
 msgid "%i of %i show(s) have episodes added to Trakt collection"
-msgstr ""
+msgstr "%i/%i sarjan jaksot lisätään Trakt-kokoelmaan"
 
 msgctxt "#32070"
 msgid "Going to update %i show(s) missing watched status"
-msgstr "Päivitetään %i sarjan puuttuvia katselukertoja"
+msgstr "Päivitetään %i sarjan puuttuvat katselutilat"
 
 msgctxt "#32071"
 msgid "Checking watched episodes on Trakt"
-msgstr "Tarkistetaan katsotut jaksot Trakt.tv:stä"
+msgstr "Tarkistetaan Traktin katsottuja jaksoja"
 
 msgctxt "#32072"
 msgid "%i show(s) had missing watched status"
-msgstr ""
+msgstr "%i sarjan katselutilat puuttuivat"
 
 msgctxt "#32073"
 msgid "%i episodes are being updated"
@@ -296,51 +296,51 @@ msgstr "%i jaksoa päivitetään"
 
 msgctxt "#32074"
 msgid "Checking watched episodes on Kodi"
-msgstr "Tarkistetaan Kodissa katsotut jaksot"
+msgstr "Tarkistetaan Kodin katsottuja jaksoja"
 
 msgctxt "#32075"
 msgid "Episode Sync Complete"
-msgstr ""
+msgstr "Jaksojen synkronointi on valmis"
 
 msgctxt "#32076"
 msgid "%i movie(s) will be removed from Trakt collection"
-msgstr ""
+msgstr "%i elokuvaa poistetaan Trakt-kokoelmasta"
 
 msgctxt "#32077"
 msgid "Cleaning Trakt TV show collection"
-msgstr "Siivotaan Trakt:in TV-sarja kokoelmaa"
+msgstr "Siivotaan Traktin sarjakokoelmaa"
 
 msgctxt "#32078"
 msgid "episodes are being removed"
-msgstr "jaksoja poistetaan"
+msgstr "jaksoa poistetaan"
 
 msgctxt "#32079"
 msgid "Loading movies from Kodi"
-msgstr "Ladataan elokuvat Kodista"
+msgstr "Ladataan elokuvia Kodista"
 
 msgctxt "#32080"
 msgid "Movies loaded from Kodi"
-msgstr "Elokuvat ladattu Kodista"
+msgstr "Elokuvat ladattiin Kodista"
 
 msgctxt "#32081"
 msgid "Retrieving movie collection from Trakt"
-msgstr ""
+msgstr "Noudetaan elokuvakokoelmaa Traktista"
 
 msgctxt "#32082"
 msgid "Retrieving watched movies from Trakt"
-msgstr ""
+msgstr "Noudetaan katsottuja elokuvia Traktista"
 
 msgctxt "#32083"
 msgid "Retrieved movie data from Trakt"
-msgstr ""
+msgstr "Elokuvien tiedot noudettiin Traktista"
 
 msgctxt "#32084"
 msgid "Trakt movie collection is up to date, no movies to add"
-msgstr ""
+msgstr "Traktin elokuvakokoelma on ajan tasalla, eikä lisättäviä elokuvia ole"
 
 msgctxt "#32085"
 msgid "%i movie(s) were added to your Trakt collection"
-msgstr ""
+msgstr "%i elokuvaa lisättiin Trakt-kokoelmaasi"
 
 msgctxt "#32086"
 msgid "Trakt movie playcounts are up to date"
@@ -348,7 +348,7 @@ msgstr "Traktin elokuvien katselukerrat ovat ajantasalla"
 
 msgctxt "#32087"
 msgid "Playcounts updated for %i movie(s) on Trakt"
-msgstr "Katselukerrat päivitetty %i elokuvalle Trakt:issa"
+msgstr "%i elokuvan katselukerrat päivitettiin Traktiin"
 
 msgctxt "#32088"
 msgid "Kodi movie playcounts are up to date"
@@ -356,99 +356,99 @@ msgstr "Kodin elokuvien katselukerrat ovat ajantasalla"
 
 msgctxt "#32089"
 msgid "Updating %i of %i movie playcount(s) in Kodi"
-msgstr ""
+msgstr "Päivitetään %i/%i elokuvan katselukerrat Kodiin"
 
 msgctxt "#32090"
 msgid "Playcounts updated for %i movie(s) in Kodi"
-msgstr "Katselukerrat päivitetty %i elokuvalle Kodissa"
+msgstr "%i elokuvan katselukerrat päivitettiin Kodiin"
 
 msgctxt "#32091"
 msgid "Trakt movie collection is up to date, no movies removed"
-msgstr ""
+msgstr "Traktin elokuvakokoelma on ajan tasalla, eikä elokuvia poistettu"
 
 msgctxt "#32092"
 msgid "%i movie(s) were removed from your Trakt collection"
-msgstr ""
+msgstr "%i elokuvaa poistettiin Trakt-kokoelmasta"
 
 msgctxt "#32093"
 msgid "Updating %i of %i movie playcount(s) on Trakt"
-msgstr ""
+msgstr "Päivitetään %i/%i elokuvan katselukerrat Traktiin"
 
 msgctxt "#32094"
 msgid "Loading episode data from Kodi"
-msgstr "Ladataan jakson tietoja Kodista"
+msgstr "Jaksoja ladataan Kodista"
 
 msgctxt "#32095"
 msgid "Loading shows from Kodi"
-msgstr ""
+msgstr "Sarjoja ladataan Kodista"
 
 msgctxt "#32096"
 msgid "Shows loaded from Kodi"
-msgstr "Sarjat ladattu Kodista"
+msgstr "Sarjat ladattiin Kodista"
 
 msgctxt "#32097"
 msgid "Parsing %i of %i episode data from Kodi"
-msgstr ""
+msgstr "Puretaan %i/%i jakson tietoja Kodista"
 
 msgctxt "#32098"
 msgid "Loaded episode data from Kodi"
-msgstr ""
+msgstr "Jaksot ladattiin Kodista"
 
 msgctxt "#32099"
 msgid "Loading episode data from Trakt"
-msgstr ""
+msgstr "Ladataan jaksoja Traktista"
 
 msgctxt "#32100"
 msgid "Retrieving episode collection from Trakt"
-msgstr ""
+msgstr "Noudetaan jaksokokoelmaa Traktista"
 
 msgctxt "#32101"
 msgid "Retrieving watched episodes from Trakt"
-msgstr ""
+msgstr "Noudetaan katsottuja jaksoja Traktista"
 
 msgctxt "#32102"
 msgid "Parsing episode data %i of %i from Trakt"
-msgstr ""
+msgstr "Puretaan %i/%i jakson tietoja Traktista"
 
 msgctxt "#32103"
 msgid "Retrieved episode data from Trakt"
-msgstr ""
+msgstr "Noudetaan jaksoja Traktista"
 
 msgctxt "#32104"
 msgid "Trakt episode collection is up to date, no episodes to add"
-msgstr ""
+msgstr "Traktin jaksokokoelma on ajan tasalla, eikä lisättäviä jaksoja ole"
 
 msgctxt "#32105"
 msgid "%i episode(s) were added to your Trakt collection"
-msgstr ""
+msgstr "%i jaksoa lisättiin Trakt-kokoelmaasi"
 
 msgctxt "#32106"
 msgid "Trakt episode playcounts are up to date"
-msgstr ""
+msgstr "Traktin jaksojen katselukerrat ovat ajan tasalla"
 
 msgctxt "#32107"
 msgid "Kodi episode playcounts are up to date"
-msgstr ""
+msgstr "Kodin jaksojen katselukerrat ovat ajan tasalla"
 
 msgctxt "#32108"
 msgid "Updating %i of %i episode playcount(s) in Kodi"
-msgstr ""
+msgstr "Päivitetään %i/%i jakson katselukerrat Kodiin"
 
 msgctxt "#32109"
 msgid "Playcounts updated for %i show(s) in Kodi"
-msgstr ""
+msgstr "%i sarjan katselukerrat päivitettiin Kodiin"
 
 msgctxt "#32110"
 msgid "Trakt episode collection is clean, no episodes to remove"
-msgstr ""
+msgstr "Traktin jaksokokoelma on siivottu, eikä poistettavia jaksoja ole"
 
 msgctxt "#32111"
 msgid "%i episode(s) are being removed from your Trakt collection"
-msgstr ""
+msgstr "%i jaksoa poistetaan Trakt-kokoelmasta"
 
 msgctxt "#32112"
 msgid "%i episode(s) were removed from your Trakt collection"
-msgstr ""
+msgstr "%i jaksoa poistettiin Trakt-kokoelmasta"
 
 msgctxt "#32113"
 msgid "Trakt - Marked as watched"
@@ -456,151 +456,151 @@ msgstr "Trakt - Merkitty katsotuksi"
 
 msgctxt "#32114"
 msgid "Trakt - Failed marking as watched"
-msgstr "Trakt - Katsotuksi merkitseminen epäonnistui"
+msgstr "Trakt - Merkintä katsotuksi epäonnistui"
 
 msgctxt "#32115"
 msgid "%d episode(s) of '%s'"
-msgstr ""
+msgstr "%d sarjan '%s' jaksoa"
 
 msgctxt "#32116"
 msgid "Enable debug mode"
-msgstr "Kytke debug tila päälle"
+msgstr "Käytä vianselvitystilaa"
 
 msgctxt "#32117"
 msgid "Sync movie playback progress to Kodi"
-msgstr ""
+msgstr "Synkronoi elokuvien katseluvaiheet Kodiin"
 
 msgctxt "#32118"
 msgid "Sync episode playback progress to Kodi"
-msgstr ""
+msgstr "Synkronoi jaksojen katseluvaiheet Kodiin"
 
 msgctxt "#32119"
 msgid "Retrieving episode playback progress from Trakt"
-msgstr ""
+msgstr "Noudetaan jaksojen katseluvaiheita Traktista"
 
 msgctxt "#32120"
 msgid "Parsing episode playback progress %i of %i from Trakt"
-msgstr ""
+msgstr "Puretaan %i/%i jakson katseluvaihetta Traktista"
 
 msgctxt "#32121"
 msgid "Retrieved episode playback progress from Trakt"
-msgstr ""
+msgstr "Noudettiin jaksojen katseluvaiheet Traktista"
 
 msgctxt "#32122"
 msgid "Retrieving movie playback progress from Trakt"
-msgstr ""
+msgstr "Noudetaan elokuvien katseluvaiheita Traktista"
 
 msgctxt "#32123"
 msgid "Parsing movie playback progress %i of %i from Trakt"
-msgstr ""
+msgstr "Puretaan %i/%i elokuvan katseluvaihetta Traktista"
 
 msgctxt "#32124"
 msgid "Retrieved movie playback progress from Trakt"
-msgstr ""
+msgstr "Noudettiin elokuvien katseluvaiheet Traktista"
 
 msgctxt "#32125"
 msgid "Kodi movie playback progress is up to date"
-msgstr ""
+msgstr "Kodin elokuvien katselutilanteet ovat ajan tasalla"
 
 msgctxt "#32126"
 msgid "%i movie(s) playback progress will be updated in Kodi"
-msgstr ""
+msgstr "%i elokuvan katseluvaihe päivitetään Kodiin"
 
 msgctxt "#32127"
 msgid "Updating %i of %i movie(s) playback progress in Kodi"
-msgstr ""
+msgstr "Päivitetään %i/%i elokuvan katseluvaihe Kodiin"
 
 msgctxt "#32128"
 msgid "Playback progress updated for %i movie(s) in Kodi"
-msgstr ""
+msgstr "%i elokuvan katseluvaihe päivitettiin Kodiin"
 
 msgctxt "#32129"
 msgid "Kodi episode playback progress is up to date"
-msgstr ""
+msgstr "Kodin jaksojen katselutilanteet ovat ajan tasalla"
 
 msgctxt "#32130"
 msgid "Updating %i of %i episode(s) playback progress in Kodi"
-msgstr ""
+msgstr "Päivitetään %i/%i jakson katseluvaihe Kodiin"
 
 msgctxt "#32131"
 msgid "Playback progress updated for %i episode(s) in Kodi"
-msgstr ""
+msgstr "%i jakson katseluvaihe päivitettiin Kodiin"
 
 msgctxt "#32132"
 msgid "Unrate this season"
-msgstr "Poista tämän kauden arvostelu"
+msgstr "Poista kauden arvio"
 
 msgctxt "#32133"
 msgid "Manage Movie's Lists"
-msgstr ""
+msgstr "Hallitse elokuvalistoja"
 
 msgctxt "#32134"
 msgid "Manage Show's Lists"
-msgstr ""
+msgstr "Hallitse sarjalistoja"
 
 msgctxt "#32135"
 msgid "Remove from Watchlist"
-msgstr "Poista katselulistasta"
+msgstr "Poista katselulistalta"
 
 msgctxt "#32136"
 msgid "Add to watchlist"
-msgstr ""
+msgstr "Lisää katselulistalle"
 
 msgctxt "#32137"
 msgid "Rate this movie"
-msgstr ""
+msgstr "Arvioi elokuva"
 
 msgctxt "#32138"
 msgid "Rate this show"
-msgstr ""
+msgstr "Arvioi sarja"
 
 msgctxt "#32139"
 msgid "Rate this episode"
-msgstr ""
+msgstr "Arvioi jakso"
 
 msgctxt "#32140"
 msgid "Toggle watched"
-msgstr ""
+msgstr "Kytke katsontatila"
 
 msgctxt "#32141"
 msgid "Manage all lists"
-msgstr ""
+msgstr "Hallitse kaikkia listoja"
 
 msgctxt "#32142"
 msgid "Update all tags"
-msgstr ""
+msgstr "Päivitä kaikki tunnisteet"
 
 msgctxt "#32143"
 msgid "Synchronize library"
-msgstr ""
+msgstr "Synkronoi kirjasto"
 
 msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
-msgstr "Miten valtuutan Trakt lisäosan pääsemisen Trakt.tv tiliini?"
+msgstr "Miten Trakt-lisäosalle myönnetään Trakt.tv-tilin käyttöoikeus?"
 
 msgctxt "#32147"
 msgid "Trakt.tv PIN Authorization Failed"
-msgstr "Trakt.tv PIN valtuutus epäonnistui"
+msgstr "Trakt.tv PIN-valtuutus epäonnistui"
 
 msgctxt "#32149"
 msgid "Rate this Season"
-msgstr "Arvostele tämä kausi"
+msgstr "Arvioi kausi"
 
 msgctxt "#32150"
 msgid "You will be reminded in 24 hours"
-msgstr "Sinua muistutetaan 24 tunnin kuluessa"
+msgstr "Saat muistutuksen vuorokauden sisällä"
 
 msgctxt "#32151"
 msgid "Use Addon Settings later if you change your mind"
-msgstr "Käytä lisäosan asetuksia myöhemmin, mikäli muutat mieltäsi"
+msgstr "Käytä lisäosan asetuksia myöhemmin, jos muutat mieltäsi"
 
 msgctxt "#32152"
 msgid "Trakt Authorization Complete"
-msgstr "Traktin valtuuttaminen valmis"
+msgstr "Trakt-valtuutus on valmis"
 
 msgctxt "#32153"
 msgid "Trakt Account Authorization"
-msgstr "Trakt tilin valtuuttaminen"
+msgstr "Trakt-tilin valtuutus"
 
 msgctxt "#32154"
 msgid "Authorize"
@@ -608,7 +608,7 @@ msgstr "Valtuuta"
 
 msgctxt "#32155"
 msgid "Remind Me Later"
-msgstr "Muistuta minua myöhemmin"
+msgstr "Muistuta myöhemmin"
 
 msgctxt "#32156"
 msgid "No Thanks"
@@ -616,16 +616,16 @@ msgstr "Ei kiitos"
 
 msgctxt "#32157"
 msgid "Account Authorization"
-msgstr "Tilin valtuuttaminen"
+msgstr "Tilin valtuutus"
 
 # empty string with id 32158
 msgctxt "#32159"
 msgid "Visit {0} or scan the QR code."
-msgstr ""
+msgstr "Avaa {0} tai lue QR-koodi."
 
 msgctxt "#32162"
 msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
-msgstr ""
+msgstr "Trakt-lisäosaa EI VOI käyttää myöntämättä sille Trakt.tv-tilin käyttöoikeutta."
 
 msgctxt "#32163"
 msgid "User"
@@ -633,135 +633,135 @@ msgstr "Käyttäjä"
 
 msgctxt "#32164"
 msgid "Fallback to Title/Year matching if necessary"
-msgstr ""
+msgstr "Varmista tarvittaessa nimellä/vuodella"
 
 msgctxt "#32165"
 msgid "Trakt - Added to watchlist"
-msgstr ""
+msgstr "Trakt - Lisättiin katselulistalle"
 
 msgctxt "#32166"
 msgid "Trakt - Failed adding to watchlist"
-msgstr ""
+msgstr "Trakt - Lisäys katselulistalle epäonnistui"
 
 msgctxt "#32167"
 msgid "Offset scrobble start by X minutes"
-msgstr ""
+msgstr "Siirrä kirjauksen aloitusaikaa (minuuttia)"
 
 msgctxt "#32168"
 msgid "Sync ratings"
-msgstr ""
+msgstr "Synkronoi arviot"
 
 msgctxt "#32169"
 msgid "Kodi movie ratings are up to date"
-msgstr ""
+msgstr "Kodin elokuva-arviot ovat ajan tasalla"
 
 msgctxt "#32170"
 msgid "%i movie(s) ratings will be updated in Kodi"
-msgstr ""
+msgstr "%i elokuvan arviot päivitetään Kodiin"
 
 msgctxt "#32171"
 msgid "Updating %i of %i movie ratings in Kodi"
-msgstr ""
+msgstr "Päivitetään %i/%i elokuvan arvioita Kodiin"
 
 msgctxt "#32172"
 msgid "Ratings updated for %i movie(s) in Kodi"
-msgstr ""
+msgstr "%i elokuvan arviot päivitettiin Kodiin"
 
 msgctxt "#32173"
 msgid "Kodi episode ratings are up to date"
-msgstr ""
+msgstr "Kodin jaksoarviot ovat ajan tasalla"
 
 msgctxt "#32174"
 msgid "Updating %i of %i episode ratings in Kodi"
-msgstr ""
+msgstr "Päivitetään %i/%i jakson arvioita Kodiin"
 
 msgctxt "#32175"
 msgid "Ratings updated for %i episode(s) in Kodi"
-msgstr ""
+msgstr "%i jakson arviot päivitettiin Kodiin"
 
 msgctxt "#32176"
 msgid "Kodi show ratings are up to date"
-msgstr ""
+msgstr "Kodin sarja-arviot ovat ajan tasalla"
 
 msgctxt "#32177"
 msgid "Updating %i of %i show ratings in Kodi"
-msgstr ""
+msgstr "Päivitetään %i/%i sarjan arvioita Kodiin"
 
 msgctxt "#32178"
 msgid "Ratings updated for %i show(s) in Kodi"
-msgstr ""
+msgstr "%i sarjan arviot päivitettiin Kodiin"
 
 msgctxt "#32179"
 msgid "Trakt movie ratings are up to date"
-msgstr ""
+msgstr "Traktin elokuva-arviot ovat ajan tasalla"
 
 msgctxt "#32180"
 msgid "%i movie ratings will be updated on Trakt"
-msgstr ""
+msgstr "%i elokuvan arviota päivitetään Traktiin"
 
 msgctxt "#32181"
 msgid "Trakt show ratings are up to date"
-msgstr ""
+msgstr "Traktin sarja-arviot ovat ajan tasalla"
 
 msgctxt "#32182"
 msgid "%i show ratings will be updated on Trakt"
-msgstr ""
+msgstr "%i sarjan arviota päivitetään Traktiin"
 
 msgctxt "#32183"
 msgid "Attempt to scrobble MythTV PVR recordings"
-msgstr ""
+msgstr "Pyri kirjaamaan MythTV PVR -tallenteet"
 
 msgctxt "#32184"
 msgid "Attempt secondary show title search"
-msgstr ""
+msgstr "Kokeile vaihtoehtoista hakua sarjan nimellä"
 
 msgctxt "#32185"
 msgid "Exclude Plugins"
-msgstr ""
+msgstr "Älä kirjaa lisäosia"
 
 msgctxt "#32186"
 msgid "Allow script exclusions"
-msgstr ""
+msgstr "Mahdollista skriptien esto"
 
 msgctxt "#32187"
 msgid "Override proxy"
-msgstr ""
+msgstr "Korvaa välityspalvelinasetus"
 
 msgctxt "#42187"
 msgid "Always enable a proxy, regardless of the kodi configuration. The default value is from the kodi configuration, but can be overriden below. The trakt plugin currently only supports HTTP or HTTPS proxies where kodi also supports SOCKS proxies."
-msgstr ""
+msgstr "Käytä välityspalvelinta aina, korvaten oletusarvoisesti käytettävät Kodin asetukset. Trakt-lisäosa tukee tällä hetkellä HTTP- ja HTTPS-välityspalvelimia, mutta Kodi tukee lisäksi myös SOCKS-välityspalvelimia."
 
 msgctxt "#32188"
 msgid "Proxy URI"
-msgstr ""
+msgstr "URI-osoite"
 
 msgctxt "#42188"
 msgid "Location of the proxy server."
-msgstr ""
+msgstr "Välityspalvelimen sijainti."
 
 msgctxt "#32189"
 msgid "Proxy port"
-msgstr ""
+msgstr "Portti"
 
 msgctxt "#42189"
 msgid "Port of the proxy server."
-msgstr ""
+msgstr "Välityspalvelimen portti."
 
 msgctxt "#32190"
 msgid "Username"
-msgstr ""
+msgstr "Käyttäjätunnus"
 
 msgctxt "#42190"
 msgid "Optional user name needed to authenticate with the proxy."
-msgstr ""
+msgstr "Käyttäjätunnus, jonka välityspalvelin saattaa vaatia, jos se edellyttää tunnistautumista."
 
 msgctxt "#32191"
 msgid "Password"
-msgstr ""
+msgstr "Salasana"
 
 msgctxt "#42191"
 msgid "Optional password needed to authenticate with the proxy."
-msgstr ""
+msgstr "Salasana, jonka välityspalvelin saattaa vaatia, jos se edellyttää tunnistautumista."
 
 #~ msgctxt "#32003"
 #~ msgid "Startup Delay"
