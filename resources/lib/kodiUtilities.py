@@ -441,7 +441,7 @@ def getInfoLabelDetails(result):
             data['type'] = 'movie'
             if year.isdigit():
                 data['year'] = int(year)
-            data['title'] = utilities.regex_year(showtitle)[0]
+            data['title'] = utilities.regex_year(showtitle)[0] or showtitle
             logger.debug("getInfoLabelDetails - Playing a non-library 'movie' - %s (%s)." %
                          (data['title'], data.get('year', 'NaN')))
         elif (showtitle or title):
