@@ -496,7 +496,7 @@ class SyncEpisodes:
                         # Trakt to avoid later using 0 in runtime * progress_pct.
                         if not episode['runtime']:
                             episode['runtime'] = self.sync.traktapi.getEpisodeSummary(
-                                show['ids']['trakt'], season['number'], episode['number'], extended='full').runtime
+                                show['ids']['trakt'], season['number'], episode['number'], extended='full').runtime * 60
                         episodes.append(
                             {'episodeid': episode['ids']['episodeid'], 'progress': episode['progress'], 'runtime': episode['runtime']})
 
