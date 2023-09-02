@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: XBMC Addons\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-09-28 05:14+0000\n"
+"PO-Revision-Date: 2023-02-24 20:52+0000\n"
 "Last-Translator: rimasx <riks_12@hot.ee>\n"
 "Language-Team: Estonian <https://kodi.weblate.cloud/projects/kodi-add-ons-scripts/script-trakt/et_ee/>\n"
 "Language: et_EE\n"
@@ -15,15 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.15.2\n"
 
 msgctxt "Addon Summary"
 msgid "TV and movie scrobbler for Trakt.tv"
-msgstr "Trakt.tv sarjade ja filmide vaatamisoleku salvestus"
+msgstr "Sarjade ja filmide vaatamisoleku sünkroonimine Trakt.tv teenusega"
 
 msgctxt "Addon Description"
 msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:[CR][CR]- Automatically scrobble what you're watching[CR]- Mobile apps for iPhone, iPad, Android, and Windows Phone[CR]- Share what you're watching (in real time) and rating to facebook and twitter[CR]- Personalized calendar so you never miss a TV show[CR]- Follow your friends and people you're interesed in[CR]- Use watchlists so you don't forget to what to watch[CR]- Track your media collections and impress your friends[CR]- Create custom lists around any topics you choose[CR]- Easily track your TV show progress across all seasons and episodes[CR]- Track your progress against industry lists such as the IMDb Top 250[CR]- Discover new shows and movies based on your viewing habits[CR]- Widgets for your forum signature[CR][CR]What can this addon do?[CR][CR]- Automatically scrobble all TV episodes and movies you are watching[CR]- Sync your TV episode and movie collections to Trakt (triggered after a library update)[CR]- Auto clean your Trakt collection so that it matches up with Kodi[CR]- Keep watched statuses synced between Kodi and Trakt[CR]- Rate movies and episode after watching them[CR][CR]Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
-msgstr ""
+msgstr "Talleta automaatselt kõik vaadatud episoodid ja filmid Trakt.tv teenuses! Oma kõikehõlmavat ajalugu kõigest vaadatust ja saa osa ülemaailmsest tele- ja filmihuviliste kogukonnast. Registreeri tasuta konto aadressil http://trakt.tv ja hangi palju funktsioone:[CR][CR]- Talleta automaatselt, mida vaatad[CR]- Mobiilirakendused iPhone, iPad, Android, ja Windows Phone tarbeks[CR]- Jaga seda, mida vaatad (reaalajas) ja hindeid Facebookis ja Twitteris[CR]- Isikupärastatud kalender, et sa ei magaks oma sarja kunagi maha[CR]- Jälgi oma sõpru ja inimesi, kellest oled huvitatud[CR]- Jälgimisloendite abil pead meeles, mis sarju vaatad[CR]- Jälgi oma meediakogusid ja avalda sõpradele muljet[CR]- Loo kohandatud loendid mis tahes valitud teemade kohta[CR]- Jälgi iga sarja hooaja ja episoodi vaatamise seisu[CR]- Sünkrooni oma vaatamisi filmitööstuse loendites nagu IMDb Top 250[CR]- Avasta oma vaatamisharjumuste põhjal uusi saateid ja filme[CR]- Vidinad, mida saad kasutada foorumi signatuuris[CR][CR]Mida see lisamoodul teeb?[CR][CR]- Talleta automaatselt kõik vaadatud episoodid ja filmid[CR]- Sünkrooni sarja- ja filmikogud teenusega Trakt (käivitub pärast meediakogu värskendamist)[CR]- Puhasta oma Trakti kogumik automaatselt, et see klapiks Kodiga[CR]- Sünkrooni Kodi ja Trakti vaatamiste olek[CR]- Rate movies and episode after watching them[CR][CR]Eriline tänu kõigile, kes selle lisamooduli loomisele kaasa aitasid! Need andekad arendajad leiab muudatuste logist."
 
 msgctxt "#32000"
 msgid "General"
@@ -61,43 +61,43 @@ msgstr "Vaikehinne"
 # Scrobbling Settings
 msgctxt "#32011"
 msgid "Scrobbling"
-msgstr ""
+msgstr "Sünkroonimine"
 
 msgctxt "#32012"
 msgid "Scrobble movies"
-msgstr ""
+msgstr "Talleta filmid"
 
 msgctxt "#32013"
 msgid "Scrobble TV show episodes"
-msgstr ""
+msgstr "Talleta episoodid"
 
 msgctxt "#32014"
 msgid "Show notification on scrobble"
-msgstr ""
+msgstr "Kuva talletamise märguanne"
 
 msgctxt "#32015"
 msgid "Trakt - Scrobbled successfully"
-msgstr ""
+msgstr "Trakt - talletamine tehtud"
 
 msgctxt "#32016"
 msgid "Exclusions"
-msgstr ""
+msgstr "Erandid"
 
 msgctxt "#32017"
 msgid "Exclude Live TV"
-msgstr ""
+msgstr "Telesaateid ei sünkrooni"
 
 msgctxt "#32018"
 msgid "Exclude HTTP sources"
-msgstr ""
+msgstr "HTTP allikaid ei sünkrooni"
 
 msgctxt "#32019"
 msgid "Exclude path"
-msgstr ""
+msgstr "Asukohta ei sünkrooni"
 
 msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
-msgstr ""
+msgstr "Kausta rada (ka alamkaustad)"
 
 # empty strings from id 32021 to 32022
 msgctxt "#32023"
@@ -111,19 +111,19 @@ msgstr "Viga"
 # empty string with id 32025
 msgctxt "#32026"
 msgid "What Did You Think?"
-msgstr ""
+msgstr "Mida sina arvad?"
 
 msgctxt "#32027"
 msgid "Totally Ninja!"
-msgstr ""
+msgstr "Suurepärane!"
 
 msgctxt "#32028"
 msgid "Weak Sauce :("
-msgstr ""
+msgstr "Odav rämps :("
 
 msgctxt "#32029"
 msgid "Terrible"
-msgstr ""
+msgstr "Kohutav"
 
 msgctxt "#32030"
 msgid "Bad"
@@ -135,11 +135,11 @@ msgstr "Nõrk"
 
 msgctxt "#32032"
 msgid "Meh"
-msgstr ""
+msgstr "Keskpärane"
 
 msgctxt "#32033"
 msgid "Fair"
-msgstr "keskmine"
+msgstr "Pole viga"
 
 msgctxt "#32034"
 msgid "Good"
@@ -155,7 +155,7 @@ msgstr "Ülihea"
 
 msgctxt "#32037"
 msgid "Unrate this movie"
-msgstr "Eemalda hinne"
+msgstr "Eemalda filmi hinne"
 
 msgctxt "#32038"
 msgid "Unrate this show"
@@ -167,27 +167,27 @@ msgstr "Eemalda episoodi hinne"
 
 msgctxt "#32040"
 msgid "Trakt - Rating submitted successfully"
-msgstr "Trakt - Hinne on edastatud"
+msgstr "Trakt - hinne on edastatud"
 
 msgctxt "#32041"
 msgid "Trakt - Already rated"
-msgstr "Trakt - Juba hinnatud"
+msgstr "Trakt - juba hinnatud"
 
 msgctxt "#32042"
 msgid "Trakt - Unrated successfully"
-msgstr "Trakt - Hinne eemaldatud"
+msgstr "Trakt - hinne eemaldatud"
 
 msgctxt "#32043"
 msgid "Trakt - Already has the same rating"
-msgstr "Trakt - On juba sama hindega"
+msgstr "Trakt - on juba sama hindega"
 
 msgctxt "#32044"
 msgid "Trakt - Problem submitting rating"
-msgstr ""
+msgstr "Trakt – probleem hinde esitamisel"
 
 msgctxt "#32045"
 msgid "Synchronize"
-msgstr ""
+msgstr "Sünkrooni"
 
 msgctxt "#32046"
 msgid "Movies"
@@ -195,31 +195,31 @@ msgstr "Filmid"
 
 msgctxt "#32047"
 msgid "Add new movies to Trakt collection"
-msgstr ""
+msgstr "Lisa uusi filme Trakti kogusse"
 
 msgctxt "#32048"
 msgid "Add watched movies to Trakt history"
-msgstr ""
+msgstr "Lisa vaadatud filmid Trakti ajalukku"
 
 msgctxt "#32049"
 msgid "Mark movies from Trakt history as watched in Kodi"
-msgstr ""
+msgstr "Märgi filmid Trakti ajaloost Kodis vaadatuks"
 
 msgctxt "#32050"
 msgid "TV Episodes"
-msgstr ""
+msgstr "Episoodid"
 
 msgctxt "#32051"
 msgid "Add new TV episodes to Trakt collection"
-msgstr ""
+msgstr "Lisa Trakti kogusse uusi episoode"
 
 msgctxt "#32052"
 msgid "Add watched TV episodes to Trakt history"
-msgstr ""
+msgstr "Lisa vaadatud episoodid Trakti ajalukku"
 
 msgctxt "#32053"
 msgid "Mark TV episodes from Trakt history as watched in Kodi"
-msgstr ""
+msgstr "Märgi episoodid Trakti ajaloost Kodis vaadatuks"
 
 msgctxt "#32054"
 msgid "Service"
@@ -227,544 +227,544 @@ msgstr "Teenus"
 
 msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
-msgstr ""
+msgstr "Sünkrooni meediakogu värskendamisel või puhastamisel"
 
 msgctxt "#32056"
 msgid "Show sync notifications"
-msgstr ""
+msgstr "Kuva sünkroonimise märguanded"
 
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
-msgstr ""
+msgstr "Eemalda kustutatud filmid Trakti kogumikust"
 
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
-msgstr ""
+msgstr "Eemalda kustutatud episoodid Trakti kogumikust"
 
 # empty string with id 32059
 msgctxt "#32060"
 msgid "Hide notifications during playback"
-msgstr ""
+msgstr "Peida märguanded taasesituse ajal"
 
 msgctxt "#32061"
 msgid "Sync started"
-msgstr ""
+msgstr "Sünkroonimine algas"
 
 msgctxt "#32062"
 msgid "Sync complete"
-msgstr ""
+msgstr "Sünkroonimine on tehtud"
 
 msgctxt "#32063"
 msgid "%i movie(s) will be added to Trakt collection"
-msgstr ""
+msgstr "%i filmi lisatakse Trakti kogusse"
 
 msgctxt "#32064"
 msgid "%i movie playcount(s) will be updated on Trakt"
-msgstr ""
+msgstr "%i filmi esituskorda värskendatakse Traktis"
 
 msgctxt "#32065"
 msgid "%i movie(s) playcount will be updated in Kodi"
-msgstr ""
+msgstr "%i filmi esituskorda värskendatakse Kodis"
 
 msgctxt "#32066"
 msgid "Movie Sync Complete"
-msgstr ""
+msgstr "Filmide sünkroonimine on tehtud"
 
 msgctxt "#32067"
 msgid "Going to add %i show(s) to Trakt collection"
-msgstr ""
+msgstr "%i sarja lisatakse Trakti kogusse"
 
 msgctxt "#32068"
 msgid "Checking for episodes missing from Trakt collection"
-msgstr ""
+msgstr "Trakti kogust puuduvate episoodide otsimine"
 
 msgctxt "#32069"
 msgid "%i of %i show(s) have episodes added to Trakt collection"
-msgstr ""
+msgstr "%i / %i sarjast lisati Trakti kogusse episoode"
 
 msgctxt "#32070"
 msgid "Going to update %i show(s) missing watched status"
-msgstr ""
+msgstr "Uuendatakse %i sarja puuduv vaadatud olek"
 
 msgctxt "#32071"
 msgid "Checking watched episodes on Trakt"
-msgstr ""
+msgstr "Uuritakse Trakti vaadatud episoode"
 
 msgctxt "#32072"
 msgid "%i show(s) had missing watched status"
-msgstr ""
+msgstr "%i sarja vaadatud olek puudus"
 
 msgctxt "#32073"
 msgid "%i episodes are being updated"
-msgstr ""
+msgstr "%i episoodi värskendatakse"
 
 msgctxt "#32074"
 msgid "Checking watched episodes on Kodi"
-msgstr ""
+msgstr "Uuritakse Kodi vaadatud episoode"
 
 msgctxt "#32075"
 msgid "Episode Sync Complete"
-msgstr ""
+msgstr "Episoodide sünkroonimine on tehtud"
 
 msgctxt "#32076"
 msgid "%i movie(s) will be removed from Trakt collection"
-msgstr ""
+msgstr "%i filmi eemaldatakse Trakti kogust"
 
 msgctxt "#32077"
 msgid "Cleaning Trakt TV show collection"
-msgstr ""
+msgstr "Trakt TV sarjakogu puhastamine"
 
 msgctxt "#32078"
 msgid "episodes are being removed"
-msgstr ""
+msgstr "episoodi eemaldatakse"
 
 msgctxt "#32079"
 msgid "Loading movies from Kodi"
-msgstr ""
+msgstr "Kodist filmide laadimine"
 
 msgctxt "#32080"
 msgid "Movies loaded from Kodi"
-msgstr ""
+msgstr "Kodist laaditud filmid"
 
 msgctxt "#32081"
 msgid "Retrieving movie collection from Trakt"
-msgstr ""
+msgstr "Filmikogu toomine Traktist"
 
 msgctxt "#32082"
 msgid "Retrieving watched movies from Trakt"
-msgstr ""
+msgstr "Vaadatud filmide toomine Traktist"
 
 msgctxt "#32083"
 msgid "Retrieved movie data from Trakt"
-msgstr ""
+msgstr "Filmi andmed Traktist toodud"
 
 msgctxt "#32084"
 msgid "Trakt movie collection is up to date, no movies to add"
-msgstr ""
+msgstr "Trakti filmikogu on ajakohane, lisatavaid filme pole"
 
 msgctxt "#32085"
 msgid "%i movie(s) were added to your Trakt collection"
-msgstr ""
+msgstr "%i filmi lisati sinu Trakti kogusse"
 
 msgctxt "#32086"
 msgid "Trakt movie playcounts are up to date"
-msgstr ""
+msgstr "Trakti filmide esituskorrad on ajakohased"
 
 msgctxt "#32087"
 msgid "Playcounts updated for %i movie(s) on Trakt"
-msgstr ""
+msgstr "%i filmi esituskorrad uuendati Traktis"
 
 msgctxt "#32088"
 msgid "Kodi movie playcounts are up to date"
-msgstr ""
+msgstr "Kodi filmide esituskorrad on ajakohased"
 
 msgctxt "#32089"
 msgid "Updating %i of %i movie playcount(s) in Kodi"
-msgstr ""
+msgstr "%i / %i filmi esituskorrad uuendatakse Kodis"
 
 msgctxt "#32090"
 msgid "Playcounts updated for %i movie(s) in Kodi"
-msgstr ""
+msgstr "%i filmi esituskorrad uuendati Kodis"
 
 msgctxt "#32091"
 msgid "Trakt movie collection is up to date, no movies removed"
-msgstr ""
+msgstr "Trakti filmikogu on ajakohane, ühtki filmi ei eemaldatud"
 
 msgctxt "#32092"
 msgid "%i movie(s) were removed from your Trakt collection"
-msgstr ""
+msgstr "%i filmi eemaldati Trakti kogust"
 
 msgctxt "#32093"
 msgid "Updating %i of %i movie playcount(s) on Trakt"
-msgstr ""
+msgstr "%i / %i filmi esituskorrad uuendatakse Traktis"
 
 msgctxt "#32094"
 msgid "Loading episode data from Kodi"
-msgstr ""
+msgstr "Episoodi andmete laadimine Kodist"
 
 msgctxt "#32095"
 msgid "Loading shows from Kodi"
-msgstr ""
+msgstr "Kodist sarjade laadimine"
 
 msgctxt "#32096"
 msgid "Shows loaded from Kodi"
-msgstr ""
+msgstr "Kodist laaditud sarjad"
 
 msgctxt "#32097"
 msgid "Parsing %i of %i episode data from Kodi"
-msgstr ""
+msgstr "Töödeldakse %i/%i episoodi andmeid Kodist"
 
 msgctxt "#32098"
 msgid "Loaded episode data from Kodi"
-msgstr ""
+msgstr "Kodist laaditud episoodide andmed"
 
 msgctxt "#32099"
 msgid "Loading episode data from Trakt"
-msgstr ""
+msgstr "Episoodi andmete laadimine Traktist"
 
 msgctxt "#32100"
 msgid "Retrieving episode collection from Trakt"
-msgstr ""
+msgstr "Episoodikogu toomine Traktist"
 
 msgctxt "#32101"
 msgid "Retrieving watched episodes from Trakt"
-msgstr ""
+msgstr "Vaadatud episoodide toomine Traktist"
 
 msgctxt "#32102"
 msgid "Parsing episode data %i of %i from Trakt"
-msgstr ""
+msgstr "Töödeldakse %i/%i episoodi andmeid Traktist"
 
 msgctxt "#32103"
 msgid "Retrieved episode data from Trakt"
-msgstr ""
+msgstr "Episoodi andmed Traktist toodud"
 
 msgctxt "#32104"
 msgid "Trakt episode collection is up to date, no episodes to add"
-msgstr ""
+msgstr "Trakti episoodikogu on ajakohane, lisatavaid episoode pole"
 
 msgctxt "#32105"
 msgid "%i episode(s) were added to your Trakt collection"
-msgstr ""
+msgstr "%i episoodi lisati sinu Trakti kogusse"
 
 msgctxt "#32106"
 msgid "Trakt episode playcounts are up to date"
-msgstr ""
+msgstr "Trakti episoodide esituskorrad on ajakohased"
 
 msgctxt "#32107"
 msgid "Kodi episode playcounts are up to date"
-msgstr ""
+msgstr "Kodi episoodide esituskorrad on ajakohased"
 
 msgctxt "#32108"
 msgid "Updating %i of %i episode playcount(s) in Kodi"
-msgstr ""
+msgstr "%i / %i episoodi esituskorrad uuendatakse Kodis"
 
 msgctxt "#32109"
 msgid "Playcounts updated for %i show(s) in Kodi"
-msgstr ""
+msgstr "%i episoodi esituskorrad uuendati Kodis"
 
 msgctxt "#32110"
 msgid "Trakt episode collection is clean, no episodes to remove"
-msgstr ""
+msgstr "Trakti episoodikogu on puhas, eemaldatavaid episoode pole"
 
 msgctxt "#32111"
 msgid "%i episode(s) are being removed from your Trakt collection"
-msgstr ""
+msgstr "%i episoodi eemaldatakse Trakti kogust"
 
 msgctxt "#32112"
 msgid "%i episode(s) were removed from your Trakt collection"
-msgstr ""
+msgstr "%i episoodi eemaldati Trakti kogust"
 
 msgctxt "#32113"
 msgid "Trakt - Marked as watched"
-msgstr ""
+msgstr "Trakt – märgitud vaadatuks"
 
 msgctxt "#32114"
 msgid "Trakt - Failed marking as watched"
-msgstr ""
+msgstr "Trakt – vaadatuks märkimine nurjus"
 
 msgctxt "#32115"
 msgid "%d episode(s) of '%s'"
-msgstr ""
+msgstr "Sarja %d '%s' episoodi"
 
 msgctxt "#32116"
 msgid "Enable debug mode"
-msgstr ""
+msgstr "Luba silumine"
 
 msgctxt "#32117"
 msgid "Sync movie playback progress to Kodi"
-msgstr ""
+msgstr "Sünkrooni filmide edenemine Kodiga"
 
 msgctxt "#32118"
 msgid "Sync episode playback progress to Kodi"
-msgstr ""
+msgstr "Sünkrooni episoodide edenemine Kodiga"
 
 msgctxt "#32119"
 msgid "Retrieving episode playback progress from Trakt"
-msgstr ""
+msgstr "Episoodide edenemise toomine Traktist"
 
 msgctxt "#32120"
 msgid "Parsing episode playback progress %i of %i from Trakt"
-msgstr ""
+msgstr "Töödeldakse %i/%i episoodi edenemist Traktist"
 
 msgctxt "#32121"
 msgid "Retrieved episode playback progress from Trakt"
-msgstr ""
+msgstr "Episoodide edenemine Traktist toodud"
 
 msgctxt "#32122"
 msgid "Retrieving movie playback progress from Trakt"
-msgstr ""
+msgstr "Filmide edenemise toomine Traktist"
 
 msgctxt "#32123"
 msgid "Parsing movie playback progress %i of %i from Trakt"
-msgstr ""
+msgstr "Töödeldakse %i/%i filmi edenemist Traktist"
 
 msgctxt "#32124"
 msgid "Retrieved movie playback progress from Trakt"
-msgstr ""
+msgstr "Filmide edenemine Traktist toodud"
 
 msgctxt "#32125"
 msgid "Kodi movie playback progress is up to date"
-msgstr ""
+msgstr "Kodi filmide edenemine on ajakohane"
 
 msgctxt "#32126"
 msgid "%i movie(s) playback progress will be updated in Kodi"
-msgstr ""
+msgstr "%i filmi edenemist värskendatakse Kodis"
 
 msgctxt "#32127"
 msgid "Updating %i of %i movie(s) playback progress in Kodi"
-msgstr ""
+msgstr "%i / %i filmi edenemine uuendatakse Kodis"
 
 msgctxt "#32128"
 msgid "Playback progress updated for %i movie(s) in Kodi"
-msgstr ""
+msgstr "%i filmi edenemine uuendati Kodis"
 
 msgctxt "#32129"
 msgid "Kodi episode playback progress is up to date"
-msgstr ""
+msgstr "Kodi episoodide edenemine on ajakohane"
 
 msgctxt "#32130"
 msgid "Updating %i of %i episode(s) playback progress in Kodi"
-msgstr ""
+msgstr "%i / %i episoodi edenemine uuendatakse Kodis"
 
 msgctxt "#32131"
 msgid "Playback progress updated for %i episode(s) in Kodi"
-msgstr ""
+msgstr "%i episoodi edenemine uuendati Kodis"
 
 msgctxt "#32132"
 msgid "Unrate this season"
-msgstr ""
+msgstr "Eemalda hooaja hinne"
 
 msgctxt "#32133"
 msgid "Manage Movie's Lists"
-msgstr ""
+msgstr "Halda filmiloendeid"
 
 msgctxt "#32134"
 msgid "Manage Show's Lists"
-msgstr ""
+msgstr "Halda episoodiloendeid"
 
 msgctxt "#32135"
 msgid "Remove from Watchlist"
-msgstr ""
+msgstr "Eemalda jälgimisloendist"
 
 msgctxt "#32136"
 msgid "Add to watchlist"
-msgstr ""
+msgstr "Lisa jälgimisloendisse"
 
 msgctxt "#32137"
 msgid "Rate this movie"
-msgstr ""
+msgstr "Hinda film"
 
 msgctxt "#32138"
 msgid "Rate this show"
-msgstr ""
+msgstr "Hinda sari"
 
 msgctxt "#32139"
 msgid "Rate this episode"
-msgstr ""
+msgstr "Hinda episood"
 
 msgctxt "#32140"
 msgid "Toggle watched"
-msgstr ""
+msgstr "Vaadatud/mittevaadatud lüliti"
 
 msgctxt "#32141"
 msgid "Manage all lists"
-msgstr ""
+msgstr "Halda kõiki loendeid"
 
 msgctxt "#32142"
 msgid "Update all tags"
-msgstr ""
+msgstr "Uuenda kõik sildid"
 
 msgctxt "#32143"
 msgid "Synchronize library"
-msgstr ""
+msgstr "Sünkrooni meediakogu"
 
 msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
-msgstr ""
+msgstr "Kuidas anda Trakt lisamoodulile ligipääs oma trakt.tv kontole?"
 
 # empty strings from id 32145 to 32146
 msgctxt "#32147"
 msgid "Trakt.tv PIN Authorization Failed"
-msgstr ""
+msgstr "Trakt.tv PIN koodiga tuvastamine nurjus"
 
 # empty string with id 32148
 msgctxt "#32149"
 msgid "Rate this Season"
-msgstr ""
+msgstr "Hinda hooaeg"
 
 msgctxt "#32150"
 msgid "You will be reminded in 24 hours"
-msgstr ""
+msgstr "Saad 24 tunni pärast meeldetuletuse"
 
 msgctxt "#32151"
 msgid "Use Addon Settings later if you change your mind"
-msgstr ""
+msgstr "Kui muudad meelt, kasuta hiljem lisamooduli seadeid"
 
 msgctxt "#32152"
 msgid "Trakt Authorization Complete"
-msgstr ""
+msgstr "Trakti tuvastus on tehtud"
 
 msgctxt "#32153"
 msgid "Trakt Account Authorization"
-msgstr ""
+msgstr "Trakt konto tuvastus"
 
 msgctxt "#32154"
 msgid "Authorize"
-msgstr ""
+msgstr "Tuvasta"
 
 msgctxt "#32155"
 msgid "Remind Me Later"
-msgstr ""
+msgstr "Meenuta hiljem"
 
 msgctxt "#32156"
 msgid "No Thanks"
-msgstr ""
+msgstr "Tänan, ei"
 
 msgctxt "#32157"
 msgid "Account Authorization"
-msgstr ""
+msgstr "Konto tuvastus"
 
 # empty string with id 32158
 msgctxt "#32159"
 msgid "Visit {0} or scan the QR code."
-msgstr ""
+msgstr "Mine {0} või skaneeri QR kood."
 
 msgctxt "#32162"
 msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
-msgstr ""
+msgstr "Trakti lisamoodulit EI SAA kasutada ilma Trakt.tv kontole juurdepääsu andmata."
 
 msgctxt "#32163"
 msgid "User"
-msgstr ""
+msgstr "Kasutaja"
 
 msgctxt "#32164"
 msgid "Fallback to Title/Year matching if necessary"
-msgstr ""
+msgstr "Vajadusel kinnita nime/aasta järgi"
 
 msgctxt "#32165"
 msgid "Trakt - Added to watchlist"
-msgstr ""
+msgstr "Trakt – lisatud jälgimisloendisse"
 
 msgctxt "#32166"
 msgid "Trakt - Failed adding to watchlist"
-msgstr ""
+msgstr "Trakt – jälgimisloendisse lisamine nurjus"
 
 msgctxt "#32167"
 msgid "Offset scrobble start by X minutes"
-msgstr ""
+msgstr "Käivitamise viiteaeg minutites"
 
 msgctxt "#32168"
 msgid "Sync ratings"
-msgstr ""
+msgstr "Sünkrooni hinded"
 
 msgctxt "#32169"
 msgid "Kodi movie ratings are up to date"
-msgstr ""
+msgstr "Kodi filmide hinded on ajakohased"
 
 msgctxt "#32170"
 msgid "%i movie(s) ratings will be updated in Kodi"
-msgstr ""
+msgstr "%i filmi hinnet värskendatakse Kodis"
 
 msgctxt "#32171"
 msgid "Updating %i of %i movie ratings in Kodi"
-msgstr ""
+msgstr "%i / %i filmi hinded uuendatakse Kodis"
 
 msgctxt "#32172"
 msgid "Ratings updated for %i movie(s) in Kodi"
-msgstr ""
+msgstr "%i filmi hinded uuendati Kodis"
 
 msgctxt "#32173"
 msgid "Kodi episode ratings are up to date"
-msgstr ""
+msgstr "Kodi episoodide hinded on ajakohased"
 
 msgctxt "#32174"
 msgid "Updating %i of %i episode ratings in Kodi"
-msgstr ""
+msgstr "%i / %i episoodi hinded uuendatakse Kodis"
 
 msgctxt "#32175"
 msgid "Ratings updated for %i episode(s) in Kodi"
-msgstr ""
+msgstr "%i episoodi hinded uuendati Kodis"
 
 msgctxt "#32176"
 msgid "Kodi show ratings are up to date"
-msgstr ""
+msgstr "Kodi sarjade hinded on ajakohased"
 
 msgctxt "#32177"
 msgid "Updating %i of %i show ratings in Kodi"
-msgstr ""
+msgstr "%i / %i sarja hinded uuendatakse Kodis"
 
 msgctxt "#32178"
 msgid "Ratings updated for %i show(s) in Kodi"
-msgstr ""
+msgstr "%i sarja hinded uuendati Kodis"
 
 msgctxt "#32179"
 msgid "Trakt movie ratings are up to date"
-msgstr ""
+msgstr "Trakti filmide hinded on ajakohased"
 
 msgctxt "#32180"
 msgid "%i movie ratings will be updated on Trakt"
-msgstr ""
+msgstr "%i filmi hinnet värskendatakse Traktis"
 
 msgctxt "#32181"
 msgid "Trakt show ratings are up to date"
-msgstr ""
+msgstr "Trakti sarjade hinded on ajakohased"
 
 msgctxt "#32182"
 msgid "%i show ratings will be updated on Trakt"
-msgstr ""
+msgstr "%i sarja hinnet värskendatakse Traktis"
 
 msgctxt "#32183"
 msgid "Attempt to scrobble MythTV PVR recordings"
-msgstr ""
+msgstr "Ürita talletada MythTV PVR salvestused"
 
 msgctxt "#32184"
 msgid "Attempt secondary show title search"
-msgstr ""
+msgstr "Proovi sarja nimega alternatiivset otsingut"
 
 msgctxt "#32185"
 msgid "Exclude Plugins"
-msgstr ""
+msgstr "Pluginaid ei kaasata"
 
 msgctxt "#32186"
 msgid "Allow script exclusions"
-msgstr ""
+msgstr "Luba skriptide välistamised"
 
 msgctxt "#32187"
 msgid "Override proxy"
-msgstr ""
+msgstr "Alista puhverserver"
 
 msgctxt "#42187"
 msgid "Always enable a proxy, regardless of the kodi configuration. The default value is from the kodi configuration, but can be overriden below. The trakt plugin currently only supports HTTP or HTTPS proxies where kodi also supports SOCKS proxies."
-msgstr ""
+msgstr "Luba alati puhverserver, olenemata kodi seadistusest. Vaikeväärtus pärineb kodi seadistusest, kuid selle saab allpool tühistada. Trakti lisamoodul toetab praegu ainult HTTP või HTTPS puhverservereid, Kodi toetab ka SOCKS puhverservereid."
 
 msgctxt "#32188"
 msgid "Proxy URI"
-msgstr ""
+msgstr "Puhverserveri URI"
 
 msgctxt "#42188"
 msgid "Location of the proxy server."
-msgstr ""
+msgstr "Puhverserveri asukoht."
 
 msgctxt "#32189"
 msgid "Proxy port"
-msgstr ""
+msgstr "Port"
 
 msgctxt "#42189"
 msgid "Port of the proxy server."
-msgstr ""
+msgstr "Puhverserveri port."
 
 msgctxt "#32190"
 msgid "Username"
-msgstr ""
+msgstr "Kasutajanimi"
 
 msgctxt "#42190"
 msgid "Optional user name needed to authenticate with the proxy."
-msgstr ""
+msgstr "Puhverserveri abil autentimiseks vajalik valikuline kasutajanimi."
 
 msgctxt "#32191"
 msgid "Password"
-msgstr ""
+msgstr "Parool"
 
 msgctxt "#42191"
 msgid "Optional password needed to authenticate with the proxy."
-msgstr ""
+msgstr "Puhverserveri abil autentimiseks vajalik valikuline parool."

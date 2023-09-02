@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: XBMC Addons\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-12-26 21:15+0000\n"
+"PO-Revision-Date: 2023-02-24 20:52+0000\n"
 "Last-Translator: skypichat <skypichat@hotmail.fr>\n"
 "Language-Team: French (France) <https://kodi.weblate.cloud/projects/kodi-add-ons-scripts/script-trakt/fr_fr/>\n"
 "Language: fr_FR\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.15\n"
+"X-Generator: Weblate 4.15.2\n"
 
 msgctxt "Addon Summary"
 msgid "TV and movie scrobbler for Trakt.tv"
@@ -23,7 +23,7 @@ msgstr "Scrobbler TV et film pour Trakt.tv"
 
 msgctxt "Addon Description"
 msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:[CR][CR]- Automatically scrobble what you're watching[CR]- Mobile apps for iPhone, iPad, Android, and Windows Phone[CR]- Share what you're watching (in real time) and rating to facebook and twitter[CR]- Personalized calendar so you never miss a TV show[CR]- Follow your friends and people you're interesed in[CR]- Use watchlists so you don't forget to what to watch[CR]- Track your media collections and impress your friends[CR]- Create custom lists around any topics you choose[CR]- Easily track your TV show progress across all seasons and episodes[CR]- Track your progress against industry lists such as the IMDb Top 250[CR]- Discover new shows and movies based on your viewing habits[CR]- Widgets for your forum signature[CR][CR]What can this addon do?[CR][CR]- Automatically scrobble all TV episodes and movies you are watching[CR]- Sync your TV episode and movie collections to Trakt (triggered after a library update)[CR]- Auto clean your Trakt collection so that it matches up with Kodi[CR]- Keep watched statuses synced between Kodi and Trakt[CR]- Rate movies and episode after watching them[CR][CR]Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
-msgstr "Scrobblez automatiquement sur Trakt.tv tous les épisodes TV et les films que vous regardez ! Gardez un historique complet de tout ce que vous avez regardé et prenez part à une communauté globale d'amateurs de TV et de films. Enregistrez-vous pour un compte gratuit sur http://trakt.tv pour accéder à des tonnes de fonctionnalités : - Scrobbler automatiquement ce que vous regardez - Applications mobiles pour iPhone, iPad, Android et Windows Phone - Partager ce que vous regardez (en temps réel) et vos évaluations sur Facebook et Twitter - Calendrier personnalisé pour ne plus jamais rater un épisode - Suivre vos amis et les personnes qui vous intéressent - Utiliser des listes pour ne plus oublier ce que vous voulez regarder - Synchroniser vos collections de media pour impressionner vos amis - Créer des listes personnalisées autour des sujets que vous choisissez - Suivre facilement votre progression dans toutes les saisons et épisodes des séries TV - Comparer votre progression à des listes comme le Top 250 IMDb - Découvrir de nouvelles séries et de nouveaux films en vous basant sur vos habitudes de visionnage - Widget pour votre signature de forum Que peut faire cette extension ? - Scrobbler automatiquement tous les épisodes TV et les films que vous regardez - Synchroniser vos collections d'épisodes TV et de films avec Trakt (déclenché après une mise à jour de la médiathèque) - Nettoyer automatiquement votre collection Trakt pour qu'elle concorde avec Kodi - Garder l'état des visionnages synchronisé entre Kodi et Trakt - Noter les films et épisodes après les avoir regardés Remerciements spéciaux à tous ceux qui ont apporté leur contribution à cette extension ! Allez faire un tout sur l'historique des mises à jour et le journal des changements pour voir ces talentueux développeurs."
+msgstr "Scrobblez automatiquement sur Trakt.tv tous les épisodes TV et les films que vous regardez ! Gardez un historique complet de tout ce que vous avez regardé et prenez part à une communauté globale d'amateurs de TV et de films. Enregistrez-vous avec un compte gratuit sur http://trakt.tv pour accéder à des tonnes de fonctionnalités : - Scrobbler automatiquement ce que vous regardez - Applications mobiles pour iPhone, iPad, Android et Windows Phone - Partager ce que vous regardez (en temps réel) et vos évaluations sur Facebook et Twitter - Calendrier personnalisé pour ne plus jamais rater un épisode - Suivez vos amis et les personnes qui vous intéressent - Utilisez des listes pour ne plus oublier ce que vous voulez regarder - Synchronisez vos collections de media pour impressionner vos amis - Créez des listes personnalisées autour des sujets que vous choisissez - Suivez facilement votre progression dans toutes les saisons et épisodes des séries TV - Comparez votre progression à des listes comme le Top 250 IMDb - Découvrez de nouvelles séries et de nouveaux films en vous basant sur vos habitudes de visionnage - Widget pour votre signature de forum Que fait cette extension ? - Scrobble automatiquement tous les épisodes TV et les films que vous regardez - Synchronise vos collections d'épisodes TV et de films avec Trakt (déclenché après une mise à jour de la médiathèque) - Nettoie automatiquement votre collection Trakt pour qu'elle concorde avec Kodi - Garde l'état des visionnages synchronisé entre Kodi et Trakt - Note les films et épisodes après les avoir regardés Remerciements spéciaux à tous ceux qui ont apporté leur contribution à cette extension ! Allez faire un tour sur l'historique des mises à jour et le journal des changements pour voir ces talentueux développeurs."
 
 msgctxt "#32000"
 msgid "General"
@@ -40,11 +40,11 @@ msgstr "Note"
 
 msgctxt "#32005"
 msgid "Rate Movie after watching"
-msgstr "Evaluer le Film après visionnage"
+msgstr "Evaluer le film après visionnage"
 
 msgctxt "#32006"
 msgid "Rate TV show Episode after watching"
-msgstr "Évaluer l'Épisode de la série TV après visionnage"
+msgstr "Évaluer l'épisode de la série TV après visionnage"
 
 msgctxt "#32008"
 msgid "Minimum percent watched to display rating dialog"
@@ -164,7 +164,7 @@ msgstr "Supprimer l'évaluation de cet épisode"
 
 msgctxt "#32040"
 msgid "Trakt - Rating submitted successfully"
-msgstr "Trakt - valuation envoyée avec succès"
+msgstr "Trakt - Évaluation envoyée avec succès"
 
 msgctxt "#32041"
 msgid "Trakt - Already rated"
@@ -260,7 +260,7 @@ msgstr "%i compteur(s) de lecture de film seront mis à jour sur Trakt"
 
 msgctxt "#32065"
 msgid "%i movie(s) playcount will be updated in Kodi"
-msgstr "le compteur de lecture de %i film(s) seront mis à jour dans Kodi"
+msgstr "le compteur de lecture de %i film(s) ser(a)(ont) mis à jour dans Kodi"
 
 msgctxt "#32066"
 msgid "Movie Sync Complete"
@@ -268,7 +268,7 @@ msgstr "Synchronisation des films terminée"
 
 msgctxt "#32067"
 msgid "Going to add %i show(s) to Trakt collection"
-msgstr "%i série(s) vont être ajoutées à la collection Trakt"
+msgstr "%i série(s) v(a)(ont) être ajoutée(s) à la collection Trakt"
 
 msgctxt "#32068"
 msgid "Checking for episodes missing from Trakt collection"
@@ -276,11 +276,11 @@ msgstr "Vérification des épisodes manquants dans la collection Trakt"
 
 msgctxt "#32069"
 msgid "%i of %i show(s) have episodes added to Trakt collection"
-msgstr "%i de %i série(s) ont des épisodes qui ont été ajoutés à la collection Trakt"
+msgstr "%i de %i série(s) a(ont) des épisodes qui ont été ajoutés à la collection Trakt"
 
 msgctxt "#32070"
 msgid "Going to update %i show(s) missing watched status"
-msgstr "%i série(s) vue(s) vont être mises à jour"
+msgstr "%i série(s) vue(s) v(a)(ont) être mise(s) à jour"
 
 msgctxt "#32071"
 msgid "Checking watched episodes on Trakt"
@@ -288,7 +288,7 @@ msgstr "Vérification des épisodes vus sur Trakt"
 
 msgctxt "#32072"
 msgid "%i show(s) had missing watched status"
-msgstr "%i série(s) vue(s) ne sont pas à jour"
+msgstr "%i série(s) vue(s) (n'est) (ne sont) pas à jour"
 
 msgctxt "#32073"
 msgid "%i episodes are being updated"
@@ -304,7 +304,7 @@ msgstr "Synchronisation des épisodes terminée"
 
 msgctxt "#32076"
 msgid "%i movie(s) will be removed from Trakt collection"
-msgstr "%i film(s) seront retirés de la collection Trakt"
+msgstr "%i film(s) (sera)(seront) retiré(s) de la collection Trakt"
 
 msgctxt "#32077"
 msgid "Cleaning Trakt TV show collection"
@@ -340,7 +340,7 @@ msgstr "La collection de films Trakt est à jour, il n'y a pas de film à ajoute
 
 msgctxt "#32085"
 msgid "%i movie(s) were added to your Trakt collection"
-msgstr "%i film(s) ont été ajoutés à votre collection Trakt"
+msgstr "%i film(s) (a)(ont) été ajouté(s) à votre collection Trakt"
 
 msgctxt "#32086"
 msgid "Trakt movie playcounts are up to date"
@@ -360,7 +360,7 @@ msgstr "Mise à jour de %i sur %i compteur(s) de lecture de Kodi"
 
 msgctxt "#32090"
 msgid "Playcounts updated for %i movie(s) in Kodi"
-msgstr "Les compteurs de lecture de %i film(s) ont été mis à jour dans Kodi"
+msgstr "Les compteurs de lecture de %i film(s) (a)(ont) été mis à jour dans Kodi"
 
 msgctxt "#32091"
 msgid "Trakt movie collection is up to date, no movies removed"
@@ -368,7 +368,7 @@ msgstr "La collection de films de Trakt est à jour, aucun film n'a été retir�
 
 msgctxt "#32092"
 msgid "%i movie(s) were removed from your Trakt collection"
-msgstr "%i film(s) ont été retirés de la collection Trakt"
+msgstr "%i film(s) (a)(ont) été retiré(s) de la collection Trakt"
 
 msgctxt "#32093"
 msgid "Updating %i of %i movie playcount(s) on Trakt"
@@ -420,7 +420,7 @@ msgstr "La collection d'épisodes de Trakt est à jour, aucun épisode à ajoute
 
 msgctxt "#32105"
 msgid "%i episode(s) were added to your Trakt collection"
-msgstr "%i épisode(s) ont été ajouté(s) à votre collection Trakt"
+msgstr "%i épisode(s) (a)(ont) été ajouté(s) à votre collection Trakt"
 
 msgctxt "#32106"
 msgid "Trakt episode playcounts are up to date"
@@ -480,7 +480,7 @@ msgstr "Obtention de la progression de lecture des épisodes de Trakt"
 
 msgctxt "#32120"
 msgid "Parsing episode playback progress %i of %i from Trakt"
-msgstr "Analyse de la progression de lecture de %i sur %i épisodes de Trakt"
+msgstr "Analyse de la progression de lecture de %i sur %i épisode(s) de Trakt"
 
 msgctxt "#32121"
 msgid "Retrieved episode playback progress from Trakt"
@@ -512,7 +512,7 @@ msgstr "Mise à jour de la progression de lecture de %i de %i film(s) dans Kodi"
 
 msgctxt "#32128"
 msgid "Playback progress updated for %i movie(s) in Kodi"
-msgstr "La progression de lecture de %i film(s) à été mis à jour dans Kodi"
+msgstr "La progression de lecture de %i film(s) (a)(ont) été mis à jour dans Kodi"
 
 msgctxt "#32129"
 msgid "Kodi episode playback progress is up to date"
@@ -705,7 +705,7 @@ msgstr "Les notes des émissions Trakt sont à jour"
 
 msgctxt "#32182"
 msgid "%i show ratings will be updated on Trakt"
-msgstr "Les notes des émissions %i seront mises à jour sur Trakt"
+msgstr "%i notes de séries seront mises à jour sur Trakt"
 
 msgctxt "#32183"
 msgid "Attempt to scrobble MythTV PVR recordings"
@@ -713,7 +713,7 @@ msgstr "Tentative de scrobbler les enregistrements MythTV PVR"
 
 msgctxt "#32184"
 msgid "Attempt secondary show title search"
-msgstr "Tentative de recherche du titre de l'émission secondaire"
+msgstr "Tentative de recherche du titre de la série secondaire"
 
 msgctxt "#32185"
 msgid "Exclude Plugins"
@@ -729,7 +729,7 @@ msgstr "Remplacer le proxy"
 
 msgctxt "#42187"
 msgid "Always enable a proxy, regardless of the kodi configuration. The default value is from the kodi configuration, but can be overriden below. The trakt plugin currently only supports HTTP or HTTPS proxies where kodi also supports SOCKS proxies."
-msgstr "Toujours activer un proxy, quelle que soit la configuration de Kodi. La valeur par défaut provient de la configuration de kodi, mais peut être remplacée ci-dessous. Le plugin trakt ne prend actuellement en charge que les proxys HTTP ou HTTPS où kodi prend également en charge les proxys SOCKS."
+msgstr "Toujours activer un proxy, quelle que soit la configuration de Kodi. La valeur par défaut provient de la configuration de kodi, mais peut être remplacée ci-dessous. Le plugin Trakt ne prend actuellement en charge que les proxys HTTP ou HTTPS où kodi prend également en charge les proxys SOCKS."
 
 msgctxt "#32188"
 msgid "Proxy URI"
