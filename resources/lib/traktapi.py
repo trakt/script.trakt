@@ -320,9 +320,9 @@ class traktAPI(object):
 
         return progressEpisodes
 
-    def getMovieSummary(self, movieId):
+    def getMovieSummary(self, movieId, extended=None):
         with Trakt.configuration.http(retry=True):
-            return Trakt['movies'].get(movieId)
+            return Trakt['movies'].get(movieId, extended=extended)
 
     def getShowSummary(self, showId):
         with Trakt.configuration.http(retry=True):
