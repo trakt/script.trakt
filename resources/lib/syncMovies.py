@@ -329,6 +329,12 @@ class SyncMovies():
 
             self.sync.UpdateProgress(fromPercent, line1='', line2=kodiUtilities.getString(
                 32126) % len(kodiMoviesToUpdate))
+            # If library item doesn't have a runtime set get it from
+            # Trakt to avoid later using 0 in runtime * progress_pct.
+            for movie in kodiMoviesToUpdate:
+                if not movie['runtime']:
+                    movie['runtime'] = self.sync.traktapi.getMovieSummary(
+                        movie['ids']['trakt'], extended='full').runtime * 60
             # need to calculate the progress in int from progress in percent from Trakt
             # split movie list into chunks of 50
             chunksize = 50
