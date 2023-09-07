@@ -1,3 +1,12 @@
+version 3.6.0
+- Clarify unit on startup delay
+- Migrate to new settings format
+- Allow to override global proxy settings
+- Fix empty movie title when year not included in showtitle
+- Fix runtime fallback for calculating episode and movie progress
+- Fix hide notifications when playing video
+- Update translations
+
 version 3.5.0
 - Fix problems with skins based on skin-shortcuts
 - Improve proxy URL configuration
