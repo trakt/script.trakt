@@ -208,9 +208,9 @@ class SyncEpisodes:
                 int(y), line2=kodiUtilities.getString(32102) % (i, x))
 
             # will keep the data in python structures - just like the KODI response
-            show = show.to_dict()
-
-            showsWatched['shows'].append(show)
+            show_dict = show.to_dict()
+            show_dict['reset_at'] = show.reset_at if hasattr(show, 'reset_at') else None
+            showsWatched['shows'].append(show_dict)
 
         i = 0
         x = float(len(traktShowsRated))
@@ -424,9 +424,11 @@ class SyncEpisodes:
         if kodiUtilities.getSettingAsBool('kodi_episode_playcount') and not self.sync.IsCanceled():
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
+            utilities.updateTraktLastWatchedBasedOnResetAt(updateKodiTraktShows)
 
             kodiShowsUpdate = utilities.compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, kodiUtilities.getSettingAsBool(
-                "scrobble_fallback"), watched=True, restrict=True, collected=kodiShowsCollected)
+                "scrobble_fallback"), watched=True, restrict=True, collected=kodiShowsCollected,
+                reset=kodiUtilities.getSettingAsBool('kodi_episode_reset'))
 
             if len(kodiShowsUpdate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1=kodiUtilities.getString(
@@ -446,7 +448,7 @@ class SyncEpisodes:
                 for season in show['seasons']:
                     for episode in season['episodes']:
                         episodes.append({'episodeid': episode['ids']['episodeid'], 'playcount': episode['plays'],
-                                         "lastplayed": utilities.convertUtcToDateTime(episode['last_watched_at'])})
+                                         "lastplayed": utilities.convertUtcToDateTime(episode['last_watched_at']).strftime("%Y-%m-%d %H:%M:%S") if episode['last_watched_at'] else None})
 
             # split episode list into chunks of 50
             chunksize = 50

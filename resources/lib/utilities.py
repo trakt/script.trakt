@@ -203,7 +203,6 @@ def convertDateTimeToUTC(toConvert):
 
 def convertUtcToDateTime(toConvert):
     if toConvert:
-        dateFormat = "%Y-%m-%d %H:%M:%S"
         try:
             naive = dateutil.parser.parse(toConvert)
             utc = naive.replace(tzinfo=tzutc())
@@ -212,7 +211,7 @@ def convertUtcToDateTime(toConvert):
             logger.debug(
                 'convertUtcToDateTime() ValueError: movie/show was collected/watched outside of the unix timespan. Fallback to datetime now')
             local = datetime.now()
-        return local.strftime(dateFormat)
+        return local
     else:
         return toConvert
 
@@ -391,7 +390,7 @@ def compareShows(shows_col1, shows_col2, matchByTitleAndYear, rating=False, rest
 
 
 # always return shows_col1 if you have enrich it, but don't return shows_col2
-def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, restrict=False, collected=False, playback=False, rating=False):
+def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, restrict=False, collected=False, playback=False, rating=False, reset=False):
     shows = []
     # logger.debug("epi shows_col1 %s" % shows_col1)
     # logger.debug("epi shows_col2 %s" % shows_col2)
@@ -462,6 +461,21 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                                                 eps[ep]['ids'] = {
                                                     'episodeid': collectedSeasons[season][ep]['ids']['episodeid']}
                                     season_diff[season] = eps
+                                if reset:
+                                    t = list(
+                                        set(collectedSeasons[season]).difference(set(diff)))
+                                    if len(t) > 0:
+                                        eps = {}
+                                        for ep in t:
+                                            eps[ep] = a[ep]
+                                            if 'episodeid' in collectedSeasons[season][ep]['ids']:
+                                                if 'ids' in eps:
+                                                    eps[ep]['ids']['episodeid'] = collectedSeasons[season][ep]['ids'][
+                                                        'episodeid']
+                                                else:
+                                                    eps[ep]['ids'] = {
+                                                        'episodeid': collectedSeasons[season][ep]['ids']['episodeid']}
+                                        season_diff[season] = eps
                             else:
                                 eps = {}
                                 for ep in diff:
@@ -571,3 +585,14 @@ def _fuzzyMatch(string1, string2, match_percent=55.0):
     s = difflib.SequenceMatcher(None, string1, string2)
     s.find_longest_match(0, len(string1), 0, len(string2))
     return (difflib.SequenceMatcher(None, string1, string2).ratio() * 100) >= match_percent
+
+
+def updateTraktLastWatchedBasedOnResetAt(traktShows):
+    for show in traktShows['shows']:
+        if show['reset_at']:
+            for season in show['seasons']:
+                for episode in season['episodes']:
+                    last_watched = convertUtcToDateTime(episode['last_watched_at'])
+                    if last_watched and last_watched < show['reset_at']:
+                        episode['last_watched_at'] = None
+                        episode['plays'] = 0

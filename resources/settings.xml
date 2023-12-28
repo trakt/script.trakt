@@ -585,6 +585,11 @@
 					<default>false</default>
 					<level>1</level>
 				</setting>
+				<setting id="kodi_episode_reset" type="boolean" label="32192" help="">
+					<control type="toggle" />
+					<default>false</default>
+					<level>1</level>
+				</setting>
 			</group>
 		</category>
 		<category id="rating" label="32004" help="">

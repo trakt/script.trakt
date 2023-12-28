@@ -777,3 +777,7 @@ msgstr ""
 #~ msgctxt "#32161"
 #~ msgid "Enter the PIN provided in the box below."
 #~ msgstr "Enter the PIN provided in the box below."
+
+msgctxt "#32192"
+msgid "Rewatch resets watch status"
+msgstr "Rewatch resets watch status"
