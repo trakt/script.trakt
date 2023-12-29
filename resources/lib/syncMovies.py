@@ -293,7 +293,7 @@ class SyncMovies():
             # split movie list into chunks of 50
             chunksize = 50
             chunked_movies = utilities.chunks([{"jsonrpc": "2.0", "method": "VideoLibrary.SetMovieDetails", "params": {"movieid": kodiMoviesToUpdate[i]['movieid'], "playcount": kodiMoviesToUpdate[i]
-                                                                                                                       ['plays'], "lastplayed": utilities.convertUtcToDateTime(kodiMoviesToUpdate[i]['last_watched_at'])}, "id": i} for i in range(len(kodiMoviesToUpdate))], chunksize)
+                                                                                                                       ['plays'], "lastplayed": utilities.to_datetime(utilities.from_iso8601_datetime(kodiMoviesToUpdate[i]['last_watched_at']))}, "id": i} for i in range(len(kodiMoviesToUpdate))], chunksize)
             i = 0
             x = float(len(kodiMoviesToUpdate))
             for chunk in chunked_movies:

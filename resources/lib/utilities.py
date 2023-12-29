@@ -10,6 +10,7 @@ from typing import Tuple
 import dateutil.parser
 from datetime import datetime
 from dateutil.tz import tzutc, tzlocal
+import arrow
 
 # make strptime call prior to doing anything, to try and prevent threading
 # errors
@@ -181,39 +182,49 @@ def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list, idType):
     return {}
 
 
-def convertDateTimeToUTC(toConvert):
-    if toConvert:
-        dateFormat = "%Y-%m-%d %H:%M:%S"
-        try:
-            naive = datetime.strptime(toConvert, dateFormat)
-        except TypeError:
-            naive = datetime(*(time.strptime(toConvert, dateFormat)[0:6]))
+def to_datetime(value):
+    if not value:
+        return None
 
-        try:
-            local = naive.replace(tzinfo=tzlocal())
-            utc = local.astimezone(tzutc())
-        except ValueError:
-            logger.debug(
-                'convertDateTimeToUTC() ValueError: movie/show was collected/watched outside of the unix timespan. Fallback to datetime utcnow')
-            utc = datetime.utcnow()
-        return str(utc)
-    else:
-        return toConvert
+    return value.strftime('%Y-%m-%d %H:%M:%S')
 
 
-def convertUtcToDateTime(toConvert):
-    if toConvert:
-        try:
-            naive = dateutil.parser.parse(toConvert)
-            utc = naive.replace(tzinfo=tzutc())
-            local = utc.astimezone(tzlocal())
-        except ValueError:
-            logger.debug(
-                'convertUtcToDateTime() ValueError: movie/show was collected/watched outside of the unix timespan. Fallback to datetime now')
-            local = datetime.now()
-        return local
-    else:
-        return toConvert
+def from_datetime(value):
+    if not value:
+        return None
+
+    if arrow is None:
+        raise Exception('"arrow" module is not available')
+
+    # Parse datetime
+    dt = arrow.get(value, 'YYYY-MM-DD HH:mm:ss')
+
+    # Return datetime object
+    return dt.datetime
+
+
+def to_iso8601_datetime(value):
+    if not value:
+        return None
+
+    return value.strftime('%Y-%m-%dT%H:%M:%S') + '.000-00:00'
+
+
+def from_iso8601_datetime(value):
+    if not value:
+        return None
+
+    if arrow is None:
+        raise Exception('"arrow" module is not available')
+
+    # Parse ISO8601 datetime
+    dt = arrow.get(value, 'YYYY-MM-DDTHH:mm:ss.SZZ')
+
+    # Convert to UTC
+    dt = dt.to('UTC')
+
+    # Return datetime object
+    return dt.datetime
 
 
 def createError(ex):
@@ -411,6 +422,13 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                     if season in season_col2:
                         b = season_col2[season]
                         diff = list(set(a).difference(set(b)))
+                        for key in a:
+                            # update lastplayed in KODI if they don't match trakt
+                            if not key in b or a[key]['last_watched_at'] != b[key]['last_watched_at']:
+                                diff.append(key)
+                        # make unique
+                        diff = list(set(diff))
+                        logger.debug("a: %s" % diff)
                         if playback:
                             t = list(set(a).intersection(set(b)))
                             if len(t) > 0:
@@ -461,21 +479,6 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                                                 eps[ep]['ids'] = {
                                                     'episodeid': collectedSeasons[season][ep]['ids']['episodeid']}
                                     season_diff[season] = eps
-                                if reset:
-                                    t = list(
-                                        set(collectedSeasons[season]).difference(set(diff)))
-                                    if len(t) > 0:
-                                        eps = {}
-                                        for ep in t:
-                                            eps[ep] = a[ep]
-                                            if 'episodeid' in collectedSeasons[season][ep]['ids']:
-                                                if 'ids' in eps:
-                                                    eps[ep]['ids']['episodeid'] = collectedSeasons[season][ep]['ids'][
-                                                        'episodeid']
-                                                else:
-                                                    eps[ep]['ids'] = {
-                                                        'episodeid': collectedSeasons[season][ep]['ids']['episodeid']}
-                                        season_diff[season] = eps
                             else:
                                 eps = {}
                                 for ep in diff:
@@ -587,12 +590,15 @@ def _fuzzyMatch(string1, string2, match_percent=55.0):
     return (difflib.SequenceMatcher(None, string1, string2).ratio() * 100) >= match_percent
 
 
-def updateTraktLastWatchedBasedOnResetAt(traktShows):
+def updateTraktLastWatchedBasedOnResetAt(traktShows, updateSpecials=False):
     for show in traktShows['shows']:
         if show['reset_at']:
+            reset_at = from_iso8601_datetime(show['reset_at'])
             for season in show['seasons']:
+                if not updateSpecials and season['number'] == 0:
+                    continue
                 for episode in season['episodes']:
-                    last_watched = convertUtcToDateTime(episode['last_watched_at'])
-                    if last_watched and last_watched < show['reset_at']:
+                    last_watched = from_iso8601_datetime(episode['last_watched_at'])
+                    if last_watched and last_watched < reset_at:
                         episode['last_watched_at'] = None
-                        episode['plays'] = 0
+                        episode['plays'] = 0 # TODO remove?

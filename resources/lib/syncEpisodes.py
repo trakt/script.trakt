@@ -209,7 +209,9 @@ class SyncEpisodes:
 
             # will keep the data in python structures - just like the KODI response
             show_dict = show.to_dict()
-            show_dict['reset_at'] = show.reset_at if hasattr(show, 'reset_at') else None
+            # reset_at is not included when calling `.to_dict()`
+            # but needed for watched shows to know whether to reset the watched state
+            show_dict['reset_at'] = utilities.to_iso8601_datetime(show.reset_at) if hasattr(show, 'reset_at') else None
             showsWatched['shows'].append(show_dict)
 
         i = 0
@@ -424,7 +426,10 @@ class SyncEpisodes:
         if kodiUtilities.getSettingAsBool('kodi_episode_playcount') and not self.sync.IsCanceled():
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
-            utilities.updateTraktLastWatchedBasedOnResetAt(updateKodiTraktShows)
+
+            if kodiUtilities.getSettingAsBool('kodi_episode_reset'):
+                utilities.updateTraktLastWatchedBasedOnResetAt(
+                    updateKodiTraktShows, updateSpecials=kodiUtilities.getSettingAsBool('kodi_episode_reset_specials'))
 
             kodiShowsUpdate = utilities.compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, kodiUtilities.getSettingAsBool(
                 "scrobble_fallback"), watched=True, restrict=True, collected=kodiShowsCollected,
@@ -448,7 +453,7 @@ class SyncEpisodes:
                 for season in show['seasons']:
                     for episode in season['episodes']:
                         episodes.append({'episodeid': episode['ids']['episodeid'], 'playcount': episode['plays'],
-                                         "lastplayed": utilities.convertUtcToDateTime(episode['last_watched_at']).strftime("%Y-%m-%d %H:%M:%S") if episode['last_watched_at'] else None})
+                                         "lastplayed": utilities.to_datetime(utilities.from_iso8601_datetime(episode['last_watched_at']))})
 
             # split episode list into chunks of 50
             chunksize = 50
