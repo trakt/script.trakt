@@ -783,5 +783,5 @@ msgid "Remove watched status from Kodi when rewatching"
 msgstr "Remove watched status from Kodi when rewatching"
 
 msgctxt "#32193"
-msgid "\tInclude specials"
-msgstr "\tInclude specials"
+msgid "Include specials"
+msgstr "Include specials"

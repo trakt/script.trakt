@@ -432,8 +432,7 @@ class SyncEpisodes:
                     updateKodiTraktShows, updateSpecials=kodiUtilities.getSettingAsBool('kodi_episode_reset_specials'))
 
             kodiShowsUpdate = utilities.compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, kodiUtilities.getSettingAsBool(
-                "scrobble_fallback"), watched=True, restrict=True, collected=kodiShowsCollected,
-                reset=kodiUtilities.getSettingAsBool('kodi_episode_reset'))
+                "scrobble_fallback"), watched=True, restrict=True, collected=kodiShowsCollected)
 
             if len(kodiShowsUpdate['shows']) == 0:
                 self.sync.UpdateProgress(toPercent, line1=kodiUtilities.getString(

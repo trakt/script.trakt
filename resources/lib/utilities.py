@@ -401,7 +401,7 @@ def compareShows(shows_col1, shows_col2, matchByTitleAndYear, rating=False, rest
 
 
 # always return shows_col1 if you have enrich it, but don't return shows_col2
-def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, restrict=False, collected=False, playback=False, rating=False, reset=False):
+def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, restrict=False, collected=False, playback=False, rating=False):
     shows = []
     # logger.debug("epi shows_col1 %s" % shows_col1)
     # logger.debug("epi shows_col2 %s" % shows_col2)
@@ -428,7 +428,6 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                                 diff.append(key)
                         # make unique
                         diff = list(set(diff))
-                        logger.debug("a: %s" % diff)
                         if playback:
                             t = list(set(a).intersection(set(b)))
                             if len(t) > 0:
@@ -601,4 +600,4 @@ def updateTraktLastWatchedBasedOnResetAt(traktShows, updateSpecials=False):
                     last_watched = from_iso8601_datetime(episode['last_watched_at'])
                     if last_watched and last_watched < reset_at:
                         episode['last_watched_at'] = None
-                        episode['plays'] = 0 # TODO remove?
+                        episode['plays'] = 0
