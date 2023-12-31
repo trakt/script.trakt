@@ -422,12 +422,14 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                     if season in season_col2:
                         b = season_col2[season]
                         diff = list(set(a).difference(set(b)))
-                        for key in a:
-                            # update lastplayed in KODI if they don't match trakt
-                            if not key in b or a[key]['last_watched_at'] != b[key]['last_watched_at']:
-                                diff.append(key)
-                        # make unique
-                        diff = list(set(diff))
+                        # only for removing plays from kodi
+                        if watched and restrict:
+                            for key in a:
+                                # update lastplayed in KODI if they don't match trakt
+                                if not key in b or a[key]['plays'] != b[key]['plays']:
+                                    diff.append(key)
+                            # make unique
+                            diff = list(set(diff))
                         if playback:
                             t = list(set(a).intersection(set(b)))
                             if len(t) > 0:
