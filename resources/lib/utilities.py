@@ -128,7 +128,7 @@ def findMediaObject(mediaObjectToMatch, listToSearch, matchByTitleAndYear):
                 year=mediaObjectToMatch["year"],
             )
         # match only by title, as some items don't have a year on trakt
-        if result is None and "title" in mediaObjectToMatch:
+        elif result is None and "title" in mediaObjectToMatch:
             result = __findInList(listToSearch, title=mediaObjectToMatch["title"])
 
     return result
@@ -521,11 +521,11 @@ def compareEpisodes(
                                             in season_col2[season][ep]["ids"]
                                         ):
                                             if "ids" in eps:
-                                                eps[ep]["ids"][
-                                                    "episodeid"
-                                                ] = season_col2[season][ep]["ids"][
-                                                    "episodeid"
-                                                ]
+                                                eps[ep]["ids"]["episodeid"] = (
+                                                    season_col2[season][ep]["ids"][
+                                                        "episodeid"
+                                                    ]
+                                                )
                                             else:
                                                 eps[ep]["ids"] = {
                                                     "episodeid": season_col2[season][
@@ -558,11 +558,11 @@ def compareEpisodes(
                                             in collectedSeasons[season][ep]["ids"]
                                         ):
                                             if "ids" in eps:
-                                                eps[ep]["ids"][
-                                                    "episodeid"
-                                                ] = collectedSeasons[season][ep]["ids"][
-                                                    "episodeid"
-                                                ]
+                                                eps[ep]["ids"]["episodeid"] = (
+                                                    collectedSeasons[season][ep]["ids"][
+                                                        "episodeid"
+                                                    ]
+                                                )
                                             else:
                                                 eps[ep]["ids"] = {
                                                     "episodeid": collectedSeasons[
