@@ -110,7 +110,7 @@ def findMediaObject(mediaObjectToMatch, listToSearch, matchByTitleAndYear):
             result = __findInList(
                 listToSearch, title=mediaObjectToMatch['title'], year=mediaObjectToMatch['year'])
         # match only by title, as some items don't have a year on trakt
-        if result is None and 'title' in mediaObjectToMatch:
+        elif result is None and 'title' in mediaObjectToMatch:
             result = __findInList(
                 listToSearch, title=mediaObjectToMatch['title'])
 
