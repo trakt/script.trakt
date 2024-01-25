@@ -1,0 +1,2 @@
+# Ignore line length for now
+ignore = ["E501"]

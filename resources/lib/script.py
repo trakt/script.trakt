@@ -264,7 +264,7 @@ def run():
                     for e in result['episodes']:
                         data['title'] = e['showtitle']
                         season = str(e['season'])
-                        if not season in s:
+                        if season not in s:
                             s[season] = []
                         if e['playcount'] == 0:
                             s[season].append(e['episode'])
@@ -375,7 +375,7 @@ def run():
                     for e in result['episodes']:
                         data['title'] = e['showtitle']
                         season = str(e['season'])
-                        if not season in s:
+                        if season not in s:
                             s[season] = []
                         if e['playcount'] == 0:
                             s[season].append(e['episode'])
