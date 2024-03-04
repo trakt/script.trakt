@@ -20,8 +20,8 @@ jobs:
           kodi-version: matrix
           addon-id: script.trakt
         env: # Make sure you create the below secrets (GH_TOKEN and EMAIL)
-          GH_USERNAME: trakt
-          GH_TOKEN: ${{secrets.GH_TOKEN}}
+          GH_USERNAME: ${{ github.actor }}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
           EMAIL: ${{secrets.EMAIL}}
       - name: Create Github Release
         id: create_release
