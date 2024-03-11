@@ -394,8 +394,8 @@ class SyncMovies:
                         "params": {
                             "movieid": kodiMoviesToUpdate[i]["movieid"],
                             "playcount": kodiMoviesToUpdate[i]["plays"],
-                            "lastplayed": utilities.convertUtcToDateTime(
-                                kodiMoviesToUpdate[i]["last_watched_at"]
+                            "lastplayed": utilities.to_datetime(
+                                utilities.from_iso8601_datetime(kodiMoviesToUpdate[i]["last_watched_at"])
                             ),
                         },
                         "id": i,
