@@ -585,7 +585,7 @@ class SyncEpisodes:
             if kodiUtilities.getSettingAsBool("kodi_episode_reset"):
                 utilities.updateTraktLastWatchedBasedOnResetAt(
                     updateKodiTraktShows,
-                    updateSpecials=kodiUtilities.getSettingAsBool("kodi_episode_reset_specials")
+                    kodiUtilities.getSettingAsBool("kodi_episode_reset_specials")
                 )
 
             kodiShowsUpdate = utilities.compareEpisodes(

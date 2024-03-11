@@ -496,7 +496,7 @@ def compareEpisodes(
                         if watched and restrict:
                             for key in a:
                                 # update lastplayed in KODI if they don't match trakt
-                                if not key in b or a[key]['plays'] != b[key]['plays']:
+                                if not key in b or a[key]["plays"] != b[key]["plays"]:
                                     diff.append(key)
                             # make unique
                             diff = list(set(diff))
@@ -718,15 +718,15 @@ def _fuzzyMatch(string1, string2, match_percent=55.0):
     ) >= match_percent
 
 
-def updateTraktLastWatchedBasedOnResetAt(traktShows, updateSpecials=False):
-    for show in traktShows['shows']:
-        if show['reset_at']:
-            reset_at = from_iso8601_datetime(show['reset_at'])
-            for season in show['seasons']:
-                if not updateSpecials and season['number'] == 0:
+def updateTraktLastWatchedBasedOnResetAt(trakt_shows, update_specials=False):
+    for show in trakt_shows["shows"]:
+        if show["reset_at"]:
+            reset_at = from_iso8601_datetime(show["reset_at"])
+            for season in show["seasons"]:
+                if not update_specials and season["number"] == 0:
                     continue
-                for episode in season['episodes']:
-                    last_watched = from_iso8601_datetime(episode['last_watched_at'])
+                for episode in season["episodes"]:
+                    last_watched = from_iso8601_datetime(episode["last_watched_at"])
                     if last_watched and last_watched < reset_at:
-                        episode['last_watched_at'] = None
-                        episode['plays'] = 0
+                        episode["last_watched_at"] = None
+                        episode["plays"] = 0
