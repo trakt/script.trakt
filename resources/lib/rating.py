@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Module used to launch rating dialogues and send ratings to Trakt"""
 
-import xbmc
 import xbmcaddon
 import xbmcgui
 from resources.lib import utilities
@@ -51,7 +50,7 @@ def rateMedia(media_type, itemsToRate, unrate=False, rating=None):
             if summary_info['user']['ratings']['rating'] > 0:
                 rating = 0
 
-            if not rating is None:
+            if rating is not None:
                 logger.debug("'%s' is being unrated." % s)
                 __rateOnTrakt(rating, media_type, summary_info, unrate=True)
             else:

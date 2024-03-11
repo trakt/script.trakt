@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-import sys
 import sqlite3
 from json import loads, dumps
 
@@ -57,8 +56,8 @@ class SqliteQueue(object):
 
     def __len__(self) -> int:
         with self._get_conn() as conn:
-            l = conn.execute(self._count).fetchone()[0]
-        return l
+            executed = conn.execute(self._count).fetchone()[0]
+        return executed
 
     def __iter__(self):
         with self._get_conn() as conn:

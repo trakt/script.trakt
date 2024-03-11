@@ -6,3 +6,4 @@ tests export-ignore
 .travis.yml export-ignore
 .gitlab-ci.yml export-ignore
 HOW_TO_RELEASE.md export-ignore
+ruff.toml export-ignore

@@ -7,6 +7,7 @@ on:
 
 jobs:
   kodi-addon-submitter:
+    permissions: write-all
     runs-on: ubuntu-latest
     name: Kodi addon submitter
     steps:
@@ -14,14 +15,14 @@ jobs:
         uses: actions/checkout@v2
       - name: Generate distribution zip and submit to official kodi repository
         id: kodi-addon-submitter
-        uses: xbmc/action-kodi-addon-submitter@v1.2
+        uses: xbmc/action-kodi-addon-submitter@v1.3
         with:
           kodi-repository: repo-scripts
           kodi-version: matrix
           addon-id: script.trakt
         env: # Make sure you create the below secrets (GH_TOKEN and EMAIL)
           GH_USERNAME: ${{ github.actor }}
-          GH_TOKEN: ${{secrets.GH_TOKEN}}
+          GH_TOKEN: ${{secrets.XBMC_REPO}}
           EMAIL: ${{secrets.EMAIL}}
       - name: Create Github Release
         id: create_release
