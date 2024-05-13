@@ -120,7 +120,10 @@ exec curl -sSLf --include --header 'content-type: application/json;' --request P
 
 #### Translations
 
-- Translations are done via the Transifex project of Kodi. If you want to support translation efforts, read [this](http://kodi.wiki/view/Translation_System) and look for script-trakt under the XBMC Addons project in Transifex.
+Translation for this add-on is done via WebLate @ https://kodi.weblate.cloud/
+If you are interested in helping translate this add-on, you can find out how to register @ https://forum.kodi.tv/showthread.php?tid=363132
+
+Please do not open pull requests for translations, these will be closed as they cannot be reviewed by the language teams.
 
 ### Thanks
 
