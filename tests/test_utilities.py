@@ -267,6 +267,22 @@ def test_sanitizeMovies_userrating():
     assert not result
 
 
+def test_compareMovies_matchByTitleAndYear_titles_with_same_name_for_collection():
+    data1 = load_params_from_json("tests/fixtures/movies_local_same_name.json")
+
+    assert utilities.compareMovies(data1, "", True) == data1
+
+
+def test_compareMovies_matchByTitleAndYear_titles_with_same_name_for_collection_one_already_collected():
+    data1 = load_params_from_json("tests/fixtures/movies_local_same_name.json")
+    data2 = load_params_from_json("tests/fixtures/movies_local_same_name_2.json")
+    result_json = load_params_from_json(
+        "tests/fixtures/movies_local_same_name_result.json"
+    )
+
+    assert utilities.compareMovies(data1, data2, True) == result_json
+
+
 def test_compareMovies_matchByTitleAndYear_collected_match():
     data1 = load_params_from_json("tests/fixtures/movies_local.json")
     data2 = load_params_from_json("tests/fixtures/movies_remote.json")

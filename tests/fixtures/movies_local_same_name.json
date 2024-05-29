@@ -1,0 +1,38 @@
+[
+  {
+    "imdbnumber": "116853",
+    "movieid": 781,
+    "runtime": 5220,
+    "title": "The Bling Ring",
+    "userrating": 0,
+    "year": 2011,
+    "watched_at": "",
+    "collected_at": "2024-05-29T22:01:43+00:00",
+    "plays": 0,
+    "rating": 0,
+    "collected": 1,
+    "watched": 0,
+    "ids": {
+      "imdb": "tt1935749",
+      "tmdb": "116853"
+    }
+  },
+  {
+    "imdbnumber": "96936",
+    "movieid": 782,
+    "runtime": 5400,
+    "title": "The Bling Ring",
+    "userrating": 0,
+    "year": 2013,
+    "watched_at": "",
+    "collected_at": "2024-05-29T22:01:43+00:00",
+    "plays": 0,
+    "rating": 0,
+    "collected": 1,
+    "watched": 0,
+    "ids": {
+      "imdb": "tt2132285",
+      "tmdb": "96936"
+    }
+  }
+]
