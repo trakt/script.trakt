@@ -267,6 +267,22 @@ def test_sanitizeMovies_userrating():
     assert not result
 
 
+def test_compareMovies_matchByTitleAndYear_titles_with_same_name_for_collection():
+    data1 = load_params_from_json("tests/fixtures/movies_local_same_name.json")
+
+    assert utilities.compareMovies(data1, "", True) == data1
+
+
+def test_compareMovies_matchByTitleAndYear_titles_with_same_name_for_collection_one_already_collected():
+    data1 = load_params_from_json("tests/fixtures/movies_local_same_name.json")
+    data2 = load_params_from_json("tests/fixtures/movies_local_same_name_2.json")
+    result_json = load_params_from_json(
+        "tests/fixtures/movies_local_same_name_result.json"
+    )
+
+    assert utilities.compareMovies(data1, data2, True) == result_json
+
+
 def test_compareMovies_matchByTitleAndYear_collected_match():
     data1 = load_params_from_json("tests/fixtures/movies_local.json")
     data2 = load_params_from_json("tests/fixtures/movies_remote.json")
@@ -511,11 +527,11 @@ def test_findMediaObject_not_matchByTitleAndYear_add_collection_same_year_title_
     assert utilities.findMediaObject(data1, data2, False) is None
 
 
-def test_findMediaObject_match_by_title_should_match():
+def test_findMediaObject_matchByTitleAndYear_should_not_match():
     data1 = load_params_from_json("tests/fixtures/movies_local_blind.json")
     data2 = load_params_from_json("tests/fixtures/movies_remote_blind_no_match.json")
 
-    assert utilities.findMediaObject(data1, data2, True) == data2[0]
+    assert utilities.findMediaObject(data1, data2, True) is None
 
 
 def test_findMediaObject_matchByTitleAndYear_should_match():
