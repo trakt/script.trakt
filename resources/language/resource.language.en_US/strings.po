@@ -777,11 +777,3 @@ msgstr ""
 #~ msgctxt "#32161"
 #~ msgid "Enter the PIN provided in the box below."
 #~ msgstr "Enter the PIN provided in the box below."
-
-msgctxt "#32192"
-msgid "Remove watched status from Kodi when rewatching"
-msgstr "Remove watched status from Kodi when rewatching"
-
-msgctxt "#32193"
-msgid "Include specials"
-msgstr "Include specials"
