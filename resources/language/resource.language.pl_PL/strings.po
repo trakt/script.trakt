@@ -5,17 +5,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
-"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-03-20 15:56+0000\n"
-"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"PO-Revision-Date: 2025-01-18 18:00+0000\n"
+"Last-Translator: 3vtv <90260969+3vtv@users.noreply.github.com>\n"
 "Language-Team: Polish <https://kodi.weblate.cloud/projects/kodi-add-ons-scripts/script-trakt/pl_pl/>\n"
 "Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.5.1\n"
+"X-Generator: Weblate 5.9.2\n"
 
 msgctxt "Addon Summary"
 msgid "TV and movie scrobbler for Trakt.tv"
@@ -23,7 +23,7 @@ msgstr "Dodatek umożliwiający rejestrację odtwarzanych i obejrzanych seriali 
 
 msgctxt "Addon Description"
 msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:[CR][CR]- Automatically scrobble what you're watching[CR]- Mobile apps for iPhone, iPad, Android, and Windows Phone[CR]- Share what you're watching (in real time) and rating to facebook and twitter[CR]- Personalized calendar so you never miss a TV show[CR]- Follow your friends and people you're interesed in[CR]- Use watchlists so you don't forget to what to watch[CR]- Track your media collections and impress your friends[CR]- Create custom lists around any topics you choose[CR]- Easily track your TV show progress across all seasons and episodes[CR]- Track your progress against industry lists such as the IMDb Top 250[CR]- Discover new shows and movies based on your viewing habits[CR]- Widgets for your forum signature[CR][CR]What can this addon do?[CR][CR]- Automatically scrobble all TV episodes and movies you are watching[CR]- Sync your TV episode and movie collections to Trakt (triggered after a library update)[CR]- Auto clean your Trakt collection so that it matches up with Kodi[CR]- Keep watched statuses synced between Kodi and Trakt[CR]- Rate movies and episode after watching them[CR][CR]Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
-msgstr "Automatyczna rejestracja obejrzanych odcinków serialów i film w serwisie Trakt.tv! Przechowuj pełną historię wszystkich obejrzanych mediów i bądź częścią globalnej społeczności entuzjastów multimediów. Zarejestruj swoje konto za darmo na http://trakt.tv i uzyskaj dostęp do mnóstwa funkcji:[CR]- automatycznej rejestracji obejrzanych mediów[CR]- mobilnych aplikacji na iPhone'a, iPada, Androida i Windows Phone[CR]- publikacji obejrzanych mediów i ich oceny (w czasie rzeczywistym) w serwisach Facebook i Twitter[CR]- osobistego kalendarza, żebyś nigdy nie przegapił emisji serialu[CR]- śledzenia aktywności znajomych i osób, którymi się interesujesz[CR]- listy pozycji do obejrzenia, żebyś nigdy nie zapomniał tego, co chcesz obejrzeć[CR]- udostępniania swojej kolekcji mediów, którą możesz zaimponować swoim znajomym[CR]- tworzenia niestandardowych list skupionych na wybranym temacie[CR]- łatwego śledzenia postępów oglądania sezonów i odcinków serialu[CR]- porównywania własnych postępów oglądania z publicznymi listami takimi jak lista Top 250 serwisu IMDb[CR]- odkrywanie nowych seriali i filmów na podstawie preferencji[CR][CR]Co potrafi ten dodatek?[CR][CR]- rejestrować automatycznie odtwarzania wszystkich odcinków seriali i filmów[CR]- synchronizację biblioteki filmów i odcinków seriali z kolekcją Trakt (uruchamianą po aktualizacji biblioteki)[CR]- czyszczenie kolekcji Trakt w celu pełnego dopasowania z biblioteką Kodi[CR]- utrzymywanie synchronizacji stanów obejrzenia między biblioteką Kodi a kolekcją Trakt[CR]- możliwość oceny filmów i odcinków seriali zaraz po obejrzeniu[CR][CR]Specjalne podziękowania dla wszystkich, którzy wnieśli swój wkład w tworzenie tego dodatku! Przejrzyj historię i dziennik zmian, aby poznać tych utalentowanych programistów."
+msgstr "Automatyczna rejestracja obejrzanych odcinków seriali i filmów w serwisie Trakt.tv! Przechowuj pełną historię wszystkich obejrzanych mediów i bądź częścią globalnej społeczności entuzjastów multimediów. Zarejestruj swoje konto za darmo na http://trakt.tv i uzyskaj dostęp do mnóstwa funkcji:[CR]- automatycznej rejestracji obejrzanych mediów[CR]- mobilnych aplikacji na iPhone'a, iPada, Androida i Windows Phone[CR]- publikacji obejrzanych mediów i ich oceny (w czasie rzeczywistym) w serwisach Facebook i Twitter[CR]- osobistego kalendarza, żebyś nigdy nie przegapił emisji serialu[CR]- śledzenia aktywności znajomych i osób, którymi się interesujesz[CR]- listy pozycji do obejrzenia, żebyś nigdy nie zapomniał tego, co chcesz obejrzeć[CR]- udostępniania swojej kolekcji mediów, którą możesz zaimponować swoim znajomym[CR]- tworzenia niestandardowych list skupionych na wybranym temacie[CR]- łatwego śledzenia postępów oglądania sezonów i odcinków serialu[CR]- porównywania własnych postępów oglądania z publicznymi listami takimi jak lista Top 250 serwisu IMDb[CR]- odkrywanie nowych seriali i filmów na podstawie preferencji[CR][CR]Co potrafi ten dodatek?[CR][CR]- rejestrować automatycznie odtwarzania wszystkich odcinków seriali i filmów[CR]- synchronizację biblioteki filmów i odcinków seriali z kolekcją Trakt (uruchamianą po aktualizacji biblioteki)[CR]- czyszczenie kolekcji Trakt w celu pełnego dopasowania z biblioteką Kodi[CR]- utrzymywanie synchronizacji stanów obejrzenia między biblioteką Kodi a kolekcją Trakt[CR]- możliwość oceny filmów i odcinków seriali zaraz po obejrzeniu[CR][CR]Specjalne podziękowania dla wszystkich, którzy wnieśli swój wkład w tworzenie tego dodatku! Przejrzyj historię i dziennik zmian, aby poznać tych utalentowanych programistów."
 
 msgctxt "#32000"
 msgid "General"
@@ -32,7 +32,7 @@ msgstr "Ogólne"
 # empty strings from id 32001 to 32002
 msgctxt "#32003"
 msgid "Startup Delay (seconds)"
-msgstr ""
+msgstr "Opóźnienie startu (sekundy)"
 
 msgctxt "#32004"
 msgid "Rating"
@@ -148,7 +148,7 @@ msgstr "Świetny"
 
 msgctxt "#32036"
 msgid "Superb"
-msgstr "Wspaniały"
+msgstr "Znakomity"
 
 msgctxt "#32037"
 msgid "Unrate this movie"
@@ -621,7 +621,7 @@ msgstr "Autoryzacja konta"
 # empty string with id 32158
 msgctxt "#32159"
 msgid "Visit {0} or scan the QR code."
-msgstr ""
+msgstr "Odwiedź {0} lub zeskanuj kod QR."
 
 msgctxt "#32162"
 msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
@@ -645,123 +645,123 @@ msgstr "Trakt - Nieudane dodawanie do listy Do obejrzenia"
 
 msgctxt "#32167"
 msgid "Offset scrobble start by X minutes"
-msgstr ""
+msgstr "Przesunięcie rozpoczęcia scrobblowania o X minut"
 
 msgctxt "#32168"
 msgid "Sync ratings"
-msgstr ""
+msgstr "Synchronizuj oceny"
 
 msgctxt "#32169"
 msgid "Kodi movie ratings are up to date"
-msgstr ""
+msgstr "Oceny filmów Kodi są aktualne"
 
 msgctxt "#32170"
 msgid "%i movie(s) ratings will be updated in Kodi"
-msgstr ""
+msgstr "%i ocen filmów zostanie zaktualizowanych w Kodi"
 
 msgctxt "#32171"
 msgid "Updating %i of %i movie ratings in Kodi"
-msgstr ""
+msgstr "Aktualizowanie %i z %i ocen filmów w Kodi"
 
 msgctxt "#32172"
 msgid "Ratings updated for %i movie(s) in Kodi"
-msgstr ""
+msgstr "Zaktualizowano oceny filmów %i w Kodi"
 
 msgctxt "#32173"
 msgid "Kodi episode ratings are up to date"
-msgstr ""
+msgstr "Oceny odcinków Kodi są aktualne"
 
 msgctxt "#32174"
 msgid "Updating %i of %i episode ratings in Kodi"
-msgstr ""
+msgstr "Aktualizowanie %i z %i ocen odcinków w Kodi"
 
 msgctxt "#32175"
 msgid "Ratings updated for %i episode(s) in Kodi"
-msgstr ""
+msgstr "Zaktualizowano oceny dla %i odcinków w Kodi"
 
 msgctxt "#32176"
 msgid "Kodi show ratings are up to date"
-msgstr ""
+msgstr "Oceny serialów Kodi są aktualne"
 
 msgctxt "#32177"
 msgid "Updating %i of %i show ratings in Kodi"
-msgstr ""
+msgstr "Aktualizowanie %i z %i ocen seriali w Kodi"
 
 msgctxt "#32178"
 msgid "Ratings updated for %i show(s) in Kodi"
-msgstr ""
+msgstr "Zaktualizowano oceny %i seriali w Kodi"
 
 msgctxt "#32179"
 msgid "Trakt movie ratings are up to date"
-msgstr ""
+msgstr "Oceny filmów Trakt są aktualne"
 
 msgctxt "#32180"
 msgid "%i movie ratings will be updated on Trakt"
-msgstr ""
+msgstr "Oceny filmów %i zostaną zaktualizowane w Trakt"
 
 msgctxt "#32181"
 msgid "Trakt show ratings are up to date"
-msgstr ""
+msgstr "Oceny programów Trakt są aktualne"
 
 msgctxt "#32182"
 msgid "%i show ratings will be updated on Trakt"
-msgstr ""
+msgstr "%i oceny programów zostaną zaktualizowane w Trakt"
 
 msgctxt "#32183"
 msgid "Attempt to scrobble MythTV PVR recordings"
-msgstr ""
+msgstr "Próba scrobblowania nagrań PVR MythTV"
 
 msgctxt "#32184"
 msgid "Attempt secondary show title search"
-msgstr ""
+msgstr "Próba wyszukania tytułu dodatkowego serialu"
 
 msgctxt "#32185"
 msgid "Exclude Plugins"
-msgstr ""
+msgstr "Wyklucz wtyczki"
 
 msgctxt "#32186"
 msgid "Allow script exclusions"
-msgstr ""
+msgstr "Zezwalaj na wykluczenia skryptów"
 
 msgctxt "#32187"
 msgid "Override proxy"
-msgstr ""
+msgstr "Zastąp serwer proxy"
 
 msgctxt "#42187"
 msgid "Always enable a proxy, regardless of the kodi configuration. The default value is from the kodi configuration, but can be overriden below. The trakt plugin currently only supports HTTP or HTTPS proxies where kodi also supports SOCKS proxies."
-msgstr ""
+msgstr "Zawsze włączaj serwer proxy, niezależnie od konfiguracji Kodi. Wartość domyślna pochodzi z konfiguracji Kodi, ale można ją zastąpić poniżej. Wtyczka Trakt obsługuje obecnie tylko serwery proxy HTTP lub HTTPS, podczas gdy Kodi obsługuje również serwery proxy SOCKS."
 
 msgctxt "#32188"
 msgid "Proxy URI"
-msgstr ""
+msgstr "URI serwera proxy"
 
 msgctxt "#42188"
 msgid "Location of the proxy server."
-msgstr ""
+msgstr "Lokalizacja serwera proxy."
 
 msgctxt "#32189"
 msgid "Proxy port"
-msgstr ""
+msgstr "Port serwera proxy"
 
 msgctxt "#42189"
 msgid "Port of the proxy server."
-msgstr ""
+msgstr "Port serwera proxy."
 
 msgctxt "#32190"
 msgid "Username"
-msgstr ""
+msgstr "Nazwa użytkownika"
 
 msgctxt "#42190"
 msgid "Optional user name needed to authenticate with the proxy."
-msgstr ""
+msgstr "Opcjonalna nazwa użytkownika potrzebna do uwierzytelnienia na serwerze proxy."
 
 msgctxt "#32191"
 msgid "Password"
-msgstr ""
+msgstr "Hasło"
 
 msgctxt "#42191"
 msgid "Optional password needed to authenticate with the proxy."
-msgstr ""
+msgstr "Opcjonalne hasło potrzebne do uwierzytelnienia na serwerze proxy."
 
 #~ msgctxt "#32003"
 #~ msgid "Startup Delay"
