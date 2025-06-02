@@ -281,9 +281,11 @@ class SyncEpisodes:
             )
 
             # will keep the data in python structures - just like the KODI response
-            show = show.to_dict()
-
-            showsWatched["shows"].append(show)
+            show_dict = show.to_dict()
+            # reset_at is not included when calling `.to_dict()`
+            # but needed for watched shows to know whether to reset the watched state
+            show_dict["reset_at"] = utilities.to_iso8601_datetime(show.reset_at) if hasattr(show, "reset_at") else None
+            showsWatched["shows"].append(show_dict)
 
         i = 0
         x = float(len(traktShowsRated))
@@ -580,6 +582,12 @@ class SyncEpisodes:
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
 
+            if kodiUtilities.getSettingAsBool("kodi_episode_reset"):
+                utilities.updateTraktLastWatchedBasedOnResetAt(
+                    updateKodiTraktShows,
+                    kodiUtilities.getSettingAsBool("kodi_episode_reset_specials")
+                )
+
             kodiShowsUpdate = utilities.compareEpisodes(
                 updateKodiTraktShows,
                 updateKodiKodiShows,
@@ -617,8 +625,8 @@ class SyncEpisodes:
                             {
                                 "episodeid": episode["ids"]["episodeid"],
                                 "playcount": episode["plays"],
-                                "lastplayed": utilities.convertUtcToDateTime(
-                                    episode["last_watched_at"]
+                                "lastplayed": utilities.to_datetime(
+                                    utilities.from_iso8601_datetime(episode["last_watched_at"])
                                 ),
                             }
                         )
