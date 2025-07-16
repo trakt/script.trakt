@@ -510,7 +510,10 @@ class traktPlayer(xbmc.Player):
                 {
                     "jsonrpc": "2.0",
                     "method": "Player.GetItem",
-                    "params": {"playerid": playerId},
+                    "params": {
+                        "playerid": playerId,
+                        "properties": ["customproperties"],
+                    },
                     "id": 1,
                 }
             )
@@ -523,6 +526,14 @@ class traktPlayer(xbmc.Player):
                 except:  # noqa: E722
                     logger.debug(
                         "[traktPlayer] onAVStarted() - Exception trying to get playing filename, player suddenly stopped."
+                    )
+                    return
+
+                custom_proprties = result["item"].get("customproperties")
+                if custom_proprties and "script.trakt.exclude" in custom_proprties:
+                    logger.debug(
+                        "[traktPlayer] onAVStarted() - '%s' has exclusion property, ignoring."
+                        % _filename
                     )
                     return
 
