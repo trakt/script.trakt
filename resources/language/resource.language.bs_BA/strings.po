@@ -5,33 +5,34 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
-"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: Bosnian (http://www.transifex.com/projects/p/xbmc-addons/language/bs/)\n"
-"Language: bs\n"
+"PO-Revision-Date: 2025-08-28 22:31+0000\n"
+"Last-Translator: SecularSteve <fairfull.playing@gmail.com>\n"
+"Language-Team: Bosnian (Bosnia and Herzegovina) <https://kodi.weblate.cloud/projects/kodi-add-ons-scripts/script-trakt/bs_ba/>\n"
+"Language: bs_BA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.13\n"
 
 msgctxt "Addon Summary"
 msgid "TV and movie scrobbler for Trakt.tv"
-msgstr ""
+msgstr "TV i filmski skrobler za Trakt.tv"
 
 msgctxt "Addon Description"
 msgid "Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! Keep a comprehensive history of everything you've watched and be part of a global community of TV and movie enthusiasts. Sign up for a free account at http://trakt.tv and get a ton of features:[CR][CR]- Automatically scrobble what you're watching[CR]- Mobile apps for iPhone, iPad, Android, and Windows Phone[CR]- Share what you're watching (in real time) and rating to facebook and twitter[CR]- Personalized calendar so you never miss a TV show[CR]- Follow your friends and people you're interesed in[CR]- Use watchlists so you don't forget to what to watch[CR]- Track your media collections and impress your friends[CR]- Create custom lists around any topics you choose[CR]- Easily track your TV show progress across all seasons and episodes[CR]- Track your progress against industry lists such as the IMDb Top 250[CR]- Discover new shows and movies based on your viewing habits[CR]- Widgets for your forum signature[CR][CR]What can this addon do?[CR][CR]- Automatically scrobble all TV episodes and movies you are watching[CR]- Sync your TV episode and movie collections to Trakt (triggered after a library update)[CR]- Auto clean your Trakt collection so that it matches up with Kodi[CR]- Keep watched statuses synced between Kodi and Trakt[CR]- Rate movies and episode after watching them[CR][CR]Special thanks to all who contributed to this plugin! Check the commit history and changelog to see these talented developers."
-msgstr ""
+msgstr "Automatski pretražite sve TV epizode i filmove koje gledate na Trakt.tv! Vodite sveobuhvatnu historiju svega što ste gledali i postanite dio globalne zajednice TV i filmskih entuzijasta. Registrujte se za besplatan račun na http://trakt.tv i dobijte mnoštvo funkcija:[CR][CR]- Automatski skrobler koji pratite[CR]- Mobilne aplikacije za iPhone, iPad, Android i Windows Phone[CR]- Podijelite ono što gledate (u stvarnom vremenu) i ocjenu na Facebooku i Twitteru[CR]- Personalizirani kalendar kako nikada ne biste propustili TV emisiju[CR]- Pratite svoje prijatelje i ljude koji vas zanimaju[CR]- Koristite liste za praćenje kako ne biste zaboravili šta gledati[CR]- Pratite svoje medijske kolekcije i impresionirajte svoje prijatelje[CR]- Kreirajte prilagođene liste oko bilo koje teme koju odaberete[CR]- Lako pratite napredak svoje TV emisije kroz sve sezone i epizode[CR]- Pratite svoj napredak u odnosu na industrijske liste kao što je IMDb Top 250[CR]- Otkrijte nove emisije i filmove na osnovu vaših navika gledanja[CR]- Vidžeti za vaš potpis na forumu[CR][CR]Šta ovaj dodatak može učiniti?[CR][CR]- Automatski skrobler koji prati sve TV epizode i filmove koje gledate[CR]- Sinhronizujte svoje TV epizode i Kolekcije filmova u Traktu (aktivira se nakon ažuriranja biblioteke)[CR] - Automatsko čišćenje vaše Trakt kolekcije tako da se podudara s Kodijem[CR] - Sinhronizacija statusa gledanja između Kodija i Trakta[CR] - Ocjenjivanje filmova i epizoda nakon gledanja[CR][CR]Posebna zahvala svima koji su doprinijeli ovom dodatku! Provjerite historiju commita i dnevnik promjena kako biste vidjeli ove talentovane programere."
 
 msgctxt "#32000"
 msgid "General"
-msgstr "Opšte"
+msgstr "Općenito"
 
 # empty strings from id 32001 to 32002
 msgctxt "#32003"
 msgid "Startup Delay (seconds)"
-msgstr ""
+msgstr "Kašnjenje pokretanja (sekunde)"
 
 msgctxt "#32004"
 msgid "Rating"
@@ -39,69 +40,69 @@ msgstr "Ocjena"
 
 msgctxt "#32005"
 msgid "Rate Movie after watching"
-msgstr ""
+msgstr "Ocijenite film nakon gledanja"
 
 msgctxt "#32006"
 msgid "Rate TV show Episode after watching"
-msgstr ""
+msgstr "Ocijenite epizodu TV emisije nakon gledanja"
 
 msgctxt "#32008"
 msgid "Minimum percent watched to display rating dialog"
-msgstr ""
+msgstr "Minimalni postotak gledanja za prikaz dijaloga za ocjenjivanje"
 
 msgctxt "#32009"
 msgid "Allow re-rating of media"
-msgstr ""
+msgstr "Dozvoli ponovno ocjenjivanje medija"
 
 msgctxt "#32010"
 msgid "Default rating"
-msgstr ""
+msgstr "Zadana ocjena"
 
 # Scrobbling Settings
 msgctxt "#32011"
 msgid "Scrobbling"
-msgstr ""
+msgstr "Skroblanje"
 
 msgctxt "#32012"
 msgid "Scrobble movies"
-msgstr ""
+msgstr "Scrobble filmovi"
 
 msgctxt "#32013"
 msgid "Scrobble TV show episodes"
-msgstr ""
+msgstr "Epizode TV serije Scrobble"
 
 msgctxt "#32014"
 msgid "Show notification on scrobble"
-msgstr ""
+msgstr "Prikaži obavještenje na Scrobbleu"
 
 msgctxt "#32015"
 msgid "Trakt - Scrobbled successfully"
-msgstr ""
+msgstr "Trakt - Uspješno skroblovano"
 
 msgctxt "#32016"
 msgid "Exclusions"
-msgstr ""
+msgstr "Izuzeća"
 
 msgctxt "#32017"
 msgid "Exclude Live TV"
-msgstr ""
+msgstr "Isključi TV uživo"
 
 msgctxt "#32018"
 msgid "Exclude HTTP sources"
-msgstr ""
+msgstr "Isključi HTTP izvore"
 
 msgctxt "#32019"
 msgid "Exclude path"
-msgstr ""
+msgstr "Isključi put"
 
 msgctxt "#32020"
 msgid "Folder's path (including subfolders)"
-msgstr ""
+msgstr "Putanja mape (uključujući podmape)"
 
 # empty strings from id 32021 to 32022
 msgctxt "#32023"
 msgid "Can not connect to Trakt"
-msgstr ""
+msgstr "Ne mogu se povezati s Traktom"
 
 msgctxt "#32024"
 msgid "Error"
@@ -110,83 +111,83 @@ msgstr "Greška"
 # empty string with id 32025
 msgctxt "#32026"
 msgid "What Did You Think?"
-msgstr ""
+msgstr "Šta si mislio/mislila?"
 
 msgctxt "#32027"
 msgid "Totally Ninja!"
-msgstr ""
+msgstr "Pravi Ninja!"
 
 msgctxt "#32028"
 msgid "Weak Sauce :("
-msgstr ""
+msgstr "Slab sos :("
 
 msgctxt "#32029"
 msgid "Terrible"
-msgstr ""
+msgstr "Strašno"
 
 msgctxt "#32030"
 msgid "Bad"
-msgstr ""
+msgstr "Loše"
 
 msgctxt "#32031"
 msgid "Poor"
-msgstr ""
+msgstr "Siromašno"
 
 msgctxt "#32032"
 msgid "Meh"
-msgstr ""
+msgstr "Meh"
 
 msgctxt "#32033"
 msgid "Fair"
-msgstr "umjereno"
+msgstr "Pošteno"
 
 msgctxt "#32034"
 msgid "Good"
-msgstr ""
+msgstr "Dobro"
 
 msgctxt "#32035"
 msgid "Great"
-msgstr ""
+msgstr "Odlično"
 
 msgctxt "#32036"
 msgid "Superb"
-msgstr ""
+msgstr "Izvrsno"
 
 msgctxt "#32037"
 msgid "Unrate this movie"
-msgstr ""
+msgstr "Poništi ocjenu ovog filma"
 
 msgctxt "#32038"
 msgid "Unrate this show"
-msgstr ""
+msgstr "Poništi ocjenu ove emisije"
 
 msgctxt "#32039"
 msgid "Unrate this episode"
-msgstr ""
+msgstr "Poništi ocjenu ove epizode"
 
 msgctxt "#32040"
 msgid "Trakt - Rating submitted successfully"
-msgstr ""
+msgstr "Trakt - Ocjena uspješno poslana"
 
 msgctxt "#32041"
 msgid "Trakt - Already rated"
-msgstr ""
+msgstr "Trakt - Već ocijenjeno"
 
 msgctxt "#32042"
 msgid "Trakt - Unrated successfully"
-msgstr ""
+msgstr "Trakt - Uspješno odstranjeno"
 
 msgctxt "#32043"
 msgid "Trakt - Already has the same rating"
-msgstr ""
+msgstr "Trakt - Već ima istu ocjenu"
 
 msgctxt "#32044"
 msgid "Trakt - Problem submitting rating"
-msgstr ""
+msgstr "Trakt - Problem pri slanju ocjene"
 
 msgctxt "#32045"
 msgid "Synchronize"
-msgstr ""
+msgstr "Sinhroniziraj"
 
 msgctxt "#32046"
 msgid "Movies"
@@ -194,576 +195,576 @@ msgstr "Filmovi"
 
 msgctxt "#32047"
 msgid "Add new movies to Trakt collection"
-msgstr ""
+msgstr "Dodajte nove filmove u Trakt kolekciju"
 
 msgctxt "#32048"
 msgid "Add watched movies to Trakt history"
-msgstr ""
+msgstr "Dodajte gledane filmove u Trakt historiju"
 
 msgctxt "#32049"
 msgid "Mark movies from Trakt history as watched in Kodi"
-msgstr ""
+msgstr "Označi filmove iz Trakt historije kao gledane u Kodiju"
 
 msgctxt "#32050"
 msgid "TV Episodes"
-msgstr ""
+msgstr "TV epizode"
 
 msgctxt "#32051"
 msgid "Add new TV episodes to Trakt collection"
-msgstr ""
+msgstr "Dodajte nove TV epizode u Trakt kolekciju"
 
 msgctxt "#32052"
 msgid "Add watched TV episodes to Trakt history"
-msgstr ""
+msgstr "Dodajte gledane TV epizode u Trakt historiju"
 
 msgctxt "#32053"
 msgid "Mark TV episodes from Trakt history as watched in Kodi"
-msgstr ""
+msgstr "Označi TV epizode iz Trakt historije kao gledane u Kodiju"
 
 msgctxt "#32054"
 msgid "Service"
-msgstr ""
+msgstr "Usluge"
 
 msgctxt "#32055"
 msgid "Sync collection on library update or cleaning"
-msgstr ""
+msgstr "Sinhronizacija kolekcije prilikom ažuriranja ili čišćenja biblioteke"
 
 msgctxt "#32056"
 msgid "Show sync notifications"
-msgstr ""
+msgstr "Prikaži obavještenja o sinhronizaciji"
 
 msgctxt "#32057"
 msgid "Remove deleted movies from Trakt collection"
-msgstr ""
+msgstr "Uklonite izbrisane filmove iz Trakt kolekcije"
 
 msgctxt "#32058"
 msgid "Remove deleted TV episodes from Trakt collection"
-msgstr ""
+msgstr "Uklonite izbrisane TV epizode iz Trakt kolekcije"
 
 # empty string with id 32059
 msgctxt "#32060"
 msgid "Hide notifications during playback"
-msgstr ""
+msgstr "Sakrij obavještenja tokom reprodukcije"
 
 msgctxt "#32061"
 msgid "Sync started"
-msgstr ""
+msgstr "Sinhronizacija je započela"
 
 msgctxt "#32062"
 msgid "Sync complete"
-msgstr ""
+msgstr "Sinhronizacija završena"
 
 msgctxt "#32063"
 msgid "%i movie(s) will be added to Trakt collection"
-msgstr ""
+msgstr "%i filmova će biti dodano u Trakt kolekciju"
 
 msgctxt "#32064"
 msgid "%i movie playcount(s) will be updated on Trakt"
-msgstr ""
+msgstr "Broj reprodukcija filmova (%i) bit će ažuriran na Traktu"
 
 msgctxt "#32065"
 msgid "%i movie(s) playcount will be updated in Kodi"
-msgstr ""
+msgstr "Broj reprodukcija za %i filmova će biti ažuriran u Kodiju"
 
 msgctxt "#32066"
 msgid "Movie Sync Complete"
-msgstr ""
+msgstr "Sinhronizacija filma završena"
 
 msgctxt "#32067"
 msgid "Going to add %i show(s) to Trakt collection"
-msgstr ""
+msgstr "Dodat ću %i emisija u Trakt kolekciju"
 
 msgctxt "#32068"
 msgid "Checking for episodes missing from Trakt collection"
-msgstr ""
+msgstr "Provjera epizoda koje nedostaju u Trakt kolekciji"
 
 msgctxt "#32069"
 msgid "%i of %i show(s) have episodes added to Trakt collection"
-msgstr ""
+msgstr "Epizode za %i od %i emisija su dodane u Trakt kolekciju"
 
 msgctxt "#32070"
 msgid "Going to update %i show(s) missing watched status"
-msgstr ""
+msgstr "Ažurirat ću %i emisija kojima nedostaje status gledanja"
 
 msgctxt "#32071"
 msgid "Checking watched episodes on Trakt"
-msgstr ""
+msgstr "Provjera gledanih epizoda na Traktu"
 
 msgctxt "#32072"
 msgid "%i show(s) had missing watched status"
-msgstr ""
+msgstr "%i emisija nije imalo status gledanja"
 
 msgctxt "#32073"
 msgid "%i episodes are being updated"
-msgstr ""
+msgstr "Ažurira se %i epizoda"
 
 msgctxt "#32074"
 msgid "Checking watched episodes on Kodi"
-msgstr ""
+msgstr "Provjera gledanih epizoda na Kodiju"
 
 msgctxt "#32075"
 msgid "Episode Sync Complete"
-msgstr ""
+msgstr "Sinhronizacija epizode završena"
 
 msgctxt "#32076"
 msgid "%i movie(s) will be removed from Trakt collection"
-msgstr ""
+msgstr "%i filmova će biti uklonjeno iz Trakt kolekcije"
 
 msgctxt "#32077"
 msgid "Cleaning Trakt TV show collection"
-msgstr ""
+msgstr "Kolekcija TV emisija Cleaning Trakt"
 
 msgctxt "#32078"
 msgid "episodes are being removed"
-msgstr ""
+msgstr "epizode se uklanjaju"
 
 msgctxt "#32079"
 msgid "Loading movies from Kodi"
-msgstr ""
+msgstr "Učitavanje filmova sa Kodija"
 
 msgctxt "#32080"
 msgid "Movies loaded from Kodi"
-msgstr ""
+msgstr "Filmovi učitani sa Kodija"
 
 msgctxt "#32081"
 msgid "Retrieving movie collection from Trakt"
-msgstr ""
+msgstr "Preuzimanje kolekcije filmova iz Trakt-a"
 
 msgctxt "#32082"
 msgid "Retrieving watched movies from Trakt"
-msgstr ""
+msgstr "Preuzimanje gledanih filmova iz Trakt-a"
 
 msgctxt "#32083"
 msgid "Retrieved movie data from Trakt"
-msgstr ""
+msgstr "Podaci o filmu preuzeti sa Trakt-a"
 
 msgctxt "#32084"
 msgid "Trakt movie collection is up to date, no movies to add"
-msgstr ""
+msgstr "Kolekcija filmova Trakt je ažurirana, nema filmova za dodavanje"
 
 msgctxt "#32085"
 msgid "%i movie(s) were added to your Trakt collection"
-msgstr ""
+msgstr "%i filmova je dodano u vašu Trakt kolekciju"
 
 msgctxt "#32086"
 msgid "Trakt movie playcounts are up to date"
-msgstr ""
+msgstr "Broj reprodukcija filmova na Traktu je ažuriran"
 
 msgctxt "#32087"
 msgid "Playcounts updated for %i movie(s) on Trakt"
-msgstr ""
+msgstr "Broj reprodukcija ažuriran za %i filmova na Trakt-u"
 
 msgctxt "#32088"
 msgid "Kodi movie playcounts are up to date"
-msgstr ""
+msgstr "Broj reprodukcija Kodi filmova je ažuriran"
 
 msgctxt "#32089"
 msgid "Updating %i of %i movie playcount(s) in Kodi"
-msgstr ""
+msgstr "Ažuriranje broja reprodukcija filmova (%i od %i) u Kodiju"
 
 msgctxt "#32090"
 msgid "Playcounts updated for %i movie(s) in Kodi"
-msgstr ""
+msgstr "Broj reprodukcija ažuriran za %i filmova u Kodiju"
 
 msgctxt "#32091"
 msgid "Trakt movie collection is up to date, no movies removed"
-msgstr ""
+msgstr "Kolekcija filmova Trakta je ažurirana, nijedan film nije uklonjen"
 
 msgctxt "#32092"
 msgid "%i movie(s) were removed from your Trakt collection"
-msgstr ""
+msgstr "Broj filmova je uklonjen iz vaše Trakt kolekcije: %i"
 
 msgctxt "#32093"
 msgid "Updating %i of %i movie playcount(s) on Trakt"
-msgstr ""
+msgstr "Ažuriranje broja reprodukcija filmova (%i od %i) na Trakt-u"
 
 msgctxt "#32094"
 msgid "Loading episode data from Kodi"
-msgstr ""
+msgstr "Učitavanje podataka o epizodama iz Kodija"
 
 msgctxt "#32095"
 msgid "Loading shows from Kodi"
-msgstr ""
+msgstr "Učitavanje emisija iz Kodija"
 
 msgctxt "#32096"
 msgid "Shows loaded from Kodi"
-msgstr ""
+msgstr "Emisije učitane iz Kodija"
 
 msgctxt "#32097"
 msgid "Parsing %i of %i episode data from Kodi"
-msgstr ""
+msgstr "Raščlanjivanje %i od %i podataka o epizodama iz Kodija"
 
 msgctxt "#32098"
 msgid "Loaded episode data from Kodi"
-msgstr ""
+msgstr "Učitani podaci o epizodama iz Kodija"
 
 msgctxt "#32099"
 msgid "Loading episode data from Trakt"
-msgstr ""
+msgstr "Učitavanje podataka o epizodi iz Trakt-a"
 
 msgctxt "#32100"
 msgid "Retrieving episode collection from Trakt"
-msgstr ""
+msgstr "Preuzimanje kolekcije epizoda iz Trakt-a"
 
 msgctxt "#32101"
 msgid "Retrieving watched episodes from Trakt"
-msgstr ""
+msgstr "Preuzimanje gledanih epizoda sa Trakt-a"
 
 msgctxt "#32102"
 msgid "Parsing episode data %i of %i from Trakt"
-msgstr ""
+msgstr "Raščlanjivanje podataka o epizodi %i od %i iz Trakt-a"
 
 msgctxt "#32103"
 msgid "Retrieved episode data from Trakt"
-msgstr ""
+msgstr "Podaci o epizodi preuzeti sa Trakt-a"
 
 msgctxt "#32104"
 msgid "Trakt episode collection is up to date, no episodes to add"
-msgstr ""
+msgstr "Kolekcija epizoda Trakta je ažurirana, nema epizoda za dodavanje"
 
 msgctxt "#32105"
 msgid "%i episode(s) were added to your Trakt collection"
-msgstr ""
+msgstr "%i epizoda je dodano u vašu Trakt kolekciju"
 
 msgctxt "#32106"
 msgid "Trakt episode playcounts are up to date"
-msgstr ""
+msgstr "Broj reprodukcija epizoda Trakta je ažuriran"
 
 msgctxt "#32107"
 msgid "Kodi episode playcounts are up to date"
-msgstr ""
+msgstr "Broj reprodukcija Kodijevih epizoda je ažuriran"
 
 msgctxt "#32108"
 msgid "Updating %i of %i episode playcount(s) in Kodi"
-msgstr ""
+msgstr "Ažuriranje broja reprodukcija %i od %i epizoda u Kodiju"
 
 msgctxt "#32109"
 msgid "Playcounts updated for %i show(s) in Kodi"
-msgstr ""
+msgstr "Broj reprodukcija ažuriran za %i emisija u Kodiju"
 
 msgctxt "#32110"
 msgid "Trakt episode collection is clean, no episodes to remove"
-msgstr ""
+msgstr "Kolekcija epizoda Trakta je čista, nema epizoda za uklanjanje"
 
 msgctxt "#32111"
 msgid "%i episode(s) are being removed from your Trakt collection"
-msgstr ""
+msgstr "Epizoda(e) se uklanjaju iz vaše Trakt kolekcije: %i"
 
 msgctxt "#32112"
 msgid "%i episode(s) were removed from your Trakt collection"
-msgstr ""
+msgstr "Broj epizoda je uklonjen iz vaše Trakt kolekcije: %i"
 
 msgctxt "#32113"
 msgid "Trakt - Marked as watched"
-msgstr ""
+msgstr "Trakt - Označeno kao gledano"
 
 msgctxt "#32114"
 msgid "Trakt - Failed marking as watched"
-msgstr ""
+msgstr "Trakt - Označavanje kao gledano nije uspjelo"
 
 msgctxt "#32115"
 msgid "%d episode(s) of '%s'"
-msgstr ""
+msgstr "%d epizoda serije '%s'"
 
 msgctxt "#32116"
 msgid "Enable debug mode"
-msgstr ""
+msgstr "Omogući način rada za otklanjanje grešaka"
 
 msgctxt "#32117"
 msgid "Sync movie playback progress to Kodi"
-msgstr ""
+msgstr "Sinhronizujte napredak reprodukcije filma sa Kodi-jem"
 
 msgctxt "#32118"
 msgid "Sync episode playback progress to Kodi"
-msgstr ""
+msgstr "Sinhronizacija napretka reprodukcije epizode sa Kodi-jem"
 
 msgctxt "#32119"
 msgid "Retrieving episode playback progress from Trakt"
-msgstr ""
+msgstr "Preuzimanje napretka reprodukcije epizode iz Trakt-a"
 
 msgctxt "#32120"
 msgid "Parsing episode playback progress %i of %i from Trakt"
-msgstr ""
+msgstr "Raščlanjivanje napretka reprodukcije epizode %i od %i iz Trakt-a"
 
 msgctxt "#32121"
 msgid "Retrieved episode playback progress from Trakt"
-msgstr ""
+msgstr "Preuzet napredak reprodukcije epizode sa Trakt-a"
 
 msgctxt "#32122"
 msgid "Retrieving movie playback progress from Trakt"
-msgstr ""
+msgstr "Preuzimanje napretka reprodukcije filma iz Trakt-a"
 
 msgctxt "#32123"
 msgid "Parsing movie playback progress %i of %i from Trakt"
-msgstr ""
+msgstr "Raščlanjivanje napretka reprodukcije filma %i od %i iz Trakt-a"
 
 msgctxt "#32124"
 msgid "Retrieved movie playback progress from Trakt"
-msgstr ""
+msgstr "Preuzet napredak reprodukcije filma sa Trakt-a"
 
 msgctxt "#32125"
 msgid "Kodi movie playback progress is up to date"
-msgstr ""
+msgstr "Napredak reprodukcije Kodi filmova je ažuriran"
 
 msgctxt "#32126"
 msgid "%i movie(s) playback progress will be updated in Kodi"
-msgstr ""
+msgstr "Napredak reprodukcije %i filma(a) bit će ažuriran u Kodiju"
 
 msgctxt "#32127"
 msgid "Updating %i of %i movie(s) playback progress in Kodi"
-msgstr ""
+msgstr "Ažuriranje napretka reprodukcije %i od %i filmova u Kodiju"
 
 msgctxt "#32128"
 msgid "Playback progress updated for %i movie(s) in Kodi"
-msgstr ""
+msgstr "Napredak reprodukcije ažuriran za %i filmova u Kodiju"
 
 msgctxt "#32129"
 msgid "Kodi episode playback progress is up to date"
-msgstr ""
+msgstr "Napredak reprodukcije Kodi epizoda je ažuriran"
 
 msgctxt "#32130"
 msgid "Updating %i of %i episode(s) playback progress in Kodi"
-msgstr ""
+msgstr "Ažuriranje napretka reprodukcije %i od %i epizoda u Kodiju"
 
 msgctxt "#32131"
 msgid "Playback progress updated for %i episode(s) in Kodi"
-msgstr ""
+msgstr "Napredak reprodukcije ažuriran za %i epizodu u Kodiju"
 
 msgctxt "#32132"
 msgid "Unrate this season"
-msgstr ""
+msgstr "Ne ocjenjuj ovu sezonu"
 
 msgctxt "#32133"
 msgid "Manage Movie's Lists"
-msgstr ""
+msgstr "Upravljanje listama filmova"
 
 msgctxt "#32134"
 msgid "Manage Show's Lists"
-msgstr ""
+msgstr "Upravljanje listama emisija"
 
 msgctxt "#32135"
 msgid "Remove from Watchlist"
-msgstr ""
+msgstr "Ukloni s liste za praćenje"
 
 msgctxt "#32136"
 msgid "Add to watchlist"
-msgstr ""
+msgstr "Dodaj na listu za praćenje"
 
 msgctxt "#32137"
 msgid "Rate this movie"
-msgstr ""
+msgstr "Ocijenite ovaj film"
 
 msgctxt "#32138"
 msgid "Rate this show"
-msgstr ""
+msgstr "Ocijenite ovu emisiju"
 
 msgctxt "#32139"
 msgid "Rate this episode"
-msgstr ""
+msgstr "Ocijenite ovu epizodu"
 
 msgctxt "#32140"
 msgid "Toggle watched"
-msgstr ""
+msgstr "Uključi/isključi gledano"
 
 msgctxt "#32141"
 msgid "Manage all lists"
-msgstr ""
+msgstr "Upravljaj svim listama"
 
 msgctxt "#32142"
 msgid "Update all tags"
-msgstr ""
+msgstr "Ažuriraj sve oznake"
 
 msgctxt "#32143"
 msgid "Synchronize library"
-msgstr ""
+msgstr "Sinhroniziraj biblioteku"
 
 msgctxt "#32144"
 msgid "How do I authorize the trakt addon to access my trakt.tv account?"
-msgstr ""
+msgstr "Kako da autorizujem trakt dodatak za pristup mom trakt.tv računu?"
 
 # empty strings from id 32145 to 32146
 msgctxt "#32147"
 msgid "Trakt.tv PIN Authorization Failed"
-msgstr ""
+msgstr "Autorizacija PIN-a za Trakt.tv nije uspjela"
 
 # empty string with id 32148
 msgctxt "#32149"
 msgid "Rate this Season"
-msgstr ""
+msgstr "Ocijenite ovu sezonu"
 
 msgctxt "#32150"
 msgid "You will be reminded in 24 hours"
-msgstr ""
+msgstr "Dobit ćete podsjetnik za 24 sata"
 
 msgctxt "#32151"
 msgid "Use Addon Settings later if you change your mind"
-msgstr ""
+msgstr "Koristite postavke dodataka kasnije ako se predomislite"
 
 msgctxt "#32152"
 msgid "Trakt Authorization Complete"
-msgstr ""
+msgstr "Autorizacija Trakt-a završena"
 
 msgctxt "#32153"
 msgid "Trakt Account Authorization"
-msgstr ""
+msgstr "Autorizacija Trakt računa"
 
 msgctxt "#32154"
 msgid "Authorize"
-msgstr ""
+msgstr "Autorizuj"
 
 msgctxt "#32155"
 msgid "Remind Me Later"
-msgstr ""
+msgstr "Podsjeti me kasnije"
 
 msgctxt "#32156"
 msgid "No Thanks"
-msgstr ""
+msgstr "Ne, hvala"
 
 msgctxt "#32157"
 msgid "Account Authorization"
-msgstr ""
+msgstr "Autorizacija računa"
 
 # empty string with id 32158
 msgctxt "#32159"
 msgid "Visit {0} or scan the QR code."
-msgstr ""
+msgstr "Posjetite {0} ili skenirajte QR kod."
 
 msgctxt "#32162"
 msgid "The trakt addon CAN NOT be used without authorizing it to access your trakt.tv account."
-msgstr ""
+msgstr "Dodatak trakt se NE MOŽE koristiti bez autorizacije pristupa vašem trakt.tv računu."
 
 msgctxt "#32163"
 msgid "User"
-msgstr ""
+msgstr "Korisnik"
 
 msgctxt "#32164"
 msgid "Fallback to Title/Year matching if necessary"
-msgstr ""
+msgstr "Po potrebi se vraća na podudaranje naslova/godine"
 
 msgctxt "#32165"
 msgid "Trakt - Added to watchlist"
-msgstr ""
+msgstr "Trakt - Dodano na listu za praćenje"
 
 msgctxt "#32166"
 msgid "Trakt - Failed adding to watchlist"
-msgstr ""
+msgstr "Trakt - Dodavanje na listu za praćenje nije uspjelo"
 
 msgctxt "#32167"
 msgid "Offset scrobble start by X minutes"
-msgstr ""
+msgstr "Pomakni početak Scrobble-a za X minuta"
 
 msgctxt "#32168"
 msgid "Sync ratings"
-msgstr ""
+msgstr "Sinhronizacija ocjena"
 
 msgctxt "#32169"
 msgid "Kodi movie ratings are up to date"
-msgstr ""
+msgstr "Ocjene filmova na Kodiju su ažurirane"
 
 msgctxt "#32170"
 msgid "%i movie(s) ratings will be updated in Kodi"
-msgstr ""
+msgstr "Ocjene filmova (%i) će biti ažurirane u Kodiju"
 
 msgctxt "#32171"
 msgid "Updating %i of %i movie ratings in Kodi"
-msgstr ""
+msgstr "Ažuriranje %i od %i ocjena filmova u Kodiju"
 
 msgctxt "#32172"
 msgid "Ratings updated for %i movie(s) in Kodi"
-msgstr ""
+msgstr "Ocjene ažurirane za %i filmova u Kodiju"
 
 msgctxt "#32173"
 msgid "Kodi episode ratings are up to date"
-msgstr ""
+msgstr "Ocjene Kodijevih epizoda su ažurirane"
 
 msgctxt "#32174"
 msgid "Updating %i of %i episode ratings in Kodi"
-msgstr ""
+msgstr "Ažuriranje %i od %i ocjena epizoda u Kodiju"
 
 msgctxt "#32175"
 msgid "Ratings updated for %i episode(s) in Kodi"
-msgstr ""
+msgstr "Ocjene ažurirane za %i epizodu(a) u Kodiju"
 
 msgctxt "#32176"
 msgid "Kodi show ratings are up to date"
-msgstr ""
+msgstr "Ocjene Kodi emisija su ažurirane"
 
 msgctxt "#32177"
 msgid "Updating %i of %i show ratings in Kodi"
-msgstr ""
+msgstr "Ažuriranje %i od %i ocjena emisija u Kodiju"
 
 msgctxt "#32178"
 msgid "Ratings updated for %i show(s) in Kodi"
-msgstr ""
+msgstr "Ocjene ažurirane za %i emisija u Kodiju"
 
 msgctxt "#32179"
 msgid "Trakt movie ratings are up to date"
-msgstr ""
+msgstr "Ocjene filmova na Traktu su ažurirane"
 
 msgctxt "#32180"
 msgid "%i movie ratings will be updated on Trakt"
-msgstr ""
+msgstr "Ocjene filmova za %i bit će ažurirane na Traktu"
 
 msgctxt "#32181"
 msgid "Trakt show ratings are up to date"
-msgstr ""
+msgstr "Ocjene emisije Trakt su ažurirane"
 
 msgctxt "#32182"
 msgid "%i show ratings will be updated on Trakt"
-msgstr ""
+msgstr "Ocjene emisija (%i) bit će ažurirane na Traktu"
 
 msgctxt "#32183"
 msgid "Attempt to scrobble MythTV PVR recordings"
-msgstr ""
+msgstr "Pokušaj skroblinga MythTV PVR snimaka"
 
 msgctxt "#32184"
 msgid "Attempt secondary show title search"
-msgstr ""
+msgstr "Pokušajte pretragu naslova sekundarne emisije"
 
 msgctxt "#32185"
 msgid "Exclude Plugins"
-msgstr ""
+msgstr "Isključi dodatke"
 
 msgctxt "#32186"
 msgid "Allow script exclusions"
-msgstr ""
+msgstr "Dozvoli izuzeća skripti"
 
 msgctxt "#32187"
 msgid "Override proxy"
-msgstr ""
+msgstr "Nadjačaj proxy"
 
 msgctxt "#42187"
 msgid "Always enable a proxy, regardless of the kodi configuration. The default value is from the kodi configuration, but can be overriden below. The trakt plugin currently only supports HTTP or HTTPS proxies where kodi also supports SOCKS proxies."
-msgstr ""
+msgstr "Uvijek omogući proxy, bez obzira na konfiguraciju Kodija. Zadana vrijednost je iz konfiguracije Kodija, ali se može poništiti u nastavku. Dodatak trakt trenutno podržava samo HTTP ili HTTPS proxyje, dok Kodi također podržava SOCKS proxyje."
 
 msgctxt "#32188"
 msgid "Proxy URI"
-msgstr ""
+msgstr "URI proxyja"
 
 msgctxt "#42188"
 msgid "Location of the proxy server."
-msgstr ""
+msgstr "Lokacija proxy servera."
 
 msgctxt "#32189"
 msgid "Proxy port"
-msgstr ""
+msgstr "Proxy port"
 
 msgctxt "#42189"
 msgid "Port of the proxy server."
-msgstr ""
+msgstr "Port proxy servera."
 
 msgctxt "#32190"
 msgid "Username"
-msgstr ""
+msgstr "Korisničko ime"
 
 msgctxt "#42190"
 msgid "Optional user name needed to authenticate with the proxy."
-msgstr ""
+msgstr "Opcionalno korisničko ime potrebno za autentifikaciju s proxyjem."
 
 msgctxt "#32191"
 msgid "Password"
-msgstr ""
+msgstr "Lozinka"
 
 msgctxt "#42191"
 msgid "Optional password needed to authenticate with the proxy."
-msgstr ""
+msgstr "Za autentifikaciju s proxyjem potrebna je opcionalna lozinka."
