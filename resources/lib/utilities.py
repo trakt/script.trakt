@@ -8,7 +8,7 @@ import logging
 import traceback
 from typing import Tuple
 import dateutil.parser
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil.tz import tzutc, tzlocal
 
 # make strptime call prior to doing anything, to try and prevent threading
@@ -215,6 +215,31 @@ def findEpisodeMatchInList(id, seasonNumber, episodeNumber, list, idType):
 
 def convertDateTimeToUTC(toConvert):
     if toConvert:
+        # Check if already a datetime object
+        if isinstance(toConvert, datetime):
+            try:
+                if toConvert.tzinfo is None:
+                    local = toConvert.replace(tzinfo=tzlocal())
+                else:
+                    local = toConvert
+                utc = local.astimezone(tzutc())
+                return str(utc)
+            except (ValueError, AttributeError) as e:
+                logger.debug(
+                    "convertDateTimeToUTC() ValueError/AttributeError with datetime object: %s. Fallback to datetime utcnow"
+                    % str(e)
+                )
+                return str(datetime.utcnow())
+        
+        # Check if it's a timedelta (should not happen, but handle gracefully)
+        if isinstance(toConvert, timedelta):
+            logger.error(
+                "convertDateTimeToUTC() received timedelta object instead of datetime/string: %s. This is a bug. Fallback to datetime utcnow"
+                % str(toConvert)
+            )
+            return str(datetime.utcnow())
+        
+        # Otherwise, treat as string and parse
         dateFormat = "%Y-%m-%d %H:%M:%S"
         try:
             naive = datetime.strptime(toConvert, dateFormat)
