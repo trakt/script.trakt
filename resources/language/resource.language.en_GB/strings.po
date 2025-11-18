@@ -774,6 +774,14 @@ msgctxt "#32191"
 msgid "Password"
 msgstr ""
 
+msgctxt "#32192"
+msgid "Remove watched status from Kodi when rewatching"
+msgstr ""
+
+msgctxt "#32193"
+msgid "Include specials"
+msgstr ""
+
 msgctxt "#42191"
 msgid "Optional password needed to authenticate with the proxy."
 msgstr ""

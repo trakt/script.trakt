@@ -24,9 +24,9 @@ Automatically scrobble all TV episodes and movies you are watching to Trakt.tv! 
 
 - Automatically scrobble what you're watching
 - [Mobile apps](http://trakt.tv/downloads) for iPhone, iPad, Android, and Windows Phone
-- Share what you're watching (in real time) and rating to facebook and twitter
+- Share what you're watching (in real time) and rating to Facebook and Twitter
 - Personalized calendar so you never miss a TV show
-- Follow your friends and people you're interesed in
+- Follow your friends and people you're interested in
 - Use watchlists so you don't forget what to watch
 - Track your media collections and impress your friends
 - Create custom lists around any topics you choose
@@ -51,7 +51,7 @@ Remote streaming content will scrobble assuming the metadata is correctly set in
 
 ### Installation
 
-If your not a developer, you should only install this from the official Kodi repo via Kodi itself. If you are a dev, here is how you install the dev version:
+If you're not a developer, you should only install this from the official Kodi repo via Kodi itself. If you are a dev, here is how you install the dev version:
 
 1. Download the zip ([download it here](../../zipball/main))
 2. Install script.trakt by zip. Go to _Settings_ > _Add-ons_ > _Install from zip file_ > Choose the just downloaded zip
